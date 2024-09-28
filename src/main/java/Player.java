@@ -45,7 +45,7 @@ public class Player {
         InventoryManager.getInventory();
         
     }
-    public void putItem(String item, int amount) throws InterruptedException{
+    public static void putItem(String item, int amount) throws InterruptedException{
         if(inventory.size()<inventorySize){
             TextEngine.printWithDelays("You have no room in your inventory.",false);
             TextEngine.printWithDelays("You can only hold " + inventorySize + " items.",false);

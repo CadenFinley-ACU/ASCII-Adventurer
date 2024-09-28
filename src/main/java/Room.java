@@ -1,5 +1,7 @@
 
 import java.io.Console;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Room Class
@@ -13,4 +15,5 @@ public class Room {
     public static String command;
     public static String ignore;
     public static String room = null;
+    public static final Map<String, Integer> ROOMITEMS_MAP = new HashMap<>();
 }
