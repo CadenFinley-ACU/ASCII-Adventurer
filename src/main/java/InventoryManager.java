@@ -11,16 +11,14 @@ public class InventoryManager extends Player {
 
     public void printInventory() throws InterruptedException {
         int i = 1;
+        TextEngine.clearScreen();
+        Game.printStatus(); 
         if (inventory.isEmpty()) {
-            TextEngine.clearScreen();
-            Game.printStatus(); 
             TextEngine.printWithDelays("You have nothing in your inventory.", false);
             TextEngine.printWithDelays("Press Enter to continue", false);
             console.readLine();
             leave();
         } else {
-            TextEngine.clearScreen();
-            Game.printStatus(); 
             TextEngine.printWithDelays("You have the following items in your inventory:", false);
             Set<String> keys = inventory.keySet();
             for (String key : keys) {
