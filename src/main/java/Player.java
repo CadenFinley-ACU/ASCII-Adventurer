@@ -83,8 +83,11 @@ public class Player {
             } else {
                 TextEngine.printWithDelays("Please enter a name.", true);
             }
-
+            tutorialText();
         }
+        
+    }
+    private static void tutorialText() throws InterruptedException {
         TextEngine.clearScreen();
         TextEngine.printWithDelays("Welcome " + Player.getName() + "!", false);
         TextEngine.printWithDelays("There are a few quick things to know.\nat any point you can type settings to change the text speed.", false);
