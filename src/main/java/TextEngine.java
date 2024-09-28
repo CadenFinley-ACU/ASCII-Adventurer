@@ -11,8 +11,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class TextEngine {
     public static String speedSetting = "Normal";
-    public static void printWithDelays(String data,boolean buffer) throws InterruptedException{
-    //TODO add setting to change speed add a button to speed up text generation while it is printing
+    public static void printWithDelays(String data,boolean buffer) throws InterruptedException{ //use buffer is you are accepting input after the text is printed
         if(buffer) {
         data = data + "(press enter to type)";
         }
@@ -40,7 +39,7 @@ public class TextEngine {
             remainingData.setCharAt(i, ' ');
         }
     }
-    public static void printNoDelay(String data,boolean buffer){
+    public static void printNoDelay(String data,boolean buffer){ //use buffer is you are accepting input after the text is printed
         if(buffer) {
             data = data + "(press enter to type)";
         }
@@ -50,7 +49,7 @@ public class TextEngine {
         System.out.print(data);
     }
     @SuppressWarnings("deprecation")
-    public static void clearScreen() {
+    public static void clearScreen() { //clears the screen
         try
         {
         final String os = System.getProperty("os.name");
@@ -64,11 +63,9 @@ public class TextEngine {
             System.out.flush();
             Runtime.getRuntime().exec("clear");
         }
-    }
-    catch (final Exception e)
-    {
+        }   catch (final Exception e) {
         //  Handle any exceptions.
-    }
+        }
     }
 
 }
