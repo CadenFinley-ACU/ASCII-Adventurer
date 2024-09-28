@@ -55,7 +55,7 @@ public abstract class TextEngine {
     }
 
     @SuppressWarnings("deprecation")
-    public static void clearScreen() { //clears the screen !!only works on mac rn i cant figure out how to do it on windows
+    public static void clearScreen() { //clears the screen
         try {
             final String os = System.getProperty("os.name");
             if (os.contains("Windows")) {
