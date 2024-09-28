@@ -1,47 +1,11 @@
 import java.io.Console;
 
-/**
- * Room Engine??? / Maybe make this game engine and but each room or area of rooms in their own individual classes
- * 
- * Text Adventure Game
- * SE374 F24
- * Final Project
- * Caden Finley
- * Albert Tucker
- * Grijesh Shrestha
- */
-class Adventure {
+public class SettingsMenu {
     private final static Console console = System.console();
     private static String command;
     @SuppressWarnings("unused")
     private static String ignore;
-    public static void main(String[] args) throws InterruptedException{
-        TextEngine.clearScreen();
-        startMenu();
-    }
-    private static void startMenu() throws InterruptedException {
-        TextEngine.printNoDelay("Adventure V1, by BarrettHall:: Albert Tucker, Caden Finley, and Grijesh Shrestha",false);
-        TextEngine.printWithDelays("Welcome to the game! What is your command: start, settings, or exit?",true);
-        while(true){
-            ignore = console.readLine();
-            command = console.readLine();
-            switch (command.toLowerCase()) {
-                case "start":
-                    TextEngine.clearScreen();
-                    inAmerica();       
-                case "settings":
-                    TextEngine.clearScreen();
-                    settings();
-                case "exit":
-                    TextEngine.printWithDelays("See ya next time!",false);
-                    TextEngine.clearScreen();
-                    System.exit(0);
-                default:
-                    TextEngine.printWithDelays("I'm sorry, I don't understand that command.",true);
-            }
-        }
-    }
-    private static void settings() throws InterruptedException{
+    public static void start() throws InterruptedException{
         String lastSavedState = TextEngine.speedSetting;
         TextEngine.printNoDelay("Settings",false);
         TextEngine.printNoDelay("This is the settings menu. Here you can change the speed of the text.", false);
@@ -62,12 +26,12 @@ class Adventure {
                         TextEngine.printWithDelays("Settings saved.", false);
                         TextEngine.speedSetting = "Slow";
                         TextEngine.clearScreen();
-                        startMenu();
+                        GameStart.startMenu();
                     } else {
                         TextEngine.printWithDelays("Settings not saved.", false);
                         TextEngine.speedSetting = lastSavedState;
                         TextEngine.clearScreen();
-                        settings();
+                        start();
                     }
                 }
                 case "normal" -> {
@@ -81,12 +45,12 @@ class Adventure {
                         TextEngine.printWithDelays("Settings saved.", false);
                         TextEngine.speedSetting = "Normal";
                         TextEngine.clearScreen();
-                        startMenu();
+                        GameStart.startMenu();
                     } else {
                         TextEngine.printWithDelays("Settings not saved.", false);
                         TextEngine.speedSetting = lastSavedState;
                         TextEngine.clearScreen();
-                        settings();
+                        start();
                     }
                 }
                 case "fast" -> {
@@ -100,12 +64,12 @@ class Adventure {
                         TextEngine.printWithDelays("Settings saved.", false);
                         TextEngine.speedSetting = "Fast";
                         TextEngine.clearScreen();
-                        startMenu();
+                        GameStart.startMenu();
                     } else {
                         TextEngine.printWithDelays("Settings not saved.", false);
                         TextEngine.speedSetting = lastSavedState;
                         TextEngine.clearScreen();
-                        settings();
+                        start();
                     }
                 }
                 case "nodelay" -> {
@@ -119,58 +83,20 @@ class Adventure {
                         TextEngine.printWithDelays("Settings saved.", false);
                         TextEngine.speedSetting = "NoDelay";
                         TextEngine.clearScreen();
-                        startMenu();
+                        GameStart.startMenu();
                     } else {
                         TextEngine.printWithDelays("Settings not saved.", false);
                         TextEngine.speedSetting = lastSavedState;
                         TextEngine.clearScreen();
-                        settings();
+                        start();
                     }
                 }
                 case "exit" -> {
                     TextEngine.printWithDelays("Returning to main menu.", false);
                     TextEngine.clearScreen();
-                    startMenu();
+                    GameStart.startMenu();
                 }
                 default -> TextEngine.printWithDelays("I'm sorry, I don't understand that command.", true);
-            }
-        }
-    }
-    private static void inAmerica() throws InterruptedException{
-        TextEngine.printWithDelays("You are in a lucious, green area with trees, not Abilene.\nWhat is your command: north or exit?",true);
-        while (true) {
-            ignore = console.readLine();
-            command = console.readLine();
-            switch (command.toLowerCase()) {
-                case "north":
-                    TextEngine.clearScreen();
-                    inCanada();
-                case "exit":
-                    TextEngine.printWithDelays("See ya next time!",false);
-                    System.exit(0);
-                default:
-                    TextEngine.printWithDelays("I'm sorry, I don't understand that command.",true);                  
-            }
-        }
-    }
-
-    private static void inCanada() throws InterruptedException{
-        TextEngine.printWithDelays("Eh, you are in Canada. Good luck with all the mooses.\nWhat is your command: north, south or exit?",true);
-        while (true) {
-            ignore = console.readLine();
-            command = console.readLine();
-            switch (command.toLowerCase()) {
-                case "north":
-                    TextEngine.printWithDelays("Eh, you are on the North Pole. Good luck with the cold, hope you brought your coat. brrrrrrr...",false);
-                    System.exit(0);
-                case "south":
-                    TextEngine.clearScreen();
-                    inAmerica();
-                case "exit":
-                    TextEngine.printWithDelays("See ya next time!",false);
-                    System.exit(0);
-                default:
-                    TextEngine.printWithDelays("I'm sorry, I don't understand that command.",false);
             }
         }
     }
