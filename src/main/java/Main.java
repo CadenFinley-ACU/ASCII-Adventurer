@@ -17,14 +17,21 @@ class Main {
     private static String savedPlace = null;
 
     public static void main(String[] args) throws InterruptedException {
-        TextEngine.clearScreen();
+        TextEngine.os=getOS();
         startMenu();
     }
-
+    private static String getOS() throws InterruptedException{
+        String os = System.getProperty("os.name");
+        TextEngine.printWithDelays("Using System Property: " + os,false);
+        TextEngine.printNoDelay("(Press enter to continue", false);
+        return os;
+        
+    }
     public static void startMenu() throws InterruptedException {
+        TextEngine.clearScreen();
         TextEngine.printNoDelay("Adventure V1, by BarrettHall: Albert Tucker, Caden Finley, and Grijesh Shrestha", false);
         if (hasSave()) {
-            TextEngine.printNoDelay("Welcome " + Player.getName(), false);
+            TextEngine.printNoDelay("Welcome " + Player.getName()+"!", false);
         } else {
             TextEngine.printNoDelay("Welcome Hero!", false);
         }

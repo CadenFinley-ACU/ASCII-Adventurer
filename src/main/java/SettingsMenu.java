@@ -30,7 +30,7 @@ public abstract class SettingsMenu {
                     TextEngine.speedSetting = "Slow";
                     TextEngine.printNoDelay("Slow", false);
                     TextEngine.printWithDelays("This is what SLOW text looks like", false);
-                    TextEngine.printNoDelay("Confirm?(yes or no)", true);
+                    TextEngine.printNoDelay("Confirm? (yes or no)", true);
                     ignore = console.readLine();
                     command = console.readLine();
                     if (command.toLowerCase().equals("yes")) {
@@ -48,7 +48,7 @@ public abstract class SettingsMenu {
                     TextEngine.speedSetting = "Normal";
                     TextEngine.printNoDelay("Normal", false);
                     TextEngine.printWithDelays("This is what NORMAL text looks like. It is like this by default.", false);
-                    TextEngine.printNoDelay("Confirm?(yes or no)", true);
+                    TextEngine.printNoDelay("Confirm? (yes or no)", true);
                     ignore = console.readLine();
                     command = console.readLine();
                     if (command.toLowerCase().equals("yes")) {
@@ -66,7 +66,7 @@ public abstract class SettingsMenu {
                     TextEngine.speedSetting = "Fast";
                     TextEngine.printNoDelay("Fast", false);
                     TextEngine.printWithDelays("This is what FAST text looks like", false);
-                    TextEngine.printNoDelay("Confirm?(yes or no)", true);
+                    TextEngine.printNoDelay("Confirm? (yes or no)", true);
                     ignore = console.readLine();
                     command = console.readLine();
                     if (command.toLowerCase().equals("yes")) {
@@ -84,7 +84,7 @@ public abstract class SettingsMenu {
                     TextEngine.speedSetting = "NoDelay";
                     TextEngine.printNoDelay("NoDelay", false);
                     TextEngine.printNoDelay("You in a rush or somethin?", false);
-                    TextEngine.printNoDelay("Confirm?(yes or no)", true);
+                    TextEngine.printNoDelay("Confirm? (yes or no)", true);
                     ignore = console.readLine();
                     command = console.readLine();
                     if (command.toLowerCase().equals("yes")) {

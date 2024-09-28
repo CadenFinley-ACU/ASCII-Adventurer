@@ -94,7 +94,7 @@ public class OpenWorld extends Room {
                     case "fight" -> {
                         Player.changeGold(40);
                         Player.changeHealth(-38);
-                        TextEngine.printWithDelays("You managed to fight them off and send them running,\n and take 40 of their gold,\nbut not without them leaving a few cuts on you.", false);
+                        TextEngine.printWithDelays("You managed to fight them off and send them running,\nand take 40 of their gold,\nbut not without them leaving a few cuts on you.", false);
                         TextEngine.printWithDelays("You lose -38 health.\nYou continue on to the village", false);
                         TextEngine.printWithDelays("Press Enter to continue", false);
                         console.readLine();
@@ -124,7 +124,7 @@ public class OpenWorld extends Room {
                 }
             }
         } else {
-            TextEngine.printWithDelays("The path to the village we serene and quiet.\n the bandits werre nowhere to be seen.", false);
+            TextEngine.printWithDelays("The path to the village we serene and quiet.\n the bandits were nowhere to be seen.", false);
             TextEngine.printWithDelays("Press Enter to continue", false);
             console.readLine();
             roomSave = 0;
