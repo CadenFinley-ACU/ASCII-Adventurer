@@ -1,5 +1,14 @@
 import java.io.Console;
-
+/**
+ * America Test Area
+ * 
+ * Text Adventure Game
+ * SE374 F24
+ * Final Project
+ * Caden Finley
+ * Albert Tucker
+ * Grijesh Shrestha
+ */
 public class Canada {
     private final static Console console = System.console();
     private static String command;
