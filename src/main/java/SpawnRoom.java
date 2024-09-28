@@ -14,7 +14,7 @@ public class SpawnRoom extends Room {
     static int roomSave = 0;
 
     public static void startRoom() throws InterruptedException {
-        TextEngine.clearScreen();
+        Main.screenRefresh();
         room = "SpawnRoom";
         Main.checkSave(room);
         switch (roomSave) {
@@ -29,8 +29,7 @@ public class SpawnRoom extends Room {
         }
     }
 
-    private static void part0() throws InterruptedException {
-        Main.printStatus();
+    private static void part0() throws InterruptedException { //0
         TextEngine.printWithDelays("You wake up in a dark musty cave with nothing but the clothes on your back.", false);
         TextEngine.printWithDelays("You see a faint light to the north", false);
         TextEngine.printWithDelays("What is your command: north or help", true);
@@ -39,9 +38,8 @@ public class SpawnRoom extends Room {
             command = console.readLine();
             switch (command.toLowerCase()) {
                 case "north" -> {
-                    TextEngine.clearScreen();
                     roomSave++;
-                    part1();
+                    startRoom();
                 }
                 default ->
                     Main.inGameDefaultTextHandling(command);
@@ -49,8 +47,7 @@ public class SpawnRoom extends Room {
         }
     }
 
-    private static void part1() throws InterruptedException {
-        Main.printStatus();
+    private static void part1() throws InterruptedException { //1
         TextEngine.printWithDelays("You enter a cool, dimly lit room by a few torches", false);
         TextEngine.printWithDelays("With a 'Sword' in the middle", false);
         TextEngine.printWithDelays("What is your command: take it or leave it", true);
@@ -76,8 +73,7 @@ public class SpawnRoom extends Room {
 
     }
 
-    private static void part2() throws InterruptedException {
-        Main.printStatus();
+    private static void part2() throws InterruptedException { //2
         TextEngine.printWithDelays("You enter a cool, dimly lit room by a few torches", false);
         TextEngine.printWithDelays("There is a petestal in the middle where a mighty sword once lay", false);
         TextEngine.printWithDelays("Where to?\n Deeper in the Cave or Back out in the Wilderness?", false);
@@ -91,7 +87,6 @@ public class SpawnRoom extends Room {
                     continue;
                 }
                 case "wilderness" -> {
-                    TextEngine.clearScreen();
                     OpenWorld.startRoom();
                 }
                 default ->

@@ -18,12 +18,13 @@ public class Player {
     public static String command;
     public static String ignore;
     private static int inventorySize;
-    ;
+    private static int gold;
     public static Map<String, Integer> inventory = new HashMap<>();
     public static InventoryManager manager = new InventoryManager();
 
     public static void playerStart() throws InterruptedException {
         health = 100;
+        gold = 0;
         inventorySize = 0;
         playerCreate();
     }
@@ -39,11 +40,17 @@ public class Player {
     public static int getHealth() {
         return health;
     }
-
+    public static int getGold() {
+        return gold;
+    }
     public static void changeHealth(int change) {
+        Main.screenRefresh();
         health += change;
     }
-
+    public static void changeGold(int change) {
+        Main.screenRefresh();
+        gold += change;
+    }
     public static void openInventory() throws InterruptedException {
         manager.printInventory();
 

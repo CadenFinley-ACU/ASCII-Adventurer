@@ -182,12 +182,14 @@ class Main {
             Player.playerStart();
         }
     }
-
     public static void printStatus() {
-        TextEngine.printNoDelay("Current Status: " + Player.getName(), false);
-        TextEngine.printNoDelay("Health: " + Player.getHealth(), false);
-        TextEngine.printNoDelay("Room: " + getSavedPlace() + "\n", false);
+        TextEngine.printNoDelay("Name: " + Player.getName(), false);
+        TextEngine.printNoDelay("Health: " + Player.getHealth()+" Gold: "+ Player.getGold(), false);
+        TextEngine.printNoDelay("Room: " + getSavedPlace() + " "+getRoomId()+ "\n", false);
         TextEngine.printNoDelay("\n", false);
-
+    }
+    public static void screenRefresh(){
+        TextEngine.clearScreen();
+        printStatus();
     }
 }
