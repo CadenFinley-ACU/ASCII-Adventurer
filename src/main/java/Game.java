@@ -77,12 +77,13 @@ class Game {
             case "inventory":
                 player.getInventory();
                 return;
-            case "save":
-                saveSpace(savedPlace);
-                return;
             case "settings":
                 SettingsMenu.start();
                 TextEngine.clearScreen();
+                return;
+            case "save":
+                //should auto save when you get to every area so this shouldnt matter unless we add spots that dont auto save
+                checkSave(getSavedPlace());
                 return;
             case "exit":
                 TextEngine.printWithDelays("Returning to main menu.", false);
