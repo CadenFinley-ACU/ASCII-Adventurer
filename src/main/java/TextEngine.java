@@ -11,7 +11,7 @@ public abstract class TextEngine {
 
     public static String speedSetting = "Normal";
 
-    public static void printWithDelays(String data, boolean buffer) throws InterruptedException { //use buffer is you are accepting input after the text is printed
+    public static void printWithDelays(String data,boolean buffer) throws InterruptedException { //use buffer is you are accepting input after the text is printed
         if (buffer) {
             data = data + " (press enter to type)";
         }
@@ -23,7 +23,7 @@ public abstract class TextEngine {
             char ch = data.charAt(i);
             switch (speedSetting) {
                 case "Slow" ->
-                    TimeUnit.MILLISECONDS.sleep(30);
+                    TimeUnit.MILLISECONDS.sleep(40);
                 case "Fast" ->
                     TimeUnit.MILLISECONDS.sleep(15);
                 case "NoDelay" ->
@@ -37,6 +37,7 @@ public abstract class TextEngine {
                         TimeUnit.MILLISECONDS.sleep(40);
                     }
                 }
+
             }
             System.out.print(ch);
             remainingData.setCharAt(i, ' ');

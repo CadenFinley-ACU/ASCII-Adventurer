@@ -29,9 +29,9 @@ public class OpenWorld extends Room {
 
     private static void part0() throws InterruptedException {
         Game.printStatus();
-        TextEngine.printWithDelays("You are in the open world,\nthe sunlight blinds your eyes as they have not adjusted from the dark cave.", false);
-        TextEngine.printWithDelays("You see a long winding paths in all four directions.\nHow overwhelming...", false);
-        TextEngine.printWithDelays("Which path will you take:\n Forward, Left, Right, Go Back, or help", true);
+        TextEngine.printWithDelays("You are in the open world,\nthe sunlight blinds your eyes as they have not adjusted from the dark cave.",false);
+        TextEngine.printWithDelays("You see a long winding paths in all four directions.\nHow overwhelming...",false);
+        TextEngine.printWithDelays("Which path will you take:\nForward, Left, Right, Go Back, or help",true);
         while (true) {
             ignore = console.readLine();
             command = console.readLine();
