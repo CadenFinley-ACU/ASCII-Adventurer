@@ -14,7 +14,7 @@ public class America {
     private static String command;
     @SuppressWarnings("unused")
     private static String ignore;
-    public static boolean startRoom() throws InterruptedException{
+    public static void startRoom() throws InterruptedException{
         TextEngine.printWithDelays("You are in a lucious, green area with trees, not Abilene.\nWhat is your command: north or exit?",true);
             while (true) {
                 ignore = console.readLine();
@@ -22,15 +22,10 @@ public class America {
                 switch (command.toLowerCase()) {
                     case "north":
                         TextEngine.clearScreen();
-                        Canada.startRoom();
-                    case "exit":
-                        TextEngine.printWithDelays("Returning to main menu.", false);
-                        TextEngine.clearScreen();
-                        GameStart.startMenu();
+                        Canada.startRoom();;
                     default:
-                        TextEngine.printWithDelays("I'm sorry, I don't understand that command.",true);                  
-                }
-                return true;
+                        GameStart.defaultTextHandling(command);
             }
         }
+    }     
 }

@@ -14,7 +14,7 @@ public class Canada {
     private static String command;
     @SuppressWarnings("unused")
     private static String ignore;
-    public static boolean startRoom() throws InterruptedException{
+    public static void startRoom() throws InterruptedException{
         TextEngine.printWithDelays("\"Eh, you are in Canada. Good luck with all the mooses.\n What is your command: north, south or exit?",true);
             while (true) {
                 ignore = console.readLine();
@@ -27,14 +27,9 @@ public class Canada {
                     case "south":
                         TextEngine.clearScreen();
                         America.startRoom();
-                    case "exit":
-                        TextEngine.printWithDelays("Returning to main menu.", false);
-                        TextEngine.clearScreen();
-                        GameStart.startMenu();
                     default:
-                        TextEngine.printWithDelays("I'm sorry, I don't understand that command.",true);                  
-                }
-                return true;
+                        TextEngine.defaultTextHandling(command);                 
             }
         }
+    }
 }
