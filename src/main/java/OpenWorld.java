@@ -16,22 +16,22 @@ public class OpenWorld extends Room {
     public static void startRoom() throws InterruptedException {
         TextEngine.clearScreen();
         room = "OpenWorld";
-        Game.checkSave(room);
+        Main.checkSave(room);
         switch (roomSave) {
             case 0:
                 part0();
             case 1:
                 part0();
             default:
-                Game.startMenu();
+                Main.startMenu();
         }
     }
 
     private static void part0() throws InterruptedException {
-        Game.printStatus();
-        TextEngine.printWithDelays("You are in the open world,\nthe sunlight blinds your eyes as they have not adjusted from the dark cave.",false);
-        TextEngine.printWithDelays("You see a long winding paths in all four directions.\nHow overwhelming...",false);
-        TextEngine.printWithDelays("Which path will you take:\nForward, Left, Right, Go Back, or help",true);
+        Main.printStatus();
+        TextEngine.printWithDelays("You are in the open world,\nthe sunlight blinds your eyes as they have not adjusted from the dark cave.", false);
+        TextEngine.printWithDelays("You see a long winding paths in all four directions.\nHow overwhelming...", false);
+        TextEngine.printWithDelays("Which path will you take:\nForward, Left, Right, Go Back, or help", true);
         while (true) {
             ignore = console.readLine();
             command = console.readLine();
@@ -56,7 +56,7 @@ public class OpenWorld extends Room {
                     System.out.println("you went to the right");
                 }
                 default ->
-                    Game.inGameDefaultTextHandling(command);
+                    Main.inGameDefaultTextHandling(command);
             }
         }
     }

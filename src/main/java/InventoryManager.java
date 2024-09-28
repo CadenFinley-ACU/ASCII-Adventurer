@@ -1,10 +1,14 @@
+
 import java.util.Set;
 
 /**
- * Template SE374 F24 Final Project Caden Finley Albert Tucker Grijesh Shrestha
+ * Inventory Manager
+ *
+ * Text Adventure Game SE374 F24 Final Project Caden Finley Albert Tucker
+ * Grijesh Shrestha
  */
-//todo make inventory and health management
 public class InventoryManager extends Player {
+
     public String room;
     public String area;
     //private static String[][] roomItemsMatrix = new String[2][2];
@@ -12,7 +16,7 @@ public class InventoryManager extends Player {
     public void printInventory() throws InterruptedException {
         int i = 1;
         TextEngine.clearScreen();
-        Game.printStatus(); 
+        Main.printStatus();
         if (inventory.isEmpty()) {
             TextEngine.printWithDelays("You have nothing in your inventory.", false);
             TextEngine.printWithDelays("Press Enter to continue", false);
@@ -48,7 +52,7 @@ public class InventoryManager extends Player {
     private static void inventoryManage() throws InterruptedException {
         TextEngine.printWithDelays("What would you like to do", false);
         TextEngine.printWithDelays("Use item, drop item, or exit ", false);
-        TextEngine.printWithDelays("'use', 'drop', 'exit'", false);
+        TextEngine.printWithDelays("'use', 'drop', 'exit'", true);
         while (true) {
             console.readLine();
             command = console.readLine();
@@ -56,10 +60,10 @@ public class InventoryManager extends Player {
                 case "use" -> {
                     break;
                 }
-                case "toss" -> {
-                    TextEngine.printWithDelays("Which item would you like to toss?", true);
+                case "drop" -> {
+                    TextEngine.printWithDelays("Which item would you like to drop?", true);
                     console.readLine();
-                    command = console.readLine();              
+                    command = console.readLine();
                     tossItem(command);
                 }
                 case "exit" -> {
@@ -78,8 +82,9 @@ public class InventoryManager extends Player {
     private static void leave() throws InterruptedException {
         TextEngine.printWithDelays("Returning to last saved state.", false);
         TextEngine.clearScreen();
-        Game.loadSave();
+        Main.loadSave();
     }
+
     private static void tossItem(String item) throws InterruptedException {
         if (inventory.get(item) != null) {
 
@@ -103,5 +108,3 @@ public class InventoryManager extends Player {
     //     //formations of thougbhs n stuff idk gotta figure out how when you drop an item it is saved in that room
     // }
 }
-
-

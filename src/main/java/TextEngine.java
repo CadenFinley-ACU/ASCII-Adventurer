@@ -11,7 +11,7 @@ public abstract class TextEngine {
 
     public static String speedSetting = "Normal";
 
-    public static void printWithDelays(String data,boolean buffer) throws InterruptedException { //use buffer is you are accepting input after the text is printed
+    public static void printWithDelays(String data, boolean buffer) throws InterruptedException { //use buffer is you are accepting input after the text is printed
         if (buffer) {
             data = data + " (press enter to type)";
         }
