@@ -1,7 +1,7 @@
 import java.io.Console;
 
 /**
- * Room Engine???
+ * Room Engine??? / Maybe make this game engine and but each room or area of rooms in their own individual classes
  * 
  * Text Adventure Game
  * SE374 F24
