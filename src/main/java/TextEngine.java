@@ -40,7 +40,6 @@ public class TextEngine {
             remainingData.setCharAt(i, ' ');
         }
     }
-    
     public static void printNoDelay(String data,boolean buffer){
         if(buffer) {
             data = data + "(press enter to type)";
@@ -54,4 +53,5 @@ public class TextEngine {
         System.out.print("\033[H\033[2J");
         System.out.flush();
     }
+
 }

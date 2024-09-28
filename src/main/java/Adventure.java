@@ -25,7 +25,7 @@ class Adventure {
         while(true){
             ignore = console.readLine();
             command = console.readLine();
-            switch (command) {
+            switch (command.toLowerCase()) {
                 case "start":
                     TextEngine.clearScreen();
                     inAmerica();       
@@ -50,7 +50,7 @@ class Adventure {
         while(true){
             ignore = console.readLine();
             command = console.readLine();
-            switch (command) {
+            switch (command.toLowerCase()) {
                 case "slow" -> {
                     TextEngine.speedSetting = "Slow";
                     TextEngine.printNoDelay("Slow",false);
@@ -58,7 +58,7 @@ class Adventure {
                     TextEngine.printNoDelay("Confirm?(yes or no)", true);
                     ignore = console.readLine();
                     command = console.readLine();
-                    if (command.equals("yes")) {
+                    if (command.toLowerCase().equals("yes")) {
                         TextEngine.printWithDelays("Settings saved.", false);
                         TextEngine.speedSetting = "Slow";
                         TextEngine.clearScreen();
@@ -77,7 +77,7 @@ class Adventure {
                     TextEngine.printNoDelay("Confirm?(yes or no)", true);
                     ignore = console.readLine();
                     command = console.readLine();
-                    if (command.equals("yes")) {
+                    if (command.toLowerCase().equals("yes")) {
                         TextEngine.printWithDelays("Settings saved.", false);
                         TextEngine.speedSetting = "Normal";
                         TextEngine.clearScreen();
@@ -96,7 +96,7 @@ class Adventure {
                     TextEngine.printNoDelay("Confirm?(yes or no)", true);
                     ignore = console.readLine();
                     command = console.readLine();
-                    if (command.equals("yes")) {
+                    if (command.toLowerCase().equals("yes")) {
                         TextEngine.printWithDelays("Settings saved.", false);
                         TextEngine.speedSetting = "Fast";
                         TextEngine.clearScreen();
@@ -115,7 +115,7 @@ class Adventure {
                     TextEngine.printNoDelay("Confirm?(yes or no)", true);
                     ignore = console.readLine();
                     command = console.readLine();
-                    if (command.equals("yes")) {
+                    if (command.toLowerCase().equals("yes")) {
                         TextEngine.printWithDelays("Settings saved.", false);
                         TextEngine.speedSetting = "NoDelay";
                         TextEngine.clearScreen();
@@ -141,7 +141,7 @@ class Adventure {
         while (true) {
             ignore = console.readLine();
             command = console.readLine();
-            switch (command) {
+            switch (command.toLowerCase()) {
                 case "north":
                     TextEngine.clearScreen();
                     inCanada();
@@ -159,7 +159,7 @@ class Adventure {
         while (true) {
             ignore = console.readLine();
             command = console.readLine();
-            switch (command) {
+            switch (command.toLowerCase()) {
                 case "north":
                     TextEngine.printWithDelays("Eh, you are on the North Pole. Good luck with the cold, hope you brought your coat. brrrrrrr...",false);
                     System.exit(0);
