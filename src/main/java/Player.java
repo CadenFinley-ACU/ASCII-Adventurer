@@ -24,7 +24,7 @@ public class Player {
 
     public static void playerStart() throws InterruptedException {
         health = 100;
-        gold = 0;
+        gold = 20;
         inventorySize = 0;
         playerCreate();
     }
