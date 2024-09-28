@@ -15,15 +15,13 @@ public class Player {
     public static String command;
     public static String ignore;
     private static int inventorySize;;
-    public static Map<String, Integer> inventory;
-    public static InventoryManager manager;
+    public static Map<String, Integer> inventory=new HashMap<>();
+    public static InventoryManager manager= new InventoryManager();
 
     public static void playerStart() throws InterruptedException {
         health = 100;
         inventorySize=0;
         playerCreate();
-        manager = new InventoryManager();
-        inventory = new HashMap<>();
     }
     public static String getName() {
         return name;
@@ -41,8 +39,7 @@ public class Player {
         health += change;
     }
     public static void openInventory() throws InterruptedException{
-        Game.printStatus(); 
-        InventoryManager.getInventory();
+        manager.printInventory();
         
     }
     public static void putItem(String item, int amount) throws InterruptedException{

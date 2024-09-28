@@ -9,12 +9,17 @@ public class InventoryManager extends Player {
     public String area;
     //private static String[][] roomItemsMatrix = new String[2][2];
 
-    public static void getInventory() throws InterruptedException {
-        TextEngine.clearScreen();
+    public void printInventory() throws InterruptedException {
         int i = 1;
         if (inventory.isEmpty()) {
-            TextEngine.printWithDelays("You have nothing in your inventory.", true);
+            Game.printStatus(); 
+            TextEngine.printWithDelays("You have nothing in your inventory.", false);
+            TextEngine.printWithDelays("Press Enter to continue", true);
+            console.readLine();
+            leave();
         } else {
+            TextEngine.clearScreen();
+            Game.printStatus(); 
             TextEngine.printWithDelays("You have the following items in your inventory:", false);
             Set<String> keys = inventory.keySet();
             for (String key : keys) {
@@ -83,14 +88,12 @@ public class InventoryManager extends Player {
             TextEngine.printWithDelays("You have tossed " + item, false);
             TextEngine.printWithDelays("Press Enter to continue", false);
             console.readLine();
-            TextEngine.clearScreen();
-            getInventory();
+            Player.openInventory();
         } else {
             TextEngine.printWithDelays("You do not have that item.", false);
             TextEngine.printWithDelays("Press Enter to continue", false);
             console.readLine();
-            TextEngine.clearScreen();
-            getInventory();
+            Player.openInventory();
         }
 
     }
