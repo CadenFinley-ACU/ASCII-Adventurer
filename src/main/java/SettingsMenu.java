@@ -9,7 +9,7 @@ import java.io.Console;
  * Albert Tucker
  * Grijesh Shrestha
  */
-public class SettingsMenu {
+public abstract class SettingsMenu {
     private final static Console console = System.console();
     private static String command;
     @SuppressWarnings("unused")
@@ -17,10 +17,11 @@ public class SettingsMenu {
     public static void start() throws InterruptedException{
         String lastSavedState = TextEngine.speedSetting;
         TextEngine.clearScreen();
-        TextEngine.printNoDelay("Settings",false);
+        TextEngine.printNoDelay("Settings:",false);
         TextEngine.printNoDelay("This is the settings menu. Here you can change the speed of the text.", false);
         TextEngine.printNoDelay("The current speed is set to: " + TextEngine.speedSetting, false);
-        TextEngine.printWithDelays("You can change the speed to: Slow, Normal, Fast, or NoDelay", true);
+        TextEngine.printWithDelays("You can change the speed to: Slow, Normal, Fast, or NoDelay", false);
+        TextEngine.printWithDelays("Type 'exit' to leave this menu", true);
         while(true){
             ignore = console.readLine();
             command = console.readLine();

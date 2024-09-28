@@ -9,11 +9,11 @@ import java.util.concurrent.TimeUnit;
  * Albert Tucker
  * Grijesh Shrestha
  */
-public class TextEngine {
+public abstract class TextEngine {
     public static String speedSetting = "Normal";
     public static void printWithDelays(String data,boolean buffer) throws InterruptedException{ //use buffer is you are accepting input after the text is printed
         if(buffer) {
-        data = data + "(press enter to type)";
+        data = data + " (press enter to type)";
         }
         if(data.charAt(data.length()-1) != '\n'&& !buffer){
             data = data + "\n";
@@ -41,7 +41,7 @@ public class TextEngine {
     }
     public static void printNoDelay(String data,boolean buffer){ //use buffer is you are accepting input after the text is printed
         if(buffer) {
-            data = data + "(press enter to type)";
+            data = data + " (press enter to type)";
         }
         if(data.charAt(data.length()-1) != '\n'&&!buffer){
             data = data + "\n";

@@ -13,22 +13,21 @@ import java.io.Console;
 class Game {
     private final static Console console = System.console();
     private static String command;
-    @SuppressWarnings("unused")
     private static String ignore;
     public static boolean playerCreated = false;
-    public static Player player;
     private static String savedPlace=null;
         public static void main(String[] args) throws InterruptedException{
+            TextEngine.clearScreen();
             startMenu();
-        }
-        public static void playerStart(Player passedPlayer) throws InterruptedException{
-            player = passedPlayer;
-            playerCreated = true;
-            America.startRoom();
         }
         public static void startMenu() throws InterruptedException {
             TextEngine.printNoDelay("Adventure V1, by BarrettHall: Albert Tucker, Caden Finley, and Grijesh Shrestha",false);
-            TextEngine.printNoDelay("Welcome Hero!",false);
+            if(hasSave()){
+                TextEngine.printNoDelay("Welcome "+Player.getName(), false);
+            }
+            else {
+                TextEngine.printNoDelay("Welcome Hero!",false);
+            }  
             TextEngine.printWithDelays("What is your command: Start, Settings, Exit",true);
             while(true){
                 ignore = console.readLine();
@@ -36,14 +35,13 @@ class Game {
                 switch (command.toLowerCase()) {
                     case "start":
                         TextEngine.clearScreen();
-                        if(playerCreated) {
-                            loadSave();
-                        } else {
-                            Player.playerCreate();
-                        } 
+                        start();
                     case "settings":
                         TextEngine.clearScreen();
                         SettingsMenu.start();
+                    case "help":
+                        TextEngine.printWithDelays("You can type 'start' to start the game\nor 'settings' to change the text speed\nor 'exit' to leave the game.",true);
+                        continue;
                     case "exit":
                         TextEngine.printWithDelays("See ya next time!",false);
                         TextEngine.clearScreen();
@@ -72,10 +70,10 @@ class Game {
     public static void inGameDefaultTextHandling(String data) throws InterruptedException{
         switch(data){
             case "help":
-                TextEngine.printWithDelays("You can type 'inventory' to see your health and inventory\nor 'settings' or 'exit' to return to the main menu.",true);
+                TextEngine.printWithDelays("You can type 'inventory' to see your health and inventory\nor 'settings' or type 'save' to save \n or 'exit' to return to the main menu.",true);
                 return;
             case "inventory":
-                player.getInventory();
+                Player.getInventory();
                 return;
             case "settings":
                 SettingsMenu.start();
@@ -100,24 +98,52 @@ class Game {
         savedPlace = place;
     }
     public static void loadSave() throws InterruptedException{
-        switch(savedPlace){
-            case "America":
-                America.startRoom();
-            case "Canada":
-                Canada.startRoom();
-            default:
-                startMenu();
+        if (getSavedPlace() == null) {
+            SpawnRoom.startRoom();
+        } else {
+            switch(getSavedPlace()){
+                case "SpawnRoom" -> SpawnRoom.startRoom();
+                case "OpenWorld" -> OpenWorld.startRoom();
+                default -> startMenu();
+            }
         }
     }
     public static String getSavedPlace(){
         return savedPlace;
     }
+    private static boolean hasSave(){
+        return getSavedPlace() != null;
+    }
     public static void checkSave(String place) throws InterruptedException{
-        if(savedPlace == null){
+        if(!hasSave()){
             saveSpace(place);
         }
         else if(!getSavedPlace().equals(place)){
             saveSpace(place);
         }
     }
+    public static void start() throws InterruptedException{
+        if(hasSave()){
+            TextEngine.printWithDelays("Would you like to load your saved game?",true);
+            ignore = console.readLine();
+            command = console.readLine();
+            if(command.toLowerCase().equals("yes")){
+                loadSave();
+            }
+            else{
+                Player.playerStart();
+            }
+        } else if(playerCreated){
+            loadSave();
+            } else {              
+            Player.playerStart();
+        } 
+    }
+    public static void printStatus() {
+            TextEngine.printNoDelay("Current Status: "+ Player.getName(), false);
+            TextEngine.printNoDelay("Health: " + Player.getHealth(), false);
+            TextEngine.printNoDelay("Room: " + getSavedPlace()+"\n", false);
+            TextEngine.printNoDelay("\n", false);
+        
+    }   
 }
