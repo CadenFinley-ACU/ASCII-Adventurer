@@ -6,7 +6,7 @@ public class Canada {
     @SuppressWarnings("unused")
     private static String ignore;
     public static boolean startRoom() throws InterruptedException{
-        TextEngine.printWithDelays("\"Eh, you are in Canada. Good luck with all the mooses.\\n" + "What is your command: north, south or exit?",true);
+        TextEngine.printWithDelays("\"Eh, you are in Canada. Good luck with all the mooses.\n What is your command: north, south or exit?",true);
             while (true) {
                 ignore = console.readLine();
                 command = console.readLine();
