@@ -12,6 +12,7 @@ public class InventoryManager extends Player {
     public void printInventory() throws InterruptedException {
         int i = 1;
         if (inventory.isEmpty()) {
+            TextEngine.clearScreen();
             Game.printStatus(); 
             TextEngine.printWithDelays("You have nothing in your inventory.", false);
             TextEngine.printWithDelays("Press Enter to continue", false);
@@ -30,7 +31,7 @@ public class InventoryManager extends Player {
                 }
                 i++;
             }
-            TextEngine.printWithDelays("\n", true);
+            TextEngine.printWithDelays("\n", false);
             inventoryManage();
         }
     }
@@ -49,7 +50,7 @@ public class InventoryManager extends Player {
     private static void inventoryManage() throws InterruptedException {
         TextEngine.printWithDelays("What would you like to do", false);
         TextEngine.printWithDelays("Use item, drop item, or exit ", false);
-        TextEngine.printWithDelays("'use', 'toss', 'exit'", false);
+        TextEngine.printWithDelays("'use', 'drop', 'exit'", false);
         while (true) {
             console.readLine();
             command = console.readLine();
