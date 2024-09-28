@@ -39,7 +39,7 @@ public class InventoryManager extends Player {
     }
 
     public void put(String item, int amount) throws InterruptedException {
-        if (inventory.get(item) != null) { //make sure item is not already in inventory
+        if (inventory.get(item) != null) {
             inventory.put(item, inventory.get(item) + amount);
         } else {
             inventory.put(item, amount);
@@ -49,7 +49,7 @@ public class InventoryManager extends Player {
         console.readLine();
     }
 
-    private static void inventoryManage() throws InterruptedException { //start inventory manager
+    private static void inventoryManage() throws InterruptedException {
         TextEngine.printWithDelays("What would you like to do", false);
         TextEngine.printWithDelays("Use item, drop item, or exit ", false);
         TextEngine.printWithDelays("'use', 'drop', 'exit'", true);
@@ -72,7 +72,8 @@ public class InventoryManager extends Player {
                     break;
                 }
                 default -> {
-                    Main.uniDefaultArgsTextHanding(command);
+                    TextEngine.printWithDelays("Invalid command. Please try again.", true);
+                    continue;
                 }
             }
         }

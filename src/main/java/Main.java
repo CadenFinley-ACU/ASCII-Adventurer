@@ -92,18 +92,6 @@ class Main {
             }
             default ->
                 TextEngine.printWithDelays("I'm sorry, I don't understand that command.", true);
-        } 
-    }
-    public static void uniDefaultArgsTextHanding(String data) throws InterruptedException{
-        switch (data) {
-            case "help" ->
-                TextEngine.printNoDelay("You can type' settings' or type 'save' to save \n or 'exit' to return to the main menu.", true);
-            case "settings" -> {
-                SettingsMenu.start();
-                TextEngine.clearScreen();
-            }
-            default ->
-                TextEngine.printNoDelay("I'm sorry, I don't understand that command.", true);
         }
     }
 

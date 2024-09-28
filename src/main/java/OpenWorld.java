@@ -1,4 +1,6 @@
 
+
+
 /**
  * Open World Class
  *
@@ -13,9 +15,9 @@ public class OpenWorld extends Room {
 
     public static void startRoom() throws InterruptedException {
         Main.screenRefresh();
-        room = "OpenWorld"; //this sets the player save point and the the roomId of the area is saved here
+        room = "OpenWorld";
         Main.checkSave(room);
-        switch (roomSave) { //each case is a room which creates the area maybe only certain rooms go to the next area.
+        switch (roomSave) {
             case 0:
                 part0(); //start room
             case 1:
@@ -110,7 +112,7 @@ public class OpenWorld extends Room {
                     }
                     case "plead" -> {
                         TextEngine.printWithDelays("You plead deperately from them to let you go\nThe demand all of your gold.", false);
-                        TextEngine.printWithDelays("You lose -" + Player.getGold() + " gold.", false);
+                        TextEngine.printWithDelays("You lose -"+Player.getGold()+" gold.", false);
                         Player.changeGold(-Player.getGold());
                         TextEngine.printWithDelays("Press Enter to continue", false);
                         roomSave = 6;
@@ -151,7 +153,6 @@ public class OpenWorld extends Room {
             }
         }
     }
-
     private static void part3() throws InterruptedException { //3
         TextEngine.printWithDelays("You walk into a dark spooky forest", false);
         TextEngine.printWithDelays("What is your command: enter forest or go back", true);
