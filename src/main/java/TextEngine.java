@@ -22,16 +22,16 @@ public class TextEngine {
         for (int i = 0; i < data.length(); i++) {
             char ch = data.charAt(i);
                 switch (speedSetting) {
-                    case "Slow" -> TimeUnit.MILLISECONDS.sleep(50);
-                    case "Fast" -> TimeUnit.MILLISECONDS.sleep(25);
+                    case "Slow" -> TimeUnit.MILLISECONDS.sleep(30);
+                    case "Fast" -> TimeUnit.MILLISECONDS.sleep(15);
                     case "NoDelay" -> TimeUnit.MILLISECONDS.sleep(0);
                     default -> {
                     if (data.length() > 100) {
                         TimeUnit.MILLISECONDS.sleep(15);
                     } else if (data.length() > 50) {
-                        TimeUnit.MILLISECONDS.sleep(35);
+                        TimeUnit.MILLISECONDS.sleep(30);
                     } else {
-                        TimeUnit.MILLISECONDS.sleep(50);
+                        TimeUnit.MILLISECONDS.sleep(40);
                     }
                 }
             }

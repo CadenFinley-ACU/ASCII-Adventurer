@@ -16,6 +16,7 @@ public class SettingsMenu {
     private static String ignore;
     public static void start() throws InterruptedException{
         String lastSavedState = TextEngine.speedSetting;
+        TextEngine.clearScreen();
         TextEngine.printNoDelay("Settings",false);
         TextEngine.printNoDelay("This is the settings menu. Here you can change the speed of the text.", false);
         TextEngine.printNoDelay("The current speed is set to: " + TextEngine.speedSetting, false);
@@ -33,14 +34,13 @@ public class SettingsMenu {
                     command = console.readLine();
                     if (command.toLowerCase().equals("yes")) {
                         TextEngine.printWithDelays("Settings saved.", false);
-                        TextEngine.speedSetting = "Slow";
                         TextEngine.clearScreen();
-                        GameStart.startMenu();
+                        leave();
                     } else {
                         TextEngine.printWithDelays("Settings not saved.", false);
                         TextEngine.speedSetting = lastSavedState;
                         TextEngine.clearScreen();
-                        start();
+                        continue;
                     }
                 }
                 case "normal" -> {
@@ -52,14 +52,13 @@ public class SettingsMenu {
                     command = console.readLine();
                     if (command.toLowerCase().equals("yes")) {
                         TextEngine.printWithDelays("Settings saved.", false);
-                        TextEngine.speedSetting = "Normal";
                         TextEngine.clearScreen();
-                        GameStart.startMenu();
+                        leave();
                     } else {
                         TextEngine.printWithDelays("Settings not saved.", false);
                         TextEngine.speedSetting = lastSavedState;
                         TextEngine.clearScreen();
-                        start();
+                        continue;
                     }
                 }
                 case "fast" -> {
@@ -71,14 +70,13 @@ public class SettingsMenu {
                     command = console.readLine();
                     if (command.toLowerCase().equals("yes")) {
                         TextEngine.printWithDelays("Settings saved.", false);
-                        TextEngine.speedSetting = "Fast";
                         TextEngine.clearScreen();
-                        GameStart.startMenu();
+                        leave();
                     } else {
                         TextEngine.printWithDelays("Settings not saved.", false);
                         TextEngine.speedSetting = lastSavedState;
                         TextEngine.clearScreen();
-                        start();
+                        continue;
                     }
                 }
                 case "nodelay" -> {
@@ -90,23 +88,26 @@ public class SettingsMenu {
                     command = console.readLine();
                     if (command.toLowerCase().equals("yes")) {
                         TextEngine.printWithDelays("Settings saved.", false);
-                        TextEngine.speedSetting = "NoDelay";
                         TextEngine.clearScreen();
-                        GameStart.startMenu();
+                        leave();
                     } else {
                         TextEngine.printWithDelays("Settings not saved.", false);
                         TextEngine.speedSetting = lastSavedState;
                         TextEngine.clearScreen();
-                        start();
+                        continue;
                     }
                 }
                 case "exit" -> {
-                    TextEngine.printWithDelays("Returning to main menu.", false);
+                    leave();
                     TextEngine.clearScreen();
-                    GameStart.startMenu();
                 }
                 default -> TextEngine.printWithDelays("I'm sorry, I don't understand that command.", true);
             }
         }
+    }
+    private static void leave() throws InterruptedException{
+        TextEngine.printWithDelays("Returning to last saved state.", false);
+        TextEngine.clearScreen();
+        Game.loadSave();
     }
 }

@@ -15,7 +15,8 @@ public class America {
     @SuppressWarnings("unused")
     private static String ignore;
     public static void startRoom() throws InterruptedException{
-        TextEngine.printWithDelays("You are in a lucious, green area with trees, not Abilene.\nWhat is your command: north or exit?",true);
+        Game.checkSave("America");
+        TextEngine.printWithDelays("You are in a lucious, green area with trees, not Abilene.\nWhat is your command: north",true);
             while (true) {
                 ignore = console.readLine();
                 command = console.readLine();
@@ -24,7 +25,7 @@ public class America {
                         TextEngine.clearScreen();
                         Canada.startRoom();;
                     default:
-                        GameStart.defaultTextHandling(command);
+                    Game.inGameDefaultTextHandling(command);
             }
         }
     }     

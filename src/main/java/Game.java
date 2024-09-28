@@ -10,18 +10,20 @@ import java.io.Console;
  * Albert Tucker
  * Grijesh Shrestha
  */
-class GameStart {
+class Game {
     private final static Console console = System.console();
     private static String command;
     @SuppressWarnings("unused")
     private static String ignore;
     public static boolean playerCreated = false;
     public static Player player;
+    private static String savedPlace=null;
         public static void main(String[] args) throws InterruptedException{
             startMenu();
         }
         public static void playerStart(Player passedPlayer) throws InterruptedException{
             player = passedPlayer;
+            playerCreated = true;
             America.startRoom();
         }
         public static void startMenu() throws InterruptedException {
@@ -35,10 +37,8 @@ class GameStart {
                     case "start":
                         TextEngine.clearScreen();
                         if(playerCreated) {
-                            //America.startRoom();  
-                            //create game saves somehow 
+                            loadSave();
                         } else {
-                            playerCreated = true;
                             Player.playerCreate();
                         } 
                     case "settings":
@@ -48,18 +48,41 @@ class GameStart {
                         TextEngine.printWithDelays("See ya next time!",false);
                         TextEngine.clearScreen();
                         System.exit(0);
+                    case "fast":
+                        TextEngine.speedSetting = "Fast";
+                        TextEngine.printWithDelays("Text speed set to Fast", true);
+                        continue;
+                    case "slow":
+                        TextEngine.speedSetting = "Slow";
+                        TextEngine.printWithDelays("Text speed set to Slow", true);
+                        continue;
+                    case "normal":
+                        TextEngine.speedSetting = "Normal";
+                        TextEngine.printWithDelays("Text speed set to Normal", true);
+                        continue;
+                    case "nodelay":
+                        TextEngine.speedSetting = "NoDelay";
+                        TextEngine.printWithDelays("Text speed set to NoDelay", true);
+                        continue;
                     default:
                         TextEngine.printWithDelays("I'm sorry, I don't understand that command.",true);
             }
         }     
     }
-    public static void defaultTextHandling(String data) throws InterruptedException{
+    public static void inGameDefaultTextHandling(String data) throws InterruptedException{
         switch(data){
             case "help":
-                TextEngine.printWithDelays("You can type inventory to see your health and inventory\nor exit to return to the main menu.",true);
+                TextEngine.printWithDelays("You can type 'inventory' to see your health and inventory\nor 'settings' or 'exit' to return to the main menu.",true);
                 return;
             case "inventory":
                 player.getInventory();
+                return;
+            case "save":
+                saveSpace(savedPlace);
+                return;
+            case "settings":
+                SettingsMenu.start();
+                TextEngine.clearScreen();
                 return;
             case "exit":
                 TextEngine.printWithDelays("Returning to main menu.", false);
@@ -68,6 +91,32 @@ class GameStart {
             default:
             TextEngine.printWithDelays("I'm sorry, I don't understand that command.",true);
         }
-
+    }
+    public static void saveSpace(String place) throws InterruptedException{
+        if (savedPlace != null){
+            TextEngine.printWithDelays("Game saved!",false);
+        }
+        savedPlace = place;
+    }
+    public static void loadSave() throws InterruptedException{
+        switch(savedPlace){
+            case "America":
+                America.startRoom();
+            case "Canada":
+                Canada.startRoom();
+            default:
+                startMenu();
+        }
+    }
+    public static String getSavedPlace(){
+        return savedPlace;
+    }
+    public static void checkSave(String place) throws InterruptedException{
+        if(savedPlace == null){
+            saveSpace(place);
+        }
+        else if(!getSavedPlace().equals(place)){
+            saveSpace(place);
+        }
     }
 }

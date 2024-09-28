@@ -39,14 +39,17 @@ public class Player {
         ignore = console.readLine();
         command = console.readLine();
         player.setName(command);
-                TextEngine.printWithDelays("Welcome "+player.getName()+"!",false);
-                TextEngine.printWithDelays("There are a few quick things to know\n at any point you can click settings to change the text speed.",false);
-                TextEngine.printWithDelays("You can also type exit to leave the game at any time.",false);
-                TextEngine.printWithDelays("You can type inventory to see your inventory and health.",false);
-                TextEngine.printWithDelays("Make sure you always press enter when prompted to!",false);
-                TextEngine.printWithDelays("Good luck! (press enter to continue)",false);
-                ignore = console.readLine();
-                TextEngine.clearScreen();
-                GameStart.playerStart (player);
+        TextEngine.clearScreen();
+        TextEngine.printWithDelays("Welcome "+player.getName()+"!",false);
+        TextEngine.printWithDelays("There are a few quick things to know\nat any point you can type settings to change the text speed.",false);
+        TextEngine.printWithDelays("You can also type exit to leave the game at any time.",false);
+        TextEngine.printWithDelays("You can type inventory to see your inventory and health.",false);
+        TextEngine.printWithDelays("You can type help to see these commands again.",false);
+        TextEngine.printWithDelays("Make sure you always press enter when prompted to! (press enter to continue)",false);
+        ignore = console.readLine();
+        TextEngine.printWithDelays("Good luck! (press enter to continue)",false);
+        ignore = console.readLine();
+        TextEngine.clearScreen();
+        Game.playerStart (player);
     }
 }
