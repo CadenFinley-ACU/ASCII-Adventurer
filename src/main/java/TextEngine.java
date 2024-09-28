@@ -1,7 +1,6 @@
 
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
-
 /**
  * Text Engine
  *
@@ -9,7 +8,6 @@ import java.util.concurrent.TimeUnit;
  * Grijesh Shrestha
  */
 public abstract class TextEngine {
-    public static String os=null;
     public static String speedSetting = "Normal";
 
     public static void printWithDelays(String data, boolean buffer) throws InterruptedException { //use buffer is you are accepting input after the text is printed
@@ -56,14 +54,14 @@ public abstract class TextEngine {
     }
 
     @SuppressWarnings("deprecation")
-    public static void clearScreen() { //clears the screen
+    public static void clearScreen() throws InterruptedException { //clears the screen
         try {
-            if (os.contains("Windows")) {
-                Runtime.getRuntime().exec("cls");
-            } else {
+            if (!Main.getOS().contains("Windows")) {
                 System.out.print("\033[H\033[2J");
                 System.out.flush();
                 Runtime.getRuntime().exec("clear");
+            } else {
+                Runtime.getRuntime().exec("cls");
             }
         } catch (final IOException e) {
             System.out.println("Error, No OS obtained: " + e.getMessage());

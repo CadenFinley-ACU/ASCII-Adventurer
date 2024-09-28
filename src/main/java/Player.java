@@ -43,11 +43,11 @@ public class Player {
     public static int getGold() {
         return gold;
     }
-    public static void changeHealth(int change) {
+    public static void changeHealth(int change) throws InterruptedException {
         Main.screenRefresh();
         health += change;
     }
-    public static void changeGold(int change) {
+    public static void changeGold(int change) throws InterruptedException {
         Main.screenRefresh();
         gold += change;
     }

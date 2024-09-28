@@ -1,4 +1,3 @@
-
 import java.io.Console;
 
 /**
@@ -15,23 +14,24 @@ class Main {
     private static String ignore;
     public static boolean playerCreated = false;
     private static String savedPlace = null;
+    public static String os = null;
 
     public static void main(String[] args) throws InterruptedException {
-        TextEngine.os=getOS();
+        setOS();
         startMenu();
     }
-    private static String getOS() throws InterruptedException{
-        String os = System.getProperty("os.name");
-        TextEngine.printWithDelays("Using System Property: " + os,false);
-        TextEngine.printNoDelay("(Press enter to continue", false);
+    public static String getOS() throws InterruptedException {
         return os;
-        
     }
+    private static void setOS() throws InterruptedException {
+        os = System.getProperty("os.name");
+    }
+
     public static void startMenu() throws InterruptedException {
         TextEngine.clearScreen();
         TextEngine.printNoDelay("Adventure V1, by BarrettHall: Albert Tucker, Caden Finley, and Grijesh Shrestha", false);
         if (hasSave()) {
-            TextEngine.printNoDelay("Welcome " + Player.getName()+"!", false);
+            TextEngine.printNoDelay("Welcome " + Player.getName() + "!", false);
         } else {
             TextEngine.printNoDelay("Welcome Hero!", false);
         }
@@ -72,6 +72,8 @@ class Main {
                 case "debug":
                     TextEngine.speedSetting = "NoDelay";
                     TextEngine.clearScreen();
+                    TextEngine.printWithDelays("Using System Property: " + getOS(), false);
+                    TextEngine.printNoDelay("(Press enter to continue", false);
                     start();
                 default:
                     TextEngine.printWithDelays("I'm sorry, I don't understand that command.", true);
@@ -189,13 +191,15 @@ class Main {
             Player.playerStart();
         }
     }
+
     public static void printStatus() {
         TextEngine.printNoDelay("Name: " + Player.getName(), false);
-        TextEngine.printNoDelay("Health: " + Player.getHealth()+" Gold: "+ Player.getGold(), false);
-        TextEngine.printNoDelay("Room: " + getSavedPlace() + " "+getRoomId()+ "\n", false);
+        TextEngine.printNoDelay("Health: " + Player.getHealth() + " Gold: " + Player.getGold(), false);
+        TextEngine.printNoDelay("Room: " + getSavedPlace() + " " + getRoomId() + "\n", false);
         TextEngine.printNoDelay("\n", false);
     }
-    public static void screenRefresh(){
+
+    public static void screenRefresh() throws InterruptedException {
         TextEngine.clearScreen();
         printStatus();
     }
