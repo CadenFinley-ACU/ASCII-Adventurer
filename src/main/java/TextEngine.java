@@ -55,13 +55,15 @@ public abstract class TextEngine {
 
     @SuppressWarnings("deprecation")
     public static void clearScreen() throws InterruptedException { //clears the screen
+        String OS_Name = Main.getOS_NAME();
         try {
-            if (!Main.getOS().contains("Windows")) {
+            if (OS_Name.contains("Windows")) {
                 System.out.print("\033[H\033[2J");
                 System.out.flush();
                 Runtime.getRuntime().exec("clear");
             } else {
-                Runtime.getRuntime().exec("cls");
+                System.out.print("\033[H\033[2J");
+                System.out.flush();
             }
         } catch (final IOException e) {
             System.out.println("Error, No OS obtained: " + e.getMessage());

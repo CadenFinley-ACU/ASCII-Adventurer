@@ -14,19 +14,10 @@ class Main {
     private static String ignore;
     public static boolean playerCreated = false;
     private static String savedPlace = null;
-    public static String os = null;
-
+    private static final String OS_NAME = System.getProperty("os.name");
     public static void main(String[] args) throws InterruptedException {
-        setOS();
         startMenu();
     }
-    public static String getOS() throws InterruptedException {
-        return os;
-    }
-    private static void setOS() throws InterruptedException {
-        os = System.getProperty("os.name");
-    }
-
     public static void startMenu() throws InterruptedException {
         TextEngine.clearScreen();
         TextEngine.printNoDelay("Adventure V1, by BarrettHall: Albert Tucker, Caden Finley, and Grijesh Shrestha", false);
@@ -72,8 +63,11 @@ class Main {
                 case "debug":
                     TextEngine.speedSetting = "NoDelay";
                     TextEngine.clearScreen();
-                    TextEngine.printWithDelays("Using System Property: " + getOS(), false);
-                    TextEngine.printNoDelay("(Press enter to continue", false);
+                    TextEngine.printWithDelays("Using System Property: " + getOS_NAME(), false);
+                    TextEngine.printWithDelays("Using Console: " + console, false);
+                    TextEngine.printWithDelays("Text Speed: " + TextEngine.speedSetting, false);
+                    TextEngine.printNoDelay("(Press enter to continue)", false);
+                    ignore = console.readLine();
                     start();
                 default:
                     TextEngine.printWithDelays("I'm sorry, I don't understand that command.", true);
@@ -202,5 +196,9 @@ class Main {
     public static void screenRefresh() throws InterruptedException {
         TextEngine.clearScreen();
         printStatus();
+    }
+
+    public static String getOS_NAME() {
+        return OS_NAME;
     }
 }

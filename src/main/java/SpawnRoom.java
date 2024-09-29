@@ -49,28 +49,17 @@ public class SpawnRoom extends Room {
 
     private static void part1() throws InterruptedException { //1
         TextEngine.printWithDelays("You enter a cool, dimly lit room by a few torches", false);
-        TextEngine.printWithDelays("With a 'Sword' in the middle", false);
-        TextEngine.printWithDelays("What is your command: take it or leave it", true);
         while (true) {
-            ignore = console.readLine();
-            command = console.readLine();
-            switch (command.toLowerCase()) {
-                case "take it" -> {
-                    Player.putItem("Sword", 1);
-                    roomSave++;
-                    OpenWorld.startRoom();
-                    //need to work on item clasues that before you move around the room the take or leave the items
-                }
-                case "leave it" -> {
-                    TextEngine.printWithDelays("It is too dangerous to go alone", false);
-                    TextEngine.printWithDelays("You must take the sword", true);
-                    continue;
-                }
-                default ->
-                    Main.inGameDefaultTextHandling(command);
+            hasItemInRoom("Sword", 1);
+            if(Player.inventory.containsKey("Sword")){
+                roomSave++;
+                OpenWorld.startRoom();
+                break;
+            }
+            else{
+                TextEngine.printWithDelays("You must take the sword\nit is too dangerous to go alone", false);
             }
         }
-
     }
 
     private static void part2() throws InterruptedException { //2

@@ -16,4 +16,27 @@ public class Room {
     public static String ignore;
     public static String room = null;
     public static final Map<String, Integer> ROOMITEMS_MAP = new HashMap<>();
+
+    public static void hasItemInRoom(String itemName, int quantity) throws InterruptedException{
+        TextEngine.printWithDelays("Hey! There is an item in this room: ", false);
+        if(quantity>1){
+            TextEngine.printWithDelays("Item(s): "+itemName+" x"+quantity, false);
+        } else {
+            TextEngine.printWithDelays("Item: "+itemName, false);
+        }
+        TextEngine.printWithDelays("What is your command: take it or leave it", true);
+        while (true) {
+            ignore = console.readLine();
+            command = console.readLine();
+            switch (command.toLowerCase()) {
+                case "take it" -> {Player.putItem(itemName, quantity);
+                    break;
+                }
+                case "leave it" -> {
+                    break;
+                }
+                default -> Main.inGameDefaultTextHandling(command);
+            }
+        }
+    }
 }
