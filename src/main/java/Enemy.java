@@ -15,7 +15,7 @@ public class Enemy {
             "dragon", 20,
             "bandit", 3
     );
-    public static int spawnEnemy(String type,int quantity,String action) throws InterruptedException {
+    public static int spawnEnemy(String type,int quantity,String action) throws InterruptedException { //return the total damage as negative int so that you can change health
         if(action.equals("fight")) {
             if(quantity > 1) {
                 TextEngine.printWithDelays("You fight the " + type + "s", false);
