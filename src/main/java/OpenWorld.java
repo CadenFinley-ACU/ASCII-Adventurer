@@ -11,9 +11,9 @@ public class OpenWorld extends Room {
     static boolean completedPart4 = false;
 
     public static void startRoom() throws InterruptedException {
-        Main.screenRefresh();
         room = "OpenWorld";
         Main.checkSave(room);
+        Main.screenRefresh();
         switch (roomSave) {
             case 0:
                 part0(); //start room
@@ -26,7 +26,7 @@ public class OpenWorld extends Room {
             case 4:
                 part4(); //bandit start
             case 5:
-                part5(); //village start
+                Village.startRoom(); //village start
             default:
                 Main.startMenu();
         }
@@ -42,18 +42,18 @@ public class OpenWorld extends Room {
             switch (command.toLowerCase()) {
                 case "forward" -> {
                     roomSave = 1;
-                    startRoom();
+                    Main.loadSave();
                 }
                 case "go back" -> {
                     SpawnRoom.startRoom();
                 }
                 case "left" -> {
                     roomSave = 2;
-                    startRoom();
+                    Main.loadSave();
                 }
                 case "right" -> {
                     roomSave = 3;
-                    startRoom();
+                    Main.loadSave();
                 }
                 default ->
                     Main.inGameDefaultTextHandling(command);
@@ -63,18 +63,18 @@ public class OpenWorld extends Room {
 
     private static void part2() throws InterruptedException { //2 came from 0
         TextEngine.printWithDelays("You walk forward and see a small village in the distance", false);
-        TextEngine.printWithDelays("What is your command: enter village or go back", true);
+        TextEngine.printWithDelays("What is your command: go on or go back", true);
         while (true) {
             ignore = console.readLine();
             command = console.readLine();
             switch (command.toLowerCase()) {
-                case "enter village" -> {
+                case "go on" -> {
                     roomSave = 4;
-                    startRoom();
+                    Main.loadSave();
                 }
                 case "go back" -> {
                     roomSave = 0;
-                    startRoom();
+                    Main.loadSave();
                 }
                 default ->
                     Main.inGameDefaultTextHandling(command);
@@ -100,7 +100,7 @@ public class OpenWorld extends Room {
                         console.readLine();
                         completedPart4 = true;
                         roomSave = 5; //tovillage
-                        startRoom();
+                        Main.loadSave();
                     }
                     case "run" -> {
                         Player.changeHealth(-17);
@@ -109,7 +109,7 @@ public class OpenWorld extends Room {
                         TextEngine.printWithDelays("You lose -17 health.", false);
                         TextEngine.printWithDelays("Press Enter to continue", false);
                         roomSave = 5; //to village
-                        startRoom();
+                        Main.loadSave();
                     }
                     case "plead" -> {
                         Player.changeGold(-Player.getGold());
@@ -119,34 +119,37 @@ public class OpenWorld extends Room {
                         TextEngine.printWithDelays("Press Enter to continue", false);
                         roomSave = 5; //to village
                         completedPart4 = true;
-                        startRoom();
+                        Main.loadSave();
                     }
                     default ->
                         Main.inGameDefaultTextHandling(command);
                 }
             }
         } else {
-            TextEngine.printWithDelays("The path to the village we serene and quiet.\n the bandits were nowhere to be seen.", false);
-            TextEngine.printWithDelays("A new path here has open up through a a quiet meadow\ndo you want to go down this path?", false);
-            TextEngine.printWithDelays("What is your command: meadow or village", true);
+            TextEngine.printWithDelays("The path to the village was serene and quiet.\n the bandits were nowhere to be seen.", false);
+            TextEngine.printWithDelays("A new path here has opened up through a meadow\ndo you want to go down this path?", false);
+            TextEngine.printWithDelays("What is your command: meadow, village, or back to start", true);
             while (true) { 
                 ignore = console.readLine();
                 command=console.readLine();
                 switch (command.toLowerCase()) {
                     case "meadow" -> {
                         roomSave = 3;
-                        startRoom();
+                        Main.loadSave();
                     }
                     case "village" -> {
                         roomSave = 5;
-                        startRoom();
+                        Main.loadSave();
+                    }
+                    case "back to start" -> {
+                        roomSave = 2;
+                        Main.loadSave();
                     }
                     default ->
                         Main.inGameDefaultTextHandling(command);
                 }
                 roomSave = 0;
             }
-            //maybe this unlocks shortcut now that you have cleared the path
         }
 
     }
@@ -163,6 +166,8 @@ public class OpenWorld extends Room {
                     //create forest dungeon
                 }
                 case "go back" -> {
+                    roomSave = 0;
+                    Main.loadSave();
                 }
                 default ->
                     Main.inGameDefaultTextHandling(command);
@@ -177,38 +182,12 @@ public class OpenWorld extends Room {
             command = console.readLine();
             switch (command.toLowerCase()) {
                 case "go on" -> {
-                    roomSave=4;
+                    roomSave=0;
                     //create meadow dungeon
                 }
                 case "go back" -> {
                     roomSave = 4;
-                    startRoom();
-                }
-                default ->
-                    Main.inGameDefaultTextHandling(command);
-            }
-        }
-    }
-    private static void part5() throws InterruptedException { //5 came from 4 need to create village class
-        roomSave = 5;
-        TextEngine.printWithDelays("You walk into the village, there are multiple builings", false);
-        TextEngine.printWithDelays("What is your command: church, hotel, shop, leave village", true);
-        while (true) {
-            ignore = console.readLine();
-            command = console.readLine();
-            switch (command.toLowerCase()) {
-                case "church" -> {
-                    Village.church();
-                }
-                case "hotel" -> {
-                    Village.hotel();
-                }
-                case "shop" -> {
-                    Village.shop();
-                }
-                case "leave village" -> {
-                    roomSave = 4;
-                    startRoom();
+                    Main.loadSave();
                 }
                 default ->
                     Main.inGameDefaultTextHandling(command);

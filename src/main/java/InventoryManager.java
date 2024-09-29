@@ -82,6 +82,7 @@ public class InventoryManager extends Player {
             TextEngine.printWithDelays("You have picked up " + amount + " " + item, false);
             TextEngine.printWithDelays("Press Enter to continue", false);
             console.readLine();
+            leave();
         }
     }
 

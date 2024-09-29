@@ -41,7 +41,7 @@ public class SpawnRoom extends Room {
             switch (command.toLowerCase()) {
                 case "north" -> {
                     roomSave++;
-                    startRoom();
+                    Main.loadSave();
                 }
                 default ->
                     Main.inGameDefaultTextHandling(command);
@@ -50,6 +50,10 @@ public class SpawnRoom extends Room {
     }
 
     private static void part1() throws InterruptedException { //1
+        if(Player.inventory.containsKey("Sword")){
+            roomSave++;
+            OpenWorld.startRoom();
+        }
         TextEngine.printWithDelays("You enter a cool, dimly lit room by a few torches", false);
         while (true) {
             hasItemInRoom("Sword", 1);

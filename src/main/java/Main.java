@@ -132,6 +132,8 @@ class Main {
                     SpawnRoom.startRoom();
                 case "OpenWorld" ->
                     OpenWorld.startRoom();
+                case "Village" ->
+                    Village.startRoom();
                 default ->
                     startMenu();
             }
