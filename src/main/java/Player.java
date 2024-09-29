@@ -38,7 +38,7 @@ public class Player {
         playerCreate();
     }
     public static void debugStart() throws InterruptedException{
-        maxHealth = 1000000;
+        maxHealth = 1;
         health = maxHealth;
         damage = 0;
         defense = 0;
@@ -197,15 +197,6 @@ public class Player {
         TextEngine.clearScreen();
         Main.playerCreated = true;
         Main.start();
-    }
-    public static void reset(){
-        health = 100;
-        maxHealth = 100;
-        gold = 20;
-        inventory.clear();
-        inventorySize = 20;
-        damage = 0;
-        defense = 0;
     }
     public static void printStats() throws InterruptedException{
         InventoryManager.setStatsToHighestInInventory();

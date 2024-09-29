@@ -7,6 +7,7 @@ import java.io.Console;
  * Text Adventure Game SE374 F24 Final Project Caden Finley Albert Tucker
  * Grijesh Shrestha
  */
+//need to create enemy damage calcualtor class  Enemy.spawnEnemy(Bandit,3) returns 15 damage for example  or Enemy.spawnEnemy(Bandit,2)+Enemy.spawnEnemy(Dragon,1) equals 20 damage
 class Main {
 
     private final static Console console = System.console();
@@ -207,7 +208,7 @@ class Main {
     }
     public static void printStatus() {
         TextEngine.printNoDelay(Player.getName(), false);
-        //TextEngine.printNoDelay("Health: " + Player.getHealth() + "\nGold: " + Player.getGold(), false);
+        TextEngine.printNoDelay("Health: " + Player.getHealth(), false);
         TextEngine.printNoDelay(getSavedPlace() + " " + getRoomId() + "\n", false);
         if(getSavedPlace().equals("Dungeon")){
             TextEngine.printNoDelay(Dungeon.getDungeon(), false);
