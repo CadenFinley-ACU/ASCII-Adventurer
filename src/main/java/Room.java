@@ -41,4 +41,7 @@ public class Room {
             }
         }
     }
+    public static void chest(){
+        //chest implementation
+    }
 }

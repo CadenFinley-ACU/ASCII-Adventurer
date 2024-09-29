@@ -134,7 +134,6 @@ public class InventoryManager extends Player {
             console.readLine();
             Player.openInventory();
         }
-
     }
     // private static void getRoomList(){
     //     int room = Game.getRoomId();
