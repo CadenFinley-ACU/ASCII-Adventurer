@@ -13,6 +13,7 @@ import java.util.Map;
 public class Player {
 
     private static int health;
+    private static int maxHealth;
     private static String name;
     public final static Console console = System.console();
     public static String command;
@@ -25,6 +26,7 @@ public class Player {
     public static InventoryManager manager = new InventoryManager();
 
     public static void playerStart() throws InterruptedException {
+        maxHealth = 100;
         health = 100;
         damage = 0;
         defense = 0;
@@ -44,11 +46,19 @@ public class Player {
     public static int getHealth() {
         return health;
     }
+    public static int getMaxHealth(){
+        return maxHealth;
+    }
     public static int getGold() {
         return gold;
     }
     public static void changeHealth(int change) throws InterruptedException {
         Main.screenRefresh();
+        health += change;
+    }
+    public static void changeMaxHealth(int change) throws InterruptedException {
+        Main.screenRefresh();
+        maxHealth += change;
         health += change;
     }
     public static void changeGold(int change) throws InterruptedException {

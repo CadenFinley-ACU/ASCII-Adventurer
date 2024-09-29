@@ -1,6 +1,3 @@
-
-
-
 /**
  * Open World Class
  *
@@ -21,11 +18,11 @@ public class OpenWorld extends Room {
             case 0:
                 part0(); //start room
             case 1:
-                part1(); //forest start
+                part1(); //forest dungeon start
             case 2:
                 part2(); //village path start
             case 3:
-                part3(); //meadow start
+                part3(); //meadow dungeon start
             case 4:
                 part4(); //bandit start
             case 5:
@@ -96,6 +93,7 @@ public class OpenWorld extends Room {
                     case "fight" -> {
                         Player.changeGold(40);
                         Player.changeHealth(-38);
+                        Main.screenRefresh();
                         TextEngine.printWithDelays("You managed to fight them off and send them running,\nand take 40 of their gold,\nbut not without them leaving a few cuts on you.", false);
                         TextEngine.printWithDelays("You lose -38 health.\nYou continue on to the village", false);
                         TextEngine.printWithDelays("Press Enter to continue", false);
@@ -106,6 +104,7 @@ public class OpenWorld extends Room {
                     }
                     case "run" -> {
                         Player.changeHealth(-17);
+                        Main.screenRefresh();
                         TextEngine.printWithDelays("You managed to run away from the bandits,\nbut not without them leaving a few cuts on you.", false);
                         TextEngine.printWithDelays("You lose -17 health.", false);
                         TextEngine.printWithDelays("Press Enter to continue", false);
@@ -113,9 +112,10 @@ public class OpenWorld extends Room {
                         startRoom();
                     }
                     case "plead" -> {
-                        TextEngine.printWithDelays("You plead deperately from them to let you go\nThe demand all of your gold.", false);
-                        TextEngine.printWithDelays("You lose -"+Player.getGold()+" gold.", false);
                         Player.changeGold(-Player.getGold());
+                        Main.screenRefresh();
+                        TextEngine.printWithDelays("You plead deperately from them to let you go\nThe demand all of your gold.", false);
+                        TextEngine.printWithDelays("They took everything you had.", false);
                         TextEngine.printWithDelays("Press Enter to continue", false);
                         roomSave = 5; //to village
                         completedPart4 = true;
@@ -152,17 +152,15 @@ public class OpenWorld extends Room {
     }
 
     private static void part1() throws InterruptedException { //1 came from 0 create a forest dungeon
-        TextEngine.printWithDelays("You walk into a dark spooky forest, you see thre paths", false);
-        TextEngine.printWithDelays("What is your command: left, right, center, go back", true);
+        TextEngine.printWithDelays("You walk into a dark spooky forest, if you choose to go on you cannot go back.", false);
+        TextEngine.printWithDelays("What is your command: go on or go back", true);
         while (true) {
             ignore = console.readLine();
             command = console.readLine();
             switch (command.toLowerCase()) {
-                case "left" -> {
-                }
-                case "right" -> {
-                }
-                case "center" -> {
+                case "go on" -> {
+                    roomSave =0;
+                    //create forest dungeon
                 }
                 case "go back" -> {
                 }
@@ -172,19 +170,15 @@ public class OpenWorld extends Room {
         }
     }
     private static void part3() throws InterruptedException { //3 came from 4 create a meadow dungeon
-        TextEngine.printWithDelays("You walk into the meadow, you see two paths", false);
-        TextEngine.printWithDelays("What is your command: left, right or go back", true);
+        TextEngine.printWithDelays("You walk into the meadow, if you choose to go on you cannot go back.", false);
+        TextEngine.printWithDelays("What is your command: go on or go back", true);
         while (true) {
             ignore = console.readLine();
             command = console.readLine();
             switch (command.toLowerCase()) {
-                case "left" -> {
-                    roomSave = 0;
-                    startRoom();
-                }
-                case "right" -> {
-                    roomSave = 0;
-                    startRoom();
+                case "go on" -> {
+                    roomSave=4;
+                    //create meadow dungeon
                 }
                 case "go back" -> {
                     roomSave = 4;
@@ -196,6 +190,7 @@ public class OpenWorld extends Room {
         }
     }
     private static void part5() throws InterruptedException { //5 came from 4 need to create village class
+        roomSave = 5;
         TextEngine.printWithDelays("You walk into the village, there are multiple builings", false);
         TextEngine.printWithDelays("What is your command: church, hotel, shop, leave village", true);
         while (true) {
@@ -203,10 +198,17 @@ public class OpenWorld extends Room {
             command = console.readLine();
             switch (command.toLowerCase()) {
                 case "church" -> {
+                    Village.church();
                 }
                 case "hotel" -> {
+                    Village.hotel();
                 }
                 case "shop" -> {
+                    Village.shop();
+                }
+                case "leave village" -> {
+                    roomSave = 4;
+                    startRoom();
                 }
                 default ->
                     Main.inGameDefaultTextHandling(command);

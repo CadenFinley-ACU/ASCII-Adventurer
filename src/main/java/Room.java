@@ -41,7 +41,7 @@ public class Room {
             }
         }
     }
-    public static void chest(){
+    public static void chest(Map<String,Integer> chestItems) throws InterruptedException{
         //chest implementation
     }
 }
