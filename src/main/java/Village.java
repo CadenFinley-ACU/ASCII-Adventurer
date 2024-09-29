@@ -126,7 +126,7 @@ public class Village extends Room {
     public static void shop() throws InterruptedException {
         Main.screenRefresh();
         //shop implementation
-        TextEngine.printWithDelays("You enter the village shop.", false);
+        TextEngine.printWithDelays("You enter the shop.", false);
         TextEngine.printWithDelays("You can buy items here", false);
                     TextEngine.printWithDelays("What would you like to buy: \npotion (10 gold), shield (20 gold), key (30 gold), or leave", true);
                     while (true) {
@@ -152,6 +152,30 @@ public class Village extends Room {
                                     keepShopping();
                                 } else {
                                     TextEngine.printWithDelays("You do not have enough gold to buy a shield", false);
+                                    TextEngine.printWithDelays("Press enter to continue.", false);
+                                    ignore = console.readLine();
+                                    keepShopping();
+                                }
+                            }
+                            case "axe" -> {
+                                if (Player.getGold() >= 10) {
+                                    Player.changeGold(-10);
+                                    Player.putItem("Axe", 1);
+                                    keepShopping();
+                                } else {
+                                    TextEngine.printWithDelays("You do not have enough gold to buy Axe", false);
+                                    TextEngine.printWithDelays("Press enter to continue.", false);
+                                    ignore = console.readLine();
+                                    keepShopping();
+                                }
+                            }
+                            case "chainmail set" -> {
+                                if (Player.getGold() >= 10) {
+                                    Player.changeGold(-10);
+                                    Player.putItem("Chainmail Set", 1);
+                                    keepShopping();
+                                } else {
+                                    TextEngine.printWithDelays("You do not have enough gold to buy Chainmail Set", false);
                                     TextEngine.printWithDelays("Press enter to continue.", false);
                                     ignore = console.readLine();
                                     keepShopping();

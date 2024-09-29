@@ -13,7 +13,7 @@ class Main {
     private static String command;
     private static String ignore;
     public static boolean playerCreated = false;
-    private static String savedPlace = null;
+    public static String savedPlace = null;
     private static final String OS_NAME = System.getProperty("os.name");
     public static void main(String[] args) throws InterruptedException {
         createGameItems();
@@ -22,14 +22,14 @@ class Main {
     private static void createGameItems(){
         //the value is equal to the damage,defense, or healing potential the item provides
         //this is only to use when you use the item not when you have it in your inventory or when it is on the map
-        InventoryManager.createItem("weapon","Sword", 1);
-        InventoryManager.createItem("weapon","Axe", 2);
+        InventoryManager.createItem("weapon","Sword", 2);
+        InventoryManager.createItem("weapon","Axe", 3);
         InventoryManager.createItem("weapon","Bow", 3);
-        InventoryManager.createItem("weapon","Great Sword", 5);
-        InventoryManager.createItem("armor","Boots", 1);
+        InventoryManager.createItem("weapon","Great Sword", 10);
         InventoryManager.createItem("armor","Shield", 1);
-        InventoryManager.createItem("armor","Helmet", 2);
-        InventoryManager.createItem("armor","Chestplate", 3);
+        InventoryManager.createItem("armor","Chainmail Set", 2);
+        InventoryManager.createItem("armor","Full armor Kit", 3);
+        InventoryManager.createItem("armor","Angel Armor", 7);
         InventoryManager.createItem("potion","Health Potion", 10);
         InventoryManager.createItem("potion","Heart Container", 10);
         InventoryManager.createItem("key","Key", 0);
@@ -85,8 +85,8 @@ class Main {
                     TextEngine.printWithDelays("Using Console: " + console, false);
                     TextEngine.printWithDelays("Text Speed: " + TextEngine.speedSetting, false);
                     TextEngine.printNoDelay("(Press enter to continue)", false);
-                    ignore = console.readLine();
-                    start();
+                    ignore = console.readLine();    
+                    Player.debugStart();
                 default:
                     TextEngine.printWithDelays("I'm sorry, I don't understand that command.", true);
             }
@@ -99,7 +99,7 @@ class Main {
                 if(getSavedPlace().equals("Dungeon")){
                     TextEngine.printWithDelays("You can type 'restart' to restart the dungeon", false);
                 }
-                TextEngine.printWithDelays("You can type 'inventory' to see your health and inventory\nor 'settings' or type 'save' to save \n or 'exit' to return to the main menu.", true);
+                TextEngine.printWithDelays("You can type 'stats' to see your stats\n'inventory' to see your inventory\n'settings' or type 'save' to save \n or 'exit' to return to the main menu.", true);
                 
             }
             case "inventory" ->
@@ -114,6 +114,9 @@ class Main {
                 TextEngine.printWithDelays("Returning to main menu.", false);
                 TextEngine.clearScreen();
                 startMenu();
+            }
+            case "stats" -> {
+                Player.printStats();
             }
             default ->
                 TextEngine.printWithDelays("I'm sorry, I don't understand that command.", true);
@@ -207,9 +210,9 @@ class Main {
     }
 
     public static void printStatus() {
-        TextEngine.printNoDelay("Name: " + Player.getName(), false);
-        TextEngine.printNoDelay("Health: " + Player.getHealth() + "\nGold: " + Player.getGold(), false);
-        TextEngine.printNoDelay("Room: " + getSavedPlace() + " " + getRoomId() + "\n", false);
+        TextEngine.printNoDelay(Player.getName(), false);
+        //TextEngine.printNoDelay("Health: " + Player.getHealth() + "\nGold: " + Player.getGold(), false);
+        TextEngine.printNoDelay(getSavedPlace() + " " + getRoomId() + "\n", false);
         if(getSavedPlace().equals("Dungeon")){
             TextEngine.printNoDelay(Dungeon.getDungeon(), false);
         }

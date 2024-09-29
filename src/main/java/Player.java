@@ -27,12 +27,63 @@ public class Player {
 
     public static void playerStart() throws InterruptedException {
         maxHealth = 100;
-        health = 100;
+        health = maxHealth;
         damage = 0;
         defense = 0;
         gold = 20;
         inventorySize = 20;
         playerCreate();
+    }
+    public static void debugStart() throws InterruptedException{
+        maxHealth = 1000000;
+        health = maxHealth;
+        damage = 0;
+        defense = 0;
+        gold = 20000000;
+        inventorySize = 200;
+        name = "Debug!";
+        Main.playerCreated = true;
+        TextEngine.printNoDelay("Where do you want to spawn", false);
+        TextEngine.printNoDelay("1: SpawnRoom", false);
+        TextEngine.printNoDelay("2: OpenWorld", false);
+        TextEngine.printNoDelay("3: Dungeon", false);
+        TextEngine.printNoDelay("4: MeadowDungeon", false);
+        TextEngine.printNoDelay("5: ForestDungeon", false);
+        TextEngine.printNoDelay("6: Village", false);
+        TextEngine.printNoDelay("debug spawn: ", true);
+        ignore = console.readLine();
+        command = console.readLine();
+        switch (command){
+            case "1" -> {
+                Main.saveSpace("SpawnRoom");
+                Main.loadSave();
+            }
+            case "2" -> {
+                Main.saveSpace("OpenWorld");
+                Main.loadSave();
+            }
+            case "3" -> {
+                Main.saveSpace("Dungeon");
+                Main.loadSave();
+            }
+            case "4" -> {
+                Main.saveSpace("MeadowDungeon");
+                Main.loadSave();
+            }
+            case "5" -> {
+                Main.saveSpace("ForestDungeon");
+                Main.loadSave();
+            }
+            case "6" -> {
+                Main.saveSpace("Village");
+                Main.loadSave();
+            }
+            default -> {
+                Main.saveSpace("SpawnRoom");
+                Main.loadSave();
+            }
+        }
+
     }
 
     public static String getName() {
@@ -52,9 +103,32 @@ public class Player {
     public static int getGold() {
         return gold;
     }
+    public static void changeInventorySize(int change) throws InterruptedException {
+        inventorySize += change;
+    }
     public static void changeHealth(int change) throws InterruptedException {
-        Main.screenRefresh();
+        int damageCalc = (defense + (damage/2));
+        if(change<0) {
+            change += damageCalc;
+            if (change >= 0) {
+                change = -1;
+            }
+            TextEngine.printWithDelays("You took " + change + " damage!", false);
+            TextEngine.printWithDelays("Press Enter to continue", false);
+            console.readLine();
+        }
         health += change;
+        if(health>maxHealth){
+            health = maxHealth;
+        }
+        if(health<=0){
+            TextEngine.printWithDelays("You have died!", false);
+            TextEngine.printWithDelays("Game Over!", false);
+            TextEngine.printWithDelays("Press Enter to Continue", false);
+            ignore = console.readLine();
+            Main.screenRefresh();
+            Main.startMenu();
+        }
     }
     public static void changeMaxHealth(int change) throws InterruptedException {
         Main.screenRefresh();
@@ -68,7 +142,18 @@ public class Player {
     public static void openInventory() throws InterruptedException {
         manager.printInventory();
     }
-
+    public static void setDamage(int amount){
+        damage = amount;
+    }
+    public static void setDefense(int amount){
+        defense = amount;
+    }
+    public static int getDamage(){
+        return damage;
+    }
+    public static int getDefense(){
+        return defense;
+    }
     public static void putItem(String item, int amount) throws InterruptedException {
         manager.put(item, amount);
     }
@@ -113,5 +198,19 @@ public class Player {
         inventorySize = 20;
         damage = 0;
         defense = 0;
+    }
+    public static void printStats() throws InterruptedException{
+        InventoryManager.setStatsToHighestInInventory();
+        TextEngine.clearScreen();
+        TextEngine.printNoDelay("Player Stats:", false);
+        TextEngine.printNoDelay("Name: "+name, false);
+        TextEngine.printNoDelay("Health: "+health+"/"+maxHealth, false);
+        TextEngine.printNoDelay("Gold: "+gold, false);
+        TextEngine.printNoDelay("Damage: "+damage, false);
+        TextEngine.printNoDelay("Defense: "+defense, false);
+        TextEngine.printNoDelay("Inventory: "+inventory.size()+"/"+inventorySize, false);
+        TextEngine.printNoDelay("(Press Enter to Leave menu)", false);
+        ignore = console.readLine();
+        Main.loadSave();
     }
 }

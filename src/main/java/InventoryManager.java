@@ -53,9 +53,25 @@ public class InventoryManager extends Player {
             Set<String> keys = inventory.keySet();
             for (String key : keys) {
                 if (inventory.get(key) > 1) {
-                    TextEngine.printNoDelay(i + ": " + key + " x" + inventory.get(key), false);
+                    if (Weapons.containsKey(key)) {
+                        TextEngine.printNoDelay(i + ": " + key + " x" + inventory.get(key)+" Damage: " + Weapons.get(key), false);
+                    }
+                    else if (Armor.containsKey(key)) {
+                        TextEngine.printNoDelay(" Defense: " + Armor.get(key)+" Defense: " + Armor.get(key), false);
+                    }
+                    else {
+                        TextEngine.printNoDelay(i + ": " + key + " x" + inventory.get(key), false);
+                    }
                 } else {
-                    TextEngine.printNoDelay(i + ": " + key, false);
+                    if (Weapons.containsKey(key)) {
+                        TextEngine.printNoDelay(i + ": " + key+" Damage: " + Weapons.get(key), false);
+                    }
+                    else if (Armor.containsKey(key)) {
+                        TextEngine.printNoDelay(i + ": " + key+" Defense: " + Armor.get(key), false);
+                    }
+                    else {
+                        TextEngine.printNoDelay(i + ": " + key, false);
+                    }
                 }
                 i++;
             }
@@ -75,10 +91,11 @@ public class InventoryManager extends Player {
         }
         else {
             if (inventory.get(item) != null) {
-                inventory.put(item, inventory.get(item) + amount);
+                inventory.put(item, inventory.get(item) + amount);     
             } else {
-                inventory.put(item, amount);
+                inventory.put(item, amount);        
             }
+            setStatsToHighestInInventory();
             TextEngine.printWithDelays("You have picked up " + amount + " " + item, false);
             TextEngine.printWithDelays("Press Enter to continue", false);
             console.readLine();
@@ -99,10 +116,16 @@ public class InventoryManager extends Player {
                 }
                 case "drop" -> {
                     TextEngine.printWithDelays("Which item would you like to drop?", true);
+                    printInventoryNoMenu();
                     console.readLine();
                     command = console.readLine();
                     tossItem(command);
-
+                    if(Weapons.containsKey(command)){
+                        if(Weapons.get(command) == Player.getDamage()){
+                            Player.setDamage(-Weapons.get(command));
+                        }
+                    }
+                    setStatsToHighestInInventory();
                 }
                 case "exit" -> {
                     TextEngine.clearScreen();
@@ -135,10 +158,55 @@ public class InventoryManager extends Player {
             Player.openInventory();
         }
     }
-    // private static void getRoomList(){
-    //     int room = Game.getRoomId();
-    //     String area = Game.getSavedPlace();//rooms * areas
-    //     String[][] roomItemsMatrix = new String[2][2];
-    //     //formations of thougbhs n stuff idk gotta figure out how when you drop an item it is saved in that room
-    // }
+    public static void setStatsToHighestInInventory() {
+        Player.setDamage(0);
+        Player.setDefense(0);
+        Set<String> keys = inventory.keySet();
+        for (String key : keys) {
+            if (Weapons.containsKey(key)) {
+                if (Weapons.get(key) > Player.getDamage()) {
+                    Player.setDamage(Weapons.get(key));
+                }
+            }
+            if (Armor.containsKey(key)) {
+                if (Armor.get(key) > Player.getDefense()) {
+                    Player.setDefense(Armor.get(key));
+                }
+            }
+        } 
+    }
+    public static void printInventoryNoMenu() throws InterruptedException{
+        int i = 1;
+        if (inventory.isEmpty()) {
+            leave();
+        } else {
+            TextEngine.printNoDelay("You have the following items in your inventory:", false);
+            Set<String> keys = inventory.keySet();
+            for (String key : keys) {
+                if (inventory.get(key) > 1) {
+                    if (Weapons.containsKey(key)) {
+                        TextEngine.printNoDelay(i + ": " + key + " x" + inventory.get(key)+" Damage: " + Weapons.get(key), false);
+                    }
+                    else if (Armor.containsKey(key)) {
+                        TextEngine.printNoDelay(" Defense: " + Armor.get(key)+" Defense: " + Armor.get(key), false);
+                    }
+                    else {
+                        TextEngine.printNoDelay(i + ": " + key + " x" + inventory.get(key), false);
+                    }
+                } else {
+                    if (Weapons.containsKey(key)) {
+                        TextEngine.printNoDelay(i + ": " + key+" Damage: " + Weapons.get(key), false);
+                    }
+                    else if (Armor.containsKey(key)) {
+                        TextEngine.printNoDelay(i + ": " + key+" Defense: " + Armor.get(key), false);
+                    }
+                    else {
+                        TextEngine.printNoDelay(i + ": " + key, false);
+                    }
+                }
+                i++;
+            }
+            TextEngine.printWithDelays(" ", true);
+        }
+    }
 }

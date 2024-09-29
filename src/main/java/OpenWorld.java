@@ -95,23 +95,17 @@ public class OpenWorld extends Room {
                 switch (command.toLowerCase()) {
                     case "fight" -> {
                         Player.changeGold(40);
-                        Player.changeHealth(-38);
                         Main.screenRefresh();
                         TextEngine.printWithDelays("You managed to fight them off and send them running,\nand take 40 of their gold,\nbut not without them leaving a few cuts on you.", false);
-                        TextEngine.printWithDelays("You lose -38 health.\nYou continue on to the village", false);
-                        TextEngine.printWithDelays("Press Enter to continue", false);
-                        console.readLine();
+                        Player.changeHealth(-38);
                         completedPart4 = true;
                         roomSave = 5; //tovillage
                         Main.loadSave();
                     }
                     case "run" -> {
-                        Player.changeHealth(-17);
                         Main.screenRefresh();
                         TextEngine.printWithDelays("You managed to run away from the bandits,\nbut not without them leaving a few cuts on you.", false);
-                        TextEngine.printWithDelays("You lose -17 health.", false);
-                        TextEngine.printWithDelays("Press Enter to continue", false);
-                        console.readLine();
+                        Player.changeHealth(-17);
                         roomSave = 5; //to village
                         Main.loadSave();
                     }
@@ -121,6 +115,7 @@ public class OpenWorld extends Room {
                         TextEngine.printWithDelays("You plead deperately from them to let you go\nThe demand all of your gold.", false);
                         TextEngine.printWithDelays("They took everything you had.", false);
                         TextEngine.printWithDelays("Press Enter to continue", false);
+                        ignore = console.readLine();
                         roomSave = 5; //to village
                         completedPart4 = true;
                         Main.loadSave();
