@@ -39,4 +39,51 @@ public class Dungeon extends Room {
             }
         }
     }
+    public static void defaultDungeonArgs(String data) throws InterruptedException{
+        switch(data){
+            case "leave" -> {
+                TextEngine.printWithDelays("Im sorry. You cannot leave right now.", true);
+            }
+            case "restart" -> {
+                TextEngine.printWithDelays("Are you sure you want to restart?\nThis cannot be reversed", false);
+                TextEngine.printWithDelays("What is your command: yes or no", true);
+                while (true) {
+                    ignore = console.readLine();
+                    command = console.readLine();
+                    switch (command.toLowerCase()) {
+                        case "yes" -> {
+                            resetCertain(currentDungeon);
+                            startRoom();
+                        }
+                        case "no" -> {
+                            Main.screenRefresh();
+                            return;
+                        }
+                        default -> Main.inGameDefaultTextHandling(command);
+                    }
+                }
+            }
+            default -> {
+                Main.inGameDefaultTextHandling(data);
+            }
+        }
+
+    }
+    public static String getDungeon(){
+        return currentDungeon;
+    }
+    public static void resetAll(){
+        MeadowDungeon.fresh();
+        DarkForestDungeon.fresh();
+    }
+    public static void resetCertain(String dungeon){
+        switch(dungeon){
+            case "Meadow" -> {
+                MeadowDungeon.fresh();
+            }
+            case "Dark Forest" -> {
+                DarkForestDungeon.fresh();
+            }
+        }
+    }
 }

@@ -95,8 +95,13 @@ class Main {
 
     public static void inGameDefaultTextHandling(String data) throws InterruptedException {
         switch (data) {
-            case "help" ->
+            case "help" ->{
+                if(getSavedPlace().equals("Dungeon")){
+                    TextEngine.printWithDelays("You can type 'restart' to restart the dungeon", false);
+                }
                 TextEngine.printWithDelays("You can type 'inventory' to see your health and inventory\nor 'settings' or type 'save' to save \n or 'exit' to return to the main menu.", true);
+                
+            }
             case "inventory" ->
                 Player.openInventory();
             case "settings" -> {
@@ -109,9 +114,6 @@ class Main {
                 TextEngine.printWithDelays("Returning to main menu.", false);
                 TextEngine.clearScreen();
                 startMenu();
-            }
-            case "leave" -> {
-                TextEngine.printWithDelays("Im sorry. You cannot leave right now.", true);
             }
             default ->
                 TextEngine.printWithDelays("I'm sorry, I don't understand that command.", true);
@@ -144,8 +146,11 @@ class Main {
         }
     }
 
-    public static void wipeSave() {
+    public static void wipeSave() throws InterruptedException {
         savedPlace = null;
+        //clear inventory
+        //reset all room and dungeons
+        reset();
     }
 
     public static int getRoomId() {
@@ -170,19 +175,20 @@ class Main {
 
     public static void start() throws InterruptedException {
         if (hasSave()) {
-            TextEngine.printWithDelays("Would you like to load your saved game?", true);
+            TextEngine.printWithDelays("Would you like to load your saved game? (yes or no) ", true);
             ignore = console.readLine();
             command = console.readLine();
             if (command.toLowerCase().equals("no")) {
                 String textState = TextEngine.speedSetting;
                 TextEngine.speedSetting = "Slow";
-                TextEngine.printWithDelays("All data will be wiped if you proceed.", false);
+                TextEngine.printWithDelays("All data will be wiped if you proceed. (yes or no) ", false);
                 TextEngine.printWithDelays("Are you sure?", true);
                 ignore = console.readLine();
                 command = console.readLine();
                 if (command.toLowerCase().equals("yes")) {
                     TextEngine.clearScreen();
                     TextEngine.printWithDelays("Starting new game...", false);
+                    TextEngine.speedSetting = textState;
                     wipeSave();
                     Player.playerStart();
                 } else {
@@ -205,7 +211,7 @@ class Main {
         TextEngine.printNoDelay("Health: " + Player.getHealth() + "\nGold: " + Player.getGold(), false);
         TextEngine.printNoDelay("Room: " + getSavedPlace() + " " + getRoomId() + "\n", false);
         if(getSavedPlace().equals("Dungeon")){
-            TextEngine.printNoDelay("Dungeon Level: " + getRoomId(), false);
+            TextEngine.printNoDelay(Dungeon.getDungeon(), false);
         }
         TextEngine.printNoDelay("\n", false);
     }
@@ -217,5 +223,9 @@ class Main {
 
     public static String getOS_NAME() {
         return OS_NAME;
+    }
+    public static void reset() throws InterruptedException{
+        Player.reset();
+        Room.reset("all");
     }
 }

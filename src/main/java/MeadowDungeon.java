@@ -17,11 +17,15 @@ public class MeadowDungeon extends Dungeon {
         Main.screenRefresh();
         switch (roomSave){
             case 0 -> room0();
+            case 1 -> room1();
             default -> Main.startMenu();
         }
     }
     public static int getRoom(){
         return roomSave;
+    }
+    public static void fresh(){
+        roomSave = 0;
     }
     private static void room0() throws InterruptedException{
         TextEngine.printWithDelays("You enter a meadow with a small stream running through it", false);
@@ -32,10 +36,25 @@ public class MeadowDungeon extends Dungeon {
             command = console.readLine();
             switch (command.toLowerCase()) {
                 case "north" -> {
-                    roomSave++;
+                    roomSave = 1;
                     Main.loadSave();
                 }
-                default -> Main.inGameDefaultTextHandling(command);
+                default -> defaultDungeonArgs(command);
+            }
+        }
+    }
+    private static void room1() throws InterruptedException{
+        TextEngine.printWithDelays("You enter room 1", false);
+        TextEngine.printWithDelays("What is your command: north or help", true);
+        while (true) {
+            ignore = console.readLine();
+            command = console.readLine();
+            switch (command.toLowerCase()) {
+                case "north" -> {
+                    roomSave = 2;
+                    Main.loadSave();
+                }
+                default ->defaultDungeonArgs(command);
             }
         }
     }

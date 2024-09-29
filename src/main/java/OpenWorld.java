@@ -31,7 +31,10 @@ public class OpenWorld extends Room {
                 Main.startMenu();
         }
     }
-
+    public static void resetAll(){
+        roomSave = 0;
+        completedPart4 = false;
+    }
     private static void part0() throws InterruptedException { //0
         TextEngine.printWithDelays("You are in the open world,\nthe sunlight blinds your eyes as they have not adjusted from the dark cave.", false);
         TextEngine.printWithDelays("You see a long winding paths in all four directions.\nHow overwhelming...", false);
@@ -108,6 +111,7 @@ public class OpenWorld extends Room {
                         TextEngine.printWithDelays("You managed to run away from the bandits,\nbut not without them leaving a few cuts on you.", false);
                         TextEngine.printWithDelays("You lose -17 health.", false);
                         TextEngine.printWithDelays("Press Enter to continue", false);
+                        console.readLine();
                         roomSave = 5; //to village
                         Main.loadSave();
                     }

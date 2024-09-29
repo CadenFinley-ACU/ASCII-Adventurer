@@ -118,7 +118,6 @@ public class InventoryManager extends Player {
     }
 
     private static void leave() throws InterruptedException {
-        TextEngine.printWithDelays("Returning to last saved state.", false);
         TextEngine.clearScreen();
         Main.loadSave();
     }

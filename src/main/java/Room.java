@@ -61,4 +61,22 @@ public class Room {
             }
         }
     }
+    public static void reset(String area){
+        switch (area) {
+            case "SpawnRoom" -> {
+                SpawnRoom.resetAll();
+            }
+            case "OpenWorld" -> {
+                OpenWorld.resetAll();
+            }
+            case "Dungeon" -> {
+                Dungeon.resetAll();
+            }
+            case "all" -> {
+                SpawnRoom.resetAll();
+                OpenWorld.resetAll();
+                Dungeon.resetAll();
+            }
+        }
+    }
 }

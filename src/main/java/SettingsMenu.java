@@ -59,7 +59,7 @@ public abstract class SettingsMenu {
                         TextEngine.printWithDelays("Settings not saved.", false);
                         TextEngine.speedSetting = lastSavedState;
                         TextEngine.clearScreen();
-                        continue;
+                        start();
                     }
                 }
                 case "fast" -> {
@@ -77,7 +77,7 @@ public abstract class SettingsMenu {
                         TextEngine.printWithDelays("Settings not saved.", false);
                         TextEngine.speedSetting = lastSavedState;
                         TextEngine.clearScreen();
-                        continue;
+                        start();
                     }
                 }
                 case "nodelay" -> {
@@ -95,7 +95,7 @@ public abstract class SettingsMenu {
                         TextEngine.printWithDelays("Settings not saved.", false);
                         TextEngine.speedSetting = lastSavedState;
                         TextEngine.clearScreen();
-                        continue;
+                        start();
                     }
                 }
                 case "exit" -> {

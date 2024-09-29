@@ -105,4 +105,13 @@ public class Player {
         Main.playerCreated = true;
         Main.start();
     }
+    public static void reset(){
+        health = 100;
+        maxHealth = 100;
+        gold = 20;
+        inventory.clear();
+        inventorySize = 20;
+        damage = 0;
+        defense = 0;
+    }
 }

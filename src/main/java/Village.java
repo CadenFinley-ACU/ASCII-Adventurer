@@ -196,7 +196,6 @@ public class Village extends Room {
         }
     }
     private static void leave() throws InterruptedException {
-        TextEngine.printWithDelays("Returning to last saved state.", false);
         TextEngine.clearScreen();
         OpenWorld.startRoom();
     }
