@@ -14,9 +14,9 @@ public class SpawnRoom extends Room {
     static int roomSave = 0;
 
     public static void startRoom() throws InterruptedException {
-        Main.screenRefresh();
         room = "SpawnRoom";
         Main.checkSave(room);
+        Main.screenRefresh();
         switch (roomSave) {
             case 0:
                 part0();

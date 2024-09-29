@@ -143,7 +143,7 @@ class Main {
         return savedPlace;
     }
 
-    private static boolean hasSave() {
+    public static boolean hasSave() {
         return getSavedPlace() != null;
     }
 
@@ -188,7 +188,7 @@ class Main {
 
     public static void printStatus() {
         TextEngine.printNoDelay("Name: " + Player.getName(), false);
-        TextEngine.printNoDelay("Health: " + Player.getHealth() + " Gold: " + Player.getGold(), false);
+        TextEngine.printNoDelay("Health: " + Player.getHealth() + "\nGold: " + Player.getGold(), false);
         TextEngine.printNoDelay("Room: " + getSavedPlace() + " " + getRoomId() + "\n", false);
         TextEngine.printNoDelay("\n", false);
     }
