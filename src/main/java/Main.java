@@ -16,7 +16,23 @@ class Main {
     private static String savedPlace = null;
     private static final String OS_NAME = System.getProperty("os.name");
     public static void main(String[] args) throws InterruptedException {
+        createGameItems();
         startMenu();
+    }
+    private static void createGameItems(){
+        //the value is equal to the damage,defense, or healing potential the item provides
+        //this is only to use when you use the item not when you have it in your inventory or when it is on the map
+        InventoryManager.createItem("weapon","Sword", 1);
+        InventoryManager.createItem("weapon","Axe", 2);
+        InventoryManager.createItem("weapon","Bow", 3);
+        InventoryManager.createItem("weapon","Great Sword", 5);
+        InventoryManager.createItem("armor","Boots", 1);
+        InventoryManager.createItem("armor","Shield", 1);
+        InventoryManager.createItem("armor","Helmet", 2);
+        InventoryManager.createItem("armor","Chestplate", 3);
+        InventoryManager.createItem("potion","Health Potion", 10);
+        InventoryManager.createItem("potion","Heart Container", 10);
+        InventoryManager.createItem("key","Key", 0);
     }
     public static void startMenu() throws InterruptedException {
         TextEngine.clearScreen();
@@ -41,7 +57,9 @@ class Main {
                     TextEngine.printWithDelays("You can type 'start' to start the game\nor 'settings' to change the text speed\nor 'exit' to leave the game.", true);
                     continue;
                 case "exit":
-                    TextEngine.printWithDelays("See ya next time!", true);
+                    TextEngine.printWithDelays("See ya next time!", false);
+                    TextEngine.printNoDelay("Press Enter to Continue)", false);
+                    ignore = console.readLine();
                     TextEngine.clearScreen();
                     System.exit(0);
                 case "fast":
@@ -107,7 +125,7 @@ class Main {
 
     public static void loadSave() throws InterruptedException {
         if (getSavedPlace() == null) {
-            SpawnRoom.startRoom();
+            startMenu();
         } else {
             switch (getSavedPlace()) {
                 case "SpawnRoom" ->
@@ -180,6 +198,7 @@ class Main {
                 loadSave();
             }
         } else if (playerCreated) {
+            saveSpace("SpawnRoom");
             loadSave();
         } else {
             Player.playerStart();

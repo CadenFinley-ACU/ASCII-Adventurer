@@ -30,10 +30,12 @@ public class Room {
             command = console.readLine();
             switch (command.toLowerCase()) {
                 case "take it" -> {Player.putItem(itemName, quantity);
-                    break;
+                    Main.screenRefresh();
+                    return;
                 }
                 case "leave it" -> {
-                    break;
+                    Main.screenRefresh();
+                    return;
                 }
                 default -> Main.inGameDefaultTextHandling(command);
             }

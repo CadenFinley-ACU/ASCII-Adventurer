@@ -1,4 +1,6 @@
 
+
+
 /**
  * Spawn Room Class
  *
@@ -57,7 +59,9 @@ public class SpawnRoom extends Room {
                 break;
             }
             else{
-                TextEngine.printWithDelays("You must take the sword\nit is too dangerous to go alone", false);
+                TextEngine.printWithDelays("You must take the sword!\nIt is too dangerous to go alone!", false);
+                TextEngine.printNoDelay("(Press Enter to continue)", false);
+                ignore = console.readLine();
             }
         }
     }

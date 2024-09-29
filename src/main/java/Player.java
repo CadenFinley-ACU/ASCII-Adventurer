@@ -17,15 +17,19 @@ public class Player {
     public final static Console console = System.console();
     public static String command;
     public static String ignore;
-    private static int inventorySize;
+    public static int inventorySize;
     private static int gold;
+    private static int damage; //find way to set damage automatically to strongest weapon in inventory
+    private static int defense; //find way to set defense automatically to the strongest 4-5 defense items combined
     public static Map<String, Integer> inventory = new HashMap<>();
     public static InventoryManager manager = new InventoryManager();
 
     public static void playerStart() throws InterruptedException {
         health = 100;
+        damage = 0;
+        defense = 0;
         gold = 20;
-        inventorySize = 0;
+        inventorySize = 20;
         playerCreate();
     }
 
@@ -53,20 +57,11 @@ public class Player {
     }
     public static void openInventory() throws InterruptedException {
         manager.printInventory();
-
     }
 
     public static void putItem(String item, int amount) throws InterruptedException {
-        if (inventory.size() < inventorySize) {
-            TextEngine.printWithDelays("You have no room in your inventory.", false);
-            TextEngine.printWithDelays("You can only hold " + inventorySize + " items.", false);
-            TextEngine.printWithDelays("You can drop items by typing 'drop' to make room.", false);
-            TextEngine.printWithDelays("Press Enter to continue", false);
-            return;
-        }
         manager.put(item, amount);
     }
-
     private static void playerCreate() throws InterruptedException {
         TextEngine.printWithDelays("Welcome to the game! What is your name hero?", true);
         while (true) {

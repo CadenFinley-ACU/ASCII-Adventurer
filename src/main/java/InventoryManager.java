@@ -1,4 +1,6 @@
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -12,7 +14,31 @@ public class InventoryManager extends Player {
     public String room;
     public String area;
     //private static String[][] roomItemsMatrix = new String[2][2];
+    //map format : itemname, quantity
+    public static Map<String, Integer> Weapons = new HashMap<>();
+    public static Map<String, Integer> Armor = new HashMap<>();
+    public static Map<String, Integer> Potions = new HashMap<>();
+    public static Map<String, Integer> Keys = new HashMap<>();
 
+    public static void createItem(String type, String item,int value){
+        switch(type) {
+            case "weapon" -> {
+                Weapons.put(item, value);
+            }
+            case "armor" -> {
+                Armor.put(item, value);
+            }
+            case "potion" -> {
+                Potions.put(item, value);
+            }
+            case "key" -> {
+                Keys.put(item, value);
+            }
+            default -> {
+                System.out.println("Invalid item type/n check createGameItems() in Main.java\nmake sure you set item type correctly");
+            }
+        }
+    }
     public void printInventory() throws InterruptedException {
         int i = 1;
         TextEngine.clearScreen();
@@ -39,14 +65,24 @@ public class InventoryManager extends Player {
     }
 
     public void put(String item, int amount) throws InterruptedException {
-        if (inventory.get(item) != null) {
-            inventory.put(item, inventory.get(item) + amount);
-        } else {
-            inventory.put(item, amount);
+        if(inventory.size() >= inventorySize){
+            TextEngine.printWithDelays("You have no room in your inventory.", false);
+            TextEngine.printWithDelays("You can only hold " + Player.inventorySize + " items. You have: "+inventory.size()+" items.", false);
+            TextEngine.printWithDelays("You can drop items by typing 'drop' in \nthe 'inventory menu' to make room.", false);
+            TextEngine.printWithDelays("Press Enter to continue", false);
+            console.readLine();
+            leave();
         }
-        TextEngine.printWithDelays("You have picked up " + amount + " " + item, false);
-        TextEngine.printWithDelays("Press Enter to continue", false);
-        console.readLine();
+        else {
+            if (inventory.get(item) != null) {
+                inventory.put(item, inventory.get(item) + amount);
+            } else {
+                inventory.put(item, amount);
+            }
+            TextEngine.printWithDelays("You have picked up " + amount + " " + item, false);
+            TextEngine.printWithDelays("Press Enter to continue", false);
+            console.readLine();
+        }
     }
 
     private static void inventoryManage() throws InterruptedException {
@@ -65,6 +101,7 @@ public class InventoryManager extends Player {
                     console.readLine();
                     command = console.readLine();
                     tossItem(command);
+
                 }
                 case "exit" -> {
                     TextEngine.clearScreen();
@@ -84,10 +121,8 @@ public class InventoryManager extends Player {
         TextEngine.clearScreen();
         Main.loadSave();
     }
-
     private static void tossItem(String item) throws InterruptedException {
         if (inventory.get(item) != null) {
-
             inventory.remove(item);
             TextEngine.printWithDelays("You have tossed " + item, false);
             TextEngine.printWithDelays("Press Enter to continue", false);
