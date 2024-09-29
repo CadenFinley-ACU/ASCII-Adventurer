@@ -1,6 +1,6 @@
 
 /**
- * Spawn Room Class
+ * Village Class
  *
  * Text Adventure Game
  * SE374 F24

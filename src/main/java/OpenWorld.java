@@ -126,8 +126,8 @@ public class OpenWorld extends Room {
                 }
             }
         } else {
-            TextEngine.printWithDelays("The path to the village was serene and quiet.\n the bandits were nowhere to be seen.", false);
-            TextEngine.printWithDelays("A new path here has opened up through a meadow\ndo you want to go down this path?", false);
+            TextEngine.printWithDelays("The path was serene and quiet.\n the bandits were nowhere to be seen.", false);
+            TextEngine.printWithDelays("A path here has opened up through a meadow", false);
             TextEngine.printWithDelays("What is your command: meadow, village, or back to start", true);
             while (true) { 
                 ignore = console.readLine();
@@ -182,8 +182,9 @@ public class OpenWorld extends Room {
             command = console.readLine();
             switch (command.toLowerCase()) {
                 case "go on" -> {
-                    roomSave=0;
+                    roomSave=4;
                     //create meadow dungeon
+                    Dungeon.initDungeon("Meadow");
                 }
                 case "go back" -> {
                     roomSave = 4;

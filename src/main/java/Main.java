@@ -103,13 +103,15 @@ class Main {
                 SettingsMenu.start();
                 TextEngine.clearScreen();
             }
-
             case "save" ->
                 checkSave(getSavedPlace());
             case "exit" -> {
                 TextEngine.printWithDelays("Returning to main menu.", false);
                 TextEngine.clearScreen();
                 startMenu();
+            }
+            case "leave" -> {
+                TextEngine.printWithDelays("Im sorry. You cannot leave right now.", true);
             }
             default ->
                 TextEngine.printWithDelays("I'm sorry, I don't understand that command.", true);
@@ -134,6 +136,8 @@ class Main {
                     OpenWorld.startRoom();
                 case "Village" ->
                     Village.startRoom();
+                case "Dungeon" ->
+                    Dungeon.startRoom();
                 default ->
                     startMenu();
             }
@@ -145,18 +149,7 @@ class Main {
     }
 
     public static int getRoomId() {
-        String save = getSavedPlace();
-        switch (save) {
-            case "SpawnRoom" -> {
-                return SpawnRoom.roomSave;
-            }
-            case "OpenWorld" -> {
-                return OpenWorld.roomSave;
-            }
-            default -> {
-                return 0;
-            }
-        }
+        return Room.getRoom();
     }
 
     public static String getSavedPlace() {
@@ -211,6 +204,9 @@ class Main {
         TextEngine.printNoDelay("Name: " + Player.getName(), false);
         TextEngine.printNoDelay("Health: " + Player.getHealth() + "\nGold: " + Player.getGold(), false);
         TextEngine.printNoDelay("Room: " + getSavedPlace() + " " + getRoomId() + "\n", false);
+        if(getSavedPlace().equals("Dungeon")){
+            TextEngine.printNoDelay("Dungeon Level: " + getRoomId(), false);
+        }
         TextEngine.printNoDelay("\n", false);
     }
 

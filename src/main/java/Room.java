@@ -44,4 +44,21 @@ public class Room {
     public static void chest(Map<String,Integer> chestItems) throws InterruptedException{
         //chest implementation
     }
+    public static int getRoom(){
+        String save = Main.getSavedPlace();
+        switch (save) {
+            case "SpawnRoom" -> {
+                return SpawnRoom.roomSave;
+            }
+            case "OpenWorld" -> {
+                return OpenWorld.roomSave;
+            }
+            case "Dungeon" -> {
+                return Dungeon.getRoom();
+            }
+            default -> {
+                return 0;
+            }
+        }
+    }
 }
