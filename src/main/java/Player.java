@@ -30,8 +30,11 @@ public class Player {
         health = maxHealth;
         damage = 0;
         defense = 0;
+        damage = 0;
+        defense = 0;
         gold = 20;
         inventorySize = 20;
+        inventory.clear();
         playerCreate();
     }
     public static void debugStart() throws InterruptedException{
@@ -47,9 +50,7 @@ public class Player {
         TextEngine.printNoDelay("1: SpawnRoom", false);
         TextEngine.printNoDelay("2: OpenWorld", false);
         TextEngine.printNoDelay("3: Dungeon", false);
-        TextEngine.printNoDelay("4: MeadowDungeon", false);
-        TextEngine.printNoDelay("5: ForestDungeon", false);
-        TextEngine.printNoDelay("6: Village", false);
+        TextEngine.printNoDelay("4: Village", false);
         TextEngine.printNoDelay("debug spawn: ", true);
         ignore = console.readLine();
         command = console.readLine();
@@ -63,18 +64,25 @@ public class Player {
                 Main.loadSave();
             }
             case "3" -> {
-                Main.saveSpace("Dungeon");
-                Main.loadSave();
+                TextEngine.printNoDelay("1: Meadow", false);
+                TextEngine.printNoDelay("2: Dark Forest", false);
+                TextEngine.printNoDelay("debug dungeon: ", true);
+                ignore = console.readLine();
+                command = console.readLine();
+                switch (command){
+                    case "1" -> {
+                        Dungeon.initDungeon("Meadow");
+                    }
+                    case "2" -> {
+                        Dungeon.initDungeon("Dark Forest");
+                    }
+                    default -> {
+                        Main.saveSpace("SpawnRoom");
+                        Main.loadSave();
+                    }
+                }
             }
             case "4" -> {
-                Main.saveSpace("MeadowDungeon");
-                Main.loadSave();
-            }
-            case "5" -> {
-                Main.saveSpace("ForestDungeon");
-                Main.loadSave();
-            }
-            case "6" -> {
                 Main.saveSpace("Village");
                 Main.loadSave();
             }

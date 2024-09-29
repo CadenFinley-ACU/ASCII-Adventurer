@@ -1,4 +1,6 @@
 
+
+
 /**
  * Village Class
  *
@@ -90,6 +92,8 @@ public class Village extends Room {
     public static void hotel() throws InterruptedException {
         //hotel implementation
         Main.screenRefresh();
+        TextEngine.printNoDelay("Gold: "+Player.getGold(), false);
+        TextEngine.printNoDelay("\n", false);
         TextEngine.printWithDelays("You enter the hotel.", false);
         TextEngine.printWithDelays("You can rest here to regain health", false);
         TextEngine.printWithDelays("What is your command: rest(5 gold) or leave", true);
@@ -126,6 +130,9 @@ public class Village extends Room {
     public static void shop() throws InterruptedException {
         Main.screenRefresh();
         //shop implementation
+        TextEngine.printNoDelay("Gold: "+Player.getGold(), false);
+        TextEngine.printNoDelay("Inventory: "+Player.inventory.size()+"/"+Player.inventorySize, false);
+        TextEngine.printNoDelay("\n", false);
         TextEngine.printWithDelays("You enter the shop.", false);
         TextEngine.printWithDelays("You can buy items here", false);
                     TextEngine.printWithDelays("What would you like to buy: \npotion (10 gold), shield (20 gold), key (30 gold), or leave", true);
@@ -169,7 +176,7 @@ public class Village extends Room {
                                     keepShopping();
                                 }
                             }
-                            case "chainmail set" -> {
+                            case "chainmail" -> {
                                 if (Player.getGold() >= 10) {
                                     Player.changeGold(-10);
                                     Player.putItem("Chainmail Set", 1);

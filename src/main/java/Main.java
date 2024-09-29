@@ -99,8 +99,7 @@ class Main {
                 if(getSavedPlace().equals("Dungeon")){
                     TextEngine.printWithDelays("You can type 'restart' to restart the dungeon", false);
                 }
-                TextEngine.printWithDelays("You can type 'stats' to see your stats\n'inventory' to see your inventory\n'settings' or type 'save' to save \n or 'exit' to return to the main menu.", true);
-                
+                TextEngine.printWithDelays("You can type 'stats' to see your stats\n'inventory' to see your inventory\n'settings' or type 'save' to save \n or 'exit' to return to the main menu.", true); 
             }
             case "inventory" ->
                 Player.openInventory();
@@ -151,9 +150,7 @@ class Main {
 
     public static void wipeSave() throws InterruptedException {
         savedPlace = null;
-        //clear inventory
-        //reset all room and dungeons
-        reset();
+        Room.reset("all");
     }
 
     public static int getRoomId() {
@@ -208,7 +205,6 @@ class Main {
             Player.playerStart();
         }
     }
-
     public static void printStatus() {
         TextEngine.printNoDelay(Player.getName(), false);
         //TextEngine.printNoDelay("Health: " + Player.getHealth() + "\nGold: " + Player.getGold(), false);
@@ -226,9 +222,5 @@ class Main {
 
     public static String getOS_NAME() {
         return OS_NAME;
-    }
-    public static void reset() throws InterruptedException{
-        Player.reset();
-        Room.reset("all");
     }
 }

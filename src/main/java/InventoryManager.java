@@ -87,7 +87,6 @@ public class InventoryManager extends Player {
             TextEngine.printWithDelays("You can drop items by typing 'drop' in \nthe 'inventory menu' to make room.", false);
             TextEngine.printWithDelays("Press Enter to continue", false);
             console.readLine();
-            leave();
         }
         else {
             if (inventory.get(item) != null) {
@@ -99,7 +98,6 @@ public class InventoryManager extends Player {
             TextEngine.printWithDelays("You have picked up " + amount + " " + item, false);
             TextEngine.printWithDelays("Press Enter to continue", false);
             console.readLine();
-            leave();
         }
     }
 

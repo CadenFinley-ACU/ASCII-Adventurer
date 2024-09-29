@@ -97,7 +97,7 @@ public class OpenWorld extends Room {
                         Player.changeGold(40);
                         Main.screenRefresh();
                         TextEngine.printWithDelays("You managed to fight them off and send them running,\nand take 40 of their gold,\nbut not without them leaving a few cuts on you.", false);
-                        Player.changeHealth(-38);
+                        Player.changeHealth(-17);
                         completedPart4 = true;
                         roomSave = 5; //tovillage
                         Main.loadSave();
@@ -105,7 +105,7 @@ public class OpenWorld extends Room {
                     case "run" -> {
                         Main.screenRefresh();
                         TextEngine.printWithDelays("You managed to run away from the bandits,\nbut not without them leaving a few cuts on you.", false);
-                        Player.changeHealth(-17);
+                        Player.changeHealth(-9);
                         roomSave = 5; //to village
                         Main.loadSave();
                     }
