@@ -130,8 +130,7 @@ public class Player {
         if(health<=0){
             TextEngine.printWithDelays("You have died!", false);
             TextEngine.printWithDelays("Game Over!", false);
-            TextEngine.printWithDelays("Press Enter to Continue", false);
-            ignore = console.readLine();
+            TextEngine.enterToNext();
             Main.screenRefresh();
             Main.startMenu();
         }
@@ -188,10 +187,10 @@ public class Player {
         TextEngine.printWithDelays("You can type inventory to see your inventory and health.", false);
         TextEngine.printWithDelays("You can type help to see these commands again.", false);
         TextEngine.printNoDelay("\n", false);
-        TextEngine.printWithDelays("Make sure you always press enter when prompted to! (press enter to continue)", false);
-        ignore = console.readLine();
-        TextEngine.printWithDelays("Good luck! (press enter to continue)", false);
-        ignore = console.readLine();
+        TextEngine.printWithDelays("Make sure you always press enter when prompted to!", false);
+        TextEngine.enterToNext();
+        TextEngine.printWithDelays("Good luck!", false);
+        TextEngine.enterToNext();
         TextEngine.clearScreen();
         Main.playerCreated = true;
         Main.start();
@@ -206,8 +205,7 @@ public class Player {
         TextEngine.printNoDelay("Damage: "+damage, false);
         TextEngine.printNoDelay("Defense: "+defense, false);
         TextEngine.printNoDelay("Inventory: "+inventory.size()+"/"+inventorySize, false);
-        TextEngine.printNoDelay("(Press Enter to Leave menu)", false);
-        ignore = console.readLine();
+        TextEngine.enterToNext();
         Main.loadSave();
     }
 }

@@ -55,37 +55,22 @@ class Main {
             ignore = console.readLine();
             command = console.readLine();
             switch (command.toLowerCase()) {
-                case "start":
+                case "start" -> {
                     TextEngine.clearScreen();
                     start();
-                    break;
-                case "settings":
+                }
+                case "settings" -> {
                     TextEngine.clearScreen();
                     SettingsMenu.start();
-                    break;
-                case "help":
-                    displayHelp();
-                    break;
-                case "exit":
-                    exitGame();
-                    break;
-                case "fast":
-                    setTextSpeed("Fast");
-                    break;
-                case "slow":
-                    setTextSpeed("Slow");
-                    break;
-                case "normal":
-                    setTextSpeed("Normal");
-                    break;
-                case "nodelay":
-                    setTextSpeed("NoDelay");
-                    break;
-                case "debug":
-                    debugInfo();
-                    break;
-                default:
-                    TextEngine.printWithDelays("I'm sorry, I don't understand that command.", true);
+                }
+                case "help" -> displayHelp();
+                case "exit" -> exitGame();
+                case "fast" -> setTextSpeed("Fast");
+                case "slow" -> setTextSpeed("Slow");
+                case "normal" -> setTextSpeed("Normal");
+                case "nodelay" -> setTextSpeed("NoDelay");
+                case "debug" -> debugInfo();
+                default -> TextEngine.printWithDelays("I'm sorry, I don't understand that command.", true);
             }
         }
     }
@@ -96,8 +81,7 @@ class Main {
 
     private static void exitGame() throws InterruptedException {
         TextEngine.printWithDelays("See ya next time!", false);
-        TextEngine.printNoDelay("Press Enter to Continue)", false);
-        ignore = console.readLine();
+        TextEngine.enterToNext();
         TextEngine.clearScreen();
         System.exit(0);
     }
@@ -113,8 +97,7 @@ class Main {
         TextEngine.printWithDelays("Using System Property: " + getOS_NAME(), false);
         TextEngine.printWithDelays("Using Console: " + console, false);
         TextEngine.printWithDelays("Text Speed: " + TextEngine.speedSetting, false);
-        TextEngine.printNoDelay("(Press enter to continue)", false);
-        ignore = console.readLine();
+        TextEngine.enterToNext();
         Player.debugStart();
     }
 

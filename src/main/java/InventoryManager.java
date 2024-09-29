@@ -85,8 +85,7 @@ public class InventoryManager extends Player {
             TextEngine.printWithDelays("You have no room in your inventory.", false);
             TextEngine.printWithDelays("You can only hold " + Player.inventorySize + " items. You have: "+inventory.size()+" items.", false);
             TextEngine.printWithDelays("You can drop items by typing 'drop' in \nthe 'inventory menu' to make room.", false);
-            TextEngine.printWithDelays("Press Enter to continue", false);
-            console.readLine();
+            TextEngine.enterToNext();
         }
         else {
             if (inventory.get(item) != null) {
@@ -96,8 +95,7 @@ public class InventoryManager extends Player {
             }
             setStatsToHighestInInventory();
             TextEngine.printWithDelays("You have picked up " + amount + " " + item, false);
-            TextEngine.printWithDelays("Press Enter to continue", false);
-            console.readLine();
+            TextEngine.enterToNext();
         }
     }
 
@@ -146,13 +144,11 @@ public class InventoryManager extends Player {
         if (inventory.get(item) != null) {
             inventory.remove(item);
             TextEngine.printWithDelays("You have tossed " + item, false);
-            TextEngine.printWithDelays("Press Enter to continue", false);
-            console.readLine();
+            TextEngine.enterToNext();
             Player.openInventory();
         } else {
             TextEngine.printWithDelays("You do not have that item.", false);
-            TextEngine.printWithDelays("Press Enter to continue", false);
-            console.readLine();
+            TextEngine.enterToNext();
             Player.openInventory();
         }
     }

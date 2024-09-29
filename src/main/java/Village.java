@@ -58,8 +58,7 @@ public class Village extends Room {
                         Player.putItem("Heart Container", -1);
                         Player.changeHealth(20);
                         TextEngine.printWithDelays("Your health has increased by 20 points", false);
-                        TextEngine.printNoDelay("Press enter to continue.", false);
-                        ignore = console.readLine();
+                        TextEngine.enterToNext();
                         Main.loadSave();
                     }
                     case "leave it" -> {
@@ -104,8 +103,7 @@ public class Village extends Room {
                 case "rest" -> {
                     if(Player.getGold() < 5){
                         TextEngine.printWithDelays("You do not have enough gold to rest", false);
-                        TextEngine.printWithDelays("Press enter to continue.", false);
-                        ignore = console.readLine();
+                        TextEngine.enterToNext();
                         Main.loadSave();
                     }
                     else{
@@ -113,8 +111,7 @@ public class Village extends Room {
                         Player.changeHealth(Player.getMaxHealth()-Player.getHealth());
                         Main.screenRefresh();
                         TextEngine.printWithDelays("You have rested and restored your health", false);
-                        TextEngine.printNoDelay("Press enter to continue.", false);
-                        ignore = console.readLine();
+                        TextEngine.enterToNext();
                         Main.loadSave();
                     }
                 }
@@ -147,8 +144,7 @@ public class Village extends Room {
                                     keepShopping();
                                 } else {
                                     TextEngine.printWithDelays("You do not have enough gold to buy a potion", false);
-                                    TextEngine.printWithDelays("Press enter to continue.", false);
-                                    ignore = console.readLine();
+                                    TextEngine.enterToNext();
                                     keepShopping();
                                 }
                             }
@@ -159,8 +155,7 @@ public class Village extends Room {
                                     keepShopping();
                                 } else {
                                     TextEngine.printWithDelays("You do not have enough gold to buy a shield", false);
-                                    TextEngine.printWithDelays("Press enter to continue.", false);
-                                    ignore = console.readLine();
+                                    TextEngine.enterToNext();
                                     keepShopping();
                                 }
                             }
@@ -171,8 +166,7 @@ public class Village extends Room {
                                     keepShopping();
                                 } else {
                                     TextEngine.printWithDelays("You do not have enough gold to buy Axe", false);
-                                    TextEngine.printWithDelays("Press enter to continue.", false);
-                                    ignore = console.readLine();
+                                    TextEngine.enterToNext();
                                     keepShopping();
                                 }
                             }
@@ -183,8 +177,7 @@ public class Village extends Room {
                                     keepShopping();
                                 } else {
                                     TextEngine.printWithDelays("You do not have enough gold to buy Chainmail Set", false);
-                                    TextEngine.printWithDelays("Press enter to continue.", false);
-                                    ignore = console.readLine();
+                                    TextEngine.enterToNext();
                                     keepShopping();
                                 }
                             }
@@ -195,8 +188,7 @@ public class Village extends Room {
                                     keepShopping();
                                 } else {
                                     TextEngine.printWithDelays("You do not have enough gold to buy a key", false);
-                                    TextEngine.printWithDelays("Press enter to continue.", false);
-                                    ignore = console.readLine();
+                                    TextEngine.enterToNext();
                                     keepShopping();
                                 }                   
                             }

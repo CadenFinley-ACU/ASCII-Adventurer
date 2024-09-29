@@ -1,4 +1,5 @@
 
+import java.io.Console;
 import java.util.Map;
 
 /**
@@ -8,26 +9,36 @@ import java.util.Map;
  * Grijesh Shrestha
  */
 public class Enemy {
+    public final static Console console = System.console();
+    public static String command;
+    public static String ignore;
     private static final Map<String, Integer> enemyDamageValues= Map.of(
             "goblin", 5,
-            "orc", 10,
+            "orc", 10, 
             "troll", 15,
             "dragon", 20,
             "bandit", 3
     );
-    public static int spawnEnemy(String type,int quantity,String action) throws InterruptedException { //return the total damage as negative int so that you can change health
-        if(action.equals("fight")) {
-            if(quantity > 1) {
-                TextEngine.printWithDelays("You fight the " + type + "s", false);
-            } else {
-                TextEngine.printWithDelays("You fight the " + type, false);
-            }
+    public static int spawnEnemy(String type,int quantity) throws InterruptedException { //return the total damage as negative int so that you can change health
+        if(quantity > 1) {
+            TextEngine.printWithDelays("You fight the " + type + "s!", false);
+        } else {
+            TextEngine.printWithDelays("You fight the " + type+"!", false);
         }
-        int totalDamage = 0;
-        for(int i = 0; i < quantity; i++) {
-            //spawn bandit
-            totalDamage += enemyDamageValues.get(type);
+        checkhealth(type,quantity);
+        return 0-(enemyDamageValues.get(type)*quantity);
+    }
+    private static void checkhealth(String type,int quantity) throws InterruptedException {
+        if(Player.getHealth() <= 0){
+            return;
         }
-        return 0-totalDamage;
+        if(quantity > 1) {
+            TextEngine.printWithDelays("You beat the " + type + "s!", false);
+        } else {
+            TextEngine.printWithDelays("You beat the " + type+"!", false);
+        }
     }
 }
+
+
+//

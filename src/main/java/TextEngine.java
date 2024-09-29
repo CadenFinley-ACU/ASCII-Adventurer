@@ -1,3 +1,4 @@
+import java.io.Console;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 /**
@@ -8,7 +9,7 @@ import java.util.concurrent.TimeUnit;
  */
 public abstract class TextEngine {
     public static String speedSetting = "Normal";
-
+    public final static Console console = System.console();
     public static void printWithDelays(String data, boolean buffer) throws InterruptedException { //use buffer is you are accepting input after the text is printed
         if (buffer) {
             data = data + " (press enter to type)";
@@ -67,6 +68,10 @@ public abstract class TextEngine {
         } catch (final IOException e) {
             System.out.println("Error, No OS obtained: " + e.getMessage());
         }
+    }
+    public static void enterToNext() throws InterruptedException{
+        printWithDelays("Press Enter to continue", false);
+        console.readLine();
     }
 
 }

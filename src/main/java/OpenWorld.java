@@ -98,23 +98,18 @@ public class OpenWorld extends Room {
                 command = console.readLine();
                 switch (command.toLowerCase()) {
                     case "fight" -> {
-                        Player.changeGold(40);
                         Main.screenRefresh();
-                        Player.changeHealth(Enemy.spawnEnemy("bandit",3,"fight"));
-                        TextEngine.printWithDelays("You managed to fight them off and send them running,\nand take 40 of their gold,\nbut not without them leaving a few cuts on you.", false);
-                        TextEngine.printWithDelays("Press Enter to continue", false);
-                        ignore = console.readLine();
+                        Player.changeHealth(Enemy.spawnEnemy("bandit",3));
+                        TextEngine.enterToNext();
                         completedPart4 = true;
                         roomSave = 5; //tovillage
                         Main.loadSave();
                     }
                     case "run" -> {
                         Main.screenRefresh();
-                        Player.changeHealth(Enemy.spawnEnemy("bandit",2,"run"));
-                        TextEngine.printWithDelays("You managed to run away from the bandits,\nbut not without them leaving a few cuts on you.", false);
-                        TextEngine.printWithDelays("Press Enter to continue", false);
-                        ignore = console.readLine();
-                        roomSave = 5; //to village
+                        TextEngine.printWithDelays("You managed to run away from the bandits.", false);
+                        TextEngine.enterToNext();
+                        roomSave = 2; //goes back
                         Main.loadSave();
                     }
                     case "plead" -> {
@@ -122,8 +117,7 @@ public class OpenWorld extends Room {
                         Main.screenRefresh();
                         TextEngine.printWithDelays("You plead deperately from them to let you go\nThe demand all of your gold.", false);
                         TextEngine.printWithDelays("They took everything you had.", false);
-                        TextEngine.printWithDelays("Press Enter to continue", false);
-                        ignore = console.readLine();
+                        TextEngine.enterToNext();
                         roomSave = 5; //to village
                         completedPart4 = true;
                         Main.loadSave();
