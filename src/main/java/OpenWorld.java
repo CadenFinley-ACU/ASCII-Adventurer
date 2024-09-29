@@ -1,5 +1,7 @@
 
 
+
+
 /**
  * Open World Class
  *
@@ -98,17 +100,20 @@ public class OpenWorld extends Room {
                     case "fight" -> {
                         Player.changeGold(40);
                         Main.screenRefresh();
-                        TextEngine.printWithDelays("You fight the Bandits.", false); //Later on put this in ENEMY CLASS and make it a method
-                        Player.changeHealth(-15);
+                        Player.changeHealth(Enemy.spawnEnemy("bandit",3,"fight"));
                         TextEngine.printWithDelays("You managed to fight them off and send them running,\nand take 40 of their gold,\nbut not without them leaving a few cuts on you.", false);
+                        TextEngine.printWithDelays("Press Enter to continue", false);
+                        ignore = console.readLine();
                         completedPart4 = true;
                         roomSave = 5; //tovillage
                         Main.loadSave();
                     }
                     case "run" -> {
                         Main.screenRefresh();
-                        Player.changeHealth(-5);
+                        Player.changeHealth(Enemy.spawnEnemy("bandit",2,"run"));
                         TextEngine.printWithDelays("You managed to run away from the bandits,\nbut not without them leaving a few cuts on you.", false);
+                        TextEngine.printWithDelays("Press Enter to continue", false);
+                        ignore = console.readLine();
                         roomSave = 5; //to village
                         Main.loadSave();
                     }

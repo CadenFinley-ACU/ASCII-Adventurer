@@ -38,7 +38,7 @@ public class Player {
         playerCreate();
     }
     public static void debugStart() throws InterruptedException{
-        maxHealth = 1;
+        maxHealth = 100;
         health = maxHealth;
         damage = 0;
         defense = 0;
@@ -122,8 +122,6 @@ public class Player {
                 change = -1;
             }
             TextEngine.printWithDelays("You took " + change + " damage!", false);
-            TextEngine.printWithDelays("Press Enter to continue", false);
-            console.readLine();
         }
         health += change;
         if(health>maxHealth){
