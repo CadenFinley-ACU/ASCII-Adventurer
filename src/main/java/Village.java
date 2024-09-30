@@ -184,7 +184,7 @@ public class Village extends Room {
                     }
                 }
                 case "key" -> {
-                    buyMultiple("key", 10);
+                    buyMultiple("key", 30);
                 }
                 case "leave" -> {
                     Main.loadSave();

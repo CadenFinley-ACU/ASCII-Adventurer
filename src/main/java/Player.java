@@ -140,6 +140,7 @@ public class Player {
     }
     public static void changeGold(int change) throws InterruptedException { //change the gold
         gold += change;
+        TextEngine.printWithDelays("You gained " + change + " gold!", false);
     }
     public static void openInventory() throws InterruptedException { //open the inventory
         manager.printInventory();
