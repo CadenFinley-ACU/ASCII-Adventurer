@@ -1,4 +1,6 @@
 
+
+
 /**
  * Village Class
  *
@@ -193,40 +195,46 @@ public class Village extends Room {
         }
     }
 
-    private static void buyMultiple(String type,int cost) throws InterruptedException {
+    private static void buyMultiple(String type, int cost) throws InterruptedException {
         TextEngine.printWithDelays("How many would you like to buy?", true);
         ignore = console.readLine();
         command = console.readLine();
-        if(TextEngine.checkValidInput(command)){
+        if (TextEngine.checkValidInput(command)) {
+            try {
+                Integer.valueOf(command);
+            } catch (NumberFormatException e) {
+                Main.invalidCommand();
+                TextEngine.enterToNext();
+                buyMultiple(type, cost);
+            }
             int totalCost = cost * Integer.parseInt(command);
-        if (Player.getGold() >= totalCost && !command.equals("0")) {
-            Player.changeGold(-totalCost);
-            Player.putItem(type, Integer.parseInt(command));
-            keepShopping();
-        } else {
-            switch (command) {
-                case "0" -> {
-                    TextEngine.printWithDelays("You did not buy any " + type + "s.", false);
-                    TextEngine.enterToNext();
-                    keepShopping();
-                }
-                case "1" -> {
-                    TextEngine.printWithDelays("You do not have enough gold to buy a " + command, false);
-                    TextEngine.enterToNext();
-                    keepShopping();
-                }
-                default -> {
-                    TextEngine.printWithDelays("You do not have enough gold to buy " + command + " potions", false);
-                    TextEngine.enterToNext();
-                    keepShopping();
+            if (Player.getGold() >= totalCost && !command.equals("0")) {
+                Player.changeGold(-totalCost);
+                Player.putItem(type, Integer.parseInt(command));
+                keepShopping();
+            } else {
+                switch (command) {
+                    case "0" -> {
+                        TextEngine.printWithDelays("You did not buy any " + type + "s.", false);
+                        TextEngine.enterToNext();
+                        keepShopping();
+                    }
+                    case "1" -> {
+                        TextEngine.printWithDelays("You do not have enough gold to buy a " + command, false);
+                        TextEngine.enterToNext();
+                        keepShopping();
+                    }
+                    default -> {
+                        TextEngine.printWithDelays("You do not have enough gold to buy " + command + " potions", false);
+                        TextEngine.enterToNext();
+                        keepShopping();
+                    }
                 }
             }
-        }
-        }
-        else{
+        } else {
             Main.invalidCommand();
             keepShopping();
-        }      
+        }
     }
 
     private static void keepShopping() throws InterruptedException { //keep shopping

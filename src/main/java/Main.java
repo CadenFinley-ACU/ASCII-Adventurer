@@ -106,11 +106,14 @@ class Main {
             }
             case "heal"-> Player.heal();
             case "stats" -> Player.printStats();
-            default -> invalidCommand();
+            default -> invalidCommandWithBuffer();
         }
     }
-    public static void invalidCommand() throws InterruptedException{
+    public static void invalidCommandWithBuffer() throws InterruptedException{
         TextEngine.printWithDelays("I'm sorry, I don't understand that command.", true);
+    }
+    public static void invalidCommand() throws InterruptedException{
+        TextEngine.printWithDelays("I'm sorry, I don't understand that command.", false);
     }
     private static void displayInGameHelp() throws InterruptedException { //in game help command
         if (getSavedPlace().equals("Dungeon")) {

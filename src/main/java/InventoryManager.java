@@ -108,6 +108,7 @@ public class InventoryManager extends Player {
             command = console.readLine();
             switch (command) {
                 case "use" -> {
+                    TextEngine.clearScreen();
                     TextEngine.printWithDelays("Which item would you like to use?", false);
                     printInventoryNoMenu();
                     console.readLine();
@@ -115,6 +116,7 @@ public class InventoryManager extends Player {
                     useItem(command);
                 }
                 case "drop" -> {
+                    TextEngine.clearScreen();
                     TextEngine.printWithDelays("Which item would you like to drop?", false);
                     printInventoryNoMenu();
                     console.readLine();
@@ -151,19 +153,20 @@ public class InventoryManager extends Player {
                 TextEngine.printWithDelays("How many would you like to toss?\n" + getIndividualItemString(item), true);
                 console.readLine();
                 command = console.readLine();
+                try {
+                    Integer.valueOf(command);
+                } catch (NumberFormatException e) {
+                    Main.invalidCommand();
+                    TextEngine.enterToNext();
+                    Player.openInventory();
+                }
                 if (Integer.valueOf(command) > inventory.get(item)) {
                     TextEngine.printWithDelays("You do not have that many items.", false);
                     TextEngine.enterToNext();
                     Player.openInventory();
                 } else {
-                    if (TextEngine.checkValidInput(command)) {
-                            amount = Integer.parseInt(command);
-                            inventory.put(item, inventory.get(item) - amount);
-                    } else {
-                        Main.invalidCommand();
-                        TextEngine.enterToNext();
-                        Player.openInventory();
-                    }
+                    amount = Integer.parseInt(command);
+                    inventory.put(item, inventory.get(item) - amount);
                 }
             } else {
                 inventory.remove(item);
