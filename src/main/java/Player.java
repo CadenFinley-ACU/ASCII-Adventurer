@@ -9,7 +9,6 @@ import java.util.Map;
  * Text Adventure Game SE374 F24 Final Project Caden Finley Albert Tucker
  * Grijesh Shrestha
  */
-//todo make inventory and health management **in progress**
 public class Player {
 
     private static int health;
@@ -206,4 +205,19 @@ public class Player {
         TextEngine.enterToNext();
         Main.loadSave();
     }
+    public static void heal() throws InterruptedException{ //use available health potions in inventory to heal
+        if(inventory.containsKey("health potion")){
+            if(health<maxHealth){
+                InventoryManager.useItem("health potion");
+            }
+            else{
+                TextEngine.printWithDelays("You are already at full health!", false);
+            }
+        }
+        else{
+            TextEngine.printWithDelays("You have no health potions!", false);
+        }
+        TextEngine.enterToNext();
+    }
+
 }

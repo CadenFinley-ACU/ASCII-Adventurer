@@ -163,7 +163,7 @@ public class InventoryManager extends Player {
             Player.openInventory();
         }
     }
-    private static void useItem(String item) throws InterruptedException{
+    public static void useItem(String item) throws InterruptedException{
         if (Potions.containsKey(item)&&Player.getHealth()<Player.getMaxHealth()) {
             Player.changeHealth(Potions.get(item));
             inventory.put(item,inventory.get(item) - 1);

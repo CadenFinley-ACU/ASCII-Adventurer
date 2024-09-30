@@ -6,7 +6,6 @@ import java.io.Console;
  * Grijesh Shrestha
  */
 //maybe procurally generated dungeons using birary states to matrix arrrys ti create rooms in  path
-//heal command to use potions outisde of battle
 class Main {
 
     private final static Console console = System.console();
@@ -105,6 +104,7 @@ class Main {
                 TextEngine.clearScreen();
                 startMenu();
             }
+            case "heal"-> Player.heal();
             case "stats" -> Player.printStats();
             default -> TextEngine.printWithDelays("I'm sorry, I don't understand that command.", true);
         }
