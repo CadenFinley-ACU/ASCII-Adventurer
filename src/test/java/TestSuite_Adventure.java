@@ -6,24 +6,35 @@ import org.junit.Before;
 import org.junit.Test;
 public class TestSuite_Adventure
 {   
-    TextEngine textEngine;
     @Before
     public void setUp(){
-        textEngine = new TextEngine();
     }
     @Test
     public void printWithDelays() throws InterruptedException{
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
-        TextEngine.printWithDelays("Adventure V1, by BarrettHall:: Albert Tucker, Caden Finley, and Grijesh Shrestha");
+        TextEngine.printWithDelays("Adventure V1, by BarrettHall:: Albert Tucker, Caden Finley, and Grijesh Shrestha",false);
         assertEquals("Adventure V1, by BarrettHall:: Albert Tucker, Caden Finley, and Grijesh Shrestha", outContent.toString().trim());
     }
     @Test
     public void printNoDelay() throws InterruptedException{
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
-        TextEngine.printNoDelay("Adventure V1, by BarrettHall:: Albert Tucker, Caden Finley, and Grijesh Shrestha");
+        TextEngine.printNoDelay("Adventure V1, by BarrettHall:: Albert Tucker, Caden Finley, and Grijesh Shrestha",false);
         assertEquals("Adventure V1, by BarrettHall:: Albert Tucker, Caden Finley, and Grijesh Shrestha", outContent.toString().trim());
     }
-
+    @Test
+    public void printWithDelays2() throws InterruptedException{
+        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outContent));
+        TextEngine.printWithDelays("You enter a dark forest with a small path leading to the north", false);
+        assertEquals("You enter a dark forest with a small path leading to the north", outContent.toString().trim());
+    }
+    @Test
+    public void printNoDelay2() throws InterruptedException{
+        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outContent));
+        TextEngine.printNoDelay("You enter a dark forest with a small path leading to the north", false);
+        assertEquals("You enter a dark forest with a small path leading to the north", outContent.toString().trim());
+    }
 }
