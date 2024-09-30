@@ -197,7 +197,8 @@ public class Village extends Room {
         TextEngine.printWithDelays("How many would you like to buy?", true);
         ignore = console.readLine();
         command = console.readLine();
-        int totalCost = cost * Integer.parseInt(command);
+        if(TextEngine.checkValidInput(command)){
+            int totalCost = cost * Integer.parseInt(command);
         if (Player.getGold() >= totalCost && !command.equals("0")) {
             Player.changeGold(-totalCost);
             Player.putItem(type, Integer.parseInt(command));
@@ -221,6 +222,11 @@ public class Village extends Room {
                 }
             }
         }
+        }
+        else{
+            Main.invalidCommand();
+            keepShopping();
+        }      
     }
 
     private static void keepShopping() throws InterruptedException { //keep shopping

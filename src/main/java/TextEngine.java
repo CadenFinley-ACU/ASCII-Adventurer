@@ -73,5 +73,7 @@ public abstract class TextEngine {
         printNoDelay("Press Enter to continue", false);
         console.readLine();
     }
-
+    public static Boolean checkValidInput(String command) { //checks for valid input command
+        return command != null && !command.isEmpty() && !"".equals(command);
+    }
 }

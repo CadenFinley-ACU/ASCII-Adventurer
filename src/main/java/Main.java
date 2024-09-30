@@ -106,15 +106,17 @@ class Main {
             }
             case "heal"-> Player.heal();
             case "stats" -> Player.printStats();
-            default -> TextEngine.printWithDelays("I'm sorry, I don't understand that command.", true);
+            default -> invalidCommand();
         }
     }
-
+    public static void invalidCommand() throws InterruptedException{
+        TextEngine.printWithDelays("I'm sorry, I don't understand that command.", true);
+    }
     private static void displayInGameHelp() throws InterruptedException { //in game help command
         if (getSavedPlace().equals("Dungeon")) {
             TextEngine.printWithDelays("You can type 'restart' to restart the dungeon", false);
         }
-        TextEngine.printWithDelays("You can type 'stats' to see your stats\n'inventory' to see your inventory\n'settings' or type 'save' to save \n or 'exit' to return to the main menu.", true);
+        TextEngine.printWithDelays("You can type 'stats' to see your stats\n'inventory' to see your inventory\n'heal' to heal you health using any available healing potions\n'settings' or type 'save' to save \n or 'exit' to return to the main menu.", true);
     }
 
     public static void saveSpace(String place) throws InterruptedException { //save game command

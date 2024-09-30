@@ -218,6 +218,7 @@ public class Player {
             TextEngine.printWithDelays("You have no health potions!", false);
         }
         TextEngine.enterToNext();
+        Main.loadSave();
     }
 
 }
