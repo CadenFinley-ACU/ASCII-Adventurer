@@ -40,7 +40,7 @@ class Main {
 
     public static void startMenu() throws InterruptedException {
         TextEngine.clearScreen();
-        TextEngine.printNoDelay("Adventure V1, by BarrettHall: Albert Tucker, Caden Finley, and Grijesh Shrestha", false);
+        TextEngine.printNoDelay("ASCII Adventurer, by: Albert Tucker, Caden Finley, and Grijesh Shrestha", false);
         if (hasSave()) {
             TextEngine.printNoDelay("Welcome " + Player.getName() + "!", false);
         } else {
