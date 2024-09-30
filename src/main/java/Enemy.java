@@ -3,7 +3,7 @@ import java.io.Console;
 import java.util.Map;
 
 /**
- * Room Class
+ * Enemy Class
  *
  * Text Adventure Game SE374 F24 Final Project Caden Finley Albert Tucker
  * Grijesh Shrestha

@@ -1,7 +1,7 @@
 
 
 /**
- * MeadowDungeon.java
+ * MeadowDungeon
  *
  * Text Adventure Game SE374 F24 Final Project Caden Finley Albert Tucker
  * Grijesh Shrestha

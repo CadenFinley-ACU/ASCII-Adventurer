@@ -2,7 +2,7 @@
 
 
 /**
- * Spawn Room Class
+ * Dungeon Class
  *
  * Text Adventure Game
  * SE374 F24
