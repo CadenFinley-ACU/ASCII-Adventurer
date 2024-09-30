@@ -221,6 +221,6 @@ public class InventoryManager extends Player {
         }
     }
     public static String getIndividualItemString(String item) {
-        return item + " " + inventory.get(item);
+        return item + " " + inventory.get(item).toString();
     }
 }
