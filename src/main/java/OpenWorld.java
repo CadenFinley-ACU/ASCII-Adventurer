@@ -88,7 +88,6 @@ public class OpenWorld extends Room {
             }
         }
     }
-
     private static void part4() throws InterruptedException { //4 came from 2 maybe create combat system for later fights as this is just example for class
         if (!completedPart4) {
             TextEngine.printWithDelays("As you are walking along the path to the village you are jumped by some bandits", false);
