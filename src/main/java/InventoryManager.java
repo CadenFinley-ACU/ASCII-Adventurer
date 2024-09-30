@@ -69,22 +69,29 @@ public class InventoryManager extends Player {
             inventoryManage();
         }
     }
-
-    public void put(String item, int amount) throws InterruptedException { //put an item in the inventory
-        if(inventory.size() >= inventorySize){
+    public static boolean  inventoryHasRoom(int amount) throws InterruptedException{
+        if(inventory.size() + amount > inventorySize){
             TextEngine.printWithDelays("You have no room in your inventory.", false);
             TextEngine.printWithDelays("You can only hold " + Player.inventorySize + " items. You have: "+inventory.size()+" items.", false);
             TextEngine.printWithDelays("You can drop items by typing 'drop' in \nthe 'inventory menu' to make room.", false);
             TextEngine.enterToNext();
         }
-        else {
+        return inventory.size() + amount <= inventorySize;
+    }
+    public void put(String item, int amount) throws InterruptedException { //put an item in the inventory
+        if(inventoryHasRoom(amount)){
             if (inventory.get(item) != null) {
                 inventory.put(item, inventory.get(item) + amount);     
             } else {
                 inventory.put(item, amount);        
             }
             setStatsToHighestInInventory();
-            TextEngine.printWithDelays("You have picked up " + amount + " " + item, false);
+            if(amount > 1){
+                TextEngine.printWithDelays("You have picked up " + amount + " " + item+"s", false);
+            }
+            else{
+                TextEngine.printWithDelays("You have picked up " + amount + " " + item, false);
+            }
             TextEngine.enterToNext();
         }
     }
@@ -102,20 +109,7 @@ public class InventoryManager extends Player {
                     printInventoryNoMenu();
                     console.readLine();
                     command = console.readLine();
-                    if (Potions.containsKey(command)) {
-                        Player.changeHealth(Potions.get(command));
-                        TextEngine.printWithDelays("You have used " + command, false);
-                        TextEngine.enterToNext();
-                        inventory.put(command, inventory.get(command) - 1);
-                        if (inventory.get(command) == 0) {
-                            inventory.remove(command);
-                        }
-                        setStatsToHighestInInventory();
-                    } else {
-                        TextEngine.printWithDelays("You cannot use that item.", false);
-                        TextEngine.enterToNext();
-                        Player.openInventory();
-                    }
+                    useItem(command);
                 }
                 case "drop" -> {
                     TextEngine.printWithDelays("Which item would you like to drop?", false);
@@ -165,6 +159,22 @@ public class InventoryManager extends Player {
             Player.openInventory();
         } else {
             TextEngine.printWithDelays("You do not have that item.", false);
+            TextEngine.enterToNext();
+            Player.openInventory();
+        }
+    }
+    private static void useItem(String item) throws InterruptedException{
+        if (Potions.containsKey(item)&&Player.getHealth()<Player.getMaxHealth()) {
+            Player.changeHealth(Potions.get(item));
+            inventory.put(item,inventory.get(item) - 1);
+            if (inventory.get(item) == 0) {
+                inventory.remove(item);
+            }
+            TextEngine.enterToNext();
+            setStatsToHighestInInventory();
+            Player.openInventory();
+        } else {
+            TextEngine.printWithDelays("You cannot use that item.", false);
             TextEngine.enterToNext();
             Player.openInventory();
         }
@@ -221,6 +231,9 @@ public class InventoryManager extends Player {
         }
     }
     public static String getIndividualItemString(String item) {
+        if(inventory.get(item)>1){
+            return item + " x" + inventory.get(item).toString();
+        }
         return item + " " + inventory.get(item).toString();
-    }
+    }   
 }

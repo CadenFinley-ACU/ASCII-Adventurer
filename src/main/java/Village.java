@@ -1,6 +1,4 @@
 
-
-
 /**
  * Village Class
  *
@@ -16,7 +14,7 @@ public class Village extends Room {
     public static void startRoom() throws InterruptedException { //start room
         room = "Village";
         Main.checkSave(room);
-        OpenWorld.roomSave=4;
+        OpenWorld.roomSave = 4;
         Main.screenRefresh();
         //maybe something here in the futre that adds rondomness or more advanced feature to certain villages to make them all not the exact same
         TextEngine.printWithDelays("You walk into the village, there are multiple builings", false);
@@ -91,7 +89,7 @@ public class Village extends Room {
     public static void hotel() throws InterruptedException { //hotel
         //hotel implementation
         Main.screenRefresh();
-        TextEngine.printNoDelay("Gold: "+Player.getGold(), false);
+        TextEngine.printNoDelay("Gold: " + Player.getGold(), false);
         TextEngine.printNoDelay("\n", false);
         TextEngine.printWithDelays("You enter the hotel.", false);
         TextEngine.printWithDelays("You can rest here to regain health", false);
@@ -101,14 +99,13 @@ public class Village extends Room {
             command = console.readLine();
             switch (command.toLowerCase()) {
                 case "rest" -> {
-                    if(Player.getGold() < 5){
+                    if (Player.getGold() < 5) {
                         TextEngine.printWithDelays("You do not have enough gold to rest", false);
                         TextEngine.enterToNext();
                         Main.loadSave();
-                    }
-                    else{
+                    } else {
                         Player.changeGold(-5);
-                        Player.changeHealth(Player.getMaxHealth()-Player.getHealth());
+                        Player.changeHealth(Player.getMaxHealth() - Player.getHealth());
                         Main.screenRefresh();
                         TextEngine.printWithDelays("You have rested and restored your health", false);
                         TextEngine.enterToNext();
@@ -127,79 +124,104 @@ public class Village extends Room {
     public static void shop() throws InterruptedException { //shop
         Main.screenRefresh();
         //shop implementation
-        TextEngine.printNoDelay("Gold: "+Player.getGold(), false);
-        TextEngine.printNoDelay("Inventory: "+Player.inventory.size()+"/"+Player.inventorySize, false);
+        TextEngine.printNoDelay("Gold: " + Player.getGold(), false);
+        TextEngine.printNoDelay("Inventory: " + Player.inventory.size() + "/" + Player.inventorySize, false);
         TextEngine.printNoDelay("\n", false);
         TextEngine.printWithDelays("You enter the shop.", false);
         TextEngine.printWithDelays("You can buy items here", false);
-                    TextEngine.printWithDelays("What would you like to buy: \npotion (10 gold), shield (20 gold), key (30 gold), or leave", true);
-                    while (true) {
-                        ignore = console.readLine();
-                        command = console.readLine();
-                        switch (command.toLowerCase()) {
-                            case "potion" -> {
-                                if (Player.getGold() >= 10) {
-                                    Player.changeGold(-10);
-                                    Player.putItem("Potion", 1);
-                                    keepShopping();
-                                } else {
-                                    TextEngine.printWithDelays("You do not have enough gold to buy a potion", false);
-                                    TextEngine.enterToNext();
-                                    keepShopping();
-                                }
-                            }
-                            case "shield" -> {
-                                if (Player.getGold() >= 20) {
-                                    Player.changeGold(-20);
-                                    Player.putItem("Shield", 1);
-                                    keepShopping();
-                                } else {
-                                    TextEngine.printWithDelays("You do not have enough gold to buy a shield", false);
-                                    TextEngine.enterToNext();
-                                    keepShopping();
-                                }
-                            }
-                            case "axe" -> {
-                                if (Player.getGold() >= 10) {
-                                    Player.changeGold(-10);
-                                    Player.putItem("Axe", 1);
-                                    keepShopping();
-                                } else {
-                                    TextEngine.printWithDelays("You do not have enough gold to buy Axe", false);
-                                    TextEngine.enterToNext();
-                                    keepShopping();
-                                }
-                            }
-                            case "chainmail" -> {
-                                if (Player.getGold() >= 10) {
-                                    Player.changeGold(-10);
-                                    Player.putItem("Chainmail Set", 1);
-                                    keepShopping();
-                                } else {
-                                    TextEngine.printWithDelays("You do not have enough gold to buy Chainmail Set", false);
-                                    TextEngine.enterToNext();
-                                    keepShopping();
-                                }
-                            }
-                            case "key" -> {
-                                if (Player.getGold() >= 30) {
-                                    Player.changeGold(-30);
-                                    Player.putItem("Key", 1);
-                                    keepShopping();
-                                } else {
-                                    TextEngine.printWithDelays("You do not have enough gold to buy a key", false);
-                                    TextEngine.enterToNext();
-                                    keepShopping();
-                                }                   
-                            }
-                            case "leave" -> {
-                                Main.loadSave();
-                            }
-                            default ->
-                                Main.inGameDefaultTextHandling(command);
-                        }
+        TextEngine.printWithDelays("What would you like to buy: \nhealth potion (15 gold), shield (20 gold), key (30 gold), or leave", true);
+        while (true) {
+            ignore = console.readLine();
+            command = console.readLine();
+            switch (command.toLowerCase()) {
+                case "health potion" -> {
+                    buyMultiple("health potion", 15);
+                }
+                case "shield" -> {
+                    if (Player.getGold() >= 20) {
+                        Player.changeGold(-20);
+                        Player.putItem("shield", 1);
+                        keepShopping();
+                    } else {
+                        TextEngine.printWithDelays("You do not have enough gold to buy a shield", false);
+                        TextEngine.enterToNext();
+                        keepShopping();
                     }
                 }
+                case "axe" -> {
+                    if (Player.getGold() >= 10) {
+                        Player.changeGold(-10);
+                        Player.putItem("axe", 1);
+                        keepShopping();
+                    } else {
+                        TextEngine.printWithDelays("You do not have enough gold to buy Axe", false);
+                        TextEngine.enterToNext();
+                        keepShopping();
+                    }
+                }
+                case "chainmail" -> {
+                    if (Player.getGold() >= 10) {
+                        Player.changeGold(-10);
+                        Player.putItem("chainmail set", 1);
+                        keepShopping();
+                    } else {
+                        TextEngine.printWithDelays("You do not have enough gold to buy Chainmail Set", false);
+                        TextEngine.enterToNext();
+                        keepShopping();
+                    }
+                }
+                case "heart container" -> {
+                    if (Player.getGold() >= 10) {
+                        Player.changeGold(-10);
+                        Player.putItem("heart container", 1);
+                        keepShopping();
+                    } else {
+                        TextEngine.printWithDelays("You do not have enough gold to buy Heart Container", false);
+                        TextEngine.enterToNext();
+                        keepShopping();
+                    }
+                }
+                case "key" -> {
+                    buyMultiple("key", 10);
+                }
+                case "leave" -> {
+                    Main.loadSave();
+                }
+                default ->
+                    Main.inGameDefaultTextHandling(command);
+            }
+        }
+    }
+
+    private static void buyMultiple(String type,int cost) throws InterruptedException {
+        TextEngine.printWithDelays("How many would you like to buy?", true);
+        ignore = console.readLine();
+        command = console.readLine();
+        int totalCost = cost * Integer.parseInt(command);
+        if (Player.getGold() >= totalCost && !command.equals("0")) {
+            Player.changeGold(-totalCost);
+            Player.putItem(type, Integer.parseInt(command));
+            keepShopping();
+        } else {
+            switch (command) {
+                case "0" -> {
+                    TextEngine.printWithDelays("You did not buy any " + type + "s.", false);
+                    TextEngine.enterToNext();
+                    keepShopping();
+                }
+                case "1" -> {
+                    TextEngine.printWithDelays("You do not have enough gold to buy a " + command, false);
+                    TextEngine.enterToNext();
+                    keepShopping();
+                }
+                default -> {
+                    TextEngine.printWithDelays("You do not have enough gold to buy " + command + " potions", false);
+                    TextEngine.enterToNext();
+                    keepShopping();
+                }
+            }
+        }
+    }
 
     private static void keepShopping() throws InterruptedException { //keep shopping
         TextEngine.printWithDelays("Would you like to keep shopping? yes or no", true);
@@ -218,6 +240,7 @@ public class Village extends Room {
             }
         }
     }
+
     private static void leave() throws InterruptedException { //leave the village
         TextEngine.clearScreen();
         OpenWorld.startRoom();

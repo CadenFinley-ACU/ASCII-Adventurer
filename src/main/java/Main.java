@@ -5,7 +5,8 @@ import java.io.Console;
  * Text Adventure Game SE374 F24 Final Project Caden Finley Albert Tucker
  * Grijesh Shrestha
  */
-//need to create enemy damage calculator class  Enemy.spawnEnemy(Bandit,3) returns 15 damage for example  or Enemy.spawnEnemy(Bandit,2)+Enemy.spawnEnemy(Dragon,1) equals 20 damage
+//maybe procurally generated dungeons using birary states to matrix arrrys ti create rooms in  path
+//heal command to use potions outisde of battle
 class Main {
 
     private final static Console console = System.console();
@@ -23,17 +24,17 @@ class Main {
     private static void createGameItems() { //initalize all the items in the game
         //the value is equal to the damage, defense, or healing potential the item provides
         //this is only to use when you use the item not when you have it in your inventory or when it is on the map
-        InventoryManager.createItem("weapon", "Sword", 2);
-        InventoryManager.createItem("weapon", "Axe", 3);
-        InventoryManager.createItem("weapon", "Bow", 3);
-        InventoryManager.createItem("weapon", "Great Sword", 10);
-        InventoryManager.createItem("armor", "Shield", 1);
-        InventoryManager.createItem("armor", "Chainmail Set", 2);
-        InventoryManager.createItem("armor", "Full armor Kit", 3);
-        InventoryManager.createItem("armor", "Angel Armor", 7);
-        InventoryManager.createItem("potion", "Health Potion", 10);
-        InventoryManager.createItem("potion", "Heart Container", 10);
-        InventoryManager.createItem("key", "Key", 0);
+        InventoryManager.createItem("weapon", "sword", 2);
+        InventoryManager.createItem("weapon", "axe", 3);
+        InventoryManager.createItem("weapon", "bow", 3);
+        InventoryManager.createItem("weapon", "great sword", 10);
+        InventoryManager.createItem("armor", "shield", 1);
+        InventoryManager.createItem("armor", "chainmail set", 2);
+        InventoryManager.createItem("armor", "full armor kit", 3);
+        InventoryManager.createItem("armor", "angel armor", 7);
+        InventoryManager.createItem("potion", "health potion", 10);
+        InventoryManager.createItem("potion", "heart container", 10);
+        InventoryManager.createItem("key", "key", 0);
     }
 
     public static void startMenu() throws InterruptedException { //main menu and sstart menu text

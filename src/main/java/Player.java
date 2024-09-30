@@ -121,6 +121,9 @@ public class Player {
             }
             TextEngine.printWithDelays("You took " + change + " damage!", false);
         }
+        else{
+            TextEngine.printWithDelays("You gained " + (change-(change - (maxHealth - getHealth()))) + " health!", false);
+        }
         health += change;
         if(health>maxHealth){
             health = maxHealth;
