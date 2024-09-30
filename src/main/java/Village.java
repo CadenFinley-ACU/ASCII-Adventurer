@@ -16,7 +16,6 @@ public class Village extends Room {
     public static void startRoom() throws InterruptedException { //start room
         room = "Village";
         Main.checkSave(room);
-        OpenWorld.roomSave = 4;
         Main.screenRefresh();
         //maybe something here in the futre that adds rondomness or more advanced feature to certain villages to make them all not the exact same
         TextEngine.printWithDelays("You walk into the village, there are multiple builings", false);

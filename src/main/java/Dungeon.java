@@ -13,6 +13,7 @@
  */
 public class Dungeon extends Room {
     private static String currentDungeon;
+    public static int completedDungeons = 0;
     public static void startRoom() throws InterruptedException{ //start room
         switch (currentDungeon){
             case "Meadow" -> MeadowDungeon.startRoom();
@@ -73,6 +74,7 @@ public class Dungeon extends Room {
         return currentDungeon;
     }
     public static void resetAll(){ //reset all
+        completedDungeons = 0;
         MeadowDungeon.fresh();
         DarkForestDungeon.fresh();
     }
@@ -85,5 +87,8 @@ public class Dungeon extends Room {
                 DarkForestDungeon.fresh();
             }
         }
+    }
+    public static void completed(){
+        completedDungeons++;
     }
 }
