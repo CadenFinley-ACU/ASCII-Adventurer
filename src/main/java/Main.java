@@ -15,12 +15,12 @@ class Main {
     public static String savedPlace = null;
     private static final String OS_NAME = System.getProperty("os.name");
 
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) throws InterruptedException { //main game start
         createGameItems();
         startMenu();
     }
 
-    private static void createGameItems() {
+    private static void createGameItems() { //initalize all the items in the game
         //the value is equal to the damage, defense, or healing potential the item provides
         //this is only to use when you use the item not when you have it in your inventory or when it is on the map
         InventoryManager.createItem("weapon", "Sword", 2);
@@ -36,7 +36,7 @@ class Main {
         InventoryManager.createItem("key", "Key", 0);
     }
 
-    public static void startMenu() throws InterruptedException {
+    public static void startMenu() throws InterruptedException { //main menu and sstart menu text
         TextEngine.clearScreen();
         TextEngine.printNoDelay("ASCII Adventurer, by: Albert Tucker, Caden Finley, and Grijesh Shrestha", false);
         if (hasSave()) {
@@ -48,7 +48,7 @@ class Main {
         handleMenuCommands();
     }
 
-    private static void handleMenuCommands() throws InterruptedException {
+    private static void handleMenuCommands() throws InterruptedException { //main menu command handling
         while (true) {
             ignore = console.readLine();
             command = console.readLine();
@@ -73,23 +73,23 @@ class Main {
         }
     }
 
-    private static void displayHelp() throws InterruptedException {
+    private static void displayHelp() throws InterruptedException { //main menu help command
         TextEngine.printWithDelays("You can type 'start' to start the game\nor 'settings' to change the text speed\nor 'exit' to leave the game.", true);
     }
 
-    private static void exitGame() throws InterruptedException {
+    private static void exitGame() throws InterruptedException {   //exit game command
         TextEngine.printWithDelays("See ya next time!", false);
         TextEngine.enterToNext();
         TextEngine.clearScreen();
         System.exit(0);
     }
 
-    private static void setTextSpeed(String speed) throws InterruptedException {
+    private static void setTextSpeed(String speed) throws InterruptedException { //set text speed command
         TextEngine.speedSetting = speed;
         TextEngine.printWithDelays("Text speed set to " + speed, true);
     }
 
-    private static void debugInfo() throws InterruptedException {
+    private static void debugInfo() throws InterruptedException { //debug command
         TextEngine.speedSetting = "NoDelay";
         TextEngine.clearScreen();
         TextEngine.printWithDelays("Using System Property: " + getOS_NAME(), false);
@@ -99,7 +99,7 @@ class Main {
         Player.debugStart();
     }
 
-    public static void inGameDefaultTextHandling(String data) throws InterruptedException {
+    public static void inGameDefaultTextHandling(String data) throws InterruptedException { //default in game commands
         switch (data) {
             case "help" -> displayInGameHelp();
             case "inventory" -> Player.openInventory();
@@ -118,21 +118,21 @@ class Main {
         }
     }
 
-    private static void displayInGameHelp() throws InterruptedException {
+    private static void displayInGameHelp() throws InterruptedException { //in game help command
         if (getSavedPlace().equals("Dungeon")) {
             TextEngine.printWithDelays("You can type 'restart' to restart the dungeon", false);
         }
         TextEngine.printWithDelays("You can type 'stats' to see your stats\n'inventory' to see your inventory\n'settings' or type 'save' to save \n or 'exit' to return to the main menu.", true);
     }
 
-    public static void saveSpace(String place) throws InterruptedException {
+    public static void saveSpace(String place) throws InterruptedException { //save game command
         if (savedPlace != null) {
             TextEngine.printWithDelays("Game saved!", false);
         }
         savedPlace = place;
     }
 
-    public static void loadSave() throws InterruptedException {
+    public static void loadSave() throws InterruptedException { //load saved game command
         if (getSavedPlace() == null) {
             startMenu();
         } else {
@@ -146,30 +146,30 @@ class Main {
         }
     }
 
-    public static void wipeSave() throws InterruptedException {
+    public static void wipeSave() throws InterruptedException { //wipe save command
         savedPlace = null;
         Room.reset("all");
     }
 
-    public static int getRoomId() {
+    public static int getRoomId() { //get the room id
         return Room.getRoom();
     }
 
-    public static String getSavedPlace() {
+    public static String getSavedPlace() { //get the saved place
         return savedPlace;
     }
 
-    public static boolean hasSave() {
+    public static boolean hasSave() { //check if there is a save
         return getSavedPlace() != null;
     }
 
-    public static void checkSave(String place) throws InterruptedException {
+    public static void checkSave(String place) throws InterruptedException { //check if there is a save and if that save is where you currently are
         if (!hasSave() || !getSavedPlace().equals(place)) {
             saveSpace(place);
         }
     }
 
-    public static void start() throws InterruptedException {
+    public static void start() throws InterruptedException { //start the game
         if (hasSave()) {
             promptLoadSavedGame();
         } else if (playerCreated) {
@@ -180,7 +180,7 @@ class Main {
         }
     }
 
-    private static void promptLoadSavedGame() throws InterruptedException {
+    private static void promptLoadSavedGame() throws InterruptedException { //prompt to load saved game
         TextEngine.printWithDelays("Would you like to load your saved game? (yes or no) ", true);
         ignore = console.readLine();
         command = console.readLine();
@@ -191,7 +191,7 @@ class Main {
         }
     }
 
-    private static void confirmWipeSave() throws InterruptedException {
+    private static void confirmWipeSave() throws InterruptedException { //confirm to wipe save
         String textState = TextEngine.speedSetting;
         TextEngine.speedSetting = "Slow";
         TextEngine.printWithDelays("All data will be wiped if you proceed. (yes or no) ", false);
@@ -210,7 +210,7 @@ class Main {
         }
     }
 
-    public static void printStatus() {
+    public static void printStatus() { //print the status of the player
         TextEngine.printNoDelay(Player.getName(), false);
         TextEngine.printNoDelay("Health: " + Player.getHealth(), false);
         TextEngine.printNoDelay(getSavedPlace() + " " + getRoomId() + "\n", false);
@@ -220,12 +220,12 @@ class Main {
         TextEngine.printNoDelay("\n", false);
     }
 
-    public static void screenRefresh() throws InterruptedException {
+    public static void screenRefresh() throws InterruptedException { //refresh the screen
         TextEngine.clearScreen();
         printStatus();
     }
 
-    public static String getOS_NAME() {
+    public static String getOS_NAME() { //get the os name
         return OS_NAME;
     }
 }

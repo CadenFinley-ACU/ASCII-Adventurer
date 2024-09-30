@@ -15,7 +15,7 @@ public class SpawnRoom extends Room {
 
     static int roomSave = 0;
 
-    public static void startRoom() throws InterruptedException {
+    public static void startRoom() throws InterruptedException { //start room
         room = "SpawnRoom";
         Main.checkSave(room);
         Main.screenRefresh();
@@ -30,7 +30,7 @@ public class SpawnRoom extends Room {
                 Main.startMenu();
         }
     }
-    public static void resetAll(){
+    public static void resetAll(){ //reset all
         roomSave = 0;
     }
     private static void part0() throws InterruptedException { //0

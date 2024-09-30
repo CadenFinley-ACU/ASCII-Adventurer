@@ -25,7 +25,7 @@ public class Player {
     public static Map<String, Integer> inventory = new HashMap<>();
     public static InventoryManager manager = new InventoryManager();
 
-    public static void playerStart() throws InterruptedException {
+    public static void playerStart() throws InterruptedException { //start the player
         maxHealth = 100;
         health = maxHealth;
         damage = 0;
@@ -37,7 +37,7 @@ public class Player {
         inventory.clear();
         playerCreate();
     }
-    public static void debugStart() throws InterruptedException{
+    public static void debugStart() throws InterruptedException{ //start the player with debug settings
         maxHealth = 100;
         health = maxHealth;
         damage = 0;
@@ -94,27 +94,27 @@ public class Player {
 
     }
 
-    public static String getName() {
+    public static String getName() { //get the name
         return name;
     }
 
-    public static void setName(String name) {
+    public static void setName(String name) { //set the name
         Player.name = name;
     }
 
-    public static int getHealth() {
+    public static int getHealth() { //get the health
         return health;
     }
-    public static int getMaxHealth(){
+    public static int getMaxHealth(){ //get the max health
         return maxHealth;
     }
-    public static int getGold() {
+    public static int getGold() { //get the gold
         return gold;
     }
-    public static void changeInventorySize(int change) throws InterruptedException {
-        inventorySize += change;
+    public static void changeInventorySize(int change) throws InterruptedException { //change the inventory size
+        inventorySize += change; 
     }
-    public static void changeHealth(int change) throws InterruptedException {
+    public static void changeHealth(int change) throws InterruptedException { //change the health
         int damageCalc = (defense + (damage/2));
         if(change<0) {
             change += damageCalc;
@@ -135,34 +135,34 @@ public class Player {
             Main.startMenu();
         }
     }
-    public static void changeMaxHealth(int change) throws InterruptedException {
+    public static void changeMaxHealth(int change) throws InterruptedException { //change the max health
         Main.screenRefresh();
         maxHealth += change;
         health += change;
     }
-    public static void changeGold(int change) throws InterruptedException {
+    public static void changeGold(int change) throws InterruptedException { //change the gold
         Main.screenRefresh();
         gold += change;
     }
-    public static void openInventory() throws InterruptedException {
+    public static void openInventory() throws InterruptedException { //open the inventory
         manager.printInventory();
     }
-    public static void setDamage(int amount){
+    public static void setDamage(int amount){ //set the damage
         damage = amount;
     }
-    public static void setDefense(int amount){
+    public static void setDefense(int amount){ //set the defense
         defense = amount;
     }
-    public static int getDamage(){
+    public static int getDamage(){ //get the damage
         return damage;
     }
-    public static int getDefense(){
+    public static int getDefense(){ //get the defense
         return defense;
     }
-    public static void putItem(String item, int amount) throws InterruptedException {
+    public static void putItem(String item, int amount) throws InterruptedException { //put an item in the inventory
         manager.put(item, amount);
     }
-    private static void playerCreate() throws InterruptedException {
+    private static void playerCreate() throws InterruptedException { //create the player
         TextEngine.printWithDelays("Welcome to the game! What is your name hero?", true);
         while (true) {
             ignore = console.readLine();
@@ -195,7 +195,7 @@ public class Player {
         Main.playerCreated = true;
         Main.start();
     }
-    public static void printStats() throws InterruptedException{
+    public static void printStats() throws InterruptedException{ //print the stats
         InventoryManager.setStatsToHighestInInventory();
         TextEngine.clearScreen();
         TextEngine.printNoDelay("Player Stats:", false);

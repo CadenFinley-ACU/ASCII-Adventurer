@@ -20,7 +20,7 @@ public class InventoryManager extends Player {
     public static Map<String, Integer> Potions = new HashMap<>();
     public static Map<String, Integer> Keys = new HashMap<>();
 
-    public static void createItem(String type, String item,int value){
+    public static void createItem(String type, String item,int value){ //create an item
         switch(type) {
             case "weapon" -> {
                 Weapons.put(item, value);
@@ -39,7 +39,7 @@ public class InventoryManager extends Player {
             }
         }
     }
-    public void printInventory() throws InterruptedException {
+    public void printInventory() throws InterruptedException { //print the inventory
         int i = 1;
         TextEngine.clearScreen();
         Main.printStatus();
@@ -80,7 +80,7 @@ public class InventoryManager extends Player {
         }
     }
 
-    public void put(String item, int amount) throws InterruptedException {
+    public void put(String item, int amount) throws InterruptedException { //put an item in the inventory
         if(inventory.size() >= inventorySize){
             TextEngine.printWithDelays("You have no room in your inventory.", false);
             TextEngine.printWithDelays("You can only hold " + Player.inventorySize + " items. You have: "+inventory.size()+" items.", false);
@@ -99,7 +99,7 @@ public class InventoryManager extends Player {
         }
     }
 
-    private static void inventoryManage() throws InterruptedException {
+    private static void inventoryManage() throws InterruptedException { //manage the inventory
         TextEngine.printWithDelays("What would you like to do", false);
         TextEngine.printWithDelays("Use item, drop item, or exit ", false);
         TextEngine.printWithDelays("'use', 'drop', 'exit'", true);
@@ -136,11 +136,11 @@ public class InventoryManager extends Player {
         }
     }
 
-    private static void leave() throws InterruptedException {
+    private static void leave() throws InterruptedException { //leave the inventory
         TextEngine.clearScreen();
         Main.loadSave();
     }
-    private static void tossItem(String item) throws InterruptedException {
+    private static void tossItem(String item) throws InterruptedException { //toss an item
         if (inventory.get(item) != null) {
             inventory.remove(item);
             TextEngine.printWithDelays("You have tossed " + item, false);
@@ -152,7 +152,7 @@ public class InventoryManager extends Player {
             Player.openInventory();
         }
     }
-    public static void setStatsToHighestInInventory() {
+    public static void setStatsToHighestInInventory() { //set the stats to the highest in the inventory
         Player.setDamage(0);
         Player.setDefense(0);
         Set<String> keys = inventory.keySet();
@@ -169,7 +169,7 @@ public class InventoryManager extends Player {
             }
         } 
     }
-    public static void printInventoryNoMenu() throws InterruptedException{
+    public static void printInventoryNoMenu() throws InterruptedException{ //print the inventory without the menu
         int i = 1;
         if (inventory.isEmpty()) {
             leave();

@@ -69,7 +69,7 @@ public abstract class TextEngine {
             System.out.println("Error, No OS obtained: " + e.getMessage());
         }
     }
-    public static void enterToNext() throws InterruptedException{
+    public static void enterToNext() throws InterruptedException{ //adds a pause and waits for enter
         printWithDelays("Press Enter to continue", false);
         console.readLine();
     }

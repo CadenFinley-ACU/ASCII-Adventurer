@@ -17,7 +17,7 @@ public class Room {
     public static String room = null;
     public static final Map<String, Integer> ROOMITEMS_MAP = new HashMap<>();
 
-    public static void hasItemInRoom(String itemName, int quantity) throws InterruptedException{
+    public static void hasItemInRoom(String itemName, int quantity) throws InterruptedException{    //check if there is an item in the room
         TextEngine.printWithDelays("Hey! There is an item in this room: ", false);
         if(quantity>1){
             TextEngine.printWithDelays("Item(s): "+itemName+" x"+quantity, false);
@@ -41,10 +41,10 @@ public class Room {
             }
         }
     }
-    public static void chest(Map<String,Integer> chestItems) throws InterruptedException{
+    public static void chest(Map<String,Integer> chestItems) throws InterruptedException{ 
         //chest implementation
     }
-    public static int getRoom(){
+    public static int getRoom(){ //get the room
         String save = Main.getSavedPlace();
         switch (save) {
             case "SpawnRoom" -> {
@@ -61,7 +61,7 @@ public class Room {
             }
         }
     }
-    public static void reset(String area){
+    public static void reset(String area){ //reset the room
         switch (area) {
             case "SpawnRoom" -> {
                 SpawnRoom.resetAll();

@@ -13,7 +13,7 @@
  */
 public class Village extends Room {
 
-    public static void startRoom() throws InterruptedException {
+    public static void startRoom() throws InterruptedException { //start room
         room = "Village";
         Main.checkSave(room);
         OpenWorld.roomSave=4;
@@ -43,7 +43,7 @@ public class Village extends Room {
         }
     }
 
-    public static void church() throws InterruptedException {
+    public static void church() throws InterruptedException { //church
         Main.screenRefresh();
         //church implementation
         TextEngine.printWithDelays("You enter the village church.\nThere a a preist here who can bless your heart containers to gain more hearts", false);
@@ -88,7 +88,7 @@ public class Village extends Room {
         }
     }
 
-    public static void hotel() throws InterruptedException {
+    public static void hotel() throws InterruptedException { //hotel
         //hotel implementation
         Main.screenRefresh();
         TextEngine.printNoDelay("Gold: "+Player.getGold(), false);
@@ -124,7 +124,7 @@ public class Village extends Room {
         }
     }
 
-    public static void shop() throws InterruptedException {
+    public static void shop() throws InterruptedException { //shop
         Main.screenRefresh();
         //shop implementation
         TextEngine.printNoDelay("Gold: "+Player.getGold(), false);
@@ -201,7 +201,7 @@ public class Village extends Room {
                     }
                 }
 
-    private static void keepShopping() throws InterruptedException {
+    private static void keepShopping() throws InterruptedException { //keep shopping
         TextEngine.printWithDelays("Would you like to keep shopping? yes or no", true);
         while (true) {
             ignore = console.readLine();
@@ -218,7 +218,7 @@ public class Village extends Room {
             }
         }
     }
-    private static void leave() throws InterruptedException {
+    private static void leave() throws InterruptedException { //leave the village
         TextEngine.clearScreen();
         OpenWorld.startRoom();
     }

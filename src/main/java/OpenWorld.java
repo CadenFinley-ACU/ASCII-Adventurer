@@ -14,7 +14,7 @@ public class OpenWorld extends Room {
     static int roomSave = 0;
     static boolean completedPart4 = false;
 
-    public static void startRoom() throws InterruptedException {
+    public static void startRoom() throws InterruptedException { //start room
         room = "OpenWorld";
         Main.checkSave(room);
         Main.screenRefresh();
@@ -35,7 +35,7 @@ public class OpenWorld extends Room {
                 Main.startMenu();
         }
     }
-    public static void resetAll(){
+    public static void resetAll(){ //reset all
         roomSave = 0;
         completedPart4 = false;
     }
@@ -98,7 +98,6 @@ public class OpenWorld extends Room {
                 command = console.readLine();
                 switch (command.toLowerCase()) {
                     case "fight" -> {
-                        Main.screenRefresh();
                         Player.changeHealth(Enemy.spawnEnemy("bandit",3));
                         TextEngine.enterToNext();
                         completedPart4 = true;
@@ -106,7 +105,6 @@ public class OpenWorld extends Room {
                         Main.loadSave();
                     }
                     case "run" -> {
-                        Main.screenRefresh();
                         TextEngine.printWithDelays("You managed to run away from the bandits.", false);
                         TextEngine.enterToNext();
                         roomSave = 2; //goes back
@@ -114,7 +112,6 @@ public class OpenWorld extends Room {
                     }
                     case "plead" -> {
                         Player.changeGold(-Player.getGold());
-                        Main.screenRefresh();
                         TextEngine.printWithDelays("You plead deperately from them to let you go\nThe demand all of your gold.", false);
                         TextEngine.printWithDelays("They took everything you had.", false);
                         TextEngine.enterToNext();

@@ -14,7 +14,7 @@ public abstract class SettingsMenu {
     @SuppressWarnings("unused")
     private static String ignore;
 
-    public static void start() throws InterruptedException {
+    public static void start() throws InterruptedException {  //start the settings menu
         String lastSavedState = TextEngine.speedSetting;
         TextEngine.clearScreen();
         TextEngine.printNoDelay("Settings:", false);
@@ -108,7 +108,7 @@ public abstract class SettingsMenu {
         }
     }
 
-    private static void leave() throws InterruptedException {
+    private static void leave() throws InterruptedException { //leave the settings menu
         TextEngine.printWithDelays("Returning to last saved state.", false);
         TextEngine.clearScreen();
         Main.loadSave();

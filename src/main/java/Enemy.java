@@ -12,7 +12,7 @@ public class Enemy {
     public final static Console console = System.console();
     public static String command;
     public static String ignore;
-    private static final Map<String, Integer> enemyDamageValues= Map.of(
+    private static final Map<String, Integer> enemyDamageValues= Map.of( //damage values for each enemy
             "goblin", 5,
             "orc", 10, 
             "troll", 15,
@@ -28,7 +28,7 @@ public class Enemy {
         checkhealth(type,quantity);
         return 0-(enemyDamageValues.get(type)*quantity);
     }
-    private static void checkhealth(String type,int quantity) throws InterruptedException {
+    private static void checkhealth(String type,int quantity) throws InterruptedException { //check the health of the player
         if(Player.getHealth() <= 0){
             return;
         }
@@ -37,6 +37,7 @@ public class Enemy {
         } else {
             TextEngine.printWithDelays("You beat the " + type+"!", false);
         }
+        Player.changeGold(enemyDamageValues.get(type)*quantity);
     }
 }
 

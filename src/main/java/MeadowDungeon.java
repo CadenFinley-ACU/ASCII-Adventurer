@@ -10,7 +10,7 @@ public class MeadowDungeon extends Dungeon {
 
     static int roomSave = 0;
     static boolean room2Completed = false;
-    public static void startRoom() throws InterruptedException {
+    public static void startRoom() throws InterruptedException { //start room
         Main.screenRefresh();
         switch (roomSave) {
             case 0 ->
@@ -24,15 +24,15 @@ public class MeadowDungeon extends Dungeon {
         }
     }
 
-    public static int getRoom() {
+    public static int getRoom() { //get the room
         return roomSave;
     }
 
-    public static void fresh() {
+    public static void fresh() { //fresh
         roomSave = 0;
     }
 
-    private static void room0() throws InterruptedException {
+    private static void room0() throws InterruptedException { //0
         TextEngine.printWithDelays("You enter a meadow with a small stream running through it!", false);
         TextEngine.printWithDelays("You see a small wooden bridge to the north. You also see winding path to the east", false);
         TextEngine.printWithDelays("What is your command: north, east or help", true);
@@ -54,7 +54,7 @@ public class MeadowDungeon extends Dungeon {
         }
     }
 
-    private static void room1() throws InterruptedException {
+    private static void room1() throws InterruptedException { //1
         TextEngine.printWithDelays("You cross the bridge and see a chest", false);
         TextEngine.printWithDelays("What is your command: open or go back", true);
         while (true) {
