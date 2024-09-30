@@ -27,3 +27,29 @@ Adequately, work well under pressure and try to do well no matter the time
 Communication, knowing what I need to do, setting up goals that we can complete or like having steps. 
   What contribution are expected of me?
 Coding, communication, helping others if needed
+
+
+
+Strengths:
+	Albert: because I have never played a text avenger game, I will think of things from a different angle. 
+	Grijesh: Some experience with text adventures, different point of view
+	Caden: Very good at OOP and data manipulation so a text adventure game is right in my skill set
+Weaknesses:
+	Albert: Have never played a text avenger game.
+	Grijesh: No experience creating a text adventure and not sure where to head in adventure
+	Caden: Organization/ time management
+
+
+Glossary
+Builder: Someone who creates or builds the rooms or areas where the user can interact. 
+Character: the person the user will be seeing the world through 
+Cli: Command Line Interface is how the user inputs commands using text
+Coder: person in charge of creating or modifying the game. 
+Direction: Controls used in a game to go a certain way in the game or to certain direction of rooms
+Ending: where the game has finished and user can no longer make any inputs 
+NPC: Non Playable Character is a character that the user can not use or control
+PvE: Player versus Environment where the user is facing the game itself and not other players 
+Room: spaces that can be explored by the user which are made by the coders
+Spawn Point: the place where the user can start or is set to start in the game
+Trigger: scripted sequence that causes a certain reaction in the game where the user is
+
