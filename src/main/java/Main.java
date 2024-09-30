@@ -53,14 +53,8 @@ class Main {
             ignore = console.readLine();
             command = console.readLine();
             switch (command.toLowerCase()) {
-                case "start" -> {
-                    TextEngine.clearScreen();
-                    start();
-                }
-                case "settings" -> {
-                    TextEngine.clearScreen();
-                    SettingsMenu.start();
-                }
+                case "start" -> start();
+                case "settings" -> SettingsMenu.start();
                 case "help" -> displayHelp();
                 case "exit" -> exitGame();
                 case "fast" -> setTextSpeed("Fast");
@@ -170,6 +164,7 @@ class Main {
     }
 
     public static void start() throws InterruptedException { //start the game
+        TextEngine.clearScreen();
         if (hasSave()) {
             promptLoadSavedGame();
         } else if (playerCreated) {
