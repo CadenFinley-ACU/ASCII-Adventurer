@@ -188,6 +188,7 @@ class Main {
             loadSave();
         }
     }
+    //test
 
     private static void confirmWipeSave() throws InterruptedException { //confirm to wipe save
         String textState = TextEngine.speedSetting;
