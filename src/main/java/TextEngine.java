@@ -70,7 +70,7 @@ public abstract class TextEngine {
         }
     }
     public static void enterToNext() throws InterruptedException{ //adds a pause and waits for enter
-        printWithDelays("Press Enter to continue", false);
+        printNoDelay("Press Enter to continue", false);
         console.readLine();
     }
 

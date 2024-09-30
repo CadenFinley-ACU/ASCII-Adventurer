@@ -97,11 +97,9 @@ public class Player {
     public static String getName() { //get the name
         return name;
     }
-
     public static void setName(String name) { //set the name
         Player.name = name;
     }
-
     public static int getHealth() { //get the health
         return health;
     }
@@ -131,17 +129,14 @@ public class Player {
             TextEngine.printWithDelays("You have died!", false);
             TextEngine.printWithDelays("Game Over!", false);
             TextEngine.enterToNext();
-            Main.screenRefresh();
             Main.startMenu();
         }
     }
     public static void changeMaxHealth(int change) throws InterruptedException { //change the max health
-        Main.screenRefresh();
         maxHealth += change;
         health += change;
     }
     public static void changeGold(int change) throws InterruptedException { //change the gold
-        Main.screenRefresh();
         gold += change;
     }
     public static void openInventory() throws InterruptedException { //open the inventory

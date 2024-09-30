@@ -51,6 +51,7 @@ public class Enemy {
             TextEngine.printWithDelays("You fight the " + type+"!", false);
         }
         checkhealth(type,quantity);
+        TextEngine.enterToNext();
         return 0-(enemyDamageValues.get(type)*quantity);
     }
     private static void checkhealth(String type,int quantity) throws InterruptedException { //check the health of the player

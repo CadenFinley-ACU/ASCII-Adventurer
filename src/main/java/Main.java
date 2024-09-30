@@ -97,10 +97,7 @@ class Main {
         switch (data) {
             case "help" -> displayInGameHelp();
             case "inventory" -> Player.openInventory();
-            case "settings" -> {
-                SettingsMenu.start();
-                TextEngine.clearScreen();
-            }
+            case "settings" -> SettingsMenu.start();
             case "save" -> checkSave(getSavedPlace());
             case "exit" -> {
                 TextEngine.printWithDelays("Returning to main menu.", false);

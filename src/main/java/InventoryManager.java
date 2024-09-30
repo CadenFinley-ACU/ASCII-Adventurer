@@ -13,8 +13,8 @@ public class InventoryManager extends Player {
 
     public String room;
     public String area;
-    //private static String[][] roomItemsMatrix = new String[2][2];
-    //map format : itemname, quantity
+    //inventory format is itemname, amount
+    //map format : itemname, damage
     public static Map<String, Integer> Weapons = new HashMap<>();
     public static Map<String, Integer> Armor = new HashMap<>();
     public static Map<String, Integer> Potions = new HashMap<>();
@@ -22,21 +22,11 @@ public class InventoryManager extends Player {
 
     public static void createItem(String type, String item,int value){ //create an item
         switch(type) {
-            case "weapon" -> {
-                Weapons.put(item, value);
-            }
-            case "armor" -> {
-                Armor.put(item, value);
-            }
-            case "potion" -> {
-                Potions.put(item, value);
-            }
-            case "key" -> {
-                Keys.put(item, value);
-            }
-            default -> {
-                System.out.println("Invalid item type/n check createGameItems() in Main.java\nmake sure you set item type correctly");
-            }
+            case "weapon" -> Weapons.put(item, value);
+            case "armor" -> Armor.put(item, value);
+            case "potion" -> Potions.put(item, value);
+            case "key" -> Keys.put(item, value);
+            default -> System.out.println("Invalid item type/n check createGameItems() in Main.java\nmake sure you set item type correctly");   
         }
     }
     public void printInventory() throws InterruptedException { //print the inventory
@@ -108,10 +98,27 @@ public class InventoryManager extends Player {
             command = console.readLine();
             switch (command) {
                 case "use" -> {
-                    break;
+                    TextEngine.printWithDelays("Which item would you like to use?", false);
+                    printInventoryNoMenu();
+                    console.readLine();
+                    command = console.readLine();
+                    if (Potions.containsKey(command)) {
+                        Player.changeHealth(Potions.get(command));
+                        TextEngine.printWithDelays("You have used " + command, false);
+                        TextEngine.enterToNext();
+                        inventory.put(command, inventory.get(command) - 1);
+                        if (inventory.get(command) == 0) {
+                            inventory.remove(command);
+                        }
+                        setStatsToHighestInInventory();
+                    } else {
+                        TextEngine.printWithDelays("You cannot use that item.", false);
+                        TextEngine.enterToNext();
+                        Player.openInventory();
+                    }
                 }
                 case "drop" -> {
-                    TextEngine.printWithDelays("Which item would you like to drop?", true);
+                    TextEngine.printWithDelays("Which item would you like to drop?", false);
                     printInventoryNoMenu();
                     console.readLine();
                     command = console.readLine();
@@ -141,9 +148,19 @@ public class InventoryManager extends Player {
         Main.loadSave();
     }
     private static void tossItem(String item) throws InterruptedException { //toss an item
+        int amount =1;
         if (inventory.get(item) != null) {
-            inventory.remove(item);
-            TextEngine.printWithDelays("You have tossed " + item, false);
+            if(inventory.get(item) > 1){
+                TextEngine.printWithDelays("How many would you like to toss?\n" + getIndividualItemString(item), true);
+                console.readLine();
+                command = console.readLine();
+                amount = Integer.parseInt(command);
+                inventory.put(item, inventory.get(item) - amount);  
+            }
+            else{
+                inventory.remove(item);
+            }
+            TextEngine.printWithDelays("You have tossed " + item+" " + amount, false);
             TextEngine.enterToNext();
             Player.openInventory();
         } else {
@@ -200,7 +217,10 @@ public class InventoryManager extends Player {
                 }
                 i++;
             }
-            TextEngine.printWithDelays(" ", true);
+            TextEngine.printWithDelays("", true);
         }
+    }
+    public static String getIndividualItemString(String item) {
+        return item + " " + inventory.get(item);
     }
 }
