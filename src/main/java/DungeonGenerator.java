@@ -29,9 +29,21 @@ public class DungeonGenerator {
             start(5);
             return;
         }
-        int sizeY = pass;
         int size = pass;
-        matrix = new int[size][sizeY];
+        if (size % 2 == 0) {
+            size++;
+        }
+        if (size > 15) {
+            size = 15;
+        }
+
+        float changeRatio = 1+(((size * size) / 1) / 12.5f);
+
+        if(3+size<changeRatio){
+            changeRatio = size;
+        }
+
+        matrix = new int[size][size];
         Random rand = new Random();
 
         // Place 9 at a random position on the bottom row
@@ -58,12 +70,19 @@ public class DungeonGenerator {
         matrix[coord9[0]][coord9[1]] = 0;
         matrix[coord8[0]][coord8[1]] = 0;
 
-        float changeRatio = ((size * size) / 1) / 25f; //determines how many random rooms are added
+         //determines how many random rooms are added
         // Randomly add at least size+size/2 more 1's ensuring they are connected to the main path
         addRandom(matrix, rand, size + (int) changeRatio, 1);
-
+        float itemRoomRatio = ((2*size)-5.5f)-(size/2);
+        if(itemRoomRatio>=size-5){
+            itemRoomRatio = size/2;
+        }
+        if(itemRoomRatio<1){
+            itemRoomRatio = 1;
+        }
+        
         // Randomly add item rooms (2-5) ensuring they are connected to the main path 2-5 are item rooms
-        addRandom(matrix, rand, 1, 2);
+        addRandom(matrix, rand, (int)itemRoomRatio, 2);
 
         // Randomly add 1 rare item (3) ensuring it is connected to the main path
         addRandom(matrix, rand, 1, 3);
@@ -78,15 +97,16 @@ public class DungeonGenerator {
         if (testArrays(matrix)) {
             if(testing){
                 printMap(size);
-                System.out.println("^^^^^^^^^^^^"+pass+"^^^^^^^^^^^^");
+                System.out.println("^^^^^^^^^^^^"+size+"^^^^^^^^^^^^");
                 System.out.println("Matrix connected successfully!");
+                System.out.println("Item Rooms: "+numberOfRooms(matrix, 2));
                 System.out.println("-------------------------------");
             }
             return;
         }
         if(testing){
             printMap(size);
-            System.out.println("^^^^^^^^^^^^"+pass+"^^^^^^^^^^^^");
+            System.out.println("^^^^^^^^^^^^"+size+"^^^^^^^^^^^^");
             System.out.println("Matrix not connected, retrying...");
             System.out.println("-------------------------------");
         }
@@ -265,11 +285,12 @@ public class DungeonGenerator {
         int[] pos9 = findValue(localMatrix, 9);
         int[] pos8 = findValue(localMatrix, 8);
         int[] pos3 = findValue(localMatrix, 3);
+        int[] pos2 = findValue(localMatrix, 2);
 
-        if (pos9 == null || pos8 == null || pos3 == null) {
+        if (pos9 == null || pos8 == null || pos3 == null|| pos2 == null) {
             return false;
         }
-        return isPathConnected(localMatrix, pos9[0], pos9[1], pos8[0], pos8[1]) && isPathConnected(localMatrix, pos3[0], pos3[1], pos9[0], pos9[1]);
+        return isPathConnected(localMatrix, pos9[0], pos9[1], pos8[0], pos8[1]) && isPathConnected(localMatrix, pos9[0], pos9[1], pos3[0], pos3[1]) && isPathConnected(localMatrix, pos9[0], pos9[1], pos2[0], pos2[1]);
     }
 
     /**

@@ -26,7 +26,7 @@ public class MeadowDungeon extends Dungeon {
     }
 
     public static void startRoom() throws InterruptedException { //start room
-        itemRooms = DungeonGenerator.countRooms(meadowDungeon, 2);
+        itemRooms = DungeonGenerator.numberOfRooms(meadowDungeon, 2);
         room = "Meadow Dungeon";
         Main.checkSave(room);
         Main.screenRefresh();
