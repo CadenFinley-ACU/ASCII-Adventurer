@@ -72,7 +72,6 @@ class Main {
         InventoryManager.createItem("potion", "super health potion", 50); //village level 3
 
         InventoryManager.createItem("potion", "heart container", 10);
-        InventoryManager.createItem("potion", "greater heart container", 20); //at dungeon 5
 
         InventoryManager.createItem("key", "key", 0);
     }

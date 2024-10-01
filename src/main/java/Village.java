@@ -75,27 +75,6 @@ public class Village extends Room {
                         Main.inGameDefaultTextHandling(command);
                 }
             }
-        } else if (Player.inventory.containsKey("greater heart container")) {
-                TextEngine.printWithDelays("You have a greater heart container to give to the priest", false);
-                TextEngine.printWithDelays("What is your command: give it or leave it", true);
-                while (true) {
-                    ignore = console.readLine();
-                    command = console.readLine();
-                    switch (command.toLowerCase()) {
-                        case "give it" -> {
-                            Player.putItem("greater heart container", -1);
-                            Player.changeHealth(InventoryManager.Potions.get("greater heart container"));
-                            TextEngine.printWithDelays("Your health has increased by "+InventoryManager.Potions.get("greater heart container")+" points", false);
-                            TextEngine.enterToNext();
-                            Main.loadSave();
-                        }
-                        case "leave it" -> {
-                            Main.loadSave();
-                        }
-                        default ->
-                            Main.inGameDefaultTextHandling(command);
-                    }
-            }
         } else {
             TextEngine.printWithDelays("You do not have a heart container to give to the priest", false);
             TextEngine.printWithDelays("Would you like to leave? yes or no", true);
