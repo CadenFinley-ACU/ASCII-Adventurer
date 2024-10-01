@@ -126,7 +126,7 @@ class Main {
 
     public static void saveSpace(String place) throws InterruptedException { //save game command
         if (savedPlace != null) {
-            TextEngine.printWithDelays("Game saved!"+place, false);
+            TextEngine.printWithDelays("Game saved!", false);
         }
         savedPlace = place;
     }
@@ -144,7 +144,7 @@ class Main {
                 default -> startMenu();
             }
         }
-        TextEngine.printNoDelay("Game loaded!"+getSavedPlace(), false);
+        TextEngine.printNoDelay("Game loaded!", false);
     }
 
     public static void wipeSave() throws InterruptedException { //wipe save command

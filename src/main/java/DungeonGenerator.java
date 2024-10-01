@@ -350,42 +350,58 @@ public class DungeonGenerator {
      * 
      * @param size The size of the matrix to print.
      */
-    public static void printAdjacentRoomsAndCurrentRoomAndUnlockedRooms(int[][] passedMatrix, int[][] unlocked, int[] passedPosition) {
-        for (int i = 0; i < passedMatrix.length; i++) {
-            for (int j = 0; j < passedMatrix.length; j++) {
-                if (passedMatrix[i][j] != 0) {
-                    if (i == passedPosition[0] && j == passedPosition[1]) {
-                        System.out.print("[P] ");
-                    } else if (isAdjacent(i, j, passedPosition)) {
-                        switch (passedMatrix[i][j]){
-                            case 9 -> System.out.print("[*] ");
-                            case 8 -> System.out.print("[!] ");
-                            case 0 -> System.out.print("[ ] ");
-                            default -> System.out.print("[" + passedMatrix[i][j] + "] ");
-                        }
-                    } else if (unlocked[i][j] > 0) {
-                        switch (unlocked[i][j]) {
-                            case 9 -> System.out.print("[*] ");
-                            case 8 -> System.out.print("[!] ");
-                            default -> System.out.print("[" + passedMatrix[i][j] + "] ");
-                        }
-                    } else {
-                        System.out.print("[ ] ");
+    /**
+ * Prints the adjacent rooms, the current room, and unlocked rooms in the dungeon matrix.
+ * 
+ * @param passedMatrix The matrix representing the dungeon layout.
+ * @param unlocked The matrix indicating which rooms have been unlocked.
+ * @param passedPosition The current position of the player in the dungeon.
+ */
+public static void printAdjacentRoomsAndCurrentRoomAndUnlockedRooms(int[][] passedMatrix, int[][] unlocked, int[] passedPosition) {
+    for (int i = 0; i < passedMatrix.length; i++) {
+        for (int j = 0; j < passedMatrix.length; j++) {
+            if (passedMatrix[i][j] != 0) {
+                if (i == passedPosition[0] && j == passedPosition[1]) {
+                    System.out.print("[P] ");
+                } else if (isAdjacent(i, j, passedPosition)) {
+                    switch (passedMatrix[i][j]) {
+                        case 9 -> System.out.print("[*] "); // Special marker for value 9
+                        case 8 -> System.out.print("[!] "); // Special marker for value 8
+                        case 0 -> System.out.print("[ ] "); // Empty room
+                        default -> System.out.print("[" + passedMatrix[i][j] + "] "); // Default case for other values
                     }
-                } else if (unlocked[i][j] == 1) {
-                    System.out.print("[ ] "); // Print brackets around 0 values if unlocked
+                } else if (unlocked[i][j] > 0) {
+                    switch (unlocked[i][j]) {
+                        case 9 -> System.out.print("[*] "); // Special marker for value 9
+                        case 8 -> System.out.print("[!] "); // Special marker for value 8
+                        default -> System.out.print("[" + passedMatrix[i][j] + "] "); // Default case for other values
+                    }
                 } else {
-                    System.out.print("    "); // No brackets around 0 values
+                    System.out.print("[ ] "); // Print brackets around non-zero values
                 }
+            } else if (unlocked[i][j] == 1) {
+                System.out.print("[ ] "); // Print brackets around 0 values if unlocked
+            } else {
+                System.out.print("    "); // No brackets around 0 values
             }
-            System.out.println();
         }
+        System.out.println();
     }
-    private static boolean isAdjacent(int i, int j, int[] passedPosition) {
-        int x = passedPosition[0];
-        int y = passedPosition[1];
-        return (i == x && (j == y - 1 || j == y + 1)) || (j == y && (i == x - 1 || i == x + 1));
-    }
+}
+
+/**
+ * Checks if a given position is adjacent to the player's current position.
+ * 
+ * @param x The x-coordinate of the position to check.
+ * @param y The y-coordinate of the position to check.
+ * @param playerPosition The current position of the player.
+ * @return True if the position is adjacent to the player's position, false otherwise.
+ */
+private static boolean isAdjacent(int x, int y, int[] playerPosition) {
+    int px = playerPosition[0];
+    int py = playerPosition[1];
+    return (Math.abs(px - x) == 1 && py == y) || (Math.abs(py - y) == 1 && px == x);
+}
     /**
      * Trims off the unreachable parts of the matrix.
      * 
