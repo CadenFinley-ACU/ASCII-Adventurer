@@ -14,7 +14,7 @@ public class MeadowDungeon extends Dungeon {
     public static int[] availableMove;
     public static ArrayList<String> directionsString;
     private static int foundItemRooms = 0;
-    private static List<String> items = new ArrayList<>(List.of("axe", "chainmail set", "bow", "health potion"));
+    private static List<String> items = new ArrayList<>(List.of("axe", "chainmail set", "health potion"));
     private static final List<String> enemies = new ArrayList<>(List.of("Goblin", "Skeleton", "Slime", "Mimic"));
     private static final Random rand = new Random();
 
@@ -24,11 +24,12 @@ public class MeadowDungeon extends Dungeon {
         Main.screenRefresh();
         Dungeon.currentDungeon = "Meadow";
         currentPlayerPosition = save;
+        Dungeon.autoCheck();
         startRooms();
     }
 
     public static void fresh() { //fresh
-        items = new ArrayList<>(List.of("axe", "chainmail set", "bow", "health potion"));
+        items = new ArrayList<>(List.of("axe", "chainmail set", "health potion"));
         foundItemRooms = 0;
         Dungeon.currentPlayerPosition = spawnPosition;
         currentPlayerPosition = spawnPosition;
@@ -101,6 +102,7 @@ public class MeadowDungeon extends Dungeon {
             lastPosition = currentPlayerPosition.clone();
             roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = meadowDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
             completedDungeons++;
+            Player.autoFight = Dungeon.previousAutoSettings;
             OpenWorld.startRoom();
         }
         handleDirectionsAndCommands();

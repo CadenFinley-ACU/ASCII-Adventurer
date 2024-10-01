@@ -14,8 +14,16 @@ public class Dungeon extends Room {
     public static int completedDungeons = 0;
     public static int[][] meadowDungeon;
     public static int[] currentPlayerPosition;
+    public static boolean previousAutoSettings;
     public static void generateDungeons(){
         meadowDungeon = DungeonGenerator.generateAndReturnMatrix(5);
+        meadowDungeon = DungeonGenerator.generateAndReturnMatrix(5);
+        meadowDungeon = DungeonGenerator.generateAndReturnMatrix(7);
+        meadowDungeon = DungeonGenerator.generateAndReturnMatrix(7);
+        meadowDungeon = DungeonGenerator.generateAndReturnMatrix(9);
+        meadowDungeon = DungeonGenerator.generateAndReturnMatrix(9);
+        meadowDungeon = DungeonGenerator.generateAndReturnMatrix(9);
+        meadowDungeon = DungeonGenerator.generateAndReturnMatrix(13);
         //add more dungeons here
     }
     public static void defaultDungeonArgs(String data) throws InterruptedException{ //default dungeon arguments
@@ -53,6 +61,12 @@ public class Dungeon extends Room {
     public static void resetAll() { //reset all
         MeadowDungeon.fresh();
         //add more dungeons here
+    }
+    public static void autoCheck(){
+        previousAutoSettings = Player.autoFight;
+        if(Player.autoFight){
+            Player.autoFight = false;
+        }
     }
 
 }

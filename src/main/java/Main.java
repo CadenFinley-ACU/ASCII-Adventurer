@@ -29,23 +29,20 @@ class Main {
         InventoryManager.createItem("weapon", "sword", 2); //spawn room weapon and shop 1
 
         InventoryManager.createItem("weapon", "axe", 5); //dungeon 1
-        InventoryManager.createItem("weapon", "bow", 5); //dungeon 1
 
         InventoryManager.createItem("weapon", "broad swoard", 7); //dungeon 2
 
         InventoryManager.createItem("weapon", "better sword", 10); //dungeon 3
 
         InventoryManager.createItem("weapon", "great sword", 15); //dungeon 4
-        InventoryManager.createItem("weapon", "great axe", 15);//dungeon 4
-        InventoryManager.createItem("weapon", "great bow", 15); //dungeon 4
 
         InventoryManager.createItem("weapon", "master sword", 35);//dungeon 5
-        InventoryManager.createItem("weapon", "master axe", 35); //dungeon 5
-        InventoryManager.createItem("weapon", "master bow", 35); //dungeon 5
 
         InventoryManager.createItem("weapon", "legendary sword", 50); //dungeon 6
 
         InventoryManager.createItem("weapon", "excalibur", 80); //dungeon 7
+
+        InventoryManager.createItem("weapon", "god slayer hammer", 100); //dungeon 8
 
         //*  ************************************************************************************ */
 
@@ -64,6 +61,8 @@ class Main {
         InventoryManager.createItem("armor", "demon armor", 40); //dungeon 6
 
         InventoryManager.createItem("armor", "angel armor", 50); //dungeon 7
+
+        InventoryManager.createItem("armor", "god slayer armor", 75); //dungeon 8
         
         //*  ************************************************************************************ */
 

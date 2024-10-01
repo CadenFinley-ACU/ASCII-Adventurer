@@ -31,17 +31,21 @@ public class Enemy {
 
             //minibosses
             Map.entry("Golem", 20), //dungeon 1
-            Map.entry("Elemental", 25), //dungeon 2
-            Map.entry("Forest Guardian", 35), //dungeon 3
-            Map.entry("Minotaur", 45), //dungeon 4
+            Map.entry("Forest Guardian", 25), //dungeon 2  //forest area
+
+            Map.entry("Elemental", 35), //dungeon 3
+            Map.entry("Minotaur", 45), //dungeon 4  //mountain area
+
             Map.entry("Sphinx", 60), //dungeon 5
-            Map.entry("Cyclops", 80), //dungeon 6
+            Map.entry("Cyclops", 80), //dungeon 6  //desert area
             Map.entry("Medusa", 100), //dungeon 7
-            Map.entry("Leviathan", 150), //dungeon 8
+
+            Map.entry("Leviathan", 150), //dungeon 8 //ocean area
 
             //bosses
-            Map.entry("Forest Giant", 30), //dungeon 1
+            Map.entry("Forest Giant", 30), //dungeon 1 
             Map.entry("Forest Spirit", 45), //dungeon 2
+
             Map.entry("Wyvern", 50) //dungeon 3
     ));
     public static int spawnEnemy(String type,int quantity) throws InterruptedException { //return the total damage as negative int so that you can change health

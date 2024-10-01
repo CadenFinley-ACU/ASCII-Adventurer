@@ -19,6 +19,9 @@ public class Village extends Room {
         Main.screenRefresh();
         //maybe something here in the futre that adds rondomness or more advanced feature to certain villages to make them all not the exact same
         TextEngine.printWithDelays("You walk into the village, there are multiple builings", false);
+        if(Dungeon.completedDungeons>5){
+            TextEngine.printWithDelays("You can now warp to different areas using the 'portal'", false);
+        }
         TextEngine.printWithDelays("What is your command: church, hotel, shop, leave village", true);
         while (true) {
             ignore = console.readLine();
@@ -39,6 +42,36 @@ public class Village extends Room {
                     }
                     else {
                         shop3();
+                    }
+                }
+                case "portal" -> {
+                    if(Dungeon.completedDungeons>5){
+                        TextEngine.printWithDelays("Which area would you like to warp to?", false);
+                        TextEngine.printWithDelays("Forest, Mountain, Desert, Ocean?", false);
+                        ignore = console.readLine();
+                        command = console.readLine();
+                        switch (command.toLowerCase()) {
+                            case "forest" -> {
+                                OpenWorld.roomSave = 4;
+                                OpenWorld.startRoom();
+                            }
+                            case "mountain" -> {
+                                OpenWorld.roomSave = 5;
+                                OpenWorld.startRoom();
+                            }
+                            case "desert" -> {
+                                OpenWorld.roomSave = 10;
+                                OpenWorld.startRoom();
+                            }
+                            case "ocean" -> {
+                                OpenWorld.roomSave = 9;
+                                OpenWorld.startRoom();
+                            }
+                            default -> Main.inGameDefaultTextHandling(command);
+                        }
+                    }
+                    else {
+                        Main.inGameDefaultTextHandling(command);
                     }
                 }
                 case "leave village" -> {

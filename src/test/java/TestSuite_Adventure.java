@@ -182,7 +182,7 @@ public class TestSuite_Adventure
     @Test
     //SCARY
     public void testDungeonGeneratorConnection15() {
-        DungeonGenerator.start(50);
+        DungeonGenerator.start(7);
         int[][] matrix = DungeonGenerator.returnMatrix();
         int[] pos9 = DungeonGenerator.findValue(matrix, 9);
         int[] pos8 = DungeonGenerator.findValue(matrix, 8);
@@ -194,7 +194,7 @@ public class TestSuite_Adventure
     @Test
     //SCARY
     public void testDungeonGeneratorConnection16() {
-        DungeonGenerator.start(1);
+        DungeonGenerator.start(7);
         int[][] matrix = DungeonGenerator.returnMatrix();
         int[] pos9 = DungeonGenerator.findValue(matrix, 9);
         int[] pos8 = DungeonGenerator.findValue(matrix, 8);
@@ -205,7 +205,7 @@ public class TestSuite_Adventure
     }
     @Test
     public void testDungeonGeneratorConnection17() {
-        DungeonGenerator.start(8);
+        DungeonGenerator.start(9);
         int[][] matrix = DungeonGenerator.returnMatrix();
         int[] pos9 = DungeonGenerator.findValue(matrix, 9);
         int[] pos8 = DungeonGenerator.findValue(matrix, 8);
@@ -216,7 +216,7 @@ public class TestSuite_Adventure
     }
     @Test
     public void testDungeonGeneratorConnection18() {
-        DungeonGenerator.start(8);
+        DungeonGenerator.start(9);
         int[][] matrix = DungeonGenerator.returnMatrix();
         int[] pos9 = DungeonGenerator.findValue(matrix, 9);
         int[] pos8 = DungeonGenerator.findValue(matrix, 8);
@@ -227,7 +227,7 @@ public class TestSuite_Adventure
     }
     @Test
     public void testDungeonGeneratorConnection19() {
-        DungeonGenerator.start(8);
+        DungeonGenerator.start(9);
         int[][] matrix = DungeonGenerator.returnMatrix();
         int[] pos9 = DungeonGenerator.findValue(matrix, 9);
         int[] pos8 = DungeonGenerator.findValue(matrix, 8);
@@ -238,7 +238,7 @@ public class TestSuite_Adventure
     }
     @Test
     public void testDungeonGeneratorConnection20() {
-        DungeonGenerator.start(8);
+        DungeonGenerator.start(13);
         int[][] matrix = DungeonGenerator.returnMatrix();
         int[] pos9 = DungeonGenerator.findValue(matrix, 9);
         int[] pos8 = DungeonGenerator.findValue(matrix, 8);
