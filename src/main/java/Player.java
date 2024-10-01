@@ -70,8 +70,10 @@ public class Player {
                 ignore = console.readLine();
                 command = console.readLine();
                 switch (command) {
-                    case "1" ->
-                        Dungeon.startRoom("Meadow");
+                    case "1" ->{
+                        Main.saveSpace("Meadow Dungeon");
+                        Main.loadSave();
+                }
                     default -> {
                         Main.saveSpace("SpawnRoom");
                         Main.loadSave();

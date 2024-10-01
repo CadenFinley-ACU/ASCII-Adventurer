@@ -1,4 +1,7 @@
 
+import java.util.ArrayList;
+
+
 
 /**
  * MeadowDungeon
@@ -8,23 +11,22 @@
  */
 public class MeadowDungeon extends Dungeon {
 
-    public static int[][] meadowDungeon;
     private static int[] spawnPosition;
     private static int[] bossRoom;
     private static int[] currentPlayerPosition;
-    private static int[] meadowSave;
+    private static int[] save;
     static {
         initializePositions();
     }
     private static void initializePositions() {
-        meadowDungeon = DungeonGenerator.generateAndReturnMatrix(5);
         spawnPosition = DungeonGenerator.findValue(meadowDungeon, 9);
         bossRoom = DungeonGenerator.findValue(meadowDungeon, 8);
         currentPlayerPosition = spawnPosition;
-        meadowSave = spawnPosition;
+        save = spawnPosition;
     }
 
     public static void startRoom() throws InterruptedException { //start room
+        Main.checkSave("Meadow Dungeon");
         Main.screenRefresh();
         initializePositions();
         Dungeon.currentDungeon = "Meadow";
@@ -35,11 +37,55 @@ public class MeadowDungeon extends Dungeon {
         currentPlayerPosition = spawnPosition;
     }
     private static void startRooms() throws InterruptedException {
-        int[] availableDirections = DungeonGenerator.getDirections(meadowDungeon, currentPlayerPosition[0],currentPlayerPosition[1]);
-        TextEngine.printWithDelays("You are in the Meadow Dungeon", true);
-        ignore = console.readLine();
-        TextEngine.printNoDelay("Available Directions: " + availableDirections[0] + " " + availableDirections[1] + " " + availableDirections[2] + " " + availableDirections[3],false);
-        ignore = console.readLine();
+        Main.screenRefresh();
+        String direction;
+        int[] availableMove = DungeonGenerator.getDirections(meadowDungeon, currentPlayerPosition[0], currentPlayerPosition[1]);
+        ArrayList<String> directionsString = new ArrayList<>();
+        System.out.println("You are in the Meadow Dungeon");
+        while (true) { 
+            DungeonGenerator.printMapPass(meadowDungeon,5, currentPlayerPosition);
+        TextEngine.printWithDelays("You can move in the following directions: ",false);
+        if (availableMove[0] >0) {
+            directionsString.add("North");
+            //currentPlayerPosition[0] -= 1;
+        }
+        if (availableMove[1] >0) {
+            directionsString.add("West");
+            //currentPlayerPosition[1] += 1;
+        }
+        if (availableMove[2] >0) {
+            directionsString.add("South");
+            //currentPlayerPosition[0] += 1;
+        }
+        if (availableMove[3] >0) {
+            directionsString.add("East");
+            //currentPlayerPosition[1] -= 1;
+        }
+        TextEngine.printWithDelays(directionsString.toString(),true);
+        ignore = Room.console.readLine();
+        direction = Room.console.readLine();
+        switch (direction.toLowerCase()) {
+            case "north" -> {
+                currentPlayerPosition[0] -= 1;
+                save = currentPlayerPosition;
+            }
+            case "east" -> {
+                currentPlayerPosition[1] += 1;
+                save = currentPlayerPosition;
+            }
+            case "west" -> {
+                currentPlayerPosition[1] -= 1;
+                save = currentPlayerPosition;
+            }
+            case "south" -> {
+                currentPlayerPosition[0] += 1;
+                save = currentPlayerPosition;
+            }
+            default -> {
+                Main.inGameDefaultTextHandling(direction);
+            }
+        }
+    }
     }
     public static void __init__() {
         //initialize the meadow dungeon

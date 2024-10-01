@@ -1,7 +1,5 @@
 
 import java.io.Console;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Room Class
@@ -15,7 +13,6 @@ public class Room {
     public static String command;
     public static String ignore;
     public static String room = null;
-    public static final Map<String, Integer> ROOMITEMS_MAP = new HashMap<>();
 
     public static void hasItemInRoom(String itemName, int quantity) throws InterruptedException{    //check if there is an item in the room
         TextEngine.printWithDelays("Hey! There is an item in this room: ", false);
@@ -40,9 +37,6 @@ public class Room {
                 default -> Main.inGameDefaultTextHandling(command);
             }
         }
-    }
-    public static void chest(Map<String,Integer> chestItems) throws InterruptedException{ 
-        //chest implementation
     }
     public static void reset(String area){ //reset the room
         switch (area) {

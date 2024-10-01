@@ -14,12 +14,16 @@
 public class Dungeon extends Room {
     public static String currentDungeon;
     public static int completedDungeons = 0;
+    public static int[][] meadowDungeon;
     public static void startRoom(String dungeon) throws InterruptedException{ //start room
         switch(dungeon){
             case "Meadow" -> {
                 MeadowDungeon.startRoom();
             }
         }
+    }
+    public static void generateDungeons(){
+        meadowDungeon = DungeonGenerator.generateAndReturnMatrix(5);
     }
     public static void defaultDungeonArgs(String data) throws InterruptedException{ //default dungeon arguments
         switch(data){

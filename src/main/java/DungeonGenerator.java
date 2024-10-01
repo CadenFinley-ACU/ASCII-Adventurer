@@ -343,6 +343,27 @@ public class DungeonGenerator {
             System.out.println();
         }
     }
+    /**
+     * Prints the generated matrix.
+     * 
+     * @param size The size of the matrix to print.
+     */
+    public static void printMapPass(int[][] passedMatrix,int size, int[] passedPosition) {
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
+                if (passedMatrix[i][j] != 0) {
+                    if(i == passedPosition[0] && j == passedPosition[1]){
+                        System.out.print("P ");
+                    } else {
+                    System.out.print(matrix[i][j] + " ");
+                    }
+                } else {
+                    System.out.print("  ");
+                }
+            }
+            System.out.println();
+        }
+    }
 
     /**
      * Generates and returns a valid matrix with a path connecting the values 8 and 9.
@@ -365,29 +386,18 @@ public class DungeonGenerator {
      */
     public static int[] getDirections(int[][] matrix, int x, int y) {
         List<Integer> directions = new ArrayList<>();
-        int size = matrix.length;
-
-        // Check above
-        
-        directions.add(matrix[x - 1][y]);
-        
-        // Check below
-    
-        directions.add(matrix[x + 1][y]);
-        // Check left
-        
-        directions.add(matrix[x][y - 1]);
-        
-        // Check right
-        
-        directions.add(matrix[x][y + 1]);
-        
-        // Convert List to array
-        int[] result = new int[directions.size()];
-        for (int i = 0; i < directions.size(); i++) {
-            result[i] = directions.get(i);
+        int[] dx = {-1, 1, 0, 0};
+        int[] dy = {0, 0, -1, 1};
+        for (int i = 0; i < 4; i++) {
+            int nx = x + dx[i];
+            int ny = y + dy[i];
+            if (nx >= 0 && nx < matrix.length && ny >= 0 && ny < matrix[0].length) {
+                directions.add(matrix[nx][ny]);
+            } else {
+                directions.add(0); // Add 0 if out of bounds
+            }
         }
-        return result;
+        return directions.stream().mapToInt(i -> i).toArray();
     }
     public static void __init__() {
         //initialize the meadow dungeon

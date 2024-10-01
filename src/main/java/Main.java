@@ -16,6 +16,7 @@ class Main {
     private static final String OS_NAME = System.getProperty("os.name");
 
     public static void main(String[] args) throws InterruptedException { //main game start
+        Dungeon.generateDungeons();
         createGameItems();
         startMenu();
         MeadowDungeon.__init__();
@@ -138,6 +139,7 @@ class Main {
                 case "SpawnRoom" -> SpawnRoom.startRoom();
                 case "OpenWorld" -> OpenWorld.startRoom();
                 case "Village" -> Village.startRoom();
+                case "Meadow Dungeon" -> MeadowDungeon.startRoom();
                 //case "Dungeon" -> Dungeon.startRoom();
                 default -> startMenu();
             }
