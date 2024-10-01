@@ -35,7 +35,6 @@ class Main {
         InventoryManager.createItem("potion", "heart container", 10);
         InventoryManager.createItem("key", "key", 0);
     }
-
     public static void startMenu() throws InterruptedException { //main menu and sstart menu text
         TextEngine.clearScreen();
         TextEngine.printNoDelay("ASCII Adventurer, by: Albert Tucker, Caden Finley, and Grijesh Shrestha", false);

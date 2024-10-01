@@ -31,7 +31,7 @@ public class Player {
         defense = 0;
         damage = 0;
         defense = 0;
-        gold = 20;
+        gold = 0;
         inventorySize = 20;
         inventory.clear();
         playerCreate();
@@ -68,18 +68,18 @@ public class Player {
                 TextEngine.printNoDelay("debug dungeon: ", true);
                 ignore = console.readLine();
                 command = console.readLine();
-                switch (command){
-                    case "1" -> {
-                        Dungeon.initDungeon("Meadow");
-                    }
-                    case "2" -> {
-                        Dungeon.initDungeon("Dark Forest");
-                    }
-                    default -> {
-                        Main.saveSpace("SpawnRoom");
-                        Main.loadSave();
-                    }
-                }
+                // switch (command){
+                //     case "1" -> {
+                //         Dungeon.initDungeon("Meadow");
+                //     }
+                //     case "2" -> {
+                //         Dungeon.initDungeon("Dark Forest");
+                //     }
+                //     default -> {
+                //         Main.saveSpace("SpawnRoom");
+                //         Main.loadSave();
+                //     }
+                // }
             }
             case "4" -> {
                 Main.saveSpace("Village");

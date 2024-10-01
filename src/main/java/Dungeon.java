@@ -15,30 +15,11 @@ public class Dungeon extends Room {
     private static String currentDungeon;
     public static int completedDungeons = 0;
     public static void startRoom() throws InterruptedException{ //start room
-        switch (currentDungeon){
-            case "Meadow" -> MeadowDungeon.startRoom();
-            case "Dark Forest" -> DarkForestDungeon.startRoom();
-            default -> Main.startMenu();
-        }
+        
     }
-    public static void initDungeon(String dungeon) throws InterruptedException{ //initialize dungeon
-        room = "Dungeon";
-        Main.checkSave(room);
-        currentDungeon = dungeon;
-        Main.loadSave();
-    }
+    
     public static int getRoom(){
-        switch(currentDungeon){
-            case "Meadow" -> {
-                return MeadowDungeon.getRoom();
-            }
-            case "Dark Forest" -> {
-                return DarkForestDungeon.getRoom();
-            }
-            default -> {
-                return 0;
-            }
-        }
+        return 0;
     }
     public static void defaultDungeonArgs(String data) throws InterruptedException{ //default dungeon arguments
         switch(data){
@@ -79,14 +60,7 @@ public class Dungeon extends Room {
         DarkForestDungeon.fresh();
     }
     public static void resetCertain(String dungeon){ //reset certain dungeon
-        switch(dungeon){
-            case "Meadow" -> {
-                MeadowDungeon.fresh();
-            }
-            case "Dark Forest" -> {
-                DarkForestDungeon.fresh();
-            }
-        }
+        
     }
     public static void completed(){
         completedDungeons++;

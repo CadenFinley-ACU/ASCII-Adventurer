@@ -35,12 +35,12 @@ public class DungeonGenerator {
         matrix[coord8[0]][coord8[1]] = 0;
 
         // Randomly add at least size+size/2 more 1's ensuring they are connected to the main path
-        addRandom(matrix, rand, size + size / 2, 1);
+        addRandom(matrix, rand, size, 1);
 
-        // Randomly add at least size+size/2 more 2's ensuring they are connected to the main path
-        addRandom(matrix, rand, 1, 2);
+        // Randomly add 2 item rooms (2) ensuring they are connected to the main path
+        addRandom(matrix, rand, 2, 2);
 
-        // Randomly add at least size+size/2 more 1's ensuring they are connected to the main path
+        // Randomly add 1 rare item (3) ensuring it is connected to the main path
         addRandom(matrix, rand, 1, 3);
 
         // Ensure only one 1 value is adjacent to the 8
@@ -50,10 +50,12 @@ public class DungeonGenerator {
         matrix[coord9[0]][coord9[1]] = 9;
         matrix[coord8[0]][coord8[1]] = 8;
         if (testArrays(matrix)) {
-            //Print the matrix
-            //printMap(size);
+            System.out.println("-------------------------------");
+            System.out.println("Matrix connected successfully!");
+            printMap(size);
             return;
         }
+        System.out.println("-------------------------------");
         System.out.println("Matrix not connected, retrying...");
         printMap(size);
         start(size);
@@ -156,11 +158,12 @@ public class DungeonGenerator {
         int[][] localMatrix = arrays;
         int[] pos9 = findValue(localMatrix, 9);
         int[] pos8 = findValue(localMatrix, 8);
+        int[] pos3 = findValue(localMatrix, 3);
 
-        if (pos9 == null || pos8 == null) {
+        if (pos9 == null || pos8 == null||pos3==null) {
             return false;
         }
-        return isPathConnected(localMatrix, pos9[0], pos9[1], pos8[0], pos8[1]);
+        return isPathConnected(localMatrix, pos9[0], pos9[1], pos8[0], pos8[1])&&isPathConnected(localMatrix, pos3[0], pos3[1], pos9[0], pos9[1]);
     }
 
     public static int[] findValue(int[][] matrix, int value) {
@@ -199,9 +202,18 @@ public class DungeonGenerator {
     public static void printMap(int size){
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
-                System.out.print(matrix[i][j] + " ");
+                if(matrix[i][j]!=0){
+                    System.out.print(matrix[i][j]+" ");
+                }
+                else{
+                    System.out.print("  ");
+                }    
             }
             System.out.println();
         }
+    }
+    public static int[][] generateAndReturnMatrix(int size){
+        start(size);
+        return matrix;
     }
 }
