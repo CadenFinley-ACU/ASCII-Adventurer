@@ -14,8 +14,8 @@ public class MountainCaveDungeon extends Dungeon {
     public static int[] availableMove;
     public static ArrayList<String> directionsString;
     private static int foundItemRooms = 0;
-    private static List<String> items = new ArrayList<>(List.of("better sword", "ninja kit", "health potion"));
-    private static final List<String> enemies = new ArrayList<>(List.of("Troll", "Skeleton", "Orc", "Ghost","Demon"));
+    private static List<String> items = new ArrayList<>(List.of("better sword", "ninja armor", "health potion"));
+    private static final List<String> enemies = new ArrayList<>(List.of("Troll", "Skeleton", "Orc", "Ghost","Demon","Zombie"));
     private static final Random rand = new Random();
 
     public static void startRoom() throws InterruptedException { //start room
@@ -247,7 +247,6 @@ public class MountainCaveDungeon extends Dungeon {
         if (numberOfEnemies == 0) {
             TextEngine.printWithDelays("The enemies got frightened and ran off!", false);
             TextEngine.enterToNext();
-            console.readLine();
             lastPosition = currentPlayerPosition.clone();
             roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = mountainCaveDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
             Main.loadSave();

@@ -120,7 +120,7 @@ public class OpenWorld extends Room {
     }
     private static void room3() throws InterruptedException{
         TextEngine.printWithDelays("You walk forward and see a small village in the distance", false);
-        TextEngine.printWithDelays("What is your command: north, south, east, or dungeon", true);
+        TextEngine.printWithDelays("What is your command: north, south, east, or Meadow Dungeon", true);
         while (true) {
             ignore = console.readLine();
             command = console.readLine();
@@ -177,7 +177,7 @@ public class OpenWorld extends Room {
     }
     private static void room5() throws InterruptedException{
         TextEngine.printWithDelays("You walk forward and see a small village in the distance", false);
-        TextEngine.printWithDelays("What is your command: north, dungeon, or west", true);
+        TextEngine.printWithDelays("What is your command: north, Mountain Cave Dungeon, or west", true);
         while (true) {
             ignore = console.readLine();
             command = console.readLine();
@@ -187,9 +187,14 @@ public class OpenWorld extends Room {
                     Main.loadSave();
                 }
                 case "dungeon" -> {
+                    if(Dungeon.completedDungeons>1){
                     MountainCaveDungeon.fresh();
                     Main.saveSpace("Mountain Cave Dungeon");
                     Main.loadSave();
+                    }
+                    else{
+                        TextEngine.printWithDelays("You must complete the other dungeons first.", true);
+                    }
                 }
                 case "west" -> {
                     roomSave = 4;
@@ -202,7 +207,7 @@ public class OpenWorld extends Room {
     }
     private static void room6() throws InterruptedException{
         TextEngine.printWithDelays("You walk forward and see a small village in the distance", false);
-        TextEngine.printWithDelays("What is your command: north, south, dungeon, or west", true);
+        TextEngine.printWithDelays("What is your command: north, south, Mountain Top Dungeon, or west", true);
         while (true) {
             ignore = console.readLine();
             command = console.readLine();
@@ -216,7 +221,14 @@ public class OpenWorld extends Room {
                     Main.loadSave();
                 }
                 case "dungeon" -> {
-                    //to dungeon
+                    if(Dungeon.completedDungeons>2){
+                        MountainTopDungeon.fresh();
+                        Main.saveSpace("Mountain Top Dungeon");
+                        Main.loadSave();
+                        }
+                        else{
+                            TextEngine.printWithDelays("You must complete the other dungeons first.", true);
+                        }
                 }
                 case "west" -> {
                     roomSave = 7;
@@ -257,7 +269,7 @@ public class OpenWorld extends Room {
     }
     private static void room8() throws InterruptedException{
         TextEngine.printWithDelays("You walk forward and see a small village in the distance", false);
-        TextEngine.printWithDelays("What is your command: south, east, or dungeon", true);
+        TextEngine.printWithDelays("What is your command: south, east, or Dark Forest Dungeon", true);
         while (true) {
             ignore = console.readLine();
             command = console.readLine();
@@ -271,9 +283,13 @@ public class OpenWorld extends Room {
                     Main.loadSave();
                 }
                 case "dungeon" -> {
-                    DarkForestDungeon.fresh();
+                    if(Dungeon.completedDungeons>0){
+                        DarkForestDungeon.fresh();
                     Main.saveSpace("Dark Forest Dungeon");
                     Main.loadSave();
+                    } else {
+                        TextEngine.printWithDelays("You must complete the other dungeons first.", true);
+                    }   
                 }
                 default ->
                     Main.inGameDefaultTextHandling(command);

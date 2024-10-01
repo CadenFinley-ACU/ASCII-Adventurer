@@ -247,7 +247,6 @@ public class MeadowDungeon extends Dungeon {
         if (numberOfEnemies == 0) {
             TextEngine.printWithDelays("The enemies got frightened and ran off!", false);
             TextEngine.enterToNext();
-            console.readLine();
             lastPosition = currentPlayerPosition.clone();
             roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = meadowDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
             Main.loadSave();

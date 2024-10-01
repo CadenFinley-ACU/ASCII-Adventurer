@@ -15,13 +15,14 @@ public class Dungeon extends Room {
     public static int[][] meadowDungeon;
     public static int[][] darkForestDungeon;
     public static int[][] mountainCaveDungeon;
+    public static int[][] mountainTopDungeon;
     public static int[] currentPlayerPosition;
     public static boolean previousAutoSettings;
     public static void generateDungeons(){
         meadowDungeon = DungeonGenerator.generateAndReturnMatrix(5);
         darkForestDungeon = DungeonGenerator.generateAndReturnMatrix(5);
         mountainCaveDungeon = DungeonGenerator.generateAndReturnMatrix(7);
-        // meadowDungeon = DungeonGenerator.generateAndReturnMatrix(7);
+        mountainTopDungeon = DungeonGenerator.generateAndReturnMatrix(7);
         // meadowDungeon = DungeonGenerator.generateAndReturnMatrix(9);
         // meadowDungeon = DungeonGenerator.generateAndReturnMatrix(9);
         // meadowDungeon = DungeonGenerator.generateAndReturnMatrix(9);
@@ -37,11 +38,14 @@ public class Dungeon extends Room {
                     case "Meadow" -> {
                         MeadowDungeon.fresh();
                     }
-                    case "DarkForest" -> {
+                    case "Dark Forest" -> {
                         DarkForestDungeon.fresh();
                     }
-                    case "CaveMountain" -> {
+                    case "Mountain Cave" -> {
                         MountainCaveDungeon.fresh();
+                    }
+                    case "Mountain Top" -> {
+                        MountainTopDungeon.fresh();
                     }
                     //add more dungeons here
                 }
@@ -52,10 +56,13 @@ public class Dungeon extends Room {
                         case "Meadow" -> {
                             DungeonGenerator.printMap(meadowDungeon);
                         }
-                        case "DarkForest" -> {
+                        case "Dark Forest" -> {
                             DungeonGenerator.printMap(darkForestDungeon);
                         }
-                        case "CaveMountain" -> {
+                        case "Mountain Cave" -> {
+                            DungeonGenerator.printMap(mountainCaveDungeon);
+                        }
+                        case "Mountain Top" -> {
                             DungeonGenerator.printMap(mountainCaveDungeon);
                         }
                         //add more dungeons here
@@ -75,6 +82,7 @@ public class Dungeon extends Room {
         MeadowDungeon.fresh();
         DarkForestDungeon.fresh();
         MountainCaveDungeon.fresh();
+        MountainTopDungeon.fresh();
         //add more dungeons here
     }
     public static void autoCheck(){
