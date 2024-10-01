@@ -36,7 +36,8 @@ public class Player {
         inventory.clear();
         playerCreate();
     }
-    public static void debugStart() throws InterruptedException{ //start the player with debug settings
+
+    public static void debugStart() throws InterruptedException { //start the player with debug settings
         maxHealth = 100;
         health = maxHealth;
         damage = 0;
@@ -45,6 +46,7 @@ public class Player {
         inventorySize = 200;
         name = "Debug!";
         Main.playerCreated = true;
+        DungeonGenerator.testing = false;
         TextEngine.printNoDelay("Where do you want to spawn", false);
         TextEngine.printNoDelay("1: SpawnRoom", false);
         TextEngine.printNoDelay("2: OpenWorld", false);
@@ -53,7 +55,7 @@ public class Player {
         TextEngine.printNoDelay("debug spawn: ", true);
         ignore = console.readLine();
         command = console.readLine();
-        switch (command){
+        switch (command) {
             case "1" -> {
                 Main.saveSpace("SpawnRoom");
                 Main.loadSave();
@@ -64,22 +66,17 @@ public class Player {
             }
             case "3" -> {
                 TextEngine.printNoDelay("1: Meadow", false);
-                TextEngine.printNoDelay("2: Dark Forest", false);
                 TextEngine.printNoDelay("debug dungeon: ", true);
                 ignore = console.readLine();
                 command = console.readLine();
-                // switch (command){
-                //     case "1" -> {
-                //         Dungeon.initDungeon("Meadow");
-                //     }
-                //     case "2" -> {
-                //         Dungeon.initDungeon("Dark Forest");
-                //     }
-                //     default -> {
-                //         Main.saveSpace("SpawnRoom");
-                //         Main.loadSave();
-                //     }
-                // }
+                switch (command) {
+                    case "1" ->
+                        Dungeon.startRoom("Meadow");
+                    default -> {
+                        Main.saveSpace("SpawnRoom");
+                        Main.loadSave();
+                    }
+                }
             }
             case "4" -> {
                 Main.saveSpace("Village");
@@ -96,70 +93,84 @@ public class Player {
     public static String getName() { //get the name
         return name;
     }
+
     public static void setName(String name) { //set the name
         Player.name = name;
     }
+
     public static int getHealth() { //get the health
         return health;
     }
-    public static int getMaxHealth(){ //get the max health
+
+    public static int getMaxHealth() { //get the max health
         return maxHealth;
     }
+
     public static int getGold() { //get the gold
         return gold;
     }
+
     public static void changeInventorySize(int change) throws InterruptedException { //change the inventory size
-        inventorySize += change; 
+        inventorySize += change;
     }
+
     public static void changeHealth(int change) throws InterruptedException { //change the health
-        int damageCalc = (defense + (damage/2));
-        if(change<0) {
+        int damageCalc = (defense + (damage / 2));
+        if (change < 0) {
             change += damageCalc;
             if (change >= 0) {
                 change = -1;
             }
             TextEngine.printWithDelays("You took " + change + " damage!", false);
-        }
-        else{
-            TextEngine.printWithDelays("You gained " + (change-(change - (maxHealth - getHealth()))) + " health!", false);
+        } else {
+            TextEngine.printWithDelays("You gained " + (change - (change - (maxHealth - getHealth()))) + " health!", false);
         }
         health += change;
-        if(health>maxHealth){
+        if (health > maxHealth) {
             health = maxHealth;
         }
-        if(health<=0){
+        if (health <= 0) {
             TextEngine.printWithDelays("You have died!", false);
             TextEngine.printWithDelays("Game Over!", false);
             TextEngine.enterToNext();
             Main.startMenu();
         }
     }
+
     public static void changeMaxHealth(int change) throws InterruptedException { //change the max health
         maxHealth += change;
         health += change;
     }
+
     public static void changeGold(int change) throws InterruptedException { //change the gold
         gold += change;
         TextEngine.printWithDelays("You gained " + change + " gold!", false);
     }
+
     public static void openInventory() throws InterruptedException { //open the inventory
         manager.printInventory();
     }
-    public static void setDamage(int amount){ //set the damage
+
+    public static void setDamage(int amount) { //set the damage
         damage = amount;
     }
-    public static void setDefense(int amount){ //set the defense
+
+    public static void setDefense(int amount) { //set the defense
         defense = amount;
     }
-    public static int getDamage(){ //get the damage
+
+    public static int getDamage() { //get the damage
         return damage;
     }
-    public static int getDefense(){ //get the defense
+
+    public static int getDefense() { //get the defense
         return defense;
     }
+
     public static void putItem(String item, int amount) throws InterruptedException { //put an item in the inventory
         manager.put(item, amount);
     }
+
     private static void playerCreate() throws InterruptedException { //create the player
         TextEngine.printWithDelays("Welcome to the game! What is your name hero?", true);
         while (true) {
@@ -193,29 +204,29 @@ public class Player {
         Main.playerCreated = true;
         Main.start();
     }
-    public static void printStats() throws InterruptedException{ //print the stats
+
+    public static void printStats() throws InterruptedException { //print the stats
         InventoryManager.setStatsToHighestInInventory();
         TextEngine.clearScreen();
         TextEngine.printNoDelay("Player Stats:", false);
-        TextEngine.printNoDelay("Name: "+name, false);
-        TextEngine.printNoDelay("Health: "+health+"/"+maxHealth, false);
-        TextEngine.printNoDelay("Gold: "+gold, false);
-        TextEngine.printNoDelay("Damage: "+damage, false);
-        TextEngine.printNoDelay("Defense: "+defense, false);
-        TextEngine.printNoDelay("Inventory: "+inventory.size()+"/"+inventorySize, false);
+        TextEngine.printNoDelay("Name: " + name, false);
+        TextEngine.printNoDelay("Health: " + health + "/" + maxHealth, false);
+        TextEngine.printNoDelay("Gold: " + gold, false);
+        TextEngine.printNoDelay("Damage: " + damage, false);
+        TextEngine.printNoDelay("Defense: " + defense, false);
+        TextEngine.printNoDelay("Inventory: " + inventory.size() + "/" + inventorySize, false);
         TextEngine.enterToNext();
         Main.loadSave();
     }
-    public static void heal() throws InterruptedException{ //use available health potions in inventory to heal
-        if(inventory.containsKey("health potion")){
-            if(health<maxHealth){
+
+    public static void heal() throws InterruptedException { //use available health potions in inventory to heal
+        if (inventory.containsKey("health potion")) {
+            if (health < maxHealth) {
                 InventoryManager.useItem("health potion");
-            }
-            else{
+            } else {
                 TextEngine.printWithDelays("You are already at full health!", false);
             }
-        }
-        else{
+        } else {
             TextEngine.printWithDelays("You have no health potions!", false);
         }
         TextEngine.enterToNext();

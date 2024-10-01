@@ -18,6 +18,8 @@ class Main {
     public static void main(String[] args) throws InterruptedException { //main game start
         createGameItems();
         startMenu();
+        MeadowDungeon.__init__();
+        DungeonGenerator.__init__();
     }
 
     private static void createGameItems() { //initalize all the items in the game
@@ -136,7 +138,7 @@ class Main {
                 case "SpawnRoom" -> SpawnRoom.startRoom();
                 case "OpenWorld" -> OpenWorld.startRoom();
                 case "Village" -> Village.startRoom();
-                case "Dungeon" -> Dungeon.startRoom();
+                //case "Dungeon" -> Dungeon.startRoom();
                 default -> startMenu();
             }
         }
@@ -146,11 +148,6 @@ class Main {
         savedPlace = null;
         Room.reset("all");
     }
-
-    public static int getRoomId() { //get the room id
-        return Room.getRoom();
-    }
-
     public static String getSavedPlace() { //get the saved place
         return savedPlace;
     }
@@ -210,10 +207,10 @@ class Main {
     public static void printStatus() { //print the status of the player
         TextEngine.printNoDelay(Player.getName(), false);
         TextEngine.printNoDelay("Health: " + Player.getHealth(), false);
-        TextEngine.printNoDelay(getSavedPlace() + " " + getRoomId() + "\n", false);
-        if (getSavedPlace().equals("Dungeon")) {
-            TextEngine.printNoDelay(Dungeon.getDungeon(), false);
-        }
+        // TextEngine.printNoDelay(getSavedPlace() + " " + getRoomId() + "\n", false);
+        // if (getSavedPlace().equals("Dungeon")) {
+        //     TextEngine.printNoDelay(Dungeon.getDungeon(), false);
+        // }
         TextEngine.printNoDelay("\n", false);
     }
 

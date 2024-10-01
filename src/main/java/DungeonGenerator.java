@@ -1,4 +1,6 @@
+import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
 import java.util.Random;
 
@@ -178,6 +180,7 @@ public class DungeonGenerator {
      * 
      * Algorithm: Adjacency check and modification.
      * Time Complexity: O(1) for checking and modifying adjacent cells.
+     * honestly idrk the speed
      * 
      * @param matrix The matrix to modify.
      * @param x The x-coordinate of the position to check.
@@ -350,5 +353,43 @@ public class DungeonGenerator {
     public static int[][] generateAndReturnMatrix(int size) {
         start(size);
         return matrix;
+    }
+
+     /**
+     * Returns an array of all adjacent values greater than 0 to a given point on the passed matrix.
+     * 
+     * @param matrix The matrix to check.
+     * @param x The x-coordinate of the point.
+     * @param y The y-coordinate of the point.
+     * @return An array of adjacent values greater than 0.
+     */
+    public static int[] getDirections(int[][] matrix, int x, int y) {
+        List<Integer> directions = new ArrayList<>();
+        int size = matrix.length;
+
+        // Check above
+        
+        directions.add(matrix[x - 1][y]);
+        
+        // Check below
+    
+        directions.add(matrix[x + 1][y]);
+        // Check left
+        
+        directions.add(matrix[x][y - 1]);
+        
+        // Check right
+        
+        directions.add(matrix[x][y + 1]);
+        
+        // Convert List to array
+        int[] result = new int[directions.size()];
+        for (int i = 0; i < directions.size(); i++) {
+            result[i] = directions.get(i);
+        }
+        return result;
+    }
+    public static void __init__() {
+        //initialize the meadow dungeon
     }
 }
