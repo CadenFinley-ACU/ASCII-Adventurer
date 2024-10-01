@@ -245,7 +245,7 @@ public class MountainCaveDungeon extends Dungeon {
     public static void fightRandomEnemies(int number) throws InterruptedException {
         int numberOfEnemies = rand.nextInt(number);
         if (numberOfEnemies == 0) {
-            TextEngine.printWithDelays("The enemies go frightened and ran off!", false);
+            TextEngine.printWithDelays("The enemies got frightened and ran off!", false);
             TextEngine.enterToNext();
             console.readLine();
             lastPosition = currentPlayerPosition.clone();
