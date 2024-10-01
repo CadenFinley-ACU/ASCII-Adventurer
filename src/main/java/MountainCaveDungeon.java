@@ -9,7 +9,7 @@ public class MountainCaveDungeon extends Dungeon {
     private static final int[] bossRoom = DungeonGenerator.findValue(Dungeon.mountainCaveDungeon, 8);
     private static int[] save = spawnPosition;
     private static int[] lastPosition = spawnPosition.clone(); // Variable to store the last position
-    public static int[][] roomsBeenTo = DungeonGenerator.createRoomsBeenTo(Dungeon.meadowDungeon.length);
+    public static int[][] roomsBeenTo = DungeonGenerator.createRoomsBeenTo(Dungeon.mountainCaveDungeon.length);
     public static String direction;
     public static int[] availableMove;
     public static ArrayList<String> directionsString;
@@ -19,10 +19,10 @@ public class MountainCaveDungeon extends Dungeon {
     private static final Random rand = new Random();
 
     public static void startRoom() throws InterruptedException { //start room
-        room = "Dark Forest Dungeon";
+        room = "Mountain Cave Dungeon";
         Main.checkSave(room);
         Main.screenRefresh();
-        Dungeon.currentDungeon = "Dark Forest";
+        Dungeon.currentDungeon = "Mountain Cave";
         currentPlayerPosition = save;
         Dungeon.autoCheck();
         startRooms();
