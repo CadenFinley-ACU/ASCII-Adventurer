@@ -1,8 +1,13 @@
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
+import org.junit.Before;
 import org.junit.Test;
 public class TestSuite_Adventure
 {   
+    @Before
+    public void setUp() {
+        DungeonGenerator.testing = true;
+    }
     // @Test
     // public void printWithDelays() throws InterruptedException{
     //     ByteArrayOutputStream outContent = new ByteArrayOutputStream();
@@ -30,9 +35,6 @@ public class TestSuite_Adventure
     //     System.setOut(new PrintStream(outContent));
     //     TextEngine.printNoDelay("You enter a dark forest with a small path leading to the north", false);
     //     assertEquals("You enter a dark forest with a small path leading to the north", outContent.toString().trim());
-    // }
-    // for(int i = 0, i< 100,i++){
-
     // }
     @Test
     public void testDungeonGeneratorConnection1() {

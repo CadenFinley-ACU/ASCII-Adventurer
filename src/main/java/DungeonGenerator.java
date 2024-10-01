@@ -6,6 +6,7 @@ import java.util.Random;
 // September 30, 2024
 
 public class DungeonGenerator {
+    public static boolean testing = false;
     public static int[][] matrix;
 
     /**
@@ -70,16 +71,20 @@ public class DungeonGenerator {
         matrix[coord9[0]][coord9[1]] = 9;
         matrix[coord8[0]][coord8[1]] = 8;
         if (testArrays(matrix)) {
-            printMap(size);
-            System.out.println("^^^^^^^^^^^^"+pass+"^^^^^^^^^^^^");
-            System.out.println("Matrix connected successfully!");
-            System.out.println("-------------------------------");
+            if(testing){
+                printMap(size);
+                System.out.println("^^^^^^^^^^^^"+pass+"^^^^^^^^^^^^");
+                System.out.println("Matrix connected successfully!");
+                System.out.println("-------------------------------");
+            }
             return;
         }
-        printMap(size);
-        System.out.println("^^^^^^^^^^^^"+pass+"^^^^^^^^^^^^^");
-        System.out.println("Matrix not connected, retrying...");
-        System.out.println("-------------------------------");
+        if(testing){
+            printMap(size);
+            System.out.println("^^^^^^^^^^^^"+pass+"^^^^^^^^^^^^");
+            System.out.println("Matrix not connected, retrying...");
+            System.out.println("-------------------------------");
+        }
         start(size);
     }
 
