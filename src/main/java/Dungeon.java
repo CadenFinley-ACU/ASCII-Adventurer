@@ -14,12 +14,13 @@ public class Dungeon extends Room {
     public static int completedDungeons = 0;
     public static int[][] meadowDungeon;
     public static int[][] darkForestDungeon;
+    public static int[][] mountainCaveDungeon;
     public static int[] currentPlayerPosition;
     public static boolean previousAutoSettings;
     public static void generateDungeons(){
         meadowDungeon = DungeonGenerator.generateAndReturnMatrix(5);
         darkForestDungeon = DungeonGenerator.generateAndReturnMatrix(5);
-        // meadowDungeon = DungeonGenerator.generateAndReturnMatrix(7);
+        mountainCaveDungeon = DungeonGenerator.generateAndReturnMatrix(7);
         // meadowDungeon = DungeonGenerator.generateAndReturnMatrix(7);
         // meadowDungeon = DungeonGenerator.generateAndReturnMatrix(9);
         // meadowDungeon = DungeonGenerator.generateAndReturnMatrix(9);
@@ -39,6 +40,9 @@ public class Dungeon extends Room {
                     case "DarkForest" -> {
                         DarkForestDungeon.fresh();
                     }
+                    case "CaveMountain" -> {
+                        MountainCaveDungeon.fresh();
+                    }
                     //add more dungeons here
                 }
             }
@@ -50,6 +54,9 @@ public class Dungeon extends Room {
                         }
                         case "DarkForest" -> {
                             DungeonGenerator.printMap(darkForestDungeon);
+                        }
+                        case "CaveMountain" -> {
+                            DungeonGenerator.printMap(mountainCaveDungeon);
                         }
                         //add more dungeons here
                     }
@@ -67,6 +74,7 @@ public class Dungeon extends Room {
     public static void resetAll() { //reset all
         MeadowDungeon.fresh();
         DarkForestDungeon.fresh();
+        MountainCaveDungeon.fresh();
         //add more dungeons here
     }
     public static void autoCheck(){

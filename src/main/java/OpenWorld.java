@@ -187,7 +187,9 @@ public class OpenWorld extends Room {
                     Main.loadSave();
                 }
                 case "dungeon" -> {
-                    //to dungeon
+                    MountainCaveDungeon.fresh();
+                    Main.saveSpace("Mountain Cave Dungeon");
+                    Main.loadSave();
                 }
                 case "west" -> {
                     roomSave = 4;

@@ -51,6 +51,7 @@ public class MeadowDungeon extends Dungeon {
                 items.remove(randomItem);
                 lastPosition = currentPlayerPosition.clone();
                 roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = meadowDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
+                foundItemRooms++;
                 Main.loadSave();
             }
         }

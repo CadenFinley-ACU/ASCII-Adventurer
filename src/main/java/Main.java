@@ -175,6 +175,7 @@ class Main {
                 case "Village" -> Village.startRoom();
                 case "Meadow Dungeon" -> MeadowDungeon.startRoom();
                 case "Dark Forest Dungeon" -> DarkForestDungeon.startRoom();
+                case "Mountain Cave Dungeon" -> MountainCaveDungeon.startRoom();
                 default -> startMenu();
             }
         }
