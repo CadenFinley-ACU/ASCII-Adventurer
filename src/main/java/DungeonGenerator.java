@@ -348,23 +348,33 @@ public class DungeonGenerator {
      * 
      * @param size The size of the matrix to print.
      */
-    public static void printMapPass(int[][] passedMatrix,int size, int[] passedPosition) {
-        for (int i = 0; i < size; i++) {
-            for (int j = 0; j < size; j++) {
+    public static void printAdjacentRoomsAndCurrentRoomAndUnlockedRooms(int[][] passedMatrix, int[][] unlocked, int[] passedPosition) {
+        for (int i = 0; i < passedMatrix.length; i++) {
+            for (int j = 0; j < passedMatrix.length; j++) {
                 if (passedMatrix[i][j] != 0) {
-                    if(i == passedPosition[0] && j == passedPosition[1]){
-                        System.out.print("P ");
+                    if (i == passedPosition[0] && j == passedPosition[1]) {
+                        System.out.print("[P] ");
+                    } else if (isAdjacent(i, j, passedPosition)) {
+                        System.out.print("[" + passedMatrix[i][j] + "] ");
+                    } else if (unlocked[i][j] > 0) {
+                        System.out.print("[" + passedMatrix[i][j] + "] ");
                     } else {
-                    System.out.print(matrix[i][j] + " ");
+                        System.out.print("[ ] ");
                     }
+                } else if (unlocked[i][j] == 1) {
+                    System.out.print("[ ] "); // Print brackets around 0 values if unlocked
                 } else {
-                    System.out.print("  ");
+                    System.out.print("    "); // No brackets around 0 values
                 }
             }
             System.out.println();
         }
     }
-
+    private static boolean isAdjacent(int i, int j, int[] passedPosition) {
+        int x = passedPosition[0];
+        int y = passedPosition[1];
+        return (i == x && (j == y - 1 || j == y + 1)) || (j == y && (i == x - 1 || i == x + 1));
+    }
     /**
      * Generates and returns a valid matrix with a path connecting the values 8 and 9.
      * 
@@ -401,5 +411,14 @@ public class DungeonGenerator {
     }
     public static void __init__() {
         //initialize the meadow dungeon
+    }
+    public static int[][] createRoomsBeenTo(int size) {
+        int[][] temp = new int[size][size];
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
+                temp[i][j] = 0;
+            }
+        }
+        return temp;
     }
 }

@@ -15,6 +15,7 @@ public class Dungeon extends Room {
     public static String currentDungeon;
     public static int completedDungeons = 0;
     public static int[][] meadowDungeon;
+    public static int[] currentPlayerPosition;
     public static void startRoom(String dungeon) throws InterruptedException{ //start room
         switch(dungeon){
             case "Meadow" -> {
@@ -32,13 +33,6 @@ public class Dungeon extends Room {
             }
             case "restart" -> {
                 //figure out later
-            }
-            case "map" -> {
-                switch (currentDungeon){
-                    case "Meadow" -> {
-                        DungeonGenerator.printMap(MeadowDungeon.meadowDungeon.length);
-                    }
-                }
             }
             default -> {
                 Main.inGameDefaultTextHandling(data);
