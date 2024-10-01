@@ -34,7 +34,7 @@ public class SpawnRoom extends Room {
         roomSave = 0;
     }
     private static void part0() throws InterruptedException { //0
-        TextEngine.printWithDelays("You wake up in a dark musty cave with nothing b1ut the clothes on your back.", false);
+        TextEngine.printWithDelays("You wake up in a dark musty cave with nothing but the clothes on your back.", false);
         TextEngine.printWithDelays("You see a faint light to the north", false);
         TextEngine.printWithDelays("What is your command: north or help", true);
         while (true) {

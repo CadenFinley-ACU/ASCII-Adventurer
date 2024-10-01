@@ -24,7 +24,8 @@ public class MeadowDungeon extends Dungeon {
     }
 
     public static void startRoom() throws InterruptedException { //start room
-        Main.checkSave("Meadow Dungeon");
+        room = "Meadow Dungeon";
+        Main.checkSave(room);
         Main.screenRefresh();
         Dungeon.currentDungeon = "Meadow";
         currentPlayerPosition = save;

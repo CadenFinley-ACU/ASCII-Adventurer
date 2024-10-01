@@ -126,7 +126,7 @@ class Main {
 
     public static void saveSpace(String place) throws InterruptedException { //save game command
         if (savedPlace != null) {
-            TextEngine.printWithDelays("Game saved!", false);
+            TextEngine.printWithDelays("Game saved!"+place, false);
         }
         savedPlace = place;
     }
@@ -140,10 +140,11 @@ class Main {
                 case "OpenWorld" -> OpenWorld.startRoom();
                 case "Village" -> Village.startRoom();
                 case "Meadow Dungeon" -> MeadowDungeon.startRoom();
-                //case "Dungeon" -> Dungeon.startRoom();
+                //case "Dungeon" -> 'Dungeon'.startRoom();
                 default -> startMenu();
             }
         }
+        TextEngine.printNoDelay("Game loaded!"+getSavedPlace(), false);
     }
 
     public static void wipeSave() throws InterruptedException { //wipe save command

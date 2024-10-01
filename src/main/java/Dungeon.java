@@ -16,14 +16,6 @@ public class Dungeon extends Room {
     public static int completedDungeons = 0;
     public static int[][] meadowDungeon;
     public static int[] currentPlayerPosition;
-    public static void startRoom(String dungeon) throws InterruptedException{ //start room
-        switch(dungeon){
-            case "Meadow" -> {
-                MeadowDungeon.startRoom();
-            }
-            //add more dungeons here
-        }
-    }
     public static void generateDungeons(){
         meadowDungeon = DungeonGenerator.generateAndReturnMatrix(5);
         //add more dungeons here

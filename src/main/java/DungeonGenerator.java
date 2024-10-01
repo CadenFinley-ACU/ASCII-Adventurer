@@ -72,6 +72,7 @@ public class DungeonGenerator {
         // Place 8 and 9 back in their original positions
         matrix[coord9[0]][coord9[1]] = 9;
         matrix[coord8[0]][coord8[1]] = 8;
+        matrix = trimUnreachableParts(matrix, findValue(matrix, 9));
         if (testArrays(matrix)) {
             if(testing){
                 printMap(size);
@@ -383,6 +384,53 @@ public class DungeonGenerator {
         int x = passedPosition[0];
         int y = passedPosition[1];
         return (i == x && (j == y - 1 || j == y + 1)) || (j == y && (i == x - 1 || i == x + 1));
+    }
+    /**
+     * Trims off the unreachable parts of the matrix.
+     * 
+     * @param matrix The matrix to trim.
+     * @param startPosition The starting position of the player.
+     * @return The trimmed matrix.
+     */
+    public static int[][] trimUnreachableParts(int[][] matrix, int[] startPosition) {
+        int rows = matrix.length;
+        int cols = matrix[0].length;
+        boolean[][] visited = new boolean[rows][cols];
+        Queue<int[]> queue = new LinkedList<>();
+        queue.add(startPosition);
+        visited[startPosition[0]][startPosition[1]] = true;
+
+        // Directions for moving up, down, left, right
+        int[] dx = {-1, 1, 0, 0};
+        int[] dy = {0, 0, -1, 1};
+
+        // Perform BFS to mark all reachable cells
+        while (!queue.isEmpty()) {
+            int[] current = queue.poll();
+            int x = current[0];
+            int y = current[1];
+
+            for (int i = 0; i < 4; i++) {
+                int nx = x + dx[i];
+                int ny = y + dy[i];
+
+                if (nx >= 0 && nx < rows && ny >= 0 && ny < cols && !visited[nx][ny] && matrix[nx][ny] != 0) {
+                    queue.add(new int[]{nx, ny});
+                    visited[nx][ny] = true;
+                }
+            }
+        }
+
+        // Set all unreachable cells to 0
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                if (!visited[i][j]) {
+                    matrix[i][j] = 0;
+                }
+            }
+        }
+
+        return matrix;
     }
     /**
      * Generates and returns a valid matrix with a path connecting the values 8 and 9.

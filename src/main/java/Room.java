@@ -39,6 +39,7 @@ public class Room {
         }
     }
     public static void reset(String area){ //reset the room
+        room = null;
         switch (area) {
             case "SpawnRoom" -> {
                 SpawnRoom.resetAll();
