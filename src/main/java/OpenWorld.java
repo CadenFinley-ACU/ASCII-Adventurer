@@ -339,7 +339,13 @@ public class OpenWorld extends Room {
                     Main.loadSave();
                 }
                 case "dungeon" -> {
-                    //to dungeon
+                    if(Dungeon.completedDungeons>3){
+                        DesertOasisDungeon.fresh();
+                    Main.saveSpace("Desert Oasis Dungeon");
+                    Main.loadSave();
+                    } else {
+                        TextEngine.printWithDelays("You must complete the other dungeons first.", true);
+                    } 
                 }
                 case "west" -> {
                     roomSave = 9;

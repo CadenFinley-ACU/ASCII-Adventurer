@@ -12,10 +12,13 @@
 public class Dungeon extends Room {
     public static String currentDungeon;
     public static int completedDungeons = 0;
+
     public static int[][] meadowDungeon;
     public static int[][] darkForestDungeon;
     public static int[][] mountainCaveDungeon;
     public static int[][] mountainTopDungeon;
+    public static int[][] desertOasisDungeon;
+
     public static int[] currentPlayerPosition;
     public static boolean previousAutoSettings;
     public static void generateDungeons(){
@@ -23,7 +26,7 @@ public class Dungeon extends Room {
         darkForestDungeon = DungeonGenerator.generateAndReturnMatrix(5);
         mountainCaveDungeon = DungeonGenerator.generateAndReturnMatrix(7);
         mountainTopDungeon = DungeonGenerator.generateAndReturnMatrix(7);
-        // meadowDungeon = DungeonGenerator.generateAndReturnMatrix(9);
+        desertOasisDungeon = DungeonGenerator.generateAndReturnMatrix(9);
         // meadowDungeon = DungeonGenerator.generateAndReturnMatrix(9);
         // meadowDungeon = DungeonGenerator.generateAndReturnMatrix(9);
         // meadowDungeon = DungeonGenerator.generateAndReturnMatrix(13);
@@ -47,6 +50,9 @@ public class Dungeon extends Room {
                     case "Mountain Top" -> {
                         MountainTopDungeon.fresh();
                     }
+                    case "Desert Oasis" -> {
+                        DesertOasisDungeon.fresh();
+                    }
                     //add more dungeons here
                 }
             }
@@ -64,6 +70,9 @@ public class Dungeon extends Room {
                         }
                         case "Mountain Top" -> {
                             DungeonGenerator.printMap(mountainCaveDungeon);
+                        }
+                        case "Desert Oasis" -> {
+                            DungeonGenerator.printMap(desertOasisDungeon);
                         }
                         //add more dungeons here
                     }
@@ -83,6 +92,7 @@ public class Dungeon extends Room {
         DarkForestDungeon.fresh();
         MountainCaveDungeon.fresh();
         MountainTopDungeon.fresh();
+        DesertOasisDungeon.fresh();
         //add more dungeons here
     }
     public static void autoCheck(){

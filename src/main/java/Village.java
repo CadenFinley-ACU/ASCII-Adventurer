@@ -34,13 +34,13 @@ public class Village extends Room {
                     Village.hotel();
                 }
                 case "shop" -> {
-                    if(Dungeon.completedDungeons<4){
+                    if(Dungeon.completedDungeons<3){ //0,1,2
                         shop1();
                     }
-                    else if (Dungeon.completedDungeons>3 && Dungeon.completedDungeons<6){
+                    else if (Dungeon.completedDungeons>2 && Dungeon.completedDungeons<6){ //3,4,5
                         shop2();
                     }
-                    else {
+                    else { //6,7,8
                         shop3();
                     }
                 }
