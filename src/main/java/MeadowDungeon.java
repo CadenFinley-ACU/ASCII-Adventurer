@@ -7,7 +7,6 @@ public class MeadowDungeon extends Dungeon {
 
     private static final int[] spawnPosition = DungeonGenerator.findValue(Dungeon.meadowDungeon, 9);
     private static final int[] bossRoom = DungeonGenerator.findValue(Dungeon.meadowDungeon, 8);
-    private static int[] miniBossRoom = DungeonGenerator.findValue(Dungeon.meadowDungeon, 4);
     private static int[] save = spawnPosition;
     private static int[] lastPosition = spawnPosition.clone(); // Variable to store the last position
     public static int[][] roomsBeenTo = DungeonGenerator.createRoomsBeenTo(Dungeon.meadowDungeon.length);
@@ -16,18 +15,8 @@ public class MeadowDungeon extends Dungeon {
     public static ArrayList<String> directionsString;
     private static int foundItemRooms = 0;
     private static List<String> items = new ArrayList<>(List.of("axe", "chainmail set", "bow", "health potion"));
+    private static final List<String> enemies = new ArrayList<>(List.of("Goblin", "Skeleton", "Slime", "Mimic"));
     private static final Random rand = new Random();
-
-    static {
-        try {
-            initializePositions();
-        } catch (InterruptedException ex) {
-        }
-    }
-
-    private static void initializePositions() throws InterruptedException {
-        Dungeon.currentPlayerPosition = spawnPosition;
-    }
 
     public static void startRoom() throws InterruptedException { //start room
         room = "Meadow Dungeon";
@@ -86,10 +75,7 @@ public class MeadowDungeon extends Dungeon {
                             Main.loadSave();
                         }
                         case "fight" -> {
-                            Player.changeHealth(Enemy.spawnEnemy("Goblin", 1) + Enemy.spawnEnemy("Skeleton", 1));
-                            lastPosition = currentPlayerPosition.clone();
-                            roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = meadowDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
-                            Main.loadSave();
+                            fightRandomEnemies(3);
                         }
                         default -> {
                             Dungeon.defaultDungeonArgs(command.toLowerCase());
@@ -97,15 +83,13 @@ public class MeadowDungeon extends Dungeon {
                     }
                 }
             } else {
-                Player.changeHealth(Enemy.spawnEnemy("Goblin", 1) + Enemy.spawnEnemy("Skeleton", 1));
-                lastPosition = currentPlayerPosition.clone();
-                roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = meadowDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
-                Main.loadSave();
+                fightRandomEnemies(3);
             }
         }
         if (meadowDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] == 4 && roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] == 0) {
             TextEngine.printWithDelays("You have entered a room with a mini boss", false);
             Player.changeHealth(Enemy.spawnEnemy("Golem", 1));
+            Room.hasItemInRoom("heart container", 1);
             lastPosition = currentPlayerPosition.clone();
             roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = meadowDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
             Main.loadSave();
@@ -114,7 +98,6 @@ public class MeadowDungeon extends Dungeon {
             TextEngine.printWithDelays("You have entered the boss room", false);
             Player.changeHealth(Enemy.spawnEnemy("Forest Giant", 1));
             TextEngine.printWithDelays("You have defeated the boss and completed the dungeon!", false);
-            Room.hasItemInRoom("heart container", 1);
             lastPosition = currentPlayerPosition.clone();
             roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = meadowDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
             completedDungeons++;
@@ -130,13 +113,6 @@ public class MeadowDungeon extends Dungeon {
     private static boolean testIfBossRoom(int check) throws InterruptedException {
         if (check != 0) {
             return check == 8;
-        }
-        return false;
-    }
-
-    private static boolean testIfMiniBossRoom(int check) throws InterruptedException {
-        if (check != 0) {
-            return check == 4;
         }
         return false;
     }
@@ -170,47 +146,33 @@ public class MeadowDungeon extends Dungeon {
             if (testIfBossRoom(availableMove[0])) {
                 directionsString.add("boss room");
             } else {
-                if (testIfMiniBossRoom(availableMove[0])) {
-                    directionsString.add("mini boss room");
-                } else {
-                    directionsString.add("north");
-                }
+                directionsString.add("north");
             }
         }
         if (availableMove[1] > 0) {
             if (testIfBossRoom(availableMove[1])) {
                 directionsString.add("boss room");
             } else {
-                if (testIfMiniBossRoom(availableMove[1])) {
-                    directionsString.add("mini boss room");
-                } else {
-                    directionsString.add("south");
-                }
+                directionsString.add("south");
             }
         }
         if (availableMove[2] > 0) {
             if (testIfBossRoom(availableMove[2])) {
                 directionsString.add("boss room");
             } else {
-                if (testIfMiniBossRoom(availableMove[2])) {
-                    directionsString.add("mini boss room");
-                } else {
-                    directionsString.add("west");
-                }
+                directionsString.add("west");
+
             }
         }
         if (availableMove[3] > 0) {
             if (testIfBossRoom(availableMove[3])) {
                 directionsString.add("boss room");
             } else {
-                if (testIfMiniBossRoom(availableMove[3])) {
-                    directionsString.add("mini boss room");
-                } else {
-                    directionsString.add("east");
-                }
+                directionsString.add("east");
+
             }
         }
-        TextEngine.printWithDelays(directionsString.toString(), true);
+        TextEngine.printNoDelay(directionsString.toString(), true);
         while (true) {
             ignore = Room.console.readLine();
             direction = Room.console.readLine();
@@ -270,21 +232,26 @@ public class MeadowDungeon extends Dungeon {
                         Main.loadSave();
                     }
                 }
-                case "mini boss room" -> {
-                    if (confirmBossContinue()) {
-                        lastPosition = currentPlayerPosition.clone(); // Save the current position before moving
-                        roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = meadowDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
-                        currentPlayerPosition = miniBossRoom;
-                        save = currentPlayerPosition.clone();
-                        Main.loadSave();
-                    } else {
-                        Main.loadSave();
-                    }
-                }
                 default -> {
                     Dungeon.defaultDungeonArgs(direction.toLowerCase());
                 }
             }
         }
     }
+
+    public static void fightRandomEnemies(int number) throws InterruptedException {
+        int numberOfEnemies = rand.nextInt(number);
+        if (numberOfEnemies == 0) {
+            lastPosition = currentPlayerPosition.clone();
+            roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = meadowDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
+            Main.loadSave();
+            return;
+        }
+        String enemyType = enemies.get(rand.nextInt(enemies.size()));
+        Player.changeHealth(Enemy.spawnEnemy(enemyType, numberOfEnemies));
+        lastPosition = currentPlayerPosition.clone();
+        roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = meadowDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
+        Main.loadSave();
+    }
+
 }

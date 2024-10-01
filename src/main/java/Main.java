@@ -28,18 +28,20 @@ class Main {
         //this is only to use when you use the item not when you have it in your inventory or when it is on the map
         InventoryManager.createItem("weapon", "sword", 2); //spawn room weapon and shop 1
 
-        InventoryManager.createItem("weapon", "axe", 3); //dungeon 1
-        InventoryManager.createItem("weapon", "bow", 3); //dungeon 1
+        InventoryManager.createItem("weapon", "axe", 5); //dungeon 1
+        InventoryManager.createItem("weapon", "bow", 5); //dungeon 1
 
-        InventoryManager.createItem("weapon", "better sword", 5); //dungeon 3
+        InventoryManager.createItem("weapon", "broad swoard", 7); //dungeon 2
 
-        InventoryManager.createItem("weapon", "great sword", 10); //dungeon 4
-        InventoryManager.createItem("weapon", "great axe", 10);//dungeon 4
-        InventoryManager.createItem("weapon", "great bow", 10); //dungeon 4
+        InventoryManager.createItem("weapon", "better sword", 10); //dungeon 3
 
-        InventoryManager.createItem("weapon", "master sword", 20);//dungeon 5
-        InventoryManager.createItem("weapon", "master axe", 20); //dungeon 5
-        InventoryManager.createItem("weapon", "master bow", 20); //dungeon 5
+        InventoryManager.createItem("weapon", "great sword", 15); //dungeon 4
+        InventoryManager.createItem("weapon", "great axe", 15);//dungeon 4
+        InventoryManager.createItem("weapon", "great bow", 15); //dungeon 4
+
+        InventoryManager.createItem("weapon", "master sword", 35);//dungeon 5
+        InventoryManager.createItem("weapon", "master axe", 35); //dungeon 5
+        InventoryManager.createItem("weapon", "master bow", 35); //dungeon 5
 
         InventoryManager.createItem("weapon", "legendary sword", 50); //dungeon 6
 
@@ -47,19 +49,19 @@ class Main {
 
         //*  ************************************************************************************ */
 
-        InventoryManager.createItem("armor", "shield", 1); //village shop
+        InventoryManager.createItem("armor", "shield", 2); //village shop
 
-        InventoryManager.createItem("armor", "chainmail set", 2); //dungeon 1
+        InventoryManager.createItem("armor", "chainmail set", 5); //dungeon 1
 
-        InventoryManager.createItem("armor", "full armor kit", 3); //dungeon 2
+        InventoryManager.createItem("armor", "full armor kit", 10); //dungeon 2
 
-        InventoryManager.createItem("armor", "ninja armor", 5); //dungeon 3
+        InventoryManager.createItem("armor", "ninja armor", 15); //dungeon 3
 
-        InventoryManager.createItem("armor", "knight armor", 10); //dungeon 4
+        InventoryManager.createItem("armor", "knight armor", 25); //dungeon 4
 
-        InventoryManager.createItem("armor", "royal armor", 20); //dungeon 5
+        InventoryManager.createItem("armor", "royal armor", 35); //dungeon 5
 
-        InventoryManager.createItem("armor", "demon armor", 30); //dungeon 6
+        InventoryManager.createItem("armor", "demon armor", 40); //dungeon 6
 
         InventoryManager.createItem("armor", "angel armor", 50); //dungeon 7
         
@@ -69,7 +71,8 @@ class Main {
         InventoryManager.createItem("potion", "greater health potion", 20); //village level 2
         InventoryManager.createItem("potion", "super health potion", 50); //village level 3
 
-        InventoryManager.createItem("potion", "heart container", 20);
+        InventoryManager.createItem("potion", "heart container", 10);
+        InventoryManager.createItem("potion", "greater heart container", 20); //at dungeon 5
 
         InventoryManager.createItem("key", "key", 0);
     }

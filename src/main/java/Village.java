@@ -54,7 +54,7 @@ public class Village extends Room {
         Main.screenRefresh();
         //church implementation
         TextEngine.printWithDelays("You enter the village church.\nThere a a preist here who can bless your heart containers to gain more hearts", false);
-        if (Player.inventory.containsKey("Heart Container")) {
+        if (Player.inventory.containsKey("heart container")) {
             TextEngine.printWithDelays("You have a heart container to give to the priest", false);
             TextEngine.printWithDelays("What is your command: give it or leave it", true);
             while (true) {
@@ -62,9 +62,9 @@ public class Village extends Room {
                 command = console.readLine();
                 switch (command.toLowerCase()) {
                     case "give it" -> {
-                        Player.putItem("Heart Container", -1);
-                        Player.changeHealth(20);
-                        TextEngine.printWithDelays("Your health has increased by 20 points", false);
+                        Player.putItem("heart container", -1);
+                        Player.changeHealth(InventoryManager.Potions.get("heart container"));
+                        TextEngine.printWithDelays("Your health has increased by "+InventoryManager.Potions.get("heart container")+  " points", false);
                         TextEngine.enterToNext();
                         Main.loadSave();
                     }
@@ -74,6 +74,27 @@ public class Village extends Room {
                     default ->
                         Main.inGameDefaultTextHandling(command);
                 }
+            }
+        } else if (Player.inventory.containsKey("greater heart container")) {
+                TextEngine.printWithDelays("You have a greater heart container to give to the priest", false);
+                TextEngine.printWithDelays("What is your command: give it or leave it", true);
+                while (true) {
+                    ignore = console.readLine();
+                    command = console.readLine();
+                    switch (command.toLowerCase()) {
+                        case "give it" -> {
+                            Player.putItem("greater heart container", -1);
+                            Player.changeHealth(InventoryManager.Potions.get("greater heart container"));
+                            TextEngine.printWithDelays("Your health has increased by "+InventoryManager.Potions.get("greater heart container")+" points", false);
+                            TextEngine.enterToNext();
+                            Main.loadSave();
+                        }
+                        case "leave it" -> {
+                            Main.loadSave();
+                        }
+                        default ->
+                            Main.inGameDefaultTextHandling(command);
+                    }
             }
         } else {
             TextEngine.printWithDelays("You do not have a heart container to give to the priest", false);

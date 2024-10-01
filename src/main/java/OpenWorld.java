@@ -134,6 +134,7 @@ public class OpenWorld extends Room {
                     Main.loadSave();
                 }
                 case "dungeon" -> {
+                    MeadowDungeon.fresh();
                     Main.saveSpace("Meadow Dungeon");
                     Main.loadSave();
                 }

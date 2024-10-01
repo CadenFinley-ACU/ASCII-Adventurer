@@ -52,14 +52,14 @@ public class SpawnRoom extends Room {
     }
 
     private static void part1() throws InterruptedException { //1
-        if(Player.inventory.containsKey("Sword")){
+        if(Player.inventory.containsKey("sword")){
             roomSave++;
             OpenWorld.startRoom();
         }
         TextEngine.printWithDelays("You enter a cool, dimly lit room by a few torches", false);
         while (true) {
-            hasItemInRoom("Sword", 1);
-            if(Player.inventory.containsKey("Sword")){
+            hasItemInRoom("sword", 1);
+            if(Player.inventory.containsKey("sword")){
                 roomSave++;
                 OpenWorld.startRoom();
                 break;

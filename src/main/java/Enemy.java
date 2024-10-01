@@ -30,28 +30,23 @@ public class Enemy {
             Map.entry("Mimic", 5),
 
             //minibosses
-            Map.entry("Golem", 30),
-            Map.entry("Elemental", 30),
-            Map.entry("Wyvern", 50),
-            Map.entry("Hydra", 25),
-            Map.entry("Kraken", 30),
-            Map.entry("Phoenix", 35),
-            Map.entry("Chimera", 40),
-            Map.entry("Minotaur", 45),
-            Map.entry("Cyclops", 50),
-            Map.entry("Medusa", 55),
-            Map.entry("Sphinx", 60),
-            Map.entry("Leviathan", 65),
-            Map.entry("Behemoth", 70),
-            Map.entry("Tiamat", 75),
-            Map.entry("Fenrir", 80),
+            Map.entry("Golem", 20), //dungeon 1
+            Map.entry("Elemental", 25), //dungeon 2
+            Map.entry("Forest Guardian", 35), //dungeon 3
+            Map.entry("Minotaur", 45), //dungeon 4
+            Map.entry("Sphinx", 60), //dungeon 5
+            Map.entry("Cyclops", 80), //dungeon 6
+            Map.entry("Medusa", 100), //dungeon 7
+            Map.entry("Leviathan", 150), //dungeon 8
 
             //bosses
-            Map.entry("Forest Giant", 100) //dungeon 1
+            Map.entry("Forest Giant", 30), //dungeon 1
+            Map.entry("Forest Spirit", 45), //dungeon 2
+            Map.entry("Wyvern", 50) //dungeon 3
     ));
     public static int spawnEnemy(String type,int quantity) throws InterruptedException { //return the total damage as negative int so that you can change health
         if(quantity > 1) {
-            TextEngine.printWithDelays("You fight the " + type + "s!", false);
+            TextEngine.printWithDelays("You fight the " +quantity+" "+ type + "s!", false);
         } else {
             TextEngine.printWithDelays("You fight the " + type+"!", false);
         }
@@ -59,11 +54,11 @@ public class Enemy {
         return 0-(enemyDamageValues.get(type)*quantity);
     }
     private static void checkhealth(String type,int quantity) throws InterruptedException { //check the health of the player
-        if(Player.getHealth() <= 0){
+        if(Player.getHealth() <= enemyDamageValues.get(type)*quantity) {
             return;
         }
         if(quantity > 1) {
-            TextEngine.printWithDelays("You beat the " + type + "s!", false);
+            TextEngine.printWithDelays("You beat the " +quantity+" "+ type + "s!", false);
         } else {
             TextEngine.printWithDelays("You beat the " + type+"!", false);
         }
