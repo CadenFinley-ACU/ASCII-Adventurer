@@ -244,6 +244,9 @@ public class MeadowDungeon extends Dungeon {
     public static void fightRandomEnemies(int number) throws InterruptedException {
         int numberOfEnemies = rand.nextInt(number);
         if (numberOfEnemies == 0) {
+            TextEngine.printWithDelays("The enemies go frightened and ran off!", false);
+            TextEngine.enterToNext();
+            console.readLine();
             lastPosition = currentPlayerPosition.clone();
             roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = meadowDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
             Main.loadSave();
