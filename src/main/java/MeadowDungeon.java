@@ -11,6 +11,8 @@ public class MeadowDungeon extends Dungeon {
     public static String direction;
     public static int[] availableMove;
     public static ArrayList<String> directionsString;
+    private static int itemRooms;
+    private static int foundItemRooms=0;
 
     static {
         try {
@@ -24,6 +26,7 @@ public class MeadowDungeon extends Dungeon {
     }
 
     public static void startRoom() throws InterruptedException { //start room
+        itemRooms = DungeonGenerator.countRooms(meadowDungeon, 2);
         room = "Meadow Dungeon";
         Main.checkSave(room);
         Main.screenRefresh();
@@ -79,10 +82,22 @@ public class MeadowDungeon extends Dungeon {
             }
         }
         if (meadowDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] == 2 && roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] == 0) {
-            hasItemInRoom("axe", 1);
-            currentPlayerPosition = lastPosition.clone(); // Restore the last position
-            save = currentPlayerPosition.clone();
-            Main.loadSave();
+            switch(itemRooms) {
+                case 1 -> {
+                    hasItemInRoom("axe", 1);
+                    currentPlayerPosition = lastPosition.clone(); // Restore the last position
+                    save = currentPlayerPosition.clone();
+                    foundItemRooms++;
+                    Main.loadSave();
+                }
+                case 2 -> {
+                    hasItemInRoom("chainmail set", 2);
+                    currentPlayerPosition = lastPosition.clone(); // Restore the last position
+                    save = currentPlayerPosition.clone();
+                    foundItemRooms++;
+                    Main.loadSave();
+                }
+            }
         }
         Main.screenRefresh();
         DungeonGenerator.printAdjacentRoomsAndCurrentRoomAndUnlockedRooms(meadowDungeon, roomsBeenTo, currentPlayerPosition);

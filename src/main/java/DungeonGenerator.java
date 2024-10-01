@@ -57,11 +57,12 @@ public class DungeonGenerator {
         // Remove 8 and 9 temporarily
         matrix[coord9[0]][coord9[1]] = 0;
         matrix[coord8[0]][coord8[1]] = 0;
-        float changeRatio = ((size * size) / 1) / 25f;
+
+        float changeRatio = ((size * size) / 1) / 25f; //determines how many random rooms are added
         // Randomly add at least size+size/2 more 1's ensuring they are connected to the main path
         addRandom(matrix, rand, size + (int) changeRatio, 1);
 
-        // Randomly add 2 item rooms (1) ensuring they are connected to the main path
+        // Randomly add item rooms (2-5) ensuring they are connected to the main path 2-5 are item rooms
         addRandom(matrix, rand, 1, 2);
 
         // Randomly add 1 rare item (3) ensuring it is connected to the main path
@@ -494,5 +495,16 @@ private static boolean isAdjacent(int x, int y, int[] playerPosition) {
             }
         }
         return temp;
+    }
+    public static int numberOfRooms(int[][] matrix, int find) {
+        int count = 0;
+        for (int[] ints : matrix) {
+            for (int j = 0; j < matrix.length; j++) {
+                if (ints[j] == find) {
+                    count++;
+                }
+            }
+        }
+        return count;
     }
 }
