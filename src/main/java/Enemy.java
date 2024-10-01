@@ -51,9 +51,11 @@ public class Enemy {
             Map.entry("Wyvern", 50), //dungeon 3
             Map.entry("ice Dragon", 60), //dungeon 4
 
-            Map.entry("Phoenix", 70) //dungeon 5
+            Map.entry("Phoenix", 70), //dungeon 5
+            Map.entry("Giant Scorpion", 100), //dungeon 6
+            Map.entry("Giant Sand Worm", 110), //dungeon 7
 
-
+            Map.entry("Kraken", 200) //dungeon 8
     ));
     public static int spawnEnemy(String type,int quantity) throws InterruptedException { //return the total damage as negative int so that you can change health
         if(quantity > 1) {

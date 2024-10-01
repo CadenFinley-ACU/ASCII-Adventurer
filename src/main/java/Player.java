@@ -67,7 +67,7 @@ public class Player {
                 Main.loadSave();
             }
             case "3" -> {
-                TextEngine.printNoDelay("1: Meadow 2: Dark Forest 3: Mountain Cave 4: Mountain Top", false);
+                TextEngine.printNoDelay("1: Meadow 2: Dark Forest 3: Mountain Cave 4: Mountain Top 5: Desert Oasis 6: Desert Plains", false);
                 TextEngine.printNoDelay("debug dungeon: ", true);
                 ignore = console.readLine();
                 command = console.readLine();
@@ -86,6 +86,14 @@ public class Player {
                     }
                     case "4" ->{
                         Main.saveSpace("Mountain Top Dungeon");
+                        Main.loadSave();
+                    }
+                    case "5" ->{
+                        Main.saveSpace("Desert Oasis Dungeon");
+                        Main.loadSave();
+                    }
+                    case "6" ->{
+                        Main.saveSpace("Desert Plains Dungeon");
                         Main.loadSave();
                     }
                     default -> {

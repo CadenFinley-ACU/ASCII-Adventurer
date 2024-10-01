@@ -358,7 +358,7 @@ public class OpenWorld extends Room {
     }
     private static void room11() throws InterruptedException{
         TextEngine.printWithDelays("You walk forward and see a small village in the distance", false);
-        TextEngine.printWithDelays("What is your command: south, dungeon, or west", true);
+        TextEngine.printWithDelays("What is your command: south, Desert Plains Dungeon, or west", true);
         while (true) {
             ignore = console.readLine();
             command = console.readLine();
@@ -368,7 +368,13 @@ public class OpenWorld extends Room {
                     Main.loadSave();
                 }
                 case "dungeon" -> {
-                    //to dungeon
+                    if(Dungeon.completedDungeons>4){
+                        DesertPlainsDungeon.fresh();
+                    Main.saveSpace("Desert Plains Dungeon");
+                    Main.loadSave();
+                    } else {
+                        TextEngine.printWithDelays("You must complete the other dungeons first.", true);
+                    } 
                 }
                 case "west" -> {
                     roomSave = 12;
