@@ -70,14 +70,16 @@ public class DungeonGenerator {
         matrix[coord9[0]][coord9[1]] = 9;
         matrix[coord8[0]][coord8[1]] = 8;
         if (testArrays(matrix)) {
-            System.out.println("-------------------------------");
-            System.out.println("Matrix connected successfully!");
             printMap(size);
+            System.out.println("^^^^^^^^^^^^"+pass+"^^^^^^^^^^^^");
+            System.out.println("Matrix connected successfully!");
+            System.out.println("-------------------------------");
             return;
         }
-        System.out.println("-------------------------------");
-        System.out.println("Matrix not connected, retrying...");
         printMap(size);
+        System.out.println("^^^^^^^^^^^^"+pass+"^^^^^^^^^^^^^");
+        System.out.println("Matrix not connected, retrying...");
+        System.out.println("-------------------------------");
         start(size);
     }
 
