@@ -71,7 +71,7 @@ public class TestSuite_Adventure
     }
     @Test
     public void testDungeonGeneratorConnection5() {
-        DungeonGenerator.start(5);
+        DungeonGenerator.start(8);
         int[][] matrix = DungeonGenerator.returnMatrix();
         int[] pos9 = DungeonGenerator.findValue(matrix, 9);
         int[] pos8 = DungeonGenerator.findValue(matrix, 8);
@@ -203,4 +203,49 @@ public class TestSuite_Adventure
         boolean connected = DungeonGenerator.isPathConnected(matrix, pos9[0], pos9[1], pos8[0], pos8[1]);
         assertTrue("There should be a path connecting 9 and 8 with values higher than 0", connected);
     }
+    @Test
+    public void testDungeonGeneratorConnection17() {
+        DungeonGenerator.start(8);
+        int[][] matrix = DungeonGenerator.returnMatrix();
+        int[] pos9 = DungeonGenerator.findValue(matrix, 9);
+        int[] pos8 = DungeonGenerator.findValue(matrix, 8);
+        assertNotNull(pos9);
+        assertNotNull(pos8);
+        boolean connected = DungeonGenerator.isPathConnected(matrix, pos9[0], pos9[1], pos8[0], pos8[1]);
+        assertTrue("There should be a path connecting 9 and 8 with values higher than 0", connected);
+    }
+    @Test
+    public void testDungeonGeneratorConnection18() {
+        DungeonGenerator.start(8);
+        int[][] matrix = DungeonGenerator.returnMatrix();
+        int[] pos9 = DungeonGenerator.findValue(matrix, 9);
+        int[] pos8 = DungeonGenerator.findValue(matrix, 8);
+        assertNotNull(pos9);
+        assertNotNull(pos8);
+        boolean connected = DungeonGenerator.isPathConnected(matrix, pos9[0], pos9[1], pos8[0], pos8[1]);
+        assertTrue("There should be a path connecting 9 and 8 with values higher than 0", connected);
+    }
+    @Test
+    public void testDungeonGeneratorConnection19() {
+        DungeonGenerator.start(8);
+        int[][] matrix = DungeonGenerator.returnMatrix();
+        int[] pos9 = DungeonGenerator.findValue(matrix, 9);
+        int[] pos8 = DungeonGenerator.findValue(matrix, 8);
+        assertNotNull(pos9);
+        assertNotNull(pos8);
+        boolean connected = DungeonGenerator.isPathConnected(matrix, pos9[0], pos9[1], pos8[0], pos8[1]);
+        assertTrue("There should be a path connecting 9 and 8 with values higher than 0", connected);
+    }
+    @Test
+    public void testDungeonGeneratorConnection20() {
+        DungeonGenerator.start(8);
+        int[][] matrix = DungeonGenerator.returnMatrix();
+        int[] pos9 = DungeonGenerator.findValue(matrix, 9);
+        int[] pos8 = DungeonGenerator.findValue(matrix, 8);
+        assertNotNull(pos9);
+        assertNotNull(pos8);
+        boolean connected = DungeonGenerator.isPathConnected(matrix, pos9[0], pos9[1], pos8[0], pos8[1]);
+        assertTrue("There should be a path connecting 9 and 8 with values higher than 0", connected);
+    }
+
 }

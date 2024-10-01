@@ -87,8 +87,11 @@ public class DungeonGenerator {
         // Randomly add 1 rare item (3) ensuring it is connected to the main path
         addRandom(matrix, rand, 1, 3);
 
+        // Randomly add mini boss rooms (4) ensuring it is connected to the main path
+        addRandom(matrix, rand, (int)itemRoomRatio-1, 4);
+
         // Ensure only one 1 value is adjacent to the 8
-        ensureSingleAdjacentOne(matrix, coord8[0], coord8[1]);
+        ensureSingleAdjacent(matrix, coord8[0], coord8[1]);
 
         // Place 8 and 9 back in their original positions
         matrix[coord9[0]][coord9[1]] = 9;
@@ -96,16 +99,16 @@ public class DungeonGenerator {
         matrix = trimUnreachableParts(matrix, findValue(matrix, 9));
         if (testArrays(matrix)) {
             if(testing){
-                printMap(size);
+                printMap(matrix);
                 System.out.println("^^^^^^^^^^^^"+size+"^^^^^^^^^^^^");
                 System.out.println("Matrix connected successfully!");
-                System.out.println("Item Rooms: "+numberOfRooms(matrix, 2));
+                System.out.println("Item Rooms: "+numberOfRooms(matrix, 2)+" Total Rooms: "+(numberOfRooms(matrix, 1)+numberOfRooms(matrix, 2)+numberOfRooms(matrix, 3)+numberOfRooms(matrix, 8)+numberOfRooms(matrix, 9)+numberOfRooms(matrix, 4)));
                 System.out.println("-------------------------------");
             }
             return;
         }
         if(testing){
-            printMap(size);
+            printMap(matrix);
             System.out.println("^^^^^^^^^^^^"+size+"^^^^^^^^^^^^");
             System.out.println("Matrix not connected, retrying...");
             System.out.println("-------------------------------");
@@ -199,31 +202,28 @@ public class DungeonGenerator {
     }
 
     /**
-     * Ensures only one 1 value is adjacent to a given position in the matrix.
-     * 
-     * Algorithm: Adjacency check and modification.
-     * Time Complexity: O(1) for checking and modifying adjacent cells.
-     * honestly idrk the speed
-     * 
-     * @param matrix The matrix to modify.
-     * @param x The x-coordinate of the position to check.
-     * @param y The y-coordinate of the position to check.
-     */
-    private static void ensureSingleAdjacentOne(int[][] matrix, int x, int y) {
-        int[] dx = {-1, 1, 0, 0};
-        int[] dy = {0, 0, -1, 1};
-        int adjacentOnes = 0;
-        for (int i = 0; i < 4; i++) {
-            int nx = x + dx[i];
-            int ny = y + dy[i];
-            if (nx >= 0 && nx < matrix.length && ny >= 0 && ny < matrix.length && matrix[nx][ny] == 1) {
-                adjacentOnes++;
-                if (adjacentOnes > 1) {
-                    matrix[nx][ny] = 0;
-                }
+ * Ensures that only one value greater than zero is adjacent to the value 8 in the matrix.
+ * 
+ * @param matrix The matrix to modify.
+ * @param x The x-coordinate of the position to check.
+ * @param y The y-coordinate of the position to check.
+ */
+private static void ensureSingleAdjacent(int[][] matrix, int x, int y) {
+    int[] dx = {-1, 1, 0, 0};
+    int[] dy = {0, 0, -1, 1};
+    int adjacentNonZeroCount = 0;
+
+    for (int i = 0; i < 4; i++) {
+        int nx = x + dx[i];
+        int ny = y + dy[i];
+        if (nx >= 0 && nx < matrix.length && ny >= 0 && ny < matrix[0].length && matrix[nx][ny] > 0) {
+            adjacentNonZeroCount++;
+            if (adjacentNonZeroCount > 1) {
+                matrix[nx][ny] = 0;
             }
         }
     }
+}
 
     /**
      * Checks if there is a path connecting two points in the matrix.
@@ -286,11 +286,12 @@ public class DungeonGenerator {
         int[] pos8 = findValue(localMatrix, 8);
         int[] pos3 = findValue(localMatrix, 3);
         int[] pos2 = findValue(localMatrix, 2);
+        int[] pos4 = findValue(localMatrix, 4);
 
-        if (pos9 == null || pos8 == null || pos3 == null|| pos2 == null) {
+        if (pos9 == null || pos8 == null || pos3 == null|| pos2 == null|| pos4 == null) {
             return false;
         }
-        return isPathConnected(localMatrix, pos9[0], pos9[1], pos8[0], pos8[1]) && isPathConnected(localMatrix, pos9[0], pos9[1], pos3[0], pos3[1]) && isPathConnected(localMatrix, pos9[0], pos9[1], pos2[0], pos2[1]);
+        return isPathConnected(localMatrix, pos9[0], pos9[1], pos8[0], pos8[1]) && isPathConnected(localMatrix, pos9[0], pos9[1], pos3[0], pos3[1]) && isPathConnected(localMatrix, pos9[0], pos9[1], pos2[0], pos2[1]) && isPathConnected(localMatrix, pos9[0], pos9[1], pos4[0], pos4[1]);
     }
 
     /**
@@ -333,21 +334,21 @@ public class DungeonGenerator {
      * @return The generated matrix.
      */
     public static int[][] generateValidMatrix(int size) {
-        int[][] matrix;
+        int[][] localMatrix;
         Random random = new Random();
         do {
-            matrix = new int[size][size];
+            localMatrix = new int[size][size];
             // Fill the matrix with random values greater than 0
             for (int i = 0; i < size; i++) {
                 for (int j = 0; j < size; j++) {
-                    matrix[i][j] = random.nextInt(10) + 1; // Values between 1 and 10
+                    localMatrix[i][j] = random.nextInt(10) + 1; // Values between 1 and 10
                 }
             }
             // Place 8 and 9 at random positions
-            matrix[random.nextInt(size)][random.nextInt(size)] = 8;
-            matrix[random.nextInt(size)][random.nextInt(size)] = 9;
-        } while (!isPathConnected(matrix, findValue(matrix, 9)[0], findValue(matrix, 9)[1], findValue(matrix, 8)[0], findValue(matrix, 8)[1]));
-        return matrix;
+            localMatrix[random.nextInt(size)][random.nextInt(size)] = 8;
+            localMatrix[random.nextInt(size)][random.nextInt(size)] = 9;
+        } while (!isPathConnected(localMatrix, findValue(localMatrix, 9)[0], findValue(localMatrix, 9)[1], findValue(localMatrix, 8)[0], findValue(localMatrix, 8)[1]));
+        return localMatrix;
     }
 
     /**
@@ -355,11 +356,11 @@ public class DungeonGenerator {
      * 
      * @param size The size of the matrix to print.
      */
-    public static void printMap(int size) {
-        for (int i = 0; i < size; i++) {
-            for (int j = 0; j < size; j++) {
-                if (matrix[i][j] != 0) {
-                    System.out.print(matrix[i][j] + " ");
+    public static void printMap(int[][] passedMatrix) {
+        for (int[] passedMatrix1 : passedMatrix) {
+            for (int j = 0; j < passedMatrix.length; j++) {
+                if (passedMatrix1[j] != 0) {
+                    System.out.print(passedMatrix1[j] + " ");
                 } else {
                     System.out.print("  ");
                 }

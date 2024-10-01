@@ -1,5 +1,7 @@
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 public class MeadowDungeon extends Dungeon {
 
@@ -11,8 +13,9 @@ public class MeadowDungeon extends Dungeon {
     public static String direction;
     public static int[] availableMove;
     public static ArrayList<String> directionsString;
-    private static int itemRooms;
     private static int foundItemRooms=0;
+    private static List<String> items;
+    private static final Random rand = new Random();
 
     static {
         try {
@@ -23,10 +26,10 @@ public class MeadowDungeon extends Dungeon {
 
     private static void initializePositions() throws InterruptedException {
         Dungeon.currentPlayerPosition = spawnPosition;
+        items = new ArrayList<>(List.of("axe", "chainmail set", "sword", "shield", "bow", "full armor kit", "health potion", "heart container"));
     }
 
     public static void startRoom() throws InterruptedException { //start room
-        itemRooms = DungeonGenerator.numberOfRooms(meadowDungeon, 2);
         room = "Meadow Dungeon";
         Main.checkSave(room);
         Main.screenRefresh();
@@ -36,6 +39,8 @@ public class MeadowDungeon extends Dungeon {
     }
 
     public static void fresh() { //fresh
+        items = new ArrayList<>(List.of("axe", "chainmail set","bow", "health potion"));
+        foundItemRooms=0;
         Dungeon.currentPlayerPosition = spawnPosition;
         currentPlayerPosition = spawnPosition;
         roomsBeenTo = DungeonGenerator.createRoomsBeenTo(Dungeon.meadowDungeon.length);
@@ -49,6 +54,21 @@ public class MeadowDungeon extends Dungeon {
         availableMove = DungeonGenerator.getDirections(meadowDungeon, currentPlayerPosition[0], currentPlayerPosition[1]);
         DungeonGenerator.printAdjacentRoomsAndCurrentRoomAndUnlockedRooms(meadowDungeon, roomsBeenTo, currentPlayerPosition);
         directionsString = new ArrayList<>();
+        if (meadowDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] == 2 && roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] == 0) {
+            if (foundItemRooms < items.size()) {
+                String randomItem = items.get(rand.nextInt(items.size()));
+                Room.hasItemInRoom(randomItem, 1);
+                items.remove(randomItem);
+                lastPosition = currentPlayerPosition.clone();
+                roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = meadowDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
+            }
+        }
+        if (meadowDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] == 3 && roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] == 0) {
+            Room.hasItemInRoom("heart container", 1);
+            lastPosition = currentPlayerPosition.clone();
+            roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = meadowDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
+            
+        }
         if (meadowDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] == 1 && roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] == 0) {
             boolean finsihed = false;
             TextEngine.printWithDelays("You have entered a room with enemies and were ambushed!", false);
@@ -78,24 +98,6 @@ public class MeadowDungeon extends Dungeon {
                 }
                 if (finsihed) {
                     break;
-                }
-            }
-        }
-        if (meadowDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] == 2 && roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] == 0) {
-            switch(itemRooms) {
-                case 1 -> {
-                    hasItemInRoom("axe", 1);
-                    currentPlayerPosition = lastPosition.clone(); // Restore the last position
-                    save = currentPlayerPosition.clone();
-                    foundItemRooms++;
-                    Main.loadSave();
-                }
-                case 2 -> {
-                    hasItemInRoom("chainmail set", 2);
-                    currentPlayerPosition = lastPosition.clone(); // Restore the last position
-                    save = currentPlayerPosition.clone();
-                    foundItemRooms++;
-                    Main.loadSave();
                 }
             }
         }

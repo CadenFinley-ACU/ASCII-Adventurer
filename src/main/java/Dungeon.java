@@ -33,6 +33,14 @@ public class Dungeon extends Room {
                     //add more dungeons here
                 }
             }
+            case "map" -> {
+                switch(currentDungeon){
+                    case "Meadow" -> {
+                        DungeonGenerator.printMap(meadowDungeon);
+                    }
+                    //add more dungeons here
+                }
+            }
             default -> {
                 Main.inGameDefaultTextHandling(data);
             }
