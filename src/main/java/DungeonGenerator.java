@@ -6,6 +6,7 @@ import java.util.Random;
 
 // Written by Caden Finley ACU 2024
 // September 30, 2024
+// 8 grueling hours but totally worth this is the coolest thing ive ever build
 
 public class DungeonGenerator {
     public static boolean testing = false;
