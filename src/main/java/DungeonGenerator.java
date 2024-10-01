@@ -60,8 +60,8 @@ public class DungeonGenerator {
         // Randomly add at least size+size/2 more 1's ensuring they are connected to the main path
         addRandom(matrix, rand, size + (int) changeRatio, 1);
 
-        // Randomly add 2 item rooms (2) ensuring they are connected to the main path
-        addRandom(matrix, rand, 2, 2);
+        // Randomly add 2 item rooms (1) ensuring they are connected to the main path
+        addRandom(matrix, rand, 1, 2);
 
         // Randomly add 1 rare item (3) ensuring it is connected to the main path
         addRandom(matrix, rand, 1, 3);
@@ -355,9 +355,18 @@ public class DungeonGenerator {
                     if (i == passedPosition[0] && j == passedPosition[1]) {
                         System.out.print("[P] ");
                     } else if (isAdjacent(i, j, passedPosition)) {
-                        System.out.print("[" + passedMatrix[i][j] + "] ");
+                        switch (passedMatrix[i][j]){
+                            case 9 -> System.out.print("[*] ");
+                            case 8 -> System.out.print("[!] ");
+                            case 0 -> System.out.print("[ ] ");
+                            default -> System.out.print("[" + passedMatrix[i][j] + "] ");
+                        }
                     } else if (unlocked[i][j] > 0) {
-                        System.out.print("[" + passedMatrix[i][j] + "] ");
+                        switch (unlocked[i][j]) {
+                            case 9 -> System.out.print("[*] ");
+                            case 8 -> System.out.print("[!] ");
+                            default -> System.out.print("[" + passedMatrix[i][j] + "] ");
+                        }
                     } else {
                         System.out.print("[ ] ");
                     }

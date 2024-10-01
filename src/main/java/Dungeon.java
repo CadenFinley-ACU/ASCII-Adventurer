@@ -21,10 +21,12 @@ public class Dungeon extends Room {
             case "Meadow" -> {
                 MeadowDungeon.startRoom();
             }
+            //add more dungeons here
         }
     }
     public static void generateDungeons(){
         meadowDungeon = DungeonGenerator.generateAndReturnMatrix(5);
+        //add more dungeons here
     }
     public static void defaultDungeonArgs(String data) throws InterruptedException{ //default dungeon arguments
         switch(data){
@@ -32,12 +34,21 @@ public class Dungeon extends Room {
                 TextEngine.printWithDelays("Im sorry. You cannot leave right now.", true);
             }
             case "restart" -> {
-                //figure out later
+                switch(currentDungeon){
+                    case "Meadow" -> {
+                        MeadowDungeon.fresh();
+                    }
+                    //add more dungeons here
+                }
             }
             default -> {
                 Main.inGameDefaultTextHandling(data);
             }
         }
 
+    }
+    public static void resetAll() { //reset all
+        MeadowDungeon.fresh();
+        //add more dungeons here
     }
 }

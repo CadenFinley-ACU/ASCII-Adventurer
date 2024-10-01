@@ -49,6 +49,7 @@ public class Room {
             case "all" -> {
                 SpawnRoom.resetAll();
                 OpenWorld.resetAll();
+                Dungeon.resetAll();
             }
         }
     }

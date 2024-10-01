@@ -38,7 +38,7 @@ public class Player {
     }
 
     public static void debugStart() throws InterruptedException { //start the player with debug settings
-        maxHealth = 100;
+        maxHealth = 10000;
         health = maxHealth;
         damage = 0;
         defense = 0;
@@ -137,6 +137,7 @@ public class Player {
             TextEngine.enterToNext();
             Main.startMenu();
         }
+        TextEngine.enterToNext();
     }
 
     public static void changeMaxHealth(int change) throws InterruptedException { //change the max health
