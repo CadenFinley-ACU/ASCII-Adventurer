@@ -67,7 +67,7 @@ public class Player {
                 Main.loadSave();
             }
             case "3" -> {
-                TextEngine.printNoDelay("1: Meadow", false);
+                TextEngine.printNoDelay("1: Meadow 2: Dark Forest", false);
                 TextEngine.printNoDelay("debug dungeon: ", true);
                 ignore = console.readLine();
                 command = console.readLine();
@@ -75,7 +75,11 @@ public class Player {
                     case "1" ->{
                         Main.saveSpace("Meadow Dungeon");
                         Main.loadSave();
-                }
+                    }
+                    case "2" ->{
+                        Main.saveSpace("Dark Forest Dungeon");
+                        Main.loadSave();
+                    }
                     default -> {
                         Main.saveSpace("SpawnRoom");
                         Main.loadSave();

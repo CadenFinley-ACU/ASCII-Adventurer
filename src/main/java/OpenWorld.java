@@ -265,7 +265,9 @@ public class OpenWorld extends Room {
                     Main.loadSave();
                 }
                 case "dungeon" -> {
-                    //to dungeon
+                    DarkForestDungeon.fresh();
+                    Main.saveSpace("Dark Forest Dungeon");
+                    Main.loadSave();
                 }
                 default ->
                     Main.inGameDefaultTextHandling(command);

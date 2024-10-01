@@ -19,8 +19,6 @@ class Main {
         Dungeon.generateDungeons();
         createGameItems();
         startMenu();
-        MeadowDungeon.__init__();
-        DungeonGenerator.__init__();
     }
 
     private static void createGameItems() { //initalize all the items in the game
@@ -176,6 +174,7 @@ class Main {
                 case "OpenWorld" -> OpenWorld.startRoom();
                 case "Village" -> Village.startRoom();
                 case "Meadow Dungeon" -> MeadowDungeon.startRoom();
+                case "Dark Forest Dungeon" -> DarkForestDungeon.startRoom();
                 default -> startMenu();
             }
         }

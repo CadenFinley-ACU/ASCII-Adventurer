@@ -13,18 +13,18 @@ public class Dungeon extends Room {
     public static String currentDungeon;
     public static int completedDungeons = 0;
     public static int[][] meadowDungeon;
+    public static int[][] darkForestDungeon;
     public static int[] currentPlayerPosition;
     public static boolean previousAutoSettings;
     public static void generateDungeons(){
         meadowDungeon = DungeonGenerator.generateAndReturnMatrix(5);
-        meadowDungeon = DungeonGenerator.generateAndReturnMatrix(5);
-        meadowDungeon = DungeonGenerator.generateAndReturnMatrix(7);
-        meadowDungeon = DungeonGenerator.generateAndReturnMatrix(7);
-        meadowDungeon = DungeonGenerator.generateAndReturnMatrix(9);
-        meadowDungeon = DungeonGenerator.generateAndReturnMatrix(9);
-        meadowDungeon = DungeonGenerator.generateAndReturnMatrix(9);
-        meadowDungeon = DungeonGenerator.generateAndReturnMatrix(13);
-        //add more dungeons here
+        darkForestDungeon = DungeonGenerator.generateAndReturnMatrix(5);
+        // meadowDungeon = DungeonGenerator.generateAndReturnMatrix(7);
+        // meadowDungeon = DungeonGenerator.generateAndReturnMatrix(7);
+        // meadowDungeon = DungeonGenerator.generateAndReturnMatrix(9);
+        // meadowDungeon = DungeonGenerator.generateAndReturnMatrix(9);
+        // meadowDungeon = DungeonGenerator.generateAndReturnMatrix(9);
+        // meadowDungeon = DungeonGenerator.generateAndReturnMatrix(13);
     }
     public static void defaultDungeonArgs(String data) throws InterruptedException{ //default dungeon arguments
         switch(data){
@@ -36,6 +36,9 @@ public class Dungeon extends Room {
                     case "Meadow" -> {
                         MeadowDungeon.fresh();
                     }
+                    case "DarkForest" -> {
+                        DarkForestDungeon.fresh();
+                    }
                     //add more dungeons here
                 }
             }
@@ -44,6 +47,9 @@ public class Dungeon extends Room {
                     switch(currentDungeon){
                         case "Meadow" -> {
                             DungeonGenerator.printMap(meadowDungeon);
+                        }
+                        case "DarkForest" -> {
+                            DungeonGenerator.printMap(darkForestDungeon);
                         }
                         //add more dungeons here
                     }
@@ -60,6 +66,7 @@ public class Dungeon extends Room {
     }
     public static void resetAll() { //reset all
         MeadowDungeon.fresh();
+        DarkForestDungeon.fresh();
         //add more dungeons here
     }
     public static void autoCheck(){
