@@ -24,12 +24,12 @@ public class MeadowDungeon extends Dungeon {
         Main.screenRefresh();
         Dungeon.currentDungeon = "Meadow";
         currentPlayerPosition = save;
-        Dungeon.autoCheck();
         startRooms();
     }
 
     public static void fresh() { //fresh
         items = new ArrayList<>(List.of("axe", "chainmail set", "health potion"));
+        Dungeon.autoCheck();
         foundItemRooms = 0;
         Dungeon.currentPlayerPosition = spawnPosition;
         currentPlayerPosition = spawnPosition;

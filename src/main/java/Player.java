@@ -32,7 +32,7 @@ public class Player {
         defense = 0;
         damage = 0;
         defense = 0;
-        gold = 0;
+        gold = 20;
         inventorySize = 20;
         inventory.clear();
         playerCreate();

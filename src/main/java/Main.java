@@ -243,9 +243,11 @@ class Main {
     public static void printStatus() { //print the status of the player
         TextEngine.printNoDelay(Player.getName(), false);
         TextEngine.printNoDelay("Health: " + Player.getHealth(), false);
-        // TextEngine.printNoDelay(getSavedPlace() + " " + getRoomId() + "\n", false);
-        // if (getSavedPlace().equals("Dungeon")) {
-        //     TextEngine.printNoDelay(Dungeon.getDungeon(), false);
+        if(getSavedPlace() != null){
+            TextEngine.printNoDelay("Location: " + getSavedPlace(), false);
+        }
+        // if("Village".equals(getSavedPlace())){
+        //     TextEngine.printNoDelay("Gold: " + Player.getGold(), false);
         // }
         TextEngine.printNoDelay("\n", false);
     }

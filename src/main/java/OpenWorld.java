@@ -69,7 +69,7 @@ public class OpenWorld extends Room {
     private static void room1() throws InterruptedException { //0
         TextEngine.printWithDelays("You are in the open world,\nthe sunlight blinds your eyes as they have not adjusted from the dark cave.", false);
         TextEngine.printWithDelays("You see a long winding paths in all four directions.\nHow overwhelming...", false);
-        TextEngine.printWithDelays("Which path will you take:\nnorth, village, west, Go Back, or help", true);
+        TextEngine.printWithDelays("Which path will you take:\nnorth, east, village, west, Go Back, or help", true);
         while (true) {
             ignore = console.readLine();
             command = console.readLine();
@@ -82,6 +82,10 @@ public class OpenWorld extends Room {
                     SpawnRoom.startRoom();
                 }
                 case "west" -> {
+                    roomSave = 2;
+                    Main.loadSave();
+                }
+                case "east" -> {
                     roomSave = 2;
                     Main.loadSave();
                 }
