@@ -19,6 +19,12 @@ public class DungeonGenerator {
      * @param pass The size of the matrix to generate.
      */
     public static void start(int pass) {
+        if (pass < 5) {
+            System.out.println("-------------------------------");
+            System.out.println("Matrix size too small, retrying...");
+            start(5);
+            return;
+        }
         int sizeY = pass;
         int size = pass;
         matrix = new int[size][sizeY];
@@ -38,7 +44,7 @@ public class DungeonGenerator {
         matrix[x2][y2] = 8;
 
         // Draw path of 1's to connect 9 and 8
-        drawPath(matrix, x1, y1, x2, y2);
+        drawPath(matrix, x1, y1, x2, y2, rand);
 
         // Save coordinates of 8 and 9
         int[] coord9 = {x1, y1};
@@ -78,7 +84,7 @@ public class DungeonGenerator {
     /**
      * Draws a path of 1's to connect two points in the matrix.
      * 
-     * Algorithm: Simple path drawing by incrementing/decrementing coordinates.
+     * Algorithm: Randomized path drawing with deviations.
      * Time Complexity: O(n) where n is the distance between the two points.
      * 
      * @param matrix The matrix to draw the path in.
@@ -86,17 +92,24 @@ public class DungeonGenerator {
      * @param y1 The starting y-coordinate.
      * @param x2 The ending x-coordinate.
      * @param y2 The ending y-coordinate.
+     * @param rand The Random instance to use for generating random deviations.
      */
-    private static void drawPath(int[][] matrix, int x1, int y1, int x2, int y2) {
+    private static void drawPath(int[][] matrix, int x1, int y1, int x2, int y2, Random rand) {
         while (x1 != x2 || y1 != y2) {
-            if (x1 < x2) {
-                x1++;
-            } else if (x1 > x2) {
-                x1--;
-            } else if (y1 < y2) {
-                y1++;
-            } else if (y1 > y2) {
-                y1--;
+            if (rand.nextBoolean()) {
+                // Randomly decide whether to move in the x or y direction
+                if (x1 != x2 && rand.nextBoolean()) {
+                    x1 += (x1 < x2) ? 1 : -1;
+                } else if (y1 != y2) {
+                    y1 += (y1 < y2) ? 1 : -1;
+                }
+            } else {
+                // Move in the perpendicular direction
+                if (y1 != y2 && rand.nextBoolean()) {
+                    y1 += (y1 < y2) ? 1 : -1;
+                } else if (x1 != x2) {
+                    x1 += (x1 < x2) ? 1 : -1;
+                }
             }
 
             if (matrix[x1][y1] == 0) {
