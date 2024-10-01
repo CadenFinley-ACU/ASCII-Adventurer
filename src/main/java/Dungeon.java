@@ -1,6 +1,4 @@
 
-
-
 /**
  * Dungeon Class
  *
@@ -34,12 +32,17 @@ public class Dungeon extends Room {
                 }
             }
             case "map" -> {
-                switch(currentDungeon){
-                    case "Meadow" -> {
-                        DungeonGenerator.printMap(meadowDungeon);
+                if(Player.getName().equals("Debug!")){
+                    switch(currentDungeon){
+                        case "Meadow" -> {
+                            DungeonGenerator.printMap(meadowDungeon);
+                        }
+                        //add more dungeons here
                     }
-                    //add more dungeons here
                 }
+                else{
+                    Main.inGameDefaultTextHandling(data);
+                }  
             }
             default -> {
                 Main.inGameDefaultTextHandling(data);
@@ -51,4 +54,5 @@ public class Dungeon extends Room {
         MeadowDungeon.fresh();
         //add more dungeons here
     }
+
 }

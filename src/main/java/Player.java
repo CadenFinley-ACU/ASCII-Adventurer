@@ -23,6 +23,7 @@ public class Player {
     private static int defense; //find way to set defense automatically to the strongest 4-5 defense items combined
     public static Map<String, Integer> inventory = new HashMap<>();
     public static InventoryManager manager = new InventoryManager();
+    public static boolean autoFight = false;
 
     public static void playerStart() throws InterruptedException { //start the player
         maxHealth = 100;
@@ -44,6 +45,7 @@ public class Player {
         defense = 0;
         gold = 20000000;
         inventorySize = 200;
+        autoFight = true;
         name = "Debug!";
         Main.playerCreated = true;
         DungeonGenerator.testing = false;

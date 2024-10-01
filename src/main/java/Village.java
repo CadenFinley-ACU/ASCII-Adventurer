@@ -31,7 +31,15 @@ public class Village extends Room {
                     Village.hotel();
                 }
                 case "shop" -> {
-                    Village.shop();
+                    if(Dungeon.completedDungeons<4){
+                        shop1();
+                    }
+                    else if (Dungeon.completedDungeons>3 && Dungeon.completedDungeons<6){
+                        shop2();
+                    }
+                    else {
+                        shop3();
+                    }
                 }
                 case "leave village" -> {
                     leave();
@@ -122,7 +130,7 @@ public class Village extends Room {
         }
     }
 
-    public static void shop() throws InterruptedException { //shop
+    public static void shop1() throws InterruptedException { //shop
         Main.screenRefresh();
         //shop implementation
         TextEngine.printNoDelay("Gold: " + Player.getGold(), false);
@@ -149,35 +157,78 @@ public class Village extends Room {
                         keepShopping();
                     }
                 }
-                case "axe" -> {
-                    if (Player.getGold() >= 10) {
-                        Player.changeGold(-10);
-                        Player.putItem("axe", 1);
+                case "key" -> {
+                    buyMultiple("key", 30);
+                }
+                case "leave" -> {
+                    Main.loadSave();
+                }
+                default ->
+                    Main.inGameDefaultTextHandling(command);
+            }
+        }
+    }
+    public static void shop2() throws InterruptedException { //shop
+        Main.screenRefresh();
+        //shop implementation
+        TextEngine.printNoDelay("Gold: " + Player.getGold(), false);
+        TextEngine.printNoDelay("Inventory: " + Player.inventory.size() + "/" + Player.inventorySize, false);
+        TextEngine.printNoDelay("\n", false);
+        TextEngine.printWithDelays("You enter the shop.", false);
+        TextEngine.printWithDelays("You can buy items here", false);
+        TextEngine.printWithDelays("What would you like to buy: \n greater health potion (30 gold), ninja armor (100 gold), key (30 gold), or leave", true);
+        while (true) {
+            ignore = console.readLine();
+            command = console.readLine();
+            switch (command.toLowerCase()) {
+                case "greater health potion" -> {
+                    buyMultiple("greater health potion", 30);
+                }
+                case "ninja armor" -> {
+                    if (Player.getGold() >= 100) {
+                        Player.changeGold(-100);
+                        Player.putItem("ninja armor", 1);
                         keepShopping();
                     } else {
-                        TextEngine.printWithDelays("You do not have enough gold to buy Axe", false);
+                        TextEngine.printWithDelays("You do not have enough gold to buy ninja armor", false);
                         TextEngine.enterToNext();
                         keepShopping();
                     }
                 }
-                case "chainmail" -> {
-                    if (Player.getGold() >= 10) {
-                        Player.changeGold(-10);
-                        Player.putItem("chainmail set", 1);
-                        keepShopping();
-                    } else {
-                        TextEngine.printWithDelays("You do not have enough gold to buy Chainmail Set", false);
-                        TextEngine.enterToNext();
-                        keepShopping();
-                    }
+                case "key" -> {
+                    buyMultiple("key", 30);
                 }
-                case "heart container" -> {
-                    if (Player.getGold() >= 10) {
-                        Player.changeGold(-10);
-                        Player.putItem("heart container", 1);
+                case "leave" -> {
+                    Main.loadSave();
+                }
+                default ->
+                    Main.inGameDefaultTextHandling(command);
+            }
+        }
+    }
+    public static void shop3() throws InterruptedException { //shop
+        Main.screenRefresh();
+        //shop implementation
+        TextEngine.printNoDelay("Gold: " + Player.getGold(), false);
+        TextEngine.printNoDelay("Inventory: " + Player.inventory.size() + "/" + Player.inventorySize, false);
+        TextEngine.printNoDelay("\n", false);
+        TextEngine.printWithDelays("You enter the shop.", false);
+        TextEngine.printWithDelays("You can buy items here", false);
+        TextEngine.printWithDelays("What would you like to buy: \nsuper health potion (50 gold), demon armor (200 gold), key (30 gold), or leave", true);
+        while (true) {
+            ignore = console.readLine();
+            command = console.readLine();
+            switch (command.toLowerCase()) {
+                case "super health potion" -> {
+                    buyMultiple("super health potion", 15);
+                }
+                case "demon armor" -> {
+                    if (Player.getGold() >= 20) {
+                        Player.changeGold(-20);
+                        Player.putItem("demon armor", 1);
                         keepShopping();
                     } else {
-                        TextEngine.printWithDelays("You do not have enough gold to buy Heart Container", false);
+                        TextEngine.printWithDelays("You do not have enough gold to buy a demon armor", false);
                         TextEngine.enterToNext();
                         keepShopping();
                     }
@@ -243,7 +294,15 @@ public class Village extends Room {
             command = console.readLine();
             switch (command.toLowerCase()) {
                 case "yes" -> {
-                    shop();
+                    if(Dungeon.completedDungeons<4){
+                        shop1();
+                    }
+                    else if (Dungeon.completedDungeons>3 && Dungeon.completedDungeons<6){
+                        shop2();
+                    }
+                    else {
+                        shop3();
+                    }
                 }
                 case "no" -> {
                     Main.loadSave();

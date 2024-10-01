@@ -21,6 +21,7 @@ public abstract class SettingsMenu {
         TextEngine.printNoDelay("This is the settings menu. Here you can change the speed of the text.", false);
         TextEngine.printNoDelay("The current speed is set to: " + TextEngine.speedSetting, false);
         TextEngine.printWithDelays("You can change the speed to: Slow, Normal, Fast, or NoDelay", false);
+        TextEngine.printNoDelay("You can also type 'auto fight' to enable and disable the autofight feature.", false);
         TextEngine.printWithDelays("Type 'exit' to leave this menu", true);
         while (true) {
             ignore = console.readLine();
@@ -97,6 +98,25 @@ public abstract class SettingsMenu {
                         TextEngine.clearScreen();
                         start();
                     }
+                }
+                case "audo fight"->{
+                    Boolean oldSetting = Player.autoFight;
+                    Player.autoFight = !Player.autoFight;
+                    TextEngine.printNoDelay("Auto Fight: "+Player.autoFight, false);
+                    TextEngine.printNoDelay("Confirm? (yes or no)", true);
+                    ignore = console.readLine();
+                    command = console.readLine();
+                    if (command.toLowerCase().equals("yes")) {
+                        TextEngine.printWithDelays("Settings saved.", false);
+                        TextEngine.clearScreen();
+                        leave();
+                    } else {
+                        TextEngine.printWithDelays("Settings not saved.", false);
+                        Player.autoFight = oldSetting;
+                        TextEngine.clearScreen();
+                        start();
+                    }
+
                 }
                 case "exit" -> {
                     leave();
