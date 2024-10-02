@@ -3,8 +3,6 @@ import java.io.Console;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.w3c.dom.Text;
-
 /**
  * Player Engine
  *
@@ -295,18 +293,18 @@ public class Player {
     public static void printMap() throws InterruptedException {
         TextEngine.clearScreen();
         String[][] map = {
-            {" ", " ", " ", " ", "[   ]", "[ D ]", " ", " ", " "},
-            {"[ V ]", " ", " ", " ", "[   ]", "[   ]", "[ D ]", " ", " "},
-            {"[   ]", "[   ]", "[   ]", "[   ]", "[   ]", " ", " ", " "},
-            {" ", " ", " ", "[ V ]", "[   ]", "[   ]", "[ D ]", " ", " "},
-            {"[   ]", "[   ]", "[   ]", "[   ]", "[ D ]", " ", " ", " "},
+            {"     ", "     ", "[   ]", "[ D ]", "     ", "     ", " ", " ", " "},
+            {"[ V ]", "     ", "[   ]", "[   ]", "[ D ]", "   ", "", " ", " "},
+            {"[   ]", "[   ]", "[   ]", "[ V ]", "     ", " ", " ", " "},
+            {"[   ]", "[   ]", "[   ]", "[   ]", "[ D ]", "", "", " ", " "},
+            {"     ", "[   ]", "[   ]", "[   ]", "[ D ]", " ", " ", " "},
             {"[ D ]", "[   ]", "[   ]", "[   ]", "[ D ]", " ", " ", " "},
             {"[ D ]", "[   ]", "[   ]", "[   ]", "[ D ]", " ", " ", " "},
-            {" ", " ", " ", "[   ]", "[   ]", "[ V ]", " ", " ", " "}
+            {"     ", "[   ]", "[   ]", "[ V ]", "     ", " ", " "}
         };
 
         // Update the map with the player's position
-        map[playerY][playerX] = "[ P ]";
+        map[playerY][playerX-1] = "[ P ]";
 
         // Print the map
         System.out.println("Map: ");
@@ -321,5 +319,6 @@ public class Player {
         System.out.println(" 'V' = Village");
         System.out.println(" 'P' = Player");
         TextEngine.enterToNext();
+        Main.loadSave();
     }
 }

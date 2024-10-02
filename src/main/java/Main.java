@@ -164,10 +164,12 @@ class Main {
                 Player.heal();
             case "stats"-> 
                 Player.printStats();
-            case "restart" -> {
-                TextEngine.printWithDelays("Restarting dungeon...", false);
-                Dungeon.resetAll();
-                loadSave();
+            case "map" -> {
+                if (getSavedPlace().equals("OpenWorld")) {
+                    Player.printMap();
+                } else {
+                    TextEngine.printWithDelays("You cannot use that command here.", true);
+                }
             }
             default -> invalidCommandWithBuffer();
         }

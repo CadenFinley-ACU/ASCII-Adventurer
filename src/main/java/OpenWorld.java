@@ -21,44 +21,84 @@ public class OpenWorld extends Room {
             case 0:
                 Village.startRoom();
             case 1:
-                room1(); //start room
+                Player.playerX = 3;
+                Player.playerY = 7;
+                room1(); //start room   
             case 2:
+                Player.playerX = 2;
+                Player.playerY = 7;
                 room2(); //start room
             case 3:
+                Player.playerX = 2;
+                Player.playerY = 6;
                 room3(); //start room
             case 4:
+                Player.playerX = 3;
+                Player.playerY = 6;
                 room4(); //start room
             case 5:
+                Player.playerX = 4;
+                Player.playerY = 6;
                 room5(); //start room
             case 6:
+                Player.playerX = 4;
+                Player.playerY = 5;
                 room6(); //start room
             case 7:
+                Player.playerX = 3;
+                Player.playerY = 5;
                 room7(); //start room
             case 8:
+                Player.playerX = 2;
+                Player.playerY = 5;
                 room8(); //start room
             case 9:
+                Player.playerX = 3;
+                Player.playerY = 4;
                 room9(); //start room
             case 10:
+                Player.playerX = 4;
+                Player.playerY = 4;
                 room10(); //start room
             case 11:
+                Player.playerX = 4;
+                Player.playerY = 3;
                 room11(); //start room
             case 12:
+                Player.playerX = 3;
+                Player.playerY = 3;
                 room12(); //start room
             case 13:
+                Player.playerX = 2;
+                Player.playerY = 3;
                 room13(); //start room
             case 14:
+                Player.playerX = 1;
+                Player.playerY = 3;
                 room14(); //start room
             case 15:
+                Player.playerX = 1;
+                Player.playerY = 2;
                 room15(); //start room
             case 16:
+                Player.playerX = 2;
+                Player.playerY = 2;
                 room16(); //start room
             case 17:
+                Player.playerX = 3;
+                Player.playerY = 2;
                 room17(); //start room
             case 18:
+                Player.playerX = 4;
+                Player.playerY = 1;
                 room18(); //start room
             case 19:
+                Player.playerX = 3;
+                Player.playerY = 1;
                 room19(); //start room
             case 20:
+                Player.playerX = 1;
+                Player.playerY = 0;
                 room20(); //start room
             default:
                 Main.startMenu();
