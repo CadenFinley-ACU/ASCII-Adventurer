@@ -67,7 +67,7 @@ public class Player {
                 Main.loadSave();
             }
             case "3" -> {
-                TextEngine.printNoDelay("1: Meadow 2: Dark Forest 3: Mountain Cave 4: Mountain Top 5: Desert Oasis 6: Desert Plains 7: Desert Pyramid", false);
+                TextEngine.printNoDelay("1: Meadow 2: Dark Forest 3: Mountain Cave 4: Mountain Top 5: Desert Oasis 6: Desert Plains 7: Desert Pyramid 8: Ocean Kingdom", false);
                 TextEngine.printNoDelay("debug dungeon: ", true);
                 ignore = console.readLine();
                 command = console.readLine();
@@ -98,6 +98,10 @@ public class Player {
                     }
                     case "7" ->{
                         Main.saveSpace("Desert Pyramid Dungeon");
+                        Main.loadSave();
+                    }
+                    case "8" ->{
+                        Main.saveSpace("Ocean Kingdom Dungeon");
                         Main.loadSave();
                     }
                     default -> {
@@ -197,7 +201,12 @@ public class Player {
     }
 
     public static void putItem(String item, int amount) throws InterruptedException { //put an item in the inventory
-        manager.put(item, amount);
+        if("Backpack".equals(item)|| "Large Backpack".equals(item)){
+            changeInventorySize(InventoryManager.Potions.get(item));
+        }
+        else {
+            manager.put(item, amount);
+        }
     }
 
     private static void playerCreate() throws InterruptedException { //create the player
@@ -249,15 +258,31 @@ public class Player {
     }
 
     public static void heal() throws InterruptedException { //use available health potions in inventory to heal
-        if (inventory.containsKey("health potion")) {
+        if (inventory.containsKey("super health potion")) {
             if (health < maxHealth) {
-                InventoryManager.useItem("health potion");
+                InventoryManager.useItem("super health potion");
             } else {
                 TextEngine.printWithDelays("You are already at full health!", false);
             }
         } else {
-            TextEngine.printWithDelays("You have no health potions!", false);
-        }
+            if (inventory.containsKey("greater health potion")) {
+                if (health < maxHealth) {
+                    InventoryManager.useItem("greater health potion");
+                } else {
+                    TextEngine.printWithDelays("You are already at full health!", false);
+                }
+            } else {
+                if (inventory.containsKey("health potion")) {
+                    if (health < maxHealth) {
+                        InventoryManager.useItem("health potion");
+                    } else {
+                        TextEngine.printWithDelays("You are already at full health!", false);
+                    }
+                } else {
+                    TextEngine.printWithDelays("You have no health potions!", false);
+                }
+            }
+        } 
         TextEngine.enterToNext();
         Main.loadSave();
     }

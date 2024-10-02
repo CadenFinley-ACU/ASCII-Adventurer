@@ -227,7 +227,7 @@ public class TestSuite_Adventure
     }
     @Test
     public void testDungeonGeneratorConnection19() {
-        DungeonGenerator.start(9);
+        DungeonGenerator.start(11);
         int[][] matrix = DungeonGenerator.returnMatrix();
         int[] pos9 = DungeonGenerator.findValue(matrix, 9);
         int[] pos8 = DungeonGenerator.findValue(matrix, 8);

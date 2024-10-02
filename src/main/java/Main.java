@@ -64,9 +64,12 @@ class Main {
         
         //*  ************************************************************************************ */
 
-        InventoryManager.createItem("potion", "health potion", 10); //village level 1 | dungeon 0,1,2
-        InventoryManager.createItem("potion", "greater health potion", 20); //village level 2 | dungeon 3,4,5
+        InventoryManager.createItem("potion", "health potion", 15); //village level 1 | dungeon 0,1,2
+        InventoryManager.createItem("potion", "greater health potion", 30); //village level 2 | dungeon 3,4,5
         InventoryManager.createItem("potion", "super health potion", 50); //village level 3 | dungeon 6,7,8
+
+        InventoryManager.createItem("potion", "Backpack", 15); 
+        InventoryManager.createItem("potion", "Large Backpack", 30);
 
         InventoryManager.createItem("potion", "heart container", 10);
 
@@ -180,6 +183,7 @@ class Main {
                 case "Desert Oasis Dungeon" -> DesertOasisDungeon.startRoom();
                 case "Desert Plains Dungeon" -> DesertPlainsDungeon.startRoom();
                 case "Desert Pyramid Dungeon" -> DesertPyramidDungeon.startRoom();
+                case "Ocean Kingdom Dungeon" -> OceanKingdomDungeon.startRoom();
                 default -> startMenu();
             }
         }

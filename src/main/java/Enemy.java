@@ -31,6 +31,12 @@ public class Enemy {
             Map.entry("Mimic", 5),
             Map.entry("Gargoyle", 20),
 
+            Map.entry("Sea Serpent", 50),
+            Map.entry("Sea Monster", 60),
+            Map.entry("Sea Witch", 55),
+            Map.entry("Sea Dragon", 70),
+            Map.entry("Sea Giant", 60),
+
             //minibosses
             Map.entry("Golem", 20), //dungeon 1
             Map.entry("Forest Guardian", 25), //dungeon 2  //forest area

@@ -17,6 +17,7 @@ public class MountainCaveDungeon extends Dungeon {
     private static List<String> items = new ArrayList<>(List.of("better sword", "ninja armor", "health potion"));
     private static final List<String> enemies = new ArrayList<>(List.of("Troll", "Skeleton", "Orc", "Ghost","Demon","Zombie"));
     private static final Random rand = new Random();
+    public static boolean completed = false;
 
     public static void startRoom() throws InterruptedException { //start room
         room = "Mountain Cave Dungeon";
@@ -29,6 +30,7 @@ public class MountainCaveDungeon extends Dungeon {
     }
 
     public static void fresh() { //fresh
+        completed = false;
         items = new ArrayList<>(List.of("better sword", "ninja kit", "health potion"));
         foundItemRooms = 0;
         Dungeon.currentPlayerPosition = spawnPosition;
@@ -100,9 +102,12 @@ public class MountainCaveDungeon extends Dungeon {
             TextEngine.printWithDelays("You have entered the boss room", false);
             Player.changeHealth(Enemy.spawnEnemy("Wyvern", 1));
             TextEngine.printWithDelays("You have defeated the boss and completed the dungeon!", false);
+            Room.hasItemInRoom("Backpack", 1);
             lastPosition = currentPlayerPosition.clone();
             roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = mountainCaveDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
-            completedDungeons++;
+            if(!completed){
+                completedDungeons++;
+            }
             Player.autoFight = Dungeon.previousAutoSettings;
             OpenWorld.startRoom();
         }

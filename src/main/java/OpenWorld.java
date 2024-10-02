@@ -535,7 +535,7 @@ public class OpenWorld extends Room {
                     Main.loadSave();
                 }
                 case "dungeon" -> {
-                    if(Dungeon.completedDungeons>4){
+                    if(Dungeon.completedDungeons>5){
                         DesertPyramidDungeon.fresh();
                     Main.saveSpace("Desert Pyramid Dungeon");
                     Main.loadSave();
@@ -584,7 +584,13 @@ public class OpenWorld extends Room {
                     Main.loadSave();
                 }
                 case "dungeon" -> {
-                    //to final dungeon
+                    if(Dungeon.completedDungeons>6){
+                        OceanKingdomDungeon.fresh();
+                    Main.saveSpace("Ocean Kingdom Dungeon");
+                    Main.loadSave();
+                    } else {
+                        TextEngine.printWithDelays("You must complete the other dungeons first.", true);
+                    } 
                 }
                 default ->
                     Main.inGameDefaultTextHandling(command);

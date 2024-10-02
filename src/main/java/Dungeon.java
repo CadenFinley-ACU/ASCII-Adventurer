@@ -20,6 +20,7 @@ public class Dungeon extends Room {
     public static int[][] desertOasisDungeon;
     public static int[][] desertPlainsDungeon;
     public static int[][] desertPyramidDungeon;
+    public static int[][] oceanKingdomDungeon;
 
     public static int[] currentPlayerPosition;
     public static boolean previousAutoSettings;
@@ -31,7 +32,7 @@ public class Dungeon extends Room {
         desertOasisDungeon = DungeonGenerator.generateAndReturnMatrix(9);
         desertPlainsDungeon = DungeonGenerator.generateAndReturnMatrix(9);
         desertPyramidDungeon = DungeonGenerator.generateAndReturnMatrix(11);
-        // meadowDungeon = DungeonGenerator.generateAndReturnMatrix(13);
+        oceanKingdomDungeon = DungeonGenerator.generateAndReturnMatrix(13);
     }
     public static void defaultDungeonArgs(String data) throws InterruptedException{ //default dungeon arguments
         switch(data){
@@ -61,6 +62,9 @@ public class Dungeon extends Room {
                     case "Desert Pyramid" -> {
                         DesertPyramidDungeon.fresh();
                     }
+                    case "Ocean Kingdom" -> {
+                        OceanKingdomDungeon.fresh();
+                    }
 
                     //add more dungeons here
                 }
@@ -89,6 +93,9 @@ public class Dungeon extends Room {
                         case "Desert Pyramid" -> {
                             DungeonGenerator.printMap(desertPyramidDungeon);
                         }
+                        case "Ocean Kingdom" -> {
+                            DungeonGenerator.printMap(oceanKingdomDungeon);
+                        }
                         //add more dungeons here
                     }
                 }
@@ -110,6 +117,7 @@ public class Dungeon extends Room {
         DesertOasisDungeon.fresh();
         DesertPlainsDungeon.fresh();
         DesertPyramidDungeon.fresh();
+        OceanKingdomDungeon.fresh();
         //add more dungeons here
     }
     public static void autoCheck(){

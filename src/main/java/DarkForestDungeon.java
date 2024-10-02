@@ -17,6 +17,7 @@ public class DarkForestDungeon extends Dungeon {
     private static List<String> items = new ArrayList<>(List.of("broad sword", "full armor kit", "health potion"));
     private static final List<String> enemies = new ArrayList<>(List.of("Goblin", "Skeleton", "Orc", "Mimic","Zombie"));
     private static final Random rand = new Random();
+    public static boolean completed = false;
 
     public static void startRoom() throws InterruptedException { //start room
         room = "Dark Forest Dungeon";
@@ -29,6 +30,7 @@ public class DarkForestDungeon extends Dungeon {
     }
 
     public static void fresh() { //fresh
+        completed = false;
         items = new ArrayList<>(List.of("broad sword", "full armor kit", "health potion"));
         foundItemRooms = 0;
         Dungeon.currentPlayerPosition = spawnPosition;
@@ -102,7 +104,9 @@ public class DarkForestDungeon extends Dungeon {
             TextEngine.printWithDelays("You have defeated the boss and completed the dungeon!", false);
             lastPosition = currentPlayerPosition.clone();
             roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = darkForestDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
-            completedDungeons++;
+            if(!completed){
+                completedDungeons++;
+            }
             Player.autoFight = Dungeon.previousAutoSettings;
             OpenWorld.startRoom();
         }
