@@ -26,12 +26,11 @@ public class MountainCaveDungeon extends Dungeon {
         Main.screenRefresh();
         Dungeon.currentDungeon = "Mountain Cave";
         currentPlayerPosition = save;
-        Dungeon.autoCheck();
         startRooms();
     }
 
     public static void fresh() { //fresh
-
+        Dungeon.autoCheck();
         completed = false;
         items = new ArrayList<>(List.of("better sword", "ninja kit", "health potion"));
         foundItemRooms = 0;

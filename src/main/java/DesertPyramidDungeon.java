@@ -25,11 +25,11 @@ public class DesertPyramidDungeon extends Dungeon {
         Main.screenRefresh();
         Dungeon.currentDungeon = "Desert Pyramid";
         currentPlayerPosition = save;
-        Dungeon.autoCheck();
         startRooms();
     }
 
     public static void fresh() { //fresh
+        Dungeon.autoCheck();
         completed = false;
         items = new ArrayList<>(List.of("excalibur", "angel armor", "super health potion"));
         foundItemRooms = 0;

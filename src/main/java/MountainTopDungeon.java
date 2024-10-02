@@ -25,12 +25,11 @@ public class MountainTopDungeon extends Dungeon {
         Main.screenRefresh();
         Dungeon.currentDungeon = "Mountain Top";
         currentPlayerPosition = save;
-        Dungeon.autoCheck();
         startRooms();
     }
 
     public static void fresh() { //fresh
-
+        Dungeon.autoCheck();
         completed = false;
         items = new ArrayList<>(List.of("great sword", "knight armor", "greater health potion"));
         foundItemRooms = 0;

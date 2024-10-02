@@ -25,12 +25,11 @@ public class DesertOasisDungeon extends Dungeon {
         Main.screenRefresh();
         Dungeon.currentDungeon = "Desert Oasis";
         currentPlayerPosition = save;
-        Dungeon.autoCheck();
         startRooms();
     }
 
     public static void fresh() { //fresh
-
+        Dungeon.autoCheck();
         completed = false;
         items = new ArrayList<>(List.of("master sword", "royal armor", "greater health potion"));
         foundItemRooms = 0;

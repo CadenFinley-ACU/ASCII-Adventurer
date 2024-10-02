@@ -25,12 +25,11 @@ public class DarkForestDungeon extends Dungeon {
         Main.screenRefresh();
         Dungeon.currentDungeon = "Dark Forest";
         currentPlayerPosition = save;
-        Dungeon.autoCheck();
         startRooms();
     }
 
     public static void fresh() { //fresh
-
+        Dungeon.autoCheck();
         completed = false;
         items = new ArrayList<>(List.of("broad sword", "full armor kit", "health potion"));
         foundItemRooms = 0;

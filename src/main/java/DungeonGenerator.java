@@ -13,6 +13,10 @@ public class DungeonGenerator {
     public static boolean testing = false;
     public static int[][] matrix;
 
+    public static void forceJAVAC(){
+        return;
+    }
+
     /**
      * Starts the dungeon generation process. This method generates a matrix
      * with a path connecting the values 8 and 9, and ensures the matrix meets
@@ -399,9 +403,17 @@ public class DungeonGenerator {
                             case 9 ->
                                 System.out.print("[*] "); // Special marker for value 9
                             case 8 ->
-                                System.out.print("[!] "); // Special marker for value 8
+                                System.out.print("[B] "); // Special marker for value 8
                             case 0 ->
                                 System.out.print("[ ] "); // Empty room
+                            case 3 ->
+                                System.out.print("[?] "); // Special marker for value 3
+                            case 2 ->
+                                System.out.print("[?] "); // Special marker for value 2
+                            case 4 ->
+                                System.out.print("[!] "); // Special marker for value 4
+                            case 1 ->
+                                System.out.print("[~] "); // Default case for value 1
                             default ->
                                 System.out.print("[" + passedMatrix[i][j] + "] "); // Default case for other values
                         }
@@ -409,10 +421,8 @@ public class DungeonGenerator {
                         switch (unlocked[i][j]) {
                             case 9 ->
                                 System.out.print("[*] "); // Special marker for value 9
-                            case 8 ->
-                                System.out.print("[!] "); // Special marker for value 8
                             default ->
-                                System.out.print("[" + passedMatrix[i][j] + "] "); // Default case for other values
+                                System.out.print("[.] "); // Default case for other values
                         }
                     } else {
                         System.out.print("[ ] "); // Print brackets around non-zero values

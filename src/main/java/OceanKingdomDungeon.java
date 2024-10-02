@@ -25,11 +25,11 @@ public class OceanKingdomDungeon extends Dungeon {
         Main.screenRefresh();
         Dungeon.currentDungeon = "Ocean Kingdom";
         currentPlayerPosition = save;
-        Dungeon.autoCheck();
         startRooms();
     }
 
     public static void fresh() { //fresh
+        Dungeon.autoCheck();
         completed = false;
         items = new ArrayList<>(List.of("god slayer hammer", "god slayer armor", "super health potion"));
         foundItemRooms = 0;
