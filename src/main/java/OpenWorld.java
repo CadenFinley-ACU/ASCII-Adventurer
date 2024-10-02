@@ -525,7 +525,7 @@ public class OpenWorld extends Room {
     }
     private static void room18() throws InterruptedException{
         TextEngine.printWithDelays("You walk forward and see a small village in the distance", false);
-        TextEngine.printWithDelays("What is your command: west or dungeon", true);
+        TextEngine.printWithDelays("What is your command: west or Desert Pyramid Dungeon", true);
         while (true) {
             ignore = console.readLine();
             command = console.readLine();
@@ -535,7 +535,13 @@ public class OpenWorld extends Room {
                     Main.loadSave();
                 }
                 case "dungeon" -> {
-                    //to dungeon
+                    if(Dungeon.completedDungeons>4){
+                        DesertPyramidDungeon.fresh();
+                    Main.saveSpace("Desert Pyramid Dungeon");
+                    Main.loadSave();
+                    } else {
+                        TextEngine.printWithDelays("You must complete the other dungeons first.", true);
+                    } 
                 } 
                 default ->
                     Main.inGameDefaultTextHandling(command);

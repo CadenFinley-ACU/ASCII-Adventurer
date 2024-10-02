@@ -19,6 +19,7 @@ public class Dungeon extends Room {
     public static int[][] mountainTopDungeon;
     public static int[][] desertOasisDungeon;
     public static int[][] desertPlainsDungeon;
+    public static int[][] desertPyramidDungeon;
 
     public static int[] currentPlayerPosition;
     public static boolean previousAutoSettings;
@@ -29,7 +30,7 @@ public class Dungeon extends Room {
         mountainTopDungeon = DungeonGenerator.generateAndReturnMatrix(7);
         desertOasisDungeon = DungeonGenerator.generateAndReturnMatrix(9);
         desertPlainsDungeon = DungeonGenerator.generateAndReturnMatrix(9);
-        // meadowDungeon = DungeonGenerator.generateAndReturnMatrix(11);
+        desertPyramidDungeon = DungeonGenerator.generateAndReturnMatrix(11);
         // meadowDungeon = DungeonGenerator.generateAndReturnMatrix(13);
     }
     public static void defaultDungeonArgs(String data) throws InterruptedException{ //default dungeon arguments
@@ -57,6 +58,10 @@ public class Dungeon extends Room {
                     case "Desert Plains" -> {
                         DesertPlainsDungeon.fresh();
                     }
+                    case "Desert Pyramid" -> {
+                        DesertPyramidDungeon.fresh();
+                    }
+
                     //add more dungeons here
                 }
             }
@@ -81,6 +86,9 @@ public class Dungeon extends Room {
                         case "Desert Plains" -> {
                             DungeonGenerator.printMap(desertPlainsDungeon);
                         }
+                        case "Desert Pyramid" -> {
+                            DungeonGenerator.printMap(desertPyramidDungeon);
+                        }
                         //add more dungeons here
                     }
                 }
@@ -101,6 +109,7 @@ public class Dungeon extends Room {
         MountainTopDungeon.fresh();
         DesertOasisDungeon.fresh();
         DesertPlainsDungeon.fresh();
+        DesertPyramidDungeon.fresh();
         //add more dungeons here
     }
     public static void autoCheck(){
