@@ -8,7 +8,16 @@ import java.util.Map;
  * Text Adventure Game SE374 F24 Final Project Caden Finley Albert Tucker
  * Grijesh Shrestha
  */
-//maybe procurally generated dungeons using birary states to matrix arrrys ti create rooms in  path
+
+
+
+ /**
+  * Enemies
+  Items
+    Dungeons
+    Rooms
+    Add character to game
+  */
 class Main {
 
     private final static Console console = System.console();
@@ -49,6 +58,7 @@ class Main {
         InventoryManager.createItem("weapon", "god slayer hammer", 100); //dungeon 8
 
         //*  ************************************************************************************ */
+
         InventoryManager.createItem("armor", "shield", 2); //village shop
 
         InventoryManager.createItem("armor", "chainmail set", 5); //dungeon 1

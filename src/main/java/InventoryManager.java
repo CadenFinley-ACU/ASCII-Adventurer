@@ -50,19 +50,19 @@ public class InventoryManager extends Player {
             for (String key : keys) {
                 if (inventory.get(key) > 1) {
                     if (Weapons.containsKey(key)) {
-                        TextEngine.printNoDelay(i + ": " + key + " x" + inventory.get(key) + " Damage: " + Weapons.get(key), false);
+                        TextEngine.printNoDelay(" " + key + " x" + inventory.get(key) + " Damage: " + Weapons.get(key), false);
                     } else if (Armor.containsKey(key)) {
                         TextEngine.printNoDelay(" Defense: " + Armor.get(key) + " Defense: " + Armor.get(key), false);
                     } else {
-                        TextEngine.printNoDelay(i + ": " + key + " x" + inventory.get(key), false);
+                        TextEngine.printNoDelay(" " + key + " x" + inventory.get(key), false);
                     }
                 } else {
                     if (Weapons.containsKey(key)) {
-                        TextEngine.printNoDelay(i + ": " + key + " Damage: " + Weapons.get(key), false);
+                        TextEngine.printNoDelay(" " + key + " Damage: " + Weapons.get(key), false);
                     } else if (Armor.containsKey(key)) {
-                        TextEngine.printNoDelay(i + ": " + key + " Defense: " + Armor.get(key), false);
+                        TextEngine.printNoDelay(" " + key + " Defense: " + Armor.get(key), false);
                     } else {
-                        TextEngine.printNoDelay(i + ": " + key, false);
+                        TextEngine.printNoDelay(" " + key, false);
                     }
                 }
                 i++;
