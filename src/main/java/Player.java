@@ -178,6 +178,7 @@ public class Player {
     }
 
     public static void changeGold(int change) throws InterruptedException { //change the gold
+        //check for overflow
         gold += change;
         if (change < 0) {
             TextEngine.printWithDelays("You lost " + change + " gold!", false);

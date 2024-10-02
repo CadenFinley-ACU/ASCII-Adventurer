@@ -12,8 +12,10 @@ import java.util.Map;
 
 
  /**
+  * TODOOO
   * Enemies
-  Items
+     Items
+
     Dungeons
     Rooms
     Add character to game
@@ -309,9 +311,6 @@ class Main {
         if (getSavedPlace() != null) {
             TextEngine.printNoDelay("Location: " + getSavedPlace(), false);
         }
-        // if("Village".equals(getSavedPlace())){
-        //     TextEngine.printNoDelay("Gold: " + Player.getGold(), false);
-        // }
         TextEngine.printNoDelay("\n", false);
     }
 

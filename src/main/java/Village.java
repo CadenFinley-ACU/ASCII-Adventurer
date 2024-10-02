@@ -175,7 +175,7 @@ public class Village extends Room {
         }
     }
 
-    public static void shop1() throws InterruptedException { //shop
+    public static void shop1() throws InterruptedException { //shop 1
         Main.screenRefresh();
         //shop implementation
         TextEngine.printNoDelay("Gold: " + Player.getGold(), false);
@@ -214,7 +214,7 @@ public class Village extends Room {
         }
     }
 
-    public static void shop2() throws InterruptedException { //shop
+    public static void shop2() throws InterruptedException { //shop 2
         Main.screenRefresh();
         //shop implementation
         TextEngine.printNoDelay("Gold: " + Player.getGold(), false);
@@ -253,7 +253,7 @@ public class Village extends Room {
         }
     }
 
-    public static void shop3() throws InterruptedException { //shop
+    public static void shop3() throws InterruptedException { //shop 3
         Main.screenRefresh();
         //shop implementation
         TextEngine.printNoDelay("Gold: " + Player.getGold(), false);
@@ -292,7 +292,7 @@ public class Village extends Room {
         }
     }
 
-    private static void buyMultiple(String type, int cost) throws InterruptedException {
+    private static void buyMultiple(String type, int cost) throws InterruptedException { //buy multiple clause for certain items in village shop
         TextEngine.printWithDelays("How many would you like to buy?", true);
         ignore = console.readLine();
         command = console.readLine();
