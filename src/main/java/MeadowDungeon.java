@@ -29,6 +29,7 @@ public class MeadowDungeon extends Dungeon {
     }
 
     public static void fresh() { //fresh
+        
         completed = false;
         items = new ArrayList<>(List.of("axe", "chainmail set", "health potion"));
         Dungeon.autoCheck();

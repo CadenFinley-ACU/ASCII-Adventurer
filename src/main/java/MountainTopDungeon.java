@@ -30,6 +30,7 @@ public class MountainTopDungeon extends Dungeon {
     }
 
     public static void fresh() { //fresh
+        
         completed = false;
         items = new ArrayList<>(List.of("great sword", "knight armor", "greater health potion"));
         foundItemRooms = 0;

@@ -286,5 +286,8 @@ public class Player {
         TextEngine.enterToNext();
         Main.loadSave();
     }
+    public static Map<String, Integer> copyInventory() { //get the inventory manager
+        return inventory;
+    }
 
 }

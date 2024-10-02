@@ -39,36 +39,6 @@ public class Dungeon extends Room {
             case "leave" -> {
                 TextEngine.printWithDelays("Im sorry. You cannot leave right now.", true);
             }
-            case "restart" -> {
-                switch(currentDungeon){
-                    case "Meadow" -> {
-                        MeadowDungeon.fresh();
-                    }
-                    case "Dark Forest" -> {
-                        DarkForestDungeon.fresh();
-                    }
-                    case "Mountain Cave" -> {
-                        MountainCaveDungeon.fresh();
-                    }
-                    case "Mountain Top" -> {
-                        MountainTopDungeon.fresh();
-                    }
-                    case "Desert Oasis" -> {
-                        DesertOasisDungeon.fresh();
-                    }
-                    case "Desert Plains" -> {
-                        DesertPlainsDungeon.fresh();
-                    }
-                    case "Desert Pyramid" -> {
-                        DesertPyramidDungeon.fresh();
-                    }
-                    case "Ocean Kingdom" -> {
-                        OceanKingdomDungeon.fresh();
-                    }
-
-                    //add more dungeons here
-                }
-            }
             case "map" -> {
                 if(Player.getName().equals("Debug!")){
                     switch(currentDungeon){

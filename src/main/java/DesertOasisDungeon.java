@@ -30,6 +30,7 @@ public class DesertOasisDungeon extends Dungeon {
     }
 
     public static void fresh() { //fresh
+        
         completed = false;
         items = new ArrayList<>(List.of("master sword", "royal armor", "greater health potion"));
         foundItemRooms = 0;

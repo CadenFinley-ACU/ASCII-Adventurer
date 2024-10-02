@@ -20,6 +20,7 @@ public class MountainCaveDungeon extends Dungeon {
     public static boolean completed = false;
 
     public static void startRoom() throws InterruptedException { //start room
+
         room = "Mountain Cave Dungeon";
         Main.checkSave(room);
         Main.screenRefresh();
@@ -30,6 +31,7 @@ public class MountainCaveDungeon extends Dungeon {
     }
 
     public static void fresh() { //fresh
+        
         completed = false;
         items = new ArrayList<>(List.of("better sword", "ninja kit", "health potion"));
         foundItemRooms = 0;

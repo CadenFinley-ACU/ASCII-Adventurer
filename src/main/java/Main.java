@@ -1,4 +1,6 @@
 import java.io.Console;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  *
@@ -14,6 +16,7 @@ class Main {
     public static boolean playerCreated = false;
     public static String savedPlace = null;
     private static final String OS_NAME = System.getProperty("os.name");
+    public static Map<String, Integer> savedInventory = new HashMap<>();
 
     public static void main(String[] args) throws InterruptedException { //main game start
         Dungeon.generateDungeons();
