@@ -162,10 +162,14 @@ class Main {
             }
             case "heal" ->
                 Player.heal();
-            case "stats" ->
+            case "stats"-> 
                 Player.printStats();
-            default ->
-                invalidCommandWithBuffer();
+            case "restart" -> {
+                TextEngine.printWithDelays("Restarting dungeon...", false);
+                Dungeon.resetAll();
+                loadSave();
+            }
+            default -> invalidCommandWithBuffer();
         }
     }
 

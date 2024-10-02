@@ -3,6 +3,8 @@ import java.io.Console;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.w3c.dom.Text;
+
 /**
  * Player Engine
  *
@@ -24,7 +26,8 @@ public class Player {
     public static Map<String, Integer> inventory = new HashMap<>();
     public static InventoryManager manager = new InventoryManager();
     public static boolean autoFight = false;
-
+    public static int playerX=0;
+    public static int playerY=0;
     public static void playerStart() throws InterruptedException { //start the player
         maxHealth = 100;
         health = maxHealth;
@@ -289,5 +292,34 @@ public class Player {
     public static Map<String, Integer> copyInventory() { //get the inventory manager
         return inventory;
     }
+    public static void printMap() throws InterruptedException {
+        TextEngine.clearScreen();
+        String[][] map = {
+            {" ", " ", " ", " ", "[   ]", "[ D ]", " ", " ", " "},
+            {"[ V ]", " ", " ", " ", "[   ]", "[   ]", "[ D ]", " ", " "},
+            {"[   ]", "[   ]", "[   ]", "[   ]", "[   ]", " ", " ", " "},
+            {" ", " ", " ", "[ V ]", "[   ]", "[   ]", "[ D ]", " ", " "},
+            {"[   ]", "[   ]", "[   ]", "[   ]", "[ D ]", " ", " ", " "},
+            {"[ D ]", "[   ]", "[   ]", "[   ]", "[ D ]", " ", " ", " "},
+            {"[ D ]", "[   ]", "[   ]", "[   ]", "[ D ]", " ", " ", " "},
+            {" ", " ", " ", "[   ]", "[   ]", "[ V ]", " ", " ", " "}
+        };
 
+        // Update the map with the player's position
+        map[playerY][playerX] = "[ P ]";
+
+        // Print the map
+        System.out.println("Map: ");
+        for (String[] row : map) {
+            for (String cell : row) {
+                System.out.print(cell + " ");
+            }
+            System.out.println();
+        }
+        map[playerY][playerX] = "[   ]"; // Reset the player's position
+        System.out.println(" 'D' = Dungeon");
+        System.out.println(" 'V' = Village");
+        System.out.println(" 'P' = Player");
+        TextEngine.enterToNext();
+    }
 }
