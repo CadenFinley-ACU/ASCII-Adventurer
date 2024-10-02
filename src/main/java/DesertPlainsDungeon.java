@@ -30,7 +30,7 @@ public class DesertPlainsDungeon extends Dungeon {
     }
 
     public static void fresh() { //fresh
-        completed = false;  
+        completed = false;
         items = new ArrayList<>(List.of("legendary sword", "demon armor", "greater health potion"));
         foundItemRooms = 0;
         Dungeon.currentPlayerPosition = spawnPosition;
@@ -104,7 +104,7 @@ public class DesertPlainsDungeon extends Dungeon {
             TextEngine.printWithDelays("You have defeated the boss and completed the dungeon!", false);
             lastPosition = currentPlayerPosition.clone();
             roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = desertPlainsDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
-            if(!completed){
+            if (!completed) {
                 completedDungeons++;
             }
             Player.autoFight = Dungeon.previousAutoSettings;

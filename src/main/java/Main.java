@@ -1,3 +1,4 @@
+
 import java.io.Console;
 import java.util.HashMap;
 import java.util.Map;
@@ -46,7 +47,6 @@ class Main {
         InventoryManager.createItem("weapon", "god slayer hammer", 100); //dungeon 8
 
         //*  ************************************************************************************ */
-
         InventoryManager.createItem("armor", "shield", 2); //village shop
 
         InventoryManager.createItem("armor", "chainmail set", 5); //dungeon 1
@@ -64,20 +64,20 @@ class Main {
         InventoryManager.createItem("armor", "angel armor", 50); //dungeon 7
 
         InventoryManager.createItem("armor", "god slayer armor", 75); //dungeon 8
-        
-        //*  ************************************************************************************ */
 
+        //*  ************************************************************************************ */
         InventoryManager.createItem("potion", "health potion", 15); //village level 1 | dungeon 0,1,2
         InventoryManager.createItem("potion", "greater health potion", 30); //village level 2 | dungeon 3,4,5
         InventoryManager.createItem("potion", "super health potion", 50); //village level 3 | dungeon 6,7,8
 
-        InventoryManager.createItem("potion", "Backpack", 15); 
+        InventoryManager.createItem("potion", "Backpack", 15);
         InventoryManager.createItem("potion", "Large Backpack", 30);
 
         InventoryManager.createItem("potion", "heart container", 10);
 
         InventoryManager.createItem("key", "key", 0);
     }
+
     public static void startMenu() throws InterruptedException { //main menu and sstart menu text
         TextEngine.clearScreen();
         TextEngine.printNoDelay("ASCII Adventurer, by: Albert Tucker, Caden Finley, and Grijesh Shrestha", false);
@@ -95,16 +95,26 @@ class Main {
             ignore = console.readLine();
             command = console.readLine();
             switch (command.toLowerCase()) {
-                case "start" -> start();
-                case "settings" -> SettingsMenu.start();
-                case "help" -> displayHelp();
-                case "exit" -> exitGame();
-                case "fast" -> setTextSpeed("Fast");
-                case "slow" -> setTextSpeed("Slow");
-                case "normal" -> setTextSpeed("Normal");
-                case "nodelay" -> setTextSpeed("NoDelay");
-                case "debug" -> debugInfo();
-                default -> TextEngine.printWithDelays("I'm sorry, I don't understand that command.", true);
+                case "start" ->
+                    start();
+                case "settings" ->
+                    SettingsMenu.start();
+                case "help" ->
+                    displayHelp();
+                case "exit" ->
+                    exitGame();
+                case "fast" ->
+                    setTextSpeed("Fast");
+                case "slow" ->
+                    setTextSpeed("Slow");
+                case "normal" ->
+                    setTextSpeed("Normal");
+                case "nodelay" ->
+                    setTextSpeed("NoDelay");
+                case "debug" ->
+                    debugInfo();
+                default ->
+                    TextEngine.printWithDelays("I'm sorry, I don't understand that command.", true);
             }
         }
     }
@@ -137,26 +147,36 @@ class Main {
 
     public static void inGameDefaultTextHandling(String data) throws InterruptedException { //default in game commands
         switch (data) {
-            case "help" -> displayInGameHelp();
-            case "inventory" -> Player.openInventory();
-            case "settings" -> SettingsMenu.start();
-            case "save" -> checkSave(getSavedPlace());
+            case "help" ->
+                displayInGameHelp();
+            case "inventory" ->
+                Player.openInventory();
+            case "settings" ->
+                SettingsMenu.start();
+            case "save" ->
+                checkSave(getSavedPlace());
             case "exit" -> {
                 TextEngine.printWithDelays("Returning to main menu.", false);
                 TextEngine.clearScreen();
                 startMenu();
             }
-            case "heal"-> Player.heal();
-            case "stats" -> Player.printStats();
-            default -> invalidCommandWithBuffer();
+            case "heal" ->
+                Player.heal();
+            case "stats" ->
+                Player.printStats();
+            default ->
+                invalidCommandWithBuffer();
         }
     }
-    public static void invalidCommandWithBuffer() throws InterruptedException{
+
+    public static void invalidCommandWithBuffer() throws InterruptedException {
         TextEngine.printWithDelays("I'm sorry, I don't understand that command.", true);
     }
-    public static void invalidCommand() throws InterruptedException{
+
+    public static void invalidCommand() throws InterruptedException {
         TextEngine.printWithDelays("I'm sorry, I don't understand that command.", false);
     }
+
     private static void displayInGameHelp() throws InterruptedException { //in game help command
         if (getSavedPlace().equals("Dungeon")) {
             TextEngine.printWithDelays("You can type 'restart' to restart the dungeon", false);
@@ -176,18 +196,30 @@ class Main {
             startMenu();
         } else {
             switch (getSavedPlace()) {
-                case "SpawnRoom" -> SpawnRoom.startRoom();
-                case "OpenWorld" -> OpenWorld.startRoom();
-                case "Village" -> Village.startRoom();
-                case "Meadow Dungeon" -> MeadowDungeon.startRoom();
-                case "Dark Forest Dungeon" -> DarkForestDungeon.startRoom();
-                case "Mountain Cave Dungeon" -> MountainCaveDungeon.startRoom();
-                case "Mountain Top Dungeon" -> MountainTopDungeon.startRoom();
-                case "Desert Oasis Dungeon" -> DesertOasisDungeon.startRoom();
-                case "Desert Plains Dungeon" -> DesertPlainsDungeon.startRoom();
-                case "Desert Pyramid Dungeon" -> DesertPyramidDungeon.startRoom();
-                case "Ocean Kingdom Dungeon" -> OceanKingdomDungeon.startRoom();
-                default -> startMenu();
+                case "SpawnRoom" ->
+                    SpawnRoom.startRoom();
+                case "OpenWorld" ->
+                    OpenWorld.startRoom();
+                case "Village" ->
+                    Village.startRoom();
+                case "Meadow Dungeon" ->
+                    MeadowDungeon.startRoom();
+                case "Dark Forest Dungeon" ->
+                    DarkForestDungeon.startRoom();
+                case "Mountain Cave Dungeon" ->
+                    MountainCaveDungeon.startRoom();
+                case "Mountain Top Dungeon" ->
+                    MountainTopDungeon.startRoom();
+                case "Desert Oasis Dungeon" ->
+                    DesertOasisDungeon.startRoom();
+                case "Desert Plains Dungeon" ->
+                    DesertPlainsDungeon.startRoom();
+                case "Desert Pyramid Dungeon" ->
+                    DesertPyramidDungeon.startRoom();
+                case "Ocean Kingdom Dungeon" ->
+                    OceanKingdomDungeon.startRoom();
+                default ->
+                    startMenu();
             }
         }
     }
@@ -196,6 +228,7 @@ class Main {
         savedPlace = null;
         Room.reset("all");
     }
+
     public static String getSavedPlace() { //get the saved place
         return savedPlace;
     }
@@ -255,7 +288,7 @@ class Main {
     public static void printStatus() { //print the status of the player
         TextEngine.printNoDelay(Player.getName(), false);
         TextEngine.printNoDelay("Health: " + Player.getHealth(), false);
-        if(getSavedPlace() != null){
+        if (getSavedPlace() != null) {
             TextEngine.printNoDelay("Location: " + getSavedPlace(), false);
         }
         // if("Village".equals(getSavedPlace())){

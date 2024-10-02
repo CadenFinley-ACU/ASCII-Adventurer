@@ -29,7 +29,7 @@ public class MeadowDungeon extends Dungeon {
     }
 
     public static void fresh() { //fresh
-        
+
         completed = false;
         items = new ArrayList<>(List.of("axe", "chainmail set", "health potion"));
         Dungeon.autoCheck();
@@ -105,7 +105,7 @@ public class MeadowDungeon extends Dungeon {
             TextEngine.printWithDelays("You have defeated the boss and completed the dungeon!", false);
             lastPosition = currentPlayerPosition.clone();
             roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = meadowDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
-            if(!completed){
+            if (!completed) {
                 completedDungeons++;
             }
             Player.autoFight = Dungeon.previousAutoSettings;

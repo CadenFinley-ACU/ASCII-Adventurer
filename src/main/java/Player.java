@@ -72,35 +72,35 @@ public class Player {
                 ignore = console.readLine();
                 command = console.readLine();
                 switch (command) {
-                    case "1" ->{
+                    case "1" -> {
                         Main.saveSpace("Meadow Dungeon");
                         Main.loadSave();
                     }
-                    case "2" ->{
+                    case "2" -> {
                         Main.saveSpace("Dark Forest Dungeon");
                         Main.loadSave();
                     }
-                    case "3" ->{
+                    case "3" -> {
                         Main.saveSpace("Mountain Cave Dungeon");
                         Main.loadSave();
                     }
-                    case "4" ->{
+                    case "4" -> {
                         Main.saveSpace("Mountain Top Dungeon");
                         Main.loadSave();
                     }
-                    case "5" ->{
+                    case "5" -> {
                         Main.saveSpace("Desert Oasis Dungeon");
                         Main.loadSave();
                     }
-                    case "6" ->{
+                    case "6" -> {
                         Main.saveSpace("Desert Plains Dungeon");
                         Main.loadSave();
                     }
-                    case "7" ->{
+                    case "7" -> {
                         Main.saveSpace("Desert Pyramid Dungeon");
                         Main.loadSave();
                     }
-                    case "8" ->{
+                    case "8" -> {
                         Main.saveSpace("Ocean Kingdom Dungeon");
                         Main.loadSave();
                     }
@@ -147,7 +147,7 @@ public class Player {
     }
 
     public static void changeHealth(int change) throws InterruptedException { //change the health
-        int damageCalc = (defense + (damage-(damage / 3)));
+        int damageCalc = (defense + (damage - (damage / 3)));
         if (change < 0) {
             change += damageCalc;
             if (change >= 0) {
@@ -201,10 +201,9 @@ public class Player {
     }
 
     public static void putItem(String item, int amount) throws InterruptedException { //put an item in the inventory
-        if("Backpack".equals(item)|| "Large Backpack".equals(item)){
+        if ("Backpack".equals(item) || "Large Backpack".equals(item)) {
             changeInventorySize(InventoryManager.Potions.get(item));
-        }
-        else {
+        } else {
             manager.put(item, amount);
         }
     }
@@ -282,10 +281,11 @@ public class Player {
                     TextEngine.printWithDelays("You have no health potions!", false);
                 }
             }
-        } 
+        }
         TextEngine.enterToNext();
         Main.loadSave();
     }
+
     public static Map<String, Integer> copyInventory() { //get the inventory manager
         return inventory;
     }

@@ -15,7 +15,7 @@ public class DesertPyramidDungeon extends Dungeon {
     public static ArrayList<String> directionsString;
     private static int foundItemRooms = 0;
     private static List<String> items = new ArrayList<>(List.of("excalibur", "angel armor", "super health potion"));
-    private static final List<String> enemies = new ArrayList<>(List.of("Werewolf", "Witch", "Giant", "Mummy","Minotaur"));
+    private static final List<String> enemies = new ArrayList<>(List.of("Werewolf", "Witch", "Giant", "Mummy", "Minotaur"));
     private static final Random rand = new Random();
     public static boolean completed = false;
 
@@ -105,7 +105,7 @@ public class DesertPyramidDungeon extends Dungeon {
             Room.hasItemInRoom("Large Backpack", 1);
             lastPosition = currentPlayerPosition.clone();
             roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = desertPyramidDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
-            if(!completed){
+            if (!completed) {
                 completedDungeons++;
             }
             Player.autoFight = Dungeon.previousAutoSettings;

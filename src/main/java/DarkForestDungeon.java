@@ -15,7 +15,7 @@ public class DarkForestDungeon extends Dungeon {
     public static ArrayList<String> directionsString;
     private static int foundItemRooms = 0;
     private static List<String> items = new ArrayList<>(List.of("broad sword", "full armor kit", "health potion"));
-    private static final List<String> enemies = new ArrayList<>(List.of("Goblin", "Skeleton", "Orc", "Mimic","Zombie"));
+    private static final List<String> enemies = new ArrayList<>(List.of("Goblin", "Skeleton", "Orc", "Mimic", "Zombie"));
     private static final Random rand = new Random();
     public static boolean completed = false;
 
@@ -29,9 +29,8 @@ public class DarkForestDungeon extends Dungeon {
         startRooms();
     }
 
-
     public static void fresh() { //fresh
-        
+
         completed = false;
         items = new ArrayList<>(List.of("broad sword", "full armor kit", "health potion"));
         foundItemRooms = 0;
@@ -106,7 +105,7 @@ public class DarkForestDungeon extends Dungeon {
             TextEngine.printWithDelays("You have defeated the boss and completed the dungeon!", false);
             lastPosition = currentPlayerPosition.clone();
             roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = darkForestDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
-            if(!completed){
+            if (!completed) {
                 completedDungeons++;
             }
             Player.autoFight = Dungeon.previousAutoSettings;

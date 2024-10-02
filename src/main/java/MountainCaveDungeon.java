@@ -15,7 +15,7 @@ public class MountainCaveDungeon extends Dungeon {
     public static ArrayList<String> directionsString;
     private static int foundItemRooms = 0;
     private static List<String> items = new ArrayList<>(List.of("better sword", "ninja armor", "health potion"));
-    private static final List<String> enemies = new ArrayList<>(List.of("Troll", "Skeleton", "Orc", "Ghost","Demon","Zombie"));
+    private static final List<String> enemies = new ArrayList<>(List.of("Troll", "Skeleton", "Orc", "Ghost", "Demon", "Zombie"));
     private static final Random rand = new Random();
     public static boolean completed = false;
 
@@ -31,7 +31,7 @@ public class MountainCaveDungeon extends Dungeon {
     }
 
     public static void fresh() { //fresh
-        
+
         completed = false;
         items = new ArrayList<>(List.of("better sword", "ninja kit", "health potion"));
         foundItemRooms = 0;
@@ -107,7 +107,7 @@ public class MountainCaveDungeon extends Dungeon {
             Room.hasItemInRoom("Backpack", 1);
             lastPosition = currentPlayerPosition.clone();
             roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = mountainCaveDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
-            if(!completed){
+            if (!completed) {
                 completedDungeons++;
             }
             Player.autoFight = Dungeon.previousAutoSettings;

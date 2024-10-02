@@ -10,6 +10,7 @@
  * Grijesh Shrestha
  */
 public class Dungeon extends Room {
+
     public static String currentDungeon;
     public static int completedDungeons = 0;
 
@@ -24,7 +25,8 @@ public class Dungeon extends Room {
 
     public static int[] currentPlayerPosition;
     public static boolean previousAutoSettings;
-    public static void generateDungeons(){
+
+    public static void generateDungeons() {
         meadowDungeon = DungeonGenerator.generateAndReturnMatrix(5);
         darkForestDungeon = DungeonGenerator.generateAndReturnMatrix(5);
         mountainCaveDungeon = DungeonGenerator.generateAndReturnMatrix(7);
@@ -34,14 +36,15 @@ public class Dungeon extends Room {
         desertPyramidDungeon = DungeonGenerator.generateAndReturnMatrix(11);
         oceanKingdomDungeon = DungeonGenerator.generateAndReturnMatrix(13);
     }
-    public static void defaultDungeonArgs(String data) throws InterruptedException{ //default dungeon arguments
-        switch(data){
+
+    public static void defaultDungeonArgs(String data) throws InterruptedException { //default dungeon arguments
+        switch (data) {
             case "leave" -> {
                 TextEngine.printWithDelays("Im sorry. You cannot leave right now.", true);
             }
             case "map" -> {
-                if(Player.getName().equals("Debug!")){
-                    switch(currentDungeon){
+                if (Player.getName().equals("Debug!")) {
+                    switch (currentDungeon) {
                         case "Meadow" -> {
                             DungeonGenerator.printMap(meadowDungeon);
                         }
@@ -68,10 +71,9 @@ public class Dungeon extends Room {
                         }
                         //add more dungeons here
                     }
-                }
-                else{
+                } else {
                     Main.inGameDefaultTextHandling(data);
-                }  
+                }
             }
             default -> {
                 Main.inGameDefaultTextHandling(data);
@@ -79,6 +81,7 @@ public class Dungeon extends Room {
         }
 
     }
+
     public static void resetAll() { //reset all
         MeadowDungeon.fresh();
         DarkForestDungeon.fresh();
@@ -90,9 +93,10 @@ public class Dungeon extends Room {
         OceanKingdomDungeon.fresh();
         //add more dungeons here
     }
-    public static void autoCheck(){
+
+    public static void autoCheck() {
         previousAutoSettings = Player.autoFight;
-        if(Player.autoFight){
+        if (Player.autoFight) {
             Player.autoFight = false;
         }
     }

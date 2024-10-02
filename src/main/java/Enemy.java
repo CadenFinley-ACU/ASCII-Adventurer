@@ -9,6 +9,7 @@ import java.util.Map;
  * Grijesh Shrestha
  */
 public class Enemy {
+
     public final static Console console = System.console();
     public static String command;
     public static String ignore;
@@ -30,13 +31,11 @@ public class Enemy {
             Map.entry("Slime", 2),
             Map.entry("Mimic", 5),
             Map.entry("Gargoyle", 20),
-
             Map.entry("Sea Serpent", 50),
             Map.entry("Sea Monster", 60),
             Map.entry("Sea Witch", 55),
             Map.entry("Sea Dragon", 70),
             Map.entry("Sea Giant", 60),
-
             //minibosses
             Map.entry("Golem", 20), //dungeon 1
             Map.entry("Forest Guardian", 25), //dungeon 2  //forest area
@@ -63,25 +62,27 @@ public class Enemy {
 
             Map.entry("Kraken", 200) //dungeon 8
     ));
-    public static int spawnEnemy(String type,int quantity) throws InterruptedException { //return the total damage as negative int so that you can change health
-        if(quantity > 1) {
-            TextEngine.printWithDelays("You fight the " +quantity+" "+ type + "s!", false);
+
+    public static int spawnEnemy(String type, int quantity) throws InterruptedException { //return the total damage as negative int so that you can change health
+        if (quantity > 1) {
+            TextEngine.printWithDelays("You fight the " + quantity + " " + type + "s!", false);
         } else {
-            TextEngine.printWithDelays("You fight the " + type+"!", false);
+            TextEngine.printWithDelays("You fight the " + type + "!", false);
         }
-        checkhealth(type,quantity);
-        return 0-(enemyDamageValues.get(type)*quantity);
+        checkhealth(type, quantity);
+        return 0 - (enemyDamageValues.get(type) * quantity);
     }
-    private static void checkhealth(String type,int quantity) throws InterruptedException { //check the health of the player
-        if(Player.getHealth() <= enemyDamageValues.get(type)*quantity) {
+
+    private static void checkhealth(String type, int quantity) throws InterruptedException { //check the health of the player
+        if (Player.getHealth() <= enemyDamageValues.get(type) * quantity) {
             return;
         }
-        if(quantity > 1) {
-            TextEngine.printWithDelays("You beat the " +quantity+" "+ type + "s!", false);
+        if (quantity > 1) {
+            TextEngine.printWithDelays("You beat the " + quantity + " " + type + "s!", false);
         } else {
-            TextEngine.printWithDelays("You beat the " + type+"!", false);
+            TextEngine.printWithDelays("You beat the " + type + "!", false);
         }
-        Player.changeGold(enemyDamageValues.get(type)*quantity);
+        Player.changeGold(enemyDamageValues.get(type) * quantity);
     }
 }
 
