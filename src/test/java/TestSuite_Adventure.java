@@ -337,5 +337,88 @@ public class TestSuite_Adventure {
         }
         assertTrue("The matrix should be valid", valid);
     }
+    @Test   
+    public void testOpenWorldGen31(){
+        int[][] matrix = OpenWorldGenerator.getMatrix();
+        boolean valid = OpenWorldGenerator.validateMatrix();
+        if(OpenWorldGenerator.testing) {
+            OpenWorldGenerator.printMatrix();
+        }
+        assertTrue("The matrix should be valid", valid);
+    }
+    @Test   
+    public void testOpenWorldGen32(){
+        int[][] matrix = OpenWorldGenerator.getMatrix();
+        boolean valid = OpenWorldGenerator.validateMatrix();
+        if(OpenWorldGenerator.testing) {
+            OpenWorldGenerator.printMatrix();
+        }
+        assertTrue("The matrix should be valid", valid);
+    }
+    @Test   
+    public void testOpenWorldGen33(){
+        int[][] matrix = OpenWorldGenerator.getMatrix();
+        boolean valid = OpenWorldGenerator.validateMatrix();
+        if(OpenWorldGenerator.testing) {
+            OpenWorldGenerator.printMatrix();
+        }
+        assertTrue("The matrix should be valid", valid);
+    }
+    @Test   
+    public void testOpenWorldGen34(){
+        int[][] matrix = OpenWorldGenerator.getMatrix();
+        boolean valid = OpenWorldGenerator.validateMatrix();
+        if(OpenWorldGenerator.testing) {
+            OpenWorldGenerator.printMatrix();
+        }
+        assertTrue("The matrix should be valid", valid);
+    }
+    @Test   
+    public void testOpenWorldGen35(){
+        int[][] matrix = OpenWorldGenerator.getMatrix();
+        boolean valid = OpenWorldGenerator.validateMatrix();
+        if(OpenWorldGenerator.testing) {
+            OpenWorldGenerator.printMatrix();
+        }
+        assertTrue("The matrix should be valid", valid);
+    }
+    @Test   
+    public void testOpenWorldGen36(){
+        int[][] matrix = OpenWorldGenerator.getMatrix();
+        boolean valid = OpenWorldGenerator.validateMatrix();
+        if(OpenWorldGenerator.testing) {
+            OpenWorldGenerator.printMatrix();
+        }
+        assertTrue("The matrix should be valid", valid);
+    }
+    @Test   
+    public void testOpenWorldGen37(){
+        int[][] matrix = OpenWorldGenerator.getMatrix();
+        boolean valid = OpenWorldGenerator.validateMatrix();
+        if(OpenWorldGenerator.testing) {
+            OpenWorldGenerator.printMatrix();
+        }
+        assertTrue("The matrix should be valid", valid);
+    }
+    @Test   
+    public void testOpenWorldGen38(){
+        int[][] matrix = OpenWorldGenerator.getMatrix();
+        boolean valid = OpenWorldGenerator.validateMatrix();
+        if(OpenWorldGenerator.testing) {
+            OpenWorldGenerator.printMatrix();
+        }
+        assertTrue("The matrix should be valid", valid);
+    }
+    @Test   
+    public void testOpenWorldGen39(){
+        int[][] matrix = OpenWorldGenerator.getMatrix();
+        boolean valid = OpenWorldGenerator.validateMatrix();
+        if(OpenWorldGenerator.testing) {
+            OpenWorldGenerator.printMatrix();
+        }
+        assertTrue("The matrix should be valid", valid);
+    }
+    
+
 
 }
