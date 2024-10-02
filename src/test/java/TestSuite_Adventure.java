@@ -8,34 +8,6 @@ public class TestSuite_Adventure
     public void setUp() {
         DungeonGenerator.testing = true;
     }
-    // @Test
-    // public void printWithDelays() throws InterruptedException{
-    //     ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-    //     System.setOut(new PrintStream(outContent));
-    //     TextEngine.printWithDelays("Adventure V1, by BarrettHall:: Albert Tucker, Caden Finley, and Grijesh Shrestha",false);
-    //     assertEquals("Adventure V1, by BarrettHall:: Albert Tucker, Caden Finley, and Grijesh Shrestha", outContent.toString().trim());
-    // }
-    // @Test
-    // public void printNoDelay() throws InterruptedException{
-    //     ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-    //     System.setOut(new PrintStream(outContent));
-    //     TextEngine.printNoDelay("Adventure V1, by BarrettHall:: Albert Tucker, Caden Finley, and Grijesh Shrestha",false);
-    //     assertEquals("Adventure V1, by BarrettHall:: Albert Tucker, Caden Finley, and Grijesh Shrestha", outContent.toString().trim());
-    // }
-    // @Test
-    // public void printWithDelays2() throws InterruptedException{
-    //     ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-    //     System.setOut(new PrintStream(outContent));
-    //     TextEngine.printWithDelays("You enter a dark forest with a small path leading to the north", false);
-    //     assertEquals("You enter a dark forest with a small path leading to the north", outContent.toString().trim());
-    // }
-    // @Test
-    // public void printNoDelay2() throws InterruptedException{
-    //     ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-    //     System.setOut(new PrintStream(outContent));
-    //     TextEngine.printNoDelay("You enter a dark forest with a small path leading to the north", false);
-    //     assertEquals("You enter a dark forest with a small path leading to the north", outContent.toString().trim());
-    // }
     @Test
     public void testDungeonGeneratorConnection1() {
         DungeonGenerator.start(8);
@@ -247,5 +219,6 @@ public class TestSuite_Adventure
         boolean connected = DungeonGenerator.isPathConnected(matrix, pos9[0], pos9[1], pos8[0], pos8[1]);
         assertTrue("There should be a path connecting 9 and 8 with values higher than 0", connected);
     }
+   
 
 }
