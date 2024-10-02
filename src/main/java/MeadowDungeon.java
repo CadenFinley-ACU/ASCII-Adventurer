@@ -18,7 +18,10 @@ public class MeadowDungeon extends Dungeon {
     private static final List<String> enemies = new ArrayList<>(List.of("Goblin", "Skeleton", "Slime", "Mimic"));
     private static final Random rand = new Random();
     public static boolean completed = false;
-
+    
+    public static void forceJAVAC(){
+        return;
+    }
     public static void startRoom() throws InterruptedException { //start room
         room = "Meadow Dungeon";
         Main.checkSave(room);
