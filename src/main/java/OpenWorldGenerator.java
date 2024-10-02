@@ -56,23 +56,22 @@ public class OpenWorldGenerator {
     }
 
     private boolean isValidPosition(int row, int col, List<int[]> positions) {
-        int distanceOffset = SIZE / 3;
+        int minDistance = Integer.MAX_VALUE;
+        int distanceOffset = SIZE / 2;
+    
         for (int[] pos : positions) {
-            int currentDistanceOffset = distanceOffset;
+            int distance = Math.abs(pos[0] - row) + Math.abs(pos[1] - col);
             
-            if (pos[0] == 5 || pos[1] == 5) {
-                currentDistanceOffset = distanceOffset-1;
-            }
-            if (pos[0] == 8 || pos[1] == 7) {
-                currentDistanceOffset = distanceOffset+1;
-            }
-            
-            if ((Math.abs(pos[0] - row) < currentDistanceOffset && Math.abs(pos[1] - col) < currentDistanceOffset) &&
-                (Math.abs(ninePosition[0] - row) < distanceOffset && Math.abs(ninePosition[1] - col) < distanceOffset )) {
+            // Check if the position is adjacent to any 9 values
+            if (pos[0] == 9 && (Math.abs(pos[0] - row) <= 1 && Math.abs(pos[1] - col) <= 1)) {
                 return false;
             }
+    
+            if (distance < minDistance) {
+                minDistance = distance;
+            }
         }
-        return true;
+        return minDistance >= distanceOffset;
     }
 
     public void drawLinesFromNineToEights() {
