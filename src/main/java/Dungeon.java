@@ -101,4 +101,31 @@ public class Dungeon extends Room {
         }
     }
 
+    public static boolean hasItemInDungeon(String itemName, int quantity) throws InterruptedException {
+        TextEngine.printWithDelays("Hey! There is an item in this room: ", false);
+        if (quantity > 1) {
+            TextEngine.printWithDelays("Item(s): " + itemName + " x" + quantity, false);
+        } else {
+            TextEngine.printWithDelays("Item: " + itemName, false);
+        }
+        TextEngine.printWithDelays("What is your command: take it or leave it", true);
+        while (true) {
+            ignore = console.readLine();
+            command = console.readLine();
+            switch (command.toLowerCase()) {
+                case "take it" -> {
+                    Player.putItem(itemName, quantity);
+                    Main.screenRefresh();
+                    return true;
+                }
+                case "leave it" -> {
+                    Main.screenRefresh();
+                    return false;
+                }
+                default ->
+                    Main.inGameDefaultTextHandling(command);
+            }
+        }
+    }
+
 }
