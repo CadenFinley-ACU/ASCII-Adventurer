@@ -208,22 +208,22 @@ public class OceanKingdomDungeon extends Dungeon {
                         Dungeon.defaultDungeonArgs(direction.toLowerCase());
                     }
                 }
-                case "west" -> {
+                case "south" -> {
                     if (directionsString.contains(direction.toLowerCase())) {
                         lastPosition = currentPlayerPosition.clone(); // Save the current position before moving
                         roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = oceanKingdomDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
-                        currentPlayerPosition[1] -= 1;
+                        currentPlayerPosition[0] += 1;
                         save = currentPlayerPosition.clone();
                         Main.loadSave();
                     } else {
                         Dungeon.defaultDungeonArgs(direction.toLowerCase());
                     }
                 }
-                case "south" -> {
+                case "west" -> {
                     if (directionsString.contains(direction.toLowerCase())) {
                         lastPosition = currentPlayerPosition.clone(); // Save the current position before moving
                         roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = oceanKingdomDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
-                        currentPlayerPosition[0] += 1;
+                        currentPlayerPosition[1] -= 1;
                         save = currentPlayerPosition.clone();
                         Main.loadSave();
                     } else {

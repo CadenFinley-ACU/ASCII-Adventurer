@@ -40,6 +40,9 @@ public class Village extends Room {
                         shop3();
                     }
                 }
+                case "leave village" -> {
+                    leave();
+                }
                 case "portal" -> {
                     if (Dungeon.completedDungeons > 5) {
                         TextEngine.printWithDelays("Which area would you like to warp to?", false);
@@ -69,9 +72,6 @@ public class Village extends Room {
                     } else {
                         Main.inGameDefaultTextHandling(command);
                     }
-                }
-                case "leave village" -> {
-                    leave();
                 }
                 default ->
                     Main.inGameDefaultTextHandling(command);
@@ -105,7 +105,7 @@ public class Village extends Room {
                 }
             }
         } else {
-            TextEngine.printWithDelays("You do not have a heart container to give to the priest", false);
+            TextEngine.printWithDelays("You do not have a heart container to give to the priest fuck off", false);
             TextEngine.printWithDelays("Would you like to leave? yes or no", true);
             while (true) {
                 ignore = console.readLine();
