@@ -63,27 +63,39 @@ public class Enemy {
             Map.entry("Kraken", 200) //dungeon 8
     ));
 
-    public static int spawnEnemy(String type, int quantity) throws InterruptedException { //return the total damage as negative int so that you can change health
+    public static int spawnEnemy(String type, int quantity) throws InterruptedException { // Return the total damage as negative int so that you can change health
+        String brightRedStart = "\033[1;31m"; // Start bright red text
+        String brightRedEnd = "\033[0m"; // Reset formatting
+        String space = "     ";
         if (quantity > 1) {
-            TextEngine.printWithDelays("You fight the " + quantity + " " + type + "s!", false);
+            TextEngine.printWithDelays(space + brightRedStart + "You fight the " + quantity + " " + type + "s!" + brightRedEnd, false);
         } else {
-            TextEngine.printWithDelays("You fight the " + type + "!", false);
+            TextEngine.printWithDelays(space + brightRedStart + "You fight the " + type + "!" + brightRedEnd, false);
         }
         checkhealth(type, quantity);
         return 0 - (enemyDamageValues.get(type) * quantity);
     }
+    
 
-    private static void checkhealth(String type, int quantity) throws InterruptedException { //check the health of the player
+    private static void checkhealth(String type, int quantity) throws InterruptedException { 
+        String brightGreenStart = "\033[1;32m"; // Start bright green text
+        String brightGreenEnd = "\033[0m"; // Reset formatting
+        String space = "     ";
+    
+        // Check the player's health
         if (Player.getHealth() <= enemyDamageValues.get(type) * quantity) {
             return;
         }
+        // Print victory message in green
         if (quantity > 1) {
-            TextEngine.printWithDelays("You beat the " + quantity + " " + type + "s!", false);
+            TextEngine.printWithDelays(space + brightGreenStart + "You beat the " + quantity + " " + type + "s!" + brightGreenEnd, false);
         } else {
-            TextEngine.printWithDelays("You beat the " + type + "!", false);
+            TextEngine.printWithDelays(space + brightGreenStart + "You beat the " + type + "!" + brightGreenEnd, false);
         }
+        // Update player's gold
         Player.changeGold(enemyDamageValues.get(type) * quantity);
     }
+    
 }
 
 
