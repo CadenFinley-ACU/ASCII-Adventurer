@@ -312,7 +312,7 @@ public class Player {
         };
 
         // Update the map with the player's position
-        map[playerY][playerX - 1] = "[ P ]";
+        map[playerY][playerX] = "[ P ]";
 
         // Print the map
         System.out.println("Map: ");
