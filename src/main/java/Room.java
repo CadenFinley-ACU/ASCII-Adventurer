@@ -14,7 +14,7 @@ public class Room {
     public static String ignore;
     public static String room = null;
 
-    public static void hasItemInRoom(String itemName, int quantity) throws InterruptedException {    //check if there is an item in the room accessable by all rooms and dungeons
+    public static boolean hasItemInRoom(String itemName, int quantity) throws InterruptedException {
         TextEngine.printWithDelays("Hey! There is an item in this room: ", false);
         if (quantity > 1) {
             TextEngine.printWithDelays("Item(s): " + itemName + " x" + quantity, false);
@@ -29,11 +29,11 @@ public class Room {
                 case "take it" -> {
                     Player.putItem(itemName, quantity);
                     Main.screenRefresh();
-                    return;
+                    return true;
                 }
                 case "leave it" -> {
                     Main.screenRefresh();
-                    return;
+                    return false;
                 }
                 default ->
                     Main.inGameDefaultTextHandling(command);

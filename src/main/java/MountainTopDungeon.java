@@ -55,7 +55,7 @@ public class MountainTopDungeon extends Dungeon {
         if (mountainTopDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] == 2 && roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] == 0) {
             if (foundItemRooms < items.size()) {
                 String randomItem = items.get(rand.nextInt(items.size()));
-                if (hasItemInDungeon(randomItem, 1)) {
+                if (hasItemInRoom(randomItem, 1)) {
                     items.remove(randomItem);
                     lastPosition = currentPlayerPosition.clone();
                     roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = mountainTopDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
@@ -73,7 +73,7 @@ public class MountainTopDungeon extends Dungeon {
             }
         }
         if (mountainTopDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] == 3 && roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] == 0) {
-            if (hasItemInDungeon("heart container", 1)) {
+            if (hasItemInRoom("heart container", 1)) {
                 lastPosition = currentPlayerPosition.clone();
                 roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = mountainTopDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
                 foundItemRooms++;
