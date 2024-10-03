@@ -36,7 +36,7 @@ public class InventoryManager extends Player {
     }
 
     public void printInventory() throws InterruptedException { //print the inventory
-        int i = 1;
+        
         TextEngine.clearScreen();
         Main.printStatus();
         if (inventory.isEmpty()) {
@@ -65,7 +65,6 @@ public class InventoryManager extends Player {
                         TextEngine.printNoDelay(" " + key, false);
                     }
                 }
-                i++;
             }
             TextEngine.printWithDelays("\n", false);
             inventoryManage();
@@ -122,11 +121,6 @@ public class InventoryManager extends Player {
                     console.readLine();
                     command = console.readLine();
                     tossItem(command);
-                    if (Weapons.containsKey(command)) {
-                        if (Weapons.get(command) == Player.getDamage()) {
-                            Player.setDamage(-Weapons.get(command));
-                        }
-                    }
                     setStatsToHighestInInventory();
                 }
                 case "exit" -> {

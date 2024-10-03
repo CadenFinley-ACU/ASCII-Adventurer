@@ -132,7 +132,10 @@ class Main {
     }
 
     private static void displayHelp() throws InterruptedException { //main menu help command
-        TextEngine.printWithDelays("You can type 'start' to start the game\nor 'settings' to change the text speed\nor 'exit' to leave the game.", true);
+        if (getSavedPlace().equals("OpenWorld"))
+            TextEngine.printWithDelays("Things you could say:\n'stats' to see your stats\n'inventory' to see your inventory\n'heal' to heal you health using any available healing potions\n'settings' or type 'save' to save\n'map' to see the map\n'exit' to return to the main menu.", true);
+        else
+            TextEngine.printWithDelays("Things you could say:\n'stats' to see your stats\n'inventory' to see your inventory\n'heal' to heal you health using any available healing potions\n'settings' or type 'save' to save\n'exit' to return to the main menu.", true);
     }
 
     private static void exitGame() throws InterruptedException {   //exit game command
@@ -199,8 +202,12 @@ class Main {
         if (getSavedPlace().equals("Dungeon")) {
             TextEngine.printWithDelays("You can type 'restart' to restart the dungeon", false);
         }
-        TextEngine.printWithDelays("You can type 'stats' to see your stats\n'inventory' to see your inventory\n'heal' to heal you health using any available healing potions\n'settings' or type 'save' to save \n or 'exit' to return to the main menu.", true);
-    }
+        if (getSavedPlace().equals("OpenWorld"))
+            TextEngine.printWithDelays("Things you could say:\n'stats' to see your stats\n'inventory' to see your inventory\n'heal' to heal you health using any available healing potions\n'settings' or type 'save' to save\n'map' to see the map\n'exit' to return to the main menu.", true);
+        else
+            TextEngine.printWithDelays("Things you could say:\n'stats' to see your stats\n'inventory' to see your inventory\n'heal' to heal you health using any available healing potions\n'settings' or type 'save' to save\n'exit' to return to the main menu.", true);
+
+    }                                  
 
     public static void saveSpace(String place) throws InterruptedException { //save game command
         if (savedPlace != null) {

@@ -42,6 +42,9 @@ public class Village extends Room {
                         shop3();
                     }
                 }
+                case "leave village" -> {
+                    leave();
+                }
                 case "portal" -> {
                     if (Dungeon.completedDungeons > 5) {
                         TextEngine.printWithDelays("Which area would you like to warp to?", false);
@@ -71,9 +74,6 @@ public class Village extends Room {
                     } else {
                         Main.inGameDefaultTextHandling(command);
                     }
-                }
-                case "leave village" -> {
-                    leave();
                 }
                 default ->
                     Main.inGameDefaultTextHandling(command);

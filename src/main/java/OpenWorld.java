@@ -112,7 +112,7 @@ public class OpenWorld extends Room {
     private static void room1() throws InterruptedException { //0
         TextEngine.printWithDelays("You are in the open world,\nthe sunlight blinds your eyes as they have not adjusted from the dark cave.", false);
         TextEngine.printWithDelays("You see a long winding paths in all four directions.\nHow overwhelming...", false);
-        TextEngine.printWithDelays("Which path will you take:\nnorth, east, village, west, Go Back, or help", true);
+        TextEngine.printWithDelays("Which path will you take: north, east, west, or The Village", true);
         while (true) {
             ignore = console.readLine();
             command = console.readLine();
@@ -121,18 +121,15 @@ public class OpenWorld extends Room {
                     roomSave = 4;
                     Main.loadSave();
                 }
-                case "go back" -> {
-                    SpawnRoom.startRoom();
+                case "east" -> {
+                    roomSave = 2;
+                    Main.loadSave();
                 }
                 case "west" -> {
                     roomSave = 2;
                     Main.loadSave();
                 }
-                case "east" -> {
-                    roomSave = 2;
-                    Main.loadSave();
-                }
-                case "village" -> {
+                case "the village" -> {
                     Main.saveSpace("Village");
                     Main.loadSave();
                 }
@@ -165,7 +162,7 @@ public class OpenWorld extends Room {
 
     private static void room3() throws InterruptedException {
         TextEngine.printWithDelays("You walk forward and see a small village in the distance", false);
-        TextEngine.printWithDelays("What is your command: north, south, east, or Meadow Dungeon", true);
+        TextEngine.printWithDelays("What is your command: north, east, south, or The Meadow", true);
         while (true) {
             ignore = console.readLine();
             command = console.readLine();
@@ -174,15 +171,15 @@ public class OpenWorld extends Room {
                     roomSave = 8;
                     Main.loadSave();
                 }
-                case "south" -> {
-                    roomSave = 2;
-                    Main.loadSave();
-                }
                 case "east" -> {
                     roomSave = 4;
                     Main.loadSave();
                 }
-                case "dungeon" -> {
+                case "south" -> {
+                    roomSave = 2;
+                    Main.loadSave();
+                }
+                case "the meadow" -> {
                     MeadowDungeon.fresh();
                     Main.saveSpace("Meadow Dungeon");
                     Main.loadSave();
@@ -195,7 +192,7 @@ public class OpenWorld extends Room {
 
     private static void room4() throws InterruptedException {
         TextEngine.printWithDelays("You walk forward and see a small village in the distance", false);
-        TextEngine.printWithDelays("What is your command: north, south, east, or west", true);
+        TextEngine.printWithDelays("What is your command: north, east, south, or west", true);
         while (true) {
             ignore = console.readLine();
             command = console.readLine();
@@ -204,12 +201,12 @@ public class OpenWorld extends Room {
                     roomSave = 7;
                     Main.loadSave();
                 }
-                case "south" -> {
-                    roomSave = 1;
-                    Main.loadSave();
-                }
                 case "east" -> {
                     roomSave = 5;
+                    Main.loadSave();
+                }
+                case "south" -> {
+                    roomSave = 1;
                     Main.loadSave();
                 }
                 case "west" -> {
@@ -224,7 +221,7 @@ public class OpenWorld extends Room {
 
     private static void room5() throws InterruptedException {
         TextEngine.printWithDelays("You walk forward and see a small village in the distance", false);
-        TextEngine.printWithDelays("What is your command: north, Mountain Cave Dungeon, or west", true);
+        TextEngine.printWithDelays("What is your command: north, west, or The Mountain Cave", true);
         while (true) {
             ignore = console.readLine();
             command = console.readLine();
@@ -233,7 +230,11 @@ public class OpenWorld extends Room {
                     roomSave = 6;
                     Main.loadSave();
                 }
-                case "dungeon" -> {
+                case "west" -> {
+                    roomSave = 4;
+                    Main.loadSave();
+                }
+                case "the mountain cave" -> {
                     if (Dungeon.completedDungeons > 1) {
                         MountainCaveDungeon.fresh();
                         Main.saveSpace("Mountain Cave Dungeon");
@@ -241,10 +242,6 @@ public class OpenWorld extends Room {
                     } else {
                         TextEngine.printWithDelays("You must complete the other dungeons first.", true);
                     }
-                }
-                case "west" -> {
-                    roomSave = 4;
-                    Main.loadSave();
                 }
                 default ->
                     Main.inGameDefaultTextHandling(command);
@@ -254,7 +251,7 @@ public class OpenWorld extends Room {
 
     private static void room6() throws InterruptedException {
         TextEngine.printWithDelays("You walk forward and see a small village in the distance", false);
-        TextEngine.printWithDelays("What is your command: north, south, Mountain Top Dungeon, or west", true);
+        TextEngine.printWithDelays("What is your command: north, south, west, or The Mountain Top", true);
         while (true) {
             ignore = console.readLine();
             command = console.readLine();
@@ -267,7 +264,11 @@ public class OpenWorld extends Room {
                     roomSave = 5;
                     Main.loadSave();
                 }
-                case "dungeon" -> {
+                case "west" -> {
+                    roomSave = 7;
+                    Main.loadSave();
+                }
+                case "the mountain top" -> {
                     if (Dungeon.completedDungeons > 2) {
                         MountainTopDungeon.fresh();
                         Main.saveSpace("Mountain Top Dungeon");
@@ -275,10 +276,6 @@ public class OpenWorld extends Room {
                     } else {
                         TextEngine.printWithDelays("You must complete the other dungeons first.", true);
                     }
-                }
-                case "west" -> {
-                    roomSave = 7;
-                    Main.loadSave();
                 }
                 default ->
                     Main.inGameDefaultTextHandling(command);
@@ -288,7 +285,7 @@ public class OpenWorld extends Room {
 
     private static void room7() throws InterruptedException {
         TextEngine.printWithDelays("You walk forward and see a small village in the distance", false);
-        TextEngine.printWithDelays("What is your command: north, south, east, or west", true);
+        TextEngine.printWithDelays("What is your command: north, east, south, or west", true);
         while (true) {
             ignore = console.readLine();
             command = console.readLine();
@@ -297,12 +294,12 @@ public class OpenWorld extends Room {
                     roomSave = 9;
                     Main.loadSave();
                 }
-                case "south" -> {
-                    roomSave = 4;
-                    Main.loadSave();
-                }
                 case "east" -> {
                     roomSave = 6;
+                    Main.loadSave();
+                }
+                case "south" -> {
+                    roomSave = 4;
                     Main.loadSave();
                 }
                 case "west" -> {
@@ -317,23 +314,22 @@ public class OpenWorld extends Room {
 
     private static void room8() throws InterruptedException {
         TextEngine.printWithDelays("You walk forward and see a small village in the distance", false);
-        TextEngine.printWithDelays("What is your command: south, east, or Dark Forest Dungeon", true);
+        TextEngine.printWithDelays("What is your command: east, south, or The Dark Forest", true);
         while (true) {
             ignore = console.readLine();
             command = console.readLine();
             switch (command.toLowerCase()) {
-                case "south" -> {
-                    roomSave = 3;
-                    Main.loadSave();
-                }
                 case "east" -> {
                     roomSave = 7;
                     Main.loadSave();
+                }case "south" -> {
+                    roomSave = 3;
+                    Main.loadSave();
                 }
-                case "dungeon" -> {
+                case "the dark forest" -> {
                     if (Dungeon.completedDungeons > 0) {
                         DarkForestDungeon.fresh();
-                        Main.saveSpace("Dark Forest Dungeon");
+                        Main.saveSpace("Dark Forest Dungean");
                         Main.loadSave();
                     } else {
                         TextEngine.printWithDelays("You must complete the other dungeons first.", true);
@@ -347,7 +343,7 @@ public class OpenWorld extends Room {
 
     private static void room9() throws InterruptedException {
         TextEngine.printWithDelays("You walk forward and see a small village in the distance", false);
-        TextEngine.printWithDelays("What is your command: north, south, east, or village", true);
+        TextEngine.printWithDelays("What is your command: north, east, south, or The Village", true);
         while (true) {
             ignore = console.readLine();
             command = console.readLine();
@@ -356,15 +352,15 @@ public class OpenWorld extends Room {
                     roomSave = 12;
                     Main.loadSave();
                 }
-                case "south" -> {
-                    roomSave = 7;
-                    Main.loadSave();
-                }
                 case "east" -> {
                     roomSave = 10;
                     Main.loadSave();
                 }
-                case "village" -> {
+                case "south" -> {
+                    roomSave = 7;
+                    Main.loadSave();
+                }
+                case "the village" -> {
                     Village.startRoom();
                 }
                 default ->
@@ -375,7 +371,7 @@ public class OpenWorld extends Room {
 
     private static void room10() throws InterruptedException {
         TextEngine.printWithDelays("You walk forward and see a small village in the distance", false);
-        TextEngine.printWithDelays("What is your command: north, south, dungeon, or west", true);
+        TextEngine.printWithDelays("What is your command: north, south, west, The Desert Oasis", true);
         while (true) {
             ignore = console.readLine();
             command = console.readLine();
@@ -388,7 +384,11 @@ public class OpenWorld extends Room {
                     roomSave = 6;
                     Main.loadSave();
                 }
-                case "dungeon" -> {
+                case "west" -> {
+                    roomSave = 9;
+                    Main.loadSave();
+                }
+                case "the dark oasis" -> {
                     if (Dungeon.completedDungeons > 3) {
                         DesertOasisDungeon.fresh();
                         Main.saveSpace("Desert Oasis Dungeon");
@@ -396,10 +396,6 @@ public class OpenWorld extends Room {
                     } else {
                         TextEngine.printWithDelays("You must complete the other dungeons first.", true);
                     }
-                }
-                case "west" -> {
-                    roomSave = 9;
-                    Main.loadSave();
                 }
                 default ->
                     Main.inGameDefaultTextHandling(command);
@@ -409,7 +405,7 @@ public class OpenWorld extends Room {
 
     private static void room11() throws InterruptedException {
         TextEngine.printWithDelays("You walk forward and see a small village in the distance", false);
-        TextEngine.printWithDelays("What is your command: south, Desert Plains Dungeon, or west", true);
+        TextEngine.printWithDelays("What is your command: south, west, or The Desert Plains", true);
         while (true) {
             ignore = console.readLine();
             command = console.readLine();
@@ -418,7 +414,11 @@ public class OpenWorld extends Room {
                     roomSave = 10;
                     Main.loadSave();
                 }
-                case "dungeon" -> {
+                case "west" -> {
+                    roomSave = 12;
+                    Main.loadSave();
+                }
+                case "the desert plains" -> {
                     if (Dungeon.completedDungeons > 4) {
                         DesertPlainsDungeon.fresh();
                         Main.saveSpace("Desert Plains Dungeon");
@@ -426,10 +426,6 @@ public class OpenWorld extends Room {
                     } else {
                         TextEngine.printWithDelays("You must complete the other dungeons first.", true);
                     }
-                }
-                case "west" -> {
-                    roomSave = 12;
-                    Main.loadSave();
                 }
                 default ->
                     Main.inGameDefaultTextHandling(command);
@@ -439,7 +435,7 @@ public class OpenWorld extends Room {
 
     private static void room12() throws InterruptedException {
         TextEngine.printWithDelays("You walk forward and see a small village in the distance", false);
-        TextEngine.printWithDelays("What is your command: north, south, east, or west", true);
+        TextEngine.printWithDelays("What is your command: north, east, south, or west", true);
         while (true) {
             ignore = console.readLine();
             command = console.readLine();
@@ -448,12 +444,12 @@ public class OpenWorld extends Room {
                     roomSave = 17;
                     Main.loadSave();
                 }
-                case "south" -> {
-                    roomSave = 9;
-                    Main.loadSave();
-                }
                 case "east" -> {
                     roomSave = 11;
+                    Main.loadSave();
+                }
+                case "south" -> {
+                    roomSave = 9;
                     Main.loadSave();
                 }
                 case "west" -> {
@@ -514,21 +510,21 @@ public class OpenWorld extends Room {
 
     private static void room15() throws InterruptedException {
         TextEngine.printWithDelays("You walk forward and see a small village in the distance", false);
-        TextEngine.printWithDelays("What is your command: village, south, or east", true);
+        TextEngine.printWithDelays("What is your command: east, south, or The village", true);
         while (true) {
             ignore = console.readLine();
             command = console.readLine();
             switch (command.toLowerCase()) {
-                case "village" -> {
-                    Village.startRoom();
+                case "east" -> {
+                    roomSave = 16;
+                    Main.loadSave();
                 }
                 case "south" -> {
                     roomSave = 14;
                     Main.loadSave();
                 }
-                case "east" -> {
-                    roomSave = 16;
-                    Main.loadSave();
+                case "the village" -> {
+                    Village.startRoom();
                 }
                 default ->
                     Main.inGameDefaultTextHandling(command);
@@ -559,21 +555,21 @@ public class OpenWorld extends Room {
 
     private static void room17() throws InterruptedException {
         TextEngine.printWithDelays("You walk forward and see a small village in the distance", false);
-        TextEngine.printWithDelays("What is your command: north, south, or village", true);
+        TextEngine.printWithDelays("What is your command: north, south, or The Village", true);
         while (true) {
             ignore = console.readLine();
             command = console.readLine();
             switch (command.toLowerCase()) {
+                case "north" -> {
+                    roomSave = 19;
+                    Main.loadSave();
+                }
                 case "south" -> {
                     roomSave = 12;
                     Main.loadSave();
                 }
-                case "village" -> {
+                case "the village" -> {
                     Village.startRoom();
-                }
-                case "north" -> {
-                    roomSave = 19;
-                    Main.loadSave();
                 }
                 default ->
                     Main.inGameDefaultTextHandling(command);
@@ -583,7 +579,7 @@ public class OpenWorld extends Room {
 
     private static void room18() throws InterruptedException {
         TextEngine.printWithDelays("You walk forward and see a small village in the distance", false);
-        TextEngine.printWithDelays("What is your command: west or Desert Pyramid Dungeon", true);
+        TextEngine.printWithDelays("What is your command: west or The Desert Pyramid", true);
         while (true) {
             ignore = console.readLine();
             command = console.readLine();
@@ -592,7 +588,7 @@ public class OpenWorld extends Room {
                     roomSave = 19;
                     Main.loadSave();
                 }
-                case "dungeon" -> {
+                case "the desert pyramid" -> {
                     if (Dungeon.completedDungeons > 5) {
                         DesertPyramidDungeon.fresh();
                         Main.saveSpace("Desert Pyramid Dungeon");
@@ -609,7 +605,7 @@ public class OpenWorld extends Room {
 
     private static void room19() throws InterruptedException {
         TextEngine.printWithDelays("You walk forward and see a small village in the distance", false);
-        TextEngine.printWithDelays("What is your command: north, south, or east", true);
+        TextEngine.printWithDelays("What is your command: north, east, or south", true);
         while (true) {
             ignore = console.readLine();
             command = console.readLine();
@@ -618,12 +614,12 @@ public class OpenWorld extends Room {
                     roomSave = 20;
                     Main.loadSave();
                 }
-                case "south" -> {
-                    roomSave = 17;
-                    Main.loadSave();
-                }
                 case "east" -> {
                     roomSave = 18;
+                    Main.loadSave();
+                }
+                case "south" -> {
+                    roomSave = 17;
                     Main.loadSave();
                 }
                 default ->
@@ -634,7 +630,7 @@ public class OpenWorld extends Room {
 
     private static void room20() throws InterruptedException {
         TextEngine.printWithDelays("You walk forward and see a small village in the distance", false);
-        TextEngine.printWithDelays("What is your command: south or dungeon", true);
+        TextEngine.printWithDelays("What is your command: south or The Ocean Kingdom", true);
         while (true) {
             ignore = console.readLine();
             command = console.readLine();
@@ -643,7 +639,7 @@ public class OpenWorld extends Room {
                     roomSave = 19;
                     Main.loadSave();
                 }
-                case "dungeon" -> {
+                case "the ocean kingdom" -> {
                     if (Dungeon.completedDungeons > 6) {
                         OceanKingdomDungeon.fresh();
                         Main.saveSpace("Ocean Kingdom Dungeon");
