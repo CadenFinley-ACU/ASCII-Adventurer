@@ -32,7 +32,7 @@ public class MountainCaveDungeon extends Dungeon {
     public static void fresh() { //fresh
         Dungeon.autoCheck();
         completed = false;
-        items = new ArrayList<>(List.of("better sword", "ninja kit", "health potion"));
+        items = new ArrayList<>(List.of("better sword", "ninja armor", "health potion"));
         foundItemRooms = 0;
         Dungeon.currentPlayerPosition = spawnPosition;
         currentPlayerPosition = spawnPosition;

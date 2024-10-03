@@ -84,7 +84,7 @@ public class Village extends Room {
     public static void church() throws InterruptedException { //church
         Main.screenRefresh();
         //church implementation
-        TextEngine.printWithDelays("You enter the village church.\nThere a a preist here who can bless your heart containers to gain more hearts", false);
+        TextEngine.printWithDelays("You enter the village church.\nThere a a priest here who can bless your heart containers to gain more hearts", false);
         if (Player.inventory.containsKey("heart container")) {
             TextEngine.printWithDelays("You have a heart container to give to the priest", false);
             TextEngine.printWithDelays("What is your command: give it or leave it", true);
@@ -117,7 +117,7 @@ public class Village extends Room {
                         Main.loadSave();
                     }
                     case "no" -> {
-                        TextEngine.printWithDelays("There isn't anyhting here for you, try going to a dungeon.", true);
+                        TextEngine.printWithDelays("There isn't anyhting here for you, try going to a dungeon.", false);
                         TextEngine.printWithDelays("Would you like to leave yes or no?", true);
                         ignore = console.readLine();
                         command = console.readLine();
@@ -183,7 +183,7 @@ public class Village extends Room {
         TextEngine.printNoDelay("\n", false);
         TextEngine.printWithDelays("You enter the shop.", false);
         TextEngine.printWithDelays("You can buy items here", false);
-        TextEngine.printWithDelays("What would you like to buy: \nhealth potion (15 gold), shield (20 gold), key (30 gold), or leave", true);
+        TextEngine.printWithDelays("What would you like to buy:\n health potion~15 gold\n shield~20 gold\n key~30 gold\nor leave", true);
         while (true) {
             ignore = console.readLine();
             command = console.readLine();
@@ -222,7 +222,7 @@ public class Village extends Room {
         TextEngine.printNoDelay("\n", false);
         TextEngine.printWithDelays("You enter the shop.", false);
         TextEngine.printWithDelays("You can buy items here", false);
-        TextEngine.printWithDelays("What would you like to buy: \n greater health potion (30 gold), ninja armor (100 gold), key (30 gold), or leave", true);
+        TextEngine.printWithDelays("What would you like to buy:\n greater health potion (30 gold), ninja armor (100 gold), key (30 gold), or leave", true);
         while (true) {
             ignore = console.readLine();
             command = console.readLine();

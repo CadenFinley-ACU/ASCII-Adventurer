@@ -43,7 +43,7 @@ class Main {
 
         InventoryManager.createItem("weapon", "axe", 5); //dungeon 1
 
-        InventoryManager.createItem("weapon", "broad swoard", 7); //dungeon 2
+        InventoryManager.createItem("weapon", "broad sword", 7); //dungeon 2
 
         InventoryManager.createItem("weapon", "better sword", 10); //dungeon 3
 
@@ -213,6 +213,7 @@ class Main {
         if (getSavedPlace() == null) {
             startMenu();
         } else {
+            InventoryManager.setStatsToHighestInInventory();
             switch (getSavedPlace()) {
                 case "SpawnRoom" ->
                     SpawnRoom.startRoom();
