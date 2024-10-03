@@ -34,8 +34,6 @@ class Main {
         Dungeon.generateDungeons();
         createGameItems();
         startMenu();
-        DungeonGenerator.forceJAVAC();
-        MeadowDungeon.forceJAVAC();
     }
 
     private static void createGameItems() { //initalize all the items in the game
