@@ -175,6 +175,7 @@ public class Player {
     public static void changeMaxHealth(int change) throws InterruptedException { //change the max health
         maxHealth += change;
         health += change;
+        TextEngine.printWithDelays("Your max health has increased by " + change + " points", false);
     }
 
     public static void changeGold(int change) throws InterruptedException { //change the gold

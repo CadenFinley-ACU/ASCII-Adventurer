@@ -1,6 +1,4 @@
 
-
-
 /**
  * Village Class
  *
@@ -93,9 +91,9 @@ public class Village extends Room {
                 command = console.readLine();
                 switch (command.toLowerCase()) {
                     case "give it" -> {
-                        Player.putItem("heart container", -1);
-                        Player.changeMaxHealth(InventoryManager.Potions.get("heart container"));
-                        TextEngine.printWithDelays("Your max health has increased by " + InventoryManager.Potions.get("heart container") + " points", false);
+                        int amountofHeartContainers = Player.inventory.get("heart container");
+                        Player.changeMaxHealth(InventoryManager.Potions.get("heart container") * amountofHeartContainers);
+                        Player.putItem("heart container", -amountofHeartContainers);
                         TextEngine.enterToNext();
                         Main.loadSave();
                     }
@@ -204,6 +202,9 @@ public class Village extends Room {
                 }
                 case "key" -> {
                     buyMultiple("key", 30);
+                }
+                case "heart container" -> {
+                    buyMultiple("heart container", 50);
                 }
                 case "leave" -> {
                     Main.loadSave();

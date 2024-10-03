@@ -36,7 +36,6 @@ public class InventoryManager extends Player {
     }
 
     public void printInventory() throws InterruptedException { //print the inventory
-        int i = 1;
         TextEngine.clearScreen();
         Main.printStatus();
         if (inventory.isEmpty()) {
@@ -50,11 +49,11 @@ public class InventoryManager extends Player {
             for (String key : keys) {
                 if (inventory.get(key) > 1) {
                     if (Weapons.containsKey(key)) {
-                        TextEngine.printNoDelay(" " + key + " x" + inventory.get(key) + " Damage: " + Weapons.get(key), false);
+                        TextEngine.printNoDelay(" " + inventory.get(key) + " x " + key + " Damage: " + Weapons.get(key), false);
                     } else if (Armor.containsKey(key)) {
-                        TextEngine.printNoDelay(" Defense: " + Armor.get(key) + " Defense: " + Armor.get(key), false);
+                        TextEngine.printNoDelay(" " + inventory.get(key) + " x " + "Defense:" + Armor.get(key), false);
                     } else {
-                        TextEngine.printNoDelay(" " + key + " x" + inventory.get(key), false);
+                        TextEngine.printNoDelay(" " + inventory.get(key) + " x " + key, false);
                     }
                 } else {
                     if (Weapons.containsKey(key)) {
@@ -65,7 +64,6 @@ public class InventoryManager extends Player {
                         TextEngine.printNoDelay(" " + key, false);
                     }
                 }
-                i++;
             }
             TextEngine.printWithDelays("\n", false);
             inventoryManage();
@@ -89,9 +87,14 @@ public class InventoryManager extends Player {
             } else {
                 inventory.put(item, amount);
             }
+            if (inventory.get(item) <= 0) {
+                inventory.remove(item);
+            }
             setStatsToHighestInInventory();
             if (amount > 1) {
                 TextEngine.printWithDelays("You have picked up " + amount + " " + item + "s", false);
+            } else if (amount < 0) {
+                return;
             } else {
                 TextEngine.printWithDelays("You have picked up " + amount + " " + item, false);
             }
@@ -117,17 +120,14 @@ public class InventoryManager extends Player {
                 }
                 case "drop" -> {
                     TextEngine.clearScreen();
-                    TextEngine.printWithDelays("Which item would you like to drop?", false);
                     printInventoryNoMenu();
+                    TextEngine.printWithDelays("Which item would you like to drop? (or 'leave')", true);
                     console.readLine();
                     command = console.readLine();
-                    tossItem(command);
-                    if (Weapons.containsKey(command)) {
-                        if (Weapons.get(command) == Player.getDamage()) {
-                            Player.setDamage(-Weapons.get(command));
-                        }
+                    if (command.equals("leave")) {
+                        Player.openInventory();
                     }
-                    setStatsToHighestInInventory();
+                    tossItem(command);
                 }
                 case "exit" -> {
                     TextEngine.clearScreen();
@@ -167,9 +167,15 @@ public class InventoryManager extends Player {
                 } else {
                     amount = Integer.parseInt(command);
                     inventory.put(item, inventory.get(item) - amount);
+                    setStatsToHighestInInventory();
                 }
             } else {
+                inventory.put(item, inventory.get(item) - amount);
+                setStatsToHighestInInventory();
+            }
+            if (inventory.get(item) <= 0) {
                 inventory.remove(item);
+                setStatsToHighestInInventory();
             }
             TextEngine.printWithDelays("You have tossed " + item + " " + amount, false);
             TextEngine.enterToNext();
@@ -182,7 +188,7 @@ public class InventoryManager extends Player {
     }
 
     public static void useItem(String item) throws InterruptedException { //this only shouls run with potions as those are the only items you can use from the inventory menu
-        if (Potions.containsKey(item) && Player.getHealth() < Player.getMaxHealth()&& !"heart container".equals(item)) {
+        if (Potions.containsKey(item) && Player.getHealth() < Player.getMaxHealth() && !"heart container".equals(item)) {
             Player.changeHealth(Potions.get(item));
             inventory.put(item, inventory.get(item) - 1);
             if (inventory.get(item) == 0) {
@@ -217,40 +223,38 @@ public class InventoryManager extends Player {
     }
 
     public static void printInventoryNoMenu() throws InterruptedException { //print the inventory items without the menu
-        int i = 1;
         if (inventory.isEmpty()) {
             leave();
         } else {
-            TextEngine.printNoDelay("You have the following items in your inventory:", false);
+            TextEngine.printWithDelays("You have the following items in your inventory:", false);
             Set<String> keys = inventory.keySet();
             for (String key : keys) {
                 if (inventory.get(key) > 1) {
                     if (Weapons.containsKey(key)) {
-                        TextEngine.printNoDelay(i + ": " + key + " x" + inventory.get(key) + " Damage: " + Weapons.get(key), false);
+                        TextEngine.printNoDelay(" " + inventory.get(key) + " x " + key + " Damage: " + Weapons.get(key), false);
                     } else if (Armor.containsKey(key)) {
-                        TextEngine.printNoDelay(" Defense: " + Armor.get(key) + " Defense: " + Armor.get(key), false);
+                        TextEngine.printNoDelay(" " + inventory.get(key) + " x " + "Defense:" + Armor.get(key), false);
                     } else {
-                        TextEngine.printNoDelay(i + ": " + key + " x" + inventory.get(key), false);
+                        TextEngine.printNoDelay(" " + inventory.get(key) + " x " + key, false);
                     }
                 } else {
                     if (Weapons.containsKey(key)) {
-                        TextEngine.printNoDelay(i + ": " + key + " Damage: " + Weapons.get(key), false);
+                        TextEngine.printNoDelay(" " + key + " Damage: " + Weapons.get(key), false);
                     } else if (Armor.containsKey(key)) {
-                        TextEngine.printNoDelay(i + ": " + key + " Defense: " + Armor.get(key), false);
+                        TextEngine.printNoDelay(" " + key + " Defense: " + Armor.get(key), false);
                     } else {
-                        TextEngine.printNoDelay(i + ": " + key, false);
+                        TextEngine.printNoDelay(" " + key, false);
                     }
                 }
-                i++;
             }
-            TextEngine.printWithDelays("", true);
+            TextEngine.printWithDelays(" ", false);
         }
     }
 
     public static String getIndividualItemString(String item) { //get the individual item string name
         if (inventory.get(item) > 1) {
-            return item + " x" + inventory.get(item).toString();
+            return inventory.get(item).toString() + " x " + item;
         }
-        return item + " " + inventory.get(item).toString();
+        return item + " ";
     }
 }
