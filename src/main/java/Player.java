@@ -24,7 +24,8 @@ public class Player {
     public static Map<String, Integer> inventory = new HashMap<>();
     public static InventoryManager manager = new InventoryManager();
     public static boolean autoFight = false;
-
+    public static int playerX=0;
+    public static int playerY=0;
     public static void playerStart() throws InterruptedException { //start the player
         maxHealth = 100;
         health = maxHealth;
@@ -32,7 +33,7 @@ public class Player {
         defense = 0;
         damage = 0;
         defense = 0;
-        gold = 0;
+        gold = 20;
         inventorySize = 20;
         inventory.clear();
         playerCreate();
@@ -67,15 +68,43 @@ public class Player {
                 Main.loadSave();
             }
             case "3" -> {
-                TextEngine.printNoDelay("1: Meadow", false);
+                TextEngine.printNoDelay("1: Meadow 2: Dark Forest 3: Mountain Cave 4: Mountain Top 5: Desert Oasis 6: Desert Plains 7: Desert Pyramid 8: Ocean Kingdom", false);
                 TextEngine.printNoDelay("debug dungeon: ", true);
                 ignore = console.readLine();
                 command = console.readLine();
                 switch (command) {
-                    case "1" ->{
+                    case "1" -> {
                         Main.saveSpace("Meadow Dungeon");
                         Main.loadSave();
-                }
+                    }
+                    case "2" -> {
+                        Main.saveSpace("Dark Forest Dungeon");
+                        Main.loadSave();
+                    }
+                    case "3" -> {
+                        Main.saveSpace("Mountain Cave Dungeon");
+                        Main.loadSave();
+                    }
+                    case "4" -> {
+                        Main.saveSpace("Mountain Top Dungeon");
+                        Main.loadSave();
+                    }
+                    case "5" -> {
+                        Main.saveSpace("Desert Oasis Dungeon");
+                        Main.loadSave();
+                    }
+                    case "6" -> {
+                        Main.saveSpace("Desert Plains Dungeon");
+                        Main.loadSave();
+                    }
+                    case "7" -> {
+                        Main.saveSpace("Desert Pyramid Dungeon");
+                        Main.loadSave();
+                    }
+                    case "8" -> {
+                        Main.saveSpace("Ocean Kingdom Dungeon");
+                        Main.loadSave();
+                    }
                     default -> {
                         Main.saveSpace("SpawnRoom");
                         Main.loadSave();
@@ -119,7 +148,7 @@ public class Player {
     }
 
     public static void changeHealth(int change) throws InterruptedException { //change the health
-        int damageCalc = (defense + (damage-(damage / 3)));
+        int damageCalc = (defense + (damage - (damage / 3)));
         if (change < 0) {
             change += damageCalc;
             if (change >= 0) {
@@ -173,7 +202,11 @@ public class Player {
     }
 
     public static void putItem(String item, int amount) throws InterruptedException { //put an item in the inventory
-        manager.put(item, amount);
+        if ("Backpack".equals(item) || "Large Backpack".equals(item)) {
+            changeInventorySize(InventoryManager.Potions.get(item));
+        } else {
+            manager.put(item, amount);
+        }
     }
 
     private static void playerCreate() throws InterruptedException { //create the player
@@ -225,17 +258,67 @@ public class Player {
     }
 
     public static void heal() throws InterruptedException { //use available health potions in inventory to heal
-        if (inventory.containsKey("health potion")) {
+        if (inventory.containsKey("super health potion")) {
             if (health < maxHealth) {
-                InventoryManager.useItem("health potion");
+                InventoryManager.useItem("super health potion");
             } else {
                 TextEngine.printWithDelays("You are already at full health!", false);
             }
         } else {
-            TextEngine.printWithDelays("You have no health potions!", false);
+            if (inventory.containsKey("greater health potion")) {
+                if (health < maxHealth) {
+                    InventoryManager.useItem("greater health potion");
+                } else {
+                    TextEngine.printWithDelays("You are already at full health!", false);
+                }
+            } else {
+                if (inventory.containsKey("health potion")) {
+                    if (health < maxHealth) {
+                        InventoryManager.useItem("health potion");
+                    } else {
+                        TextEngine.printWithDelays("You are already at full health!", false);
+                    }
+                } else {
+                    TextEngine.printWithDelays("You have no health potions!", false);
+                }
+            }
         }
         TextEngine.enterToNext();
         Main.loadSave();
     }
 
+    public static Map<String, Integer> copyInventory() { //get the inventory manager
+        return inventory;
+    }
+    public static void printMap() throws InterruptedException {
+        TextEngine.clearScreen();
+        String[][] map = {
+            {"     ", "     ", "[   ]", "[ D ]", "     ", "     ", " ", " ", " "},
+            {"[ V ]", "     ", "[   ]", "[   ]", "[ D ]", "   ", "", " ", " "},
+            {"[   ]", "[   ]", "[   ]", "[ V ]", "     ", " ", " ", " "},
+            {"[   ]", "[   ]", "[   ]", "[   ]", "[ D ]", "", "", " ", " "},
+            {"     ", "[   ]", "[   ]", "[   ]", "[ D ]", " ", " ", " "},
+            {"[ D ]", "[   ]", "[   ]", "[   ]", "[ D ]", " ", " ", " "},
+            {"[ D ]", "[   ]", "[   ]", "[   ]", "[ D ]", " ", " ", " "},
+            {"     ", "[   ]", "[   ]", "[ V ]", "     ", " ", " "}
+        };
+
+        // Update the map with the player's position
+        map[playerY][playerX-1] = "[ P ]";
+
+        // Print the map
+        System.out.println("Map: ");
+        for (String[] row : map) {
+            for (String cell : row) {
+                System.out.print(cell + " ");
+            }
+            System.out.println();
+        }
+        map[playerY][playerX] = "[   ]"; // Reset the player's position
+        System.out.println(" 'D' = Dungeon");
+        System.out.println(" 'V' = Village");
+        System.out.println(" 'P' = Player");
+        TextEngine.enterToNext();
+        Main.loadSave();
+    }
 }

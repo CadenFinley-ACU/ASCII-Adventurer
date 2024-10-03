@@ -1,6 +1,4 @@
 
-
-
 /**
  * Village Class
  *
@@ -19,7 +17,7 @@ public class Village extends Room {
         Main.screenRefresh();
         //maybe something here in the futre that adds rondomness or more advanced feature to certain villages to make them all not the exact same
         TextEngine.printWithDelays("You walk into the village, there are multiple builings", false);
-        if(Dungeon.completedDungeons>5){
+        if (Dungeon.completedDungeons > 5) {
             TextEngine.printWithDelays("You can now warp to different areas using the 'portal'", false);
         }
         TextEngine.printWithDelays("What is your command: church, hotel, shop, leave village", true);
@@ -34,18 +32,16 @@ public class Village extends Room {
                     Village.hotel();
                 }
                 case "shop" -> {
-                    if(Dungeon.completedDungeons<4){
+                    if (Dungeon.completedDungeons < 3) { //0,1,2
                         shop1();
-                    }
-                    else if (Dungeon.completedDungeons>3 && Dungeon.completedDungeons<6){
+                    } else if (Dungeon.completedDungeons > 2 && Dungeon.completedDungeons < 6) { //3,4,5
                         shop2();
-                    }
-                    else {
+                    } else { //6,7,8
                         shop3();
                     }
                 }
                 case "portal" -> {
-                    if(Dungeon.completedDungeons>5){
+                    if (Dungeon.completedDungeons > 5) {
                         TextEngine.printWithDelays("Which area would you like to warp to?", false);
                         TextEngine.printWithDelays("Forest, Mountain, Desert, Ocean?", false);
                         ignore = console.readLine();
@@ -67,10 +63,10 @@ public class Village extends Room {
                                 OpenWorld.roomSave = 9;
                                 OpenWorld.startRoom();
                             }
-                            default -> Main.inGameDefaultTextHandling(command);
+                            default ->
+                                Main.inGameDefaultTextHandling(command);
                         }
-                    }
-                    else {
+                    } else {
                         Main.inGameDefaultTextHandling(command);
                     }
                 }
@@ -97,7 +93,7 @@ public class Village extends Room {
                     case "give it" -> {
                         Player.putItem("heart container", -1);
                         Player.changeHealth(InventoryManager.Potions.get("heart container"));
-                        TextEngine.printWithDelays("Your health has increased by "+InventoryManager.Potions.get("heart container")+  " points", false);
+                        TextEngine.printWithDelays("Your health has increased by " + InventoryManager.Potions.get("heart container") + " points", false);
                         TextEngine.enterToNext();
                         Main.loadSave();
                     }
@@ -201,6 +197,7 @@ public class Village extends Room {
             }
         }
     }
+
     public static void shop2() throws InterruptedException { //shop
         Main.screenRefresh();
         //shop implementation
@@ -239,6 +236,7 @@ public class Village extends Room {
             }
         }
     }
+
     public static void shop3() throws InterruptedException { //shop
         Main.screenRefresh();
         //shop implementation
@@ -327,13 +325,11 @@ public class Village extends Room {
             command = console.readLine();
             switch (command.toLowerCase()) {
                 case "yes" -> {
-                    if(Dungeon.completedDungeons<4){
+                    if (Dungeon.completedDungeons < 4) {
                         shop1();
-                    }
-                    else if (Dungeon.completedDungeons>3 && Dungeon.completedDungeons<6){
+                    } else if (Dungeon.completedDungeons > 3 && Dungeon.completedDungeons < 6) {
                         shop2();
-                    }
-                    else {
+                    } else {
                         shop3();
                     }
                 }

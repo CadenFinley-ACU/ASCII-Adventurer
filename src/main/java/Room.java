@@ -14,19 +14,20 @@ public class Room {
     public static String ignore;
     public static String room = null;
 
-    public static void hasItemInRoom(String itemName, int quantity) throws InterruptedException{    //check if there is an item in the room
+    public static void hasItemInRoom(String itemName, int quantity) throws InterruptedException {    //check if there is an item in the room
         TextEngine.printWithDelays("Hey! There is an item in this room: ", false);
-        if(quantity>1){
-            TextEngine.printWithDelays("Item(s): "+itemName+" x"+quantity, false);
+        if (quantity > 1) {
+            TextEngine.printWithDelays("Item(s): " + itemName + " x" + quantity, false);
         } else {
-            TextEngine.printWithDelays("Item: "+itemName, false);
+            TextEngine.printWithDelays("Item: " + itemName, false);
         }
         TextEngine.printWithDelays("What is your command: take it or leave it", true);
         while (true) {
             ignore = console.readLine();
             command = console.readLine();
             switch (command.toLowerCase()) {
-                case "take it" -> {Player.putItem(itemName, quantity);
+                case "take it" -> {
+                    Player.putItem(itemName, quantity);
                     Main.screenRefresh();
                     return;
                 }
@@ -34,11 +35,13 @@ public class Room {
                     Main.screenRefresh();
                     return;
                 }
-                default -> Main.inGameDefaultTextHandling(command);
+                default ->
+                    Main.inGameDefaultTextHandling(command);
             }
         }
     }
-    public static void reset(String area){ //reset the room
+
+    public static void reset(String area) { //reset the room
         room = null;
         switch (area) {
             case "SpawnRoom" -> {

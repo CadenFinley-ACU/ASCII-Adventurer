@@ -99,10 +99,10 @@ public abstract class SettingsMenu {
                         start();
                     }
                 }
-                case "audo fight"->{
+                case "auto fight" -> {
                     Boolean oldSetting = Player.autoFight;
                     Player.autoFight = !Player.autoFight;
-                    TextEngine.printNoDelay("Auto Fight: "+Player.autoFight, false);
+                    TextEngine.printNoDelay("Auto Fight: " + Player.autoFight, false);
                     TextEngine.printNoDelay("Confirm? (yes or no)", true);
                     ignore = console.readLine();
                     command = console.readLine();

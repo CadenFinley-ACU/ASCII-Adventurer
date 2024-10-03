@@ -1,3 +1,4 @@
+
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -7,19 +8,23 @@ import java.util.Random;
 // Written by Caden Finley ACU 2024
 // September 30, 2024
 // 8 grueling hours but totally worth this is the coolest thing ive ever build
-
 public class DungeonGenerator {
+
     public static boolean testing = false;
     public static int[][] matrix;
 
+    public static void forceJAVAC(){
+        return;
+    }
+
     /**
-     * Starts the dungeon generation process.
-     * This method generates a matrix with a path connecting the values 8 and 9,
-     * and ensures the matrix meets certain criteria.
-     * 
+     * Starts the dungeon generation process. This method generates a matrix
+     * with a path connecting the values 8 and 9, and ensures the matrix meets
+     * certain criteria.
+     *
      * Algorithm: Randomized placement with pathfinding and connectivity checks.
      * Time Complexity: O(n^2) for matrix generation and pathfinding.
-     * 
+     *
      * @param pass The size of the matrix to generate.
      */
     public static void start(int pass) {
@@ -37,9 +42,9 @@ public class DungeonGenerator {
             size = 15;
         }
 
-        float changeRatio = 1+(((size * size) / 1) / 12.5f);
+        float changeRatio = 1 + (((size * size) / 1) / 12.5f);
 
-        if(3+size<changeRatio){
+        if (3 + size < changeRatio) {
             changeRatio = size;
         }
 
@@ -70,25 +75,25 @@ public class DungeonGenerator {
         matrix[coord9[0]][coord9[1]] = 0;
         matrix[coord8[0]][coord8[1]] = 0;
 
-         //determines how many random rooms are added
+        //determines how many random rooms are added
         // Randomly add at least size+size/2 more 1's ensuring they are connected to the main path
         addRandom(matrix, rand, size + (int) changeRatio, 1);
-        float itemRoomRatio = ((2*size)-5.5f)-(size/2);
-        if(itemRoomRatio>=size-5){
-            itemRoomRatio = size/2;
+        float itemRoomRatio = ((2 * size) - 5.5f) - (size / 2);
+        if (itemRoomRatio >= size - 5) {
+            itemRoomRatio = size / 2;
         }
-        if(itemRoomRatio<1){
+        if (itemRoomRatio < 1) {
             itemRoomRatio = 1;
         }
-        
+
         // Randomly add item rooms (2-5) ensuring they are connected to the main path 2-5 are item rooms
-        addRandom(matrix, rand, (int)itemRoomRatio, 2);
+        addRandom(matrix, rand, (int) itemRoomRatio, 2);
 
         // Randomly add 1 rare item (3) ensuring it is connected to the main path
         addRandom(matrix, rand, 1, 3);
 
         // Randomly add mini boss rooms (4) ensuring it is connected to the main path
-        addRandom(matrix, rand, (int)itemRoomRatio-1, 4);
+        addRandom(matrix, rand, (int) itemRoomRatio - 1, 4);
 
         // Ensure only one 1 value is adjacent to the 8
         ensureSingleAdjacent(matrix, coord8[0], coord8[1]);
@@ -98,18 +103,18 @@ public class DungeonGenerator {
         matrix[coord8[0]][coord8[1]] = 8;
         matrix = trimUnreachableParts(matrix, findValue(matrix, 9));
         if (testArrays(matrix)) {
-            if(testing){
+            if (testing) {
                 printMap(matrix);
-                System.out.println("^^^^^^^^^^^^"+size+"^^^^^^^^^^^^");
+                System.out.println("^^^^^^^^^^^^" + size + "^^^^^^^^^^^^");
                 System.out.println("Matrix connected successfully!");
-                System.out.println("Item Rooms: "+numberOfRooms(matrix, 2)+" Total Rooms: "+(numberOfRooms(matrix, 1)+numberOfRooms(matrix, 2)+numberOfRooms(matrix, 3)+numberOfRooms(matrix, 8)+numberOfRooms(matrix, 9)+numberOfRooms(matrix, 4)));
+                System.out.println("Item Rooms: " + numberOfRooms(matrix, 2) + " Total Rooms: " + (numberOfRooms(matrix, 1) + numberOfRooms(matrix, 2) + numberOfRooms(matrix, 3) + numberOfRooms(matrix, 8) + numberOfRooms(matrix, 9) + numberOfRooms(matrix, 4)));
                 System.out.println("-------------------------------");
             }
             return;
         }
-        if(testing){
+        if (testing) {
             printMap(matrix);
-            System.out.println("^^^^^^^^^^^^"+size+"^^^^^^^^^^^^");
+            System.out.println("^^^^^^^^^^^^" + size + "^^^^^^^^^^^^");
             System.out.println("Matrix not connected, retrying...");
             System.out.println("-------------------------------");
         }
@@ -118,10 +123,10 @@ public class DungeonGenerator {
 
     /**
      * Draws a path of 1's to connect two points in the matrix.
-     * 
-     * Algorithm: Randomized path drawing with deviations.
-     * Time Complexity: O(n) where n is the distance between the two points.
-     * 
+     *
+     * Algorithm: Randomized path drawing with deviations. Time Complexity: O(n)
+     * where n is the distance between the two points.
+     *
      * @param matrix The matrix to draw the path in.
      * @param x1 The starting x-coordinate.
      * @param y1 The starting y-coordinate.
@@ -154,11 +159,12 @@ public class DungeonGenerator {
     }
 
     /**
-     * Adds random values to the matrix ensuring they are connected to the main path.
-     * 
-     * Algorithm: Randomized placement with connectivity checks.
-     * Time Complexity: O(n^2) in the worst case for checking connectivity.
-     * 
+     * Adds random values to the matrix ensuring they are connected to the main
+     * path.
+     *
+     * Algorithm: Randomized placement with connectivity checks. Time
+     * Complexity: O(n^2) in the worst case for checking connectivity.
+     *
      * @param matrix The matrix to add values to.
      * @param rand The Random instance to use for generating random positions.
      * @param minOnes The minimum number of values to add.
@@ -179,14 +185,15 @@ public class DungeonGenerator {
 
     /**
      * Checks if a position in the matrix is connected to the main path.
-     * 
-     * Algorithm: Adjacency check.
-     * Time Complexity: O(1) for checking adjacent cells.
-     * 
+     *
+     * Algorithm: Adjacency check. Time Complexity: O(1) for checking adjacent
+     * cells.
+     *
      * @param matrix The matrix to check.
      * @param x The x-coordinate of the position to check.
      * @param y The y-coordinate of the position to check.
-     * @return True if the position is connected to the main path, false otherwise.
+     * @return True if the position is connected to the main path, false
+     * otherwise.
      */
     private static boolean isConnected(int[][] matrix, int x, int y) {
         int[] dx = {-1, 1, 0, 0};
@@ -202,41 +209,43 @@ public class DungeonGenerator {
     }
 
     /**
- * Ensures that only one value greater than zero is adjacent to the value 8 in the matrix.
- * 
- * @param matrix The matrix to modify.
- * @param x The x-coordinate of the position to check.
- * @param y The y-coordinate of the position to check.
- */
-private static void ensureSingleAdjacent(int[][] matrix, int x, int y) {
-    int[] dx = {-1, 1, 0, 0};
-    int[] dy = {0, 0, -1, 1};
-    int adjacentNonZeroCount = 0;
+     * Ensures that only one value greater than zero is adjacent to the value 8
+     * in the matrix.
+     *
+     * @param matrix The matrix to modify.
+     * @param x The x-coordinate of the position to check.
+     * @param y The y-coordinate of the position to check.
+     */
+    private static void ensureSingleAdjacent(int[][] matrix, int x, int y) {
+        int[] dx = {-1, 1, 0, 0};
+        int[] dy = {0, 0, -1, 1};
+        int adjacentNonZeroCount = 0;
 
-    for (int i = 0; i < 4; i++) {
-        int nx = x + dx[i];
-        int ny = y + dy[i];
-        if (nx >= 0 && nx < matrix.length && ny >= 0 && ny < matrix[0].length && matrix[nx][ny] > 0) {
-            adjacentNonZeroCount++;
-            if (adjacentNonZeroCount > 1) {
-                matrix[nx][ny] = 0;
+        for (int i = 0; i < 4; i++) {
+            int nx = x + dx[i];
+            int ny = y + dy[i];
+            if (nx >= 0 && nx < matrix.length && ny >= 0 && ny < matrix[0].length && matrix[nx][ny] > 0) {
+                adjacentNonZeroCount++;
+                if (adjacentNonZeroCount > 1) {
+                    matrix[nx][ny] = 0;
+                }
             }
         }
     }
-}
 
     /**
      * Checks if there is a path connecting two points in the matrix.
-     * 
-     * Algorithm: Breadth-First Search (BFS).
-     * Time Complexity: O(n^2) where n is the size of the matrix.
-     * 
+     *
+     * Algorithm: Breadth-First Search (BFS). Time Complexity: O(n^2) where n is
+     * the size of the matrix.
+     *
      * @param matrix The matrix to check.
      * @param x1 The starting x-coordinate.
      * @param y1 The starting y-coordinate.
      * @param x2 The ending x-coordinate.
      * @param y2 The ending y-coordinate.
-     * @return True if there is a path connecting the two points, false otherwise.
+     * @return True if there is a path connecting the two points, false
+     * otherwise.
      */
     public static boolean isPathConnected(int[][] matrix, int x1, int y1, int x2, int y2) {
         int size = matrix.length;
@@ -273,10 +282,10 @@ private static void ensureSingleAdjacent(int[][] matrix, int x, int y) {
 
     /**
      * Tests if the matrix meets certain criteria.
-     * 
-     * Algorithm: Pathfinding and connectivity checks.
-     * Time Complexity: O(n^2) for pathfinding and connectivity checks.
-     * 
+     *
+     * Algorithm: Pathfinding and connectivity checks. Time Complexity: O(n^2)
+     * for pathfinding and connectivity checks.
+     *
      * @param arrays The matrix to test.
      * @return True if the matrix meets the criteria, false otherwise.
      */
@@ -288,7 +297,7 @@ private static void ensureSingleAdjacent(int[][] matrix, int x, int y) {
         int[] pos2 = findValue(localMatrix, 2);
         int[] pos4 = findValue(localMatrix, 4);
 
-        if (pos9 == null || pos8 == null || pos3 == null|| pos2 == null|| pos4 == null) {
+        if (pos9 == null || pos8 == null || pos3 == null || pos2 == null || pos4 == null) {
             return false;
         }
         return isPathConnected(localMatrix, pos9[0], pos9[1], pos8[0], pos8[1]) && isPathConnected(localMatrix, pos9[0], pos9[1], pos3[0], pos3[1]) && isPathConnected(localMatrix, pos9[0], pos9[1], pos2[0], pos2[1]) && isPathConnected(localMatrix, pos9[0], pos9[1], pos4[0], pos4[1]);
@@ -296,13 +305,14 @@ private static void ensureSingleAdjacent(int[][] matrix, int x, int y) {
 
     /**
      * Finds the coordinates of a value in the matrix.
-     * 
-     * Algorithm: Linear search.
-     * Time Complexity: O(n^2) where n is the size of the matrix.
-     * 
+     *
+     * Algorithm: Linear search. Time Complexity: O(n^2) where n is the size of
+     * the matrix.
+     *
      * @param matrix The matrix to search.
      * @param value The value to find.
-     * @return The coordinates of the value as an array [x, y], or null if not found.
+     * @return The coordinates of the value as an array [x, y], or null if not
+     * found.
      */
     public static int[] findValue(int[][] matrix, int value) {
         for (int i = 0; i < matrix.length; i++) {
@@ -317,7 +327,7 @@ private static void ensureSingleAdjacent(int[][] matrix, int x, int y) {
 
     /**
      * Returns the generated matrix.
-     * 
+     *
      * @return The generated matrix.
      */
     public static int[][] returnMatrix() {
@@ -326,10 +336,10 @@ private static void ensureSingleAdjacent(int[][] matrix, int x, int y) {
 
     /**
      * Generates a valid matrix with a path connecting the values 8 and 9.
-     * 
+     *
      * Algorithm: Randomized placement with pathfinding and connectivity checks.
      * Time Complexity: O(n^2) for matrix generation and pathfinding.
-     * 
+     *
      * @param size The size of the matrix to generate.
      * @return The generated matrix.
      */
@@ -353,7 +363,7 @@ private static void ensureSingleAdjacent(int[][] matrix, int x, int y) {
 
     /**
      * Prints the generated matrix.
-     * 
+     *
      * @param size The size of the matrix to print.
      */
     public static void printMap(int[][] passedMatrix) {
@@ -368,66 +378,87 @@ private static void ensureSingleAdjacent(int[][] matrix, int x, int y) {
             System.out.println();
         }
     }
+
     /**
      * Prints the generated matrix.
-     * 
+     *
      * @param size The size of the matrix to print.
      */
     /**
- * Prints the adjacent rooms, the current room, and unlocked rooms in the dungeon matrix.
- * 
- * @param passedMatrix The matrix representing the dungeon layout.
- * @param unlocked The matrix indicating which rooms have been unlocked.
- * @param passedPosition The current position of the player in the dungeon.
- */
-public static void printAdjacentRoomsAndCurrentRoomAndUnlockedRooms(int[][] passedMatrix, int[][] unlocked, int[] passedPosition) {
-    for (int i = 0; i < passedMatrix.length; i++) {
-        for (int j = 0; j < passedMatrix.length; j++) {
-            if (passedMatrix[i][j] != 0) {
-                if (i == passedPosition[0] && j == passedPosition[1]) {
-                    System.out.print("[P] ");
-                } else if (isAdjacent(i, j, passedPosition)) {
-                    switch (passedMatrix[i][j]) {
-                        case 9 -> System.out.print("[*] "); // Special marker for value 9
-                        case 8 -> System.out.print("[!] "); // Special marker for value 8
-                        case 0 -> System.out.print("[ ] "); // Empty room
-                        default -> System.out.print("[" + passedMatrix[i][j] + "] "); // Default case for other values
+     * Prints the adjacent rooms, the current room, and unlocked rooms in the
+     * dungeon matrix.
+     *
+     * @param passedMatrix The matrix representing the dungeon layout.
+     * @param unlocked The matrix indicating which rooms have been unlocked.
+     * @param passedPosition The current position of the player in the dungeon.
+     */
+    public static void printAdjacentRoomsAndCurrentRoomAndUnlockedRooms(int[][] passedMatrix, int[][] unlocked, int[] passedPosition) {
+        for (int i = 0; i < passedMatrix.length; i++) {
+            for (int j = 0; j < passedMatrix.length; j++) {
+                if (passedMatrix[i][j] != 0) {
+                    if (i == passedPosition[0] && j == passedPosition[1]) {
+                        System.out.print("[P] ");
+                    } else if (isAdjacent(i, j, passedPosition)) {
+                        switch (passedMatrix[i][j]) {
+                            case 9 ->
+                                System.out.print("[*] "); // Special marker for value 9
+                            case 8 ->
+                                System.out.print("[B] "); // Special marker for value 8
+                            case 0 ->
+                                System.out.print("[ ] "); // Empty room
+                            case 4 ->
+                                System.out.print("[!] "); // Special marker for value 4
+                            case 3 ->
+                                System.out.print("[?] "); // Special marker for value 3
+                            case 2 ->
+                                System.out.print("[?] "); // Special marker for value 2
+                            default ->
+                                System.out.print("[~] "); // Default case for other values
+                        }
+                    } else if (unlocked[i][j] > 0) {
+                        switch (unlocked[i][j]) {
+                            case 9 ->
+                                System.out.print("[*] "); // Special marker for value 9
+                            case 2 ->
+                                System.out.print("[I] "); // Special marker for value 
+                            case 3 ->
+                                System.out.print("[I] "); // Special marker for value 3
+                            case 4 ->
+                                System.out.print("[!] "); // Special marker for value 4
+                            default ->
+                                System.out.print("[.] "); // Default case for other values
+                        }
+                    } else {
+                        System.out.print("[ ] "); // Print brackets around non-zero values
                     }
-                } else if (unlocked[i][j] > 0) {
-                    switch (unlocked[i][j]) {
-                        case 9 -> System.out.print("[*] "); // Special marker for value 9
-                        case 8 -> System.out.print("[!] "); // Special marker for value 8
-                        default -> System.out.print("[" + passedMatrix[i][j] + "] "); // Default case for other values
-                    }
+                } else if (unlocked[i][j] == 1) {
+                    System.out.print("[ ] "); // Print brackets around 0 values if unlocked
                 } else {
-                    System.out.print("[ ] "); // Print brackets around non-zero values
+                    System.out.print("    "); // No brackets around 0 values
                 }
-            } else if (unlocked[i][j] == 1) {
-                System.out.print("[ ] "); // Print brackets around 0 values if unlocked
-            } else {
-                System.out.print("    "); // No brackets around 0 values
             }
+            System.out.println();
         }
-        System.out.println();
     }
-}
 
-/**
- * Checks if a given position is adjacent to the player's current position.
- * 
- * @param x The x-coordinate of the position to check.
- * @param y The y-coordinate of the position to check.
- * @param playerPosition The current position of the player.
- * @return True if the position is adjacent to the player's position, false otherwise.
- */
-private static boolean isAdjacent(int x, int y, int[] playerPosition) {
-    int px = playerPosition[0];
-    int py = playerPosition[1];
-    return (Math.abs(px - x) == 1 && py == y) || (Math.abs(py - y) == 1 && px == x);
-}
+    /**
+     * Checks if a given position is adjacent to the player's current position.
+     *
+     * @param x The x-coordinate of the position to check.
+     * @param y The y-coordinate of the position to check.
+     * @param playerPosition The current position of the player.
+     * @return True if the position is adjacent to the player's position, false
+     * otherwise.
+     */
+    private static boolean isAdjacent(int x, int y, int[] playerPosition) {
+        int px = playerPosition[0];
+        int py = playerPosition[1];
+        return (Math.abs(px - x) == 1 && py == y) || (Math.abs(py - y) == 1 && px == x);
+    }
+
     /**
      * Trims off the unreachable parts of the matrix.
-     * 
+     *
      * @param matrix The matrix to trim.
      * @param startPosition The starting position of the player.
      * @return The trimmed matrix.
@@ -472,9 +503,11 @@ private static boolean isAdjacent(int x, int y, int[] playerPosition) {
 
         return matrix;
     }
+
     /**
-     * Generates and returns a valid matrix with a path connecting the values 8 and 9.
-     * 
+     * Generates and returns a valid matrix with a path connecting the values 8
+     * and 9.
+     *
      * @param size The size of the matrix to generate.
      * @return The generated matrix.
      */
@@ -483,9 +516,10 @@ private static boolean isAdjacent(int x, int y, int[] playerPosition) {
         return matrix;
     }
 
-     /**
-     * Returns an array of all adjacent values greater than 0 to a given point on the passed matrix.
-     * 
+    /**
+     * Returns an array of all adjacent values greater than 0 to a given point
+     * on the passed matrix.
+     *
      * @param matrix The matrix to check.
      * @param x The x-coordinate of the point.
      * @param y The y-coordinate of the point.
@@ -506,9 +540,11 @@ private static boolean isAdjacent(int x, int y, int[] playerPosition) {
         }
         return directions.stream().mapToInt(i -> i).toArray();
     }
+
     public static void __init__() {
         //initialize the meadow dungeon
     }
+
     public static int[][] createRoomsBeenTo(int size) {
         int[][] temp = new int[size][size];
         for (int i = 0; i < size; i++) {
@@ -518,6 +554,7 @@ private static boolean isAdjacent(int x, int y, int[] playerPosition) {
         }
         return temp;
     }
+
     public static int numberOfRooms(int[][] matrix, int find) {
         int count = 0;
         for (int[] ints : matrix) {

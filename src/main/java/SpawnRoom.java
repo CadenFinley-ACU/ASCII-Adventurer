@@ -1,6 +1,4 @@
 
-
-
 /**
  * Spawn Room Class
  *
@@ -30,9 +28,11 @@ public class SpawnRoom extends Room {
                 Main.startMenu();
         }
     }
-    public static void resetAll(){ //reset all
+
+    public static void resetAll() { //reset all
         roomSave = 0;
     }
+
     private static void part0() throws InterruptedException { //0
         TextEngine.printWithDelays("You wake up in a dark musty cave with nothing but the clothes on your back.", false);
         TextEngine.printWithDelays("You see a faint light to the north", false);
@@ -52,19 +52,18 @@ public class SpawnRoom extends Room {
     }
 
     private static void part1() throws InterruptedException { //1
-        if(Player.inventory.containsKey("sword")){
+        if (Player.inventory.containsKey("sword")) {
             roomSave++;
             OpenWorld.startRoom();
         }
         TextEngine.printWithDelays("You enter a cool, dimly lit room by a few torches", false);
         while (true) {
             hasItemInRoom("sword", 1);
-            if(Player.inventory.containsKey("sword")){
+            if (Player.inventory.containsKey("sword")) {
                 roomSave++;
                 OpenWorld.startRoom();
                 break;
-            }
-            else{
+            } else {
                 TextEngine.printWithDelays("You must take the sword!\nIt is too dangerous to go alone!", false);
                 TextEngine.enterToNext();
             }
