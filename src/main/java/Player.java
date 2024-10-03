@@ -301,19 +301,112 @@ public class Player {
     public static void printMap() throws InterruptedException {
         TextEngine.clearScreen();
         String[][] map = {
-            {"     ", "     ", "[   ]", "[ D ]", "     ", "     ", " ", " ", " "},
-            {"[ V ]", "     ", "[   ]", "[   ]", "[ D ]", "   ", "", " ", " "},
-            {"[   ]", "[   ]", "[   ]", "[ V ]", "     ", " ", " ", " "},
-            {"[   ]", "[   ]", "[   ]", "[   ]", "[ D ]", "", "", " ", " "},
-            {"     ", "[   ]", "[   ]", "[   ]", "[ D ]", " ", " ", " "},
-            {"[ D ]", "[   ]", "[   ]", "[   ]", "[ D ]", " ", " ", " "},
-            {"[ D ]", "[   ]", "[   ]", "[   ]", "[ D ]", " ", " ", " "},
-            {"     ", "[   ]", "[   ]", "[ V ]", "     ", " ", " "}
+            //  0        1        2        3        4
+            {"     ", "     ", "[   ]", "[ D ]", "     ", "     ", " ", " ", " "}, //0
+            {"[ V ]", "     ", "[   ]", "[   ]", "[ D ]", "   ", "", " ", " "}, //1
+            {"[   ]", "[   ]", "[   ]", "[ V ]", "     ", " ", " ", " "}, //2
+            {"[   ]", "[   ]", "[   ]", "[   ]", "[ D ]", "", "", " ", " "}, //3
+            {"     ", "[   ]", "[   ]", "[   ]", "[ D ]", " ", " ", " "}, //4
+            {"[ D ]", "[   ]", "[   ]", "[   ]", "[ D ]", " ", " ", " "}, //5
+            {"[ D ]", "[   ]", "[   ]", "[   ]", "[ D ]", " ", " ", " "}, //6
+            {"     ", "[   ]", "[   ]", "[ V ]", "     ", " ", " "} //7
         };
 
         // Update the map with the player's position
         map[playerY][playerX] = "[ P ]";
+        switch (Dungeon.completedDungeons) {
+            case 0 -> {
+                map[6][0] = "[ N ]";
+                map[5][0] = "[ L ]";
+                map[6][4] = "[ L ]";
+                map[5][4] = "[ L ]";
+                map[4][4] = "[ L ]";
+                map[3][4] = "[ L ]";
+                map[1][4] = "[ L ]";
+                map[0][3] = "[ L ]";
+            }
+            case 1 -> {
+                map[6][0] = "[ D ]";
+                map[5][0] = "[ ! ]";
+                map[6][4] = "[ L ]";
+                map[5][4] = "[ L ]";
+                map[4][4] = "[ L ]";
+                map[3][4] = "[ L ]";
+                map[1][4] = "[ L ]";
+                map[0][3] = "[ L ]";
+            }
+            case 2 -> {
+                map[6][0] = "[ D ]";
+                map[5][0] = "[ D ]";
+                map[6][4] = "[ ! ]";
+                map[5][4] = "[ L ]";
+                map[4][4] = "[ L ]";
+                map[3][4] = "[ L ]";
+                map[1][4] = "[ L ]";
+                map[0][3] = "[ L ]";
+            }
+            case 3 -> {
+                map[6][0] = "[ D ]";
+                map[5][0] = "[ D ]";
+                map[6][4] = "[ D ]";
+                map[5][4] = "[ ! ]";
+                map[4][4] = "[ L ]";
+                map[3][4] = "[ L ]";
+                map[1][4] = "[ L ]";
+                map[0][3] = "[ L ]";
+            }
+            case 4 -> {
+                map[6][0] = "[ D ]";
+                map[5][0] = "[ D ]";
+                map[6][4] = "[ D ]";
+                map[5][4] = "[ D ]";
+                map[4][4] = "[ ! ]";
+                map[3][4] = "[ L ]";
+                map[1][4] = "[ L ]";
+                map[0][3] = "[ L ]";
+            }
+            case 5 -> {
+                map[6][0] = "[ D ]";
+                map[5][0] = "[ D ]";
+                map[6][4] = "[ D ]";
+                map[5][4] = "[ D ]";
+                map[4][4] = "[ D ]";
+                map[3][4] = "[ ! ]";
+                map[1][4] = "[ L ]";
+                map[0][3] = "[ L ]";
+            }
+            case 6 -> {
+                map[6][0] = "[ D ]";
+                map[5][0] = "[ D ]";
+                map[6][4] = "[ D ]";
+                map[5][4] = "[ D ]";
+                map[4][4] = "[ D ]";
+                map[3][4] = "[ D ]";
+                map[1][4] = "[ ! ]";
+                map[0][3] = "[ L ]";
+            }
+            case 7 -> {
+                map[6][0] = "[ D ]";
+                map[5][0] = "[ D ]";
+                map[6][4] = "[ D ]";
+                map[5][4] = "[ D ]";
+                map[4][4] = "[ D ]";
+                map[3][4] = "[ D ]";
+                map[1][4] = "[ D ]";
+                map[0][3] = "[ ! ]";
+            }
+            default -> {
+                map[6][0] = "[ D ]";
+                map[5][0] = "[ D ]";
+                map[6][4] = "[ D ]";
+                map[5][4] = "[ D ]";
+                map[4][4] = "[ D ]";
+                map[3][4] = "[ D ]";
+                map[1][4] = "[ D ]";
+                map[0][3] = "[ D ]";
+            }
 
+        }
         // Print the map
         System.out.println("Map: ");
         for (String[] row : map) {
@@ -323,7 +416,10 @@ public class Player {
             System.out.println();
         }
         map[playerY][playerX] = "[   ]"; // Reset the player's position
-        System.out.println(" 'D' = Dungeon");
+        System.out.println("Key: ");
+        System.out.println(" '!' = Next Dungeon");
+        System.out.println(" 'D' = Unlocked Dungeon");
+        System.out.println(" 'L' = Locked Dungeon");
         System.out.println(" 'V' = Village");
         System.out.println(" 'P' = Player");
         TextEngine.enterToNext();
