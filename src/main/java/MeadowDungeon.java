@@ -1,4 +1,10 @@
 
+/**
+ * MeadowDungeon.java
+ *
+ * Text Adventure Game SE374 F24 Final Project Caden Finley Albert Tucker
+ * Grijesh Shrestha
+ */
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -18,7 +24,7 @@ public class MeadowDungeon extends Dungeon {
     private static final List<String> enemies = new ArrayList<>(List.of("Goblin", "Skeleton", "Slime", "Mimic"));
     private static final Random rand = new Random();
     public static boolean completed = false;
-    
+
     public static void startRoom() throws InterruptedException { //start room
         room = "Meadow Dungeon";
         Main.checkSave(room);
@@ -112,10 +118,6 @@ public class MeadowDungeon extends Dungeon {
             OpenWorld.startRoom();
         }
         handleDirectionsAndCommands();
-    }
-
-    public static void __init__() {
-        //initialize the meadow dungeon
     }
 
     private static boolean testIfBossRoom(int check) throws InterruptedException {
@@ -263,5 +265,4 @@ public class MeadowDungeon extends Dungeon {
         roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = meadowDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
         Main.loadSave();
     }
-
 }

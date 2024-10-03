@@ -1,4 +1,10 @@
 
+/**
+ * Desert Oasis Dungeon
+ *
+ * Text Adventure Game SE374 F24 Final Project Caden Finley Albert Tucker
+ * Grijesh Shrestha
+ */
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -111,10 +117,6 @@ public class DesertOasisDungeon extends Dungeon {
             OpenWorld.startRoom();
         }
         handleDirectionsAndCommands();
-    }
-
-    public static void __init__() {
-        //initialize the dark forest dungeon
     }
 
     private static boolean testIfBossRoom(int check) throws InterruptedException {
