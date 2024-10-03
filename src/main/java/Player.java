@@ -52,10 +52,10 @@ public class Player {
         Main.playerCreated = true;
         DungeonGenerator.testing = false;
         TextEngine.printNoDelay("Where do you want to spawn", false);
-        TextEngine.printNoDelay("1: SpawnRoom", false);
-        TextEngine.printNoDelay("2: OpenWorld", false);
-        TextEngine.printNoDelay("3: Dungeon", false);
-        TextEngine.printNoDelay("4: Village", false);
+        TextEngine.printNoDelay(" 1:SpawnRoom", false);
+        TextEngine.printNoDelay(" 2:OpenWorld", false);
+        TextEngine.printNoDelay(" 3:Dungeon", false);
+        TextEngine.printNoDelay(" 4:Village", false);
         TextEngine.printNoDelay("debug spawn: ", true);
         ignore = console.readLine();
         command = console.readLine();
@@ -69,7 +69,7 @@ public class Player {
                 Main.loadSave();
             }
             case "3" -> {
-                TextEngine.printNoDelay("1: Meadow 2: Dark Forest 3: Mountain Cave 4: Mountain Top 5: Desert Oasis 6: Desert Plains 7: Desert Pyramid 8: Ocean Kingdom", false);
+                TextEngine.printNoDelay(" 1:Meadow\n 2:Dark Forest\n 3:Mountain Cave\n 4:Mountain Top\n 5:Desert Oasis\n 6:Desert Plains\n 7 Desert Pyramid\n 8:Ocean Kingdom", false);
                 TextEngine.printNoDelay("debug dungeon: ", true);
                 ignore = console.readLine();
                 command = console.readLine();
@@ -148,44 +148,58 @@ public class Player {
         inventorySize += change;
     }
 
-    public static void changeHealth(int change) throws InterruptedException { //change the health
+    public static void changeHealth(int change) throws InterruptedException { 
+        String brightRedStart = "\033[1;31m";
+        String brightGreenStart = "\033[1;32m";
+        String brightEnd = "\033[0m";
+        String space = "     ";
         int damageCalc = (defense + (damage - (damage / 3)));
+    
         if (change < 0) {
             change += damageCalc;
-            if (change >= 0) {
+            if (change >= 0){
                 change = -1;
             }
-            TextEngine.printWithDelays("You took " + change + " damage!", false);
+            TextEngine.printWithDelays(space + brightRedStart + "You took " + change + " damage!" + brightEnd, false);
         } else {
-            TextEngine.printWithDelays("You gained " + (change - (change - (maxHealth - getHealth()))) + " health!", false);
+            TextEngine.printWithDelays(space + brightGreenStart + "You gained " + (change - (change - (maxHealth - getHealth()))) + " health!" + brightEnd, false);
         }
+    
         health += change;
         if (health > maxHealth) {
             health = maxHealth;
         }
+    
         if (health <= 0) {
-            TextEngine.printWithDelays("You have died!", false);
-            TextEngine.printWithDelays("Game Over!", false);
+            TextEngine.printWithDelays(space + brightRedStart + "You have died!" + brightEnd, false);
+            TextEngine.printWithDelays(space + brightRedStart + "Game Over!" + brightEnd, false);
             TextEngine.enterToNext();
             Main.startMenu();
         }
+    
         TextEngine.enterToNext();
     }
+    
 
     public static void changeMaxHealth(int change) throws InterruptedException { //change the max health
         maxHealth += change;
         health += change;
     }
 
-    public static void changeGold(int change) throws InterruptedException { //change the gold
-        //check for overflow
+    public static void changeGold(int change) throws InterruptedException { 
+        String brightRedStart = "\033[1;31m";
+        String brightGreenStart = "\033[1;32m";
+        String brightEnd = "\033[0m";
+        String space = "     ";
         gold += change;
+    
         if (change < 0) {
-            TextEngine.printWithDelays("You lost " + change + " gold!", false);
+            TextEngine.printWithDelays(space + brightRedStart + "You lost " + Math.abs(change) + " gold!" + brightEnd, false);
         } else {
-            TextEngine.printWithDelays("You gained " + change + " gold!", false);
+            TextEngine.printWithDelays(space + brightGreenStart + "You gained " + change + " gold!" + brightEnd, false);
         }
     }
+    
 
     public static void openInventory() throws InterruptedException { //open the inventory
         manager.printInventory();
