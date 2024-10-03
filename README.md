@@ -1,3 +1,6 @@
+git ls-files | grep '\.java' | xargs wc -l
+
+
 Albert Tucker 
   What am I good at? 
 Designing front end things, I really liked the things covered in HCI 
