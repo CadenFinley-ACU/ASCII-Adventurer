@@ -14,7 +14,7 @@ public class Room {
     public static String ignore;
     public static String room = null;
 
-    public static void hasItemInRoom(String itemName, int quantity) throws InterruptedException {    //check if there is an item in the room
+    public static void hasItemInRoom(String itemName, int quantity) throws InterruptedException {    //check if there is an item in the room accessable by all rooms and dungeons
         TextEngine.printWithDelays("Hey! There is an item in this room: ", false);
         if (quantity > 1) {
             TextEngine.printWithDelays("Item(s): " + itemName + " x" + quantity, false);

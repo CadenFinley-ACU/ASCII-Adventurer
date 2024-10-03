@@ -26,7 +26,7 @@ public class Dungeon extends Room {
     public static int[] currentPlayerPosition;
     public static boolean previousAutoSettings;
 
-    public static void generateDungeons() {
+    public static void generateDungeons() { //generates all 8 dungeons and stores them in their respective variables
         meadowDungeon = DungeonGenerator.generateAndReturnMatrix(5);
         darkForestDungeon = DungeonGenerator.generateAndReturnMatrix(5);
         mountainCaveDungeon = DungeonGenerator.generateAndReturnMatrix(7);
@@ -69,7 +69,7 @@ public class Dungeon extends Room {
                         case "Ocean Kingdom" -> {
                             DungeonGenerator.printMap(oceanKingdomDungeon);
                         }
-                        //add more dungeons here
+                        //add more dungeons here if needed
                     }
                 } else {
                     Main.inGameDefaultTextHandling(data);
@@ -82,7 +82,7 @@ public class Dungeon extends Room {
 
     }
 
-    public static void resetAll() { //reset all
+    public static void resetAll() { //reset all dungeons
         MeadowDungeon.fresh();
         DarkForestDungeon.fresh();
         MountainCaveDungeon.fresh();

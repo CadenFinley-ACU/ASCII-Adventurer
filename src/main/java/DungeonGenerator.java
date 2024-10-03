@@ -16,6 +16,9 @@ public class DungeonGenerator {
     public static void forceJAVAC(){
         return;
     }
+    public static void wipe(){
+        matrix = null;
+    }
 
     /**
      * Starts the dungeon generation process. This method generates a matrix
@@ -567,3 +570,6 @@ public class DungeonGenerator {
         return count;
     }
 }
+
+
+

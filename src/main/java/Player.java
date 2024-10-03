@@ -24,8 +24,9 @@ public class Player {
     public static Map<String, Integer> inventory = new HashMap<>();
     public static InventoryManager manager = new InventoryManager();
     public static boolean autoFight = false;
-    public static int playerX=0;
-    public static int playerY=0;
+    public static int playerX = 0;
+    public static int playerY = 0;
+
     public static void playerStart() throws InterruptedException { //start the player
         maxHealth = 100;
         health = maxHealth;
@@ -177,8 +178,13 @@ public class Player {
     }
 
     public static void changeGold(int change) throws InterruptedException { //change the gold
+        //check for overflow
         gold += change;
-        TextEngine.printWithDelays("You gained " + change + " gold!", false);
+        if (change < 0) {
+            TextEngine.printWithDelays("You lost " + change + " gold!", false);
+        } else {
+            TextEngine.printWithDelays("You gained " + change + " gold!", false);
+        }
     }
 
     public static void openInventory() throws InterruptedException { //open the inventory
@@ -290,6 +296,7 @@ public class Player {
     public static Map<String, Integer> copyInventory() { //get the inventory manager
         return inventory;
     }
+
     public static void printMap() throws InterruptedException {
         TextEngine.clearScreen();
         String[][] map = {
@@ -304,7 +311,7 @@ public class Player {
         };
 
         // Update the map with the player's position
-        map[playerY][playerX-1] = "[ P ]";
+        map[playerY][playerX - 1] = "[ P ]";
 
         // Print the map
         System.out.println("Map: ");

@@ -50,19 +50,19 @@ public class InventoryManager extends Player {
             for (String key : keys) {
                 if (inventory.get(key) > 1) {
                     if (Weapons.containsKey(key)) {
-                        TextEngine.printNoDelay(i + ": " + key + " x" + inventory.get(key) + " Damage: " + Weapons.get(key), false);
+                        TextEngine.printNoDelay(" " + key + " x" + inventory.get(key) + " Damage: " + Weapons.get(key), false);
                     } else if (Armor.containsKey(key)) {
                         TextEngine.printNoDelay(" Defense: " + Armor.get(key) + " Defense: " + Armor.get(key), false);
                     } else {
-                        TextEngine.printNoDelay(i + ": " + key + " x" + inventory.get(key), false);
+                        TextEngine.printNoDelay(" " + key + " x" + inventory.get(key), false);
                     }
                 } else {
                     if (Weapons.containsKey(key)) {
-                        TextEngine.printNoDelay(i + ": " + key + " Damage: " + Weapons.get(key), false);
+                        TextEngine.printNoDelay(" " + key + " Damage: " + Weapons.get(key), false);
                     } else if (Armor.containsKey(key)) {
-                        TextEngine.printNoDelay(i + ": " + key + " Defense: " + Armor.get(key), false);
+                        TextEngine.printNoDelay(" " + key + " Defense: " + Armor.get(key), false);
                     } else {
-                        TextEngine.printNoDelay(i + ": " + key, false);
+                        TextEngine.printNoDelay(" " + key, false);
                     }
                 }
                 i++;
@@ -181,8 +181,8 @@ public class InventoryManager extends Player {
         }
     }
 
-    public static void useItem(String item) throws InterruptedException {
-        if (Potions.containsKey(item) && Player.getHealth() < Player.getMaxHealth()) {
+    public static void useItem(String item) throws InterruptedException { //this only shouls run with potions as those are the only items you can use from the inventory menu
+        if (Potions.containsKey(item) && Player.getHealth() < Player.getMaxHealth()&& !"heart container".equals(item)) {
             Player.changeHealth(Potions.get(item));
             inventory.put(item, inventory.get(item) - 1);
             if (inventory.get(item) == 0) {
@@ -216,7 +216,7 @@ public class InventoryManager extends Player {
         }
     }
 
-    public static void printInventoryNoMenu() throws InterruptedException { //print the inventory without the menu
+    public static void printInventoryNoMenu() throws InterruptedException { //print the inventory items without the menu
         int i = 1;
         if (inventory.isEmpty()) {
             leave();
@@ -247,7 +247,7 @@ public class InventoryManager extends Player {
         }
     }
 
-    public static String getIndividualItemString(String item) {
+    public static String getIndividualItemString(String item) { //get the individual item string name
         if (inventory.get(item) > 1) {
             return item + " x" + inventory.get(item).toString();
         }

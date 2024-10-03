@@ -13,7 +13,7 @@ public class Enemy {
     public final static Console console = System.console();
     public static String command;
     public static String ignore;
-    private static final Map<String, Integer> enemyDamageValues = Map.copyOf(Map.ofEntries( //damage values for each enemy
+    private static final Map<String, Integer> enemyDamageValues = Map.copyOf(Map.ofEntries( //name of enemy / damage values for each enemy
             //enemies
             Map.entry("Goblin", 5),
             Map.entry("Orc", 10),

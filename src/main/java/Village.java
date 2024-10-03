@@ -1,4 +1,6 @@
 
+
+
 /**
  * Village Class
  *
@@ -92,8 +94,8 @@ public class Village extends Room {
                 switch (command.toLowerCase()) {
                     case "give it" -> {
                         Player.putItem("heart container", -1);
-                        Player.changeHealth(InventoryManager.Potions.get("heart container"));
-                        TextEngine.printWithDelays("Your health has increased by " + InventoryManager.Potions.get("heart container") + " points", false);
+                        Player.changeMaxHealth(InventoryManager.Potions.get("heart container"));
+                        TextEngine.printWithDelays("Your max health has increased by " + InventoryManager.Potions.get("heart container") + " points", false);
                         TextEngine.enterToNext();
                         Main.loadSave();
                     }
@@ -115,7 +117,21 @@ public class Village extends Room {
                         Main.loadSave();
                     }
                     case "no" -> {
-                        church();
+                        TextEngine.printWithDelays("There isn't anyhting here for you, try going to a dungeon.", true);
+                        TextEngine.printWithDelays("Would you like to leave yes or no?", true);
+                        ignore = console.readLine();
+                        command = console.readLine();
+                        switch (command.toLowerCase()) {
+                            case "yes" -> {
+                                Main.loadSave();
+                            }
+                            case "no" -> {
+                                church();
+                            }
+                            default ->
+                                Main.inGameDefaultTextHandling(command);
+                        }
+
                     }
                     default ->
                         Main.inGameDefaultTextHandling(command);
@@ -159,7 +175,7 @@ public class Village extends Room {
         }
     }
 
-    public static void shop1() throws InterruptedException { //shop
+    public static void shop1() throws InterruptedException { //shop 1
         Main.screenRefresh();
         //shop implementation
         TextEngine.printNoDelay("Gold: " + Player.getGold(), false);
@@ -198,7 +214,7 @@ public class Village extends Room {
         }
     }
 
-    public static void shop2() throws InterruptedException { //shop
+    public static void shop2() throws InterruptedException { //shop 2
         Main.screenRefresh();
         //shop implementation
         TextEngine.printNoDelay("Gold: " + Player.getGold(), false);
@@ -237,7 +253,7 @@ public class Village extends Room {
         }
     }
 
-    public static void shop3() throws InterruptedException { //shop
+    public static void shop3() throws InterruptedException { //shop 3
         Main.screenRefresh();
         //shop implementation
         TextEngine.printNoDelay("Gold: " + Player.getGold(), false);
@@ -276,7 +292,7 @@ public class Village extends Room {
         }
     }
 
-    private static void buyMultiple(String type, int cost) throws InterruptedException {
+    private static void buyMultiple(String type, int cost) throws InterruptedException { //buy multiple clause for certain items in village shop
         TextEngine.printWithDelays("How many would you like to buy?", true);
         ignore = console.readLine();
         command = console.readLine();
