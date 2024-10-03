@@ -18,13 +18,13 @@ public class SpawnRoom extends Room {
         Main.checkSave(room);
         Main.screenRefresh();
         switch (roomSave) {
-            case 0:
+            case 0 ->
                 part0();
-            case 1:
+            case 1 ->
                 part1();
-            case 2:
+            case 2 ->
                 part2();
-            default:
+            default ->
                 Main.startMenu();
         }
     }
