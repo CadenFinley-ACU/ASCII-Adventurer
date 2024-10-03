@@ -13,7 +13,7 @@ public class DungeonGenerator {
     public static boolean testing = false;
     public static int[][] matrix;
 
-    public static void wipe(){
+    public static void wipe() {
         matrix = null;
     }
 
@@ -567,6 +567,3 @@ public class DungeonGenerator {
         return count;
     }
 }
-
-
-
