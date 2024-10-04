@@ -47,7 +47,6 @@ public class Player {
         defense = 0;
         gold = 20000000;
         inventorySize = 200;
-        autoFight = true;
         name = "Debug!";
         Main.playerCreated = true;
         DungeonGenerator.testing = false;
@@ -148,38 +147,37 @@ public class Player {
         inventorySize += change;
     }
 
-    public static void changeHealth(int change) throws InterruptedException { 
+    public static void changeHealth(int change) throws InterruptedException {
         String brightRedStart = "\033[1;31m";
         String brightGreenStart = "\033[1;32m";
         String brightEnd = "\033[0m";
         String space = "     ";
         int damageCalc = (defense + (damage - (damage / 3)));
-    
+
         if (change < 0) {
             change += damageCalc;
-            if (change >= 0){
+            if (change >= 0) {
                 change = -1;
             }
             TextEngine.printWithDelays(space + brightRedStart + "You took " + change + " damage!" + brightEnd, false);
         } else {
             TextEngine.printWithDelays(space + brightGreenStart + "You gained " + (change - (change - (maxHealth - getHealth()))) + " health!" + brightEnd, false);
         }
-    
+
         health += change;
         if (health > maxHealth) {
             health = maxHealth;
         }
-    
+
         if (health <= 0) {
             TextEngine.printWithDelays(space + brightRedStart + "You have died!" + brightEnd, false);
             TextEngine.printWithDelays(space + brightRedStart + "Game Over!" + brightEnd, false);
             TextEngine.enterToNext();
             Main.startMenu();
         }
-    
+
         TextEngine.enterToNext();
     }
-    
 
     public static void changeMaxHealth(int change) throws InterruptedException { //change the max health
         maxHealth += change;
@@ -187,20 +185,19 @@ public class Player {
         TextEngine.printWithDelays("Your max health has increased by " + change + " points", false);
     }
 
-    public static void changeGold(int change) throws InterruptedException { 
+    public static void changeGold(int change) throws InterruptedException {
         String brightRedStart = "\033[1;31m";
         String brightGreenStart = "\033[1;32m";
         String brightEnd = "\033[0m";
         String space = "     ";
         gold += change;
-    
+
         if (change < 0) {
             TextEngine.printWithDelays(space + brightRedStart + "You lost " + Math.abs(change) + " gold!" + brightEnd, false);
         } else {
             TextEngine.printWithDelays(space + brightGreenStart + "You gained " + change + " gold!" + brightEnd, false);
         }
     }
-    
 
     public static void openInventory() throws InterruptedException { //open the inventory
         manager.printInventory();

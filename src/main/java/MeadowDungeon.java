@@ -35,10 +35,8 @@ public class MeadowDungeon extends Dungeon {
     }
 
     public static void fresh() { //fresh
-        Dungeon.autoCheck();
         completed = false;
         items = new ArrayList<>(List.of("axe", "chainmail set", "health potion"));
-        Dungeon.autoCheck();
         foundItemRooms = 0;
         Dungeon.currentPlayerPosition = spawnPosition;
         currentPlayerPosition = spawnPosition;
@@ -56,7 +54,7 @@ public class MeadowDungeon extends Dungeon {
         if (meadowDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] == 2 && roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] == 0) {
             if (foundItemRooms < items.size()) {
                 String randomItem = items.get(rand.nextInt(items.size()));
-                if (hasItemInRoom(randomItem, 1)) {
+                if (hasChestInRoom(randomItem, 1)) {
                     items.remove(randomItem);
                     lastPosition = currentPlayerPosition.clone();
                     roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = meadowDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
@@ -86,6 +84,12 @@ public class MeadowDungeon extends Dungeon {
         }
         if (meadowDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] == 1 && roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] == 0) {
             fightRandomEnemies(3);
+        }
+        if (meadowDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] == 6 && roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] == 0) {
+            trappedRoom();
+            lastPosition = currentPlayerPosition.clone();
+            roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = meadowDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
+            Main.loadSave();
         }
         if (meadowDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] == 4 && roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] == 0) {
             TextEngine.printWithDelays("You have entered a room with a mini boss", false);
