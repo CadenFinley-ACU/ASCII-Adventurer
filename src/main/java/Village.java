@@ -105,7 +105,7 @@ public class Village extends Room {
                 }
             }
         } else {
-            TextEngine.printWithDelays("You do not have a heart container to give to the priest fuck off", false);
+            TextEngine.printWithDelays("You do not have a heart container to give to the priest", false);
             TextEngine.printWithDelays("Would you like to leave? yes or no", true);
             while (true) {
                 ignore = console.readLine();
