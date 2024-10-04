@@ -327,7 +327,7 @@ public class Player {
         map[playerY][playerX] = "[ P ]";
         switch (Dungeon.completedDungeons) {
             case 0 -> {
-                map[6][0] = "[ N ]";
+                map[6][0] = "[ ! ]";
                 map[5][0] = "[ L ]";
                 map[6][4] = "[ L ]";
                 map[5][4] = "[ L ]";
