@@ -29,6 +29,7 @@ public class DungeonGenerator {
             start(5);
             return;
         }
+        //the algorithm is otimized for odd numbers 5 : 15
         int size = pass;
         if (size % 2 == 0) {
             size++;
@@ -37,6 +38,7 @@ public class DungeonGenerator {
             size = 15;
         }
 
+        //determines the number of regular rooms in a dungeon
         float changeRatio = 1 + (((size * size) / 1) / 12.5f);
 
         if (3 + size < changeRatio) {
@@ -73,6 +75,8 @@ public class DungeonGenerator {
         //determines how many random rooms are added
         // Randomly add at least size+size/2 more 1's ensuring they are connected to the main path
         addRandom(matrix, rand, size + (int) changeRatio, 1);
+
+        //formula that dertimes the number of item rooms in a dungeon
         float itemRoomRatio = ((2 * size) - 5.5f) - (size / 2);
         if (itemRoomRatio >= size - 5) {
             itemRoomRatio = size / 2;
@@ -91,7 +95,7 @@ public class DungeonGenerator {
         addRandom(matrix, rand, 1, 6);
 
         // Randomly add mini boss rooms (4) ensuring it is connected to the main path
-        addRandom(matrix, rand, (int) itemRoomRatio - 1, 4);
+        addRandom(matrix, rand, 1, 4);
 
         // Ensure only one 1 value is adjacent to the 8
         ensureSingleAdjacent(matrix, coord8[0], coord8[1]);
@@ -99,7 +103,11 @@ public class DungeonGenerator {
         // Place 8 and 9 back in their original positions
         matrix[coord9[0]][coord9[1]] = 9;
         matrix[coord8[0]][coord8[1]] = 8;
+
+        //trim values that dont have any connections to main path
         matrix = trimUnreachableParts(matrix, findValue(matrix, 9));
+
+        // Check if the matrix is connected and valid
         if (testArrays(matrix)) {
             if (testing) {
                 printMap(matrix);
@@ -116,6 +124,8 @@ public class DungeonGenerator {
             System.out.println("Matrix not connected, retrying...");
             System.out.println("-------------------------------");
         }
+
+        //recurse if matrix is invalid
         start(size);
     }
 

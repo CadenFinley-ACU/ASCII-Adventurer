@@ -79,7 +79,6 @@ public class Dungeon extends Room {
                 Main.inGameDefaultTextHandling(data);
             }
         }
-
     }
 
     public static void resetAll() { //reset all dungeons
