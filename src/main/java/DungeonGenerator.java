@@ -13,6 +13,7 @@ public class DungeonGenerator {
     public static boolean testing = false;
     public static int[][] matrix;
     static int fails = 0;
+    private static float itemRoomRatio;
 
     public static void wipe() {
         matrix = null;
@@ -40,7 +41,7 @@ public class DungeonGenerator {
         }
 
         //determines the number of regular rooms in a dungeon
-        float changeRatio = (size * size) - (size - (size - (2 * size))) - 2;
+        float changeRatio = (size * size) - (size - (size - (2 * size))) - 5;
 
         if (3 + size < changeRatio) {
             changeRatio = size;
@@ -79,16 +80,13 @@ public class DungeonGenerator {
 
         //formula that dertimes the number of item rooms in a dungeon
         //float itemRoomRatio = 1 + ((2 * size) - 5.5f) - (size / 2);
-        float itemRoomRatio = size - 3;
+        itemRoomRatio = size - 3;
         if (itemRoomRatio >= size - 5) {
             itemRoomRatio = size / 2;
         }
         if (itemRoomRatio < 3) {
             itemRoomRatio = 2;
         }
-
-        // Randomly add item rooms (2-5) ensuring they are connected to the main path 2-5 are item rooms
-        addRandom(matrix, rand, (int) itemRoomRatio, 2);
 
         // Randomly add 1 rare item (3) ensuring it is connected to the main path
         addRandom(matrix, rand, 1, 3);
@@ -98,6 +96,9 @@ public class DungeonGenerator {
 
         // Randomly add mini boss rooms (4) ensuring it is connected to the main path
         addRandom(matrix, rand, 1, 4);
+
+        // Randomly add item rooms (2-5) ensuring they are connected to the main path 2-5 are item rooms
+        addRandom(matrix, rand, (int) itemRoomRatio, 2);
 
         // Ensure only one 1 value is adjacent to the 8
         ensureSingleAdjacent(matrix, coord8[0], coord8[1]);
@@ -161,7 +162,6 @@ public class DungeonGenerator {
                     x1 += (x1 < x2) ? 1 : -1;
                 }
             }
-
             if (matrix[x1][y1] == 0) {
                 matrix[x1][y1] = 1;
             }
@@ -304,7 +304,7 @@ public class DungeonGenerator {
         if (pos9 == null || pos8 == null || pos3 == null || pos2 == null || pos4 == null || pos6 == null) {
             return false;
         }
-        return (isPathConnected(localMatrix, pos9[0], pos9[1], pos8[0], pos8[1]) && isPathConnected(localMatrix, pos9[0], pos9[1], pos3[0], pos3[1]) && isPathConnected(localMatrix, pos9[0], pos9[1], pos2[0], pos2[1]) && isPathConnected(localMatrix, pos9[0], pos9[1], pos4[0], pos4[1]) && !isAdjacent(pos8[0], pos8[1], pos6));
+        return (isPathConnected(localMatrix, pos9[0], pos9[1], pos8[0], pos8[1]) && isPathConnected(localMatrix, pos9[0], pos9[1], pos3[0], pos3[1]) && isPathConnected(localMatrix, pos9[0], pos9[1], pos2[0], pos2[1]) && isPathConnected(localMatrix, pos9[0], pos9[1], pos4[0], pos4[1]) && !isAdjacent(pos8[0], pos8[1], pos6)) && (numberOfRooms(localMatrix, 2) >= (int) itemRoomRatio);
     }
 
     /**
@@ -336,30 +336,6 @@ public class DungeonGenerator {
      */
     public static int[][] returnMatrix() {
         return matrix;
-    }
-
-    /**
-     * Generates a valid matrix with a path connecting the values 8 and 9.
-     *
-     * @param size The size of the matrix to generate.
-     * @return The generated matrix.
-     */
-    public static int[][] generateValidMatrix(int size) {
-        int[][] localMatrix;
-        Random random = new Random();
-        do {
-            localMatrix = new int[size][size];
-            // Fill the matrix with random values greater than 0
-            for (int i = 0; i < size; i++) {
-                for (int j = 0; j < size; j++) {
-                    localMatrix[i][j] = random.nextInt(10) + 1; // Values between 1 and 10
-                }
-            }
-            // Place 8 and 9 at random positions
-            localMatrix[random.nextInt(size)][random.nextInt(size)] = 8;
-            localMatrix[random.nextInt(size)][random.nextInt(size)] = 9;
-        } while (!isPathConnected(localMatrix, findValue(localMatrix, 9)[0], findValue(localMatrix, 9)[1], findValue(localMatrix, 8)[0], findValue(localMatrix, 8)[1]));
-        return localMatrix;
     }
 
     /**

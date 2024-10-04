@@ -28,7 +28,7 @@ public class Dungeon extends Room {
 
     public static void generateDungeons() { //generates all 8 dungeons and stores them in their respective variables
         meadowDungeon = DungeonGenerator.generateAndReturnMatrix(5);
-        darkForestDungeon = DungeonGenerator.generateAndReturnMatrix(5);
+        darkForestDungeon = DungeonGenerator.generateAndReturnMatrix(7);
         mountainCaveDungeon = DungeonGenerator.generateAndReturnMatrix(7);
         mountainTopDungeon = DungeonGenerator.generateAndReturnMatrix(7);
         desertOasisDungeon = DungeonGenerator.generateAndReturnMatrix(9);
