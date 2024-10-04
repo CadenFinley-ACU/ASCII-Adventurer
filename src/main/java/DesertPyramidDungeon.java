@@ -55,7 +55,7 @@ public class DesertPyramidDungeon extends Dungeon {
         if (desertPyramidDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] == 2 && roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] == 0) {
             if (foundItemRooms < items.size()) {
                 String randomItem = items.get(rand.nextInt(items.size()));
-                if (hasItemInRoom(randomItem, 1)) {
+                if (hasChestInRoom(randomItem, 1)) {
                     items.remove(randomItem);
                     lastPosition = currentPlayerPosition.clone();
                     roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = desertPyramidDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
@@ -84,9 +84,13 @@ public class DesertPyramidDungeon extends Dungeon {
             }
         }
         if (desertPyramidDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] == 1 && roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] == 0) {
-
             fightRandomEnemies(4);
-
+        }
+        if (desertPyramidDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] == 6 && roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] == 0) {
+            trappedRoom();
+            lastPosition = currentPlayerPosition.clone();
+            roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = desertPyramidDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
+            Main.loadSave();
         }
         if (desertPyramidDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] == 4 && roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] == 0) {
             TextEngine.printWithDelays("You have entered a room with a mini boss", false);
