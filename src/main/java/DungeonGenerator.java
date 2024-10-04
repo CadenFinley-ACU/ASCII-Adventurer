@@ -41,7 +41,7 @@ public class DungeonGenerator {
         }
 
         //determines the number of regular rooms in a dungeon
-        float changeRatio = (size * size) - (size - (size - (2 * size))) - 5;
+        float changeRatio = ((size * size) / 2);
 
         if (3 + size < changeRatio) {
             changeRatio = size;
@@ -79,14 +79,10 @@ public class DungeonGenerator {
         addRandom(matrix, rand, size + (int) changeRatio, 1);
 
         //formula that dertimes the number of item rooms in a dungeon
-        //float itemRoomRatio = 1 + ((2 * size) - 5.5f) - (size / 2);
-        itemRoomRatio = size - 3;
-        if (itemRoomRatio >= size - 5) {
-            itemRoomRatio = size / 2;
-        }
-        if (itemRoomRatio < 3) {
-            itemRoomRatio = 2;
-        }
+        itemRoomRatio = 2;
+
+        // Randomly add item rooms (2-5) ensuring they are connected to the main path 2-5 are item rooms
+        addRandom(matrix, rand, (int) itemRoomRatio, 2);
 
         // Randomly add 1 rare item (3) ensuring it is connected to the main path
         addRandom(matrix, rand, 1, 3);
@@ -96,9 +92,6 @@ public class DungeonGenerator {
 
         // Randomly add mini boss rooms (4) ensuring it is connected to the main path
         addRandom(matrix, rand, 1, 4);
-
-        // Randomly add item rooms (2-5) ensuring they are connected to the main path 2-5 are item rooms
-        addRandom(matrix, rand, (int) itemRoomRatio, 2);
 
         // Ensure only one 1 value is adjacent to the 8
         ensureSingleAdjacent(matrix, coord8[0], coord8[1]);
@@ -304,7 +297,7 @@ public class DungeonGenerator {
         if (pos9 == null || pos8 == null || pos3 == null || pos2 == null || pos4 == null || pos6 == null) {
             return false;
         }
-        return (isPathConnected(localMatrix, pos9[0], pos9[1], pos8[0], pos8[1]) && isPathConnected(localMatrix, pos9[0], pos9[1], pos3[0], pos3[1]) && isPathConnected(localMatrix, pos9[0], pos9[1], pos2[0], pos2[1]) && isPathConnected(localMatrix, pos9[0], pos9[1], pos4[0], pos4[1]) && !isAdjacent(pos8[0], pos8[1], pos6)) && (numberOfRooms(localMatrix, 2) >= (int) itemRoomRatio);
+        return (isPathConnected(localMatrix, pos9[0], pos9[1], pos8[0], pos8[1]) && isPathConnected(localMatrix, pos9[0], pos9[1], pos3[0], pos3[1]) && isPathConnected(localMatrix, pos9[0], pos9[1], pos2[0], pos2[1]) && isPathConnected(localMatrix, pos9[0], pos9[1], pos4[0], pos4[1]) && !isAdjacent(pos8[0], pos8[1], pos6)) && (numberOfRooms(localMatrix, 2) >= itemRoomRatio);
     }
 
     /**
