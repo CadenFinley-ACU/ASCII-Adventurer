@@ -39,7 +39,7 @@ public class DungeonGenerator {
         }
 
         //determines the number of regular rooms in a dungeon
-        float changeRatio = 3 + ((size * size) / 12.5f);
+        float changeRatio = 2 + ((size * size) / 12.5f);
 
         if (3 + size < changeRatio) {
             changeRatio = size;
