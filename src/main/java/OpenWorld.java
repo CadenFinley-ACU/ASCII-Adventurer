@@ -353,7 +353,7 @@ public class OpenWorld extends Room {
                 case "the dark forest" -> {
                     if (Dungeon.completedDungeons > 0) {
                         DarkForestDungeon.fresh();
-                        Main.saveSpace("Dark Forest Dungean");
+                        Main.saveSpace("Dark Forest Dungeon");
                         Main.loadSave();
                     } else {
                         TextEngine.printWithDelays("You must complete The Meadow dungeon first.\nTry going south", true);
