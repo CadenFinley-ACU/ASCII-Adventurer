@@ -29,6 +29,7 @@ public class DungeonGenerator {
             start(5);
             return;
         }
+        //the algorithm is otimized for odd numbers 5 : 15
         int size = pass;
         if (size % 2 == 0) {
             size++;
@@ -37,7 +38,8 @@ public class DungeonGenerator {
             size = 15;
         }
 
-        float changeRatio = 1 + (((size * size) / 1) / 12.5f);
+        //determines the number of regular rooms in a dungeon
+        float changeRatio = 2 + ((size * size) / 12.5f);
 
         if (3 + size < changeRatio) {
             changeRatio = size;
@@ -73,6 +75,8 @@ public class DungeonGenerator {
         //determines how many random rooms are added
         // Randomly add at least size+size/2 more 1's ensuring they are connected to the main path
         addRandom(matrix, rand, size + (int) changeRatio, 1);
+
+        //formula that dertimes the number of item rooms in a dungeon
         float itemRoomRatio = ((2 * size) - 5.5f) - (size / 2);
         if (itemRoomRatio >= size - 5) {
             itemRoomRatio = size / 2;
@@ -87,8 +91,11 @@ public class DungeonGenerator {
         // Randomly add 1 rare item (3) ensuring it is connected to the main path
         addRandom(matrix, rand, 1, 3);
 
+        // Randomly add 1 trap room (6) ensuring it is connected to the main path
+        addRandom(matrix, rand, 1, 6);
+
         // Randomly add mini boss rooms (4) ensuring it is connected to the main path
-        addRandom(matrix, rand, (int) itemRoomRatio - 1, 4);
+        addRandom(matrix, rand, 1, 4);
 
         // Ensure only one 1 value is adjacent to the 8
         ensureSingleAdjacent(matrix, coord8[0], coord8[1]);
@@ -96,7 +103,11 @@ public class DungeonGenerator {
         // Place 8 and 9 back in their original positions
         matrix[coord9[0]][coord9[1]] = 9;
         matrix[coord8[0]][coord8[1]] = 8;
+
+        //trim values that dont have any connections to main path
         matrix = trimUnreachableParts(matrix, findValue(matrix, 9));
+
+        // Check if the matrix is connected and valid
         if (testArrays(matrix)) {
             if (testing) {
                 printMap(matrix);
@@ -113,6 +124,8 @@ public class DungeonGenerator {
             System.out.println("Matrix not connected, retrying...");
             System.out.println("-------------------------------");
         }
+
+        //recurse if matrix is invalid
         start(size);
     }
 
@@ -281,11 +294,12 @@ public class DungeonGenerator {
         int[] pos3 = findValue(localMatrix, 3);
         int[] pos2 = findValue(localMatrix, 2);
         int[] pos4 = findValue(localMatrix, 4);
+        int[] pos6 = findValue(localMatrix, 6);
 
-        if (pos9 == null || pos8 == null || pos3 == null || pos2 == null || pos4 == null) {
+        if (pos9 == null || pos8 == null || pos3 == null || pos2 == null || pos4 == null || pos6 == null) {
             return false;
         }
-        return isPathConnected(localMatrix, pos9[0], pos9[1], pos8[0], pos8[1]) && isPathConnected(localMatrix, pos9[0], pos9[1], pos3[0], pos3[1]) && isPathConnected(localMatrix, pos9[0], pos9[1], pos2[0], pos2[1]) && isPathConnected(localMatrix, pos9[0], pos9[1], pos4[0], pos4[1]);
+        return (isPathConnected(localMatrix, pos9[0], pos9[1], pos8[0], pos8[1]) && isPathConnected(localMatrix, pos9[0], pos9[1], pos3[0], pos3[1]) && isPathConnected(localMatrix, pos9[0], pos9[1], pos2[0], pos2[1]) && isPathConnected(localMatrix, pos9[0], pos9[1], pos4[0], pos4[1]) && !isAdjacent(pos8[0], pos8[1], pos6));
     }
 
     /**
@@ -376,7 +390,7 @@ public class DungeonGenerator {
                     if (i == passedPosition[0] && j == passedPosition[1]) {
                         System.out.print("[P] ");
                     } else if (isAdjacent(i, j, passedPosition)) {
-                        switch (passedMatrix[i][j]) {
+                        switch (passedMatrix[i][j]) { //icon for unvisited rooms
                             case 9 ->
                                 System.out.print("[*] "); // Special marker for value 9
                             case 8 ->
@@ -393,7 +407,7 @@ public class DungeonGenerator {
                                 System.out.print("[~] "); // Default case for other values
                         }
                     } else if (unlocked[i][j] > 0) {
-                        switch (unlocked[i][j]) {
+                        switch (unlocked[i][j]) { //icon for visited rooms
                             case 9 ->
                                 System.out.print("[*] "); // Special marker for value 9
                             case 2 ->

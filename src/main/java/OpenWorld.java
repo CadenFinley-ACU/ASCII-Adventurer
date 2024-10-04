@@ -121,7 +121,7 @@ public class OpenWorld extends Room {
     }
 
     public static void resetAll() { //reset all
-        roomSave = 0;
+        roomSave = 1;
     }
 
     private static void room1() throws InterruptedException { //0
@@ -345,7 +345,8 @@ public class OpenWorld extends Room {
                 case "east" -> {
                     roomSave = 7;
                     Main.loadSave();
-                }case "south" -> {
+                }
+                case "south" -> {
                     roomSave = 3;
                     Main.loadSave();
                 }

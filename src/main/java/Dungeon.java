@@ -79,10 +79,10 @@ public class Dungeon extends Room {
                 Main.inGameDefaultTextHandling(data);
             }
         }
-
     }
 
     public static void resetAll() { //reset all dungeons
+        generateDungeons();
         MeadowDungeon.fresh();
         DarkForestDungeon.fresh();
         MountainCaveDungeon.fresh();
@@ -91,7 +91,6 @@ public class Dungeon extends Room {
         DesertPlainsDungeon.fresh();
         DesertPyramidDungeon.fresh();
         OceanKingdomDungeon.fresh();
-        //add more dungeons here
     }
 
     public static void autoCheck() {
