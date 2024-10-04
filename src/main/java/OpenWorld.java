@@ -10,6 +10,7 @@ public class OpenWorld extends Room {
 
     static int roomSave = 1;
     public static String holdCommand = "";
+
     public static void startRoom() throws InterruptedException { //start room
         room = "OpenWorld";
         Main.checkSave(room);
@@ -152,7 +153,7 @@ public class OpenWorld extends Room {
     }
 
     private static void room2() throws InterruptedException {
-        TextEngine.printWithDelays("You walk "+ holdCommand + " and see a small village in the distance", false);
+        TextEngine.printWithDelays("You walk " + holdCommand + " and see a small village in the distance", false);
         TextEngine.printWithDelays("What is your command: north or east", true);
         while (true) {
             ignore = console.readLine();
@@ -236,7 +237,7 @@ public class OpenWorld extends Room {
     }
 
     private static void room5() throws InterruptedException {
-        TextEngine.printWithDelays("You walk " + holdCommand +", you are right by The Mountain Cave", false);
+        TextEngine.printWithDelays("You walk " + holdCommand + ", you are right by The Mountain Cave", false);
         TextEngine.printWithDelays("Worrning: going into a dungeon you will trigger fights, but you might find something in the rooms\nIf you do not DIE", false);
         TextEngine.printWithDelays("What is your command: north, west, or The Mountain Cave", true);
         while (true) {
