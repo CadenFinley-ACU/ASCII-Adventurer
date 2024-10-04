@@ -15,7 +15,7 @@ public class Room {
     public static String room = null;
 
     public static boolean hasItemInRoom(String itemName, int quantity) throws InterruptedException {
-        TextEngine.printWithDelays("Hey! There is an item in this room: ", false);
+        //TextEngine.printWithDelays("Hey! There is an item in this room: ", false);
         if (quantity > 1) {
             TextEngine.printWithDelays("Item(s): " + itemName + " x" + quantity, false);
         } else {

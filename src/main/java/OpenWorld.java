@@ -9,7 +9,7 @@
 public class OpenWorld extends Room {
 
     static int roomSave = 1;
-
+    public static String holdCommand = "";
     public static void startRoom() throws InterruptedException { //start room
         room = "OpenWorld";
         Main.checkSave(room);
@@ -126,18 +126,15 @@ public class OpenWorld extends Room {
 
     private static void room1() throws InterruptedException { //0
         TextEngine.printWithDelays("You are in the open world,\nthe sunlight blinds your eyes as they have not adjusted from the dark cave.", false);
-        TextEngine.printWithDelays("You see a long winding paths in all four directions.\nHow overwhelming...", false);
-        TextEngine.printWithDelays("Which path will you take: north, east, west, or The Village", true);
+        TextEngine.printWithDelays("As your eyes adjust you see a long winding paths that goes north, west, and a village to the east.\nHow overwhelming...", false);
+        TextEngine.printWithDelays("Which path will you take: north, west, or The Village", true);
         while (true) {
             ignore = console.readLine();
             command = console.readLine();
+            holdCommand = command;
             switch (command.toLowerCase()) {
                 case "north" -> {
                     roomSave = 4;
-                    Main.loadSave();
-                }
-                case "east" -> {
-                    roomSave = 2;
                     Main.loadSave();
                 }
                 case "west" -> {
@@ -155,11 +152,12 @@ public class OpenWorld extends Room {
     }
 
     private static void room2() throws InterruptedException {
-        TextEngine.printWithDelays("You walk forward and see a small village in the distance", false);
+        TextEngine.printWithDelays("You walk "+ holdCommand + " and see a small village in the distance", false);
         TextEngine.printWithDelays("What is your command: north or east", true);
         while (true) {
             ignore = console.readLine();
             command = console.readLine();
+            holdCommand = command;
             switch (command.toLowerCase()) {
                 case "north" -> {
                     roomSave = 3;
@@ -176,11 +174,13 @@ public class OpenWorld extends Room {
     }
 
     private static void room3() throws InterruptedException {
-        TextEngine.printWithDelays("You walk forward and see a small village in the distance", false);
+        TextEngine.printWithDelays("You walk " + holdCommand + ", you are right by The Meadow dungeon now.", false);
+        TextEngine.printWithDelays("Worrning: going into a dungeon you will trigger fights, but you might find something in the rooms\nIf you do not DIE", false);
         TextEngine.printWithDelays("What is your command: north, east, south, or The Meadow", true);
         while (true) {
             ignore = console.readLine();
             command = console.readLine();
+            holdCommand = command;
             switch (command.toLowerCase()) {
                 case "north" -> {
                     roomSave = 8;
@@ -206,11 +206,12 @@ public class OpenWorld extends Room {
     }
 
     private static void room4() throws InterruptedException {
-        TextEngine.printWithDelays("You walk forward and see a small village in the distance", false);
+        TextEngine.printWithDelays("You walk " + holdCommand + " and see a unlocked dungeon to your west.", false);
         TextEngine.printWithDelays("What is your command: north, east, south, or west", true);
         while (true) {
             ignore = console.readLine();
             command = console.readLine();
+            holdCommand = command;
             switch (command.toLowerCase()) {
                 case "north" -> {
                     roomSave = 7;
@@ -235,11 +236,13 @@ public class OpenWorld extends Room {
     }
 
     private static void room5() throws InterruptedException {
-        TextEngine.printWithDelays("You walk forward and see a small village in the distance", false);
+        TextEngine.printWithDelays("You walk " + holdCommand +", you are right by The Mountain Cave", false);
+        TextEngine.printWithDelays("Worrning: going into a dungeon you will trigger fights, but you might find something in the rooms\nIf you do not DIE", false);
         TextEngine.printWithDelays("What is your command: north, west, or The Mountain Cave", true);
         while (true) {
             ignore = console.readLine();
             command = console.readLine();
+            holdCommand = command;
             switch (command.toLowerCase()) {
                 case "north" -> {
                     roomSave = 6;
@@ -255,7 +258,7 @@ public class OpenWorld extends Room {
                         Main.saveSpace("Mountain Cave Dungeon");
                         Main.loadSave();
                     } else {
-                        TextEngine.printWithDelays("You must complete the other dungeons first.", true);
+                        TextEngine.printWithDelays("You must complete The Dark Forest first.\nTry going west // MaYbe", true);
                     }
                 }
                 default ->
@@ -265,11 +268,13 @@ public class OpenWorld extends Room {
     }
 
     private static void room6() throws InterruptedException {
-        TextEngine.printWithDelays("You walk forward and see a small village in the distance", false);
+        TextEngine.printWithDelays("You walk " + holdCommand + ", you are right by The Mountain Top dungeon", false);
+        TextEngine.printWithDelays("Worrning: going into a dungeon you will trigger fights, but you might find something in the rooms\nIf you do not DIE", false);
         TextEngine.printWithDelays("What is your command: north, south, west, or The Mountain Top", true);
         while (true) {
             ignore = console.readLine();
             command = console.readLine();
+            holdCommand = command;
             switch (command.toLowerCase()) {
                 case "north" -> {
                     roomSave = 10;
@@ -289,7 +294,7 @@ public class OpenWorld extends Room {
                         Main.saveSpace("Mountain Top Dungeon");
                         Main.loadSave();
                     } else {
-                        TextEngine.printWithDelays("You must complete the other dungeons first.", true);
+                        TextEngine.printWithDelays("You must complete The Mountain Cave dungeons first\nTry going south //Not sure if that is right~Albert:)", true);
                     }
                 }
                 default ->
@@ -299,11 +304,12 @@ public class OpenWorld extends Room {
     }
 
     private static void room7() throws InterruptedException {
-        TextEngine.printWithDelays("You walk forward and see a small village in the distance", false);
+        TextEngine.printWithDelays("You walk " + holdCommand + " and see a small village in the distance", false);
         TextEngine.printWithDelays("What is your command: north, east, south, or west", true);
         while (true) {
             ignore = console.readLine();
             command = console.readLine();
+            holdCommand = command;
             switch (command.toLowerCase()) {
                 case "north" -> {
                     roomSave = 9;
@@ -328,11 +334,13 @@ public class OpenWorld extends Room {
     }
 
     private static void room8() throws InterruptedException {
-        TextEngine.printWithDelays("You walk forward and see a small village in the distance", false);
+        TextEngine.printWithDelays("You walk " + holdCommand + ", you are right by The Dark Forest", false);
+        TextEngine.printWithDelays("Worrning: going into a dungeon you will trigger fights, but you might find something in the rooms\nIf you do not DIE", false);
         TextEngine.printWithDelays("What is your command: east, south, or The Dark Forest", true);
         while (true) {
             ignore = console.readLine();
             command = console.readLine();
+            holdCommand = command;
             switch (command.toLowerCase()) {
                 case "east" -> {
                     roomSave = 7;
@@ -347,7 +355,7 @@ public class OpenWorld extends Room {
                         Main.saveSpace("Dark Forest Dungean");
                         Main.loadSave();
                     } else {
-                        TextEngine.printWithDelays("You must complete the other dungeons first.", true);
+                        TextEngine.printWithDelays("You must complete The Meadow dungeon first.\nTry going south", true);
                     }
                 }
                 default ->
@@ -357,11 +365,12 @@ public class OpenWorld extends Room {
     }
 
     private static void room9() throws InterruptedException {
-        TextEngine.printWithDelays("You walk forward and see a small village in the distance", false);
+        TextEngine.printWithDelays("You walk " + holdCommand + " and see a small village in the distance", false);
         TextEngine.printWithDelays("What is your command: north, east, south, or The Village", true);
         while (true) {
             ignore = console.readLine();
             command = console.readLine();
+            holdCommand = command;
             switch (command.toLowerCase()) {
                 case "north" -> {
                     roomSave = 12;
@@ -385,11 +394,13 @@ public class OpenWorld extends Room {
     }
 
     private static void room10() throws InterruptedException {
-        TextEngine.printWithDelays("You walk forward and see a small village in the distance", false);
+        TextEngine.printWithDelays("You walk " + holdCommand + ", you are right by The Desert Oasis", false);
+        TextEngine.printWithDelays("Worrning: going into a dungeon you will trigger fights, but you might find something in the rooms\nIf you do not DIE", false);
         TextEngine.printWithDelays("What is your command: north, south, west, The Desert Oasis", true);
         while (true) {
             ignore = console.readLine();
             command = console.readLine();
+            holdCommand = command;
             switch (command.toLowerCase()) {
                 case "north" -> {
                     roomSave = 11;
@@ -409,7 +420,7 @@ public class OpenWorld extends Room {
                         Main.saveSpace("Desert Oasis Dungeon");
                         Main.loadSave();
                     } else {
-                        TextEngine.printWithDelays("You must complete the other dungeons first.", true);
+                        TextEngine.printWithDelays("You must complete The Mountain Top dungeon first.\n Try going to the south ~ maybe", true);
                     }
                 }
                 default ->
@@ -419,11 +430,13 @@ public class OpenWorld extends Room {
     }
 
     private static void room11() throws InterruptedException {
-        TextEngine.printWithDelays("You walk forward and see a small village in the distance", false);
+        TextEngine.printWithDelays("You walk " + holdCommand + ", you are right by The Desert Plains", false);
+        TextEngine.printWithDelays("Worrning: going into a dungeon you will trigger fights, but you might find something in the rooms\nIf you do not DIE", false);
         TextEngine.printWithDelays("What is your command: south, west, or The Desert Plains", true);
         while (true) {
             ignore = console.readLine();
             command = console.readLine();
+            holdCommand = command;
             switch (command.toLowerCase()) {
                 case "south" -> {
                     roomSave = 10;
@@ -439,7 +452,7 @@ public class OpenWorld extends Room {
                         Main.saveSpace("Desert Plains Dungeon");
                         Main.loadSave();
                     } else {
-                        TextEngine.printWithDelays("You must complete the other dungeons first.", true);
+                        TextEngine.printWithDelays("You must complete The Desert Oasis dungeons first.\nTry going to the south ~ maybe", true);
                     }
                 }
                 default ->
@@ -449,11 +462,12 @@ public class OpenWorld extends Room {
     }
 
     private static void room12() throws InterruptedException {
-        TextEngine.printWithDelays("You walk forward and see a small village in the distance", false);
+        TextEngine.printWithDelays("You walk " + holdCommand + " and see a small village in the distance", false);
         TextEngine.printWithDelays("What is your command: north, east, south, or west", true);
         while (true) {
             ignore = console.readLine();
             command = console.readLine();
+            holdCommand = command;
             switch (command.toLowerCase()) {
                 case "north" -> {
                     roomSave = 17;
@@ -478,11 +492,12 @@ public class OpenWorld extends Room {
     }
 
     private static void room13() throws InterruptedException {
-        TextEngine.printWithDelays("You walk forward and see a small village in the distance", false);
+        TextEngine.printWithDelays("You walk " + holdCommand + " and see a small village in the distance", false);
         TextEngine.printWithDelays("What is your command: north, east, or west", true);
         while (true) {
             ignore = console.readLine();
             command = console.readLine();
+            holdCommand = command;
             switch (command.toLowerCase()) {
                 case "north" -> {
                     roomSave = 16;
@@ -503,11 +518,12 @@ public class OpenWorld extends Room {
     }
 
     private static void room14() throws InterruptedException {
-        TextEngine.printWithDelays("You walk forward and see a small village in the distance", false);
+        TextEngine.printWithDelays("You walk " + holdCommand + " and see a small village in the distance", false);
         TextEngine.printWithDelays("What is your command: north or east", true);
         while (true) {
             ignore = console.readLine();
             command = console.readLine();
+            holdCommand = command;
             switch (command.toLowerCase()) {
                 case "north" -> {
                     roomSave = 15;
@@ -524,11 +540,12 @@ public class OpenWorld extends Room {
     }
 
     private static void room15() throws InterruptedException {
-        TextEngine.printWithDelays("You walk forward and see a small village in the distance", false);
+        TextEngine.printWithDelays("You walk " + holdCommand + " and see a small village in the distance", false);
         TextEngine.printWithDelays("What is your command: east, south, or The village", true);
         while (true) {
             ignore = console.readLine();
             command = console.readLine();
+            holdCommand = command;
             switch (command.toLowerCase()) {
                 case "east" -> {
                     roomSave = 16;
@@ -548,11 +565,12 @@ public class OpenWorld extends Room {
     }
 
     private static void room16() throws InterruptedException {
-        TextEngine.printWithDelays("You walk forward and see a small village in the distance", false);
+        TextEngine.printWithDelays("You walk " + holdCommand + " and see a small village in the distance", false);
         TextEngine.printWithDelays("What is your command: south or west", true);
         while (true) {
             ignore = console.readLine();
             command = console.readLine();
+            holdCommand = command;
             switch (command.toLowerCase()) {
                 case "south" -> {
                     roomSave = 13;
@@ -569,11 +587,12 @@ public class OpenWorld extends Room {
     }
 
     private static void room17() throws InterruptedException {
-        TextEngine.printWithDelays("You walk forward and see a small village in the distance", false);
+        TextEngine.printWithDelays("You walk " + holdCommand + " and see a small village in the distance", false);
         TextEngine.printWithDelays("What is your command: north, south, or The Village", true);
         while (true) {
             ignore = console.readLine();
             command = console.readLine();
+            holdCommand = command;
             switch (command.toLowerCase()) {
                 case "north" -> {
                     roomSave = 19;
@@ -593,11 +612,13 @@ public class OpenWorld extends Room {
     }
 
     private static void room18() throws InterruptedException {
-        TextEngine.printWithDelays("You walk forward and see a small village in the distance", false);
+        TextEngine.printWithDelays("You walk " + holdCommand + ", you are right by The Desert Pyramid", false);
+        TextEngine.printWithDelays("Worrning: going into a dungeon you will trigger fights, but you might find something in the rooms\nIf you do not DIE", false);
         TextEngine.printWithDelays("What is your command: west or The Desert Pyramid", true);
         while (true) {
             ignore = console.readLine();
             command = console.readLine();
+            holdCommand = command;
             switch (command.toLowerCase()) {
                 case "west" -> {
                     roomSave = 19;
@@ -609,7 +630,7 @@ public class OpenWorld extends Room {
                         Main.saveSpace("Desert Pyramid Dungeon");
                         Main.loadSave();
                     } else {
-                        TextEngine.printWithDelays("You must complete the other dungeons first.", true);
+                        TextEngine.printWithDelays("You must complete The Desert Plains dungeons first.\nTry going to the south ~ maybe", true);
                     }
                 }
                 default ->
@@ -619,11 +640,12 @@ public class OpenWorld extends Room {
     }
 
     private static void room19() throws InterruptedException {
-        TextEngine.printWithDelays("You walk forward and see a small village in the distance", false);
+        TextEngine.printWithDelays("You walk " + holdCommand + " and see a small village in the distance", false);
         TextEngine.printWithDelays("What is your command: north, east, or south", true);
         while (true) {
             ignore = console.readLine();
             command = console.readLine();
+            holdCommand = command;
             switch (command.toLowerCase()) {
                 case "north" -> {
                     roomSave = 20;
@@ -644,11 +666,13 @@ public class OpenWorld extends Room {
     }
 
     private static void room20() throws InterruptedException {
-        TextEngine.printWithDelays("You walk forward and see a small village in the distance", false);
+        TextEngine.printWithDelays("You walk " + holdCommand + ", you are right by The Ocean Kingdom", false);
+        TextEngine.printWithDelays("Worrning: going into a dungeon you will trigger fights, but you might find something in the rooms\nIf you do not DIE", false);
         TextEngine.printWithDelays("What is your command: south or The Ocean Kingdom", true);
         while (true) {
             ignore = console.readLine();
             command = console.readLine();
+            holdCommand = command;
             switch (command.toLowerCase()) {
                 case "south" -> {
                     roomSave = 19;
@@ -660,7 +684,7 @@ public class OpenWorld extends Room {
                         Main.saveSpace("Ocean Kingdom Dungeon");
                         Main.loadSave();
                     } else {
-                        TextEngine.printWithDelays("You must complete the other dungeons first.", true);
+                        TextEngine.printWithDelays("You must complete The Desert Pyramis dungeon first.\nTry going to the west ~ maybe", true);
                     }
                 }
                 default ->

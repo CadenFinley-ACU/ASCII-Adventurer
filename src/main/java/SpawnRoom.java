@@ -57,7 +57,7 @@ public class SpawnRoom extends Room {
             OpenWorld.startRoom();
             return;
         }
-        TextEngine.printWithDelays("You enter a cool, dimly lit room by a few torches", false);
+        TextEngine.printWithDelays("As you get closer to the light, you see a sword on the ground", false);
         while (true) {
             if (hasItemInRoom("sword", 1)) {
                 roomSave++;
