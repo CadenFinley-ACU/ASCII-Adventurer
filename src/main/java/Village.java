@@ -105,7 +105,7 @@ public class Village extends Room {
                 }
             }
         } else {
-            TextEngine.printWithDelays("You do not have a heart container to give to the priest fuck off", false);
+            TextEngine.printWithDelays("You do not have a heart container to give to the priest", false);
             TextEngine.printWithDelays("Would you like to leave? yes or no", true);
             while (true) {
                 ignore = console.readLine();
@@ -176,7 +176,7 @@ public class Village extends Room {
     public static void shop1() throws InterruptedException { //shop1
         String brightBoldEnd = "\033[0m"; // end color
         String brightYellowStart = "\033[1;33m"; // Bright Yellow
-    
+
         Main.screenRefresh();
         // Shop implementation
         TextEngine.printNoDelay("Gold: " + Player.getGold(), false);
@@ -184,22 +184,22 @@ public class Village extends Room {
         TextEngine.printNoDelay("\n", false);
         TextEngine.printWithDelays("You enter the shop.", false);
         TextEngine.printWithDelays("You can buy items here", false);
-        
+
         // Creating the message with bold and bright items
-        String shopMessage = 
-        "What would you like to buy:\n" +
-            brightYellowStart + " health potion" + brightBoldEnd + "~15 gold\n" +
-            brightYellowStart + " shield" + brightBoldEnd + "~20 gold\n" +
-            brightYellowStart + " key" + brightBoldEnd + "~30 gold\n" +
-        "or leave";
-    
+        String shopMessage
+                = "What would you like to buy:\n"
+                + brightYellowStart + " health potion" + brightBoldEnd + "~15 gold\n"
+                + brightYellowStart + " shield" + brightBoldEnd + "~20 gold\n"
+                + brightYellowStart + " key" + brightBoldEnd + "~30 gold\n"
+                + "or leave";
+
         // Use the modified message with bold items
         TextEngine.printWithDelays(shopMessage, true);
-        
+
         while (true) {
             ignore = console.readLine(); // It's unclear what this line does, so it's kept.
             command = console.readLine();
-            
+
             switch (command.toLowerCase()) {
                 case "health potion" -> {
                     buyMultiple("health potion", 15);
@@ -224,16 +224,16 @@ public class Village extends Room {
                 case "leave" -> {
                     Main.loadSave();
                 }
-                default -> Main.inGameDefaultTextHandling(command);
+                default ->
+                    Main.inGameDefaultTextHandling(command);
             }
         }
     }
-    
 
     public static void shop2() throws InterruptedException { //shop2
         String brightBoldEnd = "\033[0m"; // end color
         String brightYellowStart = "\033[1;33m"; // Bright Yellow
-    
+
         Main.screenRefresh();
         // Shop implementation
         TextEngine.printNoDelay("Gold: " + Player.getGold(), false);
@@ -241,22 +241,22 @@ public class Village extends Room {
         TextEngine.printNoDelay("\n", false);
         TextEngine.printWithDelays("You enter the shop.", false);
         TextEngine.printWithDelays("You can buy items here", false);
-        
+
         // Creating the message with bold and bright items
-        String shopMessage = 
-        "What would you like to buy:\n" +
-            brightYellowStart + " greater health potion" + brightBoldEnd + "~30 gold\n" +
-            brightYellowStart + " ninja armor" + brightBoldEnd + "~100 gold\n" +
-            brightYellowStart + " key" + brightBoldEnd + "~30 gold\n" +
-        "or leave";
-    
+        String shopMessage
+                = "What would you like to buy:\n"
+                + brightYellowStart + " greater health potion" + brightBoldEnd + "~30 gold\n"
+                + brightYellowStart + " ninja armor" + brightBoldEnd + "~100 gold\n"
+                + brightYellowStart + " key" + brightBoldEnd + "~30 gold\n"
+                + "or leave";
+
         // Use the modified message with bold items
         TextEngine.printWithDelays(shopMessage, true);
-        
+
         while (true) {
             ignore = console.readLine(); // It's unclear what this line does, so it's kept.
             command = console.readLine();
-            
+
             switch (command.toLowerCase()) {
                 case "greater health potion" -> {
                     buyMultiple("greater health potion", 30);
@@ -278,16 +278,16 @@ public class Village extends Room {
                 case "leave" -> {
                     Main.loadSave();
                 }
-                default -> Main.inGameDefaultTextHandling(command);
+                default ->
+                    Main.inGameDefaultTextHandling(command);
             }
         }
     }
-    
 
     public static void shop3() throws InterruptedException {
         String brightBoldEnd = "\033[0m"; // end color
         String brightYellowStart = "\033[1;33m"; // Bright Yellow
-    
+
         Main.screenRefresh();
         // Shop implementation
         TextEngine.printNoDelay("Gold: " + Player.getGold(), false);
@@ -295,22 +295,22 @@ public class Village extends Room {
         TextEngine.printNoDelay("\n", false);
         TextEngine.printWithDelays("You enter the shop.", false);
         TextEngine.printWithDelays("You can buy items here", false);
-        
+
         // Creating the message with bold and bright items
-        String shopMessage = 
-        "What would you like to buy:\n" +
-            brightYellowStart + "super health potion" + brightBoldEnd + "~50 gold\n" +
-            brightYellowStart + "demon armor" + brightBoldEnd + "~200 gold\n" +
-            brightYellowStart + "key" + brightBoldEnd + "~30 gold\n" +
-        "or leave";
-    
+        String shopMessage
+                = "What would you like to buy:\n"
+                + brightYellowStart + "super health potion" + brightBoldEnd + "~50 gold\n"
+                + brightYellowStart + "demon armor" + brightBoldEnd + "~200 gold\n"
+                + brightYellowStart + "key" + brightBoldEnd + "~30 gold\n"
+                + "or leave";
+
         // Use the modified message with bold items
         TextEngine.printWithDelays(shopMessage, true);
-        
+
         while (true) {
             ignore = console.readLine(); // It's unclear what this line does, so it's kept.
             command = console.readLine();
-            
+
             switch (command.toLowerCase()) {
                 case "super health potion" -> {
                     buyMultiple("super health potion", 50);
@@ -332,11 +332,11 @@ public class Village extends Room {
                 case "leave" -> {
                     Main.loadSave();
                 }
-                default -> Main.inGameDefaultTextHandling(command);
+                default ->
+                    Main.inGameDefaultTextHandling(command);
             }
         }
     }
-    
 
     private static void buyMultiple(String type, int cost) throws InterruptedException { //buy multiple clause for certain items in village shop
         TextEngine.printWithDelays("How many would you like to buy?", true);
