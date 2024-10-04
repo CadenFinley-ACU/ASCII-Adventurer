@@ -12,6 +12,7 @@ public class DungeonGenerator {
 
     public static boolean testing = false;
     public static int[][] matrix;
+    static int fails = 0;
 
     public static void wipe() {
         matrix = null;
@@ -77,12 +78,13 @@ public class DungeonGenerator {
         addRandom(matrix, rand, size + (int) changeRatio, 1);
 
         //formula that dertimes the number of item rooms in a dungeon
-        float itemRoomRatio = ((2 * size) - 5.5f) - (size / 2);
+        //float itemRoomRatio = 1 + ((2 * size) - 5.5f) - (size / 2);
+        float itemRoomRatio = size - 3;
         if (itemRoomRatio >= size - 5) {
             itemRoomRatio = size / 2;
         }
-        if (itemRoomRatio < 1) {
-            itemRoomRatio = 1;
+        if (itemRoomRatio < 3) {
+            itemRoomRatio = 2;
         }
 
         // Randomly add item rooms (2-5) ensuring they are connected to the main path 2-5 are item rooms
@@ -115,6 +117,7 @@ public class DungeonGenerator {
                 System.out.println("Matrix connected successfully!");
                 System.out.println("Item Rooms: " + numberOfRooms(matrix, 2) + " Total Rooms: " + (numberOfRooms(matrix, 1) + numberOfRooms(matrix, 2) + numberOfRooms(matrix, 3) + numberOfRooms(matrix, 8) + numberOfRooms(matrix, 9) + numberOfRooms(matrix, 4)));
                 System.out.println("-------------------------------");
+                System.out.println(fails);
             }
             return;
         }
@@ -123,6 +126,8 @@ public class DungeonGenerator {
             System.out.println("^^^^^^^^^^^^" + size + "^^^^^^^^^^^^");
             System.out.println("Matrix not connected, retrying...");
             System.out.println("-------------------------------");
+            System.out.println(fails);
+            fails++;
         }
 
         //recurse if matrix is invalid
