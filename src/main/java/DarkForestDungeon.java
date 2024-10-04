@@ -1,4 +1,10 @@
 
+/**
+ * Dark Forest Dungeon
+ *
+ * Text Adventure Game SE374 F24 Final Project Caden Finley Albert Tucker
+ * Grijesh Shrestha
+ */
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -49,46 +55,36 @@ public class DarkForestDungeon extends Dungeon {
         if (darkForestDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] == 2 && roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] == 0) {
             if (foundItemRooms < items.size()) {
                 String randomItem = items.get(rand.nextInt(items.size()));
-                Room.hasItemInRoom(randomItem, 1);
-                items.remove(randomItem);
+                if (hasItemInRoom(randomItem, 1)) {
+                    items.remove(randomItem);
+                    lastPosition = currentPlayerPosition.clone();
+                    roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = darkForestDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
+                    foundItemRooms++;
+                } else {
+                    currentPlayerPosition = lastPosition.clone();
+                    save = currentPlayerPosition.clone();
+                    Main.loadSave();
+                }
+            } else {
+                TextEngine.printWithDelays("You have already found all the items in this dungeon", false);
                 lastPosition = currentPlayerPosition.clone();
                 roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = darkForestDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
-                foundItemRooms++;
                 Main.loadSave();
             }
         }
         if (darkForestDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] == 3 && roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] == 0) {
-            Room.hasItemInRoom("heart container", 1);
-            lastPosition = currentPlayerPosition.clone();
-            roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = darkForestDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
-            Main.loadSave();
+            if (hasItemInRoom("heart container", 1)) {
+                lastPosition = currentPlayerPosition.clone();
+                roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = darkForestDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
+                foundItemRooms++;
+            } else {
+                currentPlayerPosition = lastPosition.clone();
+                save = currentPlayerPosition.clone();
+                Main.loadSave();
+            }
         }
         if (darkForestDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] == 1 && roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] == 0) {
-            TextEngine.printWithDelays("You have entered a room with enemies and were ambushed!", false);
-            if (!Player.autoFight) {
-                TextEngine.printWithDelays("What is your command (run or fight)?", true);
-                while (true) {
-                    ignore = Room.console.readLine();
-                    command = Room.console.readLine();
-                    switch (command.toLowerCase()) {
-                        case "run" -> {
-                            TextEngine.printWithDelays("You ran away from the enemies", false);
-                            currentPlayerPosition = lastPosition.clone(); // Restore the last position
-                            save = currentPlayerPosition.clone();
-                            TextEngine.enterToNext();
-                            Main.loadSave();
-                        }
-                        case "fight" -> {
-                            fightRandomEnemies(4);
-                        }
-                        default -> {
-                            Dungeon.defaultDungeonArgs(command.toLowerCase());
-                        }
-                    }
-                }
-            } else {
-                fightRandomEnemies(4);
-            }
+            fightRandomEnemies(4);
         }
         if (darkForestDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] == 4 && roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] == 0) {
             TextEngine.printWithDelays("You have entered a room with a mini boss", false);
@@ -111,10 +107,6 @@ public class DarkForestDungeon extends Dungeon {
             OpenWorld.startRoom();
         }
         handleDirectionsAndCommands();
-    }
-
-    public static void __init__() {
-        //initialize the dark forest dungeon
     }
 
     private static boolean testIfBossRoom(int check) throws InterruptedException {
@@ -249,13 +241,14 @@ public class DarkForestDungeon extends Dungeon {
     public static void fightRandomEnemies(int number) throws InterruptedException {
         int numberOfEnemies = rand.nextInt(number);
         if (numberOfEnemies == 0) {
-            TextEngine.printWithDelays("The enemies got frightened and ran off!", false);
+            TextEngine.printWithDelays("There were no enemies in this room", false);
             TextEngine.enterToNext();
             lastPosition = currentPlayerPosition.clone();
             roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = darkForestDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
             Main.loadSave();
             return;
         }
+        TextEngine.printWithDelays("You have entered a room with enemies and were ambushed!", false);
         String enemyType = enemies.get(rand.nextInt(enemies.size()));
         Player.changeHealth(Enemy.spawnEnemy(enemyType, numberOfEnemies));
         lastPosition = currentPlayerPosition.clone();

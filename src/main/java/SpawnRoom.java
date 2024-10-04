@@ -18,13 +18,13 @@ public class SpawnRoom extends Room {
         Main.checkSave(room);
         Main.screenRefresh();
         switch (roomSave) {
-            case 0:
+            case 0 ->
                 part0();
-            case 1:
+            case 1 ->
                 part1();
-            case 2:
+            case 2 ->
                 part2();
-            default:
+            default ->
                 Main.startMenu();
         }
     }
@@ -55,11 +55,11 @@ public class SpawnRoom extends Room {
         if (Player.inventory.containsKey("sword")) {
             roomSave++;
             OpenWorld.startRoom();
+            return;
         }
         TextEngine.printWithDelays("You enter a cool, dimly lit room by a few torches", false);
         while (true) {
-            hasItemInRoom("sword", 1);
-            if (Player.inventory.containsKey("sword")) {
+            if (hasItemInRoom("sword", 1)) {
                 roomSave++;
                 OpenWorld.startRoom();
                 break;

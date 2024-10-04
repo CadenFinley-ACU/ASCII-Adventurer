@@ -1,4 +1,10 @@
 
+/**
+ * MeadowDungeon.java
+ *
+ * Text Adventure Game SE374 F24 Final Project Caden Finley Albert Tucker
+ * Grijesh Shrestha
+ */
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -18,7 +24,7 @@ public class MeadowDungeon extends Dungeon {
     private static final List<String> enemies = new ArrayList<>(List.of("Goblin", "Skeleton", "Slime", "Mimic"));
     private static final Random rand = new Random();
     public static boolean completed = false;
-    
+
     public static void startRoom() throws InterruptedException { //start room
         room = "Meadow Dungeon";
         Main.checkSave(room);
@@ -50,46 +56,36 @@ public class MeadowDungeon extends Dungeon {
         if (meadowDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] == 2 && roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] == 0) {
             if (foundItemRooms < items.size()) {
                 String randomItem = items.get(rand.nextInt(items.size()));
-                Room.hasItemInRoom(randomItem, 1);
-                items.remove(randomItem);
+                if (hasItemInRoom(randomItem, 1)) {
+                    items.remove(randomItem);
+                    lastPosition = currentPlayerPosition.clone();
+                    roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = meadowDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
+                    foundItemRooms++;
+                } else {
+                    currentPlayerPosition = lastPosition.clone();
+                    save = currentPlayerPosition.clone();
+                    Main.loadSave();
+                }
+            } else {
+                TextEngine.printWithDelays("You have already found all the items in this dungeon", false);
                 lastPosition = currentPlayerPosition.clone();
                 roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = meadowDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
-                foundItemRooms++;
                 Main.loadSave();
             }
         }
         if (meadowDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] == 3 && roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] == 0) {
-            Room.hasItemInRoom("heart container", 1);
-            lastPosition = currentPlayerPosition.clone();
-            roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = meadowDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
-            Main.loadSave();
+            if (hasItemInRoom("heart container", 1)) {
+                lastPosition = currentPlayerPosition.clone();
+                roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = meadowDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
+                foundItemRooms++;
+            } else {
+                currentPlayerPosition = lastPosition.clone();
+                save = currentPlayerPosition.clone();
+                Main.loadSave();
+            }
         }
         if (meadowDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] == 1 && roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] == 0) {
-            TextEngine.printWithDelays("You have entered a room with enemies and were ambushed!", false);
-            if (!Player.autoFight) {
-                TextEngine.printWithDelays("What is your command (run or fight)?", true);
-                while (true) {
-                    ignore = Room.console.readLine();
-                    command = Room.console.readLine();
-                    switch (command.toLowerCase()) {
-                        case "run" -> {
-                            TextEngine.printWithDelays("You ran away from the enemies", false);
-                            currentPlayerPosition = lastPosition.clone(); // Restore the last position
-                            save = currentPlayerPosition.clone();
-                            TextEngine.enterToNext();
-                            Main.loadSave();
-                        }
-                        case "fight" -> {
-                            fightRandomEnemies(3);
-                        }
-                        default -> {
-                            Dungeon.defaultDungeonArgs(command.toLowerCase());
-                        }
-                    }
-                }
-            } else {
-                fightRandomEnemies(3);
-            }
+            fightRandomEnemies(3);
         }
         if (meadowDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] == 4 && roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] == 0) {
             TextEngine.printWithDelays("You have entered a room with a mini boss", false);
@@ -112,10 +108,6 @@ public class MeadowDungeon extends Dungeon {
             OpenWorld.startRoom();
         }
         handleDirectionsAndCommands();
-    }
-
-    public static void __init__() {
-        //initialize the meadow dungeon
     }
 
     private static boolean testIfBossRoom(int check) throws InterruptedException {
@@ -250,18 +242,18 @@ public class MeadowDungeon extends Dungeon {
     public static void fightRandomEnemies(int number) throws InterruptedException {
         int numberOfEnemies = rand.nextInt(number);
         if (numberOfEnemies == 0) {
-            TextEngine.printWithDelays("The enemies got frightened and ran off!", false);
+            TextEngine.printWithDelays("There were no enemies in this room", false);
             TextEngine.enterToNext();
             lastPosition = currentPlayerPosition.clone();
             roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = meadowDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
             Main.loadSave();
             return;
         }
+        TextEngine.printWithDelays("You have entered a room with enemies and were ambushed!", false);
         String enemyType = enemies.get(rand.nextInt(enemies.size()));
         Player.changeHealth(Enemy.spawnEnemy(enemyType, numberOfEnemies));
         lastPosition = currentPlayerPosition.clone();
         roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = meadowDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
         Main.loadSave();
     }
-
 }
