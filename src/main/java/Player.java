@@ -173,6 +173,8 @@ public class Player {
             TextEngine.printWithDelays(space + brightRedStart + "You have died!" + brightEnd, false);
             TextEngine.printWithDelays(space + brightRedStart + "Game Over!" + brightEnd, false);
             TextEngine.enterToNext();
+            Main.savedPlace = null;
+            Main.wipeSave();
             Main.startMenu();
         }
 
