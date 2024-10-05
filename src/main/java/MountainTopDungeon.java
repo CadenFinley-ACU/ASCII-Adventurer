@@ -19,7 +19,7 @@ public class MountainTopDungeon extends Dungeon {
     public static String direction;
     public static int[] availableMove;
     public static ArrayList<String> directionsString;
-    private static int foundItemRooms = 0;
+    private static int foundItemRooms = DungeonGenerator.numberOfRooms(Dungeon.mountainTopDungeon, 2);
     private static List<String> items = new ArrayList<>(List.of("great sword", "knight armor", "greater health potion"));
     private static final List<String> enemies = new ArrayList<>(List.of("Ghost", "Gargoyle", "Orc", "Vampire", "Demon"));
     private static final Random rand = new Random();
@@ -38,7 +38,7 @@ public class MountainTopDungeon extends Dungeon {
         Dungeon.autoCheck();
         completed = false;
         items = new ArrayList<>(List.of("great sword", "knight armor", "greater health potion"));
-        foundItemRooms = 0;
+        foundItemRooms = DungeonGenerator.numberOfRooms(Dungeon.mountainTopDungeon, 2);
         Dungeon.currentPlayerPosition = spawnPosition;
         currentPlayerPosition = spawnPosition;
         roomsBeenTo = DungeonGenerator.createRoomsBeenTo(Dungeon.mountainTopDungeon.length);
@@ -53,20 +53,20 @@ public class MountainTopDungeon extends Dungeon {
         directionsString = new ArrayList<>();
 
         if (mountainTopDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] == 2 && roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] == 0) {
-            if (foundItemRooms < items.size()) {
+            if (foundItemRooms <= items.size()) {
                 String randomItem = items.get(rand.nextInt(items.size()));
                 if (hasChestInRoom(randomItem, 1)) {
                     items.remove(randomItem);
                     lastPosition = currentPlayerPosition.clone();
                     roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = mountainTopDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
-                    foundItemRooms++;
                 } else {
                     currentPlayerPosition = lastPosition.clone();
                     save = currentPlayerPosition.clone();
                     Main.loadSave();
                 }
             } else {
-                TextEngine.printWithDelays("You have already found all the items in this dungeon", false);
+                TextEngine.printWithDelays("You have found all of the items in the dungeon.", false);
+                TextEngine.enterToNext();
                 lastPosition = currentPlayerPosition.clone();
                 roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = mountainTopDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
                 Main.loadSave();
@@ -76,7 +76,6 @@ public class MountainTopDungeon extends Dungeon {
             if (hasItemInRoom("heart container", 1)) {
                 lastPosition = currentPlayerPosition.clone();
                 roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = mountainTopDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
-                foundItemRooms++;
             } else {
                 currentPlayerPosition = lastPosition.clone();
                 save = currentPlayerPosition.clone();

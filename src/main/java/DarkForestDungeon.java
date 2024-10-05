@@ -19,7 +19,7 @@ public class DarkForestDungeon extends Dungeon {
     public static String direction;
     public static int[] availableMove;
     public static ArrayList<String> directionsString;
-    private static int foundItemRooms = 0;
+    private static int foundItemRooms = DungeonGenerator.numberOfRooms(Dungeon.darkForestDungeon, 2);
     private static List<String> items = new ArrayList<>(List.of("broad sword", "full armor kit", "health potion"));
     private static final List<String> enemies = new ArrayList<>(List.of("Goblin", "Skeleton", "Orc", "Mimic", "Zombie"));
     private static final Random rand = new Random();
@@ -38,7 +38,7 @@ public class DarkForestDungeon extends Dungeon {
         Dungeon.autoCheck();
         completed = false;
         items = new ArrayList<>(List.of("broad sword", "full armor kit", "health potion"));
-        foundItemRooms = 0;
+        foundItemRooms = DungeonGenerator.numberOfRooms(Dungeon.darkForestDungeon, 2);
         Dungeon.currentPlayerPosition = spawnPosition;
         currentPlayerPosition = spawnPosition;
         roomsBeenTo = DungeonGenerator.createRoomsBeenTo(Dungeon.darkForestDungeon.length);
@@ -53,20 +53,20 @@ public class DarkForestDungeon extends Dungeon {
         directionsString = new ArrayList<>();
 
         if (darkForestDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] == 2 && roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] == 0) {
-            if (foundItemRooms < items.size()) {
+            if (foundItemRooms <= items.size()) {
                 String randomItem = items.get(rand.nextInt(items.size()));
                 if (hasChestInRoom(randomItem, 1)) {
                     items.remove(randomItem);
                     lastPosition = currentPlayerPosition.clone();
                     roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = darkForestDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
-                    foundItemRooms++;
                 } else {
                     currentPlayerPosition = lastPosition.clone();
                     save = currentPlayerPosition.clone();
                     Main.loadSave();
                 }
             } else {
-                TextEngine.printWithDelays("You have already found all the items in this dungeon", false);
+                TextEngine.printWithDelays("You have found all of the items in the dungeon.", false);
+                TextEngine.enterToNext();
                 lastPosition = currentPlayerPosition.clone();
                 roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = darkForestDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
                 Main.loadSave();
@@ -76,7 +76,6 @@ public class DarkForestDungeon extends Dungeon {
             if (hasItemInRoom("heart container", 1)) {
                 lastPosition = currentPlayerPosition.clone();
                 roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = darkForestDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
-                foundItemRooms++;
             } else {
                 currentPlayerPosition = lastPosition.clone();
                 save = currentPlayerPosition.clone();

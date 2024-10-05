@@ -257,4 +257,17 @@ public class InventoryManager extends Player {
         }
         return item + " ";
     }
+
+    public static int getKeyValue(String item) {
+        if (Weapons.containsKey(item)) {
+            return Weapons.get(item);
+        } else if (Armor.containsKey(item)) {
+            return Armor.get(item);
+        } else if (Potions.containsKey(item)) {
+            return Potions.get(item);
+        } else if (Keys.containsKey(item)) {
+            return Keys.get(item);
+        }
+        return 0; // or any other default value
+    }
 }

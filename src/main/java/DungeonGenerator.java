@@ -13,9 +13,9 @@ public class DungeonGenerator {
     public static boolean testing = false;
     public static int[][] matrix;
     static int fails = 0;
+    static int runs = 0;
     private static int itemRoomRatio;
     private static int changeRatio;
-    private static int trapRoomRatio;
 
     public static void wipe() {
         matrix = null;
@@ -27,17 +27,15 @@ public class DungeonGenerator {
      * @param pass The size of the matrix to generate.
      */
     public static void start(int pass) {
+        runs++;
         if (pass < 5) {
             System.out.println("-------------------------------");
             System.out.println("Matrix size too small, retrying...");
             start(5);
             return;
         }
-        //the algorithm is otimized for odd numbers 5 : 15
+        //the algorithm is otimized for numbers 5 : 15
         int size = pass;
-        if (size % 2 == 0) {
-            size++;
-        }
         if (size > 15) {
             size = 15;
         }
@@ -91,11 +89,10 @@ public class DungeonGenerator {
         // Randomly add mini boss rooms (4) ensuring it is connected to the main path
         addRandom(matrix, rand, 1, 4);
 
-        //formula that determines the number of trap rooms in a dungeon
-        trapRoomRatio = ((1 / 2) * size) - (3 / 2);
-
         // Randomly add trap rooms (6) ensuring it is connected to the main path
         addRandom(matrix, rand, 1, 6);
+
+        addRandom(matrix, rand, 1, 5);
 
         // Ensure only one 1 value is adjacent to the 8
         ensureSingleAdjacent(matrix, coord8[0], coord8[1]);
@@ -108,6 +105,7 @@ public class DungeonGenerator {
         matrix = trimUnreachableParts(matrix, findValue(matrix, 9));
 
         // Check if the matrix is connected and valid
+        float failPercent = ((float) fails / runs) * 100;
         if (testArrays(matrix)) {
             if (testing) {
                 printMap(matrix);
@@ -115,7 +113,9 @@ public class DungeonGenerator {
                 System.out.println("Matrix connected successfully!");
                 System.out.println("Item Rooms: " + numberOfRooms(matrix, 2) + " Total Rooms: " + (numberOfRooms(matrix, 1) + numberOfRooms(matrix, 2) + numberOfRooms(matrix, 3) + numberOfRooms(matrix, 8) + numberOfRooms(matrix, 9) + numberOfRooms(matrix, 4)));
                 System.out.println("-------------------------------");
-                System.out.println(fails);
+                System.out.println("runs: " + runs);
+                System.out.println("fails: " + fails);
+                System.out.println("fail rate: " + failPercent + "%");
             }
             return;
         }
@@ -129,7 +129,12 @@ public class DungeonGenerator {
         }
 
         //recurse if matrix is invalid
-        start(size);
+        try {
+            start(size);
+        } catch (StackOverflowError e) {
+            System.out.println("Stack overflow error, retrying...");
+            start(size);
+        }
     }
 
     /**
@@ -174,22 +179,23 @@ public class DungeonGenerator {
      * @param min The minimum number of values to add.
      * @param num The value to add to the matrix.
      */
-    private static void addRandom(int[][] matrix, Random rand, int min, int num) {
-        int[][] originMatrix = matrix;
+    private static void addRandom(int[][] localMatrix, Random rand, int min, int num) {
+        int[][] originMatrix = localMatrix;
         int addedOnes = 0;
         while (addedOnes < min) {
             int x, y;
             do {
-                x = rand.nextInt(matrix.length);
-                y = rand.nextInt(matrix.length);
-            } while (matrix[x][y] != 0 || !isConnected(matrix, x, y));
-            matrix[x][y] = num;
+                x = rand.nextInt(originMatrix.length);
+                y = rand.nextInt(originMatrix.length);
+            } while (originMatrix[x][y] != 0 || !isConnected(originMatrix, x, y));
+            originMatrix[x][y] = num;
             addedOnes++;
         }
-        if (min <= numberOfRooms(matrix, num)) {
+        if (min <= numberOfRooms(originMatrix, num)) {
+            matrix = originMatrix;
             return;
         }
-        addRandom(originMatrix, rand, min, num);
+        addRandom(localMatrix, rand, min, num);
     }
 
     /**
@@ -299,14 +305,13 @@ public class DungeonGenerator {
         int[] pos9 = findValue(localMatrix, 9);
         int[] pos8 = findValue(localMatrix, 8);
         int[] pos3 = findValue(localMatrix, 3);
-        int[] pos2 = findValue(localMatrix, 2);
         int[] pos4 = findValue(localMatrix, 4);
         int[] pos6 = findValue(localMatrix, 6);
 
-        if (pos9 == null || pos8 == null || pos3 == null || pos2 == null || pos4 == null || pos6 == null) {
+        if (pos9 == null || pos8 == null || pos3 == null || pos4 == null || pos6 == null) {
             return false;
         }
-        return (isPathConnected(localMatrix, pos9[0], pos9[1], pos8[0], pos8[1]) && isPathConnected(localMatrix, pos9[0], pos9[1], pos3[0], pos3[1]) && isPathConnected(localMatrix, pos9[0], pos9[1], pos2[0], pos2[1]) && isPathConnected(localMatrix, pos9[0], pos9[1], pos4[0], pos4[1]) && !isAdjacent(pos8[0], pos8[1], pos6)) && (numberOfRooms(localMatrix, 2) >= itemRoomRatio) && countValuesGreaterThanZero(matrix) >= changeRatio;
+        return (isPathConnected(localMatrix, pos9[0], pos9[1], pos8[0], pos8[1]) && isPathConnected(localMatrix, pos9[0], pos9[1], pos3[0], pos3[1]) && isPathConnected(localMatrix, pos9[0], pos9[1], pos4[0], pos4[1]) && !isAdjacent(pos8[0], pos8[1], pos4) && !isAdjacent(pos8[0], pos8[1], pos6)) && (numberOfRooms(localMatrix, 2) >= itemRoomRatio) && countValuesGreaterThanZero(matrix) >= changeRatio;
     }
 
     /**
