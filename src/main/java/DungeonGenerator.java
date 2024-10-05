@@ -38,7 +38,7 @@ public class DungeonGenerator {
             size++;
         }
         if (size > 15) {
-            size = 5;
+            size = 15;
         }
 
         matrix = new int[size][size];
