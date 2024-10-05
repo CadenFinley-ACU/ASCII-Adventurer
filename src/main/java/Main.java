@@ -125,8 +125,8 @@ class Main {
 
     private static void displayHelp() throws InterruptedException { //main menu help command
         if (getSavedPlace().equals("OpenWorld")) {
-            TextEngine.printWithDelays("Things you could say:\n'stats' to see your stats\n'inventory' to see your inventory\n'heal' to heal you health using any available healing potions\n'settings' or type 'save' to save\n'map' to see the map\n'exit' to return to the main menu.", true); 
-        }else {
+            TextEngine.printWithDelays("Things you could say:\n'stats' to see your stats\n'inventory' to see your inventory\n'heal' to heal you health using any available healing potions\n'settings' or type 'save' to save\n'map' to see the map\n'exit' to return to the main menu.", true);
+        } else {
             TextEngine.printWithDelays("Things you could say:\n'stats' to see your stats\n'inventory' to see your inventory\n'heal' to heal you health using any available healing potions\n'settings' or type 'save' to save\n'exit' to return to the main menu.", true);
         }
     }
@@ -197,8 +197,8 @@ class Main {
             TextEngine.printWithDelays("You can type 'restart' to restart the dungeon", false);
         }
         if (getSavedPlace().equals("OpenWorld")) {
-            TextEngine.printWithDelays("Things you could say:\n'stats' to see your stats\n'inventory' to see your inventory\n'heal' to heal you health using any available healing potions\n'settings' or type 'save' to save\n'map' to see the map\n'exit' to return to the main menu.", true); 
-        }else {
+            TextEngine.printWithDelays("Things you could say:\n'stats' to see your stats\n'inventory' to see your inventory\n'heal' to heal you health using any available healing potions\n'settings' or type 'save' to save\n'map' to see the map\n'exit' to return to the main menu.", true);
+        } else {
             TextEngine.printWithDelays("Things you could say:\n'stats' to see your stats\n'inventory' to see your inventory\n'heal' to heal you health using any available healing potions\n'settings' or type 'save' to save\n'exit' to return to the main menu.", true);
         }
 
