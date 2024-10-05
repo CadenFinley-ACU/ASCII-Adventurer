@@ -212,7 +212,7 @@ public class OpenWorld extends Room {
     }
 
     private static void room4() throws InterruptedException {
-        TextEngine.printWithDelays("you walk "+ command + ", and you see a unlocked dungeion to the west",false);
+        TextEngine.printWithDelays("you walk "+ holdCommand + ", and you see a unlocked dungeion to the west",false);
         TextEngine.printWithDelays("What is your command: north, east, south, or west", true);
         while (true) {
             ignore = console.readLine();
