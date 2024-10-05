@@ -133,7 +133,7 @@ public class OpenWorld extends Room {
             ignore = console.readLine();
             command = console.readLine();
             holdCommand = command;
-            switch (command.toLowerCase()) {
+            switch (command.toLowerCase().trim()) {
                 case "north" -> {
                     roomSave = 4;
                     Main.loadSave();
@@ -159,7 +159,7 @@ public class OpenWorld extends Room {
             ignore = console.readLine();
             command = console.readLine();
             holdCommand = command;
-            switch (command.toLowerCase()) {
+            switch (command.toLowerCase().trim().trim()) {
                 case "north" -> {
                     roomSave = 3;
                     Main.loadSave();
@@ -182,7 +182,7 @@ public class OpenWorld extends Room {
             ignore = console.readLine();
             command = console.readLine();
             holdCommand = command;
-            switch (command.toLowerCase()) {
+            switch (command.toLowerCase().trim()) {
                 case "north" -> {
                     roomSave = 8;
                     Main.loadSave();
@@ -213,7 +213,7 @@ public class OpenWorld extends Room {
             ignore = console.readLine();
             command = console.readLine();
             holdCommand = command;
-            switch (command.toLowerCase()) {
+            switch (command.toLowerCase().trim()) {
                 case "north" -> {
                     roomSave = 7;
                     Main.loadSave();
@@ -244,7 +244,7 @@ public class OpenWorld extends Room {
             ignore = console.readLine();
             command = console.readLine();
             holdCommand = command;
-            switch (command.toLowerCase()) {
+            switch (command.toLowerCase().trim()) {
                 case "north" -> {
                     roomSave = 6;
                     Main.loadSave();
@@ -276,7 +276,7 @@ public class OpenWorld extends Room {
             ignore = console.readLine();
             command = console.readLine();
             holdCommand = command;
-            switch (command.toLowerCase()) {
+            switch (command.toLowerCase().trim()) {
                 case "north" -> {
                     roomSave = 10;
                     Main.loadSave();
@@ -311,7 +311,7 @@ public class OpenWorld extends Room {
             ignore = console.readLine();
             command = console.readLine();
             holdCommand = command;
-            switch (command.toLowerCase()) {
+            switch (command.toLowerCase().trim()) {
                 case "north" -> {
                     roomSave = 9;
                     Main.loadSave();
@@ -342,7 +342,7 @@ public class OpenWorld extends Room {
             ignore = console.readLine();
             command = console.readLine();
             holdCommand = command;
-            switch (command.toLowerCase()) {
+            switch (command.toLowerCase().trim()) {
                 case "east" -> {
                     roomSave = 7;
                     Main.loadSave();
@@ -373,7 +373,7 @@ public class OpenWorld extends Room {
             ignore = console.readLine();
             command = console.readLine();
             holdCommand = command;
-            switch (command.toLowerCase()) {
+            switch (command.toLowerCase().trim()) {
                 case "north" -> {
                     roomSave = 12;
                     Main.loadSave();
@@ -403,7 +403,7 @@ public class OpenWorld extends Room {
             ignore = console.readLine();
             command = console.readLine();
             holdCommand = command;
-            switch (command.toLowerCase()) {
+            switch (command.toLowerCase().trim()) {
                 case "north" -> {
                     roomSave = 11;
                     Main.loadSave();
@@ -439,7 +439,7 @@ public class OpenWorld extends Room {
             ignore = console.readLine();
             command = console.readLine();
             holdCommand = command;
-            switch (command.toLowerCase()) {
+            switch (command.toLowerCase().trim()) {
                 case "south" -> {
                     roomSave = 10;
                     Main.loadSave();
@@ -470,7 +470,7 @@ public class OpenWorld extends Room {
             ignore = console.readLine();
             command = console.readLine();
             holdCommand = command;
-            switch (command.toLowerCase()) {
+            switch (command.toLowerCase().trim()) {
                 case "north" -> {
                     roomSave = 17;
                     Main.loadSave();
@@ -500,7 +500,7 @@ public class OpenWorld extends Room {
             ignore = console.readLine();
             command = console.readLine();
             holdCommand = command;
-            switch (command.toLowerCase()) {
+            switch (command.toLowerCase().trim()) {
                 case "north" -> {
                     roomSave = 16;
                     Main.loadSave();
@@ -526,7 +526,7 @@ public class OpenWorld extends Room {
             ignore = console.readLine();
             command = console.readLine();
             holdCommand = command;
-            switch (command.toLowerCase()) {
+            switch (command.toLowerCase().trim()) {
                 case "north" -> {
                     roomSave = 15;
                     Main.loadSave();
@@ -548,7 +548,7 @@ public class OpenWorld extends Room {
             ignore = console.readLine();
             command = console.readLine();
             holdCommand = command;
-            switch (command.toLowerCase()) {
+            switch (command.toLowerCase().trim()) {
                 case "east" -> {
                     roomSave = 16;
                     Main.loadSave();
@@ -573,7 +573,7 @@ public class OpenWorld extends Room {
             ignore = console.readLine();
             command = console.readLine();
             holdCommand = command;
-            switch (command.toLowerCase()) {
+            switch (command.toLowerCase().trim()) {
                 case "south" -> {
                     roomSave = 13;
                     Main.loadSave();
@@ -595,7 +595,7 @@ public class OpenWorld extends Room {
             ignore = console.readLine();
             command = console.readLine();
             holdCommand = command;
-            switch (command.toLowerCase()) {
+            switch (command.toLowerCase().trim()) {
                 case "north" -> {
                     roomSave = 19;
                     Main.loadSave();
@@ -621,7 +621,7 @@ public class OpenWorld extends Room {
             ignore = console.readLine();
             command = console.readLine();
             holdCommand = command;
-            switch (command.toLowerCase()) {
+            switch (command.toLowerCase().trim()) {
                 case "west" -> {
                     roomSave = 19;
                     Main.loadSave();
@@ -648,7 +648,7 @@ public class OpenWorld extends Room {
             ignore = console.readLine();
             command = console.readLine();
             holdCommand = command;
-            switch (command.toLowerCase()) {
+            switch (command.toLowerCase().trim()) {
                 case "north" -> {
                     roomSave = 20;
                     Main.loadSave();
@@ -675,7 +675,7 @@ public class OpenWorld extends Room {
             ignore = console.readLine();
             command = console.readLine();
             holdCommand = command;
-            switch (command.toLowerCase()) {
+            switch (command.toLowerCase().trim()) {
                 case "south" -> {
                     roomSave = 19;
                     Main.loadSave();

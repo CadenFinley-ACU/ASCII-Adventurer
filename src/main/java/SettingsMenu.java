@@ -25,7 +25,7 @@ public abstract class SettingsMenu {
         while (true) {
             ignore = console.readLine();
             command = console.readLine();
-            switch (command.toLowerCase()) {
+            switch (command.toLowerCase().trim()) {
                 case "slow" -> {
                     TextEngine.speedSetting = "Slow";
                     TextEngine.printNoDelay("Slow", false);
@@ -33,7 +33,7 @@ public abstract class SettingsMenu {
                     TextEngine.printNoDelay("Confirm? (yes or no)", true);
                     ignore = console.readLine();
                     command = console.readLine();
-                    if (command.toLowerCase().equals("yes")) {
+                    if (command.toLowerCase().trim().equals("yes")) {
                         TextEngine.printWithDelays("Settings saved.", false);
                         TextEngine.clearScreen();
                         leave();
@@ -51,7 +51,7 @@ public abstract class SettingsMenu {
                     TextEngine.printNoDelay("Confirm? (yes or no)", true);
                     ignore = console.readLine();
                     command = console.readLine();
-                    if (command.toLowerCase().equals("yes")) {
+                    if (command.toLowerCase().trim().equals("yes")) {
                         TextEngine.printWithDelays("Settings saved.", false);
                         TextEngine.clearScreen();
                         leave();
@@ -69,7 +69,7 @@ public abstract class SettingsMenu {
                     TextEngine.printNoDelay("Confirm? (yes or no)", true);
                     ignore = console.readLine();
                     command = console.readLine();
-                    if (command.toLowerCase().equals("yes")) {
+                    if (command.toLowerCase().trim().equals("yes")) {
                         TextEngine.printWithDelays("Settings saved.", false);
                         TextEngine.clearScreen();
                         leave();
@@ -87,7 +87,7 @@ public abstract class SettingsMenu {
                     TextEngine.printNoDelay("Confirm? (yes or no)", true);
                     ignore = console.readLine();
                     command = console.readLine();
-                    if (command.toLowerCase().equals("yes")) {
+                    if (command.toLowerCase().trim().equals("yes")) {
                         TextEngine.printWithDelays("Settings saved.", false);
                         TextEngine.clearScreen();
                         leave();

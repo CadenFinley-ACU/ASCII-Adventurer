@@ -40,7 +40,7 @@ public class SpawnRoom extends Room {
         while (true) {
             ignore = console.readLine();
             command = console.readLine();
-            switch (command.toLowerCase()) {
+            switch (command.toLowerCase().trim()) {
                 case "north" -> {
                     roomSave++;
                     Main.loadSave();
@@ -76,7 +76,7 @@ public class SpawnRoom extends Room {
         while (true) {
             ignore = console.readLine();
             command = console.readLine();
-            switch (command.toLowerCase()) {
+            switch (command.toLowerCase().trim()) {
                 case "cave" -> {
                     TextEngine.printWithDelays("Why would we go back there? That is where we came from.", true);
                     continue;

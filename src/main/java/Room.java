@@ -21,7 +21,7 @@ public class Room {
         while (true) {
             ignore = console.readLine();
             command = console.readLine();
-            switch (command.toLowerCase()) {
+            switch (command.toLowerCase().trim()) {
                 case "open it" -> {
                     TextEngine.printWithDelays("Hey! There is an item! ", false);
                     if (quantity > 1) {
@@ -33,7 +33,7 @@ public class Room {
                     while (true) {
                         ignore = console.readLine();
                         command = console.readLine();
-                        switch (command.toLowerCase()) {
+                        switch (command.toLowerCase().trim()) {
                             case "take it" -> {
                                 Player.putItem(itemName, quantity);
                                 Main.screenRefresh();
@@ -69,7 +69,7 @@ public class Room {
         while (true) {
             ignore = console.readLine();
             command = console.readLine();
-            switch (command.toLowerCase()) {
+            switch (command.toLowerCase().trim()) {
                 case "take it" -> {
                     Player.putItem(itemName, quantity);
                     Main.screenRefresh();

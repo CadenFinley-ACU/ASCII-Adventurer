@@ -98,7 +98,7 @@ class Main {
         while (true) {
             ignore = console.readLine();
             command = console.readLine();
-            switch (command.toLowerCase()) {
+            switch (command.toLowerCase().trim()) {
                 case "start" ->
                     start();
                 case "settings" ->
@@ -124,10 +124,11 @@ class Main {
     }
 
     private static void displayHelp() throws InterruptedException { //main menu help command
-        if (getSavedPlace().equals("OpenWorld"))
-            TextEngine.printWithDelays("Things you could say:\n'stats' to see your stats\n'inventory' to see your inventory\n'heal' to heal you health using any available healing potions\n'settings' or type 'save' to save\n'map' to see the map\n'exit' to return to the main menu.", true);
-        else
+        if (getSavedPlace().equals("OpenWorld")) {
+            TextEngine.printWithDelays("Things you could say:\n'stats' to see your stats\n'inventory' to see your inventory\n'heal' to heal you health using any available healing potions\n'settings' or type 'save' to save\n'map' to see the map\n'exit' to return to the main menu.", true); 
+        }else {
             TextEngine.printWithDelays("Things you could say:\n'stats' to see your stats\n'inventory' to see your inventory\n'heal' to heal you health using any available healing potions\n'settings' or type 'save' to save\n'exit' to return to the main menu.", true);
+        }
     }
 
     private static void exitGame() throws InterruptedException {   //exit game command
@@ -195,12 +196,13 @@ class Main {
         if (getSavedPlace().equals("Dungeon")) {
             TextEngine.printWithDelays("You can type 'restart' to restart the dungeon", false);
         }
-        if (getSavedPlace().equals("OpenWorld"))
-            TextEngine.printWithDelays("Things you could say:\n'stats' to see your stats\n'inventory' to see your inventory\n'heal' to heal you health using any available healing potions\n'settings' or type 'save' to save\n'map' to see the map\n'exit' to return to the main menu.", true);
-        else
+        if (getSavedPlace().equals("OpenWorld")) {
+            TextEngine.printWithDelays("Things you could say:\n'stats' to see your stats\n'inventory' to see your inventory\n'heal' to heal you health using any available healing potions\n'settings' or type 'save' to save\n'map' to see the map\n'exit' to return to the main menu.", true); 
+        }else {
             TextEngine.printWithDelays("Things you could say:\n'stats' to see your stats\n'inventory' to see your inventory\n'heal' to heal you health using any available healing potions\n'settings' or type 'save' to save\n'exit' to return to the main menu.", true);
+        }
 
-    }                                  
+    }
 
     public static void saveSpace(String place) throws InterruptedException { //save game command
         if (savedPlace != null) {
@@ -292,7 +294,7 @@ class Main {
         TextEngine.printWithDelays("Are you sure?", true);
         ignore = console.readLine();
         command = console.readLine();
-        if (command.toLowerCase().equals("yes")) {
+        if (command.toLowerCase().trim().equals("yes")) {
             TextEngine.clearScreen();
             TextEngine.printWithDelays("Starting new game...", false);
             TextEngine.speedSetting = textState;

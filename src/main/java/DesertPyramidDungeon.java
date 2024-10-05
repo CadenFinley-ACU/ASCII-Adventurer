@@ -128,7 +128,7 @@ public class DesertPyramidDungeon extends Dungeon {
         while (true) {
             ignore = Room.console.readLine();
             command = Room.console.readLine();
-            switch (command.toLowerCase()) {
+            switch (command.toLowerCase().trim()) {
                 case "yes" -> {
                     return true;
                 }
@@ -182,7 +182,7 @@ public class DesertPyramidDungeon extends Dungeon {
         while (true) {
             ignore = Room.console.readLine();
             direction = Room.console.readLine();
-            switch (direction.toLowerCase()) {
+            switch (direction.toLowerCase().trim()) {
                 case "north" -> {
                     if (directionsString.contains(direction.toLowerCase())) {
                         lastPosition = currentPlayerPosition.clone(); // Save the current position before moving
