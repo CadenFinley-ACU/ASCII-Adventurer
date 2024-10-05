@@ -92,8 +92,7 @@ public class DungeonGenerator {
         // Randomly add trap rooms (6) ensuring it is connected to the main path
         addRandom(matrix, rand, 1, 6);
 
-        addRandom(matrix, rand, 1, 5);
-
+        //addRandom(matrix, rand, 1, 7);
         // Ensure only one 1 value is adjacent to the 8
         ensureSingleAdjacent(matrix, coord8[0], coord8[1]);
 
