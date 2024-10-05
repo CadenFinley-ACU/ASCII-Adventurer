@@ -28,13 +28,13 @@ public class Dungeon extends Room {
 
     public static void generateDungeons() { //generates all 8 dungeons and stores them in their respective variables
         meadowDungeon = DungeonGenerator.generateAndReturnMatrix(5);
-        darkForestDungeon = DungeonGenerator.generateAndReturnMatrix(7);
-        mountainCaveDungeon = DungeonGenerator.generateAndReturnMatrix(7);
+        darkForestDungeon = DungeonGenerator.generateAndReturnMatrix(6);
+        mountainCaveDungeon = DungeonGenerator.generateAndReturnMatrix(6);
         mountainTopDungeon = DungeonGenerator.generateAndReturnMatrix(7);
-        desertOasisDungeon = DungeonGenerator.generateAndReturnMatrix(9);
-        desertPlainsDungeon = DungeonGenerator.generateAndReturnMatrix(9);
-        desertPyramidDungeon = DungeonGenerator.generateAndReturnMatrix(11);
-        oceanKingdomDungeon = DungeonGenerator.generateAndReturnMatrix(13);
+        desertOasisDungeon = DungeonGenerator.generateAndReturnMatrix(7);
+        desertPlainsDungeon = DungeonGenerator.generateAndReturnMatrix(8);
+        desertPyramidDungeon = DungeonGenerator.generateAndReturnMatrix(9);
+        oceanKingdomDungeon = DungeonGenerator.generateAndReturnMatrix(10);
     }
 
     public static void defaultDungeonArgs(String data) throws InterruptedException { //default dungeon arguments
