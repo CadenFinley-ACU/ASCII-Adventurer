@@ -173,6 +173,7 @@ public class Player {
             TextEngine.printWithDelays(space + brightRedStart + "You have died!" + brightEnd, false);
             TextEngine.printWithDelays(space + brightRedStart + "Game Over!" + brightEnd, false);
             TextEngine.enterToNext();
+            Main.wipeSave();
             Main.startMenu();
         }
 
@@ -228,6 +229,9 @@ public class Player {
     }
 
     private static void playerCreate() throws InterruptedException { //create the player
+        String brightBoldEnd = "\033[0m";
+        String brightYellowStart = "\033[1;33m";
+
         TextEngine.printWithDelays("Welcome to the game! What is your name hero?", true);
         while (true) {
             ignore = console.readLine();
@@ -247,10 +251,10 @@ public class Player {
         }
         TextEngine.clearScreen();
         TextEngine.printWithDelays("Welcome " + Player.getName() + "!", false);
-        TextEngine.printWithDelays("There are a few quick things to know.\nat any point you can type settings to change the text speed.", false);
-        TextEngine.printWithDelays("You can also type exit to leave the game at any time.", false);
-        TextEngine.printWithDelays("You can type inventory to see your inventory and health.", false);
-        TextEngine.printWithDelays("You can type help to see these commands again.", false);
+        TextEngine.printWithDelays("There are a few quick things to know.\nat any point you can type " + brightYellowStart + "'settings'" + brightBoldEnd + " to change the text speed.", false);
+        TextEngine.printWithDelays("You can also type " + brightYellowStart + "'exit'" + brightBoldEnd + " to leave the game at any time.", false);
+        TextEngine.printWithDelays("You can type " + brightYellowStart + "'inventory'" + brightBoldEnd + " to see your inventory and health.", false);
+        TextEngine.printWithDelays("You can type " + brightYellowStart + "'help'" + brightBoldEnd + " to see these commands again.", false);
         TextEngine.printNoDelay("\n", false);
         TextEngine.printWithDelays("Make sure you always press enter when prompted to!", false);
         TextEngine.enterToNext();
