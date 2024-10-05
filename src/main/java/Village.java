@@ -24,7 +24,7 @@ public class Village extends Room {
         while (true) {
             ignore = console.readLine();
             command = console.readLine();
-            switch (command.toLowerCase()) {
+            switch (command.toLowerCase().trim()) {
                 case "church" -> {
                     Village.church();
                 }
@@ -89,7 +89,7 @@ public class Village extends Room {
             while (true) {
                 ignore = console.readLine();
                 command = console.readLine();
-                switch (command.toLowerCase()) {
+                switch (command.toLowerCase().trim()) {
                     case "give it" -> {
                         int amountofHeartContainers = Player.inventory.get("heart container");
                         Player.changeMaxHealth(InventoryManager.Potions.get("heart container") * amountofHeartContainers);
@@ -110,7 +110,7 @@ public class Village extends Room {
             while (true) {
                 ignore = console.readLine();
                 command = console.readLine();
-                switch (command.toLowerCase()) {
+                switch (command.toLowerCase().trim()) {
                     case "yes" -> {
                         Main.loadSave();
                     }
@@ -149,7 +149,7 @@ public class Village extends Room {
         while (true) {
             ignore = console.readLine();
             command = console.readLine();
-            switch (command.toLowerCase()) {
+            switch (command.toLowerCase().trim()) {
                 case "rest" -> {
                     if (Player.getGold() < 5) {
                         TextEngine.printWithDelays("You do not have enough gold to rest", false);
@@ -200,7 +200,7 @@ public class Village extends Room {
             ignore = console.readLine(); // It's unclear what this line does, so it's kept.
             command = console.readLine();
 
-            switch (command.toLowerCase()) {
+            switch (command.toLowerCase().trim()) {
                 case "health potion" -> {
                     buyMultiple("health potion", 15);
                 }
@@ -257,7 +257,7 @@ public class Village extends Room {
             ignore = console.readLine(); // It's unclear what this line does, so it's kept.
             command = console.readLine();
 
-            switch (command.toLowerCase()) {
+            switch (command.toLowerCase().trim()) {
                 case "greater health potion" -> {
                     buyMultiple("greater health potion", 30);
                 }
@@ -311,7 +311,7 @@ public class Village extends Room {
             ignore = console.readLine(); // It's unclear what this line does, so it's kept.
             command = console.readLine();
 
-            switch (command.toLowerCase()) {
+            switch (command.toLowerCase().trim()) {
                 case "super health potion" -> {
                     buyMultiple("super health potion", 50);
                 }
@@ -385,7 +385,7 @@ public class Village extends Room {
         while (true) {
             ignore = console.readLine();
             command = console.readLine();
-            switch (command.toLowerCase()) {
+            switch (command.toLowerCase().trim()) {
                 case "yes" -> {
                     if (Dungeon.completedDungeons < 4) {
                         shop1();

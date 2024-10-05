@@ -13,7 +13,9 @@ public class DungeonGenerator {
     public static boolean testing = false;
     public static int[][] matrix;
     static int fails = 0;
-    private static float itemRoomRatio;
+    private static int itemRoomRatio;
+    private static int changeRatio;
+    private static int trapRoomRatio;
 
     public static void wipe() {
         matrix = null;
@@ -38,13 +40,6 @@ public class DungeonGenerator {
         }
         if (size > 15) {
             size = 15;
-        }
-
-        //determines the number of regular rooms in a dungeon
-        float changeRatio = ((size * size) / 2);
-
-        if (3 + size < changeRatio) {
-            changeRatio = size;
         }
 
         matrix = new int[size][size];
@@ -74,24 +69,33 @@ public class DungeonGenerator {
         matrix[coord9[0]][coord9[1]] = 0;
         matrix[coord8[0]][coord8[1]] = 0;
 
-        //determines how many random rooms are added
-        // Randomly add at least size+size/2 more 1's ensuring they are connected to the main path
-        addRandom(matrix, rand, size + (int) changeRatio, 1);
+        //determines the number of regular rooms in a dungeon
+        //int changeRatio = (4 * size) - 10;
+        //int changeRatio = (5 / 4) * (size * size) - (10 * size) + (115 / 4);
+        //int changeRatio = (15 / 2 * size) - 45 / 2;
+        changeRatio = ((15 / 2 * size) - 45 / 2) - 3;
 
-        //formula that dertimes the number of item rooms in a dungeon
-        itemRoomRatio = 2;
+        //determines how many random rooms are added
+        // Randomly add at least changeRatio more 1's ensuring they are connected to the main path
+        addRandom(matrix, rand, changeRatio, 1);
+
+        //formula that determines the number of item rooms in a dungeon
+        itemRoomRatio = (size / 2) - (1 / 2);
 
         // Randomly add item rooms (2-5) ensuring they are connected to the main path 2-5 are item rooms
-        addRandom(matrix, rand, (int) itemRoomRatio, 2);
+        addRandom(matrix, rand, itemRoomRatio, 2);
 
         // Randomly add 1 rare item (3) ensuring it is connected to the main path
         addRandom(matrix, rand, 1, 3);
 
-        // Randomly add 1 trap room (6) ensuring it is connected to the main path
-        addRandom(matrix, rand, 1, 6);
-
         // Randomly add mini boss rooms (4) ensuring it is connected to the main path
         addRandom(matrix, rand, 1, 4);
+
+        //formula that determines the number of trap rooms in a dungeon
+        trapRoomRatio = ((1 / 2) * size) - (3 / 2);
+
+        // Randomly add trap rooms (6) ensuring it is connected to the main path
+        addRandom(matrix, rand, 1, 6);
 
         // Ensure only one 1 value is adjacent to the 8
         ensureSingleAdjacent(matrix, coord8[0], coord8[1]);
@@ -167,12 +171,13 @@ public class DungeonGenerator {
      *
      * @param matrix The matrix to add values to.
      * @param rand The Random instance to use for generating random positions.
-     * @param minOnes The minimum number of values to add.
+     * @param min The minimum number of values to add.
      * @param num The value to add to the matrix.
      */
-    private static void addRandom(int[][] matrix, Random rand, int minOnes, int num) {
+    private static void addRandom(int[][] matrix, Random rand, int min, int num) {
+        int[][] originMatrix = matrix;
         int addedOnes = 0;
-        while (addedOnes < minOnes) {
+        while (addedOnes < min) {
             int x, y;
             do {
                 x = rand.nextInt(matrix.length);
@@ -181,6 +186,10 @@ public class DungeonGenerator {
             matrix[x][y] = num;
             addedOnes++;
         }
+        if (min <= numberOfRooms(matrix, num)) {
+            return;
+        }
+        addRandom(originMatrix, rand, min, num);
     }
 
     /**
@@ -297,7 +306,7 @@ public class DungeonGenerator {
         if (pos9 == null || pos8 == null || pos3 == null || pos2 == null || pos4 == null || pos6 == null) {
             return false;
         }
-        return (isPathConnected(localMatrix, pos9[0], pos9[1], pos8[0], pos8[1]) && isPathConnected(localMatrix, pos9[0], pos9[1], pos3[0], pos3[1]) && isPathConnected(localMatrix, pos9[0], pos9[1], pos2[0], pos2[1]) && isPathConnected(localMatrix, pos9[0], pos9[1], pos4[0], pos4[1]) && !isAdjacent(pos8[0], pos8[1], pos6)) && (numberOfRooms(localMatrix, 2) >= itemRoomRatio);
+        return (isPathConnected(localMatrix, pos9[0], pos9[1], pos8[0], pos8[1]) && isPathConnected(localMatrix, pos9[0], pos9[1], pos3[0], pos3[1]) && isPathConnected(localMatrix, pos9[0], pos9[1], pos2[0], pos2[1]) && isPathConnected(localMatrix, pos9[0], pos9[1], pos4[0], pos4[1]) && !isAdjacent(pos8[0], pos8[1], pos6)) && (numberOfRooms(localMatrix, 2) >= itemRoomRatio) && countValuesGreaterThanZero(matrix) >= changeRatio;
     }
 
     /**
@@ -544,6 +553,16 @@ public class DungeonGenerator {
         }
         return count;
     }
-    
-    
+
+    public static int countValuesGreaterThanZero(int[][] matrix) {
+        int count = 0;
+        for (int[] row : matrix) {
+            for (int value : row) {
+                if (value != 0) {
+                    count++;
+                }
+            }
+        }
+        return count;
+    }
 }
