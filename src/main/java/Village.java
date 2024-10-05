@@ -9,6 +9,8 @@ import java.util.List;
  */
 public class Village extends Room {
 
+    public static List<String> items;
+
     public static void startRoom() throws InterruptedException { //start room
         room = "Village";
         Main.checkSave(room);
@@ -18,7 +20,7 @@ public class Village extends Room {
         if (Dungeon.completedDungeons > 5) {
             TextEngine.printWithDelays("You can now warp to different areas using the 'portal'", false);
         }
-        TextEngine.printWithDelays("What is your command: church, hotel, shop, leave village", true);
+        TextEngine.printNoDelay("What is your command: church, hotel, shop, leave village", true);
         while (true) {
             ignore = console.readLine();
             command = console.readLine();
@@ -139,11 +141,12 @@ public class Village extends Room {
     public static void hotel() throws InterruptedException { //hotel
         //hotel implementation
         Main.screenRefresh();
+        int cost = 1 / 2 * Player.getMaxHealth() - Player.getHealth();
         TextEngine.printNoDelay("Gold: " + Player.getGold(), false);
         TextEngine.printNoDelay("\n", false);
         TextEngine.printWithDelays("You enter the hotel.", false);
         TextEngine.printWithDelays("You can rest here to regain health", false);
-        TextEngine.printWithDelays("What is your command: rest(5 gold) or leave", true);
+        TextEngine.printWithDelays("What is your command: rest " + cost + " gold or leave", true);
         while (true) {
             ignore = console.readLine();
             command = console.readLine();
@@ -192,7 +195,7 @@ public class Village extends Room {
                 + "or leave";
 
         // Use the modified message with bold items
-        TextEngine.printWithDelays(shopMessage, true);
+        TextEngine.printNoDelay(shopMessage, true);
 
         while (true) {
             ignore = console.readLine(); // It's unclear what this line does, so it's kept.
@@ -249,7 +252,7 @@ public class Village extends Room {
                 + "or leave";
 
         // Use the modified message with bold items
-        TextEngine.printWithDelays(shopMessage, true);
+        TextEngine.printNoDelay(shopMessage, true);
 
         while (true) {
             ignore = console.readLine(); // It's unclear what this line does, so it's kept.
@@ -303,7 +306,7 @@ public class Village extends Room {
                 + "or leave";
 
         // Use the modified message with bold items
-        TextEngine.printWithDelays(shopMessage, true);
+        TextEngine.printNoDelay(shopMessage, true);
 
         while (true) {
             ignore = console.readLine(); // It's unclear what this line does, so it's kept.
@@ -405,5 +408,11 @@ public class Village extends Room {
     private static void leave() throws InterruptedException { //leave the village
         TextEngine.clearScreen();
         OpenWorld.startRoom();
+    }
+
+    public static void addItemsToShop(List<String> items) {
+        for (String item : items) {
+            Village.items.add(item);
+        }
     }
 }

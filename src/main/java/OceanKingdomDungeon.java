@@ -53,7 +53,7 @@ public class OceanKingdomDungeon extends Dungeon {
         directionsString = new ArrayList<>();
 
         if (oceanKingdomDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] == 2 && roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] == 0) {
-            if (foundItemRooms <= items.size()) {
+            if (1 <= items.size()) {
                 String randomItem = items.get(rand.nextInt(items.size()));
                 if (hasChestInRoom(randomItem, 1)) {
                     items.remove(randomItem);
@@ -103,6 +103,8 @@ public class OceanKingdomDungeon extends Dungeon {
             TextEngine.printWithDelays("You have entered the boss room", false);
             Player.changeHealth(Enemy.spawnEnemy("Kracken", 1));
             TextEngine.printWithDelays("You have defeated the boss and completed the dungeon!", false);
+            TextEngine.enterToNext();
+            Village.addItemsToShop(items);
             lastPosition = currentPlayerPosition.clone();
             roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = oceanKingdomDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
             completedDungeons++;
