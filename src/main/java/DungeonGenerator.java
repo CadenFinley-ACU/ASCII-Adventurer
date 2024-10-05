@@ -72,7 +72,7 @@ public class DungeonGenerator {
         //int changeRatio = (4 * size) - 10;
         //int changeRatio = (5 / 4) * (size * size) - (10 * size) + (115 / 4);
         //int changeRatio = (15 / 2 * size) - 45 / 2;
-        int changeRatio = ((15 / 2 * size) - 45 / 2) - 3;
+        changeRatio = ((15 / 2 * size) - 45 / 2) - 3;
 
         //determines how many random rooms are added
         // Randomly add at least size+size/2 more 1's ensuring they are connected to the main path
