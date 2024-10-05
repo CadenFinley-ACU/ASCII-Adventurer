@@ -11,10 +11,10 @@ import java.util.Random;
 
 public class MeadowDungeon extends Dungeon {
 
-    private static final int[] spawnPosition = DungeonGenerator.findValue(Dungeon.meadowDungeon, 9);
-    private static final int[] bossRoom = DungeonGenerator.findValue(Dungeon.meadowDungeon, 8);
-    private static int[] save = spawnPosition;
-    private static int[] lastPosition = spawnPosition.clone(); // Variable to store the last position
+    private static int[] spawnPosition = DungeonGenerator.findValue(Dungeon.meadowDungeon, 9);
+    private static int[] bossRoom = DungeonGenerator.findValue(Dungeon.meadowDungeon, 8);
+    private static int[] save = DungeonGenerator.findValue(Dungeon.meadowDungeon, 9);
+    private static int[] lastPosition; // Variable to store the last position
     public static int[][] roomsBeenTo = DungeonGenerator.createRoomsBeenTo(Dungeon.meadowDungeon.length);
     public static String direction;
     public static int[] availableMove;
@@ -38,7 +38,8 @@ public class MeadowDungeon extends Dungeon {
         completed = false;
         items = new ArrayList<>(List.of("axe", "chainmail set", "health potion"));
         foundItemRooms = DungeonGenerator.numberOfRooms(Dungeon.meadowDungeon, 2);
-        Dungeon.currentPlayerPosition = spawnPosition;
+        spawnPosition = DungeonGenerator.findValue(Dungeon.meadowDungeon, 9);
+        bossRoom = DungeonGenerator.findValue(Dungeon.meadowDungeon, 8);
         currentPlayerPosition = spawnPosition;
         roomsBeenTo = DungeonGenerator.createRoomsBeenTo(Dungeon.meadowDungeon.length);
         save = spawnPosition;

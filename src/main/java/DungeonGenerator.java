@@ -400,8 +400,6 @@ public class DungeonGenerator {
                                 System.out.print("[I] "); // Special marker for value 
                             case 3 ->
                                 System.out.print("[I] "); // Special marker for value 3
-                            case 4 ->
-                                System.out.print("[!] "); // Special marker for value 4
                             default ->
                                 System.out.print("[.] "); // Default case for other values
                         }

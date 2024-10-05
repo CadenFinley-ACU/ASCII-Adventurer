@@ -11,10 +11,10 @@ import java.util.Random;
 
 public class MountainCaveDungeon extends Dungeon {
 
-    private static final int[] spawnPosition = DungeonGenerator.findValue(Dungeon.mountainCaveDungeon, 9);
-    private static final int[] bossRoom = DungeonGenerator.findValue(Dungeon.mountainCaveDungeon, 8);
-    private static int[] save = spawnPosition;
-    private static int[] lastPosition = spawnPosition.clone(); // Variable to store the last position
+    private static int[] spawnPosition = DungeonGenerator.findValue(Dungeon.mountainCaveDungeon, 9);
+    private static int[] bossRoom = DungeonGenerator.findValue(Dungeon.mountainCaveDungeon, 8);
+    private static int[] save = DungeonGenerator.findValue(Dungeon.mountainCaveDungeon, 9);
+    private static int[] lastPosition; // Variable to store the last position
     public static int[][] roomsBeenTo = DungeonGenerator.createRoomsBeenTo(Dungeon.mountainCaveDungeon.length);
     public static String direction;
     public static int[] availableMove;
@@ -36,11 +36,11 @@ public class MountainCaveDungeon extends Dungeon {
     }
 
     public static void fresh() { //fresh
-        Dungeon.autoCheck();
         completed = false;
         items = new ArrayList<>(List.of("better sword", "ninja armor", "health potion"));
         foundItemRooms = DungeonGenerator.numberOfRooms(Dungeon.mountainCaveDungeon, 2);
-        Dungeon.currentPlayerPosition = spawnPosition;
+        spawnPosition = DungeonGenerator.findValue(Dungeon.mountainCaveDungeon, 9);
+        bossRoom = DungeonGenerator.findValue(Dungeon.mountainCaveDungeon, 8);
         currentPlayerPosition = spawnPosition;
         roomsBeenTo = DungeonGenerator.createRoomsBeenTo(Dungeon.mountainCaveDungeon.length);
         save = spawnPosition;

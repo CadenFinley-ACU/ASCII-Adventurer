@@ -11,10 +11,10 @@ import java.util.Random;
 
 public class DesertOasisDungeon extends Dungeon {
 
-    private static final int[] spawnPosition = DungeonGenerator.findValue(Dungeon.desertOasisDungeon, 9);
-    private static final int[] bossRoom = DungeonGenerator.findValue(Dungeon.desertOasisDungeon, 8);
-    private static int[] save = spawnPosition;
-    private static int[] lastPosition = spawnPosition.clone(); // Variable to store the last position
+    private static int[] spawnPosition = DungeonGenerator.findValue(Dungeon.desertOasisDungeon, 9);
+    private static int[] bossRoom = DungeonGenerator.findValue(Dungeon.desertOasisDungeon, 8);
+    private static int[] save = DungeonGenerator.findValue(Dungeon.desertOasisDungeon, 9);
+    private static int[] lastPosition;// Variable to store the last position
     public static int[][] roomsBeenTo = DungeonGenerator.createRoomsBeenTo(Dungeon.desertOasisDungeon.length);
     public static String direction;
     public static int[] availableMove;
@@ -35,10 +35,11 @@ public class DesertOasisDungeon extends Dungeon {
     }
 
     public static void fresh() { //fresh
-        Dungeon.autoCheck();
         completed = false;
         items = new ArrayList<>(List.of("master sword", "royal armor", "greater health potion"));
         foundItemRooms = DungeonGenerator.numberOfRooms(Dungeon.desertOasisDungeon, 2);
+        spawnPosition = DungeonGenerator.findValue(Dungeon.desertOasisDungeon, 9);
+        bossRoom = DungeonGenerator.findValue(Dungeon.desertOasisDungeon, 8);
         Dungeon.currentPlayerPosition = spawnPosition;
         currentPlayerPosition = spawnPosition;
         roomsBeenTo = DungeonGenerator.createRoomsBeenTo(Dungeon.desertOasisDungeon.length);
