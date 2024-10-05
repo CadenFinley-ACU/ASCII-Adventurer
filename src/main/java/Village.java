@@ -82,7 +82,7 @@ public class Village extends Room {
     public static void church() throws InterruptedException { //church
         Main.screenRefresh();
         //church implementation
-        TextEngine.printWithDelays("You enter the village church.\nThere a a priest here who can bless your heart containers to gain more hearts", false);
+        TextEngine.printWithDelays("You enter the village church.\nThere is a priest here who can bless your heart containers to gain more hearts", false);
         if (Player.inventory.containsKey("heart container")) {
             TextEngine.printWithDelays("You have a heart container to give to the priest", false);
             TextEngine.printWithDelays("What is your command: give it or leave it", true);

@@ -99,5 +99,5 @@ public class Dungeon extends Room {
             Player.autoFight = false;
         }
     }
-
+    
 }
