@@ -406,44 +406,4 @@ public class Village extends Room {
         TextEngine.clearScreen();
         OpenWorld.startRoom();
     }
-
-    public static String dungeonShop(List<String> itemsForSale) throws InterruptedException {
-        Main.screenRefresh();
-        TextEngine.printWithDelays("Welcome to the dungeon shop traveler!", false);
-        for (String item : itemsForSale) {
-            System.out.println(" " + item + " - " + InventoryManager.getKeyValue(item) * 3 + " gold");
-        }
-        TextEngine.printWithDelays("What would you like to buy? ( or leave )", true);
-        while (true) {
-            ignore = console.readLine();
-            command = console.readLine();
-            if (itemsForSale.contains(command.toLowerCase().trim())) {
-                if (Player.getGold() >= InventoryManager.getKeyValue(command) * 3) {
-                    Player.changeGold(-InventoryManager.getKeyValue(command) * 3);
-                    Player.putItem(command, 1);
-                    return command;
-                } else {
-                    TextEngine.printWithDelays("You do not have enough gold to buy a " + command, false);
-                    TextEngine.enterToNext();
-                    dungeonShop(itemsForSale);
-                }
-            } else if (command.equals("leave")) {
-                TextEngine.printWithDelays("If you leave you cannot return to this shop?", false);
-                TextEngine.printWithDelays("Would you like to leave? yes or no", true);
-                ignore = console.readLine();
-                command = console.readLine();
-                switch (command.toLowerCase().trim()) {
-                    case "yes" -> {
-                        return null;
-                    }
-                    case "no" ->
-                        dungeonShop(itemsForSale);
-                    default ->
-                        Main.invalidCommand();
-                }
-            } else {
-                Main.invalidCommand();
-            }
-        }
-    }
 }

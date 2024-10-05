@@ -71,7 +71,7 @@ public class DungeonGenerator {
         //int changeRatio = (4 * size) - 10;
         //int changeRatio = (5 / 4) * (size * size) - (10 * size) + (115 / 4);
         //int changeRatio = (15 / 2 * size) - 45 / 2;
-        changeRatio = ((15 / 2 * size) - 45 / 2) - 3;
+        changeRatio = ((15 / 2 * size) - 45 / 2) - 4;
 
         //determines how many random rooms are added
         // Randomly add at least changeRatio more 1's ensuring they are connected to the main path
@@ -92,7 +92,6 @@ public class DungeonGenerator {
         // Randomly add trap rooms (6) ensuring it is connected to the main path
         addRandom(matrix, rand, 1, 6);
 
-        //addRandom(matrix, rand, 1, 7);
         // Ensure only one 1 value is adjacent to the 8
         ensureSingleAdjacent(matrix, coord8[0], coord8[1]);
 
