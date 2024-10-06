@@ -255,6 +255,7 @@ public class Player {
         TextEngine.printWithDelays("You can also type " + brightYellowStart + "'exit'" + brightBoldEnd + " to leave the game at any time.", false);
         TextEngine.printWithDelays("You can type " + brightYellowStart + "'inventory'" + brightBoldEnd + " to see your inventory and health.", false);
         TextEngine.printWithDelays("You can type " + brightYellowStart + "'help'" + brightBoldEnd + " to see these commands again.", false);
+        TextEngine.printWithDelays("You can type " + brightYellowStart + "'map'" + brightBoldEnd + " to see where you are in the openWorld.", false);
         TextEngine.printNoDelay("\n", false);
         TextEngine.printWithDelays("Make sure you always press enter when prompted to!", false);
         TextEngine.enterToNext();
