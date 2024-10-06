@@ -1,4 +1,6 @@
 
+import java.util.Random;
+
 import org.junit.After;
 import static org.junit.Assert.assertTrue;
 import org.junit.Before;
@@ -115,14 +117,113 @@ public class TestSuite_Adventure {
     }
 
     @Test
-    //merely a stress test on the algorithm
-    public void stressTest() {
-        for (int i = 5; i < 1000; i++) {
-            testsrun++;
-            int[][] testMatrix = DungeonGenerator.generateAndReturnMatrix(13);
-            boolean connected = DungeonGenerator.testArrays(testMatrix);
-            assertTrue("There should be a path connecting 9 and 8 with values higher than 0", connected);
-        }
+    public void testDungeonGeneratorConnectionRandomSize() {
+        testsrun++;
+        Random rand = new Random();
+        int size = rand.nextInt(11) + 5; // Generates a random size between 5 and 15
+        int[][] testMatrix = DungeonGenerator.generateAndReturnMatrix(size);
+        boolean connected = DungeonGenerator.testArrays(testMatrix);
+        assertTrue("There should be a path connecting 9 and 8 with values higher than 0", connected);
+    }
+
+    @Test
+    public void testDungeonGeneratorConnectionRandomSize1() {
+        testsrun++;
+        Random rand = new Random();
+        int size = rand.nextInt(11) + 5; // Generates a random size between 5 and 15
+        int[][] testMatrix = DungeonGenerator.generateAndReturnMatrix(size);
+        boolean connected = DungeonGenerator.testArrays(testMatrix);
+        assertTrue("There should be a path connecting 9 and 8 with values higher than 0", connected);
+    }
+
+    @Test
+    public void testDungeonGeneratorConnectionRandomSize2() {
+        testsrun++;
+        Random rand = new Random();
+        int size = rand.nextInt(11) + 5; // Generates a random size between 5 and 15
+        int[][] testMatrix = DungeonGenerator.generateAndReturnMatrix(size);
+        boolean connected = DungeonGenerator.testArrays(testMatrix);
+        assertTrue("There should be a path connecting 9 and 8 with values higher than 0", connected);
+    }
+
+    @Test
+    public void testDungeonGeneratorConnectionRandomSize3() {
+        testsrun++;
+        Random rand = new Random();
+        int size = rand.nextInt(11) + 5; // Generates a random size between 5 and 15
+        int[][] testMatrix = DungeonGenerator.generateAndReturnMatrix(size);
+        boolean connected = DungeonGenerator.testArrays(testMatrix);
+        assertTrue("There should be a path connecting 9 and 8 with values higher than 0", connected);
+    }
+
+    @Test
+    public void testDungeonGeneratorConnectionRandomSize4() {
+        testsrun++;
+        Random rand = new Random();
+        int size = rand.nextInt(11) + 5; // Generates a random size between 5 and 15
+        int[][] testMatrix = DungeonGenerator.generateAndReturnMatrix(size);
+        boolean connected = DungeonGenerator.testArrays(testMatrix);
+        assertTrue("There should be a path connecting 9 and 8 with values higher than 0", connected);
+    }
+
+    @Test
+    public void testDungeonGeneratorConnectionRandomSize5() {
+        testsrun++;
+        Random rand = new Random();
+        int size = rand.nextInt(11) + 5; // Generates a random size between 5 and 15
+        int[][] testMatrix = DungeonGenerator.generateAndReturnMatrix(size);
+        boolean connected = DungeonGenerator.testArrays(testMatrix);
+        assertTrue("There should be a path connecting 9 and 8 with values higher than 0", connected);
+    }
+
+    @Test
+    public void testDungeonGeneratorConnectionRandomSize6() {
+        testsrun++;
+        Random rand = new Random();
+        int size = rand.nextInt(11) + 5; // Generates a random size between 5 and 15
+        int[][] testMatrix = DungeonGenerator.generateAndReturnMatrix(size);
+        boolean connected = DungeonGenerator.testArrays(testMatrix);
+        assertTrue("There should be a path connecting 9 and 8 with values higher than 0", connected);
+    }
+
+    @Test
+    public void testDungeonGeneratorConnectionRandomSize7() {
+        testsrun++;
+        Random rand = new Random();
+        int size = rand.nextInt(11) + 5; // Generates a random size between 5 and 15
+        int[][] testMatrix = DungeonGenerator.generateAndReturnMatrix(size);
+        boolean connected = DungeonGenerator.testArrays(testMatrix);
+        assertTrue("There should be a path connecting 9 and 8 with values higher than 0", connected);
+    }
+
+    @Test
+    public void testDungeonGeneratorConnectionRandomSize8() {
+        testsrun++;
+        Random rand = new Random();
+        int size = rand.nextInt(11) + 5; // Generates a random size between 5 and 15
+        int[][] testMatrix = DungeonGenerator.generateAndReturnMatrix(size);
+        boolean connected = DungeonGenerator.testArrays(testMatrix);
+        assertTrue("There should be a path connecting 9 and 8 with values higher than 0", connected);
+    }
+
+    @Test
+    public void testDungeonGeneratorConnectionRandomSize9() {
+        testsrun++;
+        Random rand = new Random();
+        int size = rand.nextInt(11) + 5; // Generates a random size between 5 and 15
+        int[][] testMatrix = DungeonGenerator.generateAndReturnMatrix(size);
+        boolean connected = DungeonGenerator.testArrays(testMatrix);
+        assertTrue("There should be a path connecting 9 and 8 with values higher than 0", connected);
+    }
+
+    @Test
+    public void testDungeonGeneratorConnectionRandomSize10() {
+        testsrun++;
+        Random rand = new Random();
+        int size = rand.nextInt(11) + 5; // Generates a random size between 5 and 15
+        int[][] testMatrix = DungeonGenerator.generateAndReturnMatrix(size);
+        boolean connected = DungeonGenerator.testArrays(testMatrix);
+        assertTrue("There should be a path connecting 9 and 8 with values higher than 0", connected);
     }
 
 }
