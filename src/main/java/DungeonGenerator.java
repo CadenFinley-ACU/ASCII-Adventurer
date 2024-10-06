@@ -40,6 +40,16 @@ public class DungeonGenerator {
             size = 15;
         }
 
+<<<<<<< HEAD
+=======
+        //determines the number of regular rooms in a dungeon
+        float changeRatio = 1 + (((size * size) / 1) / 12.5f);
+
+        if (3 + size < changeRatio) {
+            changeRatio = size;
+        }
+
+>>>>>>> parent of 21ee8fc (tweaked dungeon generator)
         matrix = new int[size][size];
         Random rand = new Random();
 
