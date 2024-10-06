@@ -181,7 +181,7 @@ public class Village extends Room {
         TextEngine.printNoDelay("Gold: " + Player.getGold(), false);
         TextEngine.printNoDelay("Inventory: " + Player.inventory.size() + "/" + Player.inventorySize, false);
         TextEngine.printNoDelay("\n", false);
-        TextEngine.printWithDelays("You enter the shop.", false);
+        TextEngine.printWithDelays("You have entered the shop.", false);
         TextEngine.printWithDelays("You can buy items here", false);
         TextEngine.printWithDelays("What would you like to buy: \nhealth potion (15 gold), shield (20 gold), key (30 gold), or leave", true);
         while (true) {
