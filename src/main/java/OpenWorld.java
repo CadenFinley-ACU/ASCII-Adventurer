@@ -131,7 +131,7 @@ public class OpenWorld extends Room {
     }
 
     private static void room1() throws InterruptedException { //0
-        TextEngine.printWithDelays("You are in the open world,\nthe sunlight blinds your eyes as they have not adjusted from the dark cave.", false);
+        TextEngine.printWithDelays("You are in the open world,\nThe sunlight blinds your eyes as they have not adjusted from the dark cave.", false);
         TextEngine.printWithDelays("As your eyes adjust you see long winding paths that go north, west, and a village to the east.\nHow overwhelming...", false);
         TextEngine.printWithDelays("Which path will you take: north, west, or The Village", true);
         while (true) {
