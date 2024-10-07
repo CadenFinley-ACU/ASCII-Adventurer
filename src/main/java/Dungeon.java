@@ -1,12 +1,6 @@
 
-<<<<<<< HEAD
-
-
-
-=======
 import java.util.ArrayList;
 import java.util.List;
->>>>>>> main
 
 /**
  * Dungeon Class
@@ -106,7 +100,6 @@ public class Dungeon extends Room {
             Player.autoFight = false;
         }
     }
-<<<<<<< HEAD
     public static void dungeonCheck()throws InterruptedException {
         if(completedDungeons == 0) // the meadow dungeon 
             TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", the next dungeon is to the west.\nIf you are lost, check out the 'map'.", false);
@@ -127,13 +120,9 @@ public class Dungeon extends Room {
         else 
             TextEngine.printWithDelays("this function isnt working right", false);
     }
-    
-=======
-
     public static void addItemsToMiniDungeons(List<String> items) {
         for (String item : missedItems) {
             missedItems.add(item);
         }
     }
->>>>>>> main
 }
