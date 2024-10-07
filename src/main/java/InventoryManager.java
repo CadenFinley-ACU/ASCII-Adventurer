@@ -272,5 +272,19 @@ public class InventoryManager extends Player {
         return 0; // or any other default value
     }
 
-    
+    public static void useItemNoMenu(String item) throws InterruptedException { //this only shouls run with Player.heal()
+        if (Potions.containsKey(item) && Player.getHealth() < Player.getMaxHealth() && !"heart container".equals(item)) {
+            Player.changeHealth(Potions.get(item));
+            inventory.put(item, inventory.get(item) - 1);
+            if (inventory.get(item) == 0) {
+                inventory.remove(item);
+            }
+            setStatsToHighestInInventory();
+        } else {
+            TextEngine.printWithDelays("You cannot use that item.", false);
+            TextEngine.enterToNext();
+            Player.openInventory();
+        }
+    }
+
 }

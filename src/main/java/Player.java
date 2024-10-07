@@ -293,21 +293,21 @@ public class Player {
     public static void heal() throws InterruptedException { //use available health potions in inventory to heal
         if (inventory.containsKey("super health potion")) {
             if (health < maxHealth) {
-                InventoryManager.useItem("super health potion");
+                InventoryManager.useItemNoMenu("super health potion");
             } else {
                 TextEngine.printWithDelays("You are already at full health!", false);
             }
         } else {
             if (inventory.containsKey("greater health potion")) {
                 if (health < maxHealth) {
-                    InventoryManager.useItem("greater health potion");
+                    InventoryManager.useItemNoMenu("greater health potion");
                 } else {
                     TextEngine.printWithDelays("You are already at full health!", false);
                 }
             } else {
                 if (inventory.containsKey("health potion")) {
                     if (health < maxHealth) {
-                        InventoryManager.useItem("health potion");
+                        InventoryManager.useItemNoMenu("health potion");
                     } else {
                         TextEngine.printWithDelays("You are already at full health!", false);
                     }
