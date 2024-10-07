@@ -44,6 +44,7 @@ public class InventoryManager extends Player {
             console.readLine();
             leave();
         } else {
+            TextEngine.printNoDelay("Inventory: " + inventory.size() + "/" + Player.inventorySize, false);
             TextEngine.printWithDelays("You have the following items in your inventory:", false);
             Set<String> keys = inventory.keySet();
             for (String key : keys) {
@@ -112,8 +113,8 @@ public class InventoryManager extends Player {
             switch (command) {
                 case "use" -> {
                     TextEngine.clearScreen();
-                    TextEngine.printWithDelays("Which item would you like to use?", false);
                     printInventoryNoMenu();
+                    TextEngine.printWithDelays("Which item would you like to use?", true);
                     console.readLine();
                     command = console.readLine();
                     useItem(command);
@@ -194,7 +195,6 @@ public class InventoryManager extends Player {
             if (inventory.get(item) == 0) {
                 inventory.remove(item);
             }
-            TextEngine.enterToNext();
             setStatsToHighestInInventory();
             Player.openInventory();
         } else {
@@ -226,6 +226,7 @@ public class InventoryManager extends Player {
         if (inventory.isEmpty()) {
             leave();
         } else {
+            TextEngine.printNoDelay("Inventory: " + inventory.size() + "/" + Player.inventorySize, false);
             TextEngine.printWithDelays("You have the following items in your inventory:", false);
             Set<String> keys = inventory.keySet();
             for (String key : keys) {

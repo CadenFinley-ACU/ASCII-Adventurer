@@ -162,7 +162,7 @@ public class Player {
             }
             TextEngine.printWithDelays(space + brightRedStart + "You took " + change + " damage!" + brightEnd, false);
         } else {
-            TextEngine.printWithDelays(space + brightGreenStart + "You gained " + (change - (change - (maxHealth - getHealth()))) + " health!" + brightEnd, false);
+            TextEngine.printWithDelays(space + brightGreenStart + "You gained " + change + " health!" + brightEnd, false);
         }
 
         health += change;
@@ -257,7 +257,7 @@ public class Player {
         TextEngine.printWithDelays("You can type " + brightYellowStart + "'inventory'" + brightBoldEnd + " to see your inventory and health.", false);
         TextEngine.printWithDelays("You can type " + brightYellowStart + "'help'" + brightBoldEnd + " to see these commands again.", false);
         TextEngine.printWithDelays("You can type " + brightYellowStart + "'map'" + brightBoldEnd + " to see where you are in the openWorld.", false);
-        TextEngine.printWithDelays("you can type " + brightYellowStart + "'stats'" +brightBoldEnd + " to see you stats in the game.",false);
+        TextEngine.printWithDelays("you can type " + brightYellowStart + "'stats'" + brightBoldEnd + " to see you stats in the game.", false);
         TextEngine.printNoDelay("\n", false);
         TextEngine.printWithDelays("Make sure you always press enter when prompted to!", false);
         TextEngine.enterToNext();
