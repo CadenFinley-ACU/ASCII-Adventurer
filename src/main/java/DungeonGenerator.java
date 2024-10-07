@@ -87,7 +87,11 @@ public class DungeonGenerator {
         }
 
         // Randomly add item rooms (2-5) ensuring they are connected to the main path 2-5 are item rooms
-        addRandom(matrix, rand, (int) itemRoomRatio, 2);
+        if (size > 7) {
+            addRandom(matrix, rand, 2, 2);
+        } else {
+            addRandom(matrix, rand, (int) itemRoomRatio, 2);
+        }
 
         // Randomly add 1 rare item (3) ensuring it is connected to the main path
         addRandom(matrix, rand, 1, 3);
