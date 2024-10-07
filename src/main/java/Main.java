@@ -208,6 +208,7 @@ class Main {
     
     
           
+          
              
 
     
@@ -467,6 +468,7 @@ class Main {
     }
 
     public static void wipeSave() throws InterruptedException { //wipe save command
+        playerCreated = false;
         savedPlace = null;
         Room.reset("all");
     }

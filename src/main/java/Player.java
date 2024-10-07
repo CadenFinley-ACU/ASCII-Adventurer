@@ -296,6 +296,7 @@ public class Player {
                 InventoryManager.useItemNoMenu("super health potion");
             } else {
                 TextEngine.printWithDelays("You are already at full health!", false);
+                TextEngine.enterToNext();
             }
         } else {
             if (inventory.containsKey("greater health potion")) {
@@ -303,6 +304,7 @@ public class Player {
                     InventoryManager.useItemNoMenu("greater health potion");
                 } else {
                     TextEngine.printWithDelays("You are already at full health!", false);
+                    TextEngine.enterToNext();
                 }
             } else {
                 if (inventory.containsKey("health potion")) {
@@ -310,13 +312,14 @@ public class Player {
                         InventoryManager.useItemNoMenu("health potion");
                     } else {
                         TextEngine.printWithDelays("You are already at full health!", false);
+                        TextEngine.enterToNext();
                     }
                 } else {
                     TextEngine.printWithDelays("You have no health potions!", false);
+                    TextEngine.enterToNext();
                 }
             }
         }
-        TextEngine.enterToNext();
         Main.loadSave();
     }
 
