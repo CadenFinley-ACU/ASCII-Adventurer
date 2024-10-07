@@ -1,4 +1,5 @@
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -9,7 +10,7 @@ import java.util.List;
  */
 public class Village extends Room {
 
-    public static List<String> items;
+    public static List<String> items = new ArrayList<>();
 
     public static void startRoom() throws InterruptedException { //start room
         room = "Village";
