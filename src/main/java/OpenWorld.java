@@ -138,7 +138,7 @@ public class OpenWorld extends Room {
             ignore = console.readLine();
             command = console.readLine();
             if(!"map".equals(command))
-                holdCommand = command;;
+                holdCommand = command;
             switch (command.toLowerCase().trim()) {
                 case "north" -> {
                     roomSave = 4;
