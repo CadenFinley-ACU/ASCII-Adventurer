@@ -56,7 +56,7 @@ public class Enemy {
             Map.entry("Forest Spirit", 45), //dungeon 2
 
             Map.entry("Wyvern", 50), //dungeon 3
-            Map.entry("ice Dragon", 60), //dungeon 4
+            Map.entry("Ice Dragon", 60), //dungeon 4
 
             Map.entry("Phoenix", 70), //dungeon 5
             Map.entry("Giant Scorpion", 100), //dungeon 6
@@ -77,13 +77,12 @@ public class Enemy {
         checkhealth(type, quantity);
         return 0 - (enemyDamageValues.get(type) * quantity);
     }
-    
 
-    private static void checkhealth(String type, int quantity) throws InterruptedException { 
+    private static void checkhealth(String type, int quantity) throws InterruptedException {
         String brightGreenStart = "\033[1;32m"; // Start bright green text
         String brightGreenEnd = "\033[0m"; // Reset formatting
         String space = "     ";
-    
+
         // Check the player's health
         if (Player.getHealth() <= enemyDamageValues.get(type) * quantity) {
             return;
@@ -97,7 +96,7 @@ public class Enemy {
         // Update player's gold
         Player.changeGold(enemyDamageValues.get(type) * quantity);
     }
-    
+
 }
 
 

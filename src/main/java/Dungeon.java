@@ -56,7 +56,7 @@ public class Dungeon extends Room {
                             DungeonGenerator.printMap(mountainCaveDungeon);
                         }
                         case "Mountain Top" -> {
-                            DungeonGenerator.printMap(mountainCaveDungeon);
+                            DungeonGenerator.printMap(mountainTopDungeon);
                         }
                         case "Desert Oasis" -> {
                             DungeonGenerator.printMap(desertOasisDungeon);
@@ -100,26 +100,37 @@ public class Dungeon extends Room {
             Player.autoFight = false;
         }
     }
-    public static void dungeonCheck()throws InterruptedException {
-        if(completedDungeons == 0) // the meadow dungeon 
-            TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", the next dungeon is to the west.\nIf you are lost, check out the 'map'.", false);
-        else if(completedDungeons > 0) // the dark forest dungeon
-            TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", the next dungeon is to the west.\nIf you are lost, check out the 'map'.", false);
-        else if(completedDungeons > 1) // The Mountain Cave Dungeon
-            TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", the next dungeon is to the north.\nIf you are lost, check out the 'map'.", false);
-        else if(completedDungeons > 2) // The Mountain Top Dungeon
-            TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", the next dungeon is to the east.\nIf you are lost, check out the 'map'.", false);
-        else if(completedDungeons > 3) // The Desert Oasis Dungeon
-            TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", the next dungeon is to the north.\nIf you are lost, check out the 'map'.", false);
-        else if(completedDungeons > 4) // The Desert Plains Dungeon
-            TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", the next dungeon is to the north.\nIf you are lost, check out the 'map'.", false);
-        else if(completedDungeons > 4) // The Desert Pyramid Dungeon
-            TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", the next dungeon is to the north.\nIf you are lost, check out the 'map'.", false);
-        else if(completedDungeons > 4) // The Ocean Kingdom Dungeon
-            TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", the next dungeon is to the north.\nIf you are lost, check out the 'map'.", false);
-        else 
+
+    public static void dungeonCheck() throws InterruptedException {
+        if (completedDungeons == 0) // the meadow dungeon 
+        {
+            TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", the next dungeon is to the west.\nIf you are lost, check out the 'map'.", false); 
+        }else if (completedDungeons > 0) // the dark forest dungeon
+        {
+            TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", the next dungeon is to the west.\nIf you are lost, check out the 'map'.", false); 
+        }else if (completedDungeons > 1) // The Mountain Cave Dungeon
+        {
+            TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", the next dungeon is to the north.\nIf you are lost, check out the 'map'.", false); 
+        }else if (completedDungeons > 2) // The Mountain Top Dungeon
+        {
+            TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", the next dungeon is to the east.\nIf you are lost, check out the 'map'.", false); 
+        }else if (completedDungeons > 3) // The Desert Oasis Dungeon
+        {
+            TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", the next dungeon is to the north.\nIf you are lost, check out the 'map'.", false); 
+        }else if (completedDungeons > 4) // The Desert Plains Dungeon
+        {
+            TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", the next dungeon is to the north.\nIf you are lost, check out the 'map'.", false); 
+        }else if (completedDungeons > 4) // The Desert Pyramid Dungeon
+        {
+            TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", the next dungeon is to the north.\nIf you are lost, check out the 'map'.", false); 
+        }else if (completedDungeons > 4) // The Ocean Kingdom Dungeon
+        {
+            TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", the next dungeon is to the north.\nIf you are lost, check out the 'map'.", false); 
+        }else {
             TextEngine.printWithDelays("this function isnt working right", false);
+        }
     }
+
     public static void addItemsToMiniDungeons(List<String> items) {
         for (String item : missedItems) {
             missedItems.add(item);
