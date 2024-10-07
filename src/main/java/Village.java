@@ -1,6 +1,4 @@
 
-import java.util.List;
-
 /**
  * Village Class
  *
@@ -8,8 +6,6 @@ import java.util.List;
  * Grijesh Shrestha
  */
 public class Village extends Room {
-
-    public static List<String> items;
 
     public static void startRoom() throws InterruptedException { //start room
         room = "Village";
@@ -183,7 +179,7 @@ public class Village extends Room {
         TextEngine.printNoDelay("Gold: " + Player.getGold(), false);
         TextEngine.printNoDelay("Inventory: " + Player.inventory.size() + "/" + Player.inventorySize, false);
         TextEngine.printNoDelay("\n", false);
-        TextEngine.printWithDelays("You enter the shop.", false);
+        TextEngine.printWithDelays("You have entered the shop.", false);
         TextEngine.printWithDelays("You can buy items here", false);
 
         // Creating the message with bold and bright items
@@ -408,11 +404,5 @@ public class Village extends Room {
     private static void leave() throws InterruptedException { //leave the village
         TextEngine.clearScreen();
         OpenWorld.startRoom();
-    }
-
-    public static void addItemsToShop(List<String> items) {
-        for (String item : items) {
-            Village.items.add(item);
-        }
     }
 }

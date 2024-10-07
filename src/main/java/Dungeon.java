@@ -1,16 +1,17 @@
 
+<<<<<<< HEAD
 
 
 
+=======
+import java.util.ArrayList;
+import java.util.List;
+>>>>>>> main
 
 /**
  * Dungeon Class
  *
- * Text Adventure Game
- * SE374 F24
- * Final Project
- * Caden Finley
- * Albert Tucker
+ * Text Adventure Game SE374 F24 Final Project Caden Finley Albert Tucker
  * Grijesh Shrestha
  */
 public class Dungeon extends Room {
@@ -29,6 +30,8 @@ public class Dungeon extends Room {
 
     public static int[] currentPlayerPosition;
     public static boolean previousAutoSettings;
+
+    public static List<String> missedItems = new ArrayList<>();
 
     public static void generateDungeons() { //generates all 8 dungeons and stores them in their respective variables
         meadowDungeon = DungeonGenerator.generateAndReturnMatrix(5);
@@ -103,6 +106,7 @@ public class Dungeon extends Room {
             Player.autoFight = false;
         }
     }
+<<<<<<< HEAD
     public static void dungeonCheck()throws InterruptedException {
         if(completedDungeons == 0) // the meadow dungeon 
             TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", the next dungeon is to the west.\nIf you are lost, check out the 'map'.", false);
@@ -124,4 +128,12 @@ public class Dungeon extends Room {
             TextEngine.printWithDelays("this function isnt working right", false);
     }
     
+=======
+
+    public static void addItemsToMiniDungeons(List<String> items) {
+        for (String item : missedItems) {
+            missedItems.add(item);
+        }
+    }
+>>>>>>> main
 }

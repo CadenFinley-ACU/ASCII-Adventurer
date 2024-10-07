@@ -84,7 +84,9 @@ class Main {
 
     public static void startMenu() throws InterruptedException { //main menu and sstart menu text
         TextEngine.clearScreen();
-        TextEngine.printNoDelay("ASCII Adventurer, by: Albert Tucker, Caden Finley, and Grijesh Shrestha", false);
+        splashScreen();
+        TextEngine.printNoDelay("               by: Albert Tucker, Caden Finley, and Grijesh Shrestha", false);
+        System.out.println();
         if (hasSave()) {
             TextEngine.printNoDelay("Welcome " + Player.getName() + "!", false);
         } else {
@@ -121,6 +123,225 @@ class Main {
                     TextEngine.printWithDelays("I'm sorry, I don't understand that command.", true);
             }
         }
+    }
+
+    private static void splashScreen() {
+        String brightBoldEnd = "\033[0m"; // end color
+        String brightYellowStart = "\033[1;33m"; // Bright Yellow
+        System.err.println(
+                brightYellowStart
+                + 
+
+     
+           
+
+    
+    
+        
+             
+
+    
+     
+        
+           
+                
+           
+         
+           
+
+    
+    
+        
+              
+              
+        
+            
+              
+             
+            
+              
+          
+          
+         
+         
+          
+           
+             
+
+    
+    
+        
+              
+        
+              
+          
+          
+         
+             
+
+    
+    
+        
+              
+        
+            
+                
+        
+              
+        
+             
+
+    
+    
+        
+                
+              
+
+    
+       
+           
+
+    
+     
+           
+
+    
+    
+          
+             
+
+    
+    
+        
+            
+                      
+                
+                      
+                
+                      
+                
+                      
+                
+                      
+                
+                      
+                
+                      
+                
+                      
+                
+                      
+                
+                      
+                
+                      
+                
+                      
+                  
+            
+              
+        
+                
+             
+
+    
+      
+        
+         
+                
+              
+
+    
+    
+         
+              
+         
+              
+        
+         
+              
+             
+
+    
+     
+             
+
+    
+     
+             
+
+    
+    
+        
+                  
+            
+            
+                 
+                      
+                
+                      
+                   
+            
+                  
+            
+                  
+            
+            
+                
+                 
+                   
+            
+                  
+            
+                  
+            
+                  
+            
+                  
+              
+              
+
+    
+    
+        
+           
+           
+           
+        
+          
+             
+
+    
+       
+          
+              
+
+    
+    
+        
+        
+         
+             
+
+    
+    
+         
+              
+         
+              
+             
+
+    
+      """
+                               _    ____   ____ ___ ___                                     
+                              / \\  / ___| / ___|_ _|_ _|                                    
+                             / _ \\ \\___ \\| |    | | | |                                     
+                            / ___ \\ ___) | |___ | | | |                                     
+                           /_/ _ \\_\\____/_\\____|___|___|   _ _____ _   _ ____  _____ ____  
+                              / \\  |  _ \\ \\   / / ____| \\ | |_   _| | | |  _ \\| ____|  _ \\ 
+                             / _ \\ | | | \\ \\ / /|  _| |  \\| | | | | | | | |_) |  _| | |_) |
+                            / ___ \\| |_| |\\ V / | |___| |\\  | | | | |_| |  _ <| |___|  _ < 
+                           /_/   \\_\\____/  \\_/  |_____|_| \\_| |_|  \\___/|_| \\_\\_____|_| \\_\\""" + brightBoldEnd);
     }
 
     private static void displayHelp() throws InterruptedException { //main menu help command

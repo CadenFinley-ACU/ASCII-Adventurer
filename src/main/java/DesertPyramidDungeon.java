@@ -104,7 +104,7 @@ public class DesertPyramidDungeon extends Dungeon {
             Player.changeHealth(Enemy.spawnEnemy("Giant Sand Worm", 1));
             TextEngine.printWithDelays("You have defeated the boss and completed the dungeon!", false);
             TextEngine.enterToNext();
-            Village.addItemsToShop(items);
+            Dungeon.addItemsToMiniDungeons(items);
             Room.hasItemInRoom("Large Backpack", 1);
             lastPosition = currentPlayerPosition.clone();
             roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = desertPyramidDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];

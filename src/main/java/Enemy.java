@@ -19,6 +19,8 @@ public class Enemy {
             Map.entry("Orc", 10),
             Map.entry("Troll", 15),
             Map.entry("Bandit", 3),
+            Map.entry("Spider", 5),
+            Map.entry("Giant Rat", 7),
             Map.entry("Skeleton", 5),
             Map.entry("Zombie", 7),
             Map.entry("Ghost", 10),
