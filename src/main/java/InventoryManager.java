@@ -44,7 +44,7 @@ public class InventoryManager extends Player {
             console.readLine();
             leave();
         } else {
-            TextEngine.printNoDelay("Inventory: " + inventory.size() + "/" + Player.inventorySize, false);
+            TextEngine.printNoDelay("Inventory: " + getTotalNumberOfItemsInInventory() + "/" + Player.inventorySize, false);
             TextEngine.printWithDelays("You have the following items in your inventory:", false);
             Set<String> keys = inventory.keySet();
             for (String key : keys) {
@@ -72,13 +72,13 @@ public class InventoryManager extends Player {
     }
 
     public static boolean inventoryHasRoom(int amount) throws InterruptedException {
-        if (inventory.size() + amount > inventorySize) {
+        if (getTotalNumberOfItemsInInventory() + amount > inventorySize) {
             TextEngine.printWithDelays("You have no room in your inventory.", false);
-            TextEngine.printWithDelays("You can only hold " + Player.inventorySize + " items. You have: " + inventory.size() + " items.", false);
+            TextEngine.printWithDelays("You can only hold " + Player.inventorySize + " items. You have: " + getTotalNumberOfItemsInInventory() + " items.", false);
             TextEngine.printWithDelays("You can drop items by typing 'drop' in \nthe 'inventory menu' to make room.", false);
             TextEngine.enterToNext();
         }
-        return inventory.size() + amount <= inventorySize;
+        return getTotalNumberOfItemsInInventory() + amount <= inventorySize;
     }
 
     public void put(String item, int amount) throws InterruptedException { //put an item in the inventory
@@ -226,7 +226,7 @@ public class InventoryManager extends Player {
         if (inventory.isEmpty()) {
             leave();
         } else {
-            TextEngine.printNoDelay("Inventory: " + inventory.size() + "/" + Player.inventorySize, false);
+            TextEngine.printNoDelay("Inventory: " + getTotalNumberOfItemsInInventory() + "/" + Player.inventorySize, false);
             TextEngine.printWithDelays("You have the following items in your inventory:", false);
             Set<String> keys = inventory.keySet();
             for (String key : keys) {
@@ -271,4 +271,6 @@ public class InventoryManager extends Player {
         }
         return 0; // or any other default value
     }
+
+    
 }

@@ -221,6 +221,14 @@ public class Player {
         return defense;
     }
 
+    public static int getTotalNumberOfItemsInInventory() {
+        int total = 0;
+        for (String key : inventory.keySet()) {
+            total += inventory.get(key);
+        }
+        return total;
+    }
+
     public static void putItem(String item, int amount) throws InterruptedException { //put an item in the inventory
         if ("Backpack".equals(item) || "Large Backpack".equals(item)) {
             changeInventorySize(InventoryManager.Potions.get(item));
@@ -277,7 +285,7 @@ public class Player {
         TextEngine.printNoDelay("Gold: " + gold, false);
         TextEngine.printNoDelay("Damage: " + damage, false);
         TextEngine.printNoDelay("Defense: " + defense, false);
-        TextEngine.printNoDelay("Inventory: " + inventory.size() + "/" + inventorySize, false);
+        TextEngine.printNoDelay("Inventory: " + getTotalNumberOfItemsInInventory() + "/" + inventorySize, false);
         TextEngine.enterToNext();
         Main.loadSave();
     }
