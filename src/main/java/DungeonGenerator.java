@@ -100,8 +100,10 @@ public class DungeonGenerator {
         addRandom(matrix, rand, 1, 6);
 
         // Randomly add mini boss rooms (4) ensuring it is connected to the main path
-        addRandom(matrix, rand, (int) itemRoomRatio - 1, 4);
+        addRandom(matrix, rand, 1, 4);
 
+        // Randomly add shop rooms (4) ensuring it is connected to the main path
+        //addRandom(matrix, rand, 1, 7);
         // Ensure only one 1 value is adjacent to the 8
         ensureSingleAdjacent(matrix, coord8[0], coord8[1]);
 
@@ -179,7 +181,7 @@ public class DungeonGenerator {
             do {
                 x = rand.nextInt(matrix.length);
                 y = rand.nextInt(matrix.length);
-            } while (matrix[x][y] != 0 || !isConnected(matrix, x, y));
+            } while (matrix[x][y] != 0 || !isConnected(matrix, x, y) || matrix[x][y] > 2);
             matrix[x][y] = num;
             addedOnes++;
         }
