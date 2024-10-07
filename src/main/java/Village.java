@@ -184,7 +184,7 @@ public class Village extends Room {
         TextEngine.printNoDelay("Gold: " + Player.getGold(), false);
         TextEngine.printNoDelay("Inventory: " + Player.inventory.size() + "/" + Player.inventorySize, false);
         TextEngine.printNoDelay("\n", false);
-        TextEngine.printWithDelays("You enter the shop.", false);
+        TextEngine.printWithDelays("You have entered the shop.", false);
         TextEngine.printWithDelays("You can buy items here", false);
 
         // Creating the message with bold and bright items
