@@ -25,7 +25,7 @@ public class Dungeon extends Room {
     public static int[] currentPlayerPosition;
     public static boolean previousAutoSettings;
 
-    public static List<String> items = new ArrayList<>();
+    public static List<String> missedItems = new ArrayList<>();
 
     public static void generateDungeons() { //generates all 8 dungeons and stores them in their respective variables
         meadowDungeon = DungeonGenerator.generateAndReturnMatrix(5);
@@ -102,8 +102,8 @@ public class Dungeon extends Room {
     }
 
     public static void addItemsToMiniDungeons(List<String> items) {
-        for (String item : items) {
-            items.add(item);
+        for (String item : missedItems) {
+            missedItems.add(item);
         }
     }
 }
