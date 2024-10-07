@@ -109,9 +109,9 @@ public class Dungeon extends Room {
         else if(completedDungeons > 0) // the dark forest dungeon
             TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", the next dungeon is to the west.\nIf you are lost, check out the 'map'.", false);
         else if(completedDungeons > 1) // The Mountain Cave Dungeon
-            TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", the next dungeon is to the east.\nIf you are lost, check out the 'map'.", false);
-        else if(completedDungeons > 2) // The Mountain Top Dungeon
             TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", the next dungeon is to the north.\nIf you are lost, check out the 'map'.", false);
+        else if(completedDungeons > 2) // The Mountain Top Dungeon
+            TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", the next dungeon is to the east.\nIf you are lost, check out the 'map'.", false);
         else if(completedDungeons > 3) // The Desert Oasis Dungeon
             TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", the next dungeon is to the north.\nIf you are lost, check out the 'map'.", false);
         else if(completedDungeons > 4) // The Desert Plains Dungeon
