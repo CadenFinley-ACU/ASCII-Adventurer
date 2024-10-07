@@ -214,8 +214,7 @@ class Main {
     public static void loadSave() throws InterruptedException { //load saved game command
         if (getSavedPlace() == null) {
             startMenu();
-        } 
-        else {
+        } else {
             InventoryManager.setStatsToHighestInInventory();
             switch (getSavedPlace()) {
                 case "SpawnRoom" ->
