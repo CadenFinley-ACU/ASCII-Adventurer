@@ -142,7 +142,7 @@ public class Village extends Room {
         TextEngine.printNoDelay("\n", false);
         TextEngine.printWithDelays("You enter the hotel.", false);
         TextEngine.printWithDelays("You can rest here to regain health", false);
-        TextEngine.printWithDelays("What is your command: rest " + cost + " gold or leave", true);
+        TextEngine.printWithDelays("What is your command: rest (" + cost + ") gold or leave", true);
         while (true) {
             ignore = console.readLine();
             command = console.readLine();
@@ -153,11 +153,9 @@ public class Village extends Room {
                         TextEngine.enterToNext();
                         Main.loadSave();
                     } else {
+                        TextEngine.printWithDelays("You have rested and restored your health", false);
                         Player.changeGold(-cost);
                         Player.changeHealth(Player.getMaxHealth() - Player.getHealth());
-                        Main.screenRefresh();
-                        TextEngine.printWithDelays("You have rested and restored your health", false);
-                        TextEngine.enterToNext();
                         Main.loadSave();
                     }
                 }
@@ -384,11 +382,11 @@ public class Village extends Room {
             command = console.readLine();
             switch (command.toLowerCase().trim()) {
                 case "yes" -> {
-                    if (Dungeon.completedDungeons < 4) {
+                    if (Dungeon.completedDungeons < 3) { //0,1,2
                         shop1();
-                    } else if (Dungeon.completedDungeons > 3 && Dungeon.completedDungeons < 6) {
+                    } else if (Dungeon.completedDungeons > 2 && Dungeon.completedDungeons < 6) { //3,4,5
                         shop2();
-                    } else {
+                    } else { //6,7,8
                         shop3();
                     }
                 }
