@@ -137,7 +137,7 @@ public class OpenWorld extends Room {
         while (true) {
             ignore = console.readLine();
             command = console.readLine();
-            if(!"map".equals(command))
+            if("north".equals(command)||"east".equals(command)||"south".equals(command)||"west".equals(command))
                 holdCommand = command;
             switch (command.toLowerCase().trim()) {
                 case "north" -> {
@@ -164,7 +164,7 @@ public class OpenWorld extends Room {
         while (true) {
             ignore = console.readLine();
             command = console.readLine();
-            if(!"map".equals(command))
+            if("north".equals(command)||"east".equals(command)||"south".equals(command)||"west".equals(command))
                 holdCommand = command;
             switch (command.toLowerCase().trim().trim()) {
                 case "north" -> {
@@ -188,7 +188,7 @@ public class OpenWorld extends Room {
         while (true) {
             ignore = console.readLine();
             command = console.readLine();
-            if(!"map".equals(command))
+            if("north".equals(command)||"east".equals(command)||"south".equals(command)||"west".equals(command))
                 holdCommand = command;
             switch (command.toLowerCase().trim()) {
                 case "north" -> {
@@ -220,7 +220,7 @@ public class OpenWorld extends Room {
         while (true) {
             ignore = console.readLine();
             command = console.readLine();
-            if(!"map".equals(command))
+            if("north".equals(command)||"east".equals(command)||"south".equals(command)||"west".equals(command))
                 holdCommand = command;
             switch (command.toLowerCase().trim()) {
                 case "north" -> {
@@ -252,7 +252,7 @@ public class OpenWorld extends Room {
         while (true) {
             ignore = console.readLine();
             command = console.readLine();
-            if(!"map".equals(command))
+            if("north".equals(command)||"east".equals(command)||"south".equals(command)||"west".equals(command))
                 holdCommand = command;
             switch (command.toLowerCase().trim()) {
                 case "north" -> {
@@ -285,7 +285,7 @@ public class OpenWorld extends Room {
         while (true) {
             ignore = console.readLine();
             command = console.readLine();
-            if(!"map".equals(command))
+            if("north".equals(command)||"east".equals(command)||"south".equals(command)||"west".equals(command))
                 holdCommand = command;
             switch (command.toLowerCase().trim()) {
                 case "north" -> {
@@ -321,7 +321,7 @@ public class OpenWorld extends Room {
         while (true) {
             ignore = console.readLine();
             command = console.readLine();
-            if(!"map".equals(command))
+            if("north".equals(command)||"east".equals(command)||"south".equals(command)||"west".equals(command))
                 holdCommand = command;
             switch (command.toLowerCase().trim()) {
                 case "north" -> {
@@ -353,7 +353,7 @@ public class OpenWorld extends Room {
         while (true) {
             ignore = console.readLine();
             command = console.readLine();
-            if(!"map".equals(command))
+            if("north".equals(command)||"east".equals(command)||"south".equals(command)||"west".equals(command))
                 holdCommand = command;
             switch (command.toLowerCase().trim()) {
                 case "north" -> {
@@ -389,7 +389,7 @@ public class OpenWorld extends Room {
         while (true) {
             ignore = console.readLine();
             command = console.readLine();
-            if(!"map".equals(command))
+            if("north".equals(command)||"east".equals(command)||"south".equals(command)||"west".equals(command))
                 holdCommand = command;
             switch (command.toLowerCase().trim()) {
                 case "north" -> {
@@ -421,7 +421,7 @@ public class OpenWorld extends Room {
         while (true) {
             ignore = console.readLine();
             command = console.readLine();
-            if(!"map".equals(command))
+            if("north".equals(command)||"east".equals(command)||"south".equals(command)||"west".equals(command))
                 holdCommand = command;
             switch (command.toLowerCase().trim()) {
                 case "north" -> {
@@ -458,7 +458,7 @@ public class OpenWorld extends Room {
         while (true) {
             ignore = console.readLine();
             command = console.readLine();
-            if(!"map".equals(command))
+            if("north".equals(command)||"east".equals(command)||"south".equals(command)||"west".equals(command))
                 holdCommand = command;
             switch (command.toLowerCase().trim()) {
                 case "south" -> {
@@ -490,7 +490,7 @@ public class OpenWorld extends Room {
         while (true) {
             ignore = console.readLine();
             command = console.readLine();
-            if(!"map".equals(command))
+            if("north".equals(command)||"east".equals(command)||"south".equals(command)||"west".equals(command))
                 holdCommand = command;
             switch (command.toLowerCase().trim()) {
                 case "north" -> {
@@ -521,7 +521,7 @@ public class OpenWorld extends Room {
         while (true) {
             ignore = console.readLine();
             command = console.readLine();
-            if(!"map".equals(command))
+            if("north".equals(command)||"east".equals(command)||"south".equals(command)||"west".equals(command))
                 holdCommand = command;
             switch (command.toLowerCase().trim()) {
                 case "north" -> {
@@ -552,7 +552,7 @@ public class OpenWorld extends Room {
         while (true) {
             ignore = console.readLine();
             command = console.readLine();
-            if(!"map".equals(command))
+            if("north".equals(command)||"east".equals(command)||"south".equals(command)||"west".equals(command))
                 holdCommand = command;
             switch (command.toLowerCase().trim()) {
                 case "north" -> {
@@ -575,7 +575,7 @@ public class OpenWorld extends Room {
         while (true) {
             ignore = console.readLine();
             command = console.readLine();
-            if(!"map".equals(command))
+            if("north".equals(command)||"east".equals(command)||"south".equals(command)||"west".equals(command))
                 holdCommand = command;
             switch (command.toLowerCase().trim()) {
                 case "east" -> {
@@ -601,7 +601,7 @@ public class OpenWorld extends Room {
         while (true) {
             ignore = console.readLine();
             command = console.readLine();
-            if(!"map".equals(command))
+            if("north".equals(command)||"east".equals(command)||"south".equals(command)||"west".equals(command))
                 holdCommand = command;
             switch (command.toLowerCase().trim()) {
                 case "east" -> {
@@ -628,7 +628,7 @@ public class OpenWorld extends Room {
         while (true) {
             ignore = console.readLine();
             command = console.readLine();
-            if(!"map".equals(command))
+            if("north".equals(command)||"east".equals(command)||"south".equals(command)||"west".equals(command))
                 holdCommand = command;
             switch (command.toLowerCase().trim()) {
                 case "north" -> {
@@ -659,7 +659,7 @@ public class OpenWorld extends Room {
         while (true) {
             ignore = console.readLine();
             command = console.readLine();
-            if(!"map".equals(command))
+            if("north".equals(command)||"east".equals(command)||"south".equals(command)||"west".equals(command))
                 holdCommand = command;
             switch (command.toLowerCase().trim()) {
                 case "west" -> {
@@ -687,7 +687,7 @@ public class OpenWorld extends Room {
         while (true) {
             ignore = console.readLine();
             command = console.readLine();
-            if(!"map".equals(command))
+            if("north".equals(command)||"east".equals(command)||"south".equals(command)||"west".equals(command))
                 holdCommand = command;
             switch (command.toLowerCase().trim()) {
                 case "north" -> {
@@ -715,7 +715,7 @@ public class OpenWorld extends Room {
         while (true) {
             ignore = console.readLine();
             command = console.readLine();
-            if(!"map".equals(command))
+            if("north".equals(command)||"east".equals(command)||"south".equals(command)||"west".equals(command))
                 holdCommand = command;
             switch (command.toLowerCase().trim()) {
                 case "south" -> {
@@ -742,7 +742,7 @@ public class OpenWorld extends Room {
         while (true) {
             ignore = console.readLine();
             command = console.readLine();
-            if(!"map".equals(command))
+            if("north".equals(command)||"east".equals(command)||"south".equals(command)||"west".equals(command))
                 holdCommand = command;
             switch (command.toLowerCase()) {
                 case "north" -> {
