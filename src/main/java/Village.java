@@ -137,7 +137,7 @@ public class Village extends Room {
     public static void hotel() throws InterruptedException { //hotel
         //hotel implementation
         Main.screenRefresh();
-        int cost = 1 / 2 * Player.getMaxHealth() - Player.getHealth();
+        int cost = 1 / 4 * (Player.getMaxHealth() - Player.getHealth());
         TextEngine.printNoDelay("Gold: " + Player.getGold(), false);
         TextEngine.printNoDelay("\n", false);
         TextEngine.printWithDelays("You enter the hotel.", false);
@@ -148,12 +148,12 @@ public class Village extends Room {
             command = console.readLine();
             switch (command.toLowerCase().trim()) {
                 case "rest" -> {
-                    if (Player.getGold() < 5) {
+                    if (Player.getGold() < cost) {
                         TextEngine.printWithDelays("You do not have enough gold to rest", false);
                         TextEngine.enterToNext();
                         Main.loadSave();
                     } else {
-                        Player.changeGold(-5);
+                        Player.changeGold(-cost);
                         Player.changeHealth(Player.getMaxHealth() - Player.getHealth());
                         Main.screenRefresh();
                         TextEngine.printWithDelays("You have rested and restored your health", false);
