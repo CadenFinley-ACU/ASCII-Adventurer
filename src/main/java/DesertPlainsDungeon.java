@@ -104,7 +104,7 @@ public class DesertPlainsDungeon extends Dungeon {
             Player.changeHealth(Enemy.spawnEnemy("Giant Scorpion", 1));
             TextEngine.printWithDelays("You have defeated the boss and completed the dungeon!", false);
             TextEngine.enterToNext();
-            Village.addItemsToShop(items);
+            Dungeon.addItemsToMiniDungeons(items);
             lastPosition = currentPlayerPosition.clone();
             roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = desertPlainsDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
             if (!completed) {

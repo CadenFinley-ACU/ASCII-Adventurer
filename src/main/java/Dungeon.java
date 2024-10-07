@@ -1,12 +1,11 @@
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Dungeon Class
  *
- * Text Adventure Game
- * SE374 F24
- * Final Project
- * Caden Finley
- * Albert Tucker
+ * Text Adventure Game SE374 F24 Final Project Caden Finley Albert Tucker
  * Grijesh Shrestha
  */
 public class Dungeon extends Room {
@@ -25,6 +24,8 @@ public class Dungeon extends Room {
 
     public static int[] currentPlayerPosition;
     public static boolean previousAutoSettings;
+
+    public static List<String> items = new ArrayList<>();
 
     public static void generateDungeons() { //generates all 8 dungeons and stores them in their respective variables
         meadowDungeon = DungeonGenerator.generateAndReturnMatrix(5);
@@ -99,5 +100,10 @@ public class Dungeon extends Room {
             Player.autoFight = false;
         }
     }
-    
+
+    public static void addItemsToMiniDungeons(List<String> items) {
+        for (String item : items) {
+            items.add(item);
+        }
+    }
 }

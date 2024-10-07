@@ -105,7 +105,7 @@ public class MountainCaveDungeon extends Dungeon {
             Player.changeHealth(Enemy.spawnEnemy("Wyvern", 1));
             TextEngine.printWithDelays("You have defeated the boss and completed the dungeon!", false);
             TextEngine.enterToNext();
-            Village.addItemsToShop(items);
+            Dungeon.addItemsToMiniDungeons(items);
             Room.hasItemInRoom("Backpack", 1);
             lastPosition = currentPlayerPosition.clone();
             roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = mountainCaveDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];

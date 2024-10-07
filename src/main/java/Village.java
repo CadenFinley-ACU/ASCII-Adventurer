@@ -1,7 +1,4 @@
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Village Class
  *
@@ -9,8 +6,6 @@ import java.util.List;
  * Grijesh Shrestha
  */
 public class Village extends Room {
-
-    public static List<String> items = new ArrayList<>();
 
     public static void startRoom() throws InterruptedException { //start room
         room = "Village";
@@ -409,11 +404,5 @@ public class Village extends Room {
     private static void leave() throws InterruptedException { //leave the village
         TextEngine.clearScreen();
         OpenWorld.startRoom();
-    }
-
-    public static void addItemsToShop(List<String> items) {
-        for (String item : items) {
-            Village.items.add(item);
-        }
     }
 }

@@ -104,7 +104,7 @@ public class OceanKingdomDungeon extends Dungeon {
             Player.changeHealth(Enemy.spawnEnemy("Kracken", 1));
             TextEngine.printWithDelays("You have defeated the boss and completed the dungeon!", false);
             TextEngine.enterToNext();
-            Village.addItemsToShop(items);
+            Dungeon.addItemsToMiniDungeons(items);
             lastPosition = currentPlayerPosition.clone();
             roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = oceanKingdomDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
             completedDungeons++;
