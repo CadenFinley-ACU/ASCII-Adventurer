@@ -20,7 +20,7 @@ public class DarkForestDungeon extends Dungeon {
     public static int[] availableMove;
     public static ArrayList<String> directionsString;
     private static int foundItemRooms = DungeonGenerator.numberOfRooms(Dungeon.darkForestDungeon, 2);
-    private static List<String> items = new ArrayList<>(List.of("broad sword", "full armor kit", "health potion"));
+    private static List<String> items = new ArrayList<>(List.of("broad sword", "full armor kit"));
     private static final List<String> enemies = new ArrayList<>(List.of("Goblin", "Skeleton", "Orc", "Mimic", "Zombie"));
     private static final Random rand = new Random();
     public static boolean completed = false;
@@ -36,7 +36,7 @@ public class DarkForestDungeon extends Dungeon {
 
     public static void fresh() { //fresh
         completed = false;
-        items = new ArrayList<>(List.of("broad sword", "full armor kit", "health potion"));
+        items = new ArrayList<>(List.of("broad sword", "full armor kit"));
         foundItemRooms = DungeonGenerator.numberOfRooms(Dungeon.darkForestDungeon, 2);
         spawnPosition = DungeonGenerator.findValue(Dungeon.darkForestDungeon, 9);
         bossRoom = DungeonGenerator.findValue(Dungeon.darkForestDungeon, 8);

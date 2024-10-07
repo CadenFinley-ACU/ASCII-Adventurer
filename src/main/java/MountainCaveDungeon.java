@@ -20,7 +20,7 @@ public class MountainCaveDungeon extends Dungeon {
     public static int[] availableMove;
     public static ArrayList<String> directionsString;
     private static int foundItemRooms = DungeonGenerator.numberOfRooms(Dungeon.mountainCaveDungeon, 2);
-    private static List<String> items = new ArrayList<>(List.of("better sword", "ninja armor", "health potion"));
+    private static List<String> items = new ArrayList<>(List.of("better sword", "ninja armor"));
     private static final List<String> enemies = new ArrayList<>(List.of("Troll", "Skeleton", "Orc", "Ghost", "Demon", "Zombie"));
     private static final Random rand = new Random();
     public static boolean completed = false;
@@ -37,7 +37,7 @@ public class MountainCaveDungeon extends Dungeon {
 
     public static void fresh() { //fresh
         completed = false;
-        items = new ArrayList<>(List.of("better sword", "ninja armor", "health potion"));
+        items = new ArrayList<>(List.of("better sword", "ninja armor"));
         foundItemRooms = DungeonGenerator.numberOfRooms(Dungeon.mountainCaveDungeon, 2);
         spawnPosition = DungeonGenerator.findValue(Dungeon.mountainCaveDungeon, 9);
         bossRoom = DungeonGenerator.findValue(Dungeon.mountainCaveDungeon, 8);

@@ -20,7 +20,7 @@ public class MeadowDungeon extends Dungeon {
     public static int[] availableMove;
     public static ArrayList<String> directionsString;
     private static int foundItemRooms = DungeonGenerator.numberOfRooms(Dungeon.meadowDungeon, 2);
-    private static List<String> items = new ArrayList<>(List.of("axe", "chainmail set", "health potion"));
+    private static List<String> items = new ArrayList<>(List.of("axe", "chainmail set"));
     private static final List<String> enemies = new ArrayList<>(List.of("Goblin", "Skeleton", "Slime", "Mimic"));
     private static final Random rand = new Random();
     public static boolean completed = false;
@@ -36,7 +36,7 @@ public class MeadowDungeon extends Dungeon {
 
     public static void fresh() { //fresh
         completed = false;
-        items = new ArrayList<>(List.of("axe", "chainmail set", "health potion"));
+        items = new ArrayList<>(List.of("axe", "chainmail set"));
         foundItemRooms = DungeonGenerator.numberOfRooms(Dungeon.meadowDungeon, 2);
         spawnPosition = DungeonGenerator.findValue(Dungeon.meadowDungeon, 9);
         bossRoom = DungeonGenerator.findValue(Dungeon.meadowDungeon, 8);
