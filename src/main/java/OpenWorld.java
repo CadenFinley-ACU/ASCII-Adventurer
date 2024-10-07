@@ -442,7 +442,7 @@ public class OpenWorld extends Room {
                         Main.saveSpace("Desert Oasis Dungeon");
                         Main.loadSave();
                     } else {
-                        TextEngine.printWithDelays("You must complete The Mountain Top dungeon first.\n Try going to the south ~ maybe", true);
+                        TextEngine.printWithDelays("You must complete The Mountain Top dungeon first.\n Try going to the south", true);
                     }
                 }
                 default ->
@@ -475,7 +475,7 @@ public class OpenWorld extends Room {
                         Main.saveSpace("Desert Plains Dungeon");
                         Main.loadSave();
                     } else {
-                        TextEngine.printWithDelays("You must complete The Desert Oasis dungeons first.\nTry going to the south ~ maybe", true);
+                        TextEngine.printWithDelays("You must complete The Desert Oasis dungeons first.\nTry going to the south east/north", true);
                     }
                 }
                 default ->
@@ -672,7 +672,7 @@ public class OpenWorld extends Room {
                         Main.saveSpace("Desert Pyramid Dungeon");
                         Main.loadSave();
                     } else {
-                        TextEngine.printWithDelays("You must complete The Desert Plains dungeons first.\nTry going to the south ~ maybe", true);
+                        TextEngine.printWithDelays("You must complete The Desert Plains dungeons first.\nTry going to the north/east", true);
                     }
                 }
                 default ->
@@ -728,7 +728,7 @@ public class OpenWorld extends Room {
                         Main.saveSpace("Ocean Kingdom Dungeon");
                         Main.loadSave();
                     } else {
-                        TextEngine.printWithDelays("You must complete The Desert Pyramis dungeon first.\nTry going to the west ~ maybe", true);
+                        TextEngine.printWithDelays("You must complete The Desert Pyramis dungeon first.\nTry going to the north", true);
                     }
                 }
                 default ->
