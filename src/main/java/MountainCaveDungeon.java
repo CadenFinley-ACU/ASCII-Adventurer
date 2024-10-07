@@ -37,7 +37,7 @@ public class MountainCaveDungeon extends Dungeon {
 
     public static void fresh() { //fresh
         completed = false;
-        items = new ArrayList<>(List.of("better sword", "ninja armor"));
+        items = new ArrayList<>(List.of("better sword", "ninja armor", "health potion"));
         foundItemRooms = DungeonGenerator.numberOfRooms(Dungeon.mountainCaveDungeon, 2);
         spawnPosition = DungeonGenerator.findValue(Dungeon.mountainCaveDungeon, 9);
         bossRoom = DungeonGenerator.findValue(Dungeon.mountainCaveDungeon, 8);

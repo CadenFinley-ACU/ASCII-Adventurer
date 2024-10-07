@@ -137,7 +137,7 @@ public class Village extends Room {
     public static void hotel() throws InterruptedException { //hotel
         //hotel implementation
         Main.screenRefresh();
-        int cost = 1 / 4 * (Player.getMaxHealth() - Player.getHealth());
+        int cost = (int) ((1 / 4.0) * (Player.getMaxHealth() - Player.getHealth()));
         TextEngine.printNoDelay("Gold: " + Player.getGold(), false);
         TextEngine.printNoDelay("\n", false);
         TextEngine.printWithDelays("You enter the hotel.", false);

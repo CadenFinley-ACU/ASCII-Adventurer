@@ -36,7 +36,7 @@ public class DarkForestDungeon extends Dungeon {
 
     public static void fresh() { //fresh
         completed = false;
-        items = new ArrayList<>(List.of("broad sword", "full armor kit"));
+        items = new ArrayList<>(List.of("broad sword", "full armor kit", "health potion"));
         foundItemRooms = DungeonGenerator.numberOfRooms(Dungeon.darkForestDungeon, 2);
         spawnPosition = DungeonGenerator.findValue(Dungeon.darkForestDungeon, 9);
         bossRoom = DungeonGenerator.findValue(Dungeon.darkForestDungeon, 8);
