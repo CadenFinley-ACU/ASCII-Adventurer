@@ -35,7 +35,7 @@ public class Dungeon extends Room {
         desertOasisDungeon = DungeonGenerator.generateAndReturnMatrix(8);
         desertPlainsDungeon = DungeonGenerator.generateAndReturnMatrix(8);
         desertPyramidDungeon = DungeonGenerator.generateAndReturnMatrix(9);
-        oceanKingdomDungeon = DungeonGenerator.generateAndReturnMatrix(10);
+        oceanKingdomDungeon = DungeonGenerator.generateAndReturnMatrix(11);
     }
 
     public static void defaultDungeonArgs(String data) throws InterruptedException { //default dungeon arguments

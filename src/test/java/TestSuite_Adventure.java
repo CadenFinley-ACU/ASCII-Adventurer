@@ -226,4 +226,67 @@ public class TestSuite_Adventure {
         assertTrue("There should be a path connecting 9 and 8 with values higher than 0", connected);
     }
 
+    @Test
+    public void testDungeonGeneratorActualSizes1() {
+        testsrun++;
+        int[][] testMatrix = DungeonGenerator.generateAndReturnMatrix(5);
+        boolean connected = DungeonGenerator.testArrays(testMatrix);
+        assertTrue("There should be a path connecting 9 and 8 with values higher than 0", connected);
+    }
+
+    @Test
+    public void testDungeonGeneratorActualSizes2() {
+        testsrun++;
+        int[][] testMatrix = DungeonGenerator.generateAndReturnMatrix(6);
+        boolean connected = DungeonGenerator.testArrays(testMatrix);
+        assertTrue("There should be a path connecting 9 and 8 with values higher than 0", connected);
+    }
+
+    @Test
+    public void testDungeonGeneratorActualSizes3() {
+        testsrun++;
+        int[][] testMatrix = DungeonGenerator.generateAndReturnMatrix(7);
+        boolean connected = DungeonGenerator.testArrays(testMatrix);
+        assertTrue("There should be a path connecting 9 and 8 with values higher than 0", connected);
+    }
+
+    @Test
+    public void testDungeonGeneratorActualSizes4() {
+        testsrun++;
+        int[][] testMatrix = DungeonGenerator.generateAndReturnMatrix(7);
+        boolean connected = DungeonGenerator.testArrays(testMatrix);
+        assertTrue("There should be a path connecting 9 and 8 with values higher than 0", connected);
+    }
+
+    @Test
+    public void testDungeonGeneratorActualSizes5() {
+        testsrun++;
+        int[][] testMatrix = DungeonGenerator.generateAndReturnMatrix(8);
+        boolean connected = DungeonGenerator.testArrays(testMatrix);
+        assertTrue("There should be a path connecting 9 and 8 with values higher than 0", connected);
+    }
+
+    @Test
+    public void testDungeonGeneratorActualSizes6() {
+        testsrun++;
+        int[][] testMatrix = DungeonGenerator.generateAndReturnMatrix(8);
+        boolean connected = DungeonGenerator.testArrays(testMatrix);
+        assertTrue("There should be a path connecting 9 and 8 with values higher than 0", connected);
+    }
+
+    @Test
+    public void testDungeonGeneratorActualSizes7() {
+        testsrun++;
+        int[][] testMatrix = DungeonGenerator.generateAndReturnMatrix(9);
+        boolean connected = DungeonGenerator.testArrays(testMatrix);
+        assertTrue("There should be a path connecting 9 and 8 with values higher than 0", connected);
+    }
+
+    @Test
+    public void testDungeonGeneratorActualSizes8() {
+        testsrun++;
+        int[][] testMatrix = DungeonGenerator.generateAndReturnMatrix(11);
+        boolean connected = DungeonGenerator.testArrays(testMatrix);
+        assertTrue("There should be a path connecting 9 and 8 with values higher than 0", connected);
+    }
 }
