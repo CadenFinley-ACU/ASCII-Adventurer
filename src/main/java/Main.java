@@ -148,7 +148,7 @@ class Main {
 
     private static void displayHelp() throws InterruptedException { //main menu help command
         if (getSavedPlace().equals("OpenWorld")) {
-            TextEngine.printWithDelays("Things you could say:\n'stats' to see your stats\n'inventory' to see your inventory\n'heal' to heal you health using any available healing potions\n'settings' or type 'save' to save\n'map' to see the map\n'exit' to return to the main menu.", true);
+            TextEngine.printWithDelays("Things you could say:\n" +yellowColor+ "stats" +resetColor+" to see your stats\n" +yellowColor+ "inventory" +resetColor+ " to see your inventory\n" +yellowColor+ "heal" +resetColor+ " to heal you health using any available healing potions\n" +yellowColor+ "settings" +resetColor+ " or type " +yellowColor+ "save" +resetColor+ " to save\n" +yellowColor+ "map" +resetColor+ " to see the map\n" +yellowColor+ "exit" +resetColor+ " to return to the main menu.", true);
         } else {
             TextEngine.printWithDelays("Things you could say:\n'stats' to see your stats\n'inventory' to see your inventory\n'heal' to heal you health using any available healing potions\n'settings' or type 'save' to save\n'exit' to return to the main menu.", true);
         }
@@ -217,12 +217,12 @@ class Main {
 
     private static void displayInGameHelp() throws InterruptedException { //in game help command
         if (getSavedPlace().equals("Dungeon")) {
-            TextEngine.printWithDelays("You can type 'restart' to restart the dungeon", false);
+            TextEngine.printWithDelays("You can type " +yellowColor+ "restart" +resetColor+ " to restart the dungeon", false);
         }
         if (getSavedPlace().equals("OpenWorld")) {
-            TextEngine.printWithDelays("Things you could say:\n'stats' to see your stats\n'inventory' to see your inventory\n'heal' to heal you health using any available healing potions\n'settings' or type 'save' to save\n'map' to see the map\n'exit' to return to the main menu.", true);
+            TextEngine.printWithDelays("Things you could say:\n" +yellowColor+ "stats" +resetColor+ " to see your stats\n" +yellowColor+ "inventory" +resetColor+ " to see your inventory\n" +yellowColor+ "heal" +resetColor+ " to heal you health using any available healing potions\n" +yellowColor+ "settings" +resetColor+ " or type " +yellowColor+ "save" +resetColor+ " to save\n" +yellowColor+ "map" +resetColor+ " to see the map\n" +yellowColor+ "exit" +resetColor+ " to return to the main menu.", true);
         } else {
-            TextEngine.printWithDelays("Things you could say:\n'stats' to see your stats\n'inventory' to see your inventory\n'heal' to heal you health using any available healing potions\n'settings' or type 'save' to save\n'exit' to return to the main menu.", true);
+            TextEngine.printWithDelays("Things you could say:\n" +yellowColor+ "stats" +resetColor+ " to see your stats\n" +yellowColor+ "inventory" +resetColor+ " to see your inventory\n" +yellowColor+ "heal" +resetColor+ " to heal you health using any available healing potions\n" +yellowColor+ "settings" +resetColor+ " or type " +yellowColor+ "save" +resetColor+ " to save\n" +yellowColor+ "exit" +resetColor+ " to return to the main menu.", true);
         }
 
     }
@@ -301,7 +301,7 @@ class Main {
     }
 
     private static void promptLoadSavedGame() throws InterruptedException { //prompt to load saved game
-        TextEngine.printWithDelays("Would you like to load your saved game? (yes or no) ", true);
+        TextEngine.printWithDelays("Would you like to load your saved game? (" +yellowColor+ "yes" +resetColor+ " or " +yellowColor+ "no" +resetColor+ ") ", true);
         ignore = console.readLine();
         command = console.readLine();
         if (command.toLowerCase().equals("no")) {
@@ -314,7 +314,7 @@ class Main {
     private static void confirmWipeSave() throws InterruptedException { //confirm to wipe save
         String textState = TextEngine.speedSetting;
         TextEngine.speedSetting = "Slow";
-        TextEngine.printWithDelays("All data will be wiped if you proceed. (yes or no) ", false);
+        TextEngine.printWithDelays("All data will be wiped if you proceed. (" +yellowColor+ "yes" +resetColor+ " or " +yellowColor+ "no" +resetColor+ ") ", false);
         TextEngine.printWithDelays("Are you sure?", true);
         ignore = console.readLine();
         command = console.readLine();

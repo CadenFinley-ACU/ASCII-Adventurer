@@ -10,7 +10,8 @@ import java.util.Set;
  * Grijesh Shrestha
  */
 public class InventoryManager extends Player {
-
+    static String resetColor = "\033[0m"; // reset to default color
+    static String yellowColor = "\033[1;33m"; // yellow color
     public String room;
     public String area;
     //inventory format is itemname, amount
@@ -70,12 +71,11 @@ public class InventoryManager extends Player {
             inventoryManage();
         }
     }
-
     public static boolean inventoryHasRoom(int amount) throws InterruptedException {
         if (getTotalNumberOfItemsInInventory() + amount > inventorySize) {
             TextEngine.printWithDelays("You have no room in your inventory.", false);
             TextEngine.printWithDelays("You can only hold " + Player.inventorySize + " items. You have: " + getTotalNumberOfItemsInInventory() + " items.", false);
-            TextEngine.printWithDelays("You can drop items by typing 'drop' in \nthe 'inventory menu' to make room.", false);
+            TextEngine.printWithDelays("You can drop items by typing " +yellowColor+ "drop" +resetColor+ " in \nthe " +yellowColor+ "inventory" +resetColor+ "menu to make room.", false);
             TextEngine.enterToNext();
         }
         return getTotalNumberOfItemsInInventory() + amount <= inventorySize;
@@ -106,7 +106,7 @@ public class InventoryManager extends Player {
     private static void inventoryManage() throws InterruptedException { //manage the inventory
         TextEngine.printWithDelays("What would you like to do", false);
         TextEngine.printWithDelays("Use item, drop item, or exit ", false);
-        TextEngine.printWithDelays("'use', 'drop', 'exit'", true);
+        TextEngine.printWithDelays(yellowColor+"use" +resetColor+ ", " +yellowColor+ "drop" +resetColor+ ", " +yellowColor+ "exit" +resetColor, true);
         while (true) {
             console.readLine();
             command = console.readLine();
@@ -122,7 +122,7 @@ public class InventoryManager extends Player {
                 case "drop" -> {
                     TextEngine.clearScreen();
                     printInventoryNoMenu();
-                    TextEngine.printWithDelays("Which item would you like to drop? (or 'leave')", true);
+                    TextEngine.printWithDelays("Which item would you like to drop? (or " +yellowColor+ "leave" +resetColor+ ")", true);
                     console.readLine();
                     command = console.readLine();
                     if (command.equals("leave")) {

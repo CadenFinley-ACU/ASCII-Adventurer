@@ -77,10 +77,12 @@ public class SpawnRoom extends Room {
     }
 
     private static void part2() throws InterruptedException { //2
+        String resetColor = "\033[0m"; // reset to default color
+        String yellowColor = "\033[1;33m"; // yellow color
         TextEngine.printWithDelays("You enter a cool, dimly lit room by a few torches", false);
         TextEngine.printWithDelays("There is a petestal in the middle where a mighty sword once lay", false);
         TextEngine.printWithDelays("Where to?\n Deeper in the Cave or Back out in the Wilderness?", false);
-        TextEngine.printWithDelays("What is your command: cave or wilderness", true);
+        TextEngine.printWithDelays("What is your command: " +yellowColor+ "cave" +resetColor+ " or " +yellowColor+ "wilderness" +resetColor, true);
         while (true) {
             ignore = console.readLine();
             command = console.readLine();

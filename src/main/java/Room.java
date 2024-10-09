@@ -50,7 +50,7 @@ public class Room {
         }
 
         // Highlight 'take it' and 'leave it' in yellow
-        TextEngine.printWithDelays("What will you do? Type " + yellowColor + "take it" + resetColor + " to pick up the sword or " + yellowColor + "leave it", true);
+        TextEngine.printWithDelays("What will you do? Type " + yellowColor + "take it" + resetColor + " to pick up the sword or " + yellowColor + "leave it"+resetColor, true);
 
         // Command handling loop
         while (true) {
