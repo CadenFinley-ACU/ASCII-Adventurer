@@ -504,7 +504,7 @@ public class OpenWorld extends Room {
     }
 
     private static void room11() throws InterruptedException {
-        if(Dungeon.completedDungeons > 3)
+        if(Dungeon.completedDungeons > 4)
         TextEngine.printWithDelays("You find yourself standing right by the entrance to The Desert Plains dungeon,\n    its ancient stone archway beckoning you to enter.\n\n", false);
         else 
             TextEngine.printWithDelays("Congets! you have beaten The Desert Plains dungon,\n     time to go back to a village rest up, check out the shop, and head to the next dungon.\n\n", false);
@@ -714,7 +714,7 @@ public class OpenWorld extends Room {
     }
 
     private static void room18() throws InterruptedException {
-        if(Dungeon.completedDungeons > 3)
+        if(Dungeon.completedDungeons > 5)
             TextEngine.printWithDelays("You find yourself standing right by the entrance to The Desert Pyramid dungeon,\n    its ancient stone archway beckoning you to enter.\n\n", false);
         else 
             TextEngine.printWithDelays("Congets! you have beaten The Mountain Cave dungon,\n     time to go back to a village rest up, check out the shop, and head to the next dungon.\n\n", false);
@@ -774,7 +774,7 @@ public class OpenWorld extends Room {
     }
 
     private static void room20() throws InterruptedException {
-        if(Dungeon.completedDungeons > 3)
+        if(Dungeon.completedDungeons > 6)
             TextEngine.printWithDelays("You find yourself standing right by the entrance to The Ocean Kingdom dungeon,\n    its ancient stone archway beckoning you to enter.\n\n", false);
         else 
             TextEngine.printWithDelays("Congets! you have beaten The Mountain Cave dungon,\n     time to go back to a village rest up, check out the shop, and head to the next dungon.\n\n", false);
