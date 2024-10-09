@@ -262,5 +262,4 @@ public class MountainTopDungeon extends Dungeon {
         roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = mountainTopDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
         Main.loadSave();
     }
-
 }

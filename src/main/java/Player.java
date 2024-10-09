@@ -180,6 +180,7 @@ public class Player {
 
         TextEngine.enterToNext();
     }
+
     public static int getDamageCalc() {
         return (defense + (damage - (damage / 3)));
     }
@@ -189,7 +190,7 @@ public class Player {
         String brightEnd = "\033[0m";
         maxHealth += change;
         health += change;
-        TextEngine.printWithDelays(brightGreenStart+"Your max health has increased by " + change + " points" +brightEnd, false);
+        TextEngine.printWithDelays(brightGreenStart + "Your max health has increased by " + change + " points" + brightEnd, false);
     }
 
     public static void changeGold(int change) throws InterruptedException {
@@ -234,11 +235,19 @@ public class Player {
         return total;
     }
 
-    public static void putItem(String item, int amount) throws InterruptedException { //put an item in the inventory
+    public static Boolean putItem(String item, int amount) throws InterruptedException { //put an item in the inventory
         if ("Backpack".equals(item) || "Large Backpack".equals(item)) {
             changeInventorySize(InventoryManager.Potions.get(item));
+            return true;
         } else {
-            manager.put(item, amount);
+            if (inventorySize >= getTotalNumberOfItemsInInventory() + amount) {
+                manager.put(item, amount);
+                return true;
+            } else {
+                TextEngine.printWithDelays("You have no room in your inventory!", false);
+                TextEngine.enterToNext();
+                return false;
+            }
         }
     }
 
@@ -458,5 +467,9 @@ public class Player {
         System.out.println(" 'P' = Player");
         TextEngine.enterToNext();
         Main.loadSave();
+    }
+
+    public static Boolean hasRoomInInventory(int amount) {
+        return inventorySize >= getTotalNumberOfItemsInInventory() + amount;
     }
 }
