@@ -27,8 +27,13 @@ public class DesertPlainsDungeon extends Dungeon {
     private static final List<String> enemies = new ArrayList<>(List.of("Orc", "Troll", "Mummy", "Demon"));
     private static final Random rand = new Random();
     public static boolean completed = false;
+    public static boolean visited = false;
 
     public static void startRoom() throws InterruptedException { //start room
+        if (!visited) {
+            fresh();
+            visited = true;
+        }
         room = "Desert Plains Dungeon";
         Main.checkSave(room);
         Main.screenRefresh();
@@ -38,6 +43,7 @@ public class DesertPlainsDungeon extends Dungeon {
     }
 
     public static void fresh() { //fresh
+        visited = false;
         completed = false;
         items = new ArrayList<>(List.of("legendary sword", "demon armor", "greater health potion"));
         foundItemRooms = DungeonGenerator.numberOfRooms(Dungeon.desertPlainsDungeon, 2);
@@ -112,6 +118,7 @@ public class DesertPlainsDungeon extends Dungeon {
             roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = desertPlainsDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
             if (!completed) {
                 completedDungeons++;
+                completed = true;
             }
             Player.autoFight = Dungeon.previousAutoSettings;
             OpenWorld.startRoom();
@@ -149,6 +156,9 @@ public class DesertPlainsDungeon extends Dungeon {
         Main.screenRefresh();
         DungeonGenerator.printAdjacentRoomsAndCurrentRoomAndUnlockedRooms(desertPlainsDungeon, roomsBeenTo, currentPlayerPosition);
         availableMove = DungeonGenerator.getDirections(desertPlainsDungeon, currentPlayerPosition[0], currentPlayerPosition[1]);
+        if (completed) {
+            TextEngine.printWithDelays("You have completed this dungeon. You can now type 'leave' to exit this dungeon.", false);
+        }
         TextEngine.printWithDelays("You can move in the following directions: ", false);
         //System.out.println(availableMove[0] + "" + availableMove[1] + "" + availableMove[2] + "" + availableMove[3]);
         if (availableMove[0] > 0) {

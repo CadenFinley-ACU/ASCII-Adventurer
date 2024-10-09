@@ -1,6 +1,4 @@
 
-
-
 /**
  * Village Class
  *
@@ -20,7 +18,7 @@ public class Village extends Room {
         if (Dungeon.completedDungeons > 5) {
             TextEngine.printWithDelays("You can now warp to different areas using the 'portal'", false);
         }
-        TextEngine.printNoDelay("What will you do? Type "  + yellowColor + "church" + resetColor + ", " + yellowColor + "hotel" + resetColor + ", "+ yellowColor +"shop" + resetColor + ", or " + yellowColor +"leave village" + resetColor + " to decide", true);
+        TextEngine.printNoDelay("What will you do? Type " + yellowColor + "church" + resetColor + ", " + yellowColor + "hotel" + resetColor + ", " + yellowColor + "shop" + resetColor + ", or " + yellowColor + "leave village" + resetColor + " to decide", true);
         while (true) {
             ignore = console.readLine();
             command = console.readLine();
@@ -134,7 +132,6 @@ public class Village extends Room {
                             default ->
                                 Main.inGameDefaultTextHandling(command);
                         }
-
                     }
                     default ->
                         Main.inGameDefaultTextHandling(command);
@@ -212,9 +209,15 @@ public class Village extends Room {
                 }
                 case "shield" -> {
                     if (Player.getGold() >= 20) {
-                        Player.changeGold(-20);
-                        Player.putItem("shield", 1);
-                        keepShopping();
+                        if (Player.hasRoomInInventory(1)) {
+                            Player.changeGold(-20);
+                            Player.putItem("shield", 1);
+                            keepShopping();
+                        } else {
+                            TextEngine.printWithDelays("You do not have enough space in your inventory to buy a shield", false);
+                            TextEngine.enterToNext();
+                            keepShopping();
+                        }
                     } else {
                         TextEngine.printWithDelays("You do not have enough gold to buy a shield", false);
                         TextEngine.enterToNext();
@@ -269,9 +272,15 @@ public class Village extends Room {
                 }
                 case "ninja armor" -> {
                     if (Player.getGold() >= 100) {
-                        Player.changeGold(-100);
-                        Player.putItem("ninja armor", 1);
-                        keepShopping();
+                        if (Player.hasRoomInInventory(1)) {
+                            Player.changeGold(-100);
+                            Player.putItem("ninja armor", 1);
+                            keepShopping();
+                        } else {
+                            TextEngine.printWithDelays("You do not have enough space in your inventory to buy a shield", false);
+                            TextEngine.enterToNext();
+                            keepShopping();
+                        }
                     } else {
                         TextEngine.printWithDelays("You do not have enough gold to buy ninja armor", false);
                         TextEngine.enterToNext();
@@ -323,9 +332,15 @@ public class Village extends Room {
                 }
                 case "demon armor" -> {
                     if (Player.getGold() >= 200) {
-                        Player.changeGold(-200);
-                        Player.putItem("demon armor", 1);
-                        keepShopping();
+                        if (Player.hasRoomInInventory(1)) {
+                            Player.changeGold(-200);
+                            Player.putItem("demon armor", 1);
+                            keepShopping();
+                        } else {
+                            TextEngine.printWithDelays("You do not have enough space in your inventory to buy a shield", false);
+                            TextEngine.enterToNext();
+                            keepShopping();
+                        }
                     } else {
                         TextEngine.printWithDelays("You do not have enough gold to buy demon armor", false);
                         TextEngine.enterToNext();
@@ -358,9 +373,15 @@ public class Village extends Room {
             }
             int totalCost = cost * Integer.parseInt(command);
             if (Player.getGold() >= totalCost && !command.equals("0")) {
-                Player.changeGold(-totalCost);
-                Player.putItem(type, Integer.parseInt(command));
-                keepShopping();
+                if (Player.hasRoomInInventory(Integer.parseInt(command))) {
+                    Player.changeGold(-totalCost);
+                    Player.putItem(type, Integer.parseInt(command));
+                    keepShopping();
+                } else {
+                    TextEngine.printWithDelays("You do not have enough space in your inventory to buy " + command + " " + type + "s", false);
+                    TextEngine.enterToNext();
+                    keepShopping();
+                }
             } else {
                 switch (command) {
                     case "0" -> {

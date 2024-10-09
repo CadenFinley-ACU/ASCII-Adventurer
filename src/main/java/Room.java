@@ -16,40 +16,19 @@ public class Room {
     public static String room = null;
 
     public static boolean hasChestInRoom(String itemName, int quantity) throws InterruptedException {
+        String resetColor = "\033[0m"; // reset to default color
+        String yellowColor = "\033[1;33m"; // yellow color
+
         TextEngine.printWithDelays("Hey! There is a chest in this room! ", false);
-        TextEngine.printWithDelays("What is your command open it or leave it", true);
+        TextEngine.printWithDelays("What is your command" + yellowColor + " open it " + resetColor + "or " + yellowColor + "leave it", true);
         while (true) {
             ignore = console.readLine();
             command = console.readLine();
             switch (command.toLowerCase().trim()) {
                 case "open it" -> {
-                    TextEngine.printWithDelays("Hey! There is an item! ", false);
-                    if (quantity > 1) {
-                        TextEngine.printWithDelays("Item(s): " + itemName + " x" + quantity, false);
-                    } else {
-                        TextEngine.printWithDelays("Item: " + itemName, false);
-                    }
-                    TextEngine.printWithDelays("What is your command: take it or leave it", true);
-                    while (true) {
-                        ignore = console.readLine();
-                        command = console.readLine();
-                        switch (command.toLowerCase().trim()) {
-                            case "take it" -> {
-                                Player.putItem(itemName, quantity);
-                                Main.screenRefresh();
-                                return true;
-                            }
-                            case "leave it" -> {
-                                Main.screenRefresh();
-                                return false;
-                            }
-                            default ->
-                                Main.inGameDefaultTextHandling(command);
-                        }
-                    }
+                    return hasItemInRoom(itemName, quantity);
                 }
                 case "leave it" -> {
-                    Main.screenRefresh();
                     return false;
                 }
                 default ->
@@ -61,7 +40,7 @@ public class Room {
     public static boolean hasItemInRoom(String itemName, int quantity) throws InterruptedException {
         String resetColor = "\033[0m"; // reset to default color
         String yellowColor = "\033[1;33m"; // yellow color
-    
+
         // Display item information
         TextEngine.printWithDelays("An item lies before you:", false);
         if (quantity > 1) {
@@ -69,22 +48,19 @@ public class Room {
         } else {
             TextEngine.printWithDelays("Item: " + itemName, false);
         }
-    
+
         // Highlight 'take it' and 'leave it' in yellow
-        TextEngine.printWithDelays("What will you do? Type " + yellowColor + "take it" + resetColor + " to pick up the sword or " + yellowColor + "leave it" + resetColor + " to move on", true);
-    
+        TextEngine.printWithDelays("What will you do? Type " + yellowColor + "take it" + resetColor + " to pick up the sword or " + yellowColor + "leave it", true);
+
         // Command handling loop
         while (true) {
             ignore = console.readLine();
             command = console.readLine();
             switch (command.toLowerCase().trim()) {
                 case "take it" -> {
-                    Player.putItem(itemName, quantity);
-                    Main.screenRefresh();
-                    return true;
+                    return Player.putItem(itemName, quantity);
                 }
                 case "leave it" -> {
-                    Main.screenRefresh();
                     return false;
                 }
                 default ->
@@ -92,7 +68,6 @@ public class Room {
             }
         }
     }
-    
 
     public static void trappedRoom() throws InterruptedException {
         TextEngine.printWithDelays("You have entered a trapped room! ", false);

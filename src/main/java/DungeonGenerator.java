@@ -368,9 +368,9 @@ public class DungeonGenerator {
         for (int[] passedMatrix1 : passedMatrix) {
             for (int j = 0; j < passedMatrix.length; j++) {
                 if (passedMatrix1[j] != 0) {
-                    System.out.print(passedMatrix1[j] + " ");
+                    System.out.print("[" + passedMatrix1[j] + "] ");
                 } else {
-                    System.out.print("  ");
+                    System.out.print("    ");
                 }
             }
             System.out.println();

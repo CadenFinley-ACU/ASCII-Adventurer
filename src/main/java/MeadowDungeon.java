@@ -26,8 +26,13 @@ public class MeadowDungeon extends Dungeon {
     private static final List<String> enemies = new ArrayList<>(List.of("Goblin", "Skeleton", "Slime", "Mimic"));
     private static final Random rand = new Random();
     public static boolean completed = false;
+    public static boolean visited = false;
 
     public static void startRoom() throws InterruptedException { //start room
+        if (!visited) {
+            fresh();
+            visited = true;
+        }
         room = "Meadow Dungeon";
         Main.checkSave(room);
         Main.screenRefresh();
@@ -37,6 +42,7 @@ public class MeadowDungeon extends Dungeon {
     }
 
     public static void fresh() { //fresh
+        visited = false;
         completed = false;
         items = new ArrayList<>(List.of("axe", "chainmail set"));
         foundItemRooms = DungeonGenerator.numberOfRooms(Dungeon.meadowDungeon, 2);
@@ -53,7 +59,6 @@ public class MeadowDungeon extends Dungeon {
         Main.screenRefresh();
         DungeonGenerator.printAdjacentRoomsAndCurrentRoomAndUnlockedRooms(meadowDungeon, roomsBeenTo, currentPlayerPosition);
         directionsString = new ArrayList<>();
-
         if (meadowDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] == 2 && roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] == 0) {
             if (1 <= items.size()) {
                 String randomItem = items.get(rand.nextInt(items.size()));
@@ -111,6 +116,7 @@ public class MeadowDungeon extends Dungeon {
             roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = meadowDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
             if (!completed) {
                 completedDungeons++;
+                completed = true;
             }
             Player.autoFight = Dungeon.previousAutoSettings;
             OpenWorld.startRoom();
@@ -148,6 +154,9 @@ public class MeadowDungeon extends Dungeon {
         Main.screenRefresh();
         DungeonGenerator.printAdjacentRoomsAndCurrentRoomAndUnlockedRooms(meadowDungeon, roomsBeenTo, currentPlayerPosition);
         availableMove = DungeonGenerator.getDirections(meadowDungeon, currentPlayerPosition[0], currentPlayerPosition[1]);
+        if (completed) {
+            TextEngine.printWithDelays("You have completed this dungeon. You can now type 'leave' to exit this dungeon.", false);
+        }
         TextEngine.printWithDelays("You can move in the following directions: ", false);
         //System.out.println(availableMove[0] + "" + availableMove[1] + "" + availableMove[2] + "" + availableMove[3]);
         if (availableMove[0] > 0) {
