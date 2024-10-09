@@ -15,6 +15,8 @@ import java.util.Map;
  */
 class Main {
 
+    static String resetColor = "\033[0m"; // reset to default color
+    static String yellowColor = "\033[1;33m"; // yellow color
     private final static Console console = System.console();
     private static String command;
     private static String ignore;
@@ -92,7 +94,7 @@ class Main {
         } else {
             TextEngine.printNoDelay("Welcome Hero!", false);
         }
-        TextEngine.printWithDelays("What is your command: Start, Settings, Exit", true);
+        TextEngine.printWithDelays("What is your command: " +yellowColor+ "Start" +resetColor+ ", " +yellowColor+ "Settings" +resetColor+ ", " +yellowColor+ "Exit" +resetColor, true);
         handleMenuCommands();
     }
 
