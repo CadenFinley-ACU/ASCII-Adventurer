@@ -1,4 +1,6 @@
 
+
+
 /**
  * Village Class
  *
@@ -8,15 +10,17 @@
 public class Village extends Room {
 
     public static void startRoom() throws InterruptedException { //start room
+        String resetColor = "\033[0m"; // reset to default color
+        String yellowColor = "\033[1;33m"; // yellow color
         room = "Village";
         Main.checkSave(room);
         Main.screenRefresh();
         //maybe something here in the futre that adds rondomness or more advanced feature to certain villages to make them all not the exact same
-        TextEngine.printWithDelays("You walk into the village, there are multiple builings", false);
+        TextEngine.printWithDelays("You step into the village, surrounded by the hustle and bustle of life.\nVarious buildings dot the landscape, each offering something unique.", false);
         if (Dungeon.completedDungeons > 5) {
             TextEngine.printWithDelays("You can now warp to different areas using the 'portal'", false);
         }
-        TextEngine.printNoDelay("What is your command: church, hotel, shop, leave village", true);
+        TextEngine.printNoDelay("What will you do? Type "  + yellowColor + "church" + resetColor + ", " + yellowColor + "hotel" + resetColor + ", "+ yellowColor +"shop" + resetColor + ", or " + yellowColor +"leave village" + resetColor + " to decide", true);
         while (true) {
             ignore = console.readLine();
             command = console.readLine();
@@ -76,17 +80,22 @@ public class Village extends Room {
     }
 
     public static void church() throws InterruptedException { //church
+        String resetColor = "\033[0m"; // reset to default color
+        String yellowColor = "\033[1;33m"; // yellow color
+
         Main.screenRefresh();
         //church implementation
-        TextEngine.printWithDelays("You enter the village church.\nThere is a priest here who can bless your heart containers to gain more hearts", false);
+        TextEngine.printWithDelays("You step inside the village church, the air filled with the scent of incense and the soft glow of candlelight.\nThe serene atmosphere surrounds you as you approach the altar.\n\n", false);
         if (Player.inventory.containsKey("heart container")) {
-            TextEngine.printWithDelays("You have a heart container to give to the priest", false);
-            TextEngine.printWithDelays("What is your command: give it or leave it", true);
+            TextEngine.printWithDelays("A priest stands before you,\noffering blessings to those in need. You approach him, holding out your heart container.\n", false);
+            TextEngine.printWithDelays("would you like to " + yellowColor + "give it" + resetColor + " or " + yellowColor + "leave it" + resetColor, true);
             while (true) {
                 ignore = console.readLine();
                 command = console.readLine();
                 switch (command.toLowerCase().trim()) {
                     case "give it" -> {
+                        TextEngine.printWithDelays("\n\"Ah, a heart container!\" he exclaims, a warm smile spreading across his face.\n        \"With this, I can bless your heart and grant you even greater strength.\"\n", false);
+                        TextEngine.printWithDelays("As you hand over the heart container, you feel a surge of energy coursing through you.\n        The priest chants a blessing, and you sense your heart capacity increase.", false);
                         int amountofHeartContainers = Player.inventory.get("heart container");
                         Player.changeMaxHealth(InventoryManager.Potions.get("heart container") * amountofHeartContainers);
                         Player.putItem("heart container", -amountofHeartContainers);
@@ -101,8 +110,8 @@ public class Village extends Room {
                 }
             }
         } else {
-            TextEngine.printWithDelays("You do not have a heart container to give to the priest", false);
-            TextEngine.printWithDelays("Would you like to leave? yes or no", true);
+            TextEngine.printWithDelays("A priest stands before you,\nready to offer blessings that can enhance your heart containers and grant you more strength.\n\nHowever, you realize you don't have a heart container to give to him.", false);
+            TextEngine.printWithDelays("Would you like to leave this sacred space? Type " + yellowColor + "yes" + resetColor + " to exit or " + yellowColor + "no" + resetColor + " to stay", true);
             while (true) {
                 ignore = console.readLine();
                 command = console.readLine();
@@ -112,7 +121,7 @@ public class Village extends Room {
                     }
                     case "no" -> {
                         TextEngine.printWithDelays("There isn't anyhting here for you, try going to a dungeon.", false);
-                        TextEngine.printWithDelays("Would you like to leave yes or no?", true);
+                        TextEngine.printWithDelays("Would you like to leave " + yellowColor + "yes" + resetColor + " or " + yellowColor + "no" + resetColor, true);
                         ignore = console.readLine();
                         command = console.readLine();
                         switch (command.toLowerCase()) {
@@ -136,13 +145,15 @@ public class Village extends Room {
 
     public static void hotel() throws InterruptedException { //hotel
         //hotel implementation
+        String resetColor = "\033[0m"; // reset to default color
+        String yellowColor = "\033[1;33m"; // yellow color
         Main.screenRefresh();
         int cost = (int) ((1 / 4.0) * (Player.getMaxHealth() - Player.getHealth()));
         TextEngine.printNoDelay("Gold: " + Player.getGold(), false);
         TextEngine.printNoDelay("\n", false);
-        TextEngine.printWithDelays("You enter the hotel.", false);
-        TextEngine.printWithDelays("You can rest here to regain health", false);
-        TextEngine.printWithDelays("What is your command: rest (" + cost + ") gold or leave", true);
+        TextEngine.printWithDelays("You step into the hotel,\n      greeted by the cozy ambiance and the soft murmur of guests enjoying their stay.\nThe warm glow of the lights invites you to relax.", false);
+        TextEngine.printWithDelays("        Here, you can rest to regain your health and rejuvenate your spirit.\n", false);
+        TextEngine.printWithDelays("What will you do? Type " + yellowColor + "rest" + resetColor + " to restore your health (cost:" + cost + " gold) or " + yellowColor + "leave" + resetColor + " to exit the hotel", true);
         while (true) {
             ignore = console.readLine();
             command = console.readLine();
@@ -177,16 +188,16 @@ public class Village extends Room {
         TextEngine.printNoDelay("Gold: " + Player.getGold(), false);
         TextEngine.printNoDelay("Inventory: " + Player.getTotalNumberOfItemsInInventory() + "/" + Player.inventorySize, false);
         TextEngine.printNoDelay("\n", false);
-        TextEngine.printWithDelays("You have entered the shop.", false);
-        TextEngine.printWithDelays("You can buy items here", false);
+        TextEngine.printWithDelays("You step into the bustling shop,\nwhere the scent of various herbs and spices fills the air.\n      Shelves are lined with a variety of items, each glimmering under the soft light.\n\n", false);
+        TextEngine.printWithDelays("Here, you can purchase useful items to aid you on your journey.\n\n", false);
 
         // Creating the message with bold and bright items
         String shopMessage
-                = "What would you like to buy:\n"
+                = "What would you like to buy?\n"
                 + brightYellowStart + " health potion" + brightBoldEnd + "~15 gold\n"
                 + brightYellowStart + " shield" + brightBoldEnd + "~20 gold\n"
                 + brightYellowStart + " key" + brightBoldEnd + "~30 gold\n"
-                + "or leave";
+                + "Or type " + brightYellowStart + "leave" + brightBoldEnd + " to exit the shop";
 
         // Use the modified message with bold items
         TextEngine.printNoDelay(shopMessage, true);
