@@ -10,6 +10,9 @@ import java.util.List;
 import java.util.Random;
 
 public class MountainTopDungeon extends Dungeon {
+    static String resetColor = "\033[0m"; // reset to default color
+    static String yellowColor = "\033[1;33m"; // yellow color
+
 
     private static int[] spawnPosition = DungeonGenerator.findValue(Dungeon.mountainTopDungeon, 9);
     private static int[] bossRoom = DungeonGenerator.findValue(Dungeon.mountainTopDungeon, 8);
@@ -124,7 +127,7 @@ public class MountainTopDungeon extends Dungeon {
     }
 
     private static boolean confirmBossContinue() throws InterruptedException {
-        TextEngine.printWithDelays("Are you sure you want to continue to the boss room? (yes or no)", true);
+        TextEngine.printWithDelays("Are you sure you want to continue to the boss room? (" +yellowColor+ "yes" +resetColor+ " or " +yellowColor+ "no" +resetColor+ ")", true);
         while (true) {
             ignore = Room.console.readLine();
             command = Room.console.readLine();

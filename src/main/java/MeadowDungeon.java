@@ -10,6 +10,8 @@ import java.util.List;
 import java.util.Random;
 
 public class MeadowDungeon extends Dungeon {
+    static String resetColor = "\033[0m"; // reset to default color
+    static String yellowColor = "\033[1;33m"; // yellow color
 
     private static int[] spawnPosition = DungeonGenerator.findValue(Dungeon.meadowDungeon, 9);
     private static int[] bossRoom = DungeonGenerator.findValue(Dungeon.meadowDungeon, 8);
@@ -124,7 +126,7 @@ public class MeadowDungeon extends Dungeon {
     }
 
     private static boolean confirmBossContinue() throws InterruptedException {
-        TextEngine.printWithDelays("Are you sure you want to continue to the boss room? (yes or no)", true);
+        TextEngine.printWithDelays("Are you sure you want to continue to the boss room? (" +yellowColor+ "yes" +resetColor+ " or " +yellowColor+ "no" +resetColor+ ")", true);
         while (true) {
             ignore = Room.console.readLine();
             command = Room.console.readLine();
@@ -183,7 +185,7 @@ public class MeadowDungeon extends Dungeon {
             ignore = Room.console.readLine();
             direction = Room.console.readLine();
             switch (direction.toLowerCase().trim()) {
-                case "north" -> {
+                case "north"-> {
                     if (directionsString.contains(direction.toLowerCase())) {
                         lastPosition = currentPlayerPosition.clone(); // Save the current position before moving
                         roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = meadowDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];

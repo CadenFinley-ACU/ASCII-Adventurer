@@ -350,7 +350,7 @@ public class OpenWorld extends Room {
                         Main.saveSpace("Mountain Top Dungeon");
                         Main.loadSave();
                     } else {
-                        TextEngine.printWithDelays("You must complete The Dark Forest dungeons first, try going west.", true);
+                        TextEngine.printWithDelays("You must complete The Mountain Cave dungeons first, try going west.", true);
                     }
                 }
                 default ->
@@ -392,12 +392,12 @@ public class OpenWorld extends Room {
     }
 
     private static void room8() throws InterruptedException {
-        if(Dungeon.completedDungeons > 0)
+        if(Dungeon.completedDungeons == 1)
             TextEngine.printWithDelays("You find yourself standing right by the entrance to The Dark Forest dungeon,\n    its ancient stone archway beckoning you to enter.\n\n", false);
         else
             TextEngine.printWithDelays("Congets! you have beaten The Dark Forest dungon,\n     time to go back to a village rest up, check out the shop, and head to the next dungon.\n\n",false);
         TextEngine.printWithDelays("Warning: Stepping into a dungeon will trigger battles,\n    but you may uncover valuable treasures within its chambers if you manage to survive.\n", false);
-        TextEngine.printWithDelays("Which path will you choose? Type " +yellowColor+ "north" +resetColor+ ", " +yellowColor+ "east" +resetColor+ ", " +yellowColor+ "south" +resetColor+ ", or " +resetColor+ "The Dark Forest" +resetColor+ "  to continue your journey", true);
+        TextEngine.printWithDelays("Which path will you choose? Type " +yellowColor+ "north" +resetColor+ ", " +yellowColor+ "east" +resetColor+ ", " +yellowColor+ "south" +resetColor+ ", or " +yellowColor+ "The Dark Forest" +resetColor+ " to continue your journey", true);
         while (true) {
             ignore = console.readLine();
             command = console.readLine();
