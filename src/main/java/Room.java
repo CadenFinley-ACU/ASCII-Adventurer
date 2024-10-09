@@ -35,7 +35,6 @@ public class Room {
                         command = console.readLine();
                         switch (command.toLowerCase().trim()) {
                             case "take it" -> {
-                                Main.screenRefresh();
                                 return Player.putItem(itemName, quantity);
                             }
                             case "leave it" -> {

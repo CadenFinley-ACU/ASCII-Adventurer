@@ -57,14 +57,13 @@ public abstract class TextEngine {
         System.out.print(data);
     }
 
-    @SuppressWarnings("deprecation")
     public static void clearScreen() throws InterruptedException { //clears the screen
         String OS_Name = Main.getOS_NAME();
         try {
             if (OS_Name.contains("Windows")) {
                 System.out.print("\033[H\033[2J");
                 System.out.flush();
-                Runtime.getRuntime().exec("clear");
+                Runtime.getRuntime().exec(new String[]{"clear"});
             } else {
                 System.out.print("\033[H\033[2J");
                 System.out.flush();
