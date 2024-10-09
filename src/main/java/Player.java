@@ -180,6 +180,9 @@ public class Player {
 
         TextEngine.enterToNext();
     }
+    public static int getDamageCalc() {
+        return (defense + (damage - (damage / 3)));
+    }
 
     public static void changeMaxHealth(int change) throws InterruptedException { //change the max health
         maxHealth += change;

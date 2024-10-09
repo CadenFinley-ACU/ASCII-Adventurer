@@ -84,7 +84,7 @@ public class Enemy {
         String space = "     ";
 
         // Check the player's health
-        if (Player.getHealth() <= enemyDamageValues.get(type) * quantity) {
+        if (Player.getHealth() <= (enemyDamageValues.get(type) * quantity)-Player.getDamageCalc()) {
             return;
         }
         // Print victory message in green
