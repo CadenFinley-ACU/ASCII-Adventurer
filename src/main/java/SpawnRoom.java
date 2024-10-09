@@ -34,9 +34,16 @@ public class SpawnRoom extends Room {
     }
 
     private static void part0() throws InterruptedException { //0
-        TextEngine.printWithDelays("You wake up in a dark musty cave with nothing but the clothes on your back.", false);
-        TextEngine.printWithDelays("You see a faint light to the north", false);
-        TextEngine.printWithDelays("What is your command: north or help", true);
+        String resetColor = "\033[0m"; // reset to default color
+        String yellowColor = "\033[1;33m"; // yellow color
+        
+        // Print the initial text with delays
+        TextEngine.printWithDelays("You awaken in a dim, damp cave, the air thick with the scent of moss and stone. \nThe only thing you have is the clothes you're wearing. To the north, you spot a faint glimmer of light.", false);
+        
+        // Print the command text with 'north' and 'help' highlighted in yellow
+        TextEngine.printWithDelays("What will you do? Type " + yellowColor + "north" + resetColor + " to move or " + yellowColor + "help" + resetColor + " for assistance", true);
+        
+        // Command handling loop
         while (true) {
             ignore = console.readLine();
             command = console.readLine();
@@ -50,13 +57,14 @@ public class SpawnRoom extends Room {
             }
         }
     }
+    
 
     private static void part1() throws InterruptedException { //1
         if (Player.inventory.containsKey("sword")) {
             roomSave++;
             OpenWorld.startRoom();
         }
-        TextEngine.printWithDelays("As you get closer to the light, you see a sword on the ground", false);
+        TextEngine.printWithDelays("As you approach the light, your eyes catch the glint of a sword lying on the ground.", false);
         while (true) {
             if (hasItemInRoom("sword", 1)) {
                 roomSave++;

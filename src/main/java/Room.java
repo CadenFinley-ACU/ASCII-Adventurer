@@ -59,13 +59,21 @@ public class Room {
     }
 
     public static boolean hasItemInRoom(String itemName, int quantity) throws InterruptedException {
-        TextEngine.printWithDelays("Hey! There is an item! ", false);
+        String resetColor = "\033[0m"; // reset to default color
+        String yellowColor = "\033[1;33m"; // yellow color
+    
+        // Display item information
+        TextEngine.printWithDelays("An item lies before you:", false);
         if (quantity > 1) {
             TextEngine.printWithDelays("Item(s): " + itemName + " x" + quantity, false);
         } else {
             TextEngine.printWithDelays("Item: " + itemName, false);
         }
-        TextEngine.printWithDelays("What is your command: take it or leave it", true);
+    
+        // Highlight 'take it' and 'leave it' in yellow
+        TextEngine.printWithDelays("What will you do? Type " + yellowColor + "take it" + resetColor + " to pick up the sword or " + yellowColor + "leave it" + resetColor + " to move on", true);
+    
+        // Command handling loop
         while (true) {
             ignore = console.readLine();
             command = console.readLine();
@@ -84,6 +92,7 @@ public class Room {
             }
         }
     }
+    
 
     public static void trappedRoom() throws InterruptedException {
         TextEngine.printWithDelays("You have entered a trapped room! ", false);

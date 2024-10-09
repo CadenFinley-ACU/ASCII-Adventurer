@@ -185,9 +185,11 @@ public class Player {
     }
 
     public static void changeMaxHealth(int change) throws InterruptedException { //change the max health
+        String brightGreenStart = "\033[1;32m";
+        String brightEnd = "\033[0m";
         maxHealth += change;
         health += change;
-        TextEngine.printWithDelays("Your max health has increased by " + change + " points", false);
+        TextEngine.printWithDelays(brightGreenStart+"Your max health has increased by " + change + " points" +brightEnd, false);
     }
 
     public static void changeGold(int change) throws InterruptedException {
