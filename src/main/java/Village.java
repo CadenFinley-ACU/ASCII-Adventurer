@@ -132,7 +132,6 @@ public class Village extends Room {
                             default ->
                                 Main.inGameDefaultTextHandling(command);
                         }
-
                     }
                     default ->
                         Main.inGameDefaultTextHandling(command);
