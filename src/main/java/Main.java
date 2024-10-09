@@ -129,7 +129,7 @@ class Main {
 
     private static void splashScreen() {
         String brightBoldEnd = "\033[0m"; // end color
-        String darkPurpleStart = "\033[38;2;66;32;111m"; // ACU Purple
+        String darkPurpleStart = "\033[38;2;255;165;0m"; // ACU Purple
         System.err.println(
                 darkPurpleStart
                 + 
