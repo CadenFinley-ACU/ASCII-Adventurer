@@ -24,8 +24,13 @@ public class OceanKingdomDungeon extends Dungeon {
     private static final List<String> enemies = new ArrayList<>(List.of("Sea Serpent", "Sea Monster", "Sea Witch", "Sea Dragon", "Sea Dragon"));
     private static final Random rand = new Random();
     public static boolean completed = false;
+    public static boolean visited = false;
 
     public static void startRoom() throws InterruptedException { //start room
+        if (!visited) {
+            fresh();
+            visited = true;
+        }
         room = "Ocean Kingdom Dungeon";
         Main.checkSave(room);
         Main.screenRefresh();
@@ -35,6 +40,7 @@ public class OceanKingdomDungeon extends Dungeon {
     }
 
     public static void fresh() { //fresh
+        visited = false;
         completed = false;
         items = new ArrayList<>(List.of("god slayer hammer", "god slayer armor", "super health potion"));
         foundItemRooms = DungeonGenerator.numberOfRooms(Dungeon.oceanKingdomDungeon, 2);
@@ -107,7 +113,10 @@ public class OceanKingdomDungeon extends Dungeon {
             Dungeon.addItemsToMiniDungeons(items);
             lastPosition = currentPlayerPosition.clone();
             roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = oceanKingdomDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
-            completedDungeons++;
+            if (!completed) {
+                completedDungeons++;
+                completed = true;
+            }
             Player.autoFight = Dungeon.previousAutoSettings;
             OpenWorld.startRoom();
         }
@@ -144,6 +153,9 @@ public class OceanKingdomDungeon extends Dungeon {
         Main.screenRefresh();
         DungeonGenerator.printAdjacentRoomsAndCurrentRoomAndUnlockedRooms(oceanKingdomDungeon, roomsBeenTo, currentPlayerPosition);
         availableMove = DungeonGenerator.getDirections(oceanKingdomDungeon, currentPlayerPosition[0], currentPlayerPosition[1]);
+        if (completed) {
+            TextEngine.printWithDelays("You have completed this dungeon. You can now type 'leave' to exit this dungeon.", false);
+        }
         TextEngine.printWithDelays("You can move in the following directions: ", false);
         //System.out.println(availableMove[0] + "" + availableMove[1] + "" + availableMove[2] + "" + availableMove[3]);
         if (availableMove[0] > 0) {

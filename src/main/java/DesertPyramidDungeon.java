@@ -24,8 +24,13 @@ public class DesertPyramidDungeon extends Dungeon {
     private static final List<String> enemies = new ArrayList<>(List.of("Werewolf", "Witch", "Giant", "Mummy", "Minotaur"));
     private static final Random rand = new Random();
     public static boolean completed = false;
+    public static boolean visited = false;
 
     public static void startRoom() throws InterruptedException { //start room
+        if (!visited) {
+            fresh();
+            visited = true;
+        }
         room = "Desert Pyramid Dungeon";
         Main.checkSave(room);
         Main.screenRefresh();
@@ -35,6 +40,7 @@ public class DesertPyramidDungeon extends Dungeon {
     }
 
     public static void fresh() { //fresh
+        visited = false;
         completed = false;
         items = new ArrayList<>(List.of("excalibur", "angel armor", "super health potion"));
         foundItemRooms = DungeonGenerator.numberOfRooms(Dungeon.desertPyramidDungeon, 2);
@@ -110,6 +116,7 @@ public class DesertPyramidDungeon extends Dungeon {
             roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = desertPyramidDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
             if (!completed) {
                 completedDungeons++;
+                completed = true;
             }
             Player.autoFight = Dungeon.previousAutoSettings;
             OpenWorld.startRoom();
@@ -147,6 +154,9 @@ public class DesertPyramidDungeon extends Dungeon {
         Main.screenRefresh();
         DungeonGenerator.printAdjacentRoomsAndCurrentRoomAndUnlockedRooms(desertPyramidDungeon, roomsBeenTo, currentPlayerPosition);
         availableMove = DungeonGenerator.getDirections(desertPyramidDungeon, currentPlayerPosition[0], currentPlayerPosition[1]);
+        if (completed) {
+            TextEngine.printWithDelays("You have completed this dungeon. You can now type 'leave' to exit this dungeon.", false);
+        }
         TextEngine.printWithDelays("You can move in the following directions: ", false);
         //System.out.println(availableMove[0] + "" + availableMove[1] + "" + availableMove[2] + "" + availableMove[3]);
         if (availableMove[0] > 0) {
