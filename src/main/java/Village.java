@@ -256,7 +256,7 @@ public class Village extends Room {
                 + brightYellowStart + " greater health potion" + brightBoldEnd + "~30 gold\n"
                 + brightYellowStart + " ninja armor" + brightBoldEnd + "~100 gold\n"
                 + brightYellowStart + " key" + brightBoldEnd + "~30 gold\n"
-                + "or leave";
+                + "or " +brightYellowStart+ "leave" +brightBoldEnd;
 
         // Use the modified message with bold items
         TextEngine.printNoDelay(shopMessage, true);
@@ -316,7 +316,7 @@ public class Village extends Room {
                 + brightYellowStart + "super health potion" + brightBoldEnd + "~50 gold\n"
                 + brightYellowStart + "demon armor" + brightBoldEnd + "~200 gold\n"
                 + brightYellowStart + "key" + brightBoldEnd + "~30 gold\n"
-                + "or leave";
+                + "or " +brightYellowStart+ "leave" +brightBoldEnd;
 
         // Use the modified message with bold items
         TextEngine.printNoDelay(shopMessage, true);

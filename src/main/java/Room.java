@@ -20,7 +20,7 @@ public class Room {
         String yellowColor = "\033[1;33m"; // yellow color
 
         TextEngine.printWithDelays("Hey! There is a chest in this room! ", false);
-        TextEngine.printWithDelays("What is your command" + yellowColor + " open it " + resetColor + "or " + yellowColor + "leave it", true);
+        TextEngine.printWithDelays("What is your command" + yellowColor + " open it " + resetColor + "or " + yellowColor + "leave it" +resetColor, true);
         while (true) {
             ignore = console.readLine();
             command = console.readLine();
