@@ -286,7 +286,7 @@ public class OpenWorld extends Room {
             TextEngine.printWithDelays("Congets! you have beaten The Mountain Cave dungon,\n     time to go back to a village rest up, check out the shop, and head to the next dungon.\n\n", false);
         }
         TextEngine.printWithDelays("Warning: Stepping into a dungeon will trigger battles,\n    but you may uncover valuable treasures within its chambers if you manage to survive.\n", false);
-        TextEngine.printWithDelays("Which path will you choose? Type " + yellowColor + "north" + resetColor + ", " + yellowColor + "west" + resetColor + ", or " + yellowColor + "The Mountain Cave" + resetColor + " to continue your journey", true);
+        TextEngine.printWithDelays("Which path will you choose? Type " +yellowColor+ "north" +resetColor+ ", " +yellowColor+ "The Mountain Cave" +resetColor+ ", " +yellowColor+ "The Village" +resetColor+ ", or " +yellowColor+ "west" +resetColor+ " to continue your journey", true);
         while (true) {
             ignore = console.readLine();
             command = console.readLine();
@@ -309,6 +309,10 @@ public class OpenWorld extends Room {
                     } else {
                         TextEngine.printWithDelays("You must complete The Dark Forest first.\nTry going west", true);
                     }
+                }
+                case "the village" -> {
+                    Main.saveSpace("Village");
+                    Main.loadSave();
                 }
                 default ->
                     Main.inGameDefaultTextHandling(command);
@@ -512,7 +516,7 @@ public class OpenWorld extends Room {
             TextEngine.printWithDelays("Congets! you have beaten The Desert Plains dungon,\n     time to go back to a village rest up, check out the shop, and head to the next dungon.\n\n", false);
         }
         TextEngine.printWithDelays("Worrning: going into a dungeon you will trigger fights, but you might find something in the rooms\nIf you do not DIE", false);
-        TextEngine.printWithDelays("Which path will you choose? Type " + yellowColor + "south" + resetColor + ", " + yellowColor + "west" + resetColor + ", or " + yellowColor + "The Desert Plains" + resetColor + " to continue your journey", true);
+        TextEngine.printWithDelays("Which path will you choose? Type "+yellowColor+ "The Village" +resetColor+ ", " + yellowColor + "south" + resetColor + ", " + yellowColor + "west" + resetColor + ", or " + yellowColor + "The Desert Plains" + resetColor + " to continue your journey", true);
         while (true) {
             ignore = console.readLine();
             command = console.readLine();
@@ -535,6 +539,10 @@ public class OpenWorld extends Room {
                     } else {
                         TextEngine.printWithDelays("You must complete The Desert Oasis dungeons first.\nTry going to the south east/north", true);
                     }
+                }
+                case "the village" -> {
+                    Main.saveSpace("Village");
+                    Main.loadSave();
                 }
                 default ->
                     Main.inGameDefaultTextHandling(command);
@@ -729,7 +737,7 @@ public class OpenWorld extends Room {
             TextEngine.printWithDelays("Congets! you have beaten The Mountain Cave dungon,\n     time to go back to a village rest up, check out the shop, and head to the next dungon.\n\n", false);
         }
         TextEngine.printWithDelays("Warning: Stepping into a dungeon will trigger battles,\n    but you may uncover valuable treasures within its chambers if you manage to survive.\n", false);
-        TextEngine.printWithDelays("Which path will you choose? Type " + yellowColor + "west" + resetColor + " or " + yellowColor + "The Desert Pyramid" + resetColor + " to continue your journey", true);
+        TextEngine.printWithDelays("Which path will you choose? Type "+yellowColor+ "The Ocean Kingdom" +resetColor+ ", " +yellowColor+ "The Village" +resetColor+ ", " + yellowColor + "west" + resetColor + " or " + yellowColor + "The Desert Pyramid" + resetColor + " to continue your journey", true);
         while (true) {
             ignore = console.readLine();
             command = console.readLine();
@@ -747,6 +755,18 @@ public class OpenWorld extends Room {
                         Main.loadSave();
                     } else {
                         TextEngine.printWithDelays("You must complete The Desert Plains dungeons first.\nTry going to the north/east", true);
+                    }
+                }
+                case "the village" -> {
+                    Main.saveSpace("Village");
+                    Main.loadSave();
+                }
+                case "the ocean kingdom" -> {
+                    if (Dungeon.completedDungeons > 6) {
+                        Main.saveSpace("Ocean Kingdom Dungeon");
+                        Main.loadSave();
+                    } else {
+                        TextEngine.printWithDelays("You must complete The Desert Pyramis dungeon first.\nTry going to the north", true);
                     }
                 }
                 default ->

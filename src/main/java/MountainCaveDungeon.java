@@ -158,7 +158,7 @@ public class MountainCaveDungeon extends Dungeon {
         DungeonGenerator.printAdjacentRoomsAndCurrentRoomAndUnlockedRooms(mountainCaveDungeon, roomsBeenTo, currentPlayerPosition);
         availableMove = DungeonGenerator.getDirections(mountainCaveDungeon, currentPlayerPosition[0], currentPlayerPosition[1]);
         if (completed) {
-            TextEngine.printWithDelays("You have completed this dungeon. You can now type 'leave' to exit this dungeon.", false);
+            TextEngine.printWithDelays("You have completed this dungeon. You can now type " +yellowColor+ "leave" +resetColor+ " to exit this dungeon.", false);
         }
         TextEngine.printWithDelays("You can move in the following directions: ", false);
         //System.out.println(availableMove[0] + "" + availableMove[1] + "" + availableMove[2] + "" + availableMove[3]);

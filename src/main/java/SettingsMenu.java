@@ -8,6 +8,8 @@ import java.io.Console;
  * Grijesh Shrestha
  */
 public abstract class SettingsMenu {
+    static String resetColor = "\033[0m"; // reset to default color
+    static String yellowColor = "\033[1;33m"; // yellow color
 
     private final static Console console = System.console();
     private static String command;
@@ -20,8 +22,8 @@ public abstract class SettingsMenu {
         TextEngine.printNoDelay("Settings:", false);
         TextEngine.printNoDelay("This is the settings menu. Here you can change the speed of the text.", false);
         TextEngine.printNoDelay("The current speed is set to: " + TextEngine.speedSetting, false);
-        TextEngine.printWithDelays("You can change the speed to: Slow, Normal, Fast, or NoDelay", false);
-        TextEngine.printWithDelays("Type 'exit' to leave this menu", true);
+        TextEngine.printWithDelays("You can change the speed to: " +yellowColor+ "Slow" +resetColor+ ", " +yellowColor+ "Normal" +resetColor+ ", " +yellowColor+ "Fast" +resetColor+ ", or " +yellowColor+ "NoDelay" +resetColor, false);
+        TextEngine.printWithDelays("Type " +yellowColor+ "exit" +resetColor+ " to leave this menu", true);
         while (true) {
             ignore = console.readLine();
             command = console.readLine();
@@ -30,7 +32,7 @@ public abstract class SettingsMenu {
                     TextEngine.speedSetting = "Slow";
                     TextEngine.printNoDelay("Slow", false);
                     TextEngine.printWithDelays("This is what SLOW text looks like", false);
-                    TextEngine.printNoDelay("Confirm? (yes or no)", true);
+                    TextEngine.printNoDelay("Confirm? (" +yellowColor+ "yes" +resetColor+ " or " +yellowColor+ "no" +resetColor+ ")", true);
                     ignore = console.readLine();
                     command = console.readLine();
                     if (command.toLowerCase().trim().equals("yes")) {
@@ -48,7 +50,7 @@ public abstract class SettingsMenu {
                     TextEngine.speedSetting = "Normal";
                     TextEngine.printNoDelay("Normal", false);
                     TextEngine.printWithDelays("This is what NORMAL text looks like. It is like this by default.", false);
-                    TextEngine.printNoDelay("Confirm? (yes or no)", true);
+                    TextEngine.printNoDelay("Confirm? (" +yellowColor+ "yes" +resetColor+ " or " +yellowColor+ "no" +resetColor+ ")", true);
                     ignore = console.readLine();
                     command = console.readLine();
                     if (command.toLowerCase().trim().equals("yes")) {
@@ -66,7 +68,7 @@ public abstract class SettingsMenu {
                     TextEngine.speedSetting = "Fast";
                     TextEngine.printNoDelay("Fast", false);
                     TextEngine.printWithDelays("This is what FAST text looks like", false);
-                    TextEngine.printNoDelay("Confirm? (yes or no)", true);
+                    TextEngine.printNoDelay("Confirm? (" +yellowColor+ "yes" +resetColor+ " or " +yellowColor+ "no" +resetColor+ ")", true);
                     ignore = console.readLine();
                     command = console.readLine();
                     if (command.toLowerCase().trim().equals("yes")) {
@@ -84,7 +86,7 @@ public abstract class SettingsMenu {
                     TextEngine.speedSetting = "NoDelay";
                     TextEngine.printNoDelay("NoDelay", false);
                     TextEngine.printNoDelay("You in a rush or somethin?", false);
-                    TextEngine.printNoDelay("Confirm? (yes or no)", true);
+                    TextEngine.printNoDelay("Confirm? (" +yellowColor+ "yes" +resetColor+ " or " +yellowColor+ "no" +resetColor+ ")", true);
                     ignore = console.readLine();
                     command = console.readLine();
                     if (command.toLowerCase().trim().equals("yes")) {

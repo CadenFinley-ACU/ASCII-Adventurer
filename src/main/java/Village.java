@@ -6,17 +6,18 @@
  * Grijesh Shrestha
  */
 public class Village extends Room {
+    static String resetColor = "\033[0m"; // reset to default color
+    static String yellowColor = "\033[1;33m"; // yellow color
 
     public static void startRoom() throws InterruptedException { //start room
-        String resetColor = "\033[0m"; // reset to default color
-        String yellowColor = "\033[1;33m"; // yellow color
+        
         room = "Village";
         Main.checkSave(room);
         Main.screenRefresh();
         //maybe something here in the futre that adds rondomness or more advanced feature to certain villages to make them all not the exact same
         TextEngine.printWithDelays("You step into the village, surrounded by the hustle and bustle of life.\nVarious buildings dot the landscape, each offering something unique.", false);
         if (Dungeon.completedDungeons > 5) {
-            TextEngine.printWithDelays("You can now warp to different areas using the 'portal'", false);
+            TextEngine.printWithDelays("You can now warp to different areas using the " +yellowColor+ "portal" +resetColor, false);
         }
         TextEngine.printNoDelay("What will you do? Type " + yellowColor + "church" + resetColor + ", " + yellowColor + "hotel" + resetColor + ", " + yellowColor + "shop" + resetColor + ", or " + yellowColor + "leave village" + resetColor + " to decide", true);
         while (true) {
@@ -78,8 +79,7 @@ public class Village extends Room {
     }
 
     public static void church() throws InterruptedException { //church
-        String resetColor = "\033[0m"; // reset to default color
-        String yellowColor = "\033[1;33m"; // yellow color
+        
 
         Main.screenRefresh();
         //church implementation
@@ -142,8 +142,7 @@ public class Village extends Room {
 
     public static void hotel() throws InterruptedException { //hotel
         //hotel implementation
-        String resetColor = "\033[0m"; // reset to default color
-        String yellowColor = "\033[1;33m"; // yellow color
+        
         Main.screenRefresh();
         int cost = (int) ((1 / 4.0) * (Player.getMaxHealth() - Player.getHealth()));
         TextEngine.printNoDelay("Gold: " + Player.getGold(), false);
@@ -408,7 +407,7 @@ public class Village extends Room {
     }
 
     private static void keepShopping() throws InterruptedException { //keep shopping
-        TextEngine.printWithDelays("Would you like to keep shopping? yes or no", true);
+        TextEngine.printWithDelays("Would you like to keep shopping? " +yellowColor+ "yes" +resetColor+ " or " +yellowColor+ "no" +resetColor, true);
         while (true) {
             ignore = console.readLine();
             command = console.readLine();

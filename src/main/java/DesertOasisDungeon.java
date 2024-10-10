@@ -10,6 +10,8 @@ import java.util.List;
 import java.util.Random;
 
 public class DesertOasisDungeon extends Dungeon {
+    static String resetColor = "\033[0m"; // reset to default color
+    static String yellowColor = "\033[1;33m"; // yellow color
 
     private static int[] spawnPosition = DungeonGenerator.findValue(Dungeon.desertOasisDungeon, 9);
     private static int[] bossRoom = DungeonGenerator.findValue(Dungeon.desertOasisDungeon, 8);
@@ -132,7 +134,7 @@ public class DesertOasisDungeon extends Dungeon {
     }
 
     private static boolean confirmBossContinue() throws InterruptedException {
-        TextEngine.printWithDelays("Are you sure you want to continue to the boss room? (yes or no)", true);
+        TextEngine.printWithDelays("Are you sure you want to continue to the boss room? (" +yellowColor+ "yes" +resetColor+ " or " +yellowColor+ "no" +resetColor+ ")", true);
         while (true) {
             ignore = Room.console.readLine();
             command = Room.console.readLine();
@@ -155,7 +157,7 @@ public class DesertOasisDungeon extends Dungeon {
         DungeonGenerator.printAdjacentRoomsAndCurrentRoomAndUnlockedRooms(desertOasisDungeon, roomsBeenTo, currentPlayerPosition);
         availableMove = DungeonGenerator.getDirections(desertOasisDungeon, currentPlayerPosition[0], currentPlayerPosition[1]);
         if (completed) {
-            TextEngine.printWithDelays("You have completed this dungeon. You can now type 'leave' to exit this dungeon.", false);
+            TextEngine.printWithDelays("You have completed this dungeon. You can now type " +yellowColor+ "leave" +resetColor+ " to exit this dungeon.", false);
         }
         TextEngine.printWithDelays("You can move in the following directions: ", false);
         //System.out.println(availableMove[0] + "" + availableMove[1] + "" + availableMove[2] + "" + availableMove[3]);
