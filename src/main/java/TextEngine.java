@@ -24,23 +24,26 @@ public abstract class TextEngine {
         StringBuilder remainingData = new StringBuilder(data);
         for (int i = 0; i < data.length(); i++) {
             char ch = data.charAt(i);
-            switch (speedSetting) {
-                case "Slow" ->
-                    TimeUnit.MILLISECONDS.sleep(40);
-                case "Fast" ->
-                    TimeUnit.MILLISECONDS.sleep(15);
-                case "NoDelay" ->
-                    TimeUnit.MILLISECONDS.sleep(0);
-                default -> {
-                    if (data.length() > 100) {
-                        TimeUnit.MILLISECONDS.sleep(15);
-                    } else if (data.length() > 50) {
-                        TimeUnit.MILLISECONDS.sleep(30);
-                    } else {
+            if (String.valueOf(ch).matches("^[a-zA-Z0-9]+$")) {
+                switch (speedSetting) {
+                    case "Slow" ->
                         TimeUnit.MILLISECONDS.sleep(40);
+                    case "Fast" ->
+                        TimeUnit.MILLISECONDS.sleep(15);
+                    case "NoDelay" ->
+                        TimeUnit.MILLISECONDS.sleep(0);
+                    default -> {
+                        if (data.length() > 100) {
+                            TimeUnit.MILLISECONDS.sleep(15);
+                        } else if (data.length() > 50) {
+                            TimeUnit.MILLISECONDS.sleep(30);
+                        } else {
+                            TimeUnit.MILLISECONDS.sleep(40);
+                        }
                     }
                 }
-
+            } else {
+                TimeUnit.MILLISECONDS.sleep(0);
             }
             System.out.print(ch);
             remainingData.setCharAt(i, ' ');
