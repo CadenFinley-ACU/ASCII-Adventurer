@@ -16,7 +16,6 @@ import java.util.Map;
 
  
 public class Main {
-    
 
     static String resetColor = "\033[0m"; // reset to default color
     static String yellowColor = "\033[1;33m"; // yellow color
