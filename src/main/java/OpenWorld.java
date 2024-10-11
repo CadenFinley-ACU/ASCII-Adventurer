@@ -495,7 +495,7 @@ public class OpenWorld extends Room {
                     roomSave = 9;
                     Main.loadSave();
                 }
-                case "the dark oasis" -> {
+                case "the desert oasis" -> {
                     if (Dungeon.completedDungeons > 3) {
                         Main.saveSpace("Desert Oasis Dungeon");
                         Main.loadSave();
