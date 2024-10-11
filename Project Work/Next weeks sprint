@@ -1,0 +1,29 @@
+ASAP reformat readme.md for friday demo
+ASAP Add “character to game” - ADD COLOR LOTS
+/ add enemy encounters to open world give option to fight or run
+FAR FUTURE – Probably need to draw logic diagram (extra credit)
+End game sequence ~ Albert // try to get done this weekend
+Test wipe save functionality
+
+Gri:
+Start adding text prompts for all open world rooms
+
+Caden:
+git ls-files | grep '\.java' | xargs wc -l
+git log main
+
+Tests run: 1005
+Dungeons Generated: 2108 Fails: 1103
+52.32448% failure rate
+For every test run, 2 dungeons were generated
+
+
+Albert:
+Text game stuff 
+
+At some point: 
+talk about mini dungeons? Randum, set
+More to the openworld?
+
+Also we need to work on text formatting because there's still some lines that roll over to the next and just looks ugly
+
