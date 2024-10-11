@@ -33,13 +33,7 @@ public abstract class TextEngine {
                     case "NoDelay" ->
                         TimeUnit.MILLISECONDS.sleep(0);
                     default -> {
-                        if (data.length() > 100) {
-                            TimeUnit.MILLISECONDS.sleep(15);
-                        } else if (data.length() > 50) {
-                            TimeUnit.MILLISECONDS.sleep(30);
-                        } else {
-                            TimeUnit.MILLISECONDS.sleep(40);
-                        }
+                        TimeUnit.MILLISECONDS.sleep(30);
                     }
                 }
             } else {
