@@ -289,4 +289,14 @@ public class TestSuite_Adventure {
         boolean connected = DungeonGenerator.testArrays(testMatrix);
         assertTrue("There should be a path connecting 9 and 8 with values higher than 0", connected);
     }
+    @Test
+    public void stupidStress() {
+        for (int i = 0; i < 1000; i++) {
+            testsrun++;
+        int[][] testMatrix = DungeonGenerator.generateAndReturnMatrix(11);
+        boolean connected = DungeonGenerator.testArrays(testMatrix);
+        assertTrue("There should be a path connecting 9 and 8 with values higher than 0", connected);
+        }
+        
+    }
 }
