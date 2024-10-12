@@ -184,6 +184,7 @@ public class GameSaveSerialization {
             e.printStackTrace();
         }
     }
+
     private static void writeList(List<String> list, String filePath) {
         try (FileWriter writer = new FileWriter(filePath, true)) { // true to append to the file
             if (list == null) {
@@ -305,28 +306,26 @@ public class GameSaveSerialization {
             DesertPyramidDungeon.roomsBeenTo = readMatrix(reader);
             buffer = reader.readLine();
             OceanKingdomDungeon.roomsBeenTo = readMatrix(reader);
-            buffer = reader.readLine();
-            MeadowDungeon.items = readList(reader);
-            buffer = reader.readLine();
-            DarkForestDungeon.items = readList(reader);
-            buffer = reader.readLine();
-            MountainCaveDungeon.items = readList(reader);
-            buffer = reader.readLine();
-            MountainTopDungeon.items = readList(reader);
-            buffer = reader.readLine();
-            DesertOasisDungeon.items = readList(reader);
-            buffer = reader.readLine();
-            DesertPlainsDungeon.items = readList(reader);
-            buffer = reader.readLine();
-            DesertPyramidDungeon.items = readList(reader);
-            buffer = reader.readLine();
-            OceanKingdomDungeon.items = readList(reader);
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (IOException | NumberFormatException e) {
+            System.out.println("Save File Corrupt or Invalid... ");
+            TextEngine.printWithDelays("Erasing Save File and Restarting...", false);
+            TextEngine.enterToNext();
+            Main.screenRefresh();
+            Main.wipeSave();
+            Player.playerStart();
+            //e.printStackTrace();
         }
-    }
 
-    private static ArrayList<String> readList(BufferedReader reader) throws IOException {
+    }
+    catch (IOException e
+        
+
+    ) {
+            e.printStackTrace();
+    }
+}
+
+private static ArrayList<String> readList(BufferedReader reader) throws IOException {
         String line = reader.readLine();
         if (line.equals(NULL_MARKER) || line.equals("null")) {
             return null;
