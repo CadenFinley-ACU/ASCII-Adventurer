@@ -279,6 +279,7 @@ public class GameSaveSerialization {
                 System.out.println("Save File Corrupt or Invalid... ");
                 TextEngine.printWithDelays("Erasing Save File and Restarting...", false);
                 TextEngine.enterToNext();
+                Main.screenRefresh();
                 Main.wipeSave();
                 Player.playerStart();
             }
