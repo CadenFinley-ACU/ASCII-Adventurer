@@ -85,7 +85,7 @@ public class Main {
         splashScreen();
         TextEngine.printNoDelay("               by: Albert Tucker, Caden Finley, and Grijesh Shrestha", false);
         System.out.println();
-        if (hasSave()) {
+        if (hasSave() && Player.getName() != null) {
             TextEngine.printNoDelay("Welcome " + Player.getName() + "!", false);
         } else {
             TextEngine.printNoDelay("Welcome Hero!", false);
@@ -489,7 +489,7 @@ public class Main {
         // Check if getSavedPlace() is not null
         // Check if the file game_save.txt exists
         File saveFile = new File("game_save.txt");
-        return saveFile.exists()|| getSavedPlace() == null;
+        return getSavedPlace() != null || saveFile.exists();
     }
 
     public static void checkSave(String place) throws InterruptedException { //check if there is a save and if that save is where you currently are
