@@ -186,8 +186,7 @@ public class Dungeon extends Room {
                 default ->
                     TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", feeling a sense of adventure as you leave the open paths behind.\n Ahead, you notice the entrance to the next dungeon lying just to the south, west.\n\n", false);
             }
-        } else if (completedDungeons
-                > 0) // the dark forest dungeon
+        } else if (completedDungeons > 0) // the dark forest dungeon
         {
             switch (OpenWorld.roomNumber) {
                 case 1, 2, 3, 4 ->
@@ -197,8 +196,7 @@ public class Dungeon extends Room {
                 default ->
                     TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", feeling a sense of adventure as you leave the open paths behind.\n Ahead, you notice the entrance to the next dungeon lying just to the south, west.\n\n", false);
             }
-        } else if (completedDungeons
-                > 1) // The Mountain Cave Dungeon
+        } else if (completedDungeons > 1) // The Mountain Cave Dungeon
         {
             switch (OpenWorld.roomNumber) {
                 case 1, 2 ->
@@ -208,8 +206,7 @@ public class Dungeon extends Room {
                 default ->
                     TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", feeling a sense of adventure as you leave the open paths behind.\n Ahead, you notice the entrance to the next dungeon lying just to the south, east.\n\n", false);
             }
-        } else if (completedDungeons
-                > 2) // The Mountain Top Dungeon
+        } else if (completedDungeons > 2) // The Mountain Top Dungeon
         {
             switch (OpenWorld.roomNumber) {
                 case 1, 2, 3, 4, 5 ->
@@ -219,8 +216,7 @@ public class Dungeon extends Room {
                 default ->
                     TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", feeling a sense of adventure as you leave the open paths behind.\n Ahead, you notice the entrance to the next dungeon lying just to the south, east.\n\n", false);
             }
-        } else if (completedDungeons
-                > 3) // The Desert Oasis Dungeon
+        } else if (completedDungeons > 3) // The Desert Oasis Dungeon
         {
             switch (OpenWorld.roomNumber) {
                 case 1, 2, 3, 4, 5, 6, 7, 8 ->
@@ -230,8 +226,7 @@ public class Dungeon extends Room {
                 default ->
                     TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", feeling a sense of adventure as you leave the open paths behind.\n Ahead, you notice the entrance to the next dungeon lying just to the south, east.\n\n", false);
             }
-        } else if (completedDungeons
-                > 4) // The Desert Plains Dungeon
+        } else if (completedDungeons > 4) // The Desert Plains Dungeon
         {
             switch (OpenWorld.roomNumber) {
                 case 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 21 ->
@@ -241,8 +236,7 @@ public class Dungeon extends Room {
                 default ->
                     TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", feeling a sense of adventure as you leave the open paths behind.\n Ahead, you notice the entrance to the next dungeon lying just to the south, east.\n\n", false);
             }
-        } else if (completedDungeons
-                > 4) // The Desert Pyramid Dungeon
+        } else if (completedDungeons > 4) // The Desert Pyramid Dungeon
         {
             switch (OpenWorld.roomNumber) {
                 case 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 21, 11, 12, 13, 14, 15, 16, 17 ->
@@ -252,8 +246,7 @@ public class Dungeon extends Room {
                 default ->
                     TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", feeling a sense of adventure as you leave the open paths behind.\n Ahead, you notice the entrance to the next dungeon lying just to the south, east.\n\n", false);
             }
-        } else if (completedDungeons
-                > 4) // The Ocean Kingdom Dungeon
+        } else if (completedDungeons > 4) // The Ocean Kingdom Dungeon
         {
             switch (OpenWorld.roomNumber) {
                 case 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 21, 11, 12, 13, 14, 15, 16, 17, 18, 19 ->
