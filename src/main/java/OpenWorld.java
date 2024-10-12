@@ -285,7 +285,7 @@ public class OpenWorld extends Room {
         if (Dungeon.completedDungeons > 1) {
             TextEngine.printWithDelays("You find yourself standing right by the entrance to The Mountain Cave Dungeon,\n    its ancient stone archway beckoning you to enter.\n\n", false);
         } else {
-            TextEngine.printWithDelays("Congets! you have beaten The Mountain Cave dungon,\n     time to go back to a village rest up, check out the shop, and head to the next dungon.\n\n", false);
+            TextEngine.printWithDelays("Congrets! you have beaten The Mountain Cave dungeon,\n     time to go back to a village rest up, check out the shop, and head to the next dungon.\n\n", false);
         }
         TextEngine.printWithDelays("Warning: Stepping into a dungeon will trigger battles,\n    but you may uncover valuable treasures within its chambers if you manage to survive.\n", false);
         TextEngine.printWithDelays("Which path will you choose? Type " + yellowColor + "north" + resetColor + ", " + yellowColor + "The Mountain Cave" + resetColor + ", " + yellowColor + "The Village" + resetColor + ", or " + yellowColor + "west" + resetColor + " to continue your journey", true);
@@ -326,7 +326,7 @@ public class OpenWorld extends Room {
         if (Dungeon.completedDungeons > 2) {
             TextEngine.printWithDelays("You find yourself standing right by the entrance to The Mountain Top dungeon,\n    its ancient stone archway beckoning you to enter.\n\n", false);
         } else {
-            TextEngine.printWithDelays("Congets! you have beaten The Mountain Cave dungon,\n     time to go back to a village rest up, check out the shop, and head to the next dungon.\n\n", false);
+            TextEngine.printWithDelays("Congrets! you have beaten The Mountain Cave dungeon,\n     time to go back to a village rest up, check out the shop, and head to the next dungon.\n\n", false);
         }
         TextEngine.printWithDelays("Warning: Stepping into a dungeon will trigger battles,\n    but you may uncover valuable treasures within its chambers if you manage to survive.\n", false);
         TextEngine.printWithDelays("Which path will you choose? Type " + yellowColor + "north" + resetColor + ", " + yellowColor + "south" + resetColor + ", " + yellowColor + "west" + resetColor + ", or " + yellowColor + "The Mountain Top" + resetColor + "  to continue your journey", true);
