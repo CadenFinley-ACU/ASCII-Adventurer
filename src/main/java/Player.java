@@ -294,7 +294,8 @@ public class Player {
         TextEngine.enterToNext();
         TextEngine.clearScreen();
         Main.playerCreated = true;
-        Main.start();
+        Main.saveSpace("SpawnRoom");
+        Main.loadSave();
     }
 
     public static void printStats() throws InterruptedException { //print the stats
