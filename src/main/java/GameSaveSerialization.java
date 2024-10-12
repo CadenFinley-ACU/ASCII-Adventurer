@@ -282,6 +282,7 @@ public class GameSaveSerialization {
                 Main.screenRefresh();
                 Main.wipeSave();
                 Player.playerStart();
+                //e.printStackTrace();
             }
 
         } catch (IOException e) {
