@@ -41,6 +41,7 @@ public class DarkForestDungeon extends Dungeon {
         Main.screenRefresh();
         Dungeon.currentDungeon = "Dark Forest";
         currentPlayerPosition = save;
+        GameSaveSerialization.saveGame();
         startRooms();
     }
 

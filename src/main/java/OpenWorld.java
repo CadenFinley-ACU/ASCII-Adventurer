@@ -17,6 +17,7 @@ public class OpenWorld extends Room {
     public static void startRoom() throws InterruptedException { //start room
         room = "OpenWorld";
         Main.checkSave(room);
+        GameSaveSerialization.saveGame();
         Main.screenRefresh();
         switch (roomSave) {
             case 1 -> {

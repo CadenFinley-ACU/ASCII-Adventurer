@@ -86,7 +86,7 @@ public class Main {
         splashScreen();
         TextEngine.printNoDelay("               by: Albert Tucker, Caden Finley, and Grijesh Shrestha", false);
         System.out.println();
-        if (hasSave() && Player.getName() != null) {
+        if (hasSave()) {
             TextEngine.printNoDelay("Welcome " + Player.getName() + "!", false);
         } else {
             TextEngine.printNoDelay("Welcome Hero!", false);
@@ -184,9 +184,9 @@ public class Main {
               
         
             
-                
+                    
         
-              
+                  
         
              
 
@@ -505,9 +505,9 @@ public class Main {
 
     public static void start() throws InterruptedException { //start the game
         TextEngine.clearScreen();
-        if (hasSave()) {
+        if (hasSave() && Player.getName() != null) {
             promptLoadSavedGame();
-        } else if (playerCreated) {
+        } else if (playerCreated && Player.getName() != null) {
             saveSpace("SpawnRoom");
             loadSave();
         } else {

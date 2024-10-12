@@ -40,6 +40,7 @@ public class MountainTopDungeon extends Dungeon {
         Main.screenRefresh();
         Dungeon.currentDungeon = "Mountain Top";
         currentPlayerPosition = save;
+        GameSaveSerialization.saveGame();
         startRooms();
     }
 

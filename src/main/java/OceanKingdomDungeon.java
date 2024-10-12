@@ -40,6 +40,7 @@ public class OceanKingdomDungeon extends Dungeon {
         Main.screenRefresh();
         Dungeon.currentDungeon = "Ocean Kingdom";
         currentPlayerPosition = save;
+        GameSaveSerialization.saveGame();
         startRooms();
     }
 
