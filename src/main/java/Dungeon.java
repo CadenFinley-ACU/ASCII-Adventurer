@@ -22,7 +22,8 @@ public class Dungeon extends Room {
     public static int[][] desertPyramidDungeon;
     public static int[][] oceanKingdomDungeon;
 
-    public static int[] currentPlayerPosition;
+    public static int[] currentPlayerPosition = null;
+    public static int[] lastPosition = null; // Variable to store the last position
     public static boolean previousAutoSettings;
 
     public static List<String> missedItems = new ArrayList<>();
@@ -257,12 +258,6 @@ public class Dungeon extends Room {
             }
         } else {
             TextEngine.printWithDelays("this function isnt working right", false);
-        }
-    }
-
-    public static void addItemsToMiniDungeons(List<String> items) {
-        for (String item : missedItems) {
-            missedItems.add(item);
         }
     }
 }

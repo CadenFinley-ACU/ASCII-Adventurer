@@ -23,7 +23,6 @@ public class Player {
     private static int damage; //find way to set damage automatically to strongest weapon in inventory
     private static int defense; //find way to set defense automatically to the strongest 4-5 defense items combined
     public static Map<String, Integer> inventory = new HashMap<>();
-    public static InventoryManager manager = new InventoryManager();
     public static boolean autoFight = false;
     public static int playerX = 0;
     public static int playerY = 0;
@@ -148,6 +147,10 @@ public class Player {
         inventorySize += change;
     }
 
+    public static int getInventorySize() { //get the inventory size
+        return inventorySize;
+    }
+
     public static void changeHealth(int change) throws InterruptedException {
         String brightRedStart = "\033[1;31m";
         String brightGreenStart = "\033[1;32m";
@@ -208,7 +211,7 @@ public class Player {
     }
 
     public static void openInventory() throws InterruptedException { //open the inventory
-        manager.printInventory();
+        InventoryManager.printInventory();
     }
 
     public static void setDamage(int amount) { //set the damage
@@ -235,13 +238,17 @@ public class Player {
         return total;
     }
 
+    public static String getInventory() {
+        return inventory.toString();
+    }
+
     public static Boolean putItem(String item, int amount) throws InterruptedException { //put an item in the inventory
         if ("Backpack".equals(item) || "Large Backpack".equals(item)) {
             changeInventorySize(InventoryManager.Potions.get(item));
             return true;
         } else {
             if (inventorySize >= getTotalNumberOfItemsInInventory() + amount) {
-                manager.put(item, amount);
+                InventoryManager.put(item, amount);
                 return true;
             } else {
                 TextEngine.printWithDelays("You have no room in your inventory!", false);
@@ -287,7 +294,8 @@ public class Player {
         TextEngine.enterToNext();
         TextEngine.clearScreen();
         Main.playerCreated = true;
-        Main.start();
+        Main.saveSpace("SpawnRoom");
+        Main.loadSave();
     }
 
     public static void printStats() throws InterruptedException { //print the stats
@@ -337,7 +345,7 @@ public class Player {
         Main.loadSave();
     }
 
-    public static Map<String, Integer> copyInventory() { //get the inventory manager
+    public static Map<String, Integer> copyInventory() { //get the inventory Manager
         return inventory;
     }
 
@@ -471,5 +479,14 @@ public class Player {
 
     public static Boolean hasRoomInInventory(int amount) {
         return inventorySize >= getTotalNumberOfItemsInInventory() + amount;
+    }
+
+    public static void playerSetSave(String localName, int localHealth, int localMaxHealth, int localGold, Map<String, Integer> localInventory, int localInventorySize) {
+        name = localName;
+        health = localHealth;
+        maxHealth = localMaxHealth;
+        gold = localGold;
+        inventory = localInventory;
+        inventorySize = localInventorySize;
     }
 }

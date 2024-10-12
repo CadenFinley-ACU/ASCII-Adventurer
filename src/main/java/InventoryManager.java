@@ -10,10 +10,11 @@ import java.util.Set;
  * Grijesh Shrestha
  */
 public class InventoryManager extends Player {
+
     static String resetColor = "\033[0m"; // reset to default color
     static String yellowColor = "\033[1;33m"; // yellow color
-    public String room;
-    public String area;
+    // public String room;
+    // public String area;
     //inventory format is itemname, amount
     //map format : itemname, damage
     public static Map<String, Integer> Weapons = new HashMap<>();
@@ -36,7 +37,7 @@ public class InventoryManager extends Player {
         }
     }
 
-    public void printInventory() throws InterruptedException { //print the inventory
+    public static void printInventory() throws InterruptedException { //print the inventory
         TextEngine.clearScreen();
         Main.printStatus();
         if (inventory.isEmpty()) {
@@ -71,17 +72,18 @@ public class InventoryManager extends Player {
             inventoryManage();
         }
     }
+
     public static boolean inventoryHasRoom(int amount) throws InterruptedException {
         if (getTotalNumberOfItemsInInventory() + amount > inventorySize) {
             TextEngine.printWithDelays("You have no room in your inventory.", false);
             TextEngine.printWithDelays("You can only hold " + Player.inventorySize + " items. You have: " + getTotalNumberOfItemsInInventory() + " items.", false);
-            TextEngine.printWithDelays("You can drop items by typing " +yellowColor+ "drop" +resetColor+ " in \nthe " +yellowColor+ "inventory" +resetColor+ "menu to make room.", false);
+            TextEngine.printWithDelays("You can drop items by typing " + yellowColor + "drop" + resetColor + " in \nthe " + yellowColor + "inventory" + resetColor + "menu to make room.", false);
             TextEngine.enterToNext();
         }
         return getTotalNumberOfItemsInInventory() + amount <= inventorySize;
     }
 
-    public void put(String item, int amount) throws InterruptedException { //put an item in the inventory
+    public static void put(String item, int amount) throws InterruptedException { //put an item in the inventory
         if (inventoryHasRoom(amount)) {
             if (inventory.get(item) != null) {
                 inventory.put(item, inventory.get(item) + amount);
@@ -106,7 +108,7 @@ public class InventoryManager extends Player {
     private static void inventoryManage() throws InterruptedException { //manage the inventory
         TextEngine.printWithDelays("What would you like to do", false);
         TextEngine.printWithDelays("Use item, drop item, or exit ", false);
-        TextEngine.printWithDelays(yellowColor+"use" +resetColor+ ", " +yellowColor+ "drop" +resetColor+ ", " +yellowColor+ "exit" +resetColor, true);
+        TextEngine.printWithDelays(yellowColor + "use" + resetColor + ", " + yellowColor + "drop" + resetColor + ", " + yellowColor + "exit" + resetColor, true);
         while (true) {
             console.readLine();
             command = console.readLine();
@@ -122,7 +124,7 @@ public class InventoryManager extends Player {
                 case "drop" -> {
                     TextEngine.clearScreen();
                     printInventoryNoMenu();
-                    TextEngine.printWithDelays("Which item would you like to drop? (or " +yellowColor+ "leave" +resetColor+ ")", true);
+                    TextEngine.printWithDelays("Which item would you like to drop? (or " + yellowColor + "leave" + resetColor + ")", true);
                     console.readLine();
                     command = console.readLine();
                     if (command.equals("leave")) {
@@ -272,12 +274,12 @@ public class InventoryManager extends Player {
         return 0; // or any other default value
     }
 
-    public static void useItemNoMenu(String item) throws InterruptedException { //this only shouls run with Player.heal()
+    public static void useItemNoMenu(String item) throws InterruptedException { //this only shouls run with Player.heal() and keys
         if (Potions.containsKey(item) && Player.getHealth() < Player.getMaxHealth() && !"heart container".equals(item)) {
             Player.changeHealth(Potions.get(item));
-            inventory.put(item, inventory.get(item) - 1);
-            if (inventory.get(item) == 0) {
-                inventory.remove(item);
+            Player.inventory.put(item, inventory.get(item) - 1);
+            if (Player.inventory.get(item) == 0) {
+                Player.inventory.remove(item);
             }
             setStatsToHighestInInventory();
         } else {
@@ -287,4 +289,9 @@ public class InventoryManager extends Player {
         }
     }
 
+    public static void useKey() {
+        if (Player.inventory.containsKey("key") && Player.inventory.get("key") > 0) {
+            Player.inventory.put("key", inventory.get("key") - 1);
+        }
+    }
 }

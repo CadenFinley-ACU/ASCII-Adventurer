@@ -10,20 +10,19 @@ import java.util.List;
 import java.util.Random;
 
 public class MountainCaveDungeon extends Dungeon {
+
     static String resetColor = "\033[0m"; // reset to default color
     static String yellowColor = "\033[1;33m"; // yellow color
-
 
     private static int[] spawnPosition = DungeonGenerator.findValue(Dungeon.mountainCaveDungeon, 9);
     private static int[] bossRoom = DungeonGenerator.findValue(Dungeon.mountainCaveDungeon, 8);
     private static int[] save = DungeonGenerator.findValue(Dungeon.mountainCaveDungeon, 9);
-    private static int[] lastPosition; // Variable to store the last position
     public static int[][] roomsBeenTo = DungeonGenerator.createRoomsBeenTo(Dungeon.mountainCaveDungeon.length);
     public static String direction;
     public static int[] availableMove;
     public static ArrayList<String> directionsString;
     private static int foundItemRooms = DungeonGenerator.numberOfRooms(Dungeon.mountainCaveDungeon, 2);
-    private static List<String> items = new ArrayList<>(List.of("better sword", "ninja armor", "health potion"));
+    public static List<String> items = new ArrayList<>(List.of("better sword", "ninja armor", "health potion"));
     private static final List<String> enemies = new ArrayList<>(List.of("Troll", "Skeleton", "Orc", "Ghost", "Demon", "Zombie"));
     private static final Random rand = new Random();
     public static boolean completed = false;
@@ -33,12 +32,15 @@ public class MountainCaveDungeon extends Dungeon {
         if (!visited) {
             fresh();
             visited = true;
+        } else {
+            save = currentPlayerPosition.clone();
         }
         room = "Mountain Cave Dungeon";
         Main.checkSave(room);
         Main.screenRefresh();
         Dungeon.currentDungeon = "Mountain Cave";
         currentPlayerPosition = save;
+        GameSaveSerialization.saveGame();
         startRooms();
     }
 
@@ -82,7 +84,7 @@ public class MountainCaveDungeon extends Dungeon {
             }
         }
         if (mountainCaveDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] == 3 && roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] == 0) {
-            if (hasItemInRoom("heart container", 1)) {
+            if (hasLockedChestInRoom("heart container", 1)) {
                 lastPosition = currentPlayerPosition.clone();
                 roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = mountainCaveDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
             } else {
@@ -113,7 +115,6 @@ public class MountainCaveDungeon extends Dungeon {
             Player.changeHealth(Enemy.spawnEnemy("Wyvern", 1));
             TextEngine.printWithDelays("You have defeated the boss and completed the dungeon!", false);
             TextEngine.enterToNext();
-            Dungeon.addItemsToMiniDungeons(items);
             Room.hasItemInRoom("Backpack", 1);
             lastPosition = currentPlayerPosition.clone();
             roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = mountainCaveDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
@@ -135,7 +136,7 @@ public class MountainCaveDungeon extends Dungeon {
     }
 
     private static boolean confirmBossContinue() throws InterruptedException {
-        TextEngine.printWithDelays("Are you sure you want to continue to the boss room? (" +yellowColor+ "yes" +resetColor+ " or " +yellowColor+ "no" +resetColor+ ")", true);
+        TextEngine.printWithDelays("Are you sure you want to continue to the boss room? (" + yellowColor + "yes" + resetColor + " or " + yellowColor + "no" + resetColor + ")", true);
         while (true) {
             ignore = Room.console.readLine();
             command = Room.console.readLine();
@@ -158,7 +159,7 @@ public class MountainCaveDungeon extends Dungeon {
         DungeonGenerator.printAdjacentRoomsAndCurrentRoomAndUnlockedRooms(mountainCaveDungeon, roomsBeenTo, currentPlayerPosition);
         availableMove = DungeonGenerator.getDirections(mountainCaveDungeon, currentPlayerPosition[0], currentPlayerPosition[1]);
         if (completed) {
-            TextEngine.printWithDelays("You have completed this dungeon. You can now type " +yellowColor+ "leave" +resetColor+ " to exit this dungeon.", false);
+            TextEngine.printWithDelays("You have completed this dungeon. You can now type " + yellowColor + "leave" + resetColor + " to exit this dungeon.", false);
         }
         TextEngine.printWithDelays("You can move in the following directions: ", false);
         //System.out.println(availableMove[0] + "" + availableMove[1] + "" + availableMove[2] + "" + availableMove[3]);

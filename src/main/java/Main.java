@@ -1,5 +1,6 @@
 
 import java.io.Console;
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -8,13 +9,6 @@ import java.util.Map;
  * Text Adventure Game SE374 F24 Final Project Caden Finley Albert Tucker
  * Grijesh Shrestha
  */
-/**
- * TODOOO Enemies Items
- *
- *  *Dungeons Rooms Add character to game
- */
-
- 
 public class Main {
 
     static String resetColor = "\033[0m"; // reset to default color
@@ -29,6 +23,7 @@ public class Main {
 
     public static void main(String[] args) throws InterruptedException { //main game start
         Dungeon.generateDungeons();
+        GameSaveSerialization.loadGameSave();
         createGameItems();
         startMenu();
     }
@@ -96,7 +91,7 @@ public class Main {
         } else {
             TextEngine.printNoDelay("Welcome Hero!", false);
         }
-        TextEngine.printWithDelays("What is your command: " +yellowColor+ "Start" +resetColor+ ", " +yellowColor+ "Settings" +resetColor+ ", " +yellowColor+ "Exit" +resetColor, true);
+        TextEngine.printWithDelays("What is your command: " + yellowColor + "Start" + resetColor + ", " + yellowColor + "Settings" + resetColor + ", " + yellowColor + "Exit" + resetColor, true);
         handleMenuCommands();
     }
 
@@ -108,7 +103,7 @@ public class Main {
                 case "start" ->
                     start();
                 case "settings" ->
-                    SettingsMenu.start();
+                    SettingsMenu.startFromStartMenu();
                 case "help" ->
                     displayHelp();
                 case "exit" ->
@@ -135,7 +130,216 @@ public class Main {
         System.err.println(
                 darkPurpleStart
                 + 
-    """
+
+     
+           
+
+    
+    
+        
+             
+
+    
+     
+        
+           
+                
+           
+         
+           
+
+    
+    
+        
+              
+              
+        
+            
+              
+             
+            
+              
+          
+          
+         
+                         
+          
+           
+             
+
+    
+    
+        
+              
+        
+              
+          
+          
+                         
+             
+
+    
+    
+        
+              
+        
+            
+                    
+        
+                  
+        
+             
+
+    
+    
+        
+            
+                
+              
+
+    
+         
+            
+           
+
+    
+     
+           
+
+    
+    
+        
+          
+          
+             
+
+    
+    
+        
+            
+                      
+                
+                      
+                
+                      
+                
+                      
+                
+                      
+                
+                      
+                
+                      
+                
+                      
+                
+                      
+                
+                      
+                
+                      
+                
+                      
+                  
+            
+            
+              
+        
+                
+             
+
+    
+      
+        
+         
+            
+                
+              
+
+    
+    
+                                                         
+              
+                                                                 
+              
+        
+                 
+              
+             
+
+    
+     
+             
+
+    
+     
+             
+
+    
+    
+        
+                  
+            
+            
+                 
+                      
+                
+                      
+                   
+            
+                  
+            
+                  
+            
+            
+                
+                
+                 
+                   
+            
+                  
+            
+                  
+            
+                  
+            
+                  
+              
+              
+
+    
+    
+        
+           
+           
+           
+        
+          
+             
+
+    
+       
+          
+              
+
+    
+    
+        
+        
+         
+        
+             
+
+    
+    
+                                                         
+              
+                                                                 
+              
+             
+
+    
+      """
                                    _    ____   ____ ___ ___                                     
                                   / \\  / ___| / ___|_ _|_ _|                                    
                                  / _ \\ \\___ \\| |    | | | |                                     
@@ -157,6 +361,7 @@ public class Main {
     }
 
     private static void exitGame() throws InterruptedException {   //exit game command
+        GameSaveSerialization.saveGame();
         TextEngine.printWithDelays("See ya next time!", false);
         TextEngine.enterToNext();
         TextEngine.clearScreen();
@@ -191,6 +396,7 @@ public class Main {
             case "exit" -> {
                 TextEngine.printWithDelays("Returning to main menu.", false);
                 TextEngine.clearScreen();
+                GameSaveSerialization.saveGame();
                 startMenu();
             }
             case "heal" ->
@@ -231,6 +437,7 @@ public class Main {
 
     public static void saveSpace(String place) throws InterruptedException { //save game command
         if (savedPlace != null) {
+            GameSaveSerialization.saveGame();
             TextEngine.printWithDelays("Game saved!", false);
         }
         savedPlace = place;
@@ -240,6 +447,7 @@ public class Main {
         if (getSavedPlace() == null) {
             startMenu();
         } else {
+            GameSaveSerialization.saveGame();
             InventoryManager.setStatsToHighestInInventory();
             switch (getSavedPlace()) {
                 case "SpawnRoom" ->
@@ -274,27 +482,32 @@ public class Main {
         playerCreated = false;
         savedPlace = null;
         Room.reset("all");
+        GameSaveSerialization.saveGame();
     }
 
     public static String getSavedPlace() { //get the saved place
         return savedPlace;
     }
 
-    public static boolean hasSave() { //check if there is a save
-        return getSavedPlace() != null;
+    public static boolean hasSave() { // Check if there is a save
+        // Check if getSavedPlace() is not null
+        // Check if the file game_save.txt exists
+        File saveFile = new File("game_save.txt");
+        return getSavedPlace() != null || saveFile.exists();
     }
 
     public static void checkSave(String place) throws InterruptedException { //check if there is a save and if that save is where you currently are
         if (!hasSave() || !getSavedPlace().equals(place)) {
             saveSpace(place);
+            GameSaveSerialization.saveGame();
         }
     }
 
     public static void start() throws InterruptedException { //start the game
         TextEngine.clearScreen();
-        if (hasSave()) {
+        if (hasSave() && Player.getName() != null) {
             promptLoadSavedGame();
-        } else if (playerCreated) {
+        } else if (playerCreated && Player.getName() != null) {
             saveSpace("SpawnRoom");
             loadSave();
         } else {
