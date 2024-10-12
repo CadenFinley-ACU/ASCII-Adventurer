@@ -22,7 +22,7 @@ public class OceanKingdomDungeon extends Dungeon {
     public static int[] availableMove;
     public static ArrayList<String> directionsString;
     private static int foundItemRooms = DungeonGenerator.numberOfRooms(Dungeon.oceanKingdomDungeon, 2);
-    public static List<String> items = new ArrayList<>(List.of("god slayer hammer", "god slayer armor", "super health potion"));
+    public static List<String> items;
     private static final List<String> enemies = new ArrayList<>(List.of("Sea Serpent", "Sea Monster", "Sea Witch", "Sea Dragon", "Sea Dragon"));
     private static final Random rand = new Random();
     public static boolean completed = false;

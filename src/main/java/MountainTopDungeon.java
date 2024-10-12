@@ -22,7 +22,7 @@ public class MountainTopDungeon extends Dungeon {
     public static int[] availableMove;
     public static ArrayList<String> directionsString;
     private static int foundItemRooms = DungeonGenerator.numberOfRooms(Dungeon.mountainTopDungeon, 2);
-    public static List<String> items = new ArrayList<>(List.of("great sword", "knight armor", "greater health potion"));
+    public static List<String> items;
     private static final List<String> enemies = new ArrayList<>(List.of("Ghost", "Gargoyle", "Orc", "Vampire", "Demon"));
     private static final Random rand = new Random();
     public static boolean completed = false;

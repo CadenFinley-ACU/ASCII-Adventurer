@@ -22,8 +22,11 @@ public class Main {
     public static Map<String, Integer> savedInventory = new HashMap<>();
 
     public static void main(String[] args) throws InterruptedException { //main game start
-        Dungeon.generateDungeons();
-        GameSaveSerialization.loadGameSave();
+        if (!hasSave()) {
+            Dungeon.generateDungeons();
+        } else {
+            GameSaveSerialization.loadGameSave();
+        }
         createGameItems();
         startMenu();
     }
