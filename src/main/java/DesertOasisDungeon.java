@@ -17,7 +17,6 @@ public class DesertOasisDungeon extends Dungeon {
     private static int[] spawnPosition = DungeonGenerator.findValue(Dungeon.desertOasisDungeon, 9);
     private static int[] bossRoom = DungeonGenerator.findValue(Dungeon.desertOasisDungeon, 8);
     private static int[] save = DungeonGenerator.findValue(Dungeon.desertOasisDungeon, 9);
-    private static int[] lastPosition;// Variable to store the last position
     public static int[][] roomsBeenTo = DungeonGenerator.createRoomsBeenTo(Dungeon.desertOasisDungeon.length);
     public static String direction;
     public static int[] availableMove;
