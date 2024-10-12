@@ -215,7 +215,7 @@ public class OpenWorld extends Room {
         if (Dungeon.completedDungeons == 0) {
             TextEngine.printWithDelays("You find yourself standing right by the entrance to the Meadow Dungeon,\n    its ancient stone archway beckoning you to enter.\n\n", false);
         } else {
-            TextEngine.printWithDelays("Congets! you have beaten The Meadow dungon,\n     time to go back to a village rest up, check out the shop, and head to the next dungon.\n\n", false);
+            TextEngine.printWithDelays("Congrats! you have beaten The Meadow dungeon,\n     time to go back to a village rest up, check out the shop, and head to the next dungeon.\n\n", false);
         }
         TextEngine.printWithDelays("Warning: Stepping into a dungeon will trigger battles,\n    but you may uncover valuable treasures within its chambers if you manage to survive.\n", false);
         TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "north" + resetColor + ", " + yellowColor + "east" + resetColor + ", " + yellowColor + "south" + resetColor + ", or " + yellowColor + "The Meadow" + resetColor + " to make your choice", true);
@@ -285,7 +285,7 @@ public class OpenWorld extends Room {
         if (Dungeon.completedDungeons > 1) {
             TextEngine.printWithDelays("You find yourself standing right by the entrance to The Mountain Cave Dungeon,\n    its ancient stone archway beckoning you to enter.\n\n", false);
         } else {
-            TextEngine.printWithDelays("Congrets! you have beaten The Mountain Cave dungeon,\n     time to go back to a village rest up, check out the shop, and head to the next dungon.\n\n", false);
+            TextEngine.printWithDelays("Congrets! you have beaten The Mountain Cave dungeon,\n     time to go back to a village rest up, check out the shop, and head to the next dungeon.\n\n", false);
         }
         TextEngine.printWithDelays("Warning: Stepping into a dungeon will trigger battles,\n    but you may uncover valuable treasures within its chambers if you manage to survive.\n", false);
         TextEngine.printWithDelays("Which path will you choose? Type " + yellowColor + "north" + resetColor + ", " + yellowColor + "The Mountain Cave" + resetColor + ", " + yellowColor + "The Village" + resetColor + ", or " + yellowColor + "west" + resetColor + " to continue your journey", true);
@@ -326,7 +326,7 @@ public class OpenWorld extends Room {
         if (Dungeon.completedDungeons > 2) {
             TextEngine.printWithDelays("You find yourself standing right by the entrance to The Mountain Top dungeon,\n    its ancient stone archway beckoning you to enter.\n\n", false);
         } else {
-            TextEngine.printWithDelays("Congrets! you have beaten The Mountain Cave dungeon,\n     time to go back to a village rest up, check out the shop, and head to the next dungon.\n\n", false);
+            TextEngine.printWithDelays("Congrets! you have beaten The Mountain Cave dungeon,\n     time to go back to a village rest up, check out the shop, and head to the next dungeon.\n\n", false);
         }
         TextEngine.printWithDelays("Warning: Stepping into a dungeon will trigger battles,\n    but you may uncover valuable treasures within its chambers if you manage to survive.\n", false);
         TextEngine.printWithDelays("Which path will you choose? Type " + yellowColor + "north" + resetColor + ", " + yellowColor + "south" + resetColor + ", " + yellowColor + "west" + resetColor + ", or " + yellowColor + "The Mountain Top" + resetColor + "  to continue your journey", true);
@@ -400,7 +400,7 @@ public class OpenWorld extends Room {
         if (Dungeon.completedDungeons == 1) {
             TextEngine.printWithDelays("You find yourself standing right by the entrance to The Dark Forest dungeon,\n    its ancient stone archway beckoning you to enter.\n\n", false);
         } else {
-            TextEngine.printWithDelays("Congets! you have beaten The Dark Forest dungon,\n     time to go back to a village rest up, check out the shop, and head to the next dungon.\n\n", false);
+            TextEngine.printWithDelays("Congrats! you have beaten The Dark Forest dungeon,\n     time to go back to a village rest up, check out the shop, and head to the next dungeon.\n\n", false);
         }
         TextEngine.printWithDelays("Warning: Stepping into a dungeon will trigger battles,\n    but you may uncover valuable treasures within its chambers if you manage to survive.\n", false);
         TextEngine.printWithDelays("Which path will you choose? Type " + yellowColor + "north" + resetColor + ", " + yellowColor + "east" + resetColor + ", " + yellowColor + "south" + resetColor + ", or " + yellowColor + "The Dark Forest" + resetColor + " to continue your journey", true);
@@ -474,7 +474,7 @@ public class OpenWorld extends Room {
         if (Dungeon.completedDungeons > 3) {
             TextEngine.printWithDelays("You find yourself standing right by the entrance to The Desert Oasis dungeon,\n    its ancient stone archway beckoning you to enter.\n\n", false);
         } else {
-            TextEngine.printWithDelays("Congets! you have beaten The Mountain Cave dungon,\n     time to go back to a village rest up, check out the shop, and head to the next dungon.\n\n", false);
+            TextEngine.printWithDelays("Congrats! you have beaten The Mountain Cave dungeon,\n     time to go back to a village rest up, check out the shop, and head to the next dungeon.\n\n", false);
         }
         TextEngine.printWithDelays("Warning: Stepping into a dungeon will trigger battles,\n    but you may uncover valuable treasures within its chambers if you manage to survive.\n", false);
         TextEngine.printWithDelays("Which path will you choose? Type " + yellowColor + "north" + resetColor + ", " + yellowColor + "south" + resetColor + ", " + yellowColor + "west" + resetColor + ", " + yellowColor + "The Desert Oasis" + resetColor + "  to continue your journey", true);
@@ -515,7 +515,7 @@ public class OpenWorld extends Room {
         if (Dungeon.completedDungeons > 4) {
             TextEngine.printWithDelays("You find yourself standing right by the entrance to The Desert Plains dungeon,\n    its ancient stone archway beckoning you to enter.\n\n", false);
         } else {
-            TextEngine.printWithDelays("Congets! you have beaten The Desert Plains dungon,\n     time to go back to a village rest up, check out the shop, and head to the next dungon.\n\n", false);
+            TextEngine.printWithDelays("Congrats! you have beaten The Desert Plains dungeon,\n     time to go back to a village rest up, check out the shop, and head to the next dungeon.\n\n", false);
         }
         TextEngine.printWithDelays("Worrning: going into a dungeon you will trigger fights, but you might find something in the rooms\nIf you do not DIE", false);
         TextEngine.printWithDelays("Which path will you choose? Type " + yellowColor + "The Village" + resetColor + ", " + yellowColor + "south" + resetColor + ", " + yellowColor + "west" + resetColor + ", or " + yellowColor + "The Desert Plains" + resetColor + " to continue your journey", true);
@@ -736,7 +736,7 @@ public class OpenWorld extends Room {
         if (Dungeon.completedDungeons > 5) {
             TextEngine.printWithDelays("You find yourself standing right by the entrance to The Desert Pyramid dungeon,\n    its ancient stone archway beckoning you to enter.\n\n", false);
         } else {
-            TextEngine.printWithDelays("Congets! you have beaten The Mountain Cave dungon,\n     time to go back to a village rest up, check out the shop, and head to the next dungon.\n\n", false);
+            TextEngine.printWithDelays("Congrats! you have beaten The Mountain Cave dungeon,\n     time to go back to a village rest up, check out the shop, and head to the next dungeon.\n\n", false);
         }
         TextEngine.printWithDelays("Warning: Stepping into a dungeon will trigger battles,\n    but you may uncover valuable treasures within its chambers if you manage to survive.\n", false);
         TextEngine.printWithDelays("Which path will you choose? Type " + yellowColor + "The Ocean Kingdom" + resetColor + ", " + yellowColor + "The Village" + resetColor + ", " + yellowColor + "west" + resetColor + " or " + yellowColor + "The Desert Pyramid" + resetColor + " to continue your journey", true);
@@ -810,7 +810,7 @@ public class OpenWorld extends Room {
         if (Dungeon.completedDungeons > 6) {
             TextEngine.printWithDelays("You find yourself standing right by the entrance to The Ocean Kingdom dungeon,\n    its ancient stone archway beckoning you to enter.\n\n", false);
         } else {
-            TextEngine.printWithDelays("Congets! you have beaten The Mountain Cave dungon,\n     time to go back to a village rest up, check out the shop, and head to the next dungon.\n\n", false);
+            TextEngine.printWithDelays("Congrats! you have beaten The Mountain Cave dungeon,\n     time to go back to a village rest up, check out the shop, and head to the next dungeon.\n\n", false);
         }
         TextEngine.printWithDelays("Warning: Stepping into a dungeon will trigger battles,\n    but you may uncover valuable treasures within its chambers if you manage to survive.\n", false);
         TextEngine.printWithDelays("Which path will you choose? Type " + yellowColor + "south" + resetColor + " or " + yellowColor + "The Ocean Kingdom" + resetColor + " to continue your journey", true);
