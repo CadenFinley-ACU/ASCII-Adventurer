@@ -102,7 +102,7 @@ public class Main {
                 case "start" ->
                     start();
                 case "settings" ->
-                    SettingsMenu.start();
+                    SettingsMenu.startFromStartMenu();
                 case "help" ->
                     displayHelp();
                 case "exit" ->

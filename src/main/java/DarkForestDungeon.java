@@ -33,6 +33,8 @@ public class DarkForestDungeon extends Dungeon {
         if (!visited) {
             fresh();
             visited = true;
+        } else {
+            save = currentPlayerPosition.clone();
         }
         room = "Dark Forest Dungeon";
         Main.checkSave(room);

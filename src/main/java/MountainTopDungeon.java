@@ -32,6 +32,8 @@ public class MountainTopDungeon extends Dungeon {
         if (!visited) {
             fresh();
             visited = true;
+        } else {
+            save = currentPlayerPosition.clone();
         }
         room = "Mountain Top Dungeon";
         Main.checkSave(room);

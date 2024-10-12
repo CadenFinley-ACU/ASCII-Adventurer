@@ -32,6 +32,8 @@ public class DesertOasisDungeon extends Dungeon {
         if (!visited) {
             fresh();
             visited = true;
+        } else {
+            save = currentPlayerPosition.clone();
         }
         room = "Desert Oasis Dungeon";
         Main.checkSave(room);

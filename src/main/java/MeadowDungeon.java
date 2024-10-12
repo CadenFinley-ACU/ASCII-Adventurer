@@ -32,6 +32,8 @@ public class MeadowDungeon extends Dungeon {
         if (!visited) {
             fresh();
             visited = true;
+        } else {
+            save = currentPlayerPosition.clone();
         }
         room = "Meadow Dungeon";
         Main.checkSave(room);

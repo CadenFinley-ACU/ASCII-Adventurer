@@ -32,6 +32,8 @@ public class DesertPlainsDungeon extends Dungeon {
         if (!visited) {
             fresh();
             visited = true;
+        } else {
+            save = currentPlayerPosition.clone();
         }
         room = "Desert Plains Dungeon";
         Main.checkSave(room);

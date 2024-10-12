@@ -32,6 +32,8 @@ public class OceanKingdomDungeon extends Dungeon {
         if (!visited) {
             fresh();
             visited = true;
+        } else {
+            save = currentPlayerPosition.clone();
         }
         room = "Ocean Kingdom Dungeon";
         Main.checkSave(room);

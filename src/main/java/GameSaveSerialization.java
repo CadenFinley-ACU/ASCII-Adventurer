@@ -262,6 +262,22 @@ public class GameSaveSerialization {
             OceanKingdomDungeon.completed = Boolean.parseBoolean(reader.readLine());
             buffer = reader.readLine();
             OceanKingdomDungeon.visited = Boolean.parseBoolean(reader.readLine());
+            buffer = reader.readLine();
+            MeadowDungeon.roomsBeenTo = readMatrix(reader);
+            buffer = reader.readLine();
+            DarkForestDungeon.roomsBeenTo = readMatrix(reader);
+            buffer = reader.readLine();
+            MountainCaveDungeon.roomsBeenTo = readMatrix(reader);
+            buffer = reader.readLine();
+            MountainTopDungeon.roomsBeenTo = readMatrix(reader);
+            buffer = reader.readLine();
+            DesertOasisDungeon.roomsBeenTo = readMatrix(reader);
+            buffer = reader.readLine();
+            DesertPlainsDungeon.roomsBeenTo = readMatrix(reader);
+            buffer = reader.readLine();
+            DesertPyramidDungeon.roomsBeenTo = readMatrix(reader);
+            buffer = reader.readLine();
+            OceanKingdomDungeon.roomsBeenTo = readMatrix(reader);
 
         } catch (IOException e) {
             e.printStackTrace();
