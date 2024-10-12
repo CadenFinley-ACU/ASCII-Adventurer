@@ -22,8 +22,8 @@ public class Dungeon extends Room {
     public static int[][] desertPyramidDungeon;
     public static int[][] oceanKingdomDungeon;
 
-    public static int[] currentPlayerPosition;
-    public static int[] lastPosition; // Variable to store the last position
+    public static int[] currentPlayerPosition = null;
+    public static int[] lastPosition = null; // Variable to store the last position
     public static boolean previousAutoSettings;
 
     public static List<String> missedItems = new ArrayList<>();

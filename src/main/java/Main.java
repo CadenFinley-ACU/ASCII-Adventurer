@@ -1,5 +1,6 @@
 
 import java.io.Console;
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -116,8 +117,6 @@ public class Main {
                     setTextSpeed("NoDelay");
                 case "debug" ->
                     debugInfo();
-                case "load save" ->
-                    promptSaveCode();
                 default ->
                     TextEngine.printWithDelays("I'm sorry, I don't understand that command.", true);
             }
@@ -131,15 +130,6 @@ public class Main {
                 darkPurpleStart
                 + 
 
-    
-        
-        
-          
-          
-         
-             
-
-    
      
            
 
@@ -179,6 +169,7 @@ public class Main {
     
     
         
+            
               
         
               
@@ -202,11 +193,13 @@ public class Main {
     
     
         
+            
                 
               
 
     
-       
+         
+            
            
 
     
@@ -215,6 +208,7 @@ public class Main {
 
     
     
+        
           
           
              
@@ -248,6 +242,7 @@ public class Main {
                       
                   
             
+            
               
         
                 
@@ -258,9 +253,6 @@ public class Main {
         
          
             
-            
-            
-               
                 
               
 
@@ -441,10 +433,7 @@ public class Main {
 
     public static void saveSpace(String place) throws InterruptedException { //save game command
         if (savedPlace != null) {
-            String saveCode = GameSaveSerialization.saveGame();
-            System.out.println(saveCode);
-            System.out.println(GameSaveSerialization.readSave(saveCode));
-            TextEngine.enterToNext();
+            GameSaveSerialization.saveGame();
             TextEngine.printWithDelays("Game saved!", false);
         }
         savedPlace = place;
@@ -454,6 +443,7 @@ public class Main {
         if (getSavedPlace() == null) {
             startMenu();
         } else {
+            GameSaveSerialization.saveGame();
             InventoryManager.setStatsToHighestInInventory();
             switch (getSavedPlace()) {
                 case "SpawnRoom" ->
@@ -488,19 +478,24 @@ public class Main {
         playerCreated = false;
         savedPlace = null;
         Room.reset("all");
+        GameSaveSerialization.saveGame();
     }
 
     public static String getSavedPlace() { //get the saved place
         return savedPlace;
     }
 
-    public static boolean hasSave() { //check if there is a save
-        return getSavedPlace() != null;
+    public static boolean hasSave() { // Check if there is a save
+        // Check if getSavedPlace() is not null
+        // Check if the file game_save.txt exists
+        File saveFile = new File("game_save.txt");
+        return saveFile.exists()|| getSavedPlace() == null;
     }
 
     public static void checkSave(String place) throws InterruptedException { //check if there is a save and if that save is where you currently are
         if (!hasSave() || !getSavedPlace().equals(place)) {
             saveSpace(place);
+            GameSaveSerialization.saveGame();
         }
     }
 
@@ -523,6 +518,7 @@ public class Main {
         if (command.toLowerCase().equals("no")) {
             confirmWipeSave();
         } else {
+            GameSaveSerialization.loadGameSave();
             loadSave();
         }
     }
@@ -562,13 +558,5 @@ public class Main {
 
     public static String getOS_NAME() { //get the os name
         return OS_NAME;
-    }
-    public static void promptSaveCode() throws InterruptedException { //prompt to save code
-        TextEngine.printWithDelays("Enter your save code: ", true);
-        ignore = console.readLine();
-        command = console.readLine();
-        System.out.println(GameSaveSerialization.readSave(command));
-        GameSaveSerialization.parseSave(GameSaveSerialization.readSave(command));
-        loadSave();
     }
 }
