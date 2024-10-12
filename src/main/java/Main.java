@@ -23,6 +23,7 @@ public class Main {
 
     public static void main(String[] args) throws InterruptedException { //main game start
         Dungeon.generateDungeons();
+        GameSaveSerialization.loadGameSave();
         createGameItems();
         startMenu();
     }
@@ -169,7 +170,6 @@ public class Main {
     
     
         
-            
               
         
               
@@ -293,6 +293,7 @@ public class Main {
             
             
                 
+                
                  
                    
             
@@ -326,6 +327,7 @@ public class Main {
         
         
          
+        
              
 
     
@@ -359,6 +361,7 @@ public class Main {
     }
 
     private static void exitGame() throws InterruptedException {   //exit game command
+        GameSaveSerialization.saveGame();
         TextEngine.printWithDelays("See ya next time!", false);
         TextEngine.enterToNext();
         TextEngine.clearScreen();
@@ -393,6 +396,7 @@ public class Main {
             case "exit" -> {
                 TextEngine.printWithDelays("Returning to main menu.", false);
                 TextEngine.clearScreen();
+                GameSaveSerialization.saveGame();
                 startMenu();
             }
             case "heal" ->
@@ -518,7 +522,6 @@ public class Main {
         if (command.toLowerCase().equals("no")) {
             confirmWipeSave();
         } else {
-            GameSaveSerialization.loadGameSave();
             loadSave();
         }
     }

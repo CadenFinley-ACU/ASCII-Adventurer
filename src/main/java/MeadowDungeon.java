@@ -22,7 +22,7 @@ public class MeadowDungeon extends Dungeon {
     public static int[] availableMove;
     public static ArrayList<String> directionsString;
     private static int foundItemRooms = DungeonGenerator.numberOfRooms(Dungeon.meadowDungeon, 2);
-    private static List<String> items = new ArrayList<>(List.of("axe", "chainmail set"));
+    public static List<String> items = new ArrayList<>(List.of("axe", "chainmail set"));
     private static final List<String> enemies = new ArrayList<>(List.of("Goblin", "Skeleton", "Slime", "Mimic"));
     private static final Random rand = new Random();
     public static boolean completed = false;
@@ -113,7 +113,6 @@ public class MeadowDungeon extends Dungeon {
             Player.changeHealth(Enemy.spawnEnemy("Forest Giant", 1));
             TextEngine.printWithDelays("You have defeated the boss and completed the dungeon!", false);
             TextEngine.enterToNext();
-            Dungeon.addItemsToMiniDungeons(items);
             lastPosition = currentPlayerPosition.clone();
             roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = meadowDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
             if (!completed) {

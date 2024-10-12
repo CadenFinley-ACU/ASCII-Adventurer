@@ -22,7 +22,7 @@ public class OceanKingdomDungeon extends Dungeon {
     public static int[] availableMove;
     public static ArrayList<String> directionsString;
     private static int foundItemRooms = DungeonGenerator.numberOfRooms(Dungeon.oceanKingdomDungeon, 2);
-    private static List<String> items = new ArrayList<>(List.of("god slayer hammer", "god slayer armor", "super health potion"));
+    public static List<String> items = new ArrayList<>(List.of("god slayer hammer", "god slayer armor", "super health potion"));
     private static final List<String> enemies = new ArrayList<>(List.of("Sea Serpent", "Sea Monster", "Sea Witch", "Sea Dragon", "Sea Dragon"));
     private static final Random rand = new Random();
     public static boolean completed = false;
@@ -114,7 +114,6 @@ public class OceanKingdomDungeon extends Dungeon {
             Player.changeHealth(Enemy.spawnEnemy("Kracken", 1));
             TextEngine.printWithDelays("You have defeated the boss and completed the dungeon!", false);
             TextEngine.enterToNext();
-            Dungeon.addItemsToMiniDungeons(items);
             lastPosition = currentPlayerPosition.clone();
             roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = oceanKingdomDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
             if (!completed) {

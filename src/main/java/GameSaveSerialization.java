@@ -3,6 +3,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -59,8 +60,6 @@ public class GameSaveSerialization {
         writeMatrix(Dungeon.desertPyramidDungeon, filePath);
         writeSeparator(filePath);
         writeMatrix(Dungeon.oceanKingdomDungeon, filePath);
-        writeSeparator(filePath);
-        writeValue(String.valueOf(Dungeon.missedItems), filePath);
         writeSeparator(filePath);
 
         writeValue(String.valueOf(SpawnRoom.roomSave), filePath);
@@ -120,6 +119,22 @@ public class GameSaveSerialization {
         writeMatrix(DesertPyramidDungeon.roomsBeenTo, filePath);
         writeSeparator(filePath);
         writeMatrix(OceanKingdomDungeon.roomsBeenTo, filePath);
+        writeSeparator(filePath);
+        writeList(MeadowDungeon.items, filePath);
+        writeSeparator(filePath);
+        writeList(DarkForestDungeon.items, filePath);
+        writeSeparator(filePath);
+        writeList(MountainCaveDungeon.items, filePath);
+        writeSeparator(filePath);
+        writeList(MountainTopDungeon.items, filePath);
+        writeSeparator(filePath);
+        writeList(DesertOasisDungeon.items, filePath);
+        writeSeparator(filePath);
+        writeList(DesertPlainsDungeon.items, filePath);
+        writeSeparator(filePath);
+        writeList(DesertPyramidDungeon.items, filePath);
+        writeSeparator(filePath);
+        writeList(OceanKingdomDungeon.items, filePath);
     }
 
     private static void writeSeparator(String filePath) {
@@ -162,6 +177,20 @@ public class GameSaveSerialization {
             } else {
                 for (int value : array) {
                     writer.write(value + " ");
+                }
+                writer.write("\n");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    private static void writeList(List<String> list, String filePath) {
+        try (FileWriter writer = new FileWriter(filePath, true)) { // true to append to the file
+            if (list == null) {
+                writer.write("null\n");
+            } else {
+                for (String value : list) {
+                    writer.write(value + ", ");
                 }
                 writer.write("\n");
             }
@@ -218,8 +247,6 @@ public class GameSaveSerialization {
             Dungeon.desertPyramidDungeon = readMatrix(reader);
             buffer = reader.readLine();
             Dungeon.oceanKingdomDungeon = readMatrix(reader);
-            buffer = reader.readLine();
-            Dungeon.missedItems = readList(reader);
             buffer = reader.readLine();
             SpawnRoom.roomSave = Integer.parseInt(reader.readLine());
             buffer = reader.readLine();
@@ -278,18 +305,33 @@ public class GameSaveSerialization {
             DesertPyramidDungeon.roomsBeenTo = readMatrix(reader);
             buffer = reader.readLine();
             OceanKingdomDungeon.roomsBeenTo = readMatrix(reader);
-
+            buffer = reader.readLine();
+            MeadowDungeon.items = readList(reader);
+            buffer = reader.readLine();
+            DarkForestDungeon.items = readList(reader);
+            buffer = reader.readLine();
+            MountainCaveDungeon.items = readList(reader);
+            buffer = reader.readLine();
+            MountainTopDungeon.items = readList(reader);
+            buffer = reader.readLine();
+            DesertOasisDungeon.items = readList(reader);
+            buffer = reader.readLine();
+            DesertPlainsDungeon.items = readList(reader);
+            buffer = reader.readLine();
+            DesertPyramidDungeon.items = readList(reader);
+            buffer = reader.readLine();
+            OceanKingdomDungeon.items = readList(reader);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    private static List<String> readList(BufferedReader reader) throws IOException {
+    private static ArrayList<String> readList(BufferedReader reader) throws IOException {
         String line = reader.readLine();
         if (line.equals(NULL_MARKER) || line.equals("null")) {
             return null;
         }
-        return List.of(line.split(" "));
+        return new ArrayList<>(List.of(line.split(", ")));
     }
 
     private static int[] readArray(BufferedReader reader) throws IOException {

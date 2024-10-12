@@ -267,10 +267,4 @@ public class Dungeon extends Room {
             TextEngine.printWithDelays("this function isnt working right", false);
         }
     }
-
-    public static void addItemsToMiniDungeons(List<String> items) {
-        for (String item : missedItems) {
-            missedItems.add(item);
-        }
-    }
 }

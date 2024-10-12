@@ -22,7 +22,7 @@ public class DesertPyramidDungeon extends Dungeon {
     public static int[] availableMove;
     public static ArrayList<String> directionsString;
     private static int foundItemRooms = DungeonGenerator.numberOfRooms(Dungeon.desertPyramidDungeon, 2);
-    private static List<String> items = new ArrayList<>(List.of("excalibur", "angel armor", "super health potion"));
+    public static List<String> items = new ArrayList<>(List.of("excalibur", "angel armor", "super health potion"));
     private static final List<String> enemies = new ArrayList<>(List.of("Werewolf", "Witch", "Giant", "Mummy", "Minotaur"));
     private static final Random rand = new Random();
     public static boolean completed = false;
@@ -114,7 +114,6 @@ public class DesertPyramidDungeon extends Dungeon {
             Player.changeHealth(Enemy.spawnEnemy("Giant Sand Worm", 1));
             TextEngine.printWithDelays("You have defeated the boss and completed the dungeon!", false);
             TextEngine.enterToNext();
-            Dungeon.addItemsToMiniDungeons(items);
             Room.hasItemInRoom("Large Backpack", 1);
             lastPosition = currentPlayerPosition.clone();
             roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = desertPyramidDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
