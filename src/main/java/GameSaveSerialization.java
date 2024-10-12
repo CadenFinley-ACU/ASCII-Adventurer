@@ -168,7 +168,7 @@ public class GameSaveSerialization {
         }
     }
 
-    public static void loadGameSave() {
+    public static void loadGameSave() throws InterruptedException {
         String filePath = "game_save.txt";
         String buffer = "";
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
@@ -275,8 +275,12 @@ public class GameSaveSerialization {
                 DesertPyramidDungeon.roomsBeenTo = readMatrix(reader);
                 buffer = reader.readLine();
                 OceanKingdomDungeon.roomsBeenTo = readMatrix(reader);
-            } catch (Exception e) {
-                System.out.println("Save File Corrupt or Invalid: " + buffer);
+            } catch (IOException | NumberFormatException e) {
+                System.out.println("Save File Corrupt or Invalid... ");
+                TextEngine.printWithDelays("Erasing Save File and Restarting...", false);
+                TextEngine.enterToNext();
+                Main.wipeSave();
+                Player.playerStart();
             }
 
         } catch (IOException e) {
