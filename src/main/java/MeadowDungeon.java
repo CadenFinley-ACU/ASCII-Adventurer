@@ -17,7 +17,6 @@ public class MeadowDungeon extends Dungeon {
     private static int[] spawnPosition = DungeonGenerator.findValue(Dungeon.meadowDungeon, 9);
     private static int[] bossRoom = DungeonGenerator.findValue(Dungeon.meadowDungeon, 8);
     private static int[] save = DungeonGenerator.findValue(Dungeon.meadowDungeon, 9);
-    private static int[] lastPosition; // Variable to store the last position
     public static int[][] roomsBeenTo = DungeonGenerator.createRoomsBeenTo(Dungeon.meadowDungeon.length);
     public static String direction;
     public static int[] availableMove;

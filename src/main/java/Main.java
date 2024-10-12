@@ -8,15 +8,7 @@ import java.util.Map;
  * Text Adventure Game SE374 F24 Final Project Caden Finley Albert Tucker
  * Grijesh Shrestha
  */
-/**
- * TODOOO Enemies Items
- *
- *  *Dungeons Rooms Add character to game
- */
-
- 
 public class Main {
-    
 
     static String resetColor = "\033[0m"; // reset to default color
     static String yellowColor = "\033[1;33m"; // yellow color
@@ -97,7 +89,7 @@ public class Main {
         } else {
             TextEngine.printNoDelay("Welcome Hero!", false);
         }
-        TextEngine.printWithDelays("What is your command: " +yellowColor+ "Start" +resetColor+ ", " +yellowColor+ "Settings" +resetColor+ ", " +yellowColor+ "Exit" +resetColor, true);
+        TextEngine.printWithDelays("What is your command: " + yellowColor + "Start" + resetColor + ", " + yellowColor + "Settings" + resetColor + ", " + yellowColor + "Exit" + resetColor, true);
         handleMenuCommands();
     }
 
@@ -124,6 +116,8 @@ public class Main {
                     setTextSpeed("NoDelay");
                 case "debug" ->
                     debugInfo();
+                case "load save" ->
+                    promptSaveCode();
                 default ->
                     TextEngine.printWithDelays("I'm sorry, I don't understand that command.", true);
             }
@@ -136,7 +130,222 @@ public class Main {
         System.err.println(
                 darkPurpleStart
                 + 
-    """
+
+    
+        
+        
+          
+          
+         
+             
+
+    
+     
+           
+
+    
+    
+        
+             
+
+    
+     
+        
+           
+                
+           
+         
+           
+
+    
+    
+        
+              
+              
+        
+            
+              
+             
+            
+              
+          
+          
+         
+                         
+          
+           
+             
+
+    
+    
+        
+              
+        
+              
+          
+          
+                         
+             
+
+    
+    
+        
+              
+        
+            
+                
+        
+              
+        
+             
+
+    
+    
+        
+                
+              
+
+    
+       
+           
+
+    
+     
+           
+
+    
+    
+          
+          
+             
+
+    
+    
+        
+            
+                      
+                
+                      
+                
+                      
+                
+                      
+                
+                      
+                
+                      
+                
+                      
+                
+                      
+                
+                      
+                
+                      
+                
+                      
+                
+                      
+                  
+            
+              
+        
+                
+             
+
+    
+      
+        
+         
+            
+            
+            
+               
+                
+              
+
+    
+    
+                                                         
+              
+                                                                 
+              
+        
+                 
+              
+             
+
+    
+     
+             
+
+    
+     
+             
+
+    
+    
+        
+                  
+            
+            
+                 
+                      
+                
+                      
+                   
+            
+                  
+            
+                  
+            
+            
+                
+                 
+                   
+            
+                  
+            
+                  
+            
+                  
+            
+                  
+              
+              
+
+    
+    
+        
+           
+           
+           
+        
+          
+             
+
+    
+       
+          
+              
+
+    
+    
+        
+        
+         
+             
+
+    
+    
+                                                         
+              
+                                                                 
+              
+             
+
+    
+      """
                                    _    ____   ____ ___ ___                                     
                                   / \\  / ___| / ___|_ _|_ _|                                    
                                  / _ \\ \\___ \\| |    | | | |                                     
@@ -232,6 +441,10 @@ public class Main {
 
     public static void saveSpace(String place) throws InterruptedException { //save game command
         if (savedPlace != null) {
+            String saveCode = GameSaveSerialization.saveGame();
+            System.out.println(saveCode);
+            System.out.println(GameSaveSerialization.readSave(saveCode));
+            TextEngine.enterToNext();
             TextEngine.printWithDelays("Game saved!", false);
         }
         savedPlace = place;
@@ -349,5 +562,13 @@ public class Main {
 
     public static String getOS_NAME() { //get the os name
         return OS_NAME;
+    }
+    public static void promptSaveCode() throws InterruptedException { //prompt to save code
+        TextEngine.printWithDelays("Enter your save code: ", true);
+        ignore = console.readLine();
+        command = console.readLine();
+        System.out.println(GameSaveSerialization.readSave(command));
+        GameSaveSerialization.parseSave(GameSaveSerialization.readSave(command));
+        loadSave();
     }
 }

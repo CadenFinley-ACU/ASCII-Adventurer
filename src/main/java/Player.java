@@ -147,6 +147,10 @@ public class Player {
         inventorySize += change;
     }
 
+    public static int getInventorySize() { //get the inventory size
+        return inventorySize;
+    }
+
     public static void changeHealth(int change) throws InterruptedException {
         String brightRedStart = "\033[1;31m";
         String brightGreenStart = "\033[1;32m";
@@ -232,6 +236,10 @@ public class Player {
             total += inventory.get(key);
         }
         return total;
+    }
+
+    public static String getInventory() {
+        return inventory.toString();
     }
 
     public static Boolean putItem(String item, int amount) throws InterruptedException { //put an item in the inventory
@@ -470,5 +478,14 @@ public class Player {
 
     public static Boolean hasRoomInInventory(int amount) {
         return inventorySize >= getTotalNumberOfItemsInInventory() + amount;
+    }
+
+    public static void playerSetSave(String localName, int localHealth, int localMaxHealth, int localGold, Map<String, Integer> localInventory, int localInventorySize) {
+        name = localName;
+        health = localHealth;
+        maxHealth = localMaxHealth;
+        gold = localGold;
+        inventory = localInventory;
+        inventorySize = localInventorySize;
     }
 }
