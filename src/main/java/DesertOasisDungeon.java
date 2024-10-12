@@ -40,6 +40,7 @@ public class DesertOasisDungeon extends Dungeon {
         Main.screenRefresh();
         Dungeon.currentDungeon = "Desert Oasis";
         currentPlayerPosition = save;
+        GameSaveSerialization.saveGame();
         startRooms();
     }
 

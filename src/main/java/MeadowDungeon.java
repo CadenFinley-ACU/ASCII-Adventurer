@@ -40,6 +40,7 @@ public class MeadowDungeon extends Dungeon {
         Main.screenRefresh();
         Dungeon.currentDungeon = "Meadow";
         currentPlayerPosition = save;
+        GameSaveSerialization.saveGame();
         startRooms();
     }
 

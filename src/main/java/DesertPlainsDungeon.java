@@ -40,6 +40,7 @@ public class DesertPlainsDungeon extends Dungeon {
         Main.screenRefresh();
         Dungeon.currentDungeon = "Desert Plains";
         currentPlayerPosition = save;
+        GameSaveSerialization.saveGame();
         startRooms();
     }
 

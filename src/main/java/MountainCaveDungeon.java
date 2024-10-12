@@ -40,6 +40,7 @@ public class MountainCaveDungeon extends Dungeon {
         Main.screenRefresh();
         Dungeon.currentDungeon = "Mountain Cave";
         currentPlayerPosition = save;
+        GameSaveSerialization.saveGame();
         startRooms();
     }
 
