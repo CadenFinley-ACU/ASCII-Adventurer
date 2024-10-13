@@ -22,7 +22,7 @@ public class MeadowDungeon extends Dungeon {
     public static int[] availableMove;
     public static ArrayList<String> directionsString;
     private static int foundItemRooms = DungeonGenerator.numberOfRooms(Dungeon.meadowDungeon, 2);
-    public static List<String> items = new ArrayList<>(List.of("axe", "chainmail set"));
+    public static List<String> items;
     private static final List<String> enemies = new ArrayList<>(List.of("Goblin", "Skeleton", "Slime", "Mimic"));
     private static final Random rand = new Random();
     public static boolean completed = false;

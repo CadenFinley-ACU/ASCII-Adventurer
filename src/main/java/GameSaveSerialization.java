@@ -187,7 +187,7 @@ public class GameSaveSerialization {
 
     private static void writeList(List<String> list, String filePath) {
         try (FileWriter writer = new FileWriter(filePath, true)) { // true to append to the file
-            if (list == null) {
+            if (list == null || list.isEmpty()) {
                 writer.write("null\n");
             } else {
                 for (String value : list) {
@@ -307,6 +307,22 @@ public class GameSaveSerialization {
                 DesertPyramidDungeon.roomsBeenTo = readMatrix(reader);
                 buffer = reader.readLine();
                 OceanKingdomDungeon.roomsBeenTo = readMatrix(reader);
+                buffer = reader.readLine();
+                MeadowDungeon.items = readList(reader);
+                buffer = reader.readLine();
+                DarkForestDungeon.items = readList(reader);
+                buffer = reader.readLine();
+                MountainCaveDungeon.items = readList(reader);
+                buffer = reader.readLine();
+                MountainTopDungeon.items = readList(reader);
+                buffer = reader.readLine();
+                DesertOasisDungeon.items = readList(reader);
+                buffer = reader.readLine();
+                DesertPlainsDungeon.items = readList(reader);
+                buffer = reader.readLine();
+                DesertPyramidDungeon.items = readList(reader);
+                buffer = reader.readLine();
+                OceanKingdomDungeon.items = readList(reader);
             } catch (IOException | NumberFormatException e) {
                 System.out.println("Save File Corrupt or Invalid... ");
                 TextEngine.printWithDelays("Erasing Save File and Restarting...", false);

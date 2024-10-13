@@ -22,8 +22,11 @@ public class Main {
     public static Map<String, Integer> savedInventory = new HashMap<>();
 
     public static void main(String[] args) throws InterruptedException { //main game start
-        Dungeon.generateDungeons();
-        GameSaveSerialization.loadGameSave();
+        if (!hasSave()) {
+            Dungeon.generateDungeons();
+        } else {
+            GameSaveSerialization.loadGameSave();
+        }
         createGameItems();
         startMenu();
     }
@@ -86,7 +89,7 @@ public class Main {
         splashScreen();
         TextEngine.printNoDelay("               by: Albert Tucker, Caden Finley, and Grijesh Shrestha", false);
         System.out.println();
-        if (hasSave()) {
+        if (hasSave() && Player.getName() != null) {
             TextEngine.printNoDelay("Welcome " + Player.getName() + "!", false);
         } else {
             TextEngine.printNoDelay("Welcome Hero!", false);
@@ -198,7 +201,7 @@ public class Main {
               
 
     
-         
+             
             
            
 
@@ -208,6 +211,7 @@ public class Main {
 
     
     
+        
         
           
           
@@ -245,6 +249,7 @@ public class Main {
             
               
         
+              
                 
              
 
@@ -445,7 +450,8 @@ public class Main {
 
     public static void loadSave() throws InterruptedException { //load saved game command
         if (getSavedPlace() == null) {
-            startMenu();
+            playerCreated = false;  
+            Player.playerStart();
         } else {
             GameSaveSerialization.saveGame();
             InventoryManager.setStatsToHighestInInventory();
@@ -482,6 +488,7 @@ public class Main {
         playerCreated = false;
         savedPlace = null;
         Room.reset("all");
+        Player.setName(null);
         GameSaveSerialization.saveGame();
     }
 
@@ -493,7 +500,7 @@ public class Main {
         // Check if getSavedPlace() is not null
         // Check if the file game_save.txt exists
         File saveFile = new File("game_save.txt");
-        return getSavedPlace() != null || saveFile.exists();
+        return getSavedPlace() != null || saveFile.exists() || Player.getName() != null;
     }
 
     public static void checkSave(String place) throws InterruptedException { //check if there is a save and if that save is where you currently are
