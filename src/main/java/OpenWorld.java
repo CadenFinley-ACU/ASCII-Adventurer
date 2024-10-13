@@ -282,7 +282,7 @@ public class OpenWorld extends Room {
     }
 
     private static void room5() throws InterruptedException {
-        if (Dungeon.completedDungeons > 1) {
+        if (Dungeon.completedDungeons <= 2) {
             TextEngine.printWithDelays("You find yourself standing right by the entrance to The Mountain Cave Dungeon,\n    its ancient stone archway beckoning you to enter.\n\n", false);
         } else {
             TextEngine.printWithDelays("Congrets! you have beaten The Mountain Cave dungeon,\n     time to go back to a village rest up, check out the shop, and head to the next dungeon.\n\n", false);
@@ -323,7 +323,7 @@ public class OpenWorld extends Room {
     }
 
     private static void room6() throws InterruptedException {
-        if (Dungeon.completedDungeons > 2) {
+        if (Dungeon.completedDungeons <= 3) {
             TextEngine.printWithDelays("You find yourself standing right by the entrance to The Mountain Top dungeon,\n    its ancient stone archway beckoning you to enter.\n\n", false);
         } else {
             TextEngine.printWithDelays("Congrets! you have beaten The Mountain Cave dungeon,\n     time to go back to a village rest up, check out the shop, and head to the next dungeon.\n\n", false);
@@ -397,7 +397,7 @@ public class OpenWorld extends Room {
     }
 
     private static void room8() throws InterruptedException {
-        if (Dungeon.completedDungeons == 1) {
+        if (Dungeon.completedDungeons <= 1) {
             TextEngine.printWithDelays("You find yourself standing right by the entrance to The Dark Forest dungeon,\n    its ancient stone archway beckoning you to enter.\n\n", false);
         } else {
             TextEngine.printWithDelays("Congrats! you have beaten The Dark Forest dungeon,\n     time to go back to a village rest up, check out the shop, and head to the next dungeon.\n\n", false);
@@ -471,7 +471,7 @@ public class OpenWorld extends Room {
     }
 
     private static void room10() throws InterruptedException {
-        if (Dungeon.completedDungeons > 3) {
+        if (Dungeon.completedDungeons <= 4) {
             TextEngine.printWithDelays("You find yourself standing right by the entrance to The Desert Oasis dungeon,\n    its ancient stone archway beckoning you to enter.\n\n", false);
         } else {
             TextEngine.printWithDelays("Congrats! you have beaten The Mountain Cave dungeon,\n     time to go back to a village rest up, check out the shop, and head to the next dungeon.\n\n", false);
@@ -512,7 +512,7 @@ public class OpenWorld extends Room {
     }
 
     private static void room11() throws InterruptedException {
-        if (Dungeon.completedDungeons > 4) {
+        if (Dungeon.completedDungeons <= 5) {
             TextEngine.printWithDelays("You find yourself standing right by the entrance to The Desert Plains dungeon,\n    its ancient stone archway beckoning you to enter.\n\n", false);
         } else {
             TextEngine.printWithDelays("Congrats! you have beaten The Desert Plains dungeon,\n     time to go back to a village rest up, check out the shop, and head to the next dungeon.\n\n", false);
@@ -733,7 +733,7 @@ public class OpenWorld extends Room {
     }
 
     private static void room18() throws InterruptedException {
-        if (Dungeon.completedDungeons > 5) {
+        if (Dungeon.completedDungeons <= 6) {
             TextEngine.printWithDelays("You find yourself standing right by the entrance to The Desert Pyramid dungeon,\n    its ancient stone archway beckoning you to enter.\n\n", false);
         } else {
             TextEngine.printWithDelays("Congrats! you have beaten The Mountain Cave dungeon,\n     time to go back to a village rest up, check out the shop, and head to the next dungeon.\n\n", false);
@@ -807,7 +807,7 @@ public class OpenWorld extends Room {
     }
 
     private static void room20() throws InterruptedException {
-        if (Dungeon.completedDungeons > 6) {
+        if (Dungeon.completedDungeons <= 7) {
             TextEngine.printWithDelays("You find yourself standing right by the entrance to The Ocean Kingdom dungeon,\n    its ancient stone archway beckoning you to enter.\n\n", false);
         } else {
             TextEngine.printWithDelays("Congrats! you have beaten The Mountain Cave dungeon,\n     time to go back to a village rest up, check out the shop, and head to the next dungeon.\n\n", false);

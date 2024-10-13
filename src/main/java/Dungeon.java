@@ -177,113 +177,114 @@ public class Dungeon extends Room {
     }
 
     public static void dungeonCheck() throws InterruptedException {
-        // the meadow dungeon 
-        if (completedDungeons == 0) {
-            switch (OpenWorld.roomNumber) {
-                case 2 ->
-                    TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", feeling a sense of adventure as you leave the open paths behind.\n Ahead, you notice the entrance to the next dungeon lying just to the north.\n\n ", false);
-                case 4 ->
-                    TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", feeling a sense of adventure as you leave the open paths behind.\n Ahead, you notice the entrance to the next dungeon lying just to the west.\n\n", false);
-                case 13, 16,21 ->
-                    TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", feeling a sense of adventure as you leave the open paths behind.\n Ahead, you notice the entrance to the next dungeon lying just to the south.\n\n", false);
-                case 7, 9, 12, 17, 19 -> 
-                    TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", feeling a sense of adventure as you leave the open paths behind.\n Ahead, you notice the entrance to the next dungeon lying just to the south, west.\n\n", false);
-                case 14, 15 ->
-                    TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", feeling a sense of adventure as you leave the open paths behind.\n Ahead, you notice the entrance to the next dungeon lying just to the south, east.\n\n", false);
-                default ->
-                    TextEngine.printWithDelays("the Meadow is not working Doungeon.java\n\n", false);
-    
+        
+        switch (completedDungeons) {
+            case 0 -> {         // the meadow dungeon
+                switch (OpenWorld.roomNumber) {
+                    case 2 ->
+                        TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", feeling a sense of adventure as you leave the open paths behind.\n Ahead, you notice the entrance to the next dungeon lying just to the north.\n\n ", false);
+                    case 4 ->
+                        TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", feeling a sense of adventure as you leave the open paths behind.\n Ahead, you notice the entrance to the next dungeon lying just to the west.\n\n", false);
+                    case 13, 16,21 ->
+                        TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", feeling a sense of adventure as you leave the open paths behind.\n Ahead, you notice the entrance to the next dungeon lying just to the south.\n\n", false);
+                    case 7, 9, 12, 17, 19 ->
+                        TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", feeling a sense of adventure as you leave the open paths behind.\n Ahead, you notice the entrance to the next dungeon lying just to the south, west.\n\n", false);
+                    case 14, 15 ->
+                        TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", feeling a sense of adventure as you leave the open paths behind.\n Ahead, you notice the entrance to the next dungeon lying just to the south, east.\n\n", false);
+                    default ->
+                        TextEngine.printWithDelays("the Meadow is not working Doungeon.java\n\n", false);
+                        
+                }
             }
-        } else if (completedDungeons > 0) // the dark forest dungeon
-        {
-            switch (OpenWorld.roomNumber) {
-                case 4 ->
-                    TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", feeling a sense of adventure as you leave the open paths behind.\n Ahead, you notice the entrance to the next dungeon lying just to the north, west.\n\n", false);
-                case 2 ->
-                    TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", feeling a sense of adventure as you leave the open paths behind.\n Ahead, you notice the entrance to the next dungeon lying just to the north.\n\n", false);
-                case 7 ->
-                    TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", feeling a sense of adventure as you leave the open paths behind.\n Ahead, you notice the entrance to the next dungeon lying just to the west.\n\n", false);
-                case 13, 16, 21 ->
-                    TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", feeling a sense of adventure as you leave the open paths behind.\n Ahead, you notice the entrance to the next dungeon lying just to the south.\n\n", false);
-                case 9, 12, 17, 19 ->
-                    TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", feeling a sense of adventure as you leave the open paths behind.\n Ahead, you notice the entrance to the next dungeon lying just to the south, west.\n\n", false);    
-                case 14, 15 ->
-                    TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", feeling a sense of adventure as you leave the open paths behind.\n Ahead, you notice the entrance to the next dungeon lying just to the south, east.\n\n", false);
-                default ->
-                TextEngine.printWithDelays("The Dark Forest is not working Doungeon.java\n\n", false);
+            case 1 -> {         // the dark forest dungeon
+                switch (OpenWorld.roomNumber) {
+                    case 4 ->
+                        TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", feeling a sense of adventure as you leave the open paths behind.\n Ahead, you notice the entrance to the next dungeon lying just to the north, west.\n\n", false);
+                    case 2 ->
+                        TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", feeling a sense of adventure as you leave the open paths behind.\n Ahead, you notice the entrance to the next dungeon lying just to the north.\n\n", false);
+                    case 7 ->
+                        TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", feeling a sense of adventure as you leave the open paths behind.\n Ahead, you notice the entrance to the next dungeon lying just to the west.\n\n", false);
+                    case 13, 16, 21 ->
+                        TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", feeling a sense of adventure as you leave the open paths behind.\n Ahead, you notice the entrance to the next dungeon lying just to the south.\n\n", false);
+                    case 9, 12, 17, 19 ->
+                        TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", feeling a sense of adventure as you leave the open paths behind.\n Ahead, you notice the entrance to the next dungeon lying just to the south, west.\n\n", false);
+                    case 14, 15 ->
+                        TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", feeling a sense of adventure as you leave the open paths behind.\n Ahead, you notice the entrance to the next dungeon lying just to the south, east.\n\n", false);
+                    default ->
+                        TextEngine.printWithDelays("The Dark Forest is not working Doungeon.java\n\n", false);
                 }
-        } else if (completedDungeons > 1) // The Mountain Cave Dungeon
-        {
-            switch (OpenWorld.roomNumber) {
-                case 2 ->
-                    TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", feeling a sense of adventure as you leave the open paths behind.\n Ahead, you notice the entrance to the next dungeon lying just to the north, east.\n\n", false);
-                case 4 ->
-                    TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", feeling a sense of adventure as you leave the open paths behind.\n Ahead, you notice the entrance to the next dungeon lying just to the east.\n\n", false);
-                case 7, 9, 21, 12, 13, 14, 15, 16, 17, 19 ->
-                    TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", feeling a sense of adventure as you leave the open paths behind.\n Ahead, you notice the entrance to the next dungeon lying just to the south, east\n\n", false);
-                default -> 
-                    TextEngine.printWithDelays("The Mountain cave is not working Doungeon.java\n\n", false);
-
+            }
+            case 2 -> {        // The Mountain Cave Dungeon
+                switch (OpenWorld.roomNumber) {
+                    case 2 ->
+                        TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", feeling a sense of adventure as you leave the open paths behind.\n Ahead, you notice the entrance to the next dungeon lying just to the north, east.\n\n", false);
+                    case 4 ->
+                        TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", feeling a sense of adventure as you leave the open paths behind.\n Ahead, you notice the entrance to the next dungeon lying just to the east.\n\n", false);
+                    case 7, 9, 21, 12, 13, 14, 15, 16, 17, 19 ->
+                        TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", feeling a sense of adventure as you leave the open paths behind.\n Ahead, you notice the entrance to the next dungeon lying just to the south, east\n\n", false);
+                    default ->
+                        TextEngine.printWithDelays("The Mountain cave is not working Doungeon.java\n\n", false);
+                        
                 }
-        } else if (completedDungeons > 2) // The Mountain Top Dungeon
-        {
-            switch (OpenWorld.roomNumber) {
-                case 2, 4->
-                    TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", feeling a sense of adventure as you leave the open paths behind.\n Ahead, you notice the entrance to the next dungeon lying just to the north, east.\n\n", false);
-                case 7->
-                    TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", feeling a sense of adventure as you leave the open paths behind.\n Ahead, you notice the entrance to the next dungeon lying just to the east.\n\n", false);
-                case 9, 21, 12, 13, 14, 15, 16, 17, 19 ->
-                    TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", feeling a sense of adventure as you leave the open paths behind.\n Ahead, you notice the entrance to the next dungeon lying just to the south, east.\n\n", false);
-                default ->
-                    TextEngine.printWithDelays("THe  Mountain Top is not working in Doungeon.java\n\n", false);
+            }
+            case 3 -> {        // The Mountain Top Dungeon
+                switch (OpenWorld.roomNumber) {
+                    case 2, 4->
+                        TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", feeling a sense of adventure as you leave the open paths behind.\n Ahead, you notice the entrance to the next dungeon lying just to the north, east.\n\n", false);
+                    case 7->
+                        TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", feeling a sense of adventure as you leave the open paths behind.\n Ahead, you notice the entrance to the next dungeon lying just to the east.\n\n", false);
+                    case 9, 21, 12, 13, 14, 15, 16, 17, 19 ->
+                        TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", feeling a sense of adventure as you leave the open paths behind.\n Ahead, you notice the entrance to the next dungeon lying just to the south, east.\n\n", false);
+                    default ->
+                        TextEngine.printWithDelays("THe  Mountain Top is not working in Doungeon.java\n\n", false);
                 }
-        } else if (completedDungeons > 3) // The Desert Oasis Dungeon
-        {
-            switch (OpenWorld.roomNumber) {
-                case 2, 4, 7->
-                    TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", feeling a sense of adventure as you leave the open paths behind.\n Ahead, you notice the entrance to the next dungeon lying just to the north, east.\n\n", false);
-                case 9, 21 ->
-                    TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", feeling a sense of adventure as you leave the open paths behind.\n Ahead, you notice the entrance to the next dungeon lying just to the east.\n\n", false);
-                case 12, 13, 14, 15, 16, 17, 19 ->
-                    TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", feeling a sense of adventure as you leave the open paths behind.\n Ahead, you notice the entrance to the next dungeon lying just to the south east.\n\n", false);
-                default -> 
-                TextEngine.printWithDelays("The Desert Oasis is not working in Doungeon.java\n\n", false);
+            }
+            case 4 -> {        // The Desert Oasis Dungeon
+                switch (OpenWorld.roomNumber) {
+                    case 2, 4, 7->
+                        TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", feeling a sense of adventure as you leave the open paths behind.\n Ahead, you notice the entrance to the next dungeon lying just to the north, east.\n\n", false);
+                    case 9, 21 ->
+                        TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", feeling a sense of adventure as you leave the open paths behind.\n Ahead, you notice the entrance to the next dungeon lying just to the east.\n\n", false);
+                    case 12, 13, 14, 15, 16, 17, 19 ->
+                        TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", feeling a sense of adventure as you leave the open paths behind.\n Ahead, you notice the entrance to the next dungeon lying just to the south east.\n\n", false);
+                    default ->
+                        TextEngine.printWithDelays("The Desert Oasis is not working in Doungeon.java\n\n", false);
                 }
-        } else if (completedDungeons > 4) // The Desert Plains Dungeon
-        {
-            switch (OpenWorld.roomNumber) {
-                case 2, 4, 7, 9, 21 ->
-                    TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", feeling a sense of adventure as you leave the open paths behind.\n Ahead, you notice the entrance to the next dungeon lying just to the north, east.\n~to the plains(case1)\n", false);
-                case 12, 13, 14 ->
-                    TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", feeling a sense of adventure as you leave the open paths behind.\n Ahead, you notice the entrance to the next dungeon lying just to the east.\n~to the Plains(case2)\n", false);
-                case 15, 16, 17, 19 ->
-                    TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", feeling a sense of adventure as you leave the open paths behind.\n Ahead, you notice the entrance to the next dungeon lying just to the south, east.\n\n", false);
-                default ->
-                    TextEngine.printWithDelays("The Deset Plains is not working in Doungeon.java\n\n", false);
+            }
+            case 5 -> {        // The Desert Plains Dungeon
+                switch (OpenWorld.roomNumber) {
+                    case 2, 4, 7, 9, 21 ->
+                        TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", feeling a sense of adventure as you leave the open paths behind.\n Ahead, you notice the entrance to the next dungeon lying just to the north, east.\n\n", false);
+                    case 12, 13, 14 ->
+                        TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", feeling a sense of adventure as you leave the open paths behind.\n Ahead, you notice the entrance to the next dungeon lying just to the east.\n\n", false);
+                    case 15, 16, 17, 19 ->
+                        TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", feeling a sense of adventure as you leave the open paths behind.\n Ahead, you notice the entrance to the next dungeon lying just to the south, east.\n\n", false);
+                    default ->
+                        TextEngine.printWithDelays("The Deset Plains is not working in Doungeon.java\n\n", false);
                 }
-        } else if (completedDungeons > 4) // The Desert Pyramid Dungeon
-        {
-            switch (OpenWorld.roomNumber) {
-                case 2, 4, 7, 9, 21, 12, 13, 14, 15, 16, 17 ->
-                    TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", feeling a sense of adventure as you leave the open paths behind.\n Ahead, you notice the entrance to the next dungeon lying just to the north, east.\n\n", false);
-                case 19 ->
-                    TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", feeling a sense of adventure as you leave the open paths behind.\n Ahead, you notice the entrance to the next dungeon lying just to the east.\n\n", false);
-                default ->
-                    TextEngine.printWithDelays("The Deset Pryamid is not working in Doungeon.java\n\n", false);
-
+            }
+            case 6 -> {        // The Desert Pyramid Dungeon
+                switch (OpenWorld.roomNumber) {
+                    case 2, 4, 7, 9, 21, 12, 13, 14, 15, 16, 17 ->
+                        TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", feeling a sense of adventure as you leave the open paths behind.\n Ahead, you notice the entrance to the next dungeon lying just to the north, east.\n\n", false);
+                    case 19 ->
+                        TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", feeling a sense of adventure as you leave the open paths behind.\n Ahead, you notice the entrance to the next dungeon lying just to the east.\n\n", false);
+                    default ->
+                        TextEngine.printWithDelays("The Deset Pryamid is not working in Doungeon.java\n\n", false);
+                        
                 }
-        } else if (completedDungeons > 4) // The Ocean Kingdom Dungeon
-        {
-            switch (OpenWorld.roomNumber) {
-                case 2, 21, 13, 14, 15, 16 ->
-                    TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", feeling a sense of adventure as you leave the open paths behind.\n Ahead, you notice the entrance to the next dungeon lying just to the north, east.\n\n", false);
-                case 4, 7, 9, 12, 17, 19-> 
-                    TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", feeling a sense of adventure as you leave the open paths behind.\n Ahead, you notice the entrance to the next dungeon lying just to the north.\n\n", false);
-                default ->
-                    TextEngine.printWithDelays("The Ocean Kingdom is not working in Doungeon.java\n\n", false);
+            }
+            case 7 -> {        // The Ocean Kingdom Dungeon
+                switch (OpenWorld.roomNumber) {
+                    case 2, 21, 13, 14, 15, 16 ->
+                        TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", feeling a sense of adventure as you leave the open paths behind.\n Ahead, you notice the entrance to the next dungeon lying just to the north, east.\n\n", false);
+                    case 4, 7, 9, 12, 17, 19->
+                        TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", feeling a sense of adventure as you leave the open paths behind.\n Ahead, you notice the entrance to the next dungeon lying just to the north.\n\n", false);
+                    default ->
+                        TextEngine.printWithDelays("The Ocean Kingdom is not working in Doungeon.java\n\n", false);
                 }
-        } else {
-            TextEngine.printWithDelays("this function isnt working right", false);
+            }
+            default -> TextEngine.printWithDelays("this function isnt working right", false);
         }
     }
 }
