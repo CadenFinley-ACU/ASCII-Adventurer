@@ -38,7 +38,7 @@ public class DarkForestDungeon extends Dungeon {
         if ("Dark Forest Dungeon".equals(Main.getSavedPlace())) {
             currentPlayerPosition = save;
         } else {
-            currentPlayerPosition = spawnPosition;
+            currentPlayerPosition = DungeonGenerator.findValue(Dungeon.darkForestDungeon, 9);
         }
         room = "Dark Forest Dungeon";
         Main.checkSave(room);

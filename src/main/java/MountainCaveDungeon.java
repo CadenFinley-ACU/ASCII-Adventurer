@@ -37,7 +37,7 @@ public class MountainCaveDungeon extends Dungeon {
         if ("Mountain Cave Dungeon".equals(Main.getSavedPlace())) {
             currentPlayerPosition = save;
         } else {
-            currentPlayerPosition = spawnPosition;
+            currentPlayerPosition = DungeonGenerator.findValue(Dungeon.mountainCaveDungeon, 9);
         }
         room = "Mountain Cave Dungeon";
         Main.checkSave(room);

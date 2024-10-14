@@ -37,7 +37,7 @@ public class DesertPlainsDungeon extends Dungeon {
         if ("Desert Plains Dungeon".equals(Main.getSavedPlace())) {
             currentPlayerPosition = save;
         } else {
-            currentPlayerPosition = spawnPosition;
+            currentPlayerPosition = DungeonGenerator.findValue(Dungeon.desertPlainsDungeon, 9);
         }
         room = "Desert Plains Dungeon";
         Main.checkSave(room);

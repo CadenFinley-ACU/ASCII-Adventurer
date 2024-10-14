@@ -37,7 +37,7 @@ public class DesertPyramidDungeon extends Dungeon {
         if ("Desert Pyramid Dungeon".equals(Main.getSavedPlace())) {
             currentPlayerPosition = save;
         } else {
-            currentPlayerPosition = spawnPosition;
+            currentPlayerPosition = DungeonGenerator.findValue(Dungeon.desertPyramidDungeon, 9);
         }
         room = "Desert Pyramid Dungeon";
         Main.checkSave(room);

@@ -37,7 +37,7 @@ public class DesertOasisDungeon extends Dungeon {
         if ("Desert Oasis Dungeon".equals(Main.getSavedPlace())) {
             currentPlayerPosition = save;
         } else {
-            currentPlayerPosition = spawnPosition;
+            currentPlayerPosition = DungeonGenerator.findValue(Dungeon.desertOasisDungeon, 9);
         }
         room = "Desert Oasis Dungeon";
         Main.checkSave(room);

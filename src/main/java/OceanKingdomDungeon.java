@@ -37,7 +37,7 @@ public class OceanKingdomDungeon extends Dungeon {
         if ("Ocean Kingdom Dungeon".equals(Main.getSavedPlace())) {
             currentPlayerPosition = save;
         } else {
-            currentPlayerPosition = spawnPosition;
+            currentPlayerPosition = DungeonGenerator.findValue(Dungeon.oceanKingdomDungeon, 9);
         }
         room = "Ocean Kingdom Dungeon";
         Main.checkSave(room);

@@ -37,7 +37,7 @@ public class MeadowDungeon extends Dungeon {
         if ("Meadow Dungeon".equals(Main.getSavedPlace())) {
             currentPlayerPosition = save;
         } else {
-            currentPlayerPosition = spawnPosition;
+            currentPlayerPosition = DungeonGenerator.findValue(Dungeon.meadowDungeon, 9);
         }
         room = "Meadow Dungeon";
         Main.checkSave(room);
