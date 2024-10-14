@@ -1,11 +1,9 @@
 
 import java.io.BufferedReader;
+import java.io.Console;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -14,16 +12,22 @@ import java.util.Map;
 public class GameSaveSerialization {
 
     private static final String NULL_MARKER = "NULL";
+    public static float versionID = 1.0f;
+    private static String command;
+    private static String ignore;
+    private final static Console console = System.console();
 
-    public static void saveGame() throws IOException {
+    public static void saveGame() {
         String filePath = "game_save.txt";
-        Files.newInputStream(Paths.get(filePath), StandardOpenOption.TRUNCATE_EXISTING);
+        //Files.newInputStream(Paths.get(filePath), StandardOpenOption.TRUNCATE_EXISTING);
 
         try (FileWriter writer = new FileWriter(filePath, false)) {
             writer.write(""); // This will clear the file
         } catch (IOException e) {
             e.printStackTrace();
         }
+        writeValue(String.valueOf(versionID), filePath);
+        writeSeparator(filePath);
         writeValue(Player.getName(), filePath);
         writeSeparator(filePath);
         writeValue(String.valueOf(Player.getHealth()), filePath);
@@ -210,6 +214,27 @@ public class GameSaveSerialization {
         String buffer = "";
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
             try {
+                int version = Integer.parseInt(reader.readLine());
+                if (version != versionID) {
+                    System.out.println("Save File Version Mismatch... ");
+                    TextEngine.printWithDelays("Would you like to load the save? (yes or no)", true);
+                    while (true) {
+                        ignore = console.readLine();
+                        command = console.readLine();
+                        switch (command.toLowerCase()) {
+                            case "yes" -> {
+                                break;
+                            }
+                            case "no" -> {
+                                Main.wipeSave();
+                                Main.startMenu();
+                            }
+                            default ->
+                                System.out.println("Invalid Command");
+                        }
+                    }
+                }
+                buffer = reader.readLine();
                 String name = String.valueOf(reader.readLine());
                 buffer = reader.readLine();
                 int health = Integer.parseInt(reader.readLine());
@@ -334,7 +359,7 @@ public class GameSaveSerialization {
                 TextEngine.enterToNext();
                 TextEngine.clearScreen();
                 Main.wipeSave();
-                Player.playerStart();
+                Main.startMenu();
                 //e.printStackTrace();
             }
         } catch (Exception e) {
