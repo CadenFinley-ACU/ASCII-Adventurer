@@ -19,7 +19,6 @@ public class GameSaveSerialization {
 
     public static void saveGame() {
         String filePath = "game_save.txt";
-        //Files.newInputStream(Paths.get(filePath), StandardOpenOption.TRUNCATE_EXISTING);
 
         try (FileWriter writer = new FileWriter(filePath, false)) {
             writer.write(""); // This will clear the file
