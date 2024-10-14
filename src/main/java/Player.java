@@ -165,6 +165,7 @@ public class Player {
             }
             TextEngine.printWithDelays(space + brightRedStart + "You took " + change + " damage!" + brightEnd, false);
         } else {
+            change = Math.min(change, maxHealth - health);
             TextEngine.printWithDelays(space + brightGreenStart + "You gained " + change + " health!" + brightEnd, false);
         }
 

@@ -303,7 +303,10 @@ public class Main {
                  
                    
             
-                  
+            
+                 
+                
+                   
             
                   
             
@@ -397,8 +400,11 @@ public class Main {
                 Player.openInventory();
             case "settings" ->
                 SettingsMenu.start();
-            case "save" ->
+            case "save" ->  {
                 checkSave(getSavedPlace());
+                TextEngine.printWithDelays("Game saved!", false);
+                TextEngine.enterToNext();
+            }
             case "exit" -> {
                 TextEngine.printWithDelays("Returning to main menu.", false);
                 TextEngine.clearScreen();

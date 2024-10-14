@@ -180,7 +180,11 @@ public class InventoryManager extends Player {
                 inventory.remove(item);
                 setStatsToHighestInInventory();
             }
-            TextEngine.printWithDelays("You have tossed " + item + " " + amount, false);
+            if (amount > 1) {
+                TextEngine.printWithDelays("You have tossed " + amount + " x" + item + "s", false);
+            } else {
+                TextEngine.printWithDelays("You have tossed " + amount + " x" + item, false);
+            }
             TextEngine.enterToNext();
             Player.openInventory();
         } else {
