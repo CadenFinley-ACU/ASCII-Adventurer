@@ -20,131 +20,402 @@ public class OpenWorld extends Room {
         Main.screenRefresh();
         switch (roomSave) {
             case 1 -> {
-                Player.playerX = 2;
-                Player.playerY = 7;
+                Player.playerX = 0;
+                Player.playerY = 1;
                 roomNumber = 1;
                 room1(); //start room   
             }
             case 2 -> {
-                Player.playerX = 1;
-                Player.playerY = 7;
+                Player.playerX = 0;
+                Player.playerY = 2;
                 roomNumber = 2;
                 room2(); //start room
             }
             case 3 -> {
-                Player.playerX = 1;
-                Player.playerY = 6;
+                Player.playerX = 0;
+                Player.playerY = 3;
                 roomNumber = 3;
                 room3(); //start room
             }
             case 4 -> {
-                Player.playerX = 2;
-                Player.playerY = 6;
+                Player.playerX = 0;
+                Player.playerY = 4;
                 roomNumber = 4;
                 room4(); //start room
             }
             case 5 -> {
-                Player.playerX = 3;
-                Player.playerY = 6;
+                Player.playerX = 0;
+                Player.playerY = 5;
                 roomNumber = 5;
                 room5(); //start room
             }
             case 6 -> {
-                Player.playerX = 3;
-                Player.playerY = 5;
+                Player.playerX = 0;
+                Player.playerY = 6;
                 roomNumber = 6;
                 room6(); //start room
             }
             case 7 -> {
-                Player.playerX = 2;
-                Player.playerY = 5;
+                Player.playerX = 0;
+                Player.playerY = 7;
                 roomNumber = 7;
                 room7(); //start room
             }
             case 8 -> {
                 Player.playerX = 1;
-                Player.playerY = 5;
+                Player.playerY = 1;
                 roomNumber = 8;
                 room8(); //start room
             }
             case 9 -> {
-                Player.playerX = 2;
-                Player.playerY = 4;
+                Player.playerX = 1;
+                Player.playerY = 5;
                 roomNumber = 9;
                 room9(); //start room
             }
             case 10 -> {
-                Player.playerX = 3;
-                Player.playerY = 4;
+                Player.playerX = 1;
+                Player.playerY = 6;
                 roomNumber = 10;
                 room10(); //start room
             }
             case 11 -> {
-                Player.playerX = 3;
-                Player.playerY = 3;
+                Player.playerX = 1;
+                Player.playerY = 7;
                 roomNumber = 11;
                 room11(); //start room
             }
             case 12 -> {
                 Player.playerX = 2;
-                Player.playerY = 3;
+                Player.playerY = 1;
                 roomNumber = 12;
                 room12(); //start room
             }
             case 13 -> {
-                Player.playerX = 1;
-                Player.playerY = 3;
+                Player.playerX = 2;
+                Player.playerY = 5;
                 roomNumber = 13;
                 room13(); //start room
             }
             case 14 -> {
-                Player.playerX = 0;
-                Player.playerY = 3;
+                Player.playerX = 2;
+                Player.playerY = 6;
                 roomNumber = 14;
                 room14(); //start room
             }
             case 15 -> {
-                Player.playerX = 0;
-                Player.playerY = 2;
+                Player.playerX = 2;
+                Player.playerY = 7;
                 roomNumber = 15;
                 room15(); //start room
             }
             case 16 -> {
-                Player.playerX = 1;
-                Player.playerY = 2;
+                Player.playerX = 3;
+                Player.playerY = 1;
                 roomNumber = 16;
                 room16(); //start room
             }
             case 17 -> {
-                Player.playerX = 2;
-                Player.playerY = 2;
+                Player.playerX = 3;
+                Player.playerY = 5;
                 roomNumber = 17;
                 room17(); //start room
             }
             case 18 -> {
                 Player.playerX = 3;
-                Player.playerY = 1;
+                Player.playerY = 6;
                 roomNumber = 18;
                 room18(); //start room
             }
             case 19 -> {
-                Player.playerX = 2;
-                Player.playerY = 1;
+                Player.playerX = 3;
+                Player.playerY = 7;
                 roomNumber = 19;
                 room19(); //start room
             }
             case 20 -> {
-                Player.playerX = 2;
-                Player.playerY = 0;
+                Player.playerX = 3;
+                Player.playerY = 8;
                 roomNumber = 20;
                 room20(); //start room
             }
             case 21 -> {
-                Player.playerX = 1;
-                Player.playerY = 4;
+                Player.playerX = 4;
+                Player.playerY = 0;
                 roomNumber = 21;
                 room21();
             }
+            case 22 ->{
+                Player.playerX = 4;
+                Player.playerY = 1;
+                roomNumber = 22;
+                room22();
+            }
+            // case 23 ->{
+            //     Player.playerX = 4;
+            //     Player.playerY = 2;
+            //     roomNumber = 23;
+            //     room23();
+            // }
+            case 24 ->{
+                Player.playerX = 4;
+                Player.playerY = 4;
+                roomNumber = 24;
+                room24();
+            }
+            case 25 ->{
+                Player.playerX = 4;
+                Player.playerY = 5;
+                roomNumber = 25;
+                room25();
+            }
+            case 26 ->{
+                Player.playerX = 4;
+                Player.playerY = 6;
+                roomNumber = 26;
+                room26();
+            }
+            // case 27 ->{
+            //     Player.playerX = 4;
+            //     Player.playerY = 7;
+            //     roomNumber = 27;
+            //     room27();
+            // }
+            case 28 ->{
+                Player.playerX = 4;
+                Player.playerY = 7;
+                roomNumber = 26;
+                room27();
+            }
+            case 29 ->{
+                Player.playerX = 4;
+                Player.playerY = 8;
+                roomNumber = 28;
+                room28();
+            }
+            case 30 ->{
+                Player.playerX = 5;
+                Player.playerY = 0;
+                roomNumber = 30;
+                room30();
+            }
+            case 31 ->{
+                Player.playerX = 5;
+                Player.playerY = 1;
+                roomNumber = 31;
+                room31();
+            }
+            case 32 ->{
+                Player.playerX = 5;
+                Player.playerY = 2;
+                roomNumber = 32;
+                room32();
+            }
+            case 33 ->{
+                Player.playerX = 5;
+                Player.playerY = 5;
+                roomNumber = 33;
+                room33();
+            }
+            case 34 ->{
+                Player.playerX = 5;
+                Player.playerY = 6;
+                roomNumber = 34;
+                room34();
+            }
+            case 35 ->{
+                Player.playerX = 5;
+                Player.playerY = 7;
+                roomNumber = 34;
+                room35();
+            }
+            case 36 ->{
+                Player.playerX = 5;
+                Player.playerY = 8;
+                roomNumber = 34;
+                room34();
+            }
+            case 37 ->{
+                Player.playerX = 6;
+                Player.playerY = 0;
+                roomNumber = 37;
+                room37();
+            }
+            case 38 ->{
+                Player.playerX = 6;
+                Player.playerY = 1;
+                roomNumber = 38;
+                room34();
+            }
+            case 39 ->{
+                Player.playerX = 6;
+                Player.playerY = 2;
+                roomNumber = 39;
+                room39();
+            }
+            case 40 ->{
+                Player.playerX = 6;
+                Player.playerY = 3;
+                roomNumber = 40;
+                room40();
+            }
+            case 41 ->{
+                Player.playerX = 6;
+                Player.playerY = 4;
+                roomNumber = 41;
+                room41();
+            }
+            case 42 ->{
+                Player.playerX = 6;
+                Player.playerY = 5;
+                roomNumber = 42;
+                room42();
+            }
+            case 43 ->{
+                Player.playerX = 6;
+                Player.playerY = 6;
+                roomNumber = 43;
+                room43();
+            }
+            case 44 ->{
+                Player.playerX = 6;
+                Player.playerY = 7;
+                roomNumber = 44;
+                room44();
+            } 
+            case 45 ->{
+                Player.playerX = 6;
+                Player.playerY = 8;
+                roomNumber = 48;
+                room45();
+            }
+            case 46 ->{
+                Player.playerX = 7;
+                Player.playerY = 0;
+                roomNumber = 46;
+                room46();
+            }
+            case 47 ->{
+                Player.playerX = 7;
+                Player.playerY = 1;
+                roomNumber = 47;
+                room47();
+            }
+            case 48 ->{
+                Player.playerX = 7;
+                Player.playerY = 2;
+                roomNumber = 48;
+                room48();
+            }
+            case 49 ->{
+                Player.playerX = 7;
+                Player.playerY = 3;
+                roomNumber = 49;
+                room49();
+            }
+            case 50 ->{
+                Player.playerX = 7;
+                Player.playerY = 4;
+                roomNumber = 50;
+                room50());
+            }
+            case 51 ->{
+                Player.playerX = 7;
+                Player.playerY = 5;
+                roomNumber = 51;
+                room51();
+            }
+            case 52 ->{
+                Player.playerX = 7;
+                Player.playerY = 6;
+                roomNumber = 52;
+                room52();
+            }
+            case 53 ->{
+                Player.playerX = 7;
+                Player.playerY = 7;
+                roomNumber = 53;
+                room53();
+            }
+            case 54 ->{
+                Player.playerX = 7;
+                Player.playerY = 8;
+                roomNumber = 54;
+                room54());
+            }
+            case 55 ->{
+                Player.playerX = 8;
+                Player.playerY = 0;
+                roomNumber = 55;
+                room55();
+            }
+            case 56 ->{
+                Player.playerX = 8;
+                Player.playerY = 1;
+                roomNumber = 56;
+                room56();
+            }
+            case 57 ->{
+                Player.playerX = 8;
+                Player.playerY = 4;
+                roomNumber = 57;
+                room57();
+            }
+            case 58 ->{
+                Player.playerX = 8;
+                Player.playerY = 5;
+                roomNumber = 58;
+                room58();
+            }
+            case 59 ->{
+                Player.playerX = 8;
+                Player.playerY = 6;
+                roomNumber = 59;
+                room59();
+            }
+            case 60 ->{
+                Player.playerX = 8;
+                Player.playerY = 7;
+                roomNumber = 60;
+                room60();
+            }
+            case 61 ->{
+                Player.playerX = 8;
+                Player.playerY = 8;
+                roomNumber = 61;
+                room61();
+            }
+            case 62 ->{
+                Player.playerX = 8;
+                Player.playerY = 8;
+                roomNumber = 62;
+                room62();
+            }
+            case 63 ->{
+                Player.playerX = 9;
+                Player.playerY = 1;
+                roomNumber = 63;
+                room63();
+            }
+            case 64 ->{
+                Player.playerX = 9;
+                Player.playerY = 2;
+                roomNumber = 64;
+                room64();
+            }
+            case 65 ->{
+                Player.playerX = 9;
+                Player.playerY = 3;
+                roomNumber = 65;
+                room65();
+            }
+            case 66 ->{
+                Player.playerX = 9;
+                Player.playerY = 4;
+                roomNumber = 66;
+                room66();
+            }
+            
             default ->
                 Main.startMenu();
         }
