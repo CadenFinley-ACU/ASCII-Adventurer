@@ -167,6 +167,7 @@ public class Dungeon extends Room {
         DesertPlainsDungeon.fresh();
         DesertPyramidDungeon.fresh();
         OceanKingdomDungeon.fresh();
+        completedDungeons = 0;
     }
 
     public static void autoCheck() {
@@ -177,7 +178,7 @@ public class Dungeon extends Room {
     }
 
     public static void dungeonCheck() throws InterruptedException {
-        
+
         switch (completedDungeons) {
             case 0 -> {         // the meadow dungeon
                 switch (OpenWorld.roomNumber) {
@@ -185,7 +186,7 @@ public class Dungeon extends Room {
                         TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", feeling a sense of adventure as you leave the open paths behind.\n Ahead, you notice the entrance to the next dungeon lying just to the north.\n\n ", false);
                     case 4 ->
                         TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", feeling a sense of adventure as you leave the open paths behind.\n Ahead, you notice the entrance to the next dungeon lying just to the west.\n\n", false);
-                    case 13, 16,21 ->
+                    case 13, 16, 21 ->
                         TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", feeling a sense of adventure as you leave the open paths behind.\n Ahead, you notice the entrance to the next dungeon lying just to the south.\n\n", false);
                     case 7, 9, 12, 17, 19 ->
                         TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", feeling a sense of adventure as you leave the open paths behind.\n Ahead, you notice the entrance to the next dungeon lying just to the south, west.\n\n", false);
@@ -193,7 +194,7 @@ public class Dungeon extends Room {
                         TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", feeling a sense of adventure as you leave the open paths behind.\n Ahead, you notice the entrance to the next dungeon lying just to the south, east.\n\n", false);
                     default ->
                         TextEngine.printWithDelays("the Meadow is not working Doungeon.java\n\n", false);
-                        
+
                 }
             }
             case 1 -> {         // the dark forest dungeon
@@ -224,14 +225,14 @@ public class Dungeon extends Room {
                         TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", feeling a sense of adventure as you leave the open paths behind.\n Ahead, you notice the entrance to the next dungeon lying just to the south, east\n\n", false);
                     default ->
                         TextEngine.printWithDelays("The Mountain cave is not working Doungeon.java\n\n", false);
-                        
+
                 }
             }
             case 3 -> {        // The Mountain Top Dungeon
                 switch (OpenWorld.roomNumber) {
-                    case 2, 4->
+                    case 2, 4 ->
                         TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", feeling a sense of adventure as you leave the open paths behind.\n Ahead, you notice the entrance to the next dungeon lying just to the north, east.\n\n", false);
-                    case 7->
+                    case 7 ->
                         TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", feeling a sense of adventure as you leave the open paths behind.\n Ahead, you notice the entrance to the next dungeon lying just to the east.\n\n", false);
                     case 9, 21, 12, 13, 14, 15, 16, 17, 19 ->
                         TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", feeling a sense of adventure as you leave the open paths behind.\n Ahead, you notice the entrance to the next dungeon lying just to the south, east.\n\n", false);
@@ -241,7 +242,7 @@ public class Dungeon extends Room {
             }
             case 4 -> {        // The Desert Oasis Dungeon
                 switch (OpenWorld.roomNumber) {
-                    case 2, 4, 7->
+                    case 2, 4, 7 ->
                         TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", feeling a sense of adventure as you leave the open paths behind.\n Ahead, you notice the entrance to the next dungeon lying just to the north, east.\n\n", false);
                     case 9, 21 ->
                         TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", feeling a sense of adventure as you leave the open paths behind.\n Ahead, you notice the entrance to the next dungeon lying just to the east.\n\n", false);
@@ -271,20 +272,21 @@ public class Dungeon extends Room {
                         TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", feeling a sense of adventure as you leave the open paths behind.\n Ahead, you notice the entrance to the next dungeon lying just to the east.\n\n", false);
                     default ->
                         TextEngine.printWithDelays("The Deset Pryamid is not working in Doungeon.java\n\n", false);
-                        
+
                 }
             }
             case 7 -> {        // The Ocean Kingdom Dungeon
                 switch (OpenWorld.roomNumber) {
                     case 2, 21, 13, 14, 15, 16 ->
                         TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", feeling a sense of adventure as you leave the open paths behind.\n Ahead, you notice the entrance to the next dungeon lying just to the north, east.\n\n", false);
-                    case 4, 7, 9, 12, 17, 19->
+                    case 4, 7, 9, 12, 17, 19 ->
                         TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", feeling a sense of adventure as you leave the open paths behind.\n Ahead, you notice the entrance to the next dungeon lying just to the north.\n\n", false);
                     default ->
                         TextEngine.printWithDelays("The Ocean Kingdom is not working in Doungeon.java\n\n", false);
                 }
             }
-            default -> TextEngine.printWithDelays("this function isnt working right", false);
+            default ->
+                TextEngine.printWithDelays("this function isnt working right", false);
         }
     }
 }

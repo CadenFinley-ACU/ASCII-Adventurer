@@ -1,5 +1,6 @@
 
 import java.io.BufferedReader;
+import java.io.Console;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -11,14 +12,21 @@ import java.util.Map;
 public class GameSaveSerialization {
 
     private static final String NULL_MARKER = "NULL";
+    public static int versionID = 1;
+    private static String command;
+    private static String ignore;
+    private final static Console console = System.console();
 
     public static void saveGame() {
         String filePath = "game_save.txt";
+
         try (FileWriter writer = new FileWriter(filePath, false)) {
             writer.write(""); // This will clear the file
         } catch (IOException e) {
             e.printStackTrace();
         }
+        writeValue(String.valueOf(versionID), filePath);
+        writeSeparator(filePath);
         writeValue(Player.getName(), filePath);
         writeSeparator(filePath);
         writeValue(String.valueOf(Player.getHealth()), filePath);
@@ -137,74 +145,32 @@ public class GameSaveSerialization {
         writeList(OceanKingdomDungeon.items, filePath);
     }
 
-    private static void writeSeparator(String filePath) {
-        try (FileWriter writer = new FileWriter(filePath, true)) { // true to append to the file
-            writer.write("\n");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private static void writeMatrix(int[][] matrix, String filePath) {
-        try (FileWriter writer = new FileWriter(filePath, true)) { // true to append to the file
-            for (int[] row : matrix) {
-                for (int value : row) {
-                    writer.write(value + " ");
-                }
-                writer.write("\n");
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private static void writeValue(String value, String filePath) {
-        try (FileWriter writer = new FileWriter(filePath, true)) { // true to append to the file
-            if (value == null) {
-                writer.write("null\n");
-            } else {
-                writer.write(value + "\n");
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private static void writeArray(int[] array, String filePath) {
-        try (FileWriter writer = new FileWriter(filePath, true)) { // true to append to the file
-            if (array == null) {
-                writer.write("null\n");
-            } else {
-                for (int value : array) {
-                    writer.write(value + " ");
-                }
-                writer.write("\n");
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private static void writeList(List<String> list, String filePath) {
-        try (FileWriter writer = new FileWriter(filePath, true)) { // true to append to the file
-            if (list == null || list.isEmpty()) {
-                writer.write("null\n");
-            } else {
-                for (String value : list) {
-                    writer.write(value + ", ");
-                }
-                writer.write("\n");
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
     public static void loadGameSave() {
         String filePath = "game_save.txt";
         String buffer = "";
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
             try {
+                int version = Integer.parseInt(reader.readLine());
+                if (version != versionID) {
+                    System.out.println("Save File Version Mismatch... ");
+                    TextEngine.printWithDelays("Would you like to load the save? (yes or no)", true);
+                    while (true) {
+                        ignore = console.readLine();
+                        command = console.readLine();
+                        switch (command.toLowerCase()) {
+                            case "yes" -> {
+                                break;
+                            }
+                            case "no" -> {
+                                Main.wipeSave();
+                                Main.startMenu();
+                            }
+                            default ->
+                                System.out.println("Invalid Command");
+                        }
+                    }
+                }
+                buffer = reader.readLine();
                 String name = String.valueOf(reader.readLine());
                 buffer = reader.readLine();
                 int health = Integer.parseInt(reader.readLine());
@@ -329,10 +295,73 @@ public class GameSaveSerialization {
                 TextEngine.enterToNext();
                 TextEngine.clearScreen();
                 Main.wipeSave();
-                Player.playerStart();
+                Main.startMenu();
                 //e.printStackTrace();
             }
         } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void writeSeparator(String filePath) {
+        try (FileWriter writer = new FileWriter(filePath, true)) { // true to append to the file
+            writer.write("\n");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void writeMatrix(int[][] matrix, String filePath) {
+        try (FileWriter writer = new FileWriter(filePath, true)) { // true to append to the file
+            for (int[] row : matrix) {
+                for (int value : row) {
+                    writer.write(value + " ");
+                }
+                writer.write("\n");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void writeValue(String value, String filePath) {
+        try (FileWriter writer = new FileWriter(filePath, true)) { // true to append to the file
+            if (value == null) {
+                writer.write("null\n");
+            } else {
+                writer.write(value + "\n");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void writeArray(int[] array, String filePath) {
+        try (FileWriter writer = new FileWriter(filePath, true)) { // true to append to the file
+            if (array == null) {
+                writer.write("null\n");
+            } else {
+                for (int value : array) {
+                    writer.write(value + " ");
+                }
+                writer.write("\n");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void writeList(List<String> list, String filePath) {
+        try (FileWriter writer = new FileWriter(filePath, true)) { // true to append to the file
+            if (list == null || list.isEmpty()) {
+                writer.write("null\n");
+            } else {
+                for (String value : list) {
+                    writer.write(value + ", ");
+                }
+                writer.write("\n");
+            }
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }

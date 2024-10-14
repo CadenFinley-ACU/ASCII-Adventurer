@@ -5,7 +5,6 @@
  * Text Adventure Game SE374 F24 Final Project Caden Finley Albert Tucker
  * Grijesh Shrestha
  */
-//maybe procurally generated dungeons using birary states to matrix arrrys ti create rooms in  path
 public class OpenWorld extends Room {
 
     static int roomSave = 1;
@@ -239,8 +238,7 @@ public class OpenWorld extends Room {
                     Main.loadSave();
                 }
                 case "the meadow" -> {
-                    Main.saveSpace("Meadow Dungeon");
-                    Main.loadSave();
+                    MeadowDungeon.startRoom();
                 }
                 default ->
                     Main.inGameDefaultTextHandling(command);
@@ -306,8 +304,7 @@ public class OpenWorld extends Room {
                 }
                 case "the mountain cave" -> {
                     if (Dungeon.completedDungeons > 1) {
-                        Main.saveSpace("Mountain Cave Dungeon");
-                        Main.loadSave();
+                        MountainCaveDungeon.startRoom();
                     } else {
                         TextEngine.printWithDelays("You must complete The Dark Forest first.\nTry going west", true);
                     }
@@ -351,8 +348,7 @@ public class OpenWorld extends Room {
                 }
                 case "the mountain top" -> {
                     if (Dungeon.completedDungeons > 2) {
-                        Main.saveSpace("Mountain Top Dungeon");
-                        Main.loadSave();
+                        MountainTopDungeon.startRoom();
                     } else {
                         TextEngine.printWithDelays("You must complete The Mountain Cave dungeons first, try going west.", true);
                     }
@@ -425,8 +421,7 @@ public class OpenWorld extends Room {
                 }
                 case "the dark forest" -> {
                     if (Dungeon.completedDungeons > 0) {
-                        Main.saveSpace("Dark Forest Dungeon");
-                        Main.loadSave();
+                        DarkForestDungeon.startRoom();
                     } else {
                         TextEngine.printWithDelays("You must complete The Meadow dungeon first.\nTry going south", true);
                     }
@@ -499,8 +494,7 @@ public class OpenWorld extends Room {
                 }
                 case "the desert oasis" -> {
                     if (Dungeon.completedDungeons > 3) {
-                        Main.saveSpace("Desert Oasis Dungeon");
-                        Main.loadSave();
+                        DesertOasisDungeon.startRoom();
                     } else {
                         TextEngine.printWithDelays("You must complete The Mountain Top dungeon first.\n Try going to the south", true);
                     }
@@ -536,8 +530,7 @@ public class OpenWorld extends Room {
                 }
                 case "the desert plains" -> {
                     if (Dungeon.completedDungeons > 4) {
-                        Main.saveSpace("Desert Plains Dungeon");
-                        Main.loadSave();
+                        DesertPlainsDungeon.startRoom();
                     } else {
                         TextEngine.printWithDelays("You must complete The Desert Oasis dungeons first.\nTry going to the south east/north", true);
                     }
@@ -753,8 +746,7 @@ public class OpenWorld extends Room {
                 }
                 case "the desert pyramid" -> {
                     if (Dungeon.completedDungeons > 5) {
-                        Main.saveSpace("Desert Pyramid Dungeon");
-                        Main.loadSave();
+                        DesertPyramidDungeon.startRoom();
                     } else {
                         TextEngine.printWithDelays("You must complete The Desert Plains dungeons first.\nTry going to the north/east", true);
                     }
@@ -765,8 +757,7 @@ public class OpenWorld extends Room {
                 }
                 case "the ocean kingdom" -> {
                     if (Dungeon.completedDungeons > 6) {
-                        Main.saveSpace("Ocean Kingdom Dungeon");
-                        Main.loadSave();
+                        OceanKingdomDungeon.startRoom();
                     } else {
                         TextEngine.printWithDelays("You must complete The Desert Pyramis dungeon first.\nTry going to the north", true);
                     }
@@ -827,8 +818,7 @@ public class OpenWorld extends Room {
                 }
                 case "the ocean kingdom" -> {
                     if (Dungeon.completedDungeons > 6) {
-                        Main.saveSpace("Ocean Kingdom Dungeon");
-                        Main.loadSave();
+                        OceanKingdomDungeon.startRoom();
                     } else {
                         TextEngine.printWithDelays("You must complete The Desert Pyramis dungeon first.\nTry going to the north", true);
                     }

@@ -32,14 +32,17 @@ public class MountainTopDungeon extends Dungeon {
         if (!visited) {
             fresh();
             visited = true;
+            items = new ArrayList<>(List.of("great sword", "knight armor", "greater health potion"));
+        }
+        if ("Mountain Top Dungeon".equals(Main.getSavedPlace())) {
+            currentPlayerPosition = save;
         } else {
-            save = currentPlayerPosition.clone();
+            currentPlayerPosition = DungeonGenerator.findValue(Dungeon.mountainTopDungeon, 9);
         }
         room = "Mountain Top Dungeon";
         Main.checkSave(room);
         Main.screenRefresh();
         Dungeon.currentDungeon = "Mountain Top";
-        currentPlayerPosition = save;
         GameSaveSerialization.saveGame();
         startRooms();
     }
@@ -47,7 +50,6 @@ public class MountainTopDungeon extends Dungeon {
     public static void fresh() { //fresh
         visited = false;
         completed = false;
-        items = new ArrayList<>(List.of("great sword", "knight armor", "greater health potion"));
         foundItemRooms = DungeonGenerator.numberOfRooms(Dungeon.mountainTopDungeon, 2);
         spawnPosition = DungeonGenerator.findValue(Dungeon.mountainTopDungeon, 9);
         bossRoom = DungeonGenerator.findValue(Dungeon.mountainTopDungeon, 8);
@@ -64,7 +66,7 @@ public class MountainTopDungeon extends Dungeon {
         directionsString = new ArrayList<>();
 
         if (mountainTopDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] == 2 && roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] == 0) {
-            if (1 <= items.size()) {
+            if (!items.isEmpty()) {
                 String randomItem = items.get(rand.nextInt(items.size()));
                 if (hasChestInRoom(randomItem, 1)) {
                     items.remove(randomItem);
@@ -197,7 +199,7 @@ public class MountainTopDungeon extends Dungeon {
             ignore = Room.console.readLine();
             direction = Room.console.readLine();
             switch (direction.toLowerCase().trim()) {
-                case "north" -> {
+                case "north", "1" -> {
                     if (directionsString.contains(direction.toLowerCase())) {
                         lastPosition = currentPlayerPosition.clone(); // Save the current position before moving
                         roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = mountainTopDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
@@ -208,7 +210,7 @@ public class MountainTopDungeon extends Dungeon {
                         Dungeon.defaultDungeonArgs(direction.toLowerCase());
                     }
                 }
-                case "east" -> {
+                case "east", "2" -> {
                     if (directionsString.contains(direction.toLowerCase())) {
                         lastPosition = currentPlayerPosition.clone(); // Save the current position before moving
                         roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = mountainTopDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
@@ -219,7 +221,7 @@ public class MountainTopDungeon extends Dungeon {
                         Dungeon.defaultDungeonArgs(direction.toLowerCase());
                     }
                 }
-                case "south" -> {
+                case "south", "3" -> {
                     if (directionsString.contains(direction.toLowerCase())) {
                         lastPosition = currentPlayerPosition.clone(); // Save the current position before moving
                         roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = mountainTopDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
@@ -230,7 +232,7 @@ public class MountainTopDungeon extends Dungeon {
                         Dungeon.defaultDungeonArgs(direction.toLowerCase());
                     }
                 }
-                case "west" -> {
+                case "west", "4" -> {
                     if (directionsString.contains(direction.toLowerCase())) {
                         lastPosition = currentPlayerPosition.clone(); // Save the current position before moving
                         roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = mountainTopDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
@@ -241,7 +243,7 @@ public class MountainTopDungeon extends Dungeon {
                         Dungeon.defaultDungeonArgs(direction.toLowerCase());
                     }
                 }
-                case "boss room" -> {
+                case "boss room", "5" -> {
                     if (confirmBossContinue()) {
                         lastPosition = currentPlayerPosition.clone(); // Save the current position before moving
                         roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = mountainTopDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];

@@ -1,25 +1,27 @@
-        writeValue(Player.getName(), filePath);
-        writeSeparator(filePath);
+      versionID
+
+  writeValue(Player.getName(), filePath);
+
         writeValue(String.valueOf(Player.getHealth()), filePath);
-        writeSeparator(filePath);
+
         writeValue(String.valueOf(Player.getMaxHealth()), filePath);
-        writeSeparator(filePath);
+
         writeValue(String.valueOf(Player.getGold()), filePath);
-        writeSeparator(filePath);
+
         writeValue(Player.getInventory(), filePath);
-        writeSeparator(filePath);
+
         writeValue(String.valueOf(Player.getInventorySize()), filePath);
-        writeSeparator(filePath);
+
         writeValue(Main.savedPlace, filePath);
-        writeSeparator(filePath);
+
         writeValue(String.valueOf(Main.playerCreated), filePath);
-        writeSeparator(filePath);
+
         writeValue(TextEngine.speedSetting, filePath);
-        writeSeparator(filePath);
+
         writeValue(Dungeon.currentDungeon, filePath);
-        writeSeparator(filePath);
+
         writeValue(String.valueOf(Dungeon.completedDungeons), filePath);
-        writeSeparator(filePath);
+
         writeArray(Dungeon.currentPlayerPosition, filePath);
         writeSeparator(filePath);
         writeArray(Dungeon.lastPosition, filePath);

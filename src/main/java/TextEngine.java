@@ -66,7 +66,7 @@ public abstract class TextEngine {
                 System.out.flush();
             }
         } catch (final IOException e) {
-            System.out.println("Error, No OS obtained: " + e.getMessage());
+            //System.out.println("Error, No OS obtained: " + e.getMessage());
         }
     }
 

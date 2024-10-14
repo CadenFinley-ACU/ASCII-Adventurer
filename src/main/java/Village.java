@@ -152,6 +152,11 @@ public class Village extends Room {
         TextEngine.printNoDelay("\n", false);
         TextEngine.printWithDelays("You step into the hotel,\n      greeted by the cozy ambiance and the soft murmur of guests enjoying their stay.\nThe warm glow of the lights invites you to relax.", false);
         TextEngine.printWithDelays("        Here, you can rest to regain your health and rejuvenate your spirit.\n", false);
+        if (Player.getHealth() == Player.getMaxHealth()) {
+            TextEngine.printWithDelays("You are already at full health, there is no need to rest.", false);
+            TextEngine.enterToNext();
+            Main.loadSave();
+        }
         TextEngine.printWithDelays("What will you do? Type " + yellowColor + "rest" + resetColor + " to restore your health (cost:" + cost + " gold) or " + yellowColor + "leave" + resetColor + " to exit the hotel", true);
         while (true) {
             ignore = console.readLine();

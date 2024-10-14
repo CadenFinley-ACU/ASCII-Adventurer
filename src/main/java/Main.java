@@ -22,12 +22,20 @@ public class Main {
     public static Map<String, Integer> savedInventory = new HashMap<>();
 
     public static void main(String[] args) throws InterruptedException { //main game start
+        TextEngine.clearScreen();
         if (!hasSave()) {
+            TextEngine.printNoDelay("Generating Dungeons...", false);
             Dungeon.generateDungeons();
+            TextEngine.printNoDelay("Generated Dungeons!", false);
         } else {
+            TextEngine.printNoDelay("Locating Save File...", false);
             GameSaveSerialization.loadGameSave();
+            TextEngine.printNoDelay("Save File Located!", false);
         }
+        TextEngine.printNoDelay("Creating Game Items...", false);
         createGameItems();
+        TextEngine.printNoDelay("Game Items Created!", false);
+        TextEngine.printWithDelays("Starting Game!", false);
         startMenu();
     }
 
@@ -89,7 +97,7 @@ public class Main {
         splashScreen();
         TextEngine.printNoDelay("               by: Albert Tucker, Caden Finley, and Grijesh Shrestha", false);
         System.out.println();
-        if (hasSave() && Player.getName() != null) {
+        if (hasSave() && Player.getName() != null && !"null".equals(Player.getName())) {
             TextEngine.printNoDelay("Welcome " + Player.getName() + "!", false);
         } else {
             TextEngine.printNoDelay("Welcome Hero!", false);
@@ -187,9 +195,9 @@ public class Main {
               
         
             
-                    
+                      
         
-                  
+                    
         
              
 
@@ -520,9 +528,9 @@ public class Main {
 
     public static void start() throws InterruptedException { //start the game
         TextEngine.clearScreen();
-        if (hasSave() && Player.getName() != null) {
+        if (hasSave() && Player.getName() != null && !"null".equals(Player.getName())) {
             promptLoadSavedGame();
-        } else if (playerCreated && Player.getName() != null) {
+        } else if (playerCreated && Player.getName() != null && !"null".equals(Player.getName())) {
             saveSpace("SpawnRoom");
             loadSave();
         } else {

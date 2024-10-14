@@ -32,14 +32,17 @@ public class DesertOasisDungeon extends Dungeon {
         if (!visited) {
             fresh();
             visited = true;
+            items = new ArrayList<>(List.of("master sword", "royal armor", "greater health potion"));
+        }
+        if ("Desert Oasis Dungeon".equals(Main.getSavedPlace())) {
+            currentPlayerPosition = save;
         } else {
-            save = currentPlayerPosition.clone();
+            currentPlayerPosition = DungeonGenerator.findValue(Dungeon.desertOasisDungeon, 9);
         }
         room = "Desert Oasis Dungeon";
         Main.checkSave(room);
         Main.screenRefresh();
         Dungeon.currentDungeon = "Desert Oasis";
-        currentPlayerPosition = save;
         GameSaveSerialization.saveGame();
         startRooms();
     }
@@ -47,7 +50,6 @@ public class DesertOasisDungeon extends Dungeon {
     public static void fresh() { //fresh
         visited = false;
         completed = false;
-        items = new ArrayList<>(List.of("master sword", "royal armor", "greater health potion"));
         foundItemRooms = DungeonGenerator.numberOfRooms(Dungeon.desertOasisDungeon, 2);
         spawnPosition = DungeonGenerator.findValue(Dungeon.desertOasisDungeon, 9);
         bossRoom = DungeonGenerator.findValue(Dungeon.desertOasisDungeon, 8);
@@ -65,7 +67,7 @@ public class DesertOasisDungeon extends Dungeon {
         directionsString = new ArrayList<>();
 
         if (desertOasisDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] == 2 && roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] == 0) {
-            if (1 <= items.size()) {
+            if (!items.isEmpty()) {
                 String randomItem = items.get(rand.nextInt(items.size()));
                 if (hasChestInRoom(randomItem, 1)) {
                     items.remove(randomItem);
@@ -198,7 +200,7 @@ public class DesertOasisDungeon extends Dungeon {
             ignore = Room.console.readLine();
             direction = Room.console.readLine();
             switch (direction.toLowerCase().trim()) {
-                case "north" -> {
+                case "north", "1" -> {
                     if (directionsString.contains(direction.toLowerCase())) {
                         lastPosition = currentPlayerPosition.clone(); // Save the current position before moving
                         roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = desertOasisDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
@@ -209,7 +211,7 @@ public class DesertOasisDungeon extends Dungeon {
                         Dungeon.defaultDungeonArgs(direction.toLowerCase());
                     }
                 }
-                case "east" -> {
+                case "east", "2" -> {
                     if (directionsString.contains(direction.toLowerCase())) {
                         lastPosition = currentPlayerPosition.clone(); // Save the current position before moving
                         roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = desertOasisDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
@@ -220,7 +222,7 @@ public class DesertOasisDungeon extends Dungeon {
                         Dungeon.defaultDungeonArgs(direction.toLowerCase());
                     }
                 }
-                case "south" -> {
+                case "south", "3" -> {
                     if (directionsString.contains(direction.toLowerCase())) {
                         lastPosition = currentPlayerPosition.clone(); // Save the current position before moving
                         roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = desertOasisDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
@@ -231,7 +233,7 @@ public class DesertOasisDungeon extends Dungeon {
                         Dungeon.defaultDungeonArgs(direction.toLowerCase());
                     }
                 }
-                case "west" -> {
+                case "west", "4" -> {
                     if (directionsString.contains(direction.toLowerCase())) {
                         lastPosition = currentPlayerPosition.clone(); // Save the current position before moving
                         roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = desertOasisDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
@@ -242,7 +244,7 @@ public class DesertOasisDungeon extends Dungeon {
                         Dungeon.defaultDungeonArgs(direction.toLowerCase());
                     }
                 }
-                case "boss room" -> {
+                case "boss room", "5" -> {
                     if (confirmBossContinue()) {
                         lastPosition = currentPlayerPosition.clone(); // Save the current position before moving
                         roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = desertOasisDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
