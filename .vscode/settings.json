@@ -1,5 +1,0 @@
-{
-    "java.jdt.ls.vmargs": "-XX:+UseParallelGC -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90 -Dsun.zip.disableMemoryMapping=false -Xmx4G -Xms3072m -Xlog:enable",
-    "java.configuration.updateBuildConfiguration": "interactive",
-    "maven.view": "flat"
-}
