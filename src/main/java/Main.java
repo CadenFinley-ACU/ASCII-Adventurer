@@ -213,6 +213,7 @@ public class Main {
     
         
         
+        
           
           
              
@@ -489,6 +490,7 @@ public class Main {
         savedPlace = null;
         Room.reset("all");
         Player.setName(null);
+        Dungeon.generateDungeons();
         GameSaveSerialization.saveGame();
     }
 
