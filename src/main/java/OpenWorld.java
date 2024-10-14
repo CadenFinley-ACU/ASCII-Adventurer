@@ -415,7 +415,18 @@ public class OpenWorld extends Room {
                 roomNumber = 66;
                 room66();
             }
-            
+            case 67 ->{
+                Player.playerX = 9;
+                Player.playerY = 5;
+                roomNumber = 67;
+                room67();
+            }
+            case 68 ->{
+                Player.playerX = 8;
+                Player.playerY = 7;
+                roomNumber = 60;
+                room60();
+            }
             default ->
                 Main.startMenu();
         }
