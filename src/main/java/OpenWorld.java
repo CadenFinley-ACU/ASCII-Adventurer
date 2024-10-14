@@ -5,7 +5,6 @@
  * Text Adventure Game SE374 F24 Final Project Caden Finley Albert Tucker
  * Grijesh Shrestha
  */
-//maybe procurally generated dungeons using birary states to matrix arrrys ti create rooms in  path
 public class OpenWorld extends Room {
 
     static int roomSave = 1;
