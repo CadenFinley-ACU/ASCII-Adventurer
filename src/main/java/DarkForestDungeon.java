@@ -34,14 +34,16 @@ public class DarkForestDungeon extends Dungeon {
             fresh();
             items = new ArrayList<>(List.of("broad sword", "full armor kit", "health potion"));
             visited = true;
+        }
+        if ("Dark Forest Dungeon".equals(Main.getSavedPlace())) {
+            currentPlayerPosition = save;
         } else {
-            save = currentPlayerPosition.clone();
+            currentPlayerPosition = spawnPosition;
         }
         room = "Dark Forest Dungeon";
         Main.checkSave(room);
         Main.screenRefresh();
         Dungeon.currentDungeon = "Dark Forest";
-        currentPlayerPosition = save;
         GameSaveSerialization.saveGame();
         startRooms();
     }

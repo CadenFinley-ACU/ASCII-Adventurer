@@ -33,14 +33,16 @@ public class DesertPyramidDungeon extends Dungeon {
             fresh();
             visited = true;
             items = new ArrayList<>(List.of("excalibur", "angel armor", "super health potion"));
+        }
+        if ("Desert Pyramid Dungeon".equals(Main.getSavedPlace())) {
+            currentPlayerPosition = save;
         } else {
-            save = currentPlayerPosition.clone();
+            currentPlayerPosition = spawnPosition;
         }
         room = "Desert Pyramid Dungeon";
         Main.checkSave(room);
         Main.screenRefresh();
         Dungeon.currentDungeon = "Desert Pyramid";
-        currentPlayerPosition = save;
         GameSaveSerialization.saveGame();
         startRooms();
     }

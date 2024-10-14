@@ -33,14 +33,16 @@ public class MeadowDungeon extends Dungeon {
             fresh();
             items = new ArrayList<>(List.of("axe", "chainmail set"));
             visited = true;
+        }
+        if ("Meadow Dungeon".equals(Main.getSavedPlace())) {
+            currentPlayerPosition = save;
         } else {
-            save = currentPlayerPosition.clone();
+            currentPlayerPosition = spawnPosition;
         }
         room = "Meadow Dungeon";
         Main.checkSave(room);
         Main.screenRefresh();
         Dungeon.currentDungeon = "Meadow";
-        currentPlayerPosition = save;
         GameSaveSerialization.saveGame();
         startRooms();
     }

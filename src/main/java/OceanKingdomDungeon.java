@@ -33,14 +33,16 @@ public class OceanKingdomDungeon extends Dungeon {
             fresh();
             visited = true;
             items = new ArrayList<>(List.of("god slayer hammer", "god slayer armor", "super health potion"));
+        }
+        if ("Ocean Kingdom Dungeon".equals(Main.getSavedPlace())) {
+            currentPlayerPosition = save;
         } else {
-            save = currentPlayerPosition.clone();
+            currentPlayerPosition = spawnPosition;
         }
         room = "Ocean Kingdom Dungeon";
         Main.checkSave(room);
         Main.screenRefresh();
         Dungeon.currentDungeon = "Ocean Kingdom";
-        currentPlayerPosition = save;
         GameSaveSerialization.saveGame();
         startRooms();
     }

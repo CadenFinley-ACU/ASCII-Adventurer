@@ -33,14 +33,16 @@ public class DesertOasisDungeon extends Dungeon {
             fresh();
             visited = true;
             items = new ArrayList<>(List.of("master sword", "royal armor", "greater health potion"));
+        }
+        if ("Desert Oasis Dungeon".equals(Main.getSavedPlace())) {
+            currentPlayerPosition = save;
         } else {
-            save = currentPlayerPosition.clone();
+            currentPlayerPosition = spawnPosition;
         }
         room = "Desert Oasis Dungeon";
         Main.checkSave(room);
         Main.screenRefresh();
         Dungeon.currentDungeon = "Desert Oasis";
-        currentPlayerPosition = save;
         GameSaveSerialization.saveGame();
         startRooms();
     }

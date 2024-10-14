@@ -33,14 +33,16 @@ public class MountainTopDungeon extends Dungeon {
             fresh();
             visited = true;
             items = new ArrayList<>(List.of("great sword", "knight armor", "greater health potion"));
+        }
+        if ("Mountain Top Dungeon".equals(Main.getSavedPlace())) {
+            currentPlayerPosition = save;
         } else {
-            save = currentPlayerPosition.clone();
+            currentPlayerPosition = spawnPosition;
         }
         room = "Mountain Top Dungeon";
         Main.checkSave(room);
         Main.screenRefresh();
         Dungeon.currentDungeon = "Mountain Top";
-        currentPlayerPosition = save;
         GameSaveSerialization.saveGame();
         startRooms();
     }

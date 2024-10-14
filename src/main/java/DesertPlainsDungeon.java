@@ -33,14 +33,16 @@ public class DesertPlainsDungeon extends Dungeon {
             fresh();
             items = new ArrayList<>(List.of("legendary sword", "demon armor", "greater health potion"));
             visited = true;
+        }
+        if ("Desert Plains Dungeon".equals(Main.getSavedPlace())) {
+            currentPlayerPosition = save;
         } else {
-            save = currentPlayerPosition.clone();
+            currentPlayerPosition = spawnPosition;
         }
         room = "Desert Plains Dungeon";
         Main.checkSave(room);
         Main.screenRefresh();
         Dungeon.currentDungeon = "Desert Plains";
-        currentPlayerPosition = save;
         GameSaveSerialization.saveGame();
         startRooms();
     }

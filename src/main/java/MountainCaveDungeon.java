@@ -33,14 +33,16 @@ public class MountainCaveDungeon extends Dungeon {
             fresh();
             visited = true;
             items = new ArrayList<>(List.of("better sword", "ninja armor", "health potion"));
+        }
+        if ("Mountain Cave Dungeon".equals(Main.getSavedPlace())) {
+            currentPlayerPosition = save;
         } else {
-            save = currentPlayerPosition.clone();
+            currentPlayerPosition = spawnPosition;
         }
         room = "Mountain Cave Dungeon";
         Main.checkSave(room);
         Main.screenRefresh();
         Dungeon.currentDungeon = "Mountain Cave";
-        currentPlayerPosition = save;
         GameSaveSerialization.saveGame();
         startRooms();
     }
