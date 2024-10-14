@@ -3,6 +3,9 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -12,8 +15,10 @@ public class GameSaveSerialization {
 
     private static final String NULL_MARKER = "NULL";
 
-    public static void saveGame() {
+    public static void saveGame() throws IOException {
         String filePath = "game_save.txt";
+        Files.newInputStream(Paths.get(filePath), StandardOpenOption.TRUNCATE_EXISTING);
+
         try (FileWriter writer = new FileWriter(filePath, false)) {
             writer.write(""); // This will clear the file
         } catch (IOException e) {

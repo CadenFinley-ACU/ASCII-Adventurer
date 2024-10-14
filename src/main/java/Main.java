@@ -22,12 +22,20 @@ public class Main {
     public static Map<String, Integer> savedInventory = new HashMap<>();
 
     public static void main(String[] args) throws InterruptedException { //main game start
+        TextEngine.clearScreen();
         if (!hasSave()) {
+            TextEngine.printWithDelays("Generating Dungeons...", false);
             Dungeon.generateDungeons();
+            TextEngine.printWithDelays("Generated Dungeons!", false);
         } else {
+            TextEngine.printWithDelays("Locating Save File...", false);
             GameSaveSerialization.loadGameSave();
+            TextEngine.printWithDelays("Save File Located!", false);
         }
+        TextEngine.printWithDelays("Creating Game Items...", false);
         createGameItems();
+        TextEngine.printWithDelays("Game Items Created!", false);
+        TextEngine.printWithDelays("Starting Game!", false);
         startMenu();
     }
 
