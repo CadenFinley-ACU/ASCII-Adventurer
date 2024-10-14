@@ -398,13 +398,25 @@ public class DungeonGenerator {
                             case 0 ->
                                 System.out.print("[ ] "); // Empty room
                             case 4 -> {
-                                System.out.print("[!] "); // Special marker for value 3
+                                if (unlocked[i][j] > 0) {
+                                    System.out.print("[!] "); // Special marker for value 4
+                                } else {
+                                    System.out.print("[?] "); // Special marker for value 3
+                                }
                             }
                             case 3 -> {
-                                System.out.print("[I] "); // Special marker for value 3  
+                                if (unlocked[i][j] > 0) {
+                                    System.out.print("[I] "); // Special marker for value 3
+                                } else {
+                                    System.out.print("[?] "); // Special marker for value 3  
+                                }
                             }
                             case 2 -> {
-                                System.out.print("[I] "); // Special marker for value 2
+                                if (unlocked[i][j] > 0) {
+                                    System.out.print("[I] "); // Special marker for value 2
+                                } else {
+                                    System.out.print("[?] "); // Special marker for value 2
+                                }
                             }
                             default ->
                                 System.out.print("[~] "); // Default case for other values
