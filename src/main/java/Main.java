@@ -24,17 +24,17 @@ public class Main {
     public static void main(String[] args) throws InterruptedException { //main game start
         TextEngine.clearScreen();
         if (!hasSave()) {
-            TextEngine.printWithDelays("Generating Dungeons...", false);
+            TextEngine.printNoDelay("Generating Dungeons...", false);
             Dungeon.generateDungeons();
-            TextEngine.printWithDelays("Generated Dungeons!", false);
+            TextEngine.printNoDelay("Generated Dungeons!", false);
         } else {
-            TextEngine.printWithDelays("Locating Save File...", false);
+            TextEngine.printNoDelay("Locating Save File...", false);
             GameSaveSerialization.loadGameSave();
-            TextEngine.printWithDelays("Save File Located!", false);
+            TextEngine.printNoDelay("Save File Located!", false);
         }
-        TextEngine.printWithDelays("Creating Game Items...", false);
+        TextEngine.printNoDelay("Creating Game Items...", false);
         createGameItems();
-        TextEngine.printWithDelays("Game Items Created!", false);
+        TextEngine.printNoDelay("Game Items Created!", false);
         TextEngine.printWithDelays("Starting Game!", false);
         startMenu();
     }
