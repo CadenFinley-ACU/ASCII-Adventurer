@@ -90,6 +90,11 @@ public class Room {
                     return Player.putItem(itemName, quantity);
                 }
                 case "leave it" -> {
+                    if ("Backpack".equals(itemName) || "Large Backpack".equals(itemName)) {
+                        TextEngine.printWithDelays("You can't leave your backpack behind!", false);
+                        TextEngine.enterToNext();
+                        return Player.putItem(itemName, quantity);
+                    }
                     return false;
                 }
                 default ->

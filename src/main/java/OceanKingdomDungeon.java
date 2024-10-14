@@ -32,6 +32,7 @@ public class OceanKingdomDungeon extends Dungeon {
         if (!visited) {
             fresh();
             visited = true;
+            items = new ArrayList<>(List.of("god slayer hammer", "god slayer armor", "super health potion"));
         } else {
             save = currentPlayerPosition.clone();
         }
@@ -47,7 +48,6 @@ public class OceanKingdomDungeon extends Dungeon {
     public static void fresh() { //fresh
         visited = false;
         completed = false;
-        items = new ArrayList<>(List.of("god slayer hammer", "god slayer armor", "super health potion"));
         foundItemRooms = DungeonGenerator.numberOfRooms(Dungeon.oceanKingdomDungeon, 2);
         spawnPosition = DungeonGenerator.findValue(Dungeon.oceanKingdomDungeon, 9);
         bossRoom = DungeonGenerator.findValue(Dungeon.oceanKingdomDungeon, 8);
@@ -197,7 +197,7 @@ public class OceanKingdomDungeon extends Dungeon {
             ignore = Room.console.readLine();
             direction = Room.console.readLine();
             switch (direction.toLowerCase().trim()) {
-                case "north" -> {
+                case "north", "1" -> {
                     if (directionsString.contains(direction.toLowerCase())) {
                         lastPosition = currentPlayerPosition.clone(); // Save the current position before moving
                         roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = oceanKingdomDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
@@ -208,7 +208,7 @@ public class OceanKingdomDungeon extends Dungeon {
                         Dungeon.defaultDungeonArgs(direction.toLowerCase());
                     }
                 }
-                case "east" -> {
+                case "east", "2" -> {
                     if (directionsString.contains(direction.toLowerCase())) {
                         lastPosition = currentPlayerPosition.clone(); // Save the current position before moving
                         roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = oceanKingdomDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
@@ -219,7 +219,7 @@ public class OceanKingdomDungeon extends Dungeon {
                         Dungeon.defaultDungeonArgs(direction.toLowerCase());
                     }
                 }
-                case "south" -> {
+                case "south", "3" -> {
                     if (directionsString.contains(direction.toLowerCase())) {
                         lastPosition = currentPlayerPosition.clone(); // Save the current position before moving
                         roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = oceanKingdomDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
@@ -230,7 +230,7 @@ public class OceanKingdomDungeon extends Dungeon {
                         Dungeon.defaultDungeonArgs(direction.toLowerCase());
                     }
                 }
-                case "west" -> {
+                case "west", "4" -> {
                     if (directionsString.contains(direction.toLowerCase())) {
                         lastPosition = currentPlayerPosition.clone(); // Save the current position before moving
                         roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = oceanKingdomDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
@@ -241,7 +241,7 @@ public class OceanKingdomDungeon extends Dungeon {
                         Dungeon.defaultDungeonArgs(direction.toLowerCase());
                     }
                 }
-                case "boss room" -> {
+                case "boss room", "5" -> {
                     if (confirmBossContinue()) {
                         lastPosition = currentPlayerPosition.clone(); // Save the current position before moving
                         roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = oceanKingdomDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];

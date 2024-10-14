@@ -32,6 +32,7 @@ public class DarkForestDungeon extends Dungeon {
     public static void startRoom() throws InterruptedException { //start room
         if (!visited) {
             fresh();
+            items = new ArrayList<>(List.of("broad sword", "full armor kit", "health potion"));
             visited = true;
         } else {
             save = currentPlayerPosition.clone();
@@ -48,7 +49,6 @@ public class DarkForestDungeon extends Dungeon {
     public static void fresh() { //fresh
         visited = false;
         completed = false;
-        items = new ArrayList<>(List.of("broad sword", "full armor kit", "health potion"));
         foundItemRooms = DungeonGenerator.numberOfRooms(Dungeon.darkForestDungeon, 2);
         spawnPosition = DungeonGenerator.findValue(Dungeon.darkForestDungeon, 9);
         bossRoom = DungeonGenerator.findValue(Dungeon.darkForestDungeon, 8);
@@ -198,7 +198,7 @@ public class DarkForestDungeon extends Dungeon {
             ignore = Room.console.readLine();
             direction = Room.console.readLine();
             switch (direction.toLowerCase().trim()) {
-                case "north" -> {
+                case "north", "1" -> {
                     if (directionsString.contains(direction.toLowerCase())) {
                         lastPosition = currentPlayerPosition.clone(); // Save the current position before moving
                         roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = darkForestDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
@@ -209,7 +209,7 @@ public class DarkForestDungeon extends Dungeon {
                         Dungeon.defaultDungeonArgs(direction.toLowerCase());
                     }
                 }
-                case "east" -> {
+                case "east", "2" -> {
                     if (directionsString.contains(direction.toLowerCase())) {
                         lastPosition = currentPlayerPosition.clone(); // Save the current position before moving
                         roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = darkForestDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
@@ -220,18 +220,7 @@ public class DarkForestDungeon extends Dungeon {
                         Dungeon.defaultDungeonArgs(direction.toLowerCase());
                     }
                 }
-                case "west" -> {
-                    if (directionsString.contains(direction.toLowerCase())) {
-                        lastPosition = currentPlayerPosition.clone(); // Save the current position before moving
-                        roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = darkForestDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
-                        currentPlayerPosition[1] -= 1;
-                        save = currentPlayerPosition.clone();
-                        Main.loadSave();
-                    } else {
-                        Dungeon.defaultDungeonArgs(direction.toLowerCase());
-                    }
-                }
-                case "south" -> {
+                case "south", "3" -> {
                     if (directionsString.contains(direction.toLowerCase())) {
                         lastPosition = currentPlayerPosition.clone(); // Save the current position before moving
                         roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = darkForestDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
@@ -242,7 +231,18 @@ public class DarkForestDungeon extends Dungeon {
                         Dungeon.defaultDungeonArgs(direction.toLowerCase());
                     }
                 }
-                case "boss room" -> {
+                case "west", "4" -> {
+                    if (directionsString.contains(direction.toLowerCase())) {
+                        lastPosition = currentPlayerPosition.clone(); // Save the current position before moving
+                        roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = darkForestDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
+                        currentPlayerPosition[1] -= 1;
+                        save = currentPlayerPosition.clone();
+                        Main.loadSave();
+                    } else {
+                        Dungeon.defaultDungeonArgs(direction.toLowerCase());
+                    }
+                }
+                case "boss room", "5" -> {
                     if (confirmBossContinue()) {
                         lastPosition = currentPlayerPosition.clone(); // Save the current position before moving
                         roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = darkForestDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
