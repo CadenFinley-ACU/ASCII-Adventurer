@@ -12,7 +12,7 @@ import java.util.Map;
 public class GameSaveSerialization {
 
     private static final String NULL_MARKER = "NULL";
-    public static float versionID = 1.0f;
+    public static int versionID = 1;
     private static String command;
     private static String ignore;
     private final static Console console = System.console();
