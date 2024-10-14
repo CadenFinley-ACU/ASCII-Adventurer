@@ -339,7 +339,7 @@ public class GameSaveSerialization {
 
     private static ArrayList<String> readList(BufferedReader reader) throws IOException {
         String line = reader.readLine();
-        if (line.equals(NULL_MARKER) || line.equals("null")) {
+        if (line.equals(NULL_MARKER) || line.equals("null") || line.equals("") || line.equals("Null") || line.equals("NULL")) {
             return null;
         }
         return new ArrayList<>(List.of(line.split(", ")));
@@ -347,7 +347,7 @@ public class GameSaveSerialization {
 
     private static int[] readArray(BufferedReader reader) throws IOException {
         String line = reader.readLine();
-        if (line.equals(NULL_MARKER) || line.equals("null")) {
+        if (line.equals(NULL_MARKER) || line.equals("null") || line.equals("") || line.equals("Null") || line.equals("NULL")) {
             return null;
         }
         String[] values = line.trim().split(" ");
