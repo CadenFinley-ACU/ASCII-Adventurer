@@ -515,7 +515,7 @@ public class Main {
     public static boolean hasSave() { // Check if there is a save
         // Check if getSavedPlace() is not null
         // Check if the file game_save.txt exists
-        File saveFile = new File("game_save.txt");
+        File saveFile = new File(GameSaveSerialization.filePath);
         return getSavedPlace() != null || saveFile.exists() || Player.getName() != null;
     }
 

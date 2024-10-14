@@ -16,10 +16,9 @@ public class GameSaveSerialization {
     private static String command;
     private static String ignore;
     private final static Console console = System.console();
+    public static String filePath = ".game_save.txt";
 
     public static void saveGame() {
-        String filePath = "game_save.txt";
-
         try (FileWriter writer = new FileWriter(filePath, false)) {
             writer.write(""); // This will clear the file
         } catch (IOException e) {
@@ -146,7 +145,6 @@ public class GameSaveSerialization {
     }
 
     public static void loadGameSave() {
-        String filePath = "game_save.txt";
         String buffer = "";
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
             try {
@@ -290,13 +288,14 @@ public class GameSaveSerialization {
                 buffer = reader.readLine();
                 OceanKingdomDungeon.items = readList(reader);
             } catch (IOException | NumberFormatException e) {
+                e.printStackTrace();
                 System.out.println("Save File Corrupt or Invalid... ");
                 TextEngine.printWithDelays("Erasing Save File and Restarting...", false);
                 TextEngine.enterToNext();
                 TextEngine.clearScreen();
                 Main.wipeSave();
                 Main.startMenu();
-                //e.printStackTrace();
+
             }
         } catch (Exception e) {
             e.printStackTrace();
