@@ -180,7 +180,7 @@ public class Dungeon extends Room {
         switch (completedDungeons) {
             case 0 -> {// the meadow dungeon
                 switch (OpenWorld.roomNumber) {
-                    case 73 ->
+                    case 73,74 ->
                         TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", feeling a sense of adventure as you leave the open paths behind.\n Ahead, you notice the entrance to the next dungeon lying just to the north, east.\n\n ", false);
                     case 65, 66, 68 ->
                         TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", feeling a sense of adventure as you leave the open paths behind.\n Ahead, you notice the entrance to the next dungeon lying just to the east.\n\n", false);
