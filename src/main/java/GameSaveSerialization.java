@@ -14,7 +14,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
+// Written by Caden Finley ACU 2024
+// October 15, 2024
 public class GameSaveSerialization {
 
     private static final String NULL_MARKER = "NULL";
@@ -75,7 +76,6 @@ public class GameSaveSerialization {
         writeSeparator(filePath);
         writeMatrix(Dungeon.oceanKingdomDungeon, filePath);
         writeSeparator(filePath);
-
         writeValue(String.valueOf(SpawnRoom.roomSave), filePath);
         writeSeparator(filePath);
         writeValue(String.valueOf(OpenWorld.roomSave), filePath);
