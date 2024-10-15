@@ -1,6 +1,8 @@
 
 import java.io.Console;
 import java.io.File;
+import java.io.FileWriter;
+import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -347,6 +349,15 @@ public class Main {
     
         
         
+        
+        
+                
+        
+            
+            
+                 
+                 
+             
          
         
              
@@ -384,6 +395,15 @@ public class Main {
     private static void exitGame() throws InterruptedException {   //exit game command
         GameSaveSerialization.saveGame();
         TextEngine.printWithDelays("See ya next time!", false);
+        try {
+            FileWriter fwOb = new FileWriter(".runtime.txt", false); 
+            PrintWriter pwOb = new PrintWriter(fwOb, false);
+            pwOb.flush();
+            pwOb.close();
+            fwOb.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         TextEngine.enterToNext();
         TextEngine.clearScreen();
         System.exit(0);

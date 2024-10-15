@@ -12,6 +12,8 @@ buildNumber.properties
 .game_save.txt
 game_save.txt
 .vscode
+.runtime.txt
+runtime.txt
 # https://github.com/takari/maven-wrapper#usage-without-binary-jar
 .mvn/wrapper/maven-wrapper.jar
 
