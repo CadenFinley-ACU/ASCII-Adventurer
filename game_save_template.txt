@@ -22,41 +22,40 @@
 
         writeValue(String.valueOf(Dungeon.completedDungeons), filePath);
 
-        writeArray(Dungeon.currentPlayerPosition, filePath);
-        writeSeparator(filePath);
+        writeArray(Dungeon.currentPlayerPosition, filePath)
+
         writeArray(Dungeon.lastPosition, filePath);
-        writeSeparator(filePath);
+
         writeMatrix(Dungeon.meadowDungeon, filePath);
-        writeSeparator(filePath);
+
         writeMatrix(Dungeon.darkForestDungeon, filePath);
-        writeSeparator(filePath);
+
         writeMatrix(Dungeon.mountainCaveDungeon, filePath);
-        writeSeparator(filePath);
+
         writeMatrix(Dungeon.mountainTopDungeon, filePath);
-        writeSeparator(filePath);
+
         writeMatrix(Dungeon.desertOasisDungeon, filePath);
-        writeSeparator(filePath);
+
         writeMatrix(Dungeon.desertPlainsDungeon, filePath);
-        writeSeparator(filePath);
+
         writeMatrix(Dungeon.desertPyramidDungeon, filePath);
-        writeSeparator(filePath);
+
         writeMatrix(Dungeon.oceanKingdomDungeon, filePath);
-        writeSeparator(filePath);
 
         writeValue(String.valueOf(SpawnRoom.roomSave), filePath);
-        writeSeparator(filePath);
+       
         writeValue(String.valueOf(OpenWorld.roomSave), filePath);
-        writeSeparator(filePath);
+   
         writeValue(String.valueOf(OpenWorld.roomNumber), filePath);
-        writeSeparator(filePath);
+    
         writeValue(OpenWorld.holdCommand, filePath);
-        writeSeparator(filePath);
+      
         writeValue(Room.room, filePath);
-        writeSeparator(filePath);
+    
         writeValue(String.valueOf(MeadowDungeon.completed), filePath);
-        writeSeparator(filePath);
+      
         writeValue(String.valueOf(MeadowDungeon.visited), filePath);
-        writeSeparator(filePath);
+        
         writeValue(String.valueOf(DarkForestDungeon.completed), filePath);
         writeSeparator(filePath);
         writeValue(String.valueOf(DarkForestDungeon.visited), filePath);
