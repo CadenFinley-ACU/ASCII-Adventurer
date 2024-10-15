@@ -25,6 +25,7 @@ public class Main {
         TextEngine.clearScreen();
         if (!hasSave()) {
             TextEngine.printNoDelay("Generating Dungeons...", false);
+            TextEngine.printNoDelay("(P.S. if this takes more than ~10 seconds, restart the game.)", false);
             Dungeon.generateDungeons();
             TextEngine.printNoDelay("Generated Dungeons!", false);
         } else {
