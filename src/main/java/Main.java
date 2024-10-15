@@ -139,7 +139,7 @@ public class Main {
     private static void splashScreen() {
         String brightBoldEnd = "\033[0m"; // end color
         String darkPurpleStart = "\033[38;2;255;165;0m"; // ACU Purple
-        if (getOS_NAME().contains("Mac OS X")) {
+        if (getOS_NAME().contains("Mac")) {
             darkPurpleStart = "\033[1;33m";
         }
         System.err.println(
