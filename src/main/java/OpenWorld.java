@@ -1,4 +1,3 @@
-
 /**
  * Open World Class
  *
@@ -6,8 +5,8 @@
  * Grijesh Shrestha
  */
 public class OpenWorld extends Room {
-
-    static int roomSave = 1;
+    
+    static int roomSave = 74;
     public static String holdCommand = null;
     static int roomNumber = 0;
     static String resetColor = "\033[0m"; // reset to default color
@@ -19,47 +18,35 @@ public class OpenWorld extends Room {
         GameSaveSerialization.saveGame();
         Main.screenRefresh();
         switch (roomSave) {
-            case 1 -> {
-                Player.playerX = 0;
-                Player.playerY = 1;
-                roomNumber = 1;
-                room1(); //start room   
-            }
             case 2 -> {
-                Player.playerX = 0;
-                Player.playerY = 2;
+                Player.playerX = 2;
+                Player.playerY = 0;
                 roomNumber = 2;
                 room2(); //start room
             }
             case 3 -> {
-                Player.playerX = 0;
-                Player.playerY = 3;
+                Player.playerX = 3;
+                Player.playerY = 0;
                 roomNumber = 3;
                 room3(); //start room
             }
             case 4 -> {
-                Player.playerX = 0;
-                Player.playerY = 4;
+                Player.playerX = 4;
+                Player.playerY = 0;
                 roomNumber = 4;
                 room4(); //start room
             }
             case 5 -> {
-                Player.playerX = 0;
-                Player.playerY = 5;
+                Player.playerX = 5;
+                Player.playerY = 0;
                 roomNumber = 5;
                 room5(); //start room
             }
             case 6 -> {
-                Player.playerX = 0;
-                Player.playerY = 6;
+                Player.playerX = 6;
+                Player.playerY = 0;
                 roomNumber = 6;
                 room6(); //start room
-            }
-            case 7 -> {
-                Player.playerX = 0;
-                Player.playerY = 7;
-                roomNumber = 7;
-                room7(); //start room
             }
             case 8 -> {
                 Player.playerX = 1;
@@ -68,447 +55,359 @@ public class OpenWorld extends Room {
                 room8(); //start room
             }
             case 9 -> {
-                Player.playerX = 1;
-                Player.playerY = 5;
+                Player.playerX = 5;
+                Player.playerY = 1;
                 roomNumber = 9;
                 room9(); //start room
             }
             case 10 -> {
-                Player.playerX = 1;
-                Player.playerY = 6;
+                Player.playerX = 6;
+                Player.playerY = 1;
                 roomNumber = 10;
                 room10(); //start room
             }
             case 11 -> {
-                Player.playerX = 1;
-                Player.playerY = 7;
+                Player.playerX = 7;
+                Player.playerY = 1;
                 roomNumber = 11;
                 room11(); //start room
             }
             case 12 -> {
-                Player.playerX = 2;
-                Player.playerY = 1;
+                Player.playerX = 1;
+                Player.playerY = 2;
                 roomNumber = 12;
                 room12(); //start room
             }
             case 13 -> {
-                Player.playerX = 2;
-                Player.playerY = 5;
+                Player.playerX = 5;
+                Player.playerY = 2;
                 roomNumber = 13;
                 room13(); //start room
             }
             case 14 -> {
-                Player.playerX = 2;
-                Player.playerY = 6;
+                Player.playerX = 6;
+                Player.playerY = 2;
                 roomNumber = 14;
                 room14(); //start room
             }
             case 15 -> {
-                Player.playerX = 2;
-                Player.playerY = 7;
+                Player.playerX = 7;
+                Player.playerY = 2;
                 roomNumber = 15;
                 room15(); //start room
             }
             case 16 -> {
-                Player.playerX = 3;
-                Player.playerY = 1;
+                Player.playerX = 1;
+                Player.playerY = 3;
                 roomNumber = 16;
                 room16(); //start room
             }
             case 17 -> {
-                Player.playerX = 3;
-                Player.playerY = 5;
+                Player.playerX = 5;
+                Player.playerY = 3;
                 roomNumber = 17;
                 room17(); //start room
             }
             case 18 -> {
-                Player.playerX = 3;
-                Player.playerY = 6;
+                Player.playerX = 6;
+                Player.playerY = 3;
                 roomNumber = 18;
                 room18(); //start room
             }
             case 19 -> {
-                Player.playerX = 3;
-                Player.playerY = 7;
+                Player.playerX = 7;
+                Player.playerY = 3;
                 roomNumber = 19;
                 room19(); //start room
             }
-            case 20 -> {
-                Player.playerX = 3;
-                Player.playerY = 8;
-                roomNumber = 20;
-                room20(); //start room
-            }
             case 21 -> {
-                Player.playerX = 4;
-                Player.playerY = 0;
+                Player.playerX = 0;
+                Player.playerY = 4;
                 roomNumber = 21;
                 room21();
             }
-            case 22 ->{
-                Player.playerX = 4;
-                Player.playerY = 1;
+            case 22 -> {
+                Player.playerX = 1;
+                Player.playerY = 4;
                 roomNumber = 22;
                 room22();
             }
-            // case 23 ->{
-            //     Player.playerX = 4;
-            //     Player.playerY = 2;
-            //     roomNumber = 23;
-            //     room23();
-            // }
-            case 24 ->{
-                Player.playerX = 4;
+            case 25 -> {
+                Player.playerX = 5;
                 Player.playerY = 4;
-                roomNumber = 24;
-                room24();
-            }
-            case 25 ->{
-                Player.playerX = 4;
-                Player.playerY = 5;
                 roomNumber = 25;
                 room25();
             }
-            case 26 ->{
-                Player.playerX = 4;
-                Player.playerY = 6;
+            case 26 -> {
+                Player.playerX = 6;
+                Player.playerY = 4;
                 roomNumber = 26;
                 room26();
             }
-            case 27 ->{
-                Player.playerX = 8;
-                Player.playerY = 3;
+            case 27 -> {
+                Player.playerX = 3;
+                Player.playerY = 8;
                 roomNumber = 27;
                 room27();
             }
-            case 28 ->{
-                Player.playerX = 4;
-                Player.playerY = 7;
+            case 28 -> {
+                Player.playerX = 7;
+                Player.playerY = 4;
                 roomNumber = 28;
                 room28();
             }
-            case 29 ->{
-                Player.playerX = 4;
-                Player.playerY = 8;
+            case 29 -> {
+                Player.playerX = 8;
+                Player.playerY = 4;
                 roomNumber = 29;
                 room29();
             }
-            case 30 ->{
-                Player.playerX = 5;
-                Player.playerY = 0;
+            case 30 -> {
+                Player.playerX = 0;
+                Player.playerY = 5;
                 roomNumber = 30;
                 room30();
             }
-            case 31 ->{
-                Player.playerX = 5;
-                Player.playerY = 1;
+            case 31 -> {
+                Player.playerX = 1;
+                Player.playerY = 5;
                 roomNumber = 31;
                 room31();
             }
-            case 32 ->{
-                Player.playerX = 5;
-                Player.playerY = 2;
+            case 32 -> {
+                Player.playerX = 2;
+                Player.playerY = 5;
                 roomNumber = 32;
                 room32();
             }
-            case 33 ->{
+            case 33 -> {
                 Player.playerX = 5;
                 Player.playerY = 5;
                 roomNumber = 33;
                 room33();
             }
-            case 34 ->{
-                Player.playerX = 5;
-                Player.playerY = 6;
+            case 34 -> {
+                Player.playerX = 6;
+                Player.playerY = 5;
                 roomNumber = 34;
                 room34();
             }
-            case 35 ->{
-                Player.playerX = 5;
-                Player.playerY = 7;
+            case 35 -> {
+                Player.playerX = 7;
+                Player.playerY = 5;
                 roomNumber = 35;
                 room35();
             }
-            case 36 ->{
-                Player.playerX = 5;
-                Player.playerY = 8;
+            case 36 -> {
+                Player.playerX = 8;
+                Player.playerY = 5;
                 roomNumber = 36;
                 room36();
             }
-            case 37 ->{
-                Player.playerX = 6;
-                Player.playerY = 0;
+            case 37 -> {
+                Player.playerX = 0;
+                Player.playerY = 6;
                 roomNumber = 37;
                 room37();
             }
-            case 38 ->{
-                Player.playerX = 6;
-                Player.playerY = 1;
+            case 38 -> {
+                Player.playerX = 1;
+                Player.playerY = 6;
                 roomNumber = 38;
                 room38();
             }
-            case 39 ->{
-                Player.playerX = 6;
-                Player.playerY = 2;
+            case 39 -> {
+                Player.playerX = 2;
+                Player.playerY = 6;
                 roomNumber = 39;
                 room39();
             }
-            case 40 ->{
-                Player.playerX = 6;
-                Player.playerY = 3;
+            case 40 -> {
+                Player.playerX = 3;
+                Player.playerY = 6;
                 roomNumber = 40;
                 room40();
             }
-            case 41 ->{
-                Player.playerX = 6;
-                Player.playerY = 4;
+            case 41 -> {
+                Player.playerX = 4;
+                Player.playerY = 6;
                 roomNumber = 41;
                 room41();
             }
-            case 42 ->{
-                Player.playerX = 6;
-                Player.playerY = 5;
+            case 42 -> {
+                Player.playerX = 5;
+                Player.playerY = 6;
                 roomNumber = 42;
                 room42();
             }
-            case 43 ->{
+            case 43 -> {
                 Player.playerX = 6;
                 Player.playerY = 6;
                 roomNumber = 43;
                 room43();
             }
-            case 44 ->{
-                Player.playerX = 6;
-                Player.playerY = 7;
+            case 44 -> {
+                Player.playerX = 7;
+                Player.playerY = 6;
                 roomNumber = 44;
                 room44();
-            } 
-            case 45 ->{
-                Player.playerX = 6;
-                Player.playerY = 8;
-                roomNumber = 48;
+            }
+            case 45 -> {
+                Player.playerX = 8;
+                Player.playerY = 6;
+                roomNumber = 45;
                 room45();
             }
-            case 46 ->{
-                Player.playerX = 7;
-                Player.playerY = 0;
-                roomNumber = 46;
-                room46();
-            }
-            case 47 ->{
-                Player.playerX = 7;
-                Player.playerY = 1;
+            case 47 -> {
+                Player.playerX = 1;
+                Player.playerY = 7;
                 roomNumber = 47;
                 room47();
             }
-            case 48 ->{
-                Player.playerX = 7;
-                Player.playerY = 2;
+            case 48 -> {
+                Player.playerX = 2;
+                Player.playerY = 7;
                 roomNumber = 48;
                 room48();
             }
-            case 49 ->{
-                Player.playerX = 7;
-                Player.playerY = 3;
+            case 49 -> {
+                Player.playerX = 3;
+                Player.playerY = 7;
                 roomNumber = 49;
                 room49();
             }
-            case 50 ->{
-                Player.playerX = 7;
-                Player.playerY = 4;
+            case 50 -> {
+                Player.playerX = 4;
+                Player.playerY = 7;
                 roomNumber = 50;
                 room50();
             }
-            case 51 ->{
-                Player.playerX = 7;
-                Player.playerY = 5;
+            case 51 -> {
+                Player.playerX = 5;
+                Player.playerY = 7;
                 roomNumber = 51;
                 room51();
             }
-            case 52 ->{
-                Player.playerX = 7;
-                Player.playerY = 6;
+            case 52 -> {
+                Player.playerX = 6;
+                Player.playerY = 7;
                 roomNumber = 52;
                 room52();
             }
-            case 53 ->{
+            case 53 -> {
                 Player.playerX = 7;
                 Player.playerY = 7;
                 roomNumber = 53;
                 room53();
             }
-            case 54 ->{
-                Player.playerX = 7;
-                Player.playerY = 8;
+            case 54 -> {
+                Player.playerX = 8;
+                Player.playerY = 7;
                 roomNumber = 54;
                 room54();
             }
-            case 55 ->{
-                Player.playerX = 8;
-                Player.playerY = 2;
+            case 55 -> {
+                Player.playerX = 2;
+                Player.playerY = 8;
                 roomNumber = 55;
                 room55();
             }
-            case 56 ->{
-                Player.playerX = 8;
-                Player.playerY = 1;
-                roomNumber = 56;
-                room56();
-            }
-            case 57 ->{
-                Player.playerX = 8;
-                Player.playerY = 4;
+            case 57 -> {
+                Player.playerX = 4;
+                Player.playerY = 8;
                 roomNumber = 57;
                 room57();
             }
-            case 58 ->{
-                Player.playerX = 8;
-                Player.playerY = 5;
+            case 58 -> {
+                Player.playerX = 5;
+                Player.playerY = 8;
                 roomNumber = 58;
                 room58();
             }
-            case 59 ->{
-                Player.playerX = 8;
-                Player.playerY = 6;
+            case 59 -> {
+                Player.playerX = 6;
+                Player.playerY = 8;
                 roomNumber = 59;
                 room59();
             }
-            case 60 ->{
-                Player.playerX = 8;
-                Player.playerY = 7;
+            case 60 -> {
+                Player.playerX = 7;
+                Player.playerY = 8;
                 roomNumber = 60;
                 room60();
             }
-            case 61 ->{
-                Player.playerX = 8;
-                Player.playerY = 8;
-                roomNumber = 61;
-                room61();
-            }
-            case 62 ->{
-                Player.playerX = 8;
-                Player.playerY = 8;
+            case 62 -> {
+                Player.playerX = 4;
+                Player.playerY = 5;
                 roomNumber = 62;
                 room62();
             }
-            case 63 ->{
-                Player.playerX = 9;
-                Player.playerY = 1;
-                roomNumber = 63;
-                room63();
-            }
-            case 64 ->{
-                Player.playerX = 9;
-                Player.playerY = 2;
+            case 64 -> {
+                Player.playerX = 2;
+                Player.playerY = 9;
                 roomNumber = 64;
                 room64();
             }
-            case 65 ->{
-                Player.playerX = 9;
-                Player.playerY = 3;
+            case 65 -> {
+                Player.playerX = 3;
+                Player.playerY = 9;
                 roomNumber = 65;
                 room65();
             }
-            case 66 ->{
-                Player.playerX = 9;
-                Player.playerY = 4;
+            case 66 -> {
+                Player.playerX = 4;
+                Player.playerY = 9;
                 roomNumber = 66;
                 room66();
             }
-            case 67 ->{
-                Player.playerX = 9;
-                Player.playerY = 5;
+            case 67 -> {
+                Player.playerX = 5;
+                Player.playerY = 9;
                 roomNumber = 67;
                 room67();
             }
-            case 68 ->{
-                Player.playerX = 9;
-                Player.playerY = 6;
+            case 68 -> {
+                Player.playerX = 6;
+                Player.playerY = 9;
                 roomNumber = 68;
                 room68();
             }
-            case 69 ->{
-                Player.playerX = 9;
-                Player.playerY = 7;
+            case 69 -> {
+                Player.playerX = 7;
+                Player.playerY = 9;
                 roomNumber = 69;
                 room69();
             }
-            case 70 ->{
-                Player.playerX = 9;
-                Player.playerY = 8;
-                roomNumber = 70;
-                room70();
-            }
-            case 71 ->{
-                Player.playerX = 10;
-                Player.playerY = 1;
-                roomNumber = 71;
-                room71();
-            }
-            case 72 ->{
-                Player.playerX = 10;
-                Player.playerY = 2;
+            case 72 -> {
+                Player.playerX = 2;
+                Player.playerY = 10;
                 roomNumber = 72;
                 room72();
             }
-            case 73 ->{
-                Player.playerX = 10;
-                Player.playerY = 3;
+            case 73 -> {
+                Player.playerX = 3;
+                Player.playerY = 10;
                 roomNumber = 73;
                 room73();
             }
-            case 74 ->{
-                Player.playerX = 10;
-                Player.playerY = 4;
+            case 74 -> {
+                Player.playerX = 4;
+                Player.playerY = 10;
                 roomNumber = 74;
                 room74();
             }
-            case 75 ->{
-                Player.playerX = 10;
-                Player.playerY = 5;
-                roomNumber = 75;
-                room75();
-            }
-            default ->
-                Main.startMenu();
         }
     }
 
     public static void resetAll() { //reset all
-        roomSave = 1;
+        roomSave = 74;
         roomNumber = 0;
     }
-
-    private static void room1() throws InterruptedException { //0
-        TextEngine.printWithDelays("You step into the open world.\nThe sunlight overwhelms your senses, momentarily blinding you after the darkness of the cave.", false);
-        TextEngine.printWithDelays("As your vision clears, you notice winding paths stretching out before you:\n    one leads north, another to the west,\n    and in the distance, you can make out a village to the east.\n\n         How overwhelming...", false);
-        TextEngine.printWithDelays("Which path will you choose? Type " + yellowColor + "east" + resetColor + ", " + yellowColor + "south" + resetColor + " to decide", true);
-        while (true) {
-            ignore = console.readLine();
-            command = console.readLine();
-            if ("north".equals(command) || "east".equals(command) || "south".equals(command) || "west".equals(command)) {
-                holdCommand = command;
-            }
-            switch (command.toLowerCase().trim()) {
-                case "east" -> {
-                    roomSave = 2;
-                    Main.loadSave();
-                }
-                case "south" -> {
-                    roomSave = 8;
-                    Main.loadSave();
-                }
-                default ->
-                    Main.inGameDefaultTextHandling(command);
-            }
-        }
-    }
-
     private static void room2() throws InterruptedException {
         Dungeon.dungeonCheck();
         TextEngine.printWithDelays("As you walk, you notice the winding paths leading back to the village,\n    where the comforting sights and sounds of town life await you.", false);
         TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
-        TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "east" + resetColor + " or " + yellowColor + "west" + resetColor+ " to decide", true);
+        TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "east" + resetColor + " or " + yellowColor + "The Ocean Kingdom" + resetColor+ " to decide", true);
         while (true) {
             ignore = console.readLine();
             command = console.readLine();
@@ -519,12 +418,13 @@ public class OpenWorld extends Room {
                 case "east" -> {
                     roomSave = 3;
                     Main.loadSave();
-                }
-                case "north" -> {
-                    roomSave = 1;
-                    Main.loadSave();
-                }
-                default ->
+                }case "the ocean kingdom" -> {
+                    if (Dungeon.completedDungeons > 7) {
+                        DesertOasisDungeon.startRoom();
+                    } else {
+                        TextEngine.printWithDelays("You must complete The Desert Pyramid dungeon first.\n Try going to the south", true);
+                    }
+                }default ->
                     Main.inGameDefaultTextHandling(command);
             }
         }
@@ -546,17 +446,12 @@ public class OpenWorld extends Room {
             }
             switch (command.toLowerCase().trim()) {
                 case "east" -> {
-                    roomSave = 8;
-                    Main.loadSave();
-                }
-                case "west" -> {
                     roomSave = 4;
                     Main.loadSave();
-                }
-                case "the meadow" -> {
-                    MeadowDungeon.startRoom();
-                }
-                default ->
+                }case "west" -> {
+                    roomSave = 2;
+                    Main.loadSave();
+                }default ->
                     Main.inGameDefaultTextHandling(command);
             }
         }
@@ -573,23 +468,13 @@ public class OpenWorld extends Room {
                 holdCommand = command;
             }
             switch (command.toLowerCase().trim()) {
-                case "north" -> {
-                    roomSave = 7;
-                    Main.loadSave();
-                }
                 case "east" -> {
                     roomSave = 5;
                     Main.loadSave();
-                }
-                case "south" -> {
-                    roomSave = 1;
-                    Main.loadSave();
-                }
-                case "west" -> {
+                }case "west" -> {
                     roomSave = 3;
                     Main.loadSave();
-                }
-                default ->
+                }default ->
                     Main.inGameDefaultTextHandling(command);
             }
         }
@@ -610,26 +495,16 @@ public class OpenWorld extends Room {
                 holdCommand = command;
             }
             switch (command.toLowerCase().trim()) {
-                case "north" -> {
+                case "east" -> {
                     roomSave = 6;
                     Main.loadSave();
-                }
-                case "west" -> {
+                }case "south" -> {
+                    roomSave = 9;
+                    Main.loadSave();
+                }case "west" -> {
                     roomSave = 4;
                     Main.loadSave();
-                }
-                case "the mountain cave" -> {
-                    if (Dungeon.completedDungeons > 1) {
-                        MountainCaveDungeon.startRoom();
-                    } else {
-                        TextEngine.printWithDelays("You must complete The Dark Forest first.\nTry going west", true);
-                    }
-                }
-                case "the village" -> {
-                    Main.saveSpace("Village");
-                    Main.loadSave();
-                }
-                default ->
+                }default ->
                     Main.inGameDefaultTextHandling(command);
             }
         }
@@ -642,7 +517,7 @@ public class OpenWorld extends Room {
             TextEngine.printWithDelays("Congrets! you have beaten The Mountain Cave dungeon,\n     time to go back to a village rest up, check out the shop, and head to the next dungeon.\n\n", false);
         }
         TextEngine.printWithDelays("Warning: Stepping into a dungeon will trigger battles,\n    but you may uncover valuable treasures within its chambers if you manage to survive.\n", false);
-        TextEngine.printWithDelays("Which path will you choose? Type " + yellowColor + "east" + resetColor + ", " + yellowColor + "south" + resetColor + ", or " + yellowColor + "west" + resetColor + " to continue your journey", true);
+        TextEngine.printWithDelays("Which path will you choose? Type " + yellowColor + "The Mountain Top" + resetColor + ", " + yellowColor + "south" + resetColor + ", or " + yellowColor + "west" + resetColor + " to continue your journey", true);
         while (true) {
             ignore = console.readLine();
             command = console.readLine();
@@ -650,64 +525,23 @@ public class OpenWorld extends Room {
                 holdCommand = command;
             }
             switch (command.toLowerCase().trim()) {
-                case "north" -> {
+                case "south" -> {
                     roomSave = 10;
                     Main.loadSave();
-                }
-                case "south" -> {
+                }case "west" -> {
                     roomSave = 5;
                     Main.loadSave();
-                }
-                case "west" -> {
-                    roomSave = 7;
-                    Main.loadSave();
-                }
-                case "the mountain top" -> {
+                }case "the mountain top" -> {
                     if (Dungeon.completedDungeons > 2) {
                         MountainTopDungeon.startRoom();
                     } else {
                         TextEngine.printWithDelays("You must complete The Mountain Cave dungeons first, try going west.", true);
                     }
-                }
-                default ->
+                }default ->
                     Main.inGameDefaultTextHandling(command);
             }
         }
     }
-
-    private static void room7() throws InterruptedException {
-        Dungeon.dungeonCheck();
-        TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
-        TextEngine.printWithDelays("Which path will you choose? Type " + yellowColor + "south" + resetColor + ", or " + yellowColor + "east" + resetColor + " to continue your journey", true);
-        while (true) {
-            ignore = console.readLine();
-            command = console.readLine();
-            if ("north".equals(command) || "east".equals(command) || "south".equals(command) || "west".equals(command)) {
-                holdCommand = command;
-            }
-            switch (command.toLowerCase().trim()) {
-                case "north" -> {
-                    roomSave = 9;
-                    Main.loadSave();
-                }
-                case "east" -> {
-                    roomSave = 6;
-                    Main.loadSave();
-                }
-                case "south" -> {
-                    roomSave = 4;
-                    Main.loadSave();
-                }
-                case "west" -> {
-                    roomSave = 8;
-                    Main.loadSave();
-                }
-                default ->
-                    Main.inGameDefaultTextHandling(command);
-            }
-        }
-    }
-
     private static void room8() throws InterruptedException {
         if (Dungeon.completedDungeons <= 1) {
             TextEngine.printWithDelays("You find yourself standing right by the entrance to The Dark Forest dungeon,\n    its ancient stone archway beckoning you to enter.\n\n", false);
@@ -723,31 +557,20 @@ public class OpenWorld extends Room {
                 holdCommand = command;
             }
             switch (command.toLowerCase().trim()) {
-                case "north" -> {
-                    roomSave = 21;
-                    Main.loadSave();
-                }
-                case "east" -> {
-                    roomSave = 7;
-                    Main.loadSave();
-                }
-                case "south" -> {
-                    roomSave = 3;
-                    Main.loadSave();
-                }
-                case "the dark forest" -> {
-                    if (Dungeon.completedDungeons > 0) {
-                        DarkForestDungeon.startRoom();
+                case "the ocean kingdom" -> {
+                    if (Dungeon.completedDungeons > 7) {
+                        DesertOasisDungeon.startRoom();
                     } else {
-                        TextEngine.printWithDelays("You must complete The Meadow dungeon first.\nTry going south", true);
+                        TextEngine.printWithDelays("You must complete The Desert Pyramid dungeon first.\n Try going to the south", true);
                     }
-                }
-                default ->
+                }case "south" -> {
+                    roomSave = 12;
+                    Main.loadSave();
+                }default ->
                     Main.inGameDefaultTextHandling(command);
             }
         }
     }
-
     private static void room9() throws InterruptedException {
         Dungeon.dungeonCheck();
         TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
@@ -760,27 +583,19 @@ public class OpenWorld extends Room {
             }
             switch (command.toLowerCase().trim()) {
                 case "north" -> {
-                    roomSave = 12;
+                    roomSave = 5;
                     Main.loadSave();
-                }
-                case "east" -> {
+                }case "east" -> {
                     roomSave = 10;
                     Main.loadSave();
-                }
-                case "south" -> {
-                    roomSave = 7;
+                }case "south" -> {
+                    roomSave = 13;
                     Main.loadSave();
-                }
-                case "west" -> {
-                    roomSave = 21;
-                    Main.loadSave();
-                }
-                default ->
+                }default ->
                     Main.inGameDefaultTextHandling(command);
             }
         }
     }
-
     private static void room10() throws InterruptedException {
         if (Dungeon.completedDungeons <= 4) {
             TextEngine.printWithDelays("You find yourself standing right by the entrance to The Desert Oasis dungeon,\n    its ancient stone archway beckoning you to enter.\n\n", false);
@@ -797,30 +612,22 @@ public class OpenWorld extends Room {
             }
             switch (command.toLowerCase().trim()) {
                 case "north" -> {
-                    roomSave = 11;
-                    Main.loadSave();
-                }
-                case "south" -> {
                     roomSave = 6;
                     Main.loadSave();
-                }
-                case "west" -> {
+                }case "east" -> {
+                    roomSave = 11;
+                    Main.loadSave();
+                }case "south" -> {
+                    roomSave = 14;
+                    Main.loadSave();
+                }case "west" -> {
                     roomSave = 9;
                     Main.loadSave();
-                }
-                case "the desert oasis" -> {
-                    if (Dungeon.completedDungeons > 3) {
-                        DesertOasisDungeon.startRoom();
-                    } else {
-                        TextEngine.printWithDelays("You must complete The Mountain Top dungeon first.\n Try going to the south", true);
-                    }
-                }
-                default ->
+                }default ->
                     Main.inGameDefaultTextHandling(command);
             }
         }
     }
-
     private static void room11() throws InterruptedException {
         if (Dungeon.completedDungeons <= 5) {
             TextEngine.printWithDelays("You find yourself standing right by the entrance to The Desert Plains dungeon,\n    its ancient stone archway beckoning you to enter.\n\n", false);
@@ -828,7 +635,7 @@ public class OpenWorld extends Room {
             TextEngine.printWithDelays("Congrats! you have beaten The Desert Plains dungeon,\n     time to go back to a village rest up, check out the shop, and head to the next dungeon.\n\n", false);
         }
         TextEngine.printWithDelays("Worrning: going into a dungeon you will trigger fights, but you might find something in the rooms\nIf you do not DIE", false);
-        TextEngine.printWithDelays("Which path will you choose? Type " + yellowColor + "north" + resetColor + ", " + yellowColor + "south" + resetColor + ", or " + yellowColor + "west" + resetColor + " to continue your journey", true);
+        TextEngine.printWithDelays("Which path will you choose? Type " + yellowColor + "The Mountain Top" + resetColor + ", " + yellowColor + "south" + resetColor + ", or " + yellowColor + "west" + resetColor + " to continue your journey", true);
         while (true) {
             ignore = console.readLine();
             command = console.readLine();
@@ -836,31 +643,23 @@ public class OpenWorld extends Room {
                 holdCommand = command;
             }
             switch (command.toLowerCase().trim()) {
-                case "south" -> {
+                case "the mountain top" -> {
+                    if (Dungeon.completedDungeons > 2) {
+                        MountainTopDungeon.startRoom();
+                    } else {
+                        TextEngine.printWithDelays("You must complete The Mountain Cave dungeons first, try going west.", true);
+                    }
+                }case "south" -> {
+                    roomSave = 15;
+                    Main.loadSave();
+                }case "west" -> {
                     roomSave = 10;
                     Main.loadSave();
-                }
-                case "west" -> {
-                    roomSave = 12;
-                    Main.loadSave();
-                }
-                case "the desert plains" -> {
-                    if (Dungeon.completedDungeons > 4) {
-                        DesertPlainsDungeon.startRoom();
-                    } else {
-                        TextEngine.printWithDelays("You must complete The Desert Oasis dungeons first.\nTry going to the south east/north", true);
-                    }
-                }
-                case "the village" -> {
-                    Main.saveSpace("Village");
-                    Main.loadSave();
-                }
-                default ->
+                }default ->
                     Main.inGameDefaultTextHandling(command);
             }
         }
     }
-
     private static void room12() throws InterruptedException {
         Dungeon.dungeonCheck();
         TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
@@ -873,27 +672,16 @@ public class OpenWorld extends Room {
             }
             switch (command.toLowerCase().trim()) {
                 case "north" -> {
-                    roomSave = 17;
+                    roomSave = 8;
                     Main.loadSave();
-                }
-                case "east" -> {
-                    roomSave = 11;
+                }case "south" -> {
+                    roomSave = 16;
                     Main.loadSave();
-                }
-                case "south" -> {
-                    roomSave = 9;
-                    Main.loadSave();
-                }
-                case "west" -> {
-                    roomSave = 13;
-                    Main.loadSave();
-                }
-                default ->
+                }default ->
                     Main.inGameDefaultTextHandling(command);
             }
         }
     }
-
     private static void room13() throws InterruptedException {
         Dungeon.dungeonCheck();
         TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
@@ -906,27 +694,19 @@ public class OpenWorld extends Room {
             }
             switch (command.toLowerCase().trim()) {
                 case "north" -> {
-                    roomSave = 16;
+                    roomSave = 9;
                     Main.loadSave();
-                }
-                case "east" -> {
-                    roomSave = 12;
-                    Main.loadSave();
-                }
-                case "south" -> {
-                    roomSave = 21;
-                    Main.loadSave();
-                }
-                case "west" -> {
+                }case "east" -> {
                     roomSave = 14;
                     Main.loadSave();
-                }
-                default ->
+                }case "south" -> {
+                    roomSave = 17;
+                    Main.loadSave();
+                }default ->
                     Main.inGameDefaultTextHandling(command);
             }
         }
     }
-
     private static void room14() throws InterruptedException {
         Dungeon.dungeonCheck();
         TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
@@ -939,19 +719,22 @@ public class OpenWorld extends Room {
             }
             switch (command.toLowerCase().trim()) {
                 case "north" -> {
+                    roomSave = 10;
+                    Main.loadSave();
+                }case "east" -> {
                     roomSave = 15;
                     Main.loadSave();
-                }
-                case "east" -> {
+                }case "south" -> {
+                    roomSave = 18;
+                    Main.loadSave();
+                }case "west" -> {
                     roomSave = 13;
                     Main.loadSave();
-                }
-                default ->
+                }default ->
                     Main.inGameDefaultTextHandling(command);
             }
         }
     }
-
     private static void room15() throws InterruptedException {
         Dungeon.dungeonCheck();
         TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
@@ -963,23 +746,20 @@ public class OpenWorld extends Room {
                 holdCommand = command;
             }
             switch (command.toLowerCase().trim()) {
-                case "east" -> {
-                    roomSave = 16;
+                case "north" -> {
+                    roomSave = 11;
                     Main.loadSave();
-                }
-                case "south" -> {
+                }case "south" -> {
+                    roomSave = 19;
+                    Main.loadSave();
+                }case "west" -> {
                     roomSave = 14;
                     Main.loadSave();
-                }
-                case "the village" -> {
-                    Village.startRoom();
-                }
-                default ->
+                }default ->
                     Main.inGameDefaultTextHandling(command);
             }
         }
     }
-
     private static void room16() throws InterruptedException {
         Dungeon.dungeonCheck();
         TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
@@ -991,24 +771,17 @@ public class OpenWorld extends Room {
                 holdCommand = command;
             }
             switch (command.toLowerCase().trim()) {
-                case "east" -> {
-                    roomSave = 17;
+                case "north" -> {
+                    roomSave = 12;
                     Main.loadSave();
-                }
-                case "south" -> {
-                    roomSave = 13;
+                }case "south" -> {
+                    roomSave = 22;
                     Main.loadSave();
-                }
-                case "west" -> {
-                    roomSave = 15;
-                    Main.loadSave();
-                }
-                default ->
+                }default ->
                     Main.inGameDefaultTextHandling(command);
             }
         }
     }
-
     private static void room17() throws InterruptedException {
         Dungeon.dungeonCheck();
         TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
@@ -1021,26 +794,19 @@ public class OpenWorld extends Room {
             }
             switch (command.toLowerCase().trim()) {
                 case "north" -> {
-                    roomSave = 19;
+                    roomSave = 13;
                     Main.loadSave();
-                }
-                case "south" -> {
-                    roomSave = 12;
+                }case "east" -> {
+                    roomSave = 18;
                     Main.loadSave();
-                }
-                case "west" -> {
-                    roomSave = 16;
+                }case "south" -> {
+                    roomSave = 25;
                     Main.loadSave();
-                }
-                case "the village" -> {
-                    Village.startRoom();
-                }
-                default ->
+                }default ->
                     Main.inGameDefaultTextHandling(command);
             }
         }
     }
-
     private static void room18() throws InterruptedException {
         if (Dungeon.completedDungeons <= 6) {
             TextEngine.printWithDelays("You find yourself standing right by the entrance to The Desert Pyramid dungeon,\n    its ancient stone archway beckoning you to enter.\n\n", false);
@@ -1056,38 +822,27 @@ public class OpenWorld extends Room {
                 holdCommand = command;
             }
             switch (command.toLowerCase().trim()) {
-                case "west" -> {
+                case "north" -> {
+                    roomSave = 14;
+                    Main.loadSave();
+                }case "east" -> {
                     roomSave = 19;
                     Main.loadSave();
-                }
-                case "the desert pyramid" -> {
-                    if (Dungeon.completedDungeons > 5) {
-                        DesertPyramidDungeon.startRoom();
-                    } else {
-                        TextEngine.printWithDelays("You must complete The Desert Plains dungeons first.\nTry going to the north/east", true);
-                    }
-                }
-                case "the village" -> {
-                    Main.saveSpace("Village");
+                }case "south" -> {
+                    roomSave = 26;
                     Main.loadSave();
-                }
-                case "the ocean kingdom" -> {
-                    if (Dungeon.completedDungeons > 6) {
-                        OceanKingdomDungeon.startRoom();
-                    } else {
-                        TextEngine.printWithDelays("You must complete The Desert Pyramis dungeon first.\nTry going to the north", true);
-                    }
-                }
-                default ->
+                }case "west" -> {
+                    roomSave = 17;
+                    Main.loadSave();
+                }default ->
                     Main.inGameDefaultTextHandling(command);
             }
         }
     }
-
     private static void room19() throws InterruptedException {
         Dungeon.dungeonCheck();
         TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
-        TextEngine.printWithDelays("Which path will you choose? Type " + yellowColor + "north" + resetColor + ", " + yellowColor + "east" + resetColor + ", " + yellowColor + "south" + resetColor + " or " +yellowColor+ "west" +resetColor+ " to continue your journey", true);
+        TextEngine.printWithDelays("Which path will you choose? Type " + yellowColor + "north" + resetColor + ", " + yellowColor + "The Village" + resetColor + ", " + yellowColor + "south" + resetColor + " or " +yellowColor+ "west" +resetColor+ " to continue your journey", true);
         while (true) {
             ignore = console.readLine();
             command = console.readLine();
@@ -1096,55 +851,22 @@ public class OpenWorld extends Room {
             }
             switch (command.toLowerCase().trim()) {
                 case "north" -> {
-                    roomSave = 20;
+                    roomSave = 15;
                     Main.loadSave();
-                }
-                case "east" -> {
+                }case "the village" -> {
+                    Main.saveSpace("Village");
+                    Main.loadSave();
+                }case "south" -> {
+                    roomSave = 28;
+                    Main.loadSave();
+                }case "west" -> {
                     roomSave = 18;
                     Main.loadSave();
-                }
-                case "south" -> {
-                    roomSave = 17;
-                    Main.loadSave();
-                }
-                default ->
+                }default ->
                     Main.inGameDefaultTextHandling(command);
             }
         }
     }
-
-    private static void room20() throws InterruptedException {
-        if (Dungeon.completedDungeons <= 7) {
-            TextEngine.printWithDelays("You find yourself standing right by the entrance to The Ocean Kingdom dungeon,\n    its ancient stone archway beckoning you to enter.\n\n", false);
-        } else {
-            TextEngine.printWithDelays("Congrats! you have beaten The Mountain Cave dungeon,\n     time to go back to a village rest up, check out the shop, and head to the next dungeon.\n\n", false);
-        }
-        TextEngine.printWithDelays("Warning: Stepping into a dungeon will trigger battles,\n    but you may uncover valuable treasures within its chambers if you manage to survive.\n", false);
-        TextEngine.printWithDelays("Which path will you choose? Type " + yellowColor + "south" + resetColor + " or " + yellowColor + "east" + resetColor + " to continue your journey", true);
-        while (true) {
-            ignore = console.readLine();
-            command = console.readLine();
-            if ("north".equals(command) || "east".equals(command) || "south".equals(command) || "west".equals(command)) {
-                holdCommand = command;
-            }
-            switch (command.toLowerCase().trim()) {
-                case "south" -> {
-                    roomSave = 19;
-                    Main.loadSave();
-                }
-                case "the ocean kingdom" -> {
-                    if (Dungeon.completedDungeons > 6) {
-                        OceanKingdomDungeon.startRoom();
-                    } else {
-                        TextEngine.printWithDelays("You must complete The Desert Pyramis dungeon first.\nTry going to the north", true);
-                    }
-                }
-                default ->
-                    Main.inGameDefaultTextHandling(command);
-            }
-        }
-    }
-
     private static void room21() throws InterruptedException {
         Dungeon.dungeonCheck();
         TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
@@ -1156,19 +878,13 @@ public class OpenWorld extends Room {
                 holdCommand = command;
             }
             switch (command.toLowerCase()) {
-                case "north" -> {
-                    roomSave = 13;
-                    Main.loadSave();
-                }
                 case "east" -> {
-                    roomSave = 9;
+                    roomSave = 22;
                     Main.loadSave();
-                }
-                case "south" -> {
-                    roomSave = 8;
+                }case "south" -> {
+                    roomSave = 30;
                     Main.loadSave();
-                }
-                default ->
+                }default ->
                     Main.inGameDefaultTextHandling(command);
             }
         }
@@ -1185,54 +901,15 @@ public class OpenWorld extends Room {
             }
             switch (command.toLowerCase().trim()) {
                 case "north" -> {
-                    roomSave = 7;
+                    roomSave = 16;
                     Main.loadSave();
-                }
-                case "east" -> {
-                    roomSave = 5;
+                }case "south" -> {
+                    roomSave = 31;
                     Main.loadSave();
-                }
-                case "south" -> {
-                    roomSave = 1;
+                }case "west" -> {
+                    roomSave = 21;
                     Main.loadSave();
-                }
-                case "west" -> {
-                    roomSave = 3;
-                    Main.loadSave();
-                }
-                default ->
-                    Main.inGameDefaultTextHandling(command);
-            }
-        }
-    }
-    private static void room24() throws InterruptedException {
-        Dungeon.dungeonCheck();
-        TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
-        TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "east" + resetColor + ", or " + yellowColor + "south" + resetColor + " to continue your journey ", true);
-        while (true) {
-            ignore = console.readLine();
-            command = console.readLine();
-            if ("north".equals(command) || "east".equals(command) || "south".equals(command) || "west".equals(command)) {
-                holdCommand = command;
-            }
-            switch (command.toLowerCase().trim()) {
-                case "north" -> {
-                    roomSave = 7;
-                    Main.loadSave();
-                }
-                case "east" -> {
-                    roomSave = 5;
-                    Main.loadSave();
-                }
-                case "south" -> {
-                    roomSave = 1;
-                    Main.loadSave();
-                }
-                case "west" -> {
-                    roomSave = 3;
-                    Main.loadSave();
-                }
-                default ->
+                }default ->
                     Main.inGameDefaultTextHandling(command);
             }
         }
@@ -1249,22 +926,21 @@ public class OpenWorld extends Room {
             }
             switch (command.toLowerCase().trim()) {
                 case "north" -> {
-                    roomSave = 7;
+                    roomSave = 17;
                     Main.loadSave();
-                }
-                case "east" -> {
-                    roomSave = 5;
+                }case "east" -> {
+                    roomSave = 26;
                     Main.loadSave();
-                }
-                case "south" -> {
-                    roomSave = 1;
+                }case "south" -> {
+                    roomSave = 33;
                     Main.loadSave();
-                }
-                case "west" -> {
-                    roomSave = 3;
-                    Main.loadSave();
-                }
-                default ->
+                }case "the mountain cave" -> {
+                    if (Dungeon.completedDungeons > 1) {
+                        MountainCaveDungeon.startRoom();
+                    } else {
+                        TextEngine.printWithDelays("You must complete The Dark Forest first.\nTry going west", true);
+                    }
+                }default ->
                     Main.inGameDefaultTextHandling(command);
             }
         }
@@ -1281,22 +957,18 @@ public class OpenWorld extends Room {
             }
             switch (command.toLowerCase().trim()) {
                 case "north" -> {
-                    roomSave = 7;
+                    roomSave = 18;
                     Main.loadSave();
-                }
-                case "east" -> {
-                    roomSave = 5;
+                }case "east" -> {
+                    roomSave = 28;
                     Main.loadSave();
-                }
-                case "south" -> {
-                    roomSave = 1;
+                }case "south" -> {
+                    roomSave = 34;
                     Main.loadSave();
-                }
-                case "west" -> {
-                    roomSave = 3;
+                }case "west" -> {
+                    roomSave = 25;
                     Main.loadSave();
-                }
-                default ->
+                }default ->
                     Main.inGameDefaultTextHandling(command);
             }
         }
@@ -1313,22 +985,18 @@ public class OpenWorld extends Room {
             }
             switch (command.toLowerCase().trim()) {
                 case "north" -> {
-                    roomSave = 7;
+                    roomSave = 49;
                     Main.loadSave();
-                }
-                case "east" -> {
-                    roomSave = 5;
+                }case "east" -> {
+                    roomSave = 57;
                     Main.loadSave();
-                }
-                case "south" -> {
-                    roomSave = 1;
+                }case "south" -> {
+                    roomSave = 65;
                     Main.loadSave();
-                }
-                case "west" -> {
-                    roomSave = 3;
+                }case "west" -> {
+                    roomSave = 55;
                     Main.loadSave();
-                }
-                default ->
+                }default ->
                     Main.inGameDefaultTextHandling(command);
             }
         }
@@ -1345,22 +1013,18 @@ public class OpenWorld extends Room {
             }
             switch (command.toLowerCase().trim()) {
                 case "north" -> {
-                    roomSave = 7;
+                    roomSave = 19;
                     Main.loadSave();
-                }
-                case "east" -> {
-                    roomSave = 5;
+                }case "east" -> {
+                    roomSave = 29;
                     Main.loadSave();
-                }
-                case "south" -> {
-                    roomSave = 1;
+                }case "south" -> {
+                    roomSave = 35;
                     Main.loadSave();
-                }
-                case "west" -> {
-                    roomSave = 3;
+                }case "west" -> {
+                    roomSave = 26;
                     Main.loadSave();
-                }
-                default ->
+                }default ->
                     Main.inGameDefaultTextHandling(command);
             }
         }
@@ -1368,7 +1032,7 @@ public class OpenWorld extends Room {
     private static void room29() throws InterruptedException {
         Dungeon.dungeonCheck();
         TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
-        TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "north" + resetColor + ", " + yellowColor + "south" + resetColor + ", or " + yellowColor + "west" + resetColor + " to continue your journey ", true);
+        TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "The Village" + resetColor + ", " + yellowColor + "south" + resetColor + ", or " + yellowColor + "west" + resetColor + " to continue your journey ", true);
         while (true) {
             ignore = console.readLine();
             command = console.readLine();
@@ -1376,23 +1040,16 @@ public class OpenWorld extends Room {
                 holdCommand = command;
             }
             switch (command.toLowerCase().trim()) {
-                case "north" -> {
-                    roomSave = 7;
+                case "the village" -> {
+                    Main.saveSpace("Village");
                     Main.loadSave();
-                }
-                case "east" -> {
-                    roomSave = 5;
+                }case "south" -> {
+                    roomSave = 36;
                     Main.loadSave();
-                }
-                case "south" -> {
-                    roomSave = 1;
+                }case "west" -> {
+                    roomSave = 28;
                     Main.loadSave();
-                }
-                case "west" -> {
-                    roomSave = 3;
-                    Main.loadSave();
-                }
-                default ->
+                }default ->
                     Main.inGameDefaultTextHandling(command);
             }
         }
@@ -1409,22 +1066,15 @@ public class OpenWorld extends Room {
             }
             switch (command.toLowerCase().trim()) {
                 case "north" -> {
-                    roomSave = 7;
+                    roomSave = 21;
                     Main.loadSave();
-                }
-                case "east" -> {
-                    roomSave = 5;
+                }case "east" -> {
+                    roomSave = 31;
                     Main.loadSave();
-                }
-                case "south" -> {
-                    roomSave = 1;
+                }case "south" -> {
+                    roomSave = 37;
                     Main.loadSave();
-                }
-                case "west" -> {
-                    roomSave = 3;
-                    Main.loadSave();
-                }
-                default ->
+                }default ->
                     Main.inGameDefaultTextHandling(command);
             }
         }
@@ -1441,22 +1091,18 @@ public class OpenWorld extends Room {
             }
             switch (command.toLowerCase().trim()) {
                 case "north" -> {
-                    roomSave = 7;
+                    roomSave = 22;
                     Main.loadSave();
-                }
-                case "east" -> {
-                    roomSave = 5;
+                }case "east" -> {
+                    roomSave = 32;
                     Main.loadSave();
-                }
-                case "south" -> {
-                    roomSave = 1;
+                }case "south" -> {
+                    roomSave = 38;
                     Main.loadSave();
-                }
-                case "west" -> {
-                    roomSave = 3;
+                }case "west" -> {
+                    roomSave = 30;
                     Main.loadSave();
-                }
-                default ->
+                }default ->
                     Main.inGameDefaultTextHandling(command);
             }
         }
@@ -1472,23 +1118,13 @@ public class OpenWorld extends Room {
                 holdCommand = command;
             }
             switch (command.toLowerCase().trim()) {
-                case "north" -> {
-                    roomSave = 7;
-                    Main.loadSave();
-                }
-                case "east" -> {
-                    roomSave = 5;
-                    Main.loadSave();
-                }
                 case "south" -> {
-                    roomSave = 1;
+                    roomSave = 39;
                     Main.loadSave();
-                }
-                case "west" -> {
-                    roomSave = 3;
+                }case "west" -> {
+                    roomSave = 31;
                     Main.loadSave();
-                }
-                default ->
+                }default ->
                     Main.inGameDefaultTextHandling(command);
             }
         }
@@ -1505,22 +1141,18 @@ public class OpenWorld extends Room {
             }
             switch (command.toLowerCase().trim()) {
                 case "north" -> {
-                    roomSave = 7;
+                    roomSave = 25;
                     Main.loadSave();
-                }
-                case "east" -> {
-                    roomSave = 5;
+                }case "east" -> {
+                    roomSave = 34;
                     Main.loadSave();
-                }
-                case "south" -> {
-                    roomSave = 1;
+                }case "south" -> {
+                    roomSave = 42;
                     Main.loadSave();
-                }
-                case "west" -> {
-                    roomSave = 3;
+                }case "west" -> {
+                    roomSave = 62;
                     Main.loadSave();
-                }
-                default ->
+                }default ->
                     Main.inGameDefaultTextHandling(command);
             }
         }
@@ -1537,22 +1169,18 @@ public class OpenWorld extends Room {
             }
             switch (command.toLowerCase().trim()) {
                 case "north" -> {
-                    roomSave = 7;
+                    roomSave = 26;
                     Main.loadSave();
-                }
-                case "east" -> {
-                    roomSave = 5;
+                }case "east" -> {
+                    roomSave = 35;
                     Main.loadSave();
-                }
-                case "south" -> {
-                    roomSave = 1;
+                }case "south" -> {
+                    roomSave = 43;
                     Main.loadSave();
-                }
-                case "west" -> {
-                    roomSave = 3;
+                }case "west" -> {
+                    roomSave = 33;
                     Main.loadSave();
-                }
-                default ->
+                }default ->
                     Main.inGameDefaultTextHandling(command);
             }
         }
@@ -1569,22 +1197,18 @@ public class OpenWorld extends Room {
             }
             switch (command.toLowerCase().trim()) {
                 case "north" -> {
-                    roomSave = 7;
+                    roomSave = 28;
                     Main.loadSave();
-                }
-                case "east" -> {
-                    roomSave = 5;
+                }case "east" -> {
+                    roomSave = 36;
                     Main.loadSave();
-                }
-                case "south" -> {
-                    roomSave = 1;
+                }case "south" -> {
+                    roomSave = 44;
                     Main.loadSave();
-                }
-                case "west" -> {
-                    roomSave = 3;
+                }case "west" -> {
+                    roomSave = 34;
                     Main.loadSave();
-                }
-                default ->
+                }default ->
                     Main.inGameDefaultTextHandling(command);
             }
         }
@@ -1601,22 +1225,15 @@ public class OpenWorld extends Room {
             }
             switch (command.toLowerCase().trim()) {
                 case "north" -> {
-                    roomSave = 7;
+                    roomSave = 29;
                     Main.loadSave();
-                }
-                case "east" -> {
-                    roomSave = 5;
+                }case "south" -> {
+                    roomSave = 45;
                     Main.loadSave();
-                }
-                case "south" -> {
-                    roomSave = 1;
+                }case "west" -> {
+                    roomSave = 35;
                     Main.loadSave();
-                }
-                case "west" -> {
-                    roomSave = 3;
-                    Main.loadSave();
-                }
-                default ->
+                }default ->
                     Main.inGameDefaultTextHandling(command);
             }
         }
@@ -1624,7 +1241,7 @@ public class OpenWorld extends Room {
     private static void room37() throws InterruptedException {
         Dungeon.dungeonCheck();
         TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
-        TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "north" + resetColor + ", " + yellowColor + "east" + resetColor + ", or " + yellowColor + "south" + resetColor + " to continue your journey ", true);
+        TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "north" + resetColor + ", " + yellowColor + "east" + resetColor + ", or " + yellowColor + "The Village" + resetColor + " to continue your journey ", true);
         while (true) {
             ignore = console.readLine();
             command = console.readLine();
@@ -1633,22 +1250,15 @@ public class OpenWorld extends Room {
             }
             switch (command.toLowerCase().trim()) {
                 case "north" -> {
-                    roomSave = 7;
+                    roomSave = 30;
                     Main.loadSave();
-                }
-                case "east" -> {
-                    roomSave = 5;
+                }case "east" -> {
+                    roomSave = 38;
                     Main.loadSave();
-                }
-                case "south" -> {
-                    roomSave = 1;
+                }case "the village" -> {
+                    Main.saveSpace("Village");
                     Main.loadSave();
-                }
-                case "west" -> {
-                    roomSave = 3;
-                    Main.loadSave();
-                }
-                default ->
+                }default ->
                     Main.inGameDefaultTextHandling(command);
             }
         }
@@ -1665,22 +1275,18 @@ public class OpenWorld extends Room {
             }
             switch (command.toLowerCase().trim()) {
                 case "north" -> {
-                    roomSave = 7;
+                    roomSave = 31;
                     Main.loadSave();
-                }
-                case "east" -> {
-                    roomSave = 5;
+                }case "east" -> {
+                    roomSave = 39;
                     Main.loadSave();
-                }
-                case "south" -> {
-                    roomSave = 1;
+                }case "south" -> {
+                    roomSave = 47;
                     Main.loadSave();
-                }
-                case "west" -> {
-                    roomSave = 3;
+                }case "west" -> {
+                    roomSave = 37;
                     Main.loadSave();
-                }
-                default ->
+                }default ->
                     Main.inGameDefaultTextHandling(command);
             }
         }
@@ -1697,22 +1303,18 @@ public class OpenWorld extends Room {
             }
             switch (command.toLowerCase().trim()) {
                 case "north" -> {
-                    roomSave = 7;
+                    roomSave = 32;
                     Main.loadSave();
-                }
-                case "east" -> {
-                    roomSave = 5;
+                }case "east" -> {
+                    roomSave =40;
                     Main.loadSave();
-                }
-                case "south" -> {
-                    roomSave = 1;
+                }case "south" -> {
+                    roomSave = 48;
                     Main.loadSave();
-                }
-                case "west" -> {
-                    roomSave = 3;
+                }case "west" -> {
+                    roomSave = 38;
                     Main.loadSave();
-                }
-                default ->
+                }default ->
                     Main.inGameDefaultTextHandling(command);
             }
         }
@@ -1728,23 +1330,16 @@ public class OpenWorld extends Room {
                 holdCommand = command;
             }
             switch (command.toLowerCase().trim()) {
-                case "north" -> {
-                    roomSave = 7;
-                    Main.loadSave();
-                }
                 case "east" -> {
-                    roomSave = 5;
+                    roomSave = 41;
                     Main.loadSave();
-                }
-                case "south" -> {
-                    roomSave = 1;
+                }case "south" -> {
+                    roomSave = 49;
                     Main.loadSave();
-                }
-                case "west" -> {
-                    roomSave = 3;
+                }case "west" -> {
+                    roomSave = 39;
                     Main.loadSave();
-                }
-                default ->
+                }default ->
                     Main.inGameDefaultTextHandling(command);
             }
         }
@@ -1761,22 +1356,18 @@ public class OpenWorld extends Room {
             }
             switch (command.toLowerCase().trim()) {
                 case "north" -> {
-                    roomSave = 7;
+                    roomSave = 62;
                     Main.loadSave();
-                }
-                case "east" -> {
-                    roomSave = 5;
+                } case "east" -> {
+                    roomSave = 42;
                     Main.loadSave();
-                }
-                case "south" -> {
-                    roomSave = 1;
+                }case "south" -> {
+                    roomSave = 50;
                     Main.loadSave();
-                }
-                case "west" -> {
-                    roomSave = 3;
+                }case "west" -> {
+                    roomSave = 40;
                     Main.loadSave();
-                }
-                default ->
+                }default ->
                     Main.inGameDefaultTextHandling(command);
             }
         }
@@ -1793,22 +1384,18 @@ public class OpenWorld extends Room {
             }
             switch (command.toLowerCase().trim()) {
                 case "north" -> {
-                    roomSave = 7;
+                    roomSave = 33;
                     Main.loadSave();
-                }
-                case "east" -> {
-                    roomSave = 5;
+                }case "east" -> {
+                    roomSave = 43;
                     Main.loadSave();
-                }
-                case "south" -> {
-                    roomSave = 1;
+                }case "south" -> {
+                    roomSave = 51;
                     Main.loadSave();
-                }
-                case "west" -> {
-                    roomSave = 3;
+                }case "west" -> {
+                    roomSave = 41;
                     Main.loadSave();
-                }
-                default ->
+                }default ->
                     Main.inGameDefaultTextHandling(command);
             }
         }
@@ -1825,22 +1412,18 @@ public class OpenWorld extends Room {
             }
             switch (command.toLowerCase().trim()) {
                 case "north" -> {
-                    roomSave = 7;
+                    roomSave = 34;
                     Main.loadSave();
-                }
-                case "east" -> {
-                    roomSave = 5;
+                }case "east" -> {
+                    roomSave = 44;
                     Main.loadSave();
-                }
-                case "south" -> {
-                    roomSave = 1;
+                }case "south" -> {
+                    roomSave = 52;
                     Main.loadSave();
-                }
-                case "west" -> {
-                    roomSave = 3;
+                }case "west" -> {
+                    roomSave = 42;
                     Main.loadSave();
-                }
-                default ->
+                }default ->
                     Main.inGameDefaultTextHandling(command);
             }
         }
@@ -1857,22 +1440,18 @@ public class OpenWorld extends Room {
             }
             switch (command.toLowerCase().trim()) {
                 case "north" -> {
-                    roomSave = 7;
+                    roomSave = 35;
                     Main.loadSave();
-                }
-                case "east" -> {
-                    roomSave = 5;
+                }case "east" -> {
+                    roomSave = 45;
                     Main.loadSave();
-                }
-                case "south" -> {
-                    roomSave = 1;
+                } case "south" -> {
+                    roomSave = 53;
                     Main.loadSave();
-                }
-                case "west" -> {
-                    roomSave = 3;
+                }case "west" -> {
+                    roomSave = 43;
                     Main.loadSave();
-                }
-                default ->
+                }default ->
                     Main.inGameDefaultTextHandling(command);
             }
         }
@@ -1889,54 +1468,15 @@ public class OpenWorld extends Room {
             }
             switch (command.toLowerCase().trim()) {
                 case "north" -> {
-                    roomSave = 7;
+                    roomSave = 36;
                     Main.loadSave();
-                }
-                case "east" -> {
-                    roomSave = 5;
+                }case "south" -> {
+                    roomSave = 54;
                     Main.loadSave();
-                }
-                case "south" -> {
-                    roomSave = 1;
+                }case "west" -> {
+                    roomSave = 44;
                     Main.loadSave();
-                }
-                case "west" -> {
-                    roomSave = 3;
-                    Main.loadSave();
-                }
-                default ->
-                    Main.inGameDefaultTextHandling(command);
-            }
-        }
-    }
-    private static void room46() throws InterruptedException {
-        Dungeon.dungeonCheck();
-        TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
-        TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "north" + resetColor + ", " + yellowColor + "east" + resetColor + ", or " + yellowColor + "south" + resetColor + " to continue your journey ", true);
-        while (true) {
-            ignore = console.readLine();
-            command = console.readLine();
-            if ("north".equals(command) || "east".equals(command) || "south".equals(command) || "west".equals(command)) {
-                holdCommand = command;
-            }
-            switch (command.toLowerCase().trim()) {
-                case "north" -> {
-                    roomSave = 7;
-                    Main.loadSave();
-                }
-                case "east" -> {
-                    roomSave = 5;
-                    Main.loadSave();
-                }
-                case "south" -> {
-                    roomSave = 1;
-                    Main.loadSave();
-                }
-                case "west" -> {
-                    roomSave = 3;
-                    Main.loadSave();
-                }
-                default ->
+                }default ->
                     Main.inGameDefaultTextHandling(command);
             }
         }
@@ -1944,7 +1484,7 @@ public class OpenWorld extends Room {
     private static void room47() throws InterruptedException {
         Dungeon.dungeonCheck();
         TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
-        TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "north" + resetColor + ", " + yellowColor + "east" + resetColor + ", " + yellowColor + "south" + resetColor + ", or " + yellowColor + "west" + resetColor + " to continue your journey ", true);
+        TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "north" + resetColor + ", " + yellowColor + "east" + resetColor + ", " + yellowColor + "The Dark Forest" + resetColor + ", or " + yellowColor + "The Village" + resetColor + " to continue your journey ", true);
         while (true) {
             ignore = console.readLine();
             command = console.readLine();
@@ -1953,22 +1493,21 @@ public class OpenWorld extends Room {
             }
             switch (command.toLowerCase().trim()) {
                 case "north" -> {
-                    roomSave = 7;
+                    roomSave = 38;
                     Main.loadSave();
-                }
-                case "east" -> {
-                    roomSave = 5;
+                }case "east" -> {
+                    roomSave = 48;
                     Main.loadSave();
-                }
-                case "south" -> {
-                    roomSave = 1;
+                }case "the dark forest" -> {
+                    if (Dungeon.completedDungeons > 0) {
+                        DarkForestDungeon.startRoom();
+                    } else {
+                        TextEngine.printWithDelays("You must complete The Meadow dungeon first.\nTry going south", true);
+                    }
+                }case "the village" -> {
+                    Main.saveSpace("Village");
                     Main.loadSave();
-                }
-                case "west" -> {
-                    roomSave = 3;
-                    Main.loadSave();
-                }
-                default ->
+                }default ->
                     Main.inGameDefaultTextHandling(command);
             }
         }
@@ -1985,22 +1524,18 @@ public class OpenWorld extends Room {
             }
             switch (command.toLowerCase().trim()) {
                 case "north" -> {
-                    roomSave = 7;
+                    roomSave = 39;
                     Main.loadSave();
-                }
-                case "east" -> {
-                    roomSave = 5;
+                }case "east" -> {
+                    roomSave = 49;
                     Main.loadSave();
-                }
-                case "south" -> {
-                    roomSave = 1;
+                }case "south" -> {
+                    roomSave = 55;
                     Main.loadSave();
-                }
-                case "west" -> {
-                    roomSave = 3;
+                }case "west" -> {
+                    roomSave = 47;
                     Main.loadSave();
-                }
-                default ->
+                }default ->
                     Main.inGameDefaultTextHandling(command);
             }
         }
@@ -2017,22 +1552,18 @@ public class OpenWorld extends Room {
             }
             switch (command.toLowerCase().trim()) {
                 case "north" -> {
-                    roomSave = 7;
+                    roomSave = 40;
                     Main.loadSave();
-                }
-                case "east" -> {
-                    roomSave = 5;
+                }case "east" -> {
+                    roomSave = 50;
                     Main.loadSave();
-                }
-                case "south" -> {
-                    roomSave = 1;
+                }case "south" -> {
+                    roomSave = 27;
                     Main.loadSave();
-                }
-                case "west" -> {
-                    roomSave = 3;
+                }case "west" -> {
+                    roomSave = 48;
                     Main.loadSave();
-                }
-                default ->
+                }default ->
                     Main.inGameDefaultTextHandling(command);
             }
         }
@@ -2049,22 +1580,18 @@ public class OpenWorld extends Room {
             }
             switch (command.toLowerCase().trim()) {
                 case "north" -> {
-                    roomSave = 7;
+                    roomSave = 41;
                     Main.loadSave();
-                }
-                case "east" -> {
-                    roomSave = 5;
+                }case "east" -> {
+                    roomSave = 51;
                     Main.loadSave();
-                }
-                case "south" -> {
-                    roomSave = 1;
+                }case "south" -> {
+                    roomSave = 57;
                     Main.loadSave();
-                }
-                case "west" -> {
-                    roomSave = 3;
+                }case "west" -> {
+                    roomSave = 49;
                     Main.loadSave();
-                }
-                default ->
+                }default ->
                     Main.inGameDefaultTextHandling(command);
             }
         }
@@ -2081,22 +1608,18 @@ public class OpenWorld extends Room {
             }
             switch (command.toLowerCase().trim()) {
                 case "north" -> {
-                    roomSave = 7;
+                    roomSave = 42;
                     Main.loadSave();
-                }
-                case "east" -> {
-                    roomSave = 5;
+                }case "east" -> {
+                    roomSave = 52;
                     Main.loadSave();
-                }
-                case "south" -> {
-                    roomSave = 1;
+                }case "south" -> {
+                    roomSave = 58;
                     Main.loadSave();
-                }
-                case "west" -> {
-                    roomSave = 3;
+                }case "west" -> {
+                    roomSave = 50;
                     Main.loadSave();
-                }
-                default ->
+                }default ->
                     Main.inGameDefaultTextHandling(command);
             }
         }
@@ -2113,22 +1636,18 @@ public class OpenWorld extends Room {
             }
             switch (command.toLowerCase().trim()) {
                 case "north" -> {
-                    roomSave = 7;
+                    roomSave = 43;
                     Main.loadSave();
-                }
-                case "east" -> {
-                    roomSave = 5;
+                }case "east" -> {
+                    roomSave = 53;
                     Main.loadSave();
-                }
-                case "south" -> {
-                    roomSave = 1;
+                }case "south" -> {
+                    roomSave = 59;
                     Main.loadSave();
-                }
-                case "west" -> {
-                    roomSave = 3;
+                }case "west" -> {
+                    roomSave = 51;
                     Main.loadSave();
-                }
-                default ->
+                }default ->
                     Main.inGameDefaultTextHandling(command);
             }
         }
@@ -2145,22 +1664,18 @@ public class OpenWorld extends Room {
             }
             switch (command.toLowerCase().trim()) {
                 case "north" -> {
-                    roomSave = 7;
+                    roomSave = 44;
                     Main.loadSave();
-                }
-                case "east" -> {
-                    roomSave = 5;
+                }case "east" -> {
+                    roomSave = 54;
                     Main.loadSave();
-                }
-                case "south" -> {
-                    roomSave = 1;
+                }case "south" -> {
+                    roomSave = 60;
                     Main.loadSave();
-                }
-                case "west" -> {
-                    roomSave = 3;
+                }case "west" -> {
+                    roomSave = 52;
                     Main.loadSave();
-                }
-                default ->
+                }default ->
                     Main.inGameDefaultTextHandling(command);
             }
         }
@@ -2168,7 +1683,7 @@ public class OpenWorld extends Room {
     private static void room54() throws InterruptedException {
         Dungeon.dungeonCheck();
         TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
-        TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "north" + resetColor + ", " + yellowColor + "south" + resetColor + ", " + yellowColor + "west" + resetColor + ", or " +yellowColor+ "The Dark Forest" +resetColor+ " to continue your journey ", true);
+        TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "north" + resetColor + ", " + yellowColor + "west" + resetColor + ", or " +yellowColor+ "The Dark Forest" +resetColor+ " to continue your journey ", true);
         while (true) {
             ignore = console.readLine();
             command = console.readLine();
@@ -2177,22 +1692,18 @@ public class OpenWorld extends Room {
             }
             switch (command.toLowerCase().trim()) {
                 case "north" -> {
-                    roomSave = 7;
+                    roomSave = 45;
                     Main.loadSave();
-                }
-                case "east" -> {
-                    roomSave = 5;
+                }case "the dark forest" -> {
+                    if (Dungeon.completedDungeons > 0) {
+                        DarkForestDungeon.startRoom();
+                    } else {
+                        TextEngine.printWithDelays("You must complete The Meadow dungeon first.\nTry going south", true);
+                    }
+                }case "west" -> {
+                    roomSave = 53;
                     Main.loadSave();
-                }
-                case "south" -> {
-                    roomSave = 1;
-                    Main.loadSave();
-                }
-                case "west" -> {
-                    roomSave = 3;
-                    Main.loadSave();
-                }
-                default ->
+                }default ->
                     Main.inGameDefaultTextHandling(command);
             }
         }
@@ -2209,54 +1720,21 @@ public class OpenWorld extends Room {
             }
             switch (command.toLowerCase().trim()) {
                 case "north" -> {
-                    roomSave = 7;
+                    roomSave = 48;
                     Main.loadSave();
-                }
-                case "east" -> {
-                    roomSave = 5;
+                }case "east" -> {
+                    roomSave = 27;
                     Main.loadSave();
-                }
-                case "south" -> {
-                    roomSave = 1;
+                }case "south" -> {
+                    roomSave = 64;
                     Main.loadSave();
-                }
-                case "west" -> {
-                    roomSave = 3;
-                    Main.loadSave();
-                }
-                default ->
-                    Main.inGameDefaultTextHandling(command);
-            }
-        }
-    }
-    private static void room56() throws InterruptedException {
-        Dungeon.dungeonCheck();
-        TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
-        TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "north" + resetColor + ", " + yellowColor + "east" + resetColor + ", or " + yellowColor + "south" + resetColor + " to continue your journey ", true);
-        while (true) {
-            ignore = console.readLine();
-            command = console.readLine();
-            if ("north".equals(command) || "east".equals(command) || "south".equals(command) || "west".equals(command)) {
-                holdCommand = command;
-            }
-            switch (command.toLowerCase().trim()) {
-                case "north" -> {
-                    roomSave = 7;
-                    Main.loadSave();
-                }
-                case "east" -> {
-                    roomSave = 5;
-                    Main.loadSave();
-                }
-                case "south" -> {
-                    roomSave = 1;
-                    Main.loadSave();
-                }
-                case "west" -> {
-                    roomSave = 3;
-                    Main.loadSave();
-                }
-                default ->
+                }case "the desrt pryramid" -> {
+                    if (Dungeon.completedDungeons > 3) {
+                        DarkForestDungeon.startRoom();
+                    } else {
+                        TextEngine.printWithDelays("You must complete The Desert Plains dungeon first.\nTry going south", true);
+                    }
+                }default ->
                     Main.inGameDefaultTextHandling(command);
             }
         }
@@ -2273,22 +1751,18 @@ public class OpenWorld extends Room {
             }
             switch (command.toLowerCase().trim()) {
                 case "north" -> {
-                    roomSave = 7;
+                    roomSave = 50;
                     Main.loadSave();
-                }
-                case "east" -> {
-                    roomSave = 5;
+                }case "east" -> {
+                    roomSave = 58;
                     Main.loadSave();
-                }
-                case "south" -> {
-                    roomSave = 1;
+                }case "south" -> {
+                    roomSave = 66;
                     Main.loadSave();
-                }
-                case "west" -> {
-                    roomSave = 3;
+                }case "west" -> {
+                    roomSave = 27;
                     Main.loadSave();
-                }
-                default ->
+                }default ->
                     Main.inGameDefaultTextHandling(command);
             }
         }
@@ -2305,22 +1779,18 @@ public class OpenWorld extends Room {
             }
             switch (command.toLowerCase().trim()) {
                 case "north" -> {
-                    roomSave = 7;
+                    roomSave = 51;
                     Main.loadSave();
-                }
-                case "east" -> {
-                    roomSave = 5;
+                }case "east" -> {
+                    roomSave = 59;
                     Main.loadSave();
-                }
-                case "south" -> {
-                    roomSave = 1;
+                }case "south" -> {
+                    roomSave = 67;
                     Main.loadSave();
-                }
-                case "west" -> {
-                    roomSave = 3;
+                }case "west" -> {
+                    roomSave = 57;
                     Main.loadSave();
-                }
-                default ->
+                }default ->
                     Main.inGameDefaultTextHandling(command);
             }
         }
@@ -2337,22 +1807,18 @@ public class OpenWorld extends Room {
             }
             switch (command.toLowerCase().trim()) {
                 case "north" -> {
-                    roomSave = 7;
+                    roomSave = 52;
                     Main.loadSave();
-                }
-                case "east" -> {
-                    roomSave = 5;
+                }case "east" -> {
+                    roomSave = 60;
                     Main.loadSave();
-                }
-                case "south" -> {
-                    roomSave = 1;
+                }case "south" -> {
+                    roomSave = 68;
                     Main.loadSave();
-                }
-                case "west" -> {
-                    roomSave = 3;
+                }case "west" -> {
+                    roomSave = 58;
                     Main.loadSave();
-                }
-                default ->
+                }default ->
                     Main.inGameDefaultTextHandling(command);
             }
         }
@@ -2360,7 +1826,7 @@ public class OpenWorld extends Room {
     private static void room60() throws InterruptedException {
         Dungeon.dungeonCheck();
         TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
-        TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "north" + resetColor + ", " + yellowColor + "east" + resetColor + ", " + yellowColor + "south" + resetColor + ", " + yellowColor + "west" + resetColor + ", or " +yellowColor+ "The Dark Forest" +resetColor+ " to continue your journey ", true);
+        TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "north" + resetColor + ", " + yellowColor + "south" + resetColor + ", " + yellowColor + "west" + resetColor + ", or " +yellowColor+ "The Dark Forest" +resetColor+ " to continue your journey ", true);
         while (true) {
             ignore = console.readLine();
             command = console.readLine();
@@ -2369,54 +1835,21 @@ public class OpenWorld extends Room {
             }
             switch (command.toLowerCase().trim()) {
                 case "north" -> {
-                    roomSave = 7;
+                    roomSave = 53;
                     Main.loadSave();
-                }
-                case "east" -> {
-                    roomSave = 5;
+                }case "the dark forest" -> {
+                    if (Dungeon.completedDungeons > 0) {
+                        DarkForestDungeon.startRoom();
+                    } else {
+                        TextEngine.printWithDelays("You must complete The Meadow dungeon first.\nTry going south", true);
+                    }
+                }case "south" -> {
+                    roomSave = 69;
                     Main.loadSave();
-                }
-                case "south" -> {
-                    roomSave = 1;
+                }case "west" -> {
+                    roomSave = 59;
                     Main.loadSave();
-                }
-                case "west" -> {
-                    roomSave = 3;
-                    Main.loadSave();
-                }
-                default ->
-                    Main.inGameDefaultTextHandling(command);
-            }
-        }
-    }
-    private static void room61() throws InterruptedException {
-        Dungeon.dungeonCheck();
-        TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
-        TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "north" + resetColor + ", " + yellowColor + "south" + resetColor + ", or " + yellowColor + "west" + resetColor + " to continue your journey ", true);
-        while (true) {
-            ignore = console.readLine();
-            command = console.readLine();
-            if ("north".equals(command) || "east".equals(command) || "south".equals(command) || "west".equals(command)) {
-                holdCommand = command;
-            }
-            switch (command.toLowerCase().trim()) {
-                case "north" -> {
-                    roomSave = 7;
-                    Main.loadSave();
-                }
-                case "east" -> {
-                    roomSave = 5;
-                    Main.loadSave();
-                }
-                case "south" -> {
-                    roomSave = 1;
-                    Main.loadSave();
-                }
-                case "west" -> {
-                    roomSave = 3;
-                    Main.loadSave();
-                }
-                default ->
+                }default ->
                     Main.inGameDefaultTextHandling(command);
             }
         }
@@ -2424,7 +1857,7 @@ public class OpenWorld extends Room {
     private static void room62() throws InterruptedException {
         Dungeon.dungeonCheck();
         TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
-        TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "north" + resetColor + ", " + yellowColor + "east" + resetColor + ", " + yellowColor + "south" + resetColor + ", or " + yellowColor + "west" + resetColor + " to continue your journey ", true);
+        TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "east" + resetColor + ", " + yellowColor + "south" + resetColor + ", or " + yellowColor + "The Mountain Cave" + resetColor + " to continue your journey ", true);
         while (true) {
             ignore = console.readLine();
             command = console.readLine();
@@ -2432,55 +1865,19 @@ public class OpenWorld extends Room {
                 holdCommand = command;
             }
             switch (command.toLowerCase().trim()) {
-                case "north" -> {
-                    roomSave = 7;
-                    Main.loadSave();
-                }
                 case "east" -> {
-                    roomSave = 5;
+                    roomSave = 33;
                     Main.loadSave();
-                }
-                case "south" -> {
-                    roomSave = 1;
+                }case "south" -> {
+                    roomSave = 41;
                     Main.loadSave();
-                }
-                case "west" -> {
-                    roomSave = 3;
-                    Main.loadSave();
-                }
-                default ->
-                    Main.inGameDefaultTextHandling(command);
-            }
-        }
-    }
-    private static void room63() throws InterruptedException {
-        Dungeon.dungeonCheck();
-        TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
-        TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "north" + resetColor + ", " + yellowColor + "east" + resetColor + ", or " + yellowColor + "south" + resetColor + " to continue your journey ", true);
-        while (true) {
-            ignore = console.readLine();
-            command = console.readLine();
-            if ("north".equals(command) || "east".equals(command) || "south".equals(command) || "west".equals(command)) {
-                holdCommand = command;
-            }
-            switch (command.toLowerCase().trim()) {
-                case "north" -> {
-                    roomSave = 7;
-                    Main.loadSave();
-                }
-                case "east" -> {
-                    roomSave = 5;
-                    Main.loadSave();
-                }
-                case "south" -> {
-                    roomSave = 1;
-                    Main.loadSave();
-                }
-                case "west" -> {
-                    roomSave = 3;
-                    Main.loadSave();
-                }
-                default ->
+                }case "the mountain cave" -> {
+                    if (Dungeon.completedDungeons > 1) {
+                        MountainCaveDungeon.startRoom();
+                    } else {
+                        TextEngine.printWithDelays("You must complete The Dark Forest first.\nTry going west", true);
+                    }
+                }default ->
                     Main.inGameDefaultTextHandling(command);
             }
         }
@@ -2497,22 +1894,21 @@ public class OpenWorld extends Room {
             }
             switch (command.toLowerCase().trim()) {
                 case "north" -> {
-                    roomSave = 7;
+                    roomSave = 55;
                     Main.loadSave();
-                }
-                case "east" -> {
-                    roomSave = 5;
+                }case "east" -> {
+                    roomSave = 65;
                     Main.loadSave();
-                }
-                case "south" -> {
-                    roomSave = 1;
+                }case "south" -> {
+                    roomSave = 72;
                     Main.loadSave();
-                }
-                case "west" -> {
-                    roomSave = 3;
-                    Main.loadSave();
-                }
-                default ->
+                }case "the desert plains" -> {
+                    if (Dungeon.completedDungeons > 4) {
+                        DesertPlainsDungeon.startRoom();
+                    } else {
+                        TextEngine.printWithDelays("You must complete The Desert Oasis dungeons first.\nTry going to the south east/north", true);
+                    }
+                }default ->
                     Main.inGameDefaultTextHandling(command);
             }
         }
@@ -2529,22 +1925,18 @@ public class OpenWorld extends Room {
             }
             switch (command.toLowerCase().trim()) {
                 case "north" -> {
-                    roomSave = 7;
+                    roomSave = 27;
                     Main.loadSave();
-                }
-                case "east" -> {
-                    roomSave = 5;
+                }case "east" -> {
+                    roomSave = 66;
                     Main.loadSave();
-                }
-                case "south" -> {
-                    roomSave = 1;
+                }case "south" -> {
+                    roomSave = 73;
                     Main.loadSave();
-                }
-                case "west" -> {
-                    roomSave = 3;
+                }case "west" -> {
+                    roomSave = 64;
                     Main.loadSave();
-                }
-                default ->
+                }default ->
                     Main.inGameDefaultTextHandling(command);
             }
         }
@@ -2561,22 +1953,18 @@ public class OpenWorld extends Room {
             }
             switch (command.toLowerCase().trim()) {
                 case "north" -> {
-                    roomSave = 7;
+                    roomSave = 57;
                     Main.loadSave();
-                }
-                case "east" -> {
-                    roomSave = 5;
+                }case "east" -> {
+                    roomSave = 67;
                     Main.loadSave();
-                }
-                case "south" -> {
-                    roomSave = 1;
+                }case "south" -> {
+                    roomSave = 74;
                     Main.loadSave();
-                }
-                case "west" -> {
-                    roomSave = 3;
+                }case "west" -> {
+                    roomSave = 65;
                     Main.loadSave();
-                }
-                default ->
+                }default ->
                     Main.inGameDefaultTextHandling(command);
             }
         }
@@ -2584,7 +1972,7 @@ public class OpenWorld extends Room {
     private static void room67() throws InterruptedException {
         Dungeon.dungeonCheck();
         TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
-        TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "north" + resetColor + ", " + yellowColor + "east" + resetColor + ", " + yellowColor + "south" + resetColor + ", " + yellowColor + "west" + resetColor + ", or "+yellowColor+ "the village" +resetColor+ " to continue your journey ", true);
+        TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "north" + resetColor + ", " + yellowColor + "east" + resetColor + ", " + yellowColor + "west" + resetColor + ", or "+yellowColor+ "The Village" +resetColor+ " to continue your journey ", true);
         while (true) {
             ignore = console.readLine();
             command = console.readLine();
@@ -2593,22 +1981,18 @@ public class OpenWorld extends Room {
             }
             switch (command.toLowerCase().trim()) {
                 case "north" -> {
-                    roomSave = 7;
+                    roomSave = 58;
                     Main.loadSave();
-                }
-                case "east" -> {
-                    roomSave = 5;
+                }case "east" -> {
+                    roomSave = 68;
                     Main.loadSave();
-                }
-                case "south" -> {
-                    roomSave = 1;
+                }case "the village" -> {
+                    Main.saveSpace("Village");
                     Main.loadSave();
-                }
-                case "west" -> {
-                    roomSave = 3;
+                }case "west" -> {
+                    roomSave = 66;
                     Main.loadSave();
-                }
-                default ->
+                }default ->
                     Main.inGameDefaultTextHandling(command);
             }
         }
@@ -2616,7 +2000,7 @@ public class OpenWorld extends Room {
     private static void room68() throws InterruptedException {
         Dungeon.dungeonCheck();
         TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
-        TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "north" + resetColor + ", " + yellowColor + "east" + resetColor + ", " + yellowColor + "south" + resetColor + ", or " + yellowColor + "west" + resetColor + " to continue your journey ", true);
+        TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "north" + resetColor + ", " + yellowColor + "east" + resetColor + ", or " + yellowColor + "west" + resetColor + " to continue your journey ", true);
         while (true) {
             ignore = console.readLine();
             command = console.readLine();
@@ -2625,22 +2009,15 @@ public class OpenWorld extends Room {
             }
             switch (command.toLowerCase().trim()) {
                 case "north" -> {
-                    roomSave = 7;
+                    roomSave = 59;
                     Main.loadSave();
-                }
-                case "east" -> {
-                    roomSave = 5;
+                }case "east" -> {
+                    roomSave = 69;
                     Main.loadSave();
-                }
-                case "south" -> {
-                    roomSave = 1;
+                }case "west" -> {
+                    roomSave = 67;
                     Main.loadSave();
-                }
-                case "west" -> {
-                    roomSave = 3;
-                    Main.loadSave();
-                }
-                default ->
+                }default ->
                     Main.inGameDefaultTextHandling(command);
             }
         }
@@ -2648,7 +2025,7 @@ public class OpenWorld extends Room {
     private static void room69() throws InterruptedException {
         Dungeon.dungeonCheck();
         TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
-        TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "north" + resetColor + ", " + yellowColor + "east" + resetColor + ", " + yellowColor + "south" + resetColor + ", " + yellowColor + "west" + resetColor + ", or " +yellowColor+ "the meadow" +resetColor+ " to continue your journey ", true);
+        TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "north" + resetColor + ", " + yellowColor + "west" + resetColor + ", or " +yellowColor+ "The Meadow" +resetColor+ " to continue your journey ", true);
         while (true) {
             ignore = console.readLine();
             command = console.readLine();
@@ -2657,86 +2034,14 @@ public class OpenWorld extends Room {
             }
             switch (command.toLowerCase().trim()) {
                 case "north" -> {
-                    roomSave = 7;
+                    roomSave = 60;
                     Main.loadSave();
-                }
-                case "east" -> {
-                    roomSave = 5;
+                }case "the meadow" -> {
+                    MeadowDungeon.startRoom();
+                }case "west" -> {
+                    roomSave = 68;
                     Main.loadSave();
-                }
-                case "south" -> {
-                    roomSave = 1;
-                    Main.loadSave();
-                }
-                case "west" -> {
-                    roomSave = 3;
-                    Main.loadSave();
-                }
-                default ->
-                    Main.inGameDefaultTextHandling(command);
-            }
-        }
-    }
-    private static void room70() throws InterruptedException {
-        Dungeon.dungeonCheck();
-        TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
-        TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "north" + resetColor + ", or " + yellowColor + "west" + resetColor + " to continue your journey ", true);
-        while (true) {
-            ignore = console.readLine();
-            command = console.readLine();
-            if ("north".equals(command) || "east".equals(command) || "south".equals(command) || "west".equals(command)) {
-                holdCommand = command;
-            }
-            switch (command.toLowerCase().trim()) {
-                case "north" -> {
-                    roomSave = 7;
-                    Main.loadSave();
-                }
-                case "east" -> {
-                    roomSave = 5;
-                    Main.loadSave();
-                }
-                case "south" -> {
-                    roomSave = 1;
-                    Main.loadSave();
-                }
-                case "west" -> {
-                    roomSave = 3;
-                    Main.loadSave();
-                }
-                default ->
-                    Main.inGameDefaultTextHandling(command);
-            }
-        }
-    }
-    private static void room71() throws InterruptedException {
-        Dungeon.dungeonCheck();
-        TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
-        TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "north" + resetColor + ", or " + yellowColor + "east" + resetColor + " to continue your journey ", true);
-        while (true) {
-            ignore = console.readLine();
-            command = console.readLine();
-            if ("north".equals(command) || "east".equals(command) || "south".equals(command) || "west".equals(command)) {
-                holdCommand = command;
-            }
-            switch (command.toLowerCase().trim()) {
-                case "north" -> {
-                    roomSave = 7;
-                    Main.loadSave();
-                }
-                case "east" -> {
-                    roomSave = 5;
-                    Main.loadSave();
-                }
-                case "south" -> {
-                    roomSave = 1;
-                    Main.loadSave();
-                }
-                case "west" -> {
-                    roomSave = 3;
-                    Main.loadSave();
-                }
-                default ->
+                }default ->
                     Main.inGameDefaultTextHandling(command);
             }
         }
@@ -2744,7 +2049,7 @@ public class OpenWorld extends Room {
     private static void room72() throws InterruptedException {
         Dungeon.dungeonCheck();
         TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
-        TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "north" + resetColor + ", " + yellowColor + "east" + resetColor + ", " + yellowColor + "west" + resetColor + ", or " +yellowColor+ "The Desert Oasis" +resetColor+ " to continue your journey ", true);
+        TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "north" + resetColor + ", " + yellowColor + "east" + resetColor + ", or " +yellowColor+ "The Desert Oasis" +resetColor+ " to continue your journey ", true);
         while (true) {
             ignore = console.readLine();
             command = console.readLine();
@@ -2753,22 +2058,18 @@ public class OpenWorld extends Room {
             }
             switch (command.toLowerCase().trim()) {
                 case "north" -> {
-                    roomSave = 7;
+                    roomSave = 64;
                     Main.loadSave();
-                }
-                case "east" -> {
-                    roomSave = 5;
+                }case "east" -> {
+                    roomSave = 73;
                     Main.loadSave();
-                }
-                case "south" -> {
-                    roomSave = 1;
-                    Main.loadSave();
-                }
-                case "west" -> {
-                    roomSave = 3;
-                    Main.loadSave();
-                }
-                default ->
+                }case "the desert oasis" -> {
+                    if (Dungeon.completedDungeons > 3) {
+                        DesertOasisDungeon.startRoom();
+                    } else {
+                        TextEngine.printWithDelays("You must complete The Mountain Top dungeon first.\n Try going to the south", true);
+                    }
+                }default ->
                     Main.inGameDefaultTextHandling(command);
             }
         }
@@ -2785,22 +2086,15 @@ public class OpenWorld extends Room {
             }
             switch (command.toLowerCase().trim()) {
                 case "north" -> {
-                    roomSave = 7;
+                    roomSave = 65;
                     Main.loadSave();
-                }
-                case "east" -> {
-                    roomSave = 5;
+                }case "east" -> {
+                    roomSave = 74;
                     Main.loadSave();
-                }
-                case "south" -> {
-                    roomSave = 1;
+                }case "west" -> {
+                    roomSave = 72;
                     Main.loadSave();
-                }
-                case "west" -> {
-                    roomSave = 3;
-                    Main.loadSave();
-                }
-                default ->
+                }default ->
                     Main.inGameDefaultTextHandling(command);
             }
         }
@@ -2808,7 +2102,7 @@ public class OpenWorld extends Room {
     private static void room74() throws InterruptedException {
         Dungeon.dungeonCheck();
         TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
-        TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "north" + resetColor + ", " + yellowColor + "east" + resetColor + ", " + yellowColor + "west" + resetColor + ", or "+yellowColor+ "the village" +resetColor+ " to continue your journey ", true);
+        TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "north" + resetColor + ", " + yellowColor + "west" + resetColor + ", or "+yellowColor+ "the village" +resetColor+ " to continue your journey ", true);
         while (true) {
             ignore = console.readLine();
             command = console.readLine();
@@ -2817,54 +2111,15 @@ public class OpenWorld extends Room {
             }
             switch (command.toLowerCase().trim()) {
                 case "north" -> {
-                    roomSave = 7;
+                    roomSave = 66;
                     Main.loadSave();
-                }
-                case "east" -> {
-                    roomSave = 5;
+                }case "the village" -> {
+                    Main.saveSpace("Village");
                     Main.loadSave();
-                }
-                case "south" -> {
-                    roomSave = 1;
+                }case "west" -> {
+                    roomSave = 73;
                     Main.loadSave();
-                }
-                case "west" -> {
-                    roomSave = 3;
-                    Main.loadSave();
-                }
-                default ->
-                    Main.inGameDefaultTextHandling(command);
-            }
-        }
-    }
-    private static void room75() throws InterruptedException {
-        Dungeon.dungeonCheck();
-        TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
-        TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "north" + resetColor + ", or " + yellowColor + "west" + resetColor + " to continue your journey ", true);
-        while (true) {
-            ignore = console.readLine();
-            command = console.readLine();
-            if ("north".equals(command) || "east".equals(command) || "south".equals(command) || "west".equals(command)) {
-                holdCommand = command;
-            }
-            switch (command.toLowerCase().trim()) {
-                case "north" -> {
-                    roomSave = 7;
-                    Main.loadSave();
-                }
-                case "east" -> {
-                    roomSave = 5;
-                    Main.loadSave();
-                }
-                case "south" -> {
-                    roomSave = 1;
-                    Main.loadSave();
-                }
-                case "west" -> {
-                    roomSave = 3;
-                    Main.loadSave();
-                }
-                default ->
+                }default ->
                     Main.inGameDefaultTextHandling(command);
             }
         }
