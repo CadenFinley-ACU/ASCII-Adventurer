@@ -23,7 +23,6 @@ public class Player {
     private static int damage; //find way to set damage automatically to strongest weapon in inventory
     private static int defense; //find way to set defense automatically to the strongest 4-5 defense items combined
     public static Map<String, Integer> inventory = new HashMap<>();
-    public static boolean autoFight = false;
     public static int playerX = 0;
     public static int playerY = 0;
 
@@ -357,7 +356,7 @@ public class Player {
         TextEngine.clearScreen();
 
         String[][] map = {
-            //  0       1       2       3       4       5       6       7       8
+            //  0       1          2       3         4       5         6       7       8
             {"     ", "[ D ]", "[   ]", "[   ]", "[   ]", "[   ]", "[   ]", "[ D ]", "     ", "", ""}, //0
             {"     ", "[   ]", "     ", "     ", "     ", "[   ]", "[   ]", "[   ]", "     ", "", ""}, //1
             {"     ", "[   ]", "     ", "     ", "     ", "[   ]", "[   ]", "[   ]", "     ", "", ""}, //2
@@ -377,91 +376,91 @@ public class Player {
             case 0 -> {
                 map[9][8] = "[ ! ]";
                 map[8][8] = "[ L ]";
+                map[4][4] = "[ L ]";
+                map[0][7] = "[ L ]";
                 map[10][1] = "[ L ]";
                 map[9][1] = "[ L ]";
                 map[8][1] = "[ L ]";
-                map[4][4] = "[ L ]";
-                map[0][7] = "[ L ]";
                 map[0][1] = "[ L ]";
             }
             case 1 -> {
                 map[9][8] = "[ D ]";
                 map[8][8] = "[ ! ]";
+                map[4][4] = "[ L ]";
+                map[0][7] = "[ L ]";
                 map[10][1] = "[ L ]";
                 map[9][1] = "[ L ]";
                 map[8][1] = "[ L ]";
-                map[4][4] = "[ L ]";
-                map[0][7] = "[ L ]";
                 map[0][1] = "[ L ]";
             }
             case 2 -> {
                 map[9][8] = "[ D ]";
                 map[8][8] = "[ D ]";
-                map[10][1] = "[ ! ]";
+                map[4][4] = "[ ! ]";
+                map[0][7] = "[ L ]";
+                map[10][1] = "[ L ]";
                 map[9][1] = "[ L ]";
                 map[8][1] = "[ L ]";
-                map[4][4] = "[ L ]";
-                map[0][7] = "[ L ]";
                 map[0][1] = "[ L ]";
             }
             case 3 -> {
                 map[9][8] = "[ D ]";
                 map[8][8] = "[ D ]";
-                map[10][1] = "[ D ]";
-                map[9][1] = "[ ! ]";
+                map[4][4] = "[ D ]";
+                map[0][7] = "[ ! ]";
+                map[10][1] = "[ L ]";
+                map[9][1] = "[ L ]";
                 map[8][1] = "[ L ]";
-                map[4][4] = "[ L ]";
-                map[0][7] = "[ L ]";
                 map[0][1] = "[ L ]";
             }
             case 4 -> {
                 map[9][8] = "[ D ]";
                 map[8][8] = "[ D ]";
-                map[10][1] = "[ D ]";
-                map[9][1] = "[ D ]";
-                map[8][1] = "[ ! ]";
-                map[4][4] = "[ L ]";
-                map[0][7] = "[ L ]";
+                map[4][4] = "[ D ]";
+                map[0][7] = "[ D ]";
+                map[10][1] = "[ ! ]";
+                map[9][1] = "[ L ]";
+                map[8][1] = "[ L ]";
                 map[0][1] = "[ L ]";
             }
             case 5 -> {
                 map[9][8] = "[ D ]";
                 map[8][8] = "[ D ]";
+                map[4][4] = "[ D ]";
+                map[0][7] = "[ D ]";
                 map[10][1] = "[ D ]";
-                map[9][1] = "[ D ]";
-                map[8][1] = "[ D ]";
-                map[4][4] = "[ ! ]";
-                map[0][7] = "[ L ]";
+                map[9][1] = "[ ! ]";
+                map[8][1] = "[ L ]";
                 map[0][1] = "[ L ]";
             }
             case 6 -> {
                 map[9][8] = "[ D ]";
                 map[8][8] = "[ D ]";
+                map[4][4] = "[ D ]";
+                map[0][7] = "[ D ]";
                 map[10][1] = "[ D ]";
                 map[9][1] = "[ D ]";
-                map[8][1] = "[ D ]";
-                map[4][4] = "[ D ]";
-                map[0][7] = "[ ! ]";
+                map[8][1] = "[ ! ]";
                 map[0][1] = "[ L ]";
             }
             case 7 -> {
                 map[9][8] = "[ D ]";
                 map[8][8] = "[ D ]";
+                map[4][4] = "[ D ]";
+                map[0][7] = "[ D ]";
                 map[10][1] = "[ D ]";
                 map[9][1] = "[ D ]";
                 map[8][1] = "[ D ]";
-                map[4][4] = "[ D ]";
-                map[0][7] = "[ D ]";
                 map[0][1] = "[ ! ]";
             }
             default -> {
                 map[9][8] = "[ D ]";
                 map[8][8] = "[ D ]";
+                map[4][4] = "[ D ]";
+                map[0][7] = "[ D ]";
                 map[10][1] = "[ D ]";
                 map[9][1] = "[ D ]";
                 map[8][1] = "[ D ]";
-                map[4][4] = "[ D ]";
-                map[0][7] = "[ D ]";
                 map[0][1] = "[ D ]";
             }
 

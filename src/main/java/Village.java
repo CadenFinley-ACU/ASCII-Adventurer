@@ -11,7 +11,6 @@ public class Village extends Room {
     static String yellowColor = "\033[1;33m"; // yellow color
 
     public static void startRoom() throws InterruptedException { //start room
-
         room = "Village";
         Main.checkSave(room);
         Main.screenRefresh();
@@ -41,7 +40,69 @@ public class Village extends Room {
                     }
                 }
                 case "leave village" -> {
-                    leave();
+                    switch (OpenWorld.saveRoomNumber) {
+                        case 74, 67 -> {
+                            TextEngine.printWithDelays("Witch way would you like to leave the village\n you can go west to go to the desert\n or north to the forest", false);
+                            TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "north" + resetColor + " or " + yellowColor + "west" + resetColor+ " to decide", true);
+                            while (true) {
+                                ignore = console.readLine();
+                                command = console.readLine();
+                                if ("north".equals(command) || "east".equals(command) || "south".equals(command) || "west".equals(command)) {
+                                    OpenWorld.holdCommand = command;
+                                }switch (command.toLowerCase().trim().trim()) {
+                                    case "north" -> {
+                                        OpenWorld.roomSave = 67;
+                                        leave();
+                                    }case "west" -> {
+                                        OpenWorld.roomSave = 74;
+                                        leave();
+                                    }default ->
+                                        Main.inGameDefaultTextHandling(command);
+                                }
+                            }
+                        }
+                        case 47, 37 -> {
+                            TextEngine.printWithDelays("Witch way would you like to leave the village\n you can go west to go to the desert\n or north to the forest", false);
+                            TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "north" + resetColor + " or " + yellowColor + "east" + resetColor+ " to decide", true);
+                            while (true) {
+                                ignore = console.readLine();
+                                command = console.readLine();
+                                if ("north".equals(command) || "east".equals(command) || "south".equals(command) || "west".equals(command)) {
+                                    OpenWorld.holdCommand = command;
+                                }switch (command.toLowerCase().trim().trim()) {
+                                    case "north" -> {
+                                        OpenWorld.roomSave = 37;
+                                        leave();
+                                    }case "east" -> {
+                                        OpenWorld.roomSave = 47;
+                                        leave();
+                                    }default ->
+                                        Main.inGameDefaultTextHandling(command);
+                                }
+                            }
+                        }
+                        default -> {
+                            TextEngine.printWithDelays("Witch way would you like to leave the village\n you can go west to go to the desert\n or north to the forest", false);
+                            TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "south" + resetColor + " or " + yellowColor + "west" + resetColor+ " to decide", true);
+                            while (true) {
+                                ignore = console.readLine();
+                                command = console.readLine();
+                                if ("north".equals(command) || "east".equals(command) || "south".equals(command) || "west".equals(command)) {
+                                    OpenWorld.holdCommand = command;
+                                }
+                                switch (command.toLowerCase().trim().trim()) {
+                                    case "south" -> {
+                                        OpenWorld.roomSave = 29;
+                                        leave();
+                                    }case "west" -> {
+                                        OpenWorld.roomSave = 19;
+                                        leave();
+                                    }default ->
+                                        Main.inGameDefaultTextHandling(command);
+                                }
+                            }
+                        }
+                    }
                 }
                 case "portal" -> {
                     if (Dungeon.completedDungeons > 5) {
