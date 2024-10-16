@@ -10,8 +10,7 @@ buildNumber.properties
 .DS_Store
 *.class
 .vscode
-.runtime.txt
-.game_save.txt
+
 
 # https://github.com/takari/maven-wrapper#usage-without-binary-jar
 .mvn/wrapper/maven-wrapper.jar
