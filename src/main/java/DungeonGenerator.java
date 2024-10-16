@@ -404,7 +404,7 @@ public class DungeonGenerator {
                                     System.out.print("[!] "); // Special marker for value 3
                                 }
                             }
-                            case 3, 2 -> {
+                            case 5, 2 -> {
                                 if (unlocked[i][j] > 0) {
                                     System.out.print("[I] "); // Special marker for value 3
                                 } else {
@@ -423,7 +423,7 @@ public class DungeonGenerator {
                         }
                     } else if (unlocked[i][j] > 0) {
                         switch (unlocked[i][j]) { //icon for visited rooms
-                            case 2, 3 ->
+                            case 2, 5 ->
                                 System.out.print("[I] "); // Special marker for value 
                             default ->
                                 System.out.print("[■] "); // Default case for other values
@@ -603,13 +603,13 @@ public class DungeonGenerator {
         }
         // Mark possible moves
         switch (moves[0]) {
-            case 1, 9 -> {
+            case 1, 3, 9 -> {
                 room[0][7] = ' ';
                 //room[0][7] = '↑';
                 room[0][6] = ' ';
                 room[0][8] = ' ';
             }
-            case 2, 3, 6 -> {
+            case 2, 5, 6 -> {
                 if (visitedRoom[x - 1][y] > 0) {
                     room[0][7] = ' ';
                 } else {
@@ -648,13 +648,13 @@ public class DungeonGenerator {
                 room[0][7] = '─';
         }
         switch (moves[1]) {
-            case 1, 9 -> {
+            case 1, 3, 9 -> {
                 room[4][7] = ' ';
                 //room[4][7] = '↓';
                 room[4][6] = ' ';
                 room[4][8] = ' ';
             }
-            case 2, 3, 6 -> {
+            case 2, 5, 6 -> {
                 if (visitedRoom[x + 1][y] > 0) {
                     room[4][7] = ' ';
                 } else {
@@ -693,13 +693,13 @@ public class DungeonGenerator {
                 room[4][7] = '─';
         }
         switch (moves[2]) {
-            case 1, 9 -> {
+            case 1, 3, 9 -> {
                 room[2][0] = ' ';
                 //room[2][0] = '←';
                 //room[1][0] = ' ';
                 //room[3][0] = ' ';
             }
-            case 2, 3, 6 -> {
+            case 2, 5, 6 -> {
                 if (visitedRoom[x][y - 1] > 0) {
                     room[2][0] = ' ';
                 } else {
@@ -739,13 +739,13 @@ public class DungeonGenerator {
                 room[2][0] = '│';
         }
         switch (moves[3]) {
-            case 1, 9 -> {
+            case 1, 3, 9 -> {
                 room[2][14] = ' ';
                 //room[2][14] = '→';
                 //room[1][14] = ' ';
                 //room[3][14] = ' ';
             }
-            case 2, 3, 6 -> {
+            case 2, 5, 6 -> {
                 if (visitedRoom[x][y + 1] > 0) {
                     room[2][14] = ' ';
                 } else {
@@ -790,12 +790,16 @@ public class DungeonGenerator {
             room[2][7] = 'P'; // Player
         } else {
             switch (localDungeon[x][y]) {
-                case 1 -> {
+                case 1, 3 -> {
                     room[2][7] = 'P'; // Player
                 }
-                case 2, 3 -> {
+                case 2 -> {
                     room[2][5] = 'P'; // Item Room
                     room[2][7] = 'I'; // Item
+                }
+                case 5 -> {
+                    room[2][5] = 'P'; // key Room
+                    room[2][7] = 'K'; // key
                 }
                 case 6 -> {
                     room[2][5] = 'P'; // Trap Room

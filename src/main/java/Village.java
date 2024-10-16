@@ -43,47 +43,53 @@ public class Village extends Room {
                     switch (OpenWorld.saveRoomNumber) {
                         case 74, 67 -> {
                             TextEngine.printWithDelays("Witch way would you like to leave the village\n you can go west to go to the desert\n or north to the forest", false);
-                            TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "north" + resetColor + " or " + yellowColor + "west" + resetColor+ " to decide", true);
+                            TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "north" + resetColor + " or " + yellowColor + "west" + resetColor + " to decide", true);
                             while (true) {
                                 ignore = console.readLine();
                                 command = console.readLine();
                                 if ("north".equals(command) || "east".equals(command) || "south".equals(command) || "west".equals(command)) {
                                     OpenWorld.holdCommand = command;
-                                }switch (command.toLowerCase().trim().trim()) {
+                                }
+                                switch (command.toLowerCase().trim().trim()) {
                                     case "north" -> {
                                         OpenWorld.roomSave = 67;
                                         leave();
-                                    }case "west" -> {
+                                    }
+                                    case "west" -> {
                                         OpenWorld.roomSave = 74;
                                         leave();
-                                    }default ->
+                                    }
+                                    default ->
                                         Main.inGameDefaultTextHandling(command);
                                 }
                             }
                         }
                         case 47, 37 -> {
                             TextEngine.printWithDelays("Witch way would you like to leave the village\n you can go west to go to the desert\n or north to the forest", false);
-                            TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "north" + resetColor + " or " + yellowColor + "east" + resetColor+ " to decide", true);
+                            TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "north" + resetColor + " or " + yellowColor + "east" + resetColor + " to decide", true);
                             while (true) {
                                 ignore = console.readLine();
                                 command = console.readLine();
                                 if ("north".equals(command) || "east".equals(command) || "south".equals(command) || "west".equals(command)) {
                                     OpenWorld.holdCommand = command;
-                                }switch (command.toLowerCase().trim().trim()) {
+                                }
+                                switch (command.toLowerCase().trim().trim()) {
                                     case "north" -> {
                                         OpenWorld.roomSave = 37;
                                         leave();
-                                    }case "east" -> {
+                                    }
+                                    case "east" -> {
                                         OpenWorld.roomSave = 47;
                                         leave();
-                                    }default ->
+                                    }
+                                    default ->
                                         Main.inGameDefaultTextHandling(command);
                                 }
                             }
                         }
                         default -> {
                             TextEngine.printWithDelays("Witch way would you like to leave the village\n you can go west to go to the desert\n or north to the forest", false);
-                            TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "south" + resetColor + " or " + yellowColor + "west" + resetColor+ " to decide", true);
+                            TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "south" + resetColor + " or " + yellowColor + "west" + resetColor + " to decide", true);
                             while (true) {
                                 ignore = console.readLine();
                                 command = console.readLine();
@@ -94,10 +100,12 @@ public class Village extends Room {
                                     case "south" -> {
                                         OpenWorld.roomSave = 29;
                                         leave();
-                                    }case "west" -> {
+                                    }
+                                    case "west" -> {
                                         OpenWorld.roomSave = 19;
                                         leave();
-                                    }default ->
+                                    }
+                                    default ->
                                         Main.inGameDefaultTextHandling(command);
                                 }
                             }
@@ -261,7 +269,6 @@ public class Village extends Room {
                 = "What would you like to buy?\n"
                 + brightYellowStart + " health potion" + brightBoldEnd + "~15 gold\n"
                 + brightYellowStart + " shield" + brightBoldEnd + "~20 gold\n"
-                + brightYellowStart + " key" + brightBoldEnd + "~30 gold\n"
                 + "Or type " + brightYellowStart + "leave" + brightBoldEnd + " to exit the shop";
 
         // Use the modified message with bold items
@@ -292,9 +299,6 @@ public class Village extends Room {
                         keepShopping();
                     }
                 }
-                case "key" -> {
-                    buyMultiple("key", 30);
-                }
                 case "heart container" -> {
                     buyMultiple("heart container", 50);
                 }
@@ -324,7 +328,6 @@ public class Village extends Room {
                 = "What would you like to buy:\n"
                 + brightYellowStart + " greater health potion" + brightBoldEnd + "~30 gold\n"
                 + brightYellowStart + " ninja armor" + brightBoldEnd + "~100 gold\n"
-                + brightYellowStart + " key" + brightBoldEnd + "~30 gold\n"
                 + "or " + brightYellowStart + "leave" + brightBoldEnd;
 
         // Use the modified message with bold items
@@ -355,9 +358,6 @@ public class Village extends Room {
                         keepShopping();
                     }
                 }
-                case "key" -> {
-                    buyMultiple("key", 30);
-                }
                 case "leave" -> {
                     Main.loadSave();
                 }
@@ -384,7 +384,6 @@ public class Village extends Room {
                 = "What would you like to buy:\n"
                 + brightYellowStart + "super health potion" + brightBoldEnd + "~50 gold\n"
                 + brightYellowStart + "demon armor" + brightBoldEnd + "~200 gold\n"
-                + brightYellowStart + "key" + brightBoldEnd + "~30 gold\n"
                 + "or " + brightYellowStart + "leave" + brightBoldEnd;
 
         // Use the modified message with bold items
@@ -414,9 +413,6 @@ public class Village extends Room {
                         TextEngine.enterToNext();
                         keepShopping();
                     }
-                }
-                case "key" -> {
-                    buyMultiple("key", 30);
                 }
                 case "leave" -> {
                     Main.loadSave();

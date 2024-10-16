@@ -79,8 +79,10 @@ public class MountainTopDungeon extends Dungeon {
             }
         }
         if (mountainTopDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] == 3 && roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] == 0) {
-            if (hasLockedChestInRoom("heart container", 1)) {
-                //lastPosition = currentPlayerPosition.clone();
+            keyRoomSequence(7);
+        }
+        if (mountainTopDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] == 5 && roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] == 0) {
+            if (hasItemInRoom("key", 1)) {
                 roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = mountainTopDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
             } else {
                 currentPlayerPosition = lastPosition.clone();
@@ -263,6 +265,18 @@ public class MountainTopDungeon extends Dungeon {
         Player.changeHealth(Enemy.spawnEnemy(enemyType, numberOfEnemies));
         //lastPosition = currentPlayerPosition.clone();
         roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = mountainTopDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
+        Main.loadSave();
+    }
+
+    public static void keyRoomSequence(int number) throws InterruptedException {
+        int numberOfEnemies = rand.nextInt(number);
+        String enemyType = enemies.get(rand.nextInt(enemies.size()));
+        if (numberOfEnemies == 0) {
+            numberOfEnemies = 1;
+        }
+        TextEngine.printWithDelays("You have entered a room with enemies and were ambushed!", false);
+        Player.changeHealth(Enemy.spawnEnemy(enemyType, numberOfEnemies));
+        mountainTopDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] = 5;
         Main.loadSave();
     }
 }

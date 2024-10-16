@@ -15,35 +15,6 @@ public class Room {
     public static String ignore;
     public static String room = null;
 
-    public static boolean hasLockedChestInRoom(String item, int quantity) throws InterruptedException {
-        String resetColor = "\033[0m"; // reset to default color
-        String yellowColor = "\033[1;33m"; // yellow color
-
-        TextEngine.printWithDelays("Hey! There is a locked chest in this room! ", false);
-        TextEngine.printWithDelays("What is your command" + yellowColor + " unlock it " + resetColor + "or " + yellowColor + "leave it" + resetColor, true);
-        while (true) {
-            ignore = console.readLine();
-            command = console.readLine();
-            switch (command.toLowerCase().trim()) {
-                case "unlock it" -> {
-                    if (Player.inventory.containsKey("key") && Player.inventory.get("key") > 0) {
-                        InventoryManager.useKey();
-                        return hasItemInRoom(item, quantity);
-                    } else {
-                        TextEngine.printWithDelays("You need a key to open this chest! I think the village has a few for sale...", false);
-                        TextEngine.enterToNext();
-                        return false;
-                    }
-                }
-                case "leave it" -> {
-                    return false;
-                }
-                default ->
-                    Main.inGameDefaultTextHandling(command);
-            }
-        }
-    }
-
     public static boolean hasChestInRoom(String itemName, int quantity) throws InterruptedException {
         String resetColor = "\033[0m"; // reset to default color
         String yellowColor = "\033[1;33m"; // yellow color
