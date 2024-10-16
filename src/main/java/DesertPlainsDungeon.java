@@ -34,9 +34,7 @@ public class DesertPlainsDungeon extends Dungeon {
             items = new ArrayList<>(List.of("legendary sword", "demon armor", "greater health potion"));
             visited = true;
         }
-        if ("Desert Plains Dungeon".equals(Main.getSavedPlace())) {
-            currentPlayerPosition = save;
-        } else {
+        if (!"Desert Plains Dungeon".equals(Main.getSavedPlace())) {
             currentPlayerPosition = DungeonGenerator.findValue(Dungeon.desertPlainsDungeon, 9);
         }
         room = "Desert Plains Dungeon";
@@ -70,7 +68,7 @@ public class DesertPlainsDungeon extends Dungeon {
                 String randomItem = items.get(rand.nextInt(items.size()));
                 if (hasChestInRoom(randomItem, 1)) {
                     items.remove(randomItem);
-                    lastPosition = currentPlayerPosition.clone();
+                    //lastPosition = currentPlayerPosition.clone();
                     roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = desertPlainsDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
                 } else {
                     currentPlayerPosition = lastPosition.clone();
@@ -80,14 +78,14 @@ public class DesertPlainsDungeon extends Dungeon {
             } else {
                 TextEngine.printWithDelays("You have found all of the items in the dungeon.", false);
                 TextEngine.enterToNext();
-                lastPosition = currentPlayerPosition.clone();
+                //lastPosition = currentPlayerPosition.clone();
                 roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = desertPlainsDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
                 Main.loadSave();
             }
         }
         if (desertPlainsDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] == 3 && roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] == 0) {
             if (hasLockedChestInRoom("heart container", 1)) {
-                lastPosition = currentPlayerPosition.clone();
+                //lastPosition = currentPlayerPosition.clone();
                 roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = desertPlainsDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
             } else {
                 currentPlayerPosition = lastPosition.clone();
@@ -100,7 +98,7 @@ public class DesertPlainsDungeon extends Dungeon {
         }
         if (desertPlainsDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] == 6 && roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] == 0) {
             trappedRoom();
-            lastPosition = currentPlayerPosition.clone();
+            //lastPosition = currentPlayerPosition.clone();
             roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = desertPlainsDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
             Main.loadSave();
         }
@@ -108,7 +106,7 @@ public class DesertPlainsDungeon extends Dungeon {
             TextEngine.printWithDelays("You have entered a room with a mini boss", false);
             Player.changeHealth(Enemy.spawnEnemy("Cyclops", 1));
             Room.hasItemInRoom("heart container", 1);
-            lastPosition = currentPlayerPosition.clone();
+            //lastPosition = currentPlayerPosition.clone();
             roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = desertPlainsDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
             Main.loadSave();
         }
@@ -117,12 +115,13 @@ public class DesertPlainsDungeon extends Dungeon {
             Player.changeHealth(Enemy.spawnEnemy("Giant Scorpion", 1));
             TextEngine.printWithDelays("You have defeated the boss and completed the dungeon!", false);
             TextEngine.enterToNext();
-            lastPosition = currentPlayerPosition.clone();
+            //lastPosition = currentPlayerPosition.clone();
             roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = desertPlainsDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
             if (!completed) {
                 completedDungeons++;
                 completed = true;
             }
+            lastPosition = null;
             Player.autoFight = Dungeon.previousAutoSettings;
             OpenWorld.startRoom();
         }
@@ -266,7 +265,7 @@ public class DesertPlainsDungeon extends Dungeon {
         if (numberOfEnemies == 0) {
             TextEngine.printWithDelays("There were no enemies in this room", false);
             TextEngine.enterToNext();
-            lastPosition = currentPlayerPosition.clone();
+            //lastPosition = currentPlayerPosition.clone();
             roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = desertPlainsDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
             Main.loadSave();
             return;
@@ -274,7 +273,7 @@ public class DesertPlainsDungeon extends Dungeon {
         TextEngine.printWithDelays("You have entered a room with enemies and were ambushed!", false);
         String enemyType = enemies.get(rand.nextInt(enemies.size()));
         Player.changeHealth(Enemy.spawnEnemy(enemyType, numberOfEnemies));
-        lastPosition = currentPlayerPosition.clone();
+        //lastPosition = currentPlayerPosition.clone();
         roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = desertPlainsDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
         Main.loadSave();
     }

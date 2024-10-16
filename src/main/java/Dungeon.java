@@ -46,6 +46,7 @@ public class Dungeon extends Room {
                     case "Meadow" -> {
                         if (MeadowDungeon.completed) {
                             TextEngine.printWithDelays("You leave the dungeon and return to the open world.", false);
+                            lastPosition = null;
                             TextEngine.enterToNext();
                             OpenWorld.startRoom();
                         } else {
@@ -55,6 +56,7 @@ public class Dungeon extends Room {
                     case "Dark Forest" -> {
                         if (DarkForestDungeon.completed) {
                             TextEngine.printWithDelays("You leave the dungeon and return to the open world.", false);
+                            lastPosition = null;
                             TextEngine.enterToNext();
                             OpenWorld.startRoom();
                         } else {
@@ -64,6 +66,7 @@ public class Dungeon extends Room {
                     case "Mountain Cave" -> {
                         if (MountainCaveDungeon.completed) {
                             TextEngine.printWithDelays("You leave the dungeon and return to the open world.", false);
+                            lastPosition = null;
                             TextEngine.enterToNext();
                             OpenWorld.startRoom();
                         } else {
@@ -73,6 +76,7 @@ public class Dungeon extends Room {
                     case "Mountain Top" -> {
                         if (MountainTopDungeon.completed) {
                             TextEngine.printWithDelays("You leave the dungeon and return to the open world.", false);
+                            lastPosition = null;
                             TextEngine.enterToNext();
                             OpenWorld.startRoom();
                         } else {
@@ -82,6 +86,7 @@ public class Dungeon extends Room {
                     case "Desert Oasis" -> {
                         if (DesertOasisDungeon.completed) {
                             TextEngine.printWithDelays("You leave the dungeon and return to the open world.", false);
+                            lastPosition = null;
                             TextEngine.enterToNext();
                             OpenWorld.startRoom();
                         } else {
@@ -100,6 +105,7 @@ public class Dungeon extends Room {
                     case "Desert Pyramid" -> {
                         if (DesertPyramidDungeon.completed) {
                             TextEngine.printWithDelays("You leave the dungeon and return to the open world.", false);
+                            lastPosition = null;
                             TextEngine.enterToNext();
                             OpenWorld.startRoom();
                         } else {
@@ -109,6 +115,7 @@ public class Dungeon extends Room {
                     case "Ocean Kingdom" -> {
                         if (OceanKingdomDungeon.completed) {
                             TextEngine.printWithDelays("You leave the dungeon and return to the open world.", false);
+                            lastPosition = null;
                             TextEngine.enterToNext();
                             OpenWorld.startRoom();
                         } else {
@@ -180,13 +187,13 @@ public class Dungeon extends Room {
     }
 
     public static void dungeonCheck() throws InterruptedException {
-        if (OpenWorld.holdCommand != null) {
+        if (OpenWorld.holdCommand == null) {
             OpenWorld.holdCommand = "onward";
         }
         switch (completedDungeons) {
             case 0 -> {// the meadow dungeon
                 switch (OpenWorld.roomNumber) {
-                    case 73,74 ->
+                    case 73, 74 ->
                         TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", feeling a sense of adventure as you leave the open paths behind.\n Ahead, you notice the entrance to the next dungeon lying just to the north, east.\n\n ", false);
                     case 65, 66, 68 ->
                         TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", feeling a sense of adventure as you leave the open paths behind.\n Ahead, you notice the entrance to the next dungeon lying just to the east.\n\n", false);
@@ -206,13 +213,13 @@ public class Dungeon extends Room {
             }
             case 2 -> {// The Mountain Cave Dungeon
                 switch (OpenWorld.roomNumber) {
-                    case 66,57,50,41 ->
+                    case 66, 57, 50, 41 ->
                         TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", feeling a sense of adventure as you leave the open paths behind.\n Ahead, you notice the entrance to the next dungeon lying just to the north.\n\n", false);
                     case 33, 34, 35, 36, 42, 43, 44, 45, 51, 52, 53, 58, 59, 68 ->
                         TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", feeling a sense of adventure as you leave the open paths behind.\n Ahead, you notice the entrance to the next dungeon lying just to the north, west.\n\n", false);
                     case 21, 22 ->
                         TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", feeling a sense of adventure as you leave the open paths behind.\n Ahead, you notice the entrance to the next dungeon lying just to the east.\n\n", false);
-                    case 30, 31, 32, 37, 38, 39, 40,48, 49, 27, 65, 73 ->
+                    case 30, 31, 32, 37, 38, 39, 40, 48, 49, 27, 65, 73 ->
                         TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", feeling a sense of adventure as you leave the open paths behind.\n Ahead, you notice the entrance to the next dungeon lying just to the north, east\n\n", false);
                     case 17, 18, 13, 14, 15, 9, 10, 5 ->
                         TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", feeling a sense of adventure as you leave the open paths behind.\n Ahead, you notice the entrance to the next dungeon lying just to the south, west.\n\n", false);

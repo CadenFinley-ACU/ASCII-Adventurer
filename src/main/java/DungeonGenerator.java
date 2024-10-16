@@ -423,12 +423,8 @@ public class DungeonGenerator {
                         }
                     } else if (unlocked[i][j] > 0) {
                         switch (unlocked[i][j]) { //icon for visited rooms
-                            case 9 ->
-                                System.out.print("[*] "); // Special marker for value 9
-                            case 2 ->
+                            case 2, 3 ->
                                 System.out.print("[I] "); // Special marker for value 
-                            case 3 ->
-                                System.out.print("[I] "); // Special marker for value 3
                             default ->
                                 System.out.print("[■] "); // Default case for other values
                         }
@@ -594,7 +590,17 @@ public class DungeonGenerator {
             {'|', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '|'},
             {'└', '─', '─', '─', '─', '─', '─', '─', '─', '─', '─', '─', '─', '─', '┘'}
         };
-
+        if (Dungeon.lastPosition != null) {
+            if (x - 1 == Dungeon.lastPosition[0] && y == Dungeon.lastPosition[1]) {
+                moves[0] = 15;
+            } else if (x + 1 == Dungeon.lastPosition[0] && y == Dungeon.lastPosition[1]) {
+                moves[1] = 15;
+            } else if (x == Dungeon.lastPosition[0] && y - 1 == Dungeon.lastPosition[1]) {
+                moves[2] = 15;
+            } else if (x == Dungeon.lastPosition[0] && y + 1 == Dungeon.lastPosition[1]) {
+                moves[3] = 15;
+            }
+        }
         // Mark possible moves
         switch (moves[0]) {
             case 1, 9 -> {
@@ -604,20 +610,37 @@ public class DungeonGenerator {
                 room[0][8] = ' ';
             }
             case 2, 3, 6 -> {
-                room[0][7] = '?';
+                if (visitedRoom[x - 1][y] > 0) {
+                    room[0][7] = ' ';
+                } else {
+                    room[0][7] = '?';
+                }
                 //room[1][7] = '↑';
                 room[0][6] = ' ';
                 room[0][8] = ' ';
             }
             case 4 -> {
-                room[0][7] = '!';
+                if (visitedRoom[x - 1][y] > 0) {
+                    room[0][7] = ' ';
+                } else {
+                    room[0][7] = '!';
+                }
                 //room[1][7] = '↑';
                 room[0][6] = ' ';
                 room[0][8] = ' ';
             }
             case 8 -> {
-                room[0][7] = 'B';
+                if (visitedRoom[x - 1][y] > 0) {
+                    room[0][7] = ' ';
+                } else {
+                    room[0][7] = 'B';
+                }
                 //room[1][7] = '↑';
+                room[0][6] = ' ';
+                room[0][8] = ' ';
+            }
+            case 15 -> {
+                room[0][7] = '*';
                 room[0][6] = ' ';
                 room[0][8] = ' ';
             }
@@ -632,20 +655,37 @@ public class DungeonGenerator {
                 room[4][8] = ' ';
             }
             case 2, 3, 6 -> {
-                room[4][7] = '?';
+                if (visitedRoom[x + 1][y] > 0) {
+                    room[4][7] = ' ';
+                } else {
+                    room[4][7] = '?';
+                }
                 //room[3][7] = '↓';
                 room[4][6] = ' ';
                 room[4][8] = ' ';
             }
             case 4 -> {
-                room[4][7] = '!';
+                if (visitedRoom[x + 1][y] > 0) {
+                    room[4][7] = ' ';
+                } else {
+                    room[4][7] = '!';
+                }
                 //room[3][7] = '↓';
                 room[4][6] = ' ';
                 room[4][8] = ' ';
             }
             case 8 -> {
-                room[4][7] = 'B';
+                if (visitedRoom[x + 1][y] > 0) {
+                    room[4][7] = ' ';
+                } else {
+                    room[4][7] = 'B';
+                }
                 //room[3][7] = '↓';
+                room[4][6] = ' ';
+                room[4][8] = ' ';
+            }
+            case 15 -> {
+                room[4][7] = '*';
                 room[4][6] = ' ';
                 room[4][8] = ' ';
             }
@@ -660,19 +700,37 @@ public class DungeonGenerator {
                 //room[3][0] = ' ';
             }
             case 2, 3, 6 -> {
-                room[2][0] = '?';
+                if (visitedRoom[x][y - 1] > 0) {
+                    room[2][0] = ' ';
+                } else {
+                    room[2][0] = '?';
+                }
                 //room[2][1] = '←';
                 //room[1][0] = ' ';
                 //room[3][0] = ' ';
             }
             case 4 -> {
-                room[2][0] = '!';
+                if (visitedRoom[x][y - 1] > 0) {
+                    room[2][0] = ' ';
+                } else {
+                    room[2][0] = '!';
+                }
                 //room[2][1] = '←';
                 //room[1][0] = ' ';
                 //room[3][0] = ' ';
             }
             case 8 -> {
-                room[2][0] = 'B';
+                if (visitedRoom[x][y - 1] > 0) {
+                    room[2][0] = ' ';
+                } else {
+                    room[2][0] = 'B';
+                }
+                //room[2][1] = '←';
+                //room[1][0] = ' ';
+                //room[3][0] = ' ';
+            }
+            case 15 -> {
+                room[2][0] = '*';
                 //room[2][1] = '←';
                 //room[1][0] = ' ';
                 //room[3][0] = ' ';
@@ -688,19 +746,37 @@ public class DungeonGenerator {
                 //room[3][14] = ' ';
             }
             case 2, 3, 6 -> {
-                room[2][14] = '?';
+                if (visitedRoom[x][y + 1] > 0) {
+                    room[2][14] = ' ';
+                } else {
+                    room[2][14] = '?';
+                }
                 //room[2][13] = '→';
                 //room[1][14] = ' ';
                 //room[3][14] = ' ';
             }
             case 4 -> {
-                room[2][14] = '!';
+                if (visitedRoom[x][y + 1] > 0) {
+                    room[2][14] = ' ';
+                } else {
+                    room[2][14] = '!';
+                }
                 //room[2][13] = '→';
                 //room[1][14] = ' ';
                 //room[3][14] = ' ';
             }
             case 8 -> {
-                room[2][14] = 'B';
+                if (visitedRoom[x][y + 1] > 0) {
+                    room[2][14] = ' ';
+                } else {
+                    room[2][14] = 'B';
+                }
+                //room[2][13] = '→';
+                //room[1][14] = ' ';
+                //room[3][14] = ' ';
+            }
+            case 15 -> {
+                room[2][14] = '*';
                 //room[2][13] = '→';
                 //room[1][14] = ' ';
                 //room[3][14] = ' ';
@@ -708,6 +784,8 @@ public class DungeonGenerator {
             default ->
                 room[2][14] = '│';
         }
+
+        //render room
         if (visitedRoom[x][y] > 0) {
             room[2][7] = 'P'; // Player
         } else {
@@ -736,6 +814,7 @@ public class DungeonGenerator {
                 }
             }
         }
+
         // Print the room to the console
         String yellowColor = "\033[1;33m"; // Yellow color
         String resetColor = "\033[0m"; // Reset to default color
