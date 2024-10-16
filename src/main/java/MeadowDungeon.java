@@ -16,12 +16,10 @@ public class MeadowDungeon extends Dungeon {
 
     private static int[] spawnPosition = DungeonGenerator.findValue(Dungeon.meadowDungeon, 9);
     private static int[] bossRoom = DungeonGenerator.findValue(Dungeon.meadowDungeon, 8);
-    private static int[] save = DungeonGenerator.findValue(Dungeon.meadowDungeon, 9);
     public static int[][] roomsBeenTo = DungeonGenerator.createRoomsBeenTo(Dungeon.meadowDungeon.length);
     public static String direction;
     public static int[] availableMove;
     public static ArrayList<String> directionsString;
-    private static int foundItemRooms = DungeonGenerator.numberOfRooms(Dungeon.meadowDungeon, 2);
     public static List<String> items;
     private static final List<String> enemies = new ArrayList<>(List.of("Goblin", "Skeleton", "Slime", "Mimic"));
     private static final Random rand = new Random();
@@ -48,12 +46,10 @@ public class MeadowDungeon extends Dungeon {
     public static void fresh() { //fresh
         visited = false;
         completed = false;
-        foundItemRooms = DungeonGenerator.numberOfRooms(Dungeon.meadowDungeon, 2);
         spawnPosition = DungeonGenerator.findValue(Dungeon.meadowDungeon, 9);
         bossRoom = DungeonGenerator.findValue(Dungeon.meadowDungeon, 8);
         currentPlayerPosition = spawnPosition;
         roomsBeenTo = DungeonGenerator.createRoomsBeenTo(Dungeon.meadowDungeon.length);
-        save = spawnPosition;
         lastPosition = spawnPosition.clone();
     }
 
@@ -71,7 +67,6 @@ public class MeadowDungeon extends Dungeon {
                     roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = meadowDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
                 } else {
                     currentPlayerPosition = lastPosition.clone();
-                    save = currentPlayerPosition.clone();
                     Main.loadSave();
                 }
             } else {
@@ -88,7 +83,6 @@ public class MeadowDungeon extends Dungeon {
                 roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = meadowDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
             } else {
                 currentPlayerPosition = lastPosition.clone();
-                save = currentPlayerPosition.clone();
                 Main.loadSave();
             }
         }
@@ -201,7 +195,6 @@ public class MeadowDungeon extends Dungeon {
                         lastPosition = currentPlayerPosition.clone(); // Save the current position before moving
                         roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = meadowDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
                         currentPlayerPosition[0] -= 1;
-                        save = currentPlayerPosition.clone();
                         Main.loadSave();
                     } else {
                         Dungeon.defaultDungeonArgs(direction.toLowerCase());
@@ -212,7 +205,6 @@ public class MeadowDungeon extends Dungeon {
                         lastPosition = currentPlayerPosition.clone(); // Save the current position before moving
                         roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = meadowDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
                         currentPlayerPosition[1] += 1;
-                        save = currentPlayerPosition.clone();
                         Main.loadSave();
                     } else {
                         Dungeon.defaultDungeonArgs(direction.toLowerCase());
@@ -223,7 +215,6 @@ public class MeadowDungeon extends Dungeon {
                         lastPosition = currentPlayerPosition.clone(); // Save the current position before moving
                         roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = meadowDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
                         currentPlayerPosition[0] += 1;
-                        save = currentPlayerPosition.clone();
                         Main.loadSave();
                     } else {
                         Dungeon.defaultDungeonArgs(direction.toLowerCase());
@@ -234,7 +225,6 @@ public class MeadowDungeon extends Dungeon {
                         lastPosition = currentPlayerPosition.clone(); // Save the current position before moving
                         roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = meadowDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
                         currentPlayerPosition[1] -= 1;
-                        save = currentPlayerPosition.clone();
                         Main.loadSave();
                     } else {
                         Dungeon.defaultDungeonArgs(direction.toLowerCase());
@@ -245,7 +235,6 @@ public class MeadowDungeon extends Dungeon {
                         lastPosition = currentPlayerPosition.clone(); // Save the current position before moving
                         roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = meadowDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
                         currentPlayerPosition = bossRoom;
-                        save = currentPlayerPosition.clone();
                         Main.loadSave();
                     } else {
                         Main.loadSave();

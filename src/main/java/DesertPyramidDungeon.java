@@ -16,12 +16,10 @@ public class DesertPyramidDungeon extends Dungeon {
 
     private static int[] spawnPosition = DungeonGenerator.findValue(Dungeon.desertPyramidDungeon, 9);
     private static int[] bossRoom = DungeonGenerator.findValue(Dungeon.desertPyramidDungeon, 8);
-    private static int[] save = DungeonGenerator.findValue(Dungeon.desertPyramidDungeon, 9);
     public static int[][] roomsBeenTo = DungeonGenerator.createRoomsBeenTo(Dungeon.desertPyramidDungeon.length);
     public static String direction;
     public static int[] availableMove;
     public static ArrayList<String> directionsString;
-    private static int foundItemRooms = DungeonGenerator.numberOfRooms(Dungeon.desertPyramidDungeon, 2);
     public static List<String> items;
     private static final List<String> enemies = new ArrayList<>(List.of("Werewolf", "Witch", "Giant", "Mummy", "Minotaur"));
     private static final Random rand = new Random();
@@ -48,12 +46,10 @@ public class DesertPyramidDungeon extends Dungeon {
     public static void fresh() { //fresh
         visited = false;
         completed = false;
-        foundItemRooms = DungeonGenerator.numberOfRooms(Dungeon.desertPyramidDungeon, 2);
         spawnPosition = DungeonGenerator.findValue(Dungeon.desertPyramidDungeon, 9);
         bossRoom = DungeonGenerator.findValue(Dungeon.desertPyramidDungeon, 8);
         Dungeon.currentPlayerPosition = spawnPosition;
         roomsBeenTo = DungeonGenerator.createRoomsBeenTo(Dungeon.desertPyramidDungeon.length);
-        save = spawnPosition;
         lastPosition = spawnPosition.clone();
     }
 
@@ -72,7 +68,6 @@ public class DesertPyramidDungeon extends Dungeon {
                     roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = desertPyramidDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
                 } else {
                     currentPlayerPosition = lastPosition.clone();
-                    save = currentPlayerPosition.clone();
                     Main.loadSave();
                 }
             } else {
@@ -89,7 +84,6 @@ public class DesertPyramidDungeon extends Dungeon {
                 roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = desertPyramidDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
             } else {
                 currentPlayerPosition = lastPosition.clone();
-                save = currentPlayerPosition.clone();
                 Main.loadSave();
             }
         }
@@ -203,7 +197,6 @@ public class DesertPyramidDungeon extends Dungeon {
                         lastPosition = currentPlayerPosition.clone(); // Save the current position before moving
                         roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = desertPyramidDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
                         currentPlayerPosition[0] -= 1;
-                        save = currentPlayerPosition.clone();
                         Main.loadSave();
                     } else {
                         Dungeon.defaultDungeonArgs(direction.toLowerCase());
@@ -214,7 +207,6 @@ public class DesertPyramidDungeon extends Dungeon {
                         lastPosition = currentPlayerPosition.clone(); // Save the current position before moving
                         roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = desertPyramidDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
                         currentPlayerPosition[1] += 1;
-                        save = currentPlayerPosition.clone();
                         Main.loadSave();
                     } else {
                         Dungeon.defaultDungeonArgs(direction.toLowerCase());
@@ -225,7 +217,6 @@ public class DesertPyramidDungeon extends Dungeon {
                         lastPosition = currentPlayerPosition.clone(); // Save the current position before moving
                         roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = desertPyramidDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
                         currentPlayerPosition[0] += 1;
-                        save = currentPlayerPosition.clone();
                         Main.loadSave();
                     } else {
                         Dungeon.defaultDungeonArgs(direction.toLowerCase());
@@ -236,7 +227,6 @@ public class DesertPyramidDungeon extends Dungeon {
                         lastPosition = currentPlayerPosition.clone(); // Save the current position before moving
                         roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = desertPyramidDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
                         currentPlayerPosition[1] -= 1;
-                        save = currentPlayerPosition.clone();
                         Main.loadSave();
                     } else {
                         Dungeon.defaultDungeonArgs(direction.toLowerCase());
@@ -247,7 +237,6 @@ public class DesertPyramidDungeon extends Dungeon {
                         lastPosition = currentPlayerPosition.clone(); // Save the current position before moving
                         roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = desertPyramidDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
                         currentPlayerPosition = bossRoom;
-                        save = currentPlayerPosition.clone();
                         Main.loadSave();
                     } else {
                         Main.loadSave();
