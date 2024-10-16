@@ -598,25 +598,26 @@ public class DungeonGenerator {
         // Mark possible moves
         switch (moves[0]) {
             case 1, 9 -> {
-                room[0][7] = '↑';
+                room[0][7] = ' ';
+                //room[0][7] = '↑';
                 room[0][6] = ' ';
                 room[0][8] = ' ';
             }
             case 2, 3, 6 -> {
                 room[0][7] = '?';
-                room[1][7] = '↑';
+                //room[1][7] = '↑';
                 room[0][6] = ' ';
                 room[0][8] = ' ';
             }
             case 4 -> {
                 room[0][7] = '!';
-                room[1][7] = '↑';
+                //room[1][7] = '↑';
                 room[0][6] = ' ';
                 room[0][8] = ' ';
             }
             case 8 -> {
                 room[0][7] = 'B';
-                room[1][7] = '↑';
+                //room[1][7] = '↑';
                 room[0][6] = ' ';
                 room[0][8] = ' ';
             }
@@ -625,25 +626,26 @@ public class DungeonGenerator {
         }
         switch (moves[1]) {
             case 1, 9 -> {
-                room[4][7] = '↓';
+                room[4][7] = ' ';
+                //room[4][7] = '↓';
                 room[4][6] = ' ';
                 room[4][8] = ' ';
             }
             case 2, 3, 6 -> {
                 room[4][7] = '?';
-                room[3][7] = '↓';
+                //room[3][7] = '↓';
                 room[4][6] = ' ';
                 room[4][8] = ' ';
             }
             case 4 -> {
                 room[4][7] = '!';
-                room[3][7] = '↓';
+                //room[3][7] = '↓';
                 room[4][6] = ' ';
                 room[4][8] = ' ';
             }
             case 8 -> {
                 room[4][7] = 'B';
-                room[3][7] = '↓';
+                //room[3][7] = '↓';
                 room[4][6] = ' ';
                 room[4][8] = ' ';
             }
@@ -652,25 +654,26 @@ public class DungeonGenerator {
         }
         switch (moves[2]) {
             case 1, 9 -> {
-                room[2][0] = '←';
+                room[2][0] = ' ';
+                //room[2][0] = '←';
                 //room[1][0] = ' ';
                 //room[3][0] = ' ';
             }
             case 2, 3, 6 -> {
                 room[2][0] = '?';
-                room[2][1] = '←';
+                //room[2][1] = '←';
                 //room[1][0] = ' ';
                 //room[3][0] = ' ';
             }
             case 4 -> {
                 room[2][0] = '!';
-                room[2][1] = '←';
+                //room[2][1] = '←';
                 //room[1][0] = ' ';
                 //room[3][0] = ' ';
             }
             case 8 -> {
                 room[2][0] = 'B';
-                room[2][1] = '←';
+                //room[2][1] = '←';
                 //room[1][0] = ' ';
                 //room[3][0] = ' ';
             }
@@ -679,25 +682,26 @@ public class DungeonGenerator {
         }
         switch (moves[3]) {
             case 1, 9 -> {
-                room[2][14] = '→';
+                room[2][14] = ' ';
+                //room[2][14] = '→';
                 //room[1][14] = ' ';
                 //room[3][14] = ' ';
             }
             case 2, 3, 6 -> {
                 room[2][14] = '?';
-                room[2][13] = '→';
+                //room[2][13] = '→';
                 //room[1][14] = ' ';
                 //room[3][14] = ' ';
             }
             case 4 -> {
                 room[2][14] = '!';
-                room[2][13] = '→';
+                //room[2][13] = '→';
                 //room[1][14] = ' ';
                 //room[3][14] = ' ';
             }
             case 8 -> {
                 room[2][14] = 'B';
-                room[2][13] = '→';
+                //room[2][13] = '→';
                 //room[1][14] = ' ';
                 //room[3][14] = ' ';
             }
