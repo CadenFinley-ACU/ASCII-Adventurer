@@ -392,39 +392,28 @@ public class DungeonGenerator {
                     if (i == passedPosition[0] && j == passedPosition[1]) {
                         System.out.print("[P] ");
                     } else if (isAdjacent(i, j, passedPosition)) {
-                        switch (passedMatrix[i][j]) { //icon for unvisited rooms
+                        switch (passedMatrix[i][j]) {
+                            case 2, 5, 4 ->
+                                System.out.print("[?] ");
                             case 8 ->
-                                System.out.print("[B] "); // Special marker for value 8
-                            case 0 ->
-                                System.out.print("[ ] "); // Empty room
-                            case 4 -> {
-                                if (unlocked[i][j] > 0) {
-                                    System.out.print("[■] "); // Special marker for value 4
-                                } else {
-                                    System.out.print("[!] "); // Special marker for value 3
-                                }
-                            }
-                            case 5, 2 -> {
-                                if (unlocked[i][j] > 0) {
-                                    System.out.print("[I] "); // Special marker for value 3
-                                } else {
-                                    System.out.print("[?] "); // Special marker for value 3  
-                                }
-                            }
-                            case 6 -> {
-                                if (unlocked[i][j] > 0) {
-                                    System.out.print("[■] "); // Special marker for value 6
-                                } else {
-                                    System.out.print("[?] "); // Special marker for value 3
-                                }
-                            }
+                                System.out.print("[B] ");
+                            case 9 ->
+                                System.out.print("[S] ");
+                            case 6 ->
+                                System.out.print("[$] ");
                             default ->
-                                System.out.print("[~] "); // Default case for other values
+                                System.out.print("[~] ");
                         }
                     } else if (unlocked[i][j] > 0) {
                         switch (unlocked[i][j]) { //icon for visited rooms
                             case 2, 5 ->
-                                System.out.print("[I] "); // Special marker for value 
+                                System.out.print("[I] "); // Special marker for item rooms 
+                            case 6 ->
+                                System.out.print("[$] "); // Special marker for shop/trap room
+                            case 8 ->
+                                System.out.print("[B] "); // Special marker for boss room
+                            case 9 ->
+                                System.out.print("[S] "); // Special marker for start room
                             default ->
                                 System.out.print("[■] "); // Default case for other values
                         }
@@ -439,6 +428,8 @@ public class DungeonGenerator {
             }
             System.out.println();
         }
+        System.out.println("Map Key: [P] Player, [?] Item Room, [B] Boss Room, [S] Start Room, [$] Shop Room");
+        System.out.println(" [~] Available Moves, [ ] Unvisited Room, [■] Visited Room");
     }
 
     /**
@@ -580,7 +571,7 @@ public class DungeonGenerator {
         return count;
     }
 
-    public static void drawRoom(int[][] localDungeon, int[][] visitedRoom, int x, int y) {
+    public static void drawRoom(int[][] localDungeon, int[][] visitedRoom, int x, int y, int numberofEnemies) {
         int[] moves = getDirections(localDungeon, x, y);
 
         char[][] room = {
@@ -609,7 +600,7 @@ public class DungeonGenerator {
                 room[0][6] = ' ';
                 room[0][8] = ' ';
             }
-            case 2, 5, 6 -> {
+            case 2, 5 -> {
                 if (visitedRoom[x - 1][y] > 0) {
                     room[0][7] = ' ';
                 } else {
@@ -644,6 +635,11 @@ public class DungeonGenerator {
                 room[0][6] = ' ';
                 room[0][8] = ' ';
             }
+            case 6 -> {
+                room[0][7] = '$';
+                room[0][6] = ' ';
+                room[0][8] = ' ';
+            }
             default ->
                 room[0][7] = '─';
         }
@@ -654,7 +650,7 @@ public class DungeonGenerator {
                 room[4][6] = ' ';
                 room[4][8] = ' ';
             }
-            case 2, 5, 6 -> {
+            case 2, 5 -> {
                 if (visitedRoom[x + 1][y] > 0) {
                     room[4][7] = ' ';
                 } else {
@@ -689,6 +685,11 @@ public class DungeonGenerator {
                 room[4][6] = ' ';
                 room[4][8] = ' ';
             }
+            case 6 -> {
+                room[4][7] = '$';
+                room[4][6] = ' ';
+                room[4][8] = ' ';
+            }
             default ->
                 room[4][7] = '─';
         }
@@ -699,7 +700,7 @@ public class DungeonGenerator {
                 //room[1][0] = ' ';
                 //room[3][0] = ' ';
             }
-            case 2, 5, 6 -> {
+            case 2, 5 -> {
                 if (visitedRoom[x][y - 1] > 0) {
                     room[2][0] = ' ';
                 } else {
@@ -735,6 +736,12 @@ public class DungeonGenerator {
                 //room[1][0] = ' ';
                 //room[3][0] = ' ';
             }
+            case 6 -> {
+                room[2][0] = '$';
+                //room[2][1] = '←';
+                //room[1][0] = ' ';
+                //room[3][0] = ' ';
+            }
             default ->
                 room[2][0] = '│';
         }
@@ -745,7 +752,7 @@ public class DungeonGenerator {
                 //room[1][14] = ' ';
                 //room[3][14] = ' ';
             }
-            case 2, 5, 6 -> {
+            case 2, 5 -> {
                 if (visitedRoom[x][y + 1] > 0) {
                     room[2][14] = ' ';
                 } else {
@@ -781,6 +788,12 @@ public class DungeonGenerator {
                 //room[1][14] = ' ';
                 //room[3][14] = ' ';
             }
+            case 6 -> {
+                room[2][14] = '$';
+                //room[2][13] = '→';
+                //room[1][14] = ' ';
+                //room[3][14] = ' ';
+            }
             default ->
                 room[2][14] = '│';
         }
@@ -791,7 +804,23 @@ public class DungeonGenerator {
         } else {
             switch (localDungeon[x][y]) {
                 case 1, 3 -> {
+                    List<int[]> emptySpots = new ArrayList<>();
+                    Random random = new Random();
                     room[2][7] = 'P'; // Player
+                    // Collect all empty spots in the room
+                    for (int row = 0; row < room.length; row++) {
+                        for (int col = 0; col < room[row].length; col++) {
+                            if (room[row][col] == ' ') { // Assuming ' ' represents an empty spot
+                                emptySpots.add(new int[]{row, col});
+                            }
+                        }
+                    }
+                    // Place enemies at random empty spots
+                    for (int i = 0; i < numberofEnemies && !emptySpots.isEmpty(); i++) {
+                        int randomIndex = random.nextInt(emptySpots.size());
+                        int[] spot = emptySpots.remove(randomIndex);
+                        room[spot[0]][spot[1]] = 'E'; // Enemy
+                    }
                 }
                 case 2 -> {
                     room[2][5] = 'P'; // Item Room
@@ -803,7 +832,7 @@ public class DungeonGenerator {
                 }
                 case 6 -> {
                     room[2][5] = 'P'; // Trap Room
-                    room[2][7] = 'T'; // Trap
+                    room[2][7] = '$'; // Trap
                 }
                 case 4 -> {
                     room[2][5] = 'P'; // Mini Boss Room

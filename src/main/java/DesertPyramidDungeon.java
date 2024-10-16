@@ -54,9 +54,11 @@ public class DesertPyramidDungeon extends Dungeon {
     }
 
     private static void startRooms() throws InterruptedException {
+        numberOfEnemies = rand.nextInt(4);
+        enemyType = enemies.get(rand.nextInt(enemies.size()));
         availableMove = null;
         Main.screenRefresh();
-        DungeonGenerator.drawRoom(desertPyramidDungeon, roomsBeenTo, currentPlayerPosition[0], currentPlayerPosition[1]);
+        DungeonGenerator.drawRoom(desertPyramidDungeon, roomsBeenTo, currentPlayerPosition[0], currentPlayerPosition[1], numberOfEnemies);
         directionsString = new ArrayList<>();
 
         if (desertPyramidDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] == 2 && roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] == 0) {
@@ -79,7 +81,7 @@ public class DesertPyramidDungeon extends Dungeon {
             }
         }
         if (desertPyramidDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] == 3 && roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] == 0) {
-            keyRoomSequence(4);
+            keyRoomSequence();
         }
         if (desertPyramidDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] == 5 && roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] == 0) {
             if (hasItemInRoom("key", 1)) {
@@ -90,7 +92,7 @@ public class DesertPyramidDungeon extends Dungeon {
             }
         }
         if (desertPyramidDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] == 1 && roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] == 0) {
-            fightRandomEnemies(4);
+            fightRandomEnemies();
         }
         if (desertPyramidDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] == 6 && roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] == 0) {
             trappedRoom();
@@ -133,7 +135,7 @@ public class DesertPyramidDungeon extends Dungeon {
 
     private static void handleDirectionsAndCommands() throws InterruptedException {
         Main.screenRefresh();
-        DungeonGenerator.drawRoom(desertPyramidDungeon, roomsBeenTo, currentPlayerPosition[0], currentPlayerPosition[1]);
+        DungeonGenerator.drawRoom(desertPyramidDungeon, roomsBeenTo, currentPlayerPosition[0], currentPlayerPosition[1], 0);
         availableMove = DungeonGenerator.getDirections(desertPyramidDungeon, currentPlayerPosition[0], currentPlayerPosition[1]);
         if (completed) {
             TextEngine.printWithDelays("You have completed this dungeon. You can now type " + yellowColor + "leave" + resetColor + " to exit this dungeon.", false);
@@ -232,8 +234,7 @@ public class DesertPyramidDungeon extends Dungeon {
         }
     }
 
-    public static void fightRandomEnemies(int number) throws InterruptedException {
-        int numberOfEnemies = rand.nextInt(number);
+    public static void fightRandomEnemies() throws InterruptedException {
         if (numberOfEnemies == 0) {
             TextEngine.printWithDelays("There were no enemies in this room", false);
             TextEngine.enterToNext();
@@ -242,21 +243,26 @@ public class DesertPyramidDungeon extends Dungeon {
             Main.loadSave();
             return;
         }
-        TextEngine.printWithDelays("You have entered a room with enemies and were ambushed!", false);
-        String enemyType = enemies.get(rand.nextInt(enemies.size()));
+        if (numberOfEnemies > 1) {
+            TextEngine.printWithDelays("You have entered a room with " + numberOfEnemies + " " + enemyType + "s in this room!\nYou were ambushed!", false);
+        } else {
+            TextEngine.printWithDelays("You have entered a room with a " + enemyType + " and were ambushed!", false);
+        }
         Player.changeHealth(Enemy.spawnEnemy(enemyType, numberOfEnemies));
         //lastPosition = currentPlayerPosition.clone();
         roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = desertPyramidDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
         Main.loadSave();
     }
 
-    public static void keyRoomSequence(int number) throws InterruptedException {
-        int numberOfEnemies = rand.nextInt(number);
-        String enemyType = enemies.get(rand.nextInt(enemies.size()));
+    public static void keyRoomSequence() throws InterruptedException {
         if (numberOfEnemies == 0) {
             numberOfEnemies = 1;
         }
-        TextEngine.printWithDelays("You have entered a room with enemies and were ambushed!", false);
+        if (numberOfEnemies > 1) {
+            TextEngine.printWithDelays("You have entered a room with " + numberOfEnemies + " " + enemyType + "s in this room!\nYou were ambushed!", false);
+        } else {
+            TextEngine.printWithDelays("You have entered a room with a " + enemyType + " and were ambushed!", false);
+        }
         Player.changeHealth(Enemy.spawnEnemy(enemyType, numberOfEnemies));
         desertPyramidDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] = 5;
         Main.loadSave();

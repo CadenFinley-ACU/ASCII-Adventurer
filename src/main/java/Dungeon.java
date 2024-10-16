@@ -14,6 +14,8 @@ public class Dungeon extends Room {
     static String yellowColor = "\033[1;33m"; // yellow color
     public static String currentDungeon;
     public static int completedDungeons = 0;
+    public static int numberOfEnemies;
+    public static String enemyType;
 
     public static int[][] meadowDungeon;
     public static int[][] darkForestDungeon;
