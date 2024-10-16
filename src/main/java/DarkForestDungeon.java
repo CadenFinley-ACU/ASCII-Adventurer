@@ -63,7 +63,7 @@ public class DarkForestDungeon extends Dungeon {
     private static void startRooms() throws InterruptedException {
         availableMove = null;
         Main.screenRefresh();
-        DungeonGenerator.printAdjacentRoomsAndCurrentRoomAndUnlockedRooms(darkForestDungeon, roomsBeenTo, currentPlayerPosition);
+        DungeonGenerator.drawRoom(darkForestDungeon, roomsBeenTo, currentPlayerPosition[0], currentPlayerPosition[1]);
         directionsString = new ArrayList<>();
 
         if (darkForestDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] == 2 && roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] == 0) {
@@ -158,7 +158,7 @@ public class DarkForestDungeon extends Dungeon {
 
     private static void handleDirectionsAndCommands() throws InterruptedException {
         Main.screenRefresh();
-        DungeonGenerator.printAdjacentRoomsAndCurrentRoomAndUnlockedRooms(darkForestDungeon, roomsBeenTo, currentPlayerPosition);
+        DungeonGenerator.drawRoom(darkForestDungeon, roomsBeenTo, currentPlayerPosition[0], currentPlayerPosition[1]);
         availableMove = DungeonGenerator.getDirections(darkForestDungeon, currentPlayerPosition[0], currentPlayerPosition[1]);
         if (completed) {
             TextEngine.printWithDelays("You have completed this dungeon. You can now type " + yellowColor + "leave" + resetColor + " to exit this dungeon.", false);

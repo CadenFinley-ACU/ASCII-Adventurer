@@ -62,7 +62,7 @@ public class OceanKingdomDungeon extends Dungeon {
     private static void startRooms() throws InterruptedException {
         availableMove = null;
         Main.screenRefresh();
-        DungeonGenerator.printAdjacentRoomsAndCurrentRoomAndUnlockedRooms(oceanKingdomDungeon, roomsBeenTo, currentPlayerPosition);
+        DungeonGenerator.drawRoom(oceanKingdomDungeon, roomsBeenTo, currentPlayerPosition[0], currentPlayerPosition[1]);
         directionsString = new ArrayList<>();
 
         if (oceanKingdomDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] == 2 && roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] == 0) {
@@ -157,7 +157,7 @@ public class OceanKingdomDungeon extends Dungeon {
 
     private static void handleDirectionsAndCommands() throws InterruptedException {
         Main.screenRefresh();
-        DungeonGenerator.printAdjacentRoomsAndCurrentRoomAndUnlockedRooms(oceanKingdomDungeon, roomsBeenTo, currentPlayerPosition);
+        DungeonGenerator.drawRoom(oceanKingdomDungeon, roomsBeenTo, currentPlayerPosition[0], currentPlayerPosition[1]);
         availableMove = DungeonGenerator.getDirections(oceanKingdomDungeon, currentPlayerPosition[0], currentPlayerPosition[1]);
         if (completed) {
             TextEngine.printWithDelays("You have completed this dungeon. You can now type " + yellowColor + "leave" + resetColor + " to exit this dungeon.", false);

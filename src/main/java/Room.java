@@ -71,7 +71,6 @@ public class Room {
         String yellowColor = "\033[1;33m"; // yellow color
 
         // Display item information
-        TextEngine.printWithDelays("An item lies before you:", false);
         if (quantity > 1) {
             TextEngine.printWithDelays("Item(s): " + itemName + " x" + quantity, false);
         } else {

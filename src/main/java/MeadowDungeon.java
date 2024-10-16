@@ -62,7 +62,7 @@ public class MeadowDungeon extends Dungeon {
     private static void startRooms() throws InterruptedException {
         availableMove = null;
         Main.screenRefresh();
-        DungeonGenerator.printAdjacentRoomsAndCurrentRoomAndUnlockedRooms(meadowDungeon, roomsBeenTo, currentPlayerPosition);
+        DungeonGenerator.drawRoom(meadowDungeon, roomsBeenTo, currentPlayerPosition[0], currentPlayerPosition[1]);
         directionsString = new ArrayList<>();
         if (meadowDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] == 2 && roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] == 0) {
             if (!items.isEmpty()) {
@@ -156,7 +156,7 @@ public class MeadowDungeon extends Dungeon {
 
     private static void handleDirectionsAndCommands() throws InterruptedException {
         Main.screenRefresh();
-        DungeonGenerator.printAdjacentRoomsAndCurrentRoomAndUnlockedRooms(meadowDungeon, roomsBeenTo, currentPlayerPosition);
+        DungeonGenerator.drawRoom(meadowDungeon, roomsBeenTo, currentPlayerPosition[0], currentPlayerPosition[1]);
         availableMove = DungeonGenerator.getDirections(meadowDungeon, currentPlayerPosition[0], currentPlayerPosition[1]);
         if (completed) {
             TextEngine.printWithDelays("You have completed this dungeon. You can now type " + yellowColor + "leave" + resetColor + " to exit this dungeon.", false);

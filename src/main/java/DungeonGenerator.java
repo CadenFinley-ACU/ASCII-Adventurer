@@ -399,16 +399,23 @@ public class DungeonGenerator {
                                 System.out.print("[ ] "); // Empty room
                             case 4 -> {
                                 if (unlocked[i][j] > 0) {
-                                    System.out.print("[!] "); // Special marker for value 4
+                                    System.out.print("[.] "); // Special marker for value 4
                                 } else {
-                                    System.out.print("[?] "); // Special marker for value 3
+                                    System.out.print("[!] "); // Special marker for value 3
                                 }
                             }
-                            case 3,2,6 -> {
+                            case 3, 2 -> {
                                 if (unlocked[i][j] > 0) {
                                     System.out.print("[I] "); // Special marker for value 3
                                 } else {
                                     System.out.print("[?] "); // Special marker for value 3  
+                                }
+                            }
+                            case 6 -> {
+                                if (unlocked[i][j] > 0) {
+                                    System.out.print("[.] "); // Special marker for value 6
+                                } else {
+                                    System.out.print("[?] "); // Special marker for value 3
                                 }
                             }
                             default ->
@@ -575,5 +582,151 @@ public class DungeonGenerator {
             }
         }
         return count;
+    }
+
+    public static void drawRoom(int[][] localDungeon, int[][] visitedRoom, int x, int y) {
+        int[] moves = getDirections(localDungeon, x, y);
+
+        char[][] room = {
+            {'┌', '─', '─', '─', '─', '─', '─', '─', '─', '─', '─', '─', '─', '─', '┐'},
+            {'|', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '|'},
+            {'|', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '|'},
+            {'|', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '|'},
+            {'└', '─', '─', '─', '─', '─', '─', '─', '─', '─', '─', '─', '─', '─', '┘'}
+        };
+
+        // Mark possible moves
+        switch (moves[0]) {
+            case 1, 9 -> {
+                room[0][7] = ' ';
+                room[0][6] = ' ';
+                room[0][8] = ' ';
+            }
+            case 2, 3, 6 -> {
+                room[0][7] = '?';
+                room[0][6] = ' ';
+                room[0][8] = ' ';
+            }
+            case 4 -> {
+                room[0][7] = '!';
+                room[0][6] = ' ';
+                room[0][8] = ' ';
+            }
+            case 8 -> {
+                room[0][7] = 'B';
+                room[0][6] = ' ';
+                room[0][8] = ' ';
+            }
+            default ->
+                room[0][7] = '─';
+        }
+        switch (moves[1]) {
+            case 1, 9 -> {
+                room[4][7] = ' ';
+                room[4][6] = ' ';
+                room[4][8] = ' ';
+            }
+            case 2, 3, 6 -> {
+                room[4][7] = '?';
+                room[4][6] = ' ';
+                room[4][8] = ' ';
+            }
+            case 4 -> {
+                room[4][7] = '!';
+                room[4][6] = ' ';
+                room[4][8] = ' ';
+            }
+            case 8 -> {
+                room[4][7] = 'B';
+                room[4][6] = ' ';
+                room[4][8] = ' ';
+            }
+            default ->
+                room[4][7] = '─';
+        }
+        switch (moves[2]) {
+            case 1, 9 -> {
+                room[2][0] = ' ';
+                //room[1][0] = ' ';
+                //room[3][0] = ' ';
+            }
+            case 2, 3, 6 -> {
+                room[2][0] = '?';
+                //room[1][0] = ' ';
+                //room[3][0] = ' ';
+            }
+            case 4 -> {
+                room[2][0] = '!';
+                //room[1][0] = ' ';
+                //room[3][0] = ' ';
+            }
+            case 8 -> {
+                room[2][0] = 'B';
+                //room[1][0] = ' ';
+                //room[3][0] = ' ';
+            }
+            default ->
+                room[2][0] = '│';
+        }
+        switch (moves[3]) {
+            case 1, 9 -> {
+                room[2][14] = ' ';
+                //room[1][14] = ' ';
+                //room[3][14] = ' ';
+            }
+            case 2, 3, 6 -> {
+                room[2][14] = '?';
+                //room[1][14] = ' ';
+                //room[3][14] = ' ';
+            }
+            case 4 -> {
+                room[2][14] = '!';
+                //room[1][14] = ' ';
+                //room[3][14] = ' ';
+            }
+            case 8 -> {
+                room[2][14] = 'B';
+                //room[1][14] = ' ';
+                //room[3][14] = ' ';
+            }
+            default ->
+                room[2][14] = '│';
+        }
+        if (visitedRoom[x][y] > 0) {
+            room[2][7] = 'P'; // Player
+        } else {
+            switch (localDungeon[x][y]) {
+                case 1 -> {
+                    room[2][7] = 'P'; // Player
+                }
+                case 2, 3 -> {
+                    room[2][5] = 'P'; // Item Room
+                    room[2][7] = 'I'; // Item
+                }
+                case 6 -> {
+                    room[2][5] = 'P'; // Trap Room
+                    room[2][7] = 'T'; // Trap
+                }
+                case 4 -> {
+                    room[2][5] = 'P'; // Mini Boss Room
+                    room[2][7] = 'M'; // Mini Boss
+                }
+                case 8 -> {
+                    room[2][5] = 'P'; // Boss Room
+                    room[2][7] = 'B'; // Boss
+                }
+                default -> {
+                    room[2][7] = 'P'; // Default
+                }
+            }
+        }
+        // Print the room to the console
+        for (int i = 0; i < 5; i++) {
+            for (int j = 0; j < 15; j++) {
+                System.out.print(room[i][j]);
+            }
+            System.out.println();
+        }
+        System.out.println();
     }
 }
