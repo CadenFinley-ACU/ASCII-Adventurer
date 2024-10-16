@@ -152,6 +152,7 @@ public class GameSaveSerialization {
         writeSeparator(filePath);
         writeList(OceanKingdomDungeon.items, filePath);
         serializeAllLines(filePath, filePath);
+
     }
 
     public static void loadGameSave() {

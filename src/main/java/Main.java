@@ -24,6 +24,7 @@ public class Main {
     public static Map<String, Integer> savedInventory = new HashMap<>();
 
     public static void main(String[] args) throws InterruptedException { //main game start
+        System.out.println("\007");
         TextEngine.clearScreen();
         if (!hasSave()) {
             TextEngine.printNoDelay("Generating Dungeons...", false);
