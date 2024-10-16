@@ -1,6 +1,8 @@
 
 import java.io.Console;
 import java.io.File;
+import java.io.FileWriter;
+import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -25,6 +27,7 @@ public class Main {
         TextEngine.clearScreen();
         if (!hasSave()) {
             TextEngine.printNoDelay("Generating Dungeons...", false);
+            TextEngine.printNoDelay("(P.S. if this takes more than ~10 seconds, restart the game.)", false);
             Dungeon.generateDungeons();
             TextEngine.printNoDelay("Generated Dungeons!", false);
         } else {
@@ -138,6 +141,9 @@ public class Main {
     private static void splashScreen() {
         String brightBoldEnd = "\033[0m"; // end color
         String darkPurpleStart = "\033[38;2;255;165;0m"; // ACU Purple
+        if (getOS_NAME().contains("Mac")) {
+            darkPurpleStart = "\033[1;33m";
+        }
         System.err.println(
                 darkPurpleStart
                 + 
@@ -165,6 +171,15 @@ public class Main {
     private static void exitGame() throws InterruptedException {   //exit game command
         GameSaveSerialization.saveGame();
         TextEngine.printWithDelays("See ya next time!", false);
+        try {
+            FileWriter fwOb = new FileWriter(".runtime.txt", false); 
+            PrintWriter pwOb = new PrintWriter(fwOb, false);
+            pwOb.flush();
+            pwOb.close();
+            fwOb.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         TextEngine.enterToNext();
         TextEngine.clearScreen();
         System.exit(0);
@@ -300,7 +315,7 @@ public class Main {
     public static boolean hasSave() { // Check if there is a save
         // Check if getSavedPlace() is not null
         // Check if the file game_save.txt exists
-        File saveFile = new File("game_save.txt");
+        File saveFile = new File(GameSaveSerialization.filePath);
         return getSavedPlace() != null || saveFile.exists() || Player.getName() != null;
     }
 
