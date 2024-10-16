@@ -296,6 +296,9 @@ public class InventoryManager extends Player {
     public static void useKey() {
         if (Player.inventory.containsKey("key") && Player.inventory.get("key") > 0) {
             Player.inventory.put("key", inventory.get("key") - 1);
+            if (Player.inventory.get("key") == 0) {
+                Player.inventory.remove("key");
+            }
         }
     }
 }
