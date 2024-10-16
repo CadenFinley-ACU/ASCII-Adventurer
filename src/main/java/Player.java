@@ -60,12 +60,10 @@ public class Player {
         command = console.readLine();
         switch (command) {
             case "1" -> {
-                Main.saveSpace("SpawnRoom");
-                Main.loadSave();
+                SpawnRoom.startRoom();
             }
             case "2" -> {
-                Main.saveSpace("OpenWorld");
-                Main.loadSave();
+                OpenWorld.startRoom();
             }
             case "3" -> {
                 TextEngine.printNoDelay(" 1:Meadow\n 2:Dark Forest\n 3:Mountain Cave\n 4:Mountain Top\n 5:Desert Oasis\n 6:Desert Plains\n 7 Desert Pyramid\n 8:Ocean Kingdom", false);
@@ -74,40 +72,31 @@ public class Player {
                 command = console.readLine();
                 switch (command) {
                     case "1" -> {
-                        Main.saveSpace("Meadow Dungeon");
-                        Main.loadSave();
+                        MeadowDungeon.startRoom();
                     }
                     case "2" -> {
-                        Main.saveSpace("Dark Forest Dungeon");
-                        Main.loadSave();
+                        DarkForestDungeon.startRoom();
                     }
                     case "3" -> {
-                        Main.saveSpace("Mountain Cave Dungeon");
-                        Main.loadSave();
+                        MountainCaveDungeon.startRoom();
                     }
                     case "4" -> {
-                        Main.saveSpace("Mountain Top Dungeon");
-                        Main.loadSave();
+                        MountainTopDungeon.startRoom();
                     }
                     case "5" -> {
-                        Main.saveSpace("Desert Oasis Dungeon");
-                        Main.loadSave();
+                        DesertOasisDungeon.startRoom();
                     }
                     case "6" -> {
-                        Main.saveSpace("Desert Plains Dungeon");
-                        Main.loadSave();
+                        DesertPlainsDungeon.startRoom();
                     }
                     case "7" -> {
-                        Main.saveSpace("Desert Pyramid Dungeon");
-                        Main.loadSave();
+                        DesertPyramidDungeon.startRoom();
                     }
                     case "8" -> {
-                        Main.saveSpace("Ocean Kingdom Dungeon");
-                        Main.loadSave();
+                        OceanKingdomDungeon.startRoom();
                     }
                     default -> {
-                        Main.saveSpace("SpawnRoom");
-                        Main.loadSave();
+                        SpawnRoom.startRoom();
                     }
                 }
             }
@@ -352,114 +341,114 @@ public class Player {
 
     public static void printMap() throws InterruptedException {
         TextEngine.clearScreen();
-        
+
         String[][] map = {
             //  0       1       2       3       4       5       6       7       8
-            {"     ","[ D ]","[   ]","[   ]","[   ]","[   ]","[   ]","[ D ]","     ","",""}, //0
-            {"     ","[   ]","     ","     ","     ","[   ]","[   ]","[   ]","     ","",""}, //1
-            {"     ","[   ]","     ","     ","     ","[   ]","[   ]","[   ]","     ","",""}, //2
-            {"     ","[   ]","     ","     ","     ","[   ]","[   ]","[   ]","[ V ]","",""}, //3
-            {"[   ]","[   ]","     ","     ","[ D ]","[   ]","[   ]","[   ]","[   ]","",""}, //4
-            {"[   ]","[   ]","[   ]","     ","[   ]","[   ]","[   ]","[   ]","[   ]","",""}, //5
-            {"[   ]","[   ]","[   ]","[   ]","[   ]","[   ]","[   ]","[   ]","[   ]","",""}, //6
-            {"[ V ]","[   ]","[   ]","[   ]","[   ]","[   ]","[   ]","[   ]","[   ]","",""}, //7
-            {"     ","[ D ]","[   ]","[   ]","[   ]","[   ]","[   ]","[   ]","[ D ]","",""}, //8
-            {"     ","[ D ]","[   ]","[   ]","[   ]","[   ]","[   ]","[   ]","[ D ]","",""}, //9
-            {"     ","[ D ]","[   ]","[   ]","[   ]","[ V ]","     ", "    ","     ","",""}  //10
+            {"     ", "[ D ]", "[   ]", "[   ]", "[   ]", "[   ]", "[   ]", "[ D ]", "     ", "", ""}, //0
+            {"     ", "[   ]", "     ", "     ", "     ", "[   ]", "[   ]", "[   ]", "     ", "", ""}, //1
+            {"     ", "[   ]", "     ", "     ", "     ", "[   ]", "[   ]", "[   ]", "     ", "", ""}, //2
+            {"     ", "[   ]", "     ", "     ", "     ", "[   ]", "[   ]", "[   ]", "[ V ]", "", ""}, //3
+            {"[   ]", "[   ]", "     ", "     ", "[ D ]", "[   ]", "[   ]", "[   ]", "[   ]", "", ""}, //4
+            {"[   ]", "[   ]", "[   ]", "     ", "[   ]", "[   ]", "[   ]", "[   ]", "[   ]", "", ""}, //5
+            {"[   ]", "[   ]", "[   ]", "[   ]", "[   ]", "[   ]", "[   ]", "[   ]", "[   ]", "", ""}, //6
+            {"[ V ]", "[   ]", "[   ]", "[   ]", "[   ]", "[   ]", "[   ]", "[   ]", "[   ]", "", ""}, //7
+            {"     ", "[ D ]", "[   ]", "[   ]", "[   ]", "[   ]", "[   ]", "[   ]", "[ D ]", "", ""}, //8
+            {"     ", "[ D ]", "[   ]", "[   ]", "[   ]", "[   ]", "[   ]", "[   ]", "[ D ]", "", ""}, //9
+            {"     ", "[ D ]", "[   ]", "[   ]", "[   ]", "[ V ]", "     ", "    ", "     ", "", ""} //10
         };
 
         // Update the map with the player's position
         map[playerY][playerX] = "[ P ]";
         switch (Dungeon.completedDungeons) {
             case 0 -> {
-                map[9][8]  = "[ ! ]";
-                map[8][8]  = "[ L ]";
+                map[9][8] = "[ ! ]";
+                map[8][8] = "[ L ]";
                 map[10][1] = "[ L ]";
-                map[9][1]  = "[ L ]";
-                map[8][1]  = "[ L ]";
-                map[4][4]  = "[ L ]";
-                map[0][7]  = "[ L ]";
-                map[0][1]  = "[ L ]";
+                map[9][1] = "[ L ]";
+                map[8][1] = "[ L ]";
+                map[4][4] = "[ L ]";
+                map[0][7] = "[ L ]";
+                map[0][1] = "[ L ]";
             }
             case 1 -> {
-                map[9][8]  = "[ D ]";
-                map[8][8]  = "[ ! ]";
+                map[9][8] = "[ D ]";
+                map[8][8] = "[ ! ]";
                 map[10][1] = "[ L ]";
-                map[9][1]  = "[ L ]";
-                map[8][1]  = "[ L ]";
-                map[4][4]  = "[ L ]";
-                map[0][7]  = "[ L ]";
-                map[0][1]  = "[ L ]";
+                map[9][1] = "[ L ]";
+                map[8][1] = "[ L ]";
+                map[4][4] = "[ L ]";
+                map[0][7] = "[ L ]";
+                map[0][1] = "[ L ]";
             }
             case 2 -> {
-                map[9][8]  = "[ D ]";
-                map[8][8]  = "[ D ]";
+                map[9][8] = "[ D ]";
+                map[8][8] = "[ D ]";
                 map[10][1] = "[ ! ]";
-                map[9][1]  = "[ L ]";
-                map[8][1]  = "[ L ]";
-                map[4][4]  = "[ L ]";
-                map[0][7]  = "[ L ]";
-                map[0][1]  = "[ L ]";
+                map[9][1] = "[ L ]";
+                map[8][1] = "[ L ]";
+                map[4][4] = "[ L ]";
+                map[0][7] = "[ L ]";
+                map[0][1] = "[ L ]";
             }
             case 3 -> {
-                map[9][8]  = "[ D ]";
-                map[8][8]  = "[ D ]";
+                map[9][8] = "[ D ]";
+                map[8][8] = "[ D ]";
                 map[10][1] = "[ D ]";
-                map[9][1]  = "[ ! ]";
-                map[8][1]  = "[ L ]";
-                map[4][4]  = "[ L ]";
-                map[0][7]  = "[ L ]";
-                map[0][1]  = "[ L ]";
+                map[9][1] = "[ ! ]";
+                map[8][1] = "[ L ]";
+                map[4][4] = "[ L ]";
+                map[0][7] = "[ L ]";
+                map[0][1] = "[ L ]";
             }
             case 4 -> {
-                map[9][8]  = "[ D ]";
-                map[8][8]  = "[ D ]";
+                map[9][8] = "[ D ]";
+                map[8][8] = "[ D ]";
                 map[10][1] = "[ D ]";
-                map[9][1]  = "[ D ]";
-                map[8][1]  = "[ ! ]";
-                map[4][4]  = "[ L ]";
-                map[0][7]  = "[ L ]";
-                map[0][1]  = "[ L ]";
+                map[9][1] = "[ D ]";
+                map[8][1] = "[ ! ]";
+                map[4][4] = "[ L ]";
+                map[0][7] = "[ L ]";
+                map[0][1] = "[ L ]";
             }
             case 5 -> {
-                map[9][8]  = "[ D ]";
-                map[8][8]  = "[ D ]";
+                map[9][8] = "[ D ]";
+                map[8][8] = "[ D ]";
                 map[10][1] = "[ D ]";
-                map[9][1]  = "[ D ]";
-                map[8][1]  = "[ D ]";
-                map[4][4]  = "[ ! ]";
-                map[0][7]  = "[ L ]";
-                map[0][1]  = "[ L ]";
+                map[9][1] = "[ D ]";
+                map[8][1] = "[ D ]";
+                map[4][4] = "[ ! ]";
+                map[0][7] = "[ L ]";
+                map[0][1] = "[ L ]";
             }
             case 6 -> {
-                map[9][8]  = "[ D ]";
-                map[8][8]  = "[ D ]";
+                map[9][8] = "[ D ]";
+                map[8][8] = "[ D ]";
                 map[10][1] = "[ D ]";
-                map[9][1]  = "[ D ]";
-                map[8][1]  = "[ D ]";
-                map[4][4]  = "[ D ]";
-                map[0][7]  = "[ ! ]";
-                map[0][1]  = "[ L ]";
+                map[9][1] = "[ D ]";
+                map[8][1] = "[ D ]";
+                map[4][4] = "[ D ]";
+                map[0][7] = "[ ! ]";
+                map[0][1] = "[ L ]";
             }
             case 7 -> {
-                map[9][8]  = "[ D ]";
-                map[8][8]  = "[ D ]";
+                map[9][8] = "[ D ]";
+                map[8][8] = "[ D ]";
                 map[10][1] = "[ D ]";
-                map[9][1]  = "[ D ]";
-                map[8][1]  = "[ D ]";
-                map[4][4]  = "[ D ]";
-                map[0][7]  = "[ D ]";
-                map[0][1]  = "[ ! ]";
+                map[9][1] = "[ D ]";
+                map[8][1] = "[ D ]";
+                map[4][4] = "[ D ]";
+                map[0][7] = "[ D ]";
+                map[0][1] = "[ ! ]";
             }
             default -> {
-                map[9][8]  = "[ D ]";
-                map[8][8]  = "[ D ]";
+                map[9][8] = "[ D ]";
+                map[8][8] = "[ D ]";
                 map[10][1] = "[ D ]";
-                map[9][1]  = "[ D ]";
-                map[8][1]  = "[ D ]";
-                map[4][4]  = "[ D ]";
-                map[0][7]  = "[ D ]";
-                map[0][1]  = "[ D ]";
+                map[9][1] = "[ D ]";
+                map[8][1] = "[ D ]";
+                map[4][4] = "[ D ]";
+                map[0][7] = "[ D ]";
+                map[0][1] = "[ D ]";
             }
 
         }
