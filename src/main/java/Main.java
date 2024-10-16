@@ -147,6 +147,251 @@ public class Main {
         System.err.println(
                 darkPurpleStart
                 + 
+
+     
+           
+
+    
+    
+        
+             
+
+    
+     
+        
+           
+                
+               
+        
+          
+              
+          
+                              
+          
+                  
+         
+           
+         
+           
+           
+           
+           
+
+    
+    
+        
+              
+              
+        
+            
+              
+             
+            
+              
+          
+          
+         
+                         
+          
+           
+             
+
+    
+    
+        
+              
+        
+              
+          
+          
+                         
+             
+
+    
+    
+        
+              
+        
+            
+                      
+        
+                    
+        
+             
+
+    
+    
+        
+            
+                
+              
+
+    
+             
+            
+           
+
+    
+     
+           
+
+    
+    
+        
+        
+                
+        
+            
+            
+                 
+                 
+             
+        
+        
+        
+          
+          
+             
+
+    
+    
+        
+            
+                      
+                
+                      
+                
+                      
+                
+                      
+                
+                      
+                
+                      
+                
+                      
+                
+                      
+                
+                      
+                
+                      
+                
+                      
+                
+                      
+                  
+            
+            
+              
+        
+              
+                
+             
+
+    
+      
+        
+         
+            
+                
+              
+
+    
+    
+                                                         
+              
+                                                                 
+              
+        
+                 
+              
+             
+
+    
+     
+             
+
+    
+     
+             
+
+    
+    
+        
+                  
+            
+            
+                 
+                      
+                
+                      
+                   
+            
+                  
+            
+                  
+            
+            
+                
+                
+                 
+                   
+            
+            
+                 
+                
+                   
+            
+                  
+            
+                  
+            
+                  
+              
+              
+
+    
+    
+        
+           
+           
+           
+        
+          
+             
+
+    
+       
+          
+              
+
+    
+    
+        
+        
+        
+        
+                
+        
+            
+            
+                 
+                 
+             
+         
+        
+             
+
+    
+    
+                                                         
+              
+                                                                 
+              
+             
+
+    
       """
                                    _    ____   ____ ___ ___                                     
                                   / \\  / ___| / ___|_ _|_ _|                                    
@@ -305,6 +550,15 @@ public class Main {
         Room.reset("all");
         Player.setName(null);
         Dungeon.generateDungeons();
+        try {
+            FileWriter fwOb = new FileWriter(".runtime.txt", false); 
+            PrintWriter pwOb = new PrintWriter(fwOb, false);
+            pwOb.flush();
+            pwOb.close();
+            fwOb.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         GameSaveSerialization.saveGame();
     }
 
@@ -369,8 +623,20 @@ public class Main {
     }
 
     public static void printStatus() { //print the status of the player
+        String redColor = "\033[1;31m"; // red color
+        String yellowColor = "\033[1;33m"; // yellow color
+        String greenColor = "\033[1;32m"; // green color
+        String healthColor;
+        String resetColor = "\033[0m"; // reset to default color
         TextEngine.printNoDelay(Player.getName(), false);
-        TextEngine.printNoDelay("Health: " + Player.getHealth(), false);
+        if(Player.getHealth() > Player.getMaxHealth()/2) {
+            healthColor = greenColor;
+        } else if (Player.getHealth() <= Player.getMaxHealth() / 2 && Player.getHealth() > (Player.getMaxHealth() / 4)+(Player.getMaxHealth()/10)) {
+            healthColor = yellowColor;
+        } else {
+            healthColor = redColor;
+        }
+        TextEngine.printNoDelay("Health: " + healthColor+Player.getHealth()+resetColor, false);
         if (getSavedPlace() != null) {
             TextEngine.printNoDelay("Location: " + getSavedPlace(), false);
         }

@@ -289,11 +289,25 @@ public class Player {
     }
 
     public static void printStats() throws InterruptedException { //print the stats
+        String redColor = "\033[1;31m"; // red color
+        String yellowColor = "\033[1;33m"; // yellow color
+        String greenColor = "\033[1;32m"; // green color
+        String healthColor;
+        String resetColor = "\033[0m"; // reset to default color
+
+        if (getHealth() > getMaxHealth() / 2) {
+            healthColor = greenColor;
+        } else if (getHealth() <= getMaxHealth() / 2 && getHealth() > (getMaxHealth() / 4) + (getMaxHealth() / 10)) {
+            healthColor = yellowColor;
+        } else {
+            healthColor = redColor;
+        }
+
         InventoryManager.setStatsToHighestInInventory();
         TextEngine.clearScreen();
         TextEngine.printNoDelay("Player Stats:", false);
         TextEngine.printNoDelay("Name: " + name, false);
-        TextEngine.printNoDelay("Health: " + health + "/" + maxHealth, false);
+        TextEngine.printNoDelay("Health: " + healthColor + health + resetColor + "/" + maxHealth, false);
         TextEngine.printNoDelay("Gold: " + gold, false);
         TextEngine.printNoDelay("Damage: " + damage, false);
         TextEngine.printNoDelay("Defense: " + defense, false);

@@ -721,12 +721,15 @@ public class DungeonGenerator {
             }
         }
         // Print the room to the console
+        String yellowColor = "\033[1;33m"; // Yellow color
+        String resetColor = "\033[0m"; // Reset to default color
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 15; j++) {
                 System.out.print(room[i][j]);
             }
             System.out.println();
         }
+        System.out.println("Type " + yellowColor + "map" + resetColor + " to see the map.");
         System.out.println();
     }
 }
