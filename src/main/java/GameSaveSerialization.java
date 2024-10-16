@@ -24,8 +24,8 @@ public class GameSaveSerialization {
     private static String command;
     private static String ignore;
     private final static Console console = System.console();
-    public static String filePath = "saves/.game_save.txt";
-    public static String runtimePath = "saves/.runtime.txt";
+    public static String filePath = ".game_save.txt";
+    public static String runtimePath = ".runtime.txt";
 
     public static void saveGame() {
         try (FileWriter writer = new FileWriter(filePath, false)) {

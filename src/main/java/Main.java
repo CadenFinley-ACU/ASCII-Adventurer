@@ -417,7 +417,7 @@ public class Main {
         GameSaveSerialization.saveGame();
         TextEngine.printWithDelays("See ya next time!", false);
         try {
-            FileWriter fwOb = new FileWriter("saves/.runtime.txt", false); 
+            FileWriter fwOb = new FileWriter(".runtime.txt", false); 
             PrintWriter pwOb = new PrintWriter(fwOb, false);
             pwOb.flush();
             pwOb.close();
@@ -551,7 +551,7 @@ public class Main {
         Player.setName(null);
         Dungeon.generateDungeons();
         try {
-            FileWriter fwOb = new FileWriter("saves/.runtime.txt", false); 
+            FileWriter fwOb = new FileWriter(".runtime.txt", false); 
             PrintWriter pwOb = new PrintWriter(fwOb, false);
             pwOb.flush();
             pwOb.close();
