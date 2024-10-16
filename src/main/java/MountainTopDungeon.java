@@ -194,7 +194,7 @@ public class MountainTopDungeon extends Dungeon {
 
             }
         }
-        TextEngine.printNoDelay(directionsString.toString(), true);
+        TextEngine.printNoDelay(yellowColor + directionsString.toString() + resetColor, true);
         while (true) {
             ignore = Room.console.readLine();
             direction = Room.console.readLine();

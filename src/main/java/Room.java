@@ -72,9 +72,9 @@ public class Room {
 
         // Display item information
         if (quantity > 1) {
-            TextEngine.printWithDelays("Item(s): " + itemName + " x" + quantity, false);
+            TextEngine.printWithDelays("Item(s): " + yellowColor + itemName + resetColor + " x" + quantity, false);
         } else {
-            TextEngine.printWithDelays("Item: " + itemName, false);
+            TextEngine.printWithDelays("Item: " + yellowColor + itemName + resetColor, false);
         }
 
         // Highlight 'take it' and 'leave it' in yellow
