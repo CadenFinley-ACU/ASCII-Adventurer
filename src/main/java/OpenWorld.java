@@ -437,6 +437,7 @@ public class OpenWorld extends Room {
 
     private static void room3() throws InterruptedException {
         Dungeon.dungeonCheck();
+        TextEngine.printWithDelays("    You have entered the deep sea", false);
         TextEngine.printWithDelays("Warning: Stepping into a dungeon will trigger battles,\n    but you may uncover valuable treasures within its chambers if you manage to survive.\n", false);
         TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "east" + resetColor + ", or " + yellowColor + "west" + resetColor + " to make your choice", true);
         while (true) {
@@ -487,7 +488,7 @@ public class OpenWorld extends Room {
         } else {
             TextEngine.printWithDelays("Congrets! you have beaten The Mountain Cave dungeon,\n     time to go back to a village rest up, check out the shop, and head to the next dungeon.\n\n", false);
         }
-        TextEngine.printWithDelays("        You have started to climb the mountain\n\n", false);
+        TextEngine.printWithDelays("    You have started to climb the mountain", false);
         TextEngine.printWithDelays("Warning: Stepping into a dungeon will trigger battles,\n    but you may uncover valuable treasures within its chambers if you manage to survive.\n", false);
         TextEngine.printWithDelays("Which path will you choose? Type " + yellowColor + "east" + resetColor + ", " + yellowColor + "south" + resetColor + ", or " + yellowColor + "west" + resetColor + " to continue your journey", true);
         while (true) {
@@ -871,7 +872,7 @@ public class OpenWorld extends Room {
     }
     private static void room21() throws InterruptedException {
         Dungeon.dungeonCheck();
-        TextEngine.printWithDelays("        You have entered the deep sea\n\n", false);
+        TextEngine.printWithDelays("    You have entered the deep sea", false);
         TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
         TextEngine.printWithDelays("Which path will you choose? Type " + yellowColor + "east" + resetColor + ", or " + yellowColor + "south" + resetColor + " to continue your journey", true);
         while (true) {
@@ -894,7 +895,7 @@ public class OpenWorld extends Room {
     }
     private static void room22() throws InterruptedException {
         Dungeon.dungeonCheck();
-        TextEngine.printWithDelays("        You have entered the deep sea\n\n", false);
+        TextEngine.printWithDelays("    You have entered the deep sea", false);
         TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
         TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "north" + resetColor + ", " + yellowColor + "south" + resetColor + ", or " + yellowColor + "west" + resetColor + " to continue your journey ", true);
         while (true) {
@@ -983,7 +984,7 @@ public class OpenWorld extends Room {
     }
     private static void room27() throws InterruptedException {
         Dungeon.dungeonCheck();
-        TextEngine.printWithDelays("        You have entered the desert\n\n", false);
+        TextEngine.printWithDelays("    You have entered the desert", false);
         TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
         TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "north" + resetColor + ", " + yellowColor + "east" + resetColor + ", " + yellowColor + "south" + resetColor + ", or " + yellowColor + "west" + resetColor + " to continue your journey ", true);
         while (true) {
@@ -1140,7 +1141,7 @@ public class OpenWorld extends Room {
     }
     private static void room33() throws InterruptedException {
         Dungeon.dungeonCheck();
-        TextEngine.printWithDelays("        You have started to climb the mountain\n\n", false);
+        TextEngine.printWithDelays("    You have started to climb the mountain", false);
         TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
         TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "north" + resetColor + ", " + yellowColor + "east" + resetColor + ", " + yellowColor + "south" + resetColor + ", or " + yellowColor + "west" + resetColor + " to continue your journey ", true);
         while (true) {
@@ -1169,7 +1170,7 @@ public class OpenWorld extends Room {
     }
     private static void room34() throws InterruptedException {
         Dungeon.dungeonCheck();
-        TextEngine.printWithDelays("        You have started to climb the mountain\n\n", false);
+        TextEngine.printWithDelays("    You have started to climb the mountain", false);
         TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
         TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "north" + resetColor + ", " + yellowColor + "east" + resetColor + ", " + yellowColor + "south" + resetColor + ", or " + yellowColor + "west" + resetColor + " to continue your journey ", true);
         while (true) {
@@ -1198,7 +1199,7 @@ public class OpenWorld extends Room {
     }
     private static void room35() throws InterruptedException {
         Dungeon.dungeonCheck();
-        TextEngine.printWithDelays("        You have started to climb the mountain\n\n", false);
+        TextEngine.printWithDelays("    You have started to climb the mountain", false);
         TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
         TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "north" + resetColor + ", " + yellowColor + "east" + resetColor + ", " + yellowColor + "south" + resetColor + ", or " + yellowColor + "west" + resetColor + " to continue your journey ", true);
         while (true) {
@@ -1227,7 +1228,7 @@ public class OpenWorld extends Room {
     }
     private static void room36() throws InterruptedException {
         Dungeon.dungeonCheck();
-        TextEngine.printWithDelays("        You have started to climb the mountain\n\n", false);
+        TextEngine.printWithDelays("    You have started to climb the mountain", false);
         TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
         TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "north" + resetColor + ", " + yellowColor + "south" + resetColor + ", or " + yellowColor + "west" + resetColor + " to continue your journey ", true);
         while (true) {
@@ -1253,7 +1254,7 @@ public class OpenWorld extends Room {
     }
     private static void room37() throws InterruptedException {
         Dungeon.dungeonCheck();
-        TextEngine.printWithDelays("        You have entered the desert\n\n", false);
+        TextEngine.printWithDelays("    You have entered the desert", false);
         TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
         TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "north" + resetColor + ", " + yellowColor + "east" + resetColor + ", or " + yellowColor + "The Village" + resetColor + " to continue your journey ", true);
         while (true) {
@@ -1279,7 +1280,7 @@ public class OpenWorld extends Room {
     }
     private static void room38() throws InterruptedException {
         Dungeon.dungeonCheck();
-        TextEngine.printWithDelays("        You have entered the desert\n\n", false);
+        TextEngine.printWithDelays("    You have entered the desert", false);
         TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
         TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "north" + resetColor + ", " + yellowColor + "east" + resetColor + ", " + yellowColor + "south" + resetColor + ", or " + yellowColor + "west" + resetColor + " to continue your journey ", true);
         while (true) {
@@ -1308,7 +1309,7 @@ public class OpenWorld extends Room {
     }
     private static void room39() throws InterruptedException {
         Dungeon.dungeonCheck();
-        TextEngine.printWithDelays("        You have entered the desert\n\n", false);
+        TextEngine.printWithDelays("    You have entered the desert", false);
         TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
         TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "north" + resetColor + ", " + yellowColor + "east" + resetColor + ", " + yellowColor + "south" + resetColor + ", or " + yellowColor + "west" + resetColor + " to continue your journey ", true);
         while (true) {
@@ -1337,7 +1338,7 @@ public class OpenWorld extends Room {
     }
     private static void room40() throws InterruptedException {
         Dungeon.dungeonCheck();
-        TextEngine.printWithDelays("        You have entered the desert\n\n", false);
+        TextEngine.printWithDelays("    You have entered the desert", false);
         TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
         TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "east" + resetColor + ", " + yellowColor + "south" + resetColor + ", or " + yellowColor + "west" + resetColor + " to continue your journey ", true);
         while (true) {
@@ -1563,7 +1564,7 @@ public class OpenWorld extends Room {
     }
     private static void room49() throws InterruptedException {
         Dungeon.dungeonCheck();
-        TextEngine.printWithDelays("        You have entered the desert\n\n", false);
+        TextEngine.printWithDelays("    You have entered the desert", false);
         TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
         TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "north" + resetColor + ", " + yellowColor + "east" + resetColor + ", " + yellowColor + "south" + resetColor + ", or " + yellowColor + "west" + resetColor + " to continue your journey ", true);
         while (true) {
@@ -1620,7 +1621,7 @@ public class OpenWorld extends Room {
     }
     private static void room51() throws InterruptedException {
         Dungeon.dungeonCheck();
-        TextEngine.printWithDelays("        You have entered the lost forest\n\n", false);
+        TextEngine.printWithDelays("    You have entered the lost forest", false);
         TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
         TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "north" + resetColor + ", " + yellowColor + "east" + resetColor + ", " + yellowColor + "south" + resetColor + ", or " + yellowColor + "west" + resetColor + " to continue your journey ", true);
         while (true) {
@@ -1649,7 +1650,7 @@ public class OpenWorld extends Room {
     }
     private static void room52() throws InterruptedException {
         Dungeon.dungeonCheck();
-        TextEngine.printWithDelays("        You have entered the lost forest\n\n", false);
+        TextEngine.printWithDelays("    You have entered the lost forest", false);
         TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
         TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "north" + resetColor + ", " + yellowColor + "east" + resetColor + ", " + yellowColor + "south" + resetColor + ", or " + yellowColor + "west" + resetColor + " to continue your journey ", true);
         while (true) {
@@ -1678,7 +1679,7 @@ public class OpenWorld extends Room {
     }
     private static void room53() throws InterruptedException {
         Dungeon.dungeonCheck();
-        TextEngine.printWithDelays("        You have entered the lost forest\n\n", false);
+        TextEngine.printWithDelays("    You have entered the lost forest", false);
         TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
         TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "north" + resetColor + ", " + yellowColor + "east" + resetColor + ", " + yellowColor + "south" + resetColor + ", or " + yellowColor + "west" + resetColor + " to continue your journey ", true);
         while (true) {
@@ -1711,7 +1712,7 @@ public class OpenWorld extends Room {
         } else {
             TextEngine.printWithDelays("Congrats! you have beaten The Desert Plains dungeon,\n     time to go back to a village rest up, check out the shop, and head to the next dungeon.\n\n", false);
         }        
-        TextEngine.printWithDelays("        You have entered the lost forest\n\n", false);
+        TextEngine.printWithDelays("    You have entered the lost forest", false);
         TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
         TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "north" + resetColor + ", " + yellowColor + "west" + resetColor + ", or " +yellowColor+ "The Dark Forest" +resetColor+ " to continue your journey ", true);
         while (true) {
@@ -1803,7 +1804,7 @@ public class OpenWorld extends Room {
     }
     private static void room58() throws InterruptedException {
         Dungeon.dungeonCheck();
-        TextEngine.printWithDelays("        You have entered the lost forest\n\n", false);
+        TextEngine.printWithDelays("    You have entered the lost forest", false);
         TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
         TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "north" + resetColor + ", " + yellowColor + "east" + resetColor + ", " + yellowColor + "south" + resetColor + ", or " + yellowColor + "west" + resetColor + " to continue your journey ", true);
         while (true) {
@@ -1899,7 +1900,7 @@ public class OpenWorld extends Room {
         } else {
             TextEngine.printWithDelays("Congrats! you have beaten The Desert Plains dungeon,\n     time to go back to a village rest up, check out the shop, and head to the next dungeon.\n\n", false);
         }        
-        TextEngine.printWithDelays("        You have started to climb the mountain\n\n", false);
+        TextEngine.printWithDelays("    You have started to climb the mountain", false);
         TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
         TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "east" + resetColor + ", " + yellowColor + "south" + resetColor + ", or " + yellowColor + "The Mountain Cave" + resetColor + " to continue your journey ", true);
         while (true) {
@@ -1963,7 +1964,7 @@ public class OpenWorld extends Room {
     }
     private static void room65() throws InterruptedException {
         Dungeon.dungeonCheck();
-        TextEngine.printWithDelays("        You have entered the desert\n\n", false);
+        TextEngine.printWithDelays("    You have entered the desert", false);
         TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
         TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "north" + resetColor + ", " + yellowColor + "east" + resetColor + ", " + yellowColor + "south" + resetColor + ", or " + yellowColor + "west" + resetColor + " to continue your journey ", true);
         while (true) {
@@ -2020,7 +2021,7 @@ public class OpenWorld extends Room {
     }
     private static void room67() throws InterruptedException {
         Dungeon.dungeonCheck();
-        TextEngine.printWithDelays("        You have entered the lost forest\n\n", false);
+        TextEngine.printWithDelays("    You have entered the lost forest", false);
         TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
         TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "north" + resetColor + ", " + yellowColor + "east" + resetColor + ", " + yellowColor + "west" + resetColor + ", or "+yellowColor+ "The Village" +resetColor+ " to continue your journey ", true);
         while (true) {
@@ -2134,7 +2135,7 @@ public class OpenWorld extends Room {
     }
     private static void room73() throws InterruptedException {
         Dungeon.dungeonCheck();
-        TextEngine.printWithDelays("        You have entered the desert\n\n", false);
+        TextEngine.printWithDelays("    You have entered the desert", false);
         TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
         TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "north" + resetColor + ", " + yellowColor + "east" + resetColor + ", or " + yellowColor + "west" + resetColor + " to continue your journey ", true);
         while (true) {
@@ -2161,7 +2162,7 @@ public class OpenWorld extends Room {
     private static void room74() throws InterruptedException {
         Dungeon.dungeonCheck();
         TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
-        TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "north" + resetColor + ", " + yellowColor + "west" + resetColor + ", or "+yellowColor+ "the village" +resetColor+ " to continue your journey ", true);
+        TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "north" + resetColor + ", " + yellowColor + "west" + resetColor + ", or "+yellowColor+ "The Village" +resetColor+ " to continue your journey ", true);
         while (true) {
             ignore = console.readLine();
             command = console.readLine();
