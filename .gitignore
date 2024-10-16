@@ -9,11 +9,9 @@ buildNumber.properties
 .mvn/timing.properties
 .DS_Store
 *.class
-game/.game_save.txt
-game/game_save.txt
 .vscode
-game/.runtime.txt
-game/runtime.txt
+ASCII-Adventurer/game/.saves
+
 # https://github.com/takari/maven-wrapper#usage-without-binary-jar
 .mvn/wrapper/maven-wrapper.jar
 
