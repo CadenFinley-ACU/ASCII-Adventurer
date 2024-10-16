@@ -2,4 +2,4 @@
 
 cd -- "$(dirname -- "$0")"
 cd game
-java -jar "asciiadventurer.jar"
+java -Xmx1024M -jar "asciiadventurer.jar"
