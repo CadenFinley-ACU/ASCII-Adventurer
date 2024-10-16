@@ -26,6 +26,7 @@ public class GameSaveSerialization {
     private final static Console console = System.console();
     public static String filePath = ".game_save.txt";
     public static String runtimePath = ".runtime.txt";
+    //change file path manually in main in functions that call this class
 
     public static void saveGame() {
         try (FileWriter writer = new FileWriter(filePath, false)) {
