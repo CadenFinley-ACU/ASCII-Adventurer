@@ -1,17 +1,18 @@
 
-// import java.io.File;
-// import java.io.IOException;
+//import javax.sound.sampled.AudioInputStream;
+/**
+ * Audio Engine Engine
+ *
+ * Text Adventure Game SE374 F24 Final Project Caden Finley Albert Tucker
+ * Grijesh Shrestha
+ */
+public class AudioEngine {
 
-// import org.jogamp.joal.*;
+    static boolean muted = false;
 
-
-// /**
-//  * Audio Engine Engine
-//  *
-//  * Text Adventure Game SE374 F24 Final Project Caden Finley Albert Tucker
-//  * Grijesh Shrestha
-//  */
-// public class AudioEngine {
-//     boolean muted = false;
-	
-// }
+    public static void playSound() {
+        if (!muted) {
+            System.out.println("\007");
+        }
+    }
+}

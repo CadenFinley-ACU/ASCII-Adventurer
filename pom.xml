@@ -16,13 +16,18 @@
         <maven.compiler.target>20</maven.compiler.target>
     </properties>
 
+    <!-- <repositories>
+        <repository>
+            <id>sampled-repo</id>
+            <url>https://github.com/clojure-interop/java-jdk/tree/master/javax.sound</url>
+        </repository>
+    </repositories> -->
     <dependencies>
-
-        <dependency>
+        <!-- <dependency>
             <groupId>org.jogamp.joal</groupId>
             <artifactId>joal</artifactId>
             <version>2.3.2</version>
-        </dependency>
+        </dependency> -->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
