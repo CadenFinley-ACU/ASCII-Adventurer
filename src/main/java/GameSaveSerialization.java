@@ -1,14 +1,21 @@
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.Console;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
+// Written by Caden Finley ACU 2024
+// October 15, 2024
 public class GameSaveSerialization {
 
     private static final String NULL_MARKER = "NULL";
@@ -16,10 +23,10 @@ public class GameSaveSerialization {
     private static String command;
     private static String ignore;
     private final static Console console = System.console();
+    public static String filePath = ".game_save.txt";
+    public static String runtimePath = ".runtime.txt";
 
     public static void saveGame() {
-        String filePath = "game_save.txt";
-
         try (FileWriter writer = new FileWriter(filePath, false)) {
             writer.write(""); // This will clear the file
         } catch (IOException e) {
@@ -69,7 +76,6 @@ public class GameSaveSerialization {
         writeSeparator(filePath);
         writeMatrix(Dungeon.oceanKingdomDungeon, filePath);
         writeSeparator(filePath);
-
         writeValue(String.valueOf(SpawnRoom.roomSave), filePath);
         writeSeparator(filePath);
         writeValue(String.valueOf(OpenWorld.roomSave), filePath);
@@ -143,12 +149,13 @@ public class GameSaveSerialization {
         writeList(DesertPyramidDungeon.items, filePath);
         writeSeparator(filePath);
         writeList(OceanKingdomDungeon.items, filePath);
+        serializeAllLines(filePath, filePath);
     }
 
     public static void loadGameSave() {
-        String filePath = "game_save.txt";
         String buffer = "";
-        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+        deserializeToFile(filePath);
+        try (BufferedReader reader = new BufferedReader(new FileReader(runtimePath))) {
             try {
                 int version = Integer.parseInt(reader.readLine());
                 if (version != versionID) {
@@ -290,13 +297,14 @@ public class GameSaveSerialization {
                 buffer = reader.readLine();
                 OceanKingdomDungeon.items = readList(reader);
             } catch (IOException | NumberFormatException e) {
+                e.printStackTrace();
                 System.out.println("Save File Corrupt or Invalid... ");
                 TextEngine.printWithDelays("Erasing Save File and Restarting...", false);
                 TextEngine.enterToNext();
                 TextEngine.clearScreen();
                 Main.wipeSave();
                 Main.startMenu();
-                //e.printStackTrace();
+
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -434,4 +442,44 @@ public class GameSaveSerialization {
         return inventory;
     }
 
+    public static void serializeAllLines(String inputFilePath, String outputFilePath) {
+        File inputFile = new File(inputFilePath);
+        List<String> lines = new ArrayList<>();
+
+        try (BufferedReader br = new BufferedReader(new FileReader(inputFile))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                lines.add(line);
+            }
+
+            // Serialize the list of lines to a single file
+            try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(outputFilePath))) {
+                oos.writeObject(lines);
+                //System.out.println("File serialized successfully to: " + outputFilePath);
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void deserializeToFile(String serializedFilePath) {
+        File outputFilePath = new File(runtimePath);
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(serializedFilePath)); BufferedWriter bw = new BufferedWriter(new FileWriter(outputFilePath))) {
+
+            // Deserialize the list of lines
+            List<String> lines = (List<String>) ois.readObject();
+
+            // Write each line to the output file
+            for (String line : lines) {
+                bw.write(line);
+                bw.newLine();
+            }
+
+            //System.out.println("File deserialized and written to: " + outputFilePath);
+
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
 }
