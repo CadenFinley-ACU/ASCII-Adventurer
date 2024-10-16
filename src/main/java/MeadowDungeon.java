@@ -129,25 +129,6 @@ public class MeadowDungeon extends Dungeon {
         return false;
     }
 
-    private static boolean confirmBossContinue() throws InterruptedException {
-        TextEngine.printWithDelays("Are you sure you want to continue to the boss room? (" + yellowColor + "yes" + resetColor + " or " + yellowColor + "no" + resetColor + ")", true);
-        while (true) {
-            ignore = Room.console.readLine();
-            command = Room.console.readLine();
-            switch (command.toLowerCase().trim()) {
-                case "yes" -> {
-                    return true;
-                }
-                case "no" -> {
-                    return false;
-                }
-                default -> {
-                    Dungeon.defaultDungeonArgs(command.toLowerCase());
-                }
-            }
-        }
-    }
-
     private static void handleDirectionsAndCommands() throws InterruptedException {
         Main.screenRefresh();
         DungeonGenerator.drawRoom(meadowDungeon, roomsBeenTo, currentPlayerPosition[0], currentPlayerPosition[1]);

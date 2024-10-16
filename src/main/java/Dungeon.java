@@ -10,6 +10,8 @@ import java.util.List;
  */
 public class Dungeon extends Room {
 
+    static String resetColor = "\033[0m"; // reset to default color
+    static String yellowColor = "\033[1;33m"; // yellow color
     public static String currentDungeon;
     public static int completedDungeons = 0;
 
@@ -291,6 +293,31 @@ public class Dungeon extends Room {
             }
             default ->
                 TextEngine.printWithDelays("this function isnt working right", false);
+        }
+    }
+
+    public static boolean confirmBossContinue() throws InterruptedException {
+        if (Player.inventory.containsKey("key")) {
+            TextEngine.printWithDelays("Would you like to unlock the door to the boss room? " + yellowColor + "yes" + resetColor + " or " + yellowColor + "no" + resetColor, true);
+            while (true) {
+                ignore = Room.console.readLine();
+                command = Room.console.readLine();
+                switch (command.toLowerCase().trim()) {
+                    case "yes" -> {
+                        return InventoryManager.useKey();
+                    }
+                    case "no" -> {
+                        return false;
+                    }
+                    default -> {
+                        Dungeon.defaultDungeonArgs(command.toLowerCase());
+                    }
+                }
+            }
+        } else {
+            TextEngine.printWithDelays("You need a key to unlock the door to the boss room, i'm sure there is one around here somewhere", false);
+            TextEngine.enterToNext();
+            return false;
         }
     }
 }
