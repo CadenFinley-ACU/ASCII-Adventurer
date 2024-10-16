@@ -84,7 +84,7 @@ public class Enemy {
         String space = "     ";
 
         // Check the player's health
-        if (Player.getHealth() <= (enemyDamageValues.get(type) * quantity)-Player.getDamageCalc()) {
+        if (Player.getHealth() <= (enemyDamageValues.get(type) * quantity) - Player.getDamageCalc()) {
             return;
         }
         // Print victory message in green
@@ -94,7 +94,7 @@ public class Enemy {
             TextEngine.printWithDelays(space + brightGreenStart + "You beat the " + type + "!" + brightGreenEnd, false);
         }
         // Update player's gold
-        Player.changeGold(enemyDamageValues.get(type) * quantity);
+        Player.changeGold((enemyDamageValues.get(type) / 2) * quantity);
     }
 
 }

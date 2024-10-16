@@ -121,6 +121,7 @@ public class Dungeon extends Room {
             case "map" -> {
                 Main.screenRefresh();
                 TextEngine.printWithDelays("You open your map and see the following:\n", false);
+                System.out.println();
                 switch (currentDungeon) {
                     case "Meadow" -> {
                         DungeonGenerator.printAdjacentRoomsAndCurrentRoomAndUnlockedRooms(meadowDungeon, MeadowDungeon.roomsBeenTo, currentPlayerPosition);
@@ -147,7 +148,8 @@ public class Dungeon extends Room {
                         DungeonGenerator.printAdjacentRoomsAndCurrentRoomAndUnlockedRooms(oceanKingdomDungeon, OceanKingdomDungeon.roomsBeenTo, currentPlayerPosition);
                     }
                     //add more dungeons here if needed
-                    }
+                }
+                System.out.println();
                 TextEngine.enterToNext();
                 Main.loadSave();
             }
@@ -178,7 +180,9 @@ public class Dungeon extends Room {
     }
 
     public static void dungeonCheck() throws InterruptedException {
-
+        if (OpenWorld.holdCommand != null) {
+            OpenWorld.holdCommand = "onward";
+        }
         switch (completedDungeons) {
             case 0 -> {// the meadow dungeon
                 switch (OpenWorld.roomNumber) {
