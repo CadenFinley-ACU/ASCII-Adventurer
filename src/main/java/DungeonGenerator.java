@@ -399,7 +399,7 @@ public class DungeonGenerator {
                                 System.out.print("[ ] "); // Empty room
                             case 4 -> {
                                 if (unlocked[i][j] > 0) {
-                                    System.out.print("[.] "); // Special marker for value 4
+                                    System.out.print("[■] "); // Special marker for value 4
                                 } else {
                                     System.out.print("[!] "); // Special marker for value 3
                                 }
@@ -413,7 +413,7 @@ public class DungeonGenerator {
                             }
                             case 6 -> {
                                 if (unlocked[i][j] > 0) {
-                                    System.out.print("[.] "); // Special marker for value 6
+                                    System.out.print("[■] "); // Special marker for value 6
                                 } else {
                                     System.out.print("[?] "); // Special marker for value 3
                                 }
@@ -430,7 +430,7 @@ public class DungeonGenerator {
                             case 3 ->
                                 System.out.print("[I] "); // Special marker for value 3
                             default ->
-                                System.out.print("[.] "); // Default case for other values
+                                System.out.print("[■] "); // Default case for other values
                         }
                     } else {
                         System.out.print("[ ] "); // Print brackets around non-zero values

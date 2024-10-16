@@ -475,12 +475,16 @@ public class Player {
             System.out.println();
         }
         map[playerY][playerX] = "[   ]"; // Reset the player's position
+        String yellowColor = "\033[1;33m"; // yellow color
+        String resetColor = "\033[0m"; // reset to default color
         System.out.println("Key: ");
         System.out.println(" '!' = Next Dungeon");
         System.out.println(" 'D' = Unlocked Dungeon");
         System.out.println(" 'L' = Locked Dungeon");
         System.out.println(" 'V' = Village");
         System.out.println(" 'P' = Player");
+        System.out.println();
+        System.out.println("If you are still feeling lost type " + yellowColor + "help" + resetColor + " for a list of commands.");
         TextEngine.enterToNext();
         Main.loadSave();
     }
