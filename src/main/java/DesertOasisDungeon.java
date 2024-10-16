@@ -123,7 +123,6 @@ public class DesertOasisDungeon extends Dungeon {
                 completed = true;
             }
             lastPosition = null;
-            Player.autoFight = Dungeon.previousAutoSettings;
             OpenWorld.startRoom();
         }
         handleDirectionsAndCommands();

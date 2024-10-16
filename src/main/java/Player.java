@@ -23,7 +23,6 @@ public class Player {
     private static int damage; //find way to set damage automatically to strongest weapon in inventory
     private static int defense; //find way to set defense automatically to the strongest 4-5 defense items combined
     public static Map<String, Integer> inventory = new HashMap<>();
-    public static boolean autoFight = false;
     public static int playerX = 0;
     public static int playerY = 0;
 

@@ -122,7 +122,6 @@ public class DesertPyramidDungeon extends Dungeon {
                 completedDungeons++;
                 completed = true;
             }
-            Player.autoFight = Dungeon.previousAutoSettings;
             lastPosition = null;
             OpenWorld.startRoom();
         }

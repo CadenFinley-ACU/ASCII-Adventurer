@@ -122,7 +122,6 @@ public class OceanKingdomDungeon extends Dungeon {
                 completed = true;
             }
             lastPosition = null;
-            Player.autoFight = Dungeon.previousAutoSettings;
             OpenWorld.startRoom();
         }
         handleDirectionsAndCommands();

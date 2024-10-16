@@ -179,13 +179,6 @@ public class Dungeon extends Room {
         completedDungeons = 0;
     }
 
-    public static void autoCheck() {
-        previousAutoSettings = Player.autoFight;
-        if (Player.autoFight) {
-            Player.autoFight = false;
-        }
-    }
-
     public static void dungeonCheck() throws InterruptedException {
         if (OpenWorld.holdCommand == null) {
             OpenWorld.holdCommand = "onward";
