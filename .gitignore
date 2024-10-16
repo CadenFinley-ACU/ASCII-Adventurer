@@ -22,3 +22,4 @@ runtime.txt
 .project
 # JDT-specific (Eclipse Java Development Tools)
 .classpath
+ASCII-Adventurer/game/.game_save.txt
