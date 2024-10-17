@@ -134,6 +134,8 @@ public class Main {
                     setTextSpeed("NoDelay");
                 case "debug" ->
                     debugInfo();
+                case "change name" ->
+                    Player.changeName();
                 default ->
                     TextEngine.printWithDelays("I'm sorry, I don't understand that command.", true);
             }
@@ -449,7 +451,7 @@ public class Main {
 
     public static void inGameDefaultTextHandling(String data) throws InterruptedException { //default in game commands
         if (!Dungeon.ableToUseMenuCommands()){
-            switch (data) {
+            switch (data.toLowerCase().trim()) {
                 case "help" ->
                     displayHelp();
                 case "save" ->  {
@@ -467,7 +469,7 @@ public class Main {
             }
         }
         else { 
-            switch (data) {
+            switch (data.toLowerCase().trim()) {
                 case "help" ->
                     displayHelp();
                 case "inventory" ->

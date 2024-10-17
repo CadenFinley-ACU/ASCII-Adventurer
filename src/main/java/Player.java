@@ -521,4 +521,30 @@ public class Player {
         inventory = localInventory;
         inventorySize = localInventorySize;
     }
+
+    public static void changeName() throws InterruptedException {
+        String brightYellowStart = "\033[1;33m";
+        String brightEnd = "\033[0m";
+        String space = "     ";
+        TextEngine.printWithDelays(space + "What is your new name hero?", true);
+        while (true) {
+            ignore = console.readLine();
+            command = console.readLine();
+            if (command != null && !command.isEmpty()) {
+                if ("exit".equals(command)) {
+                    Main.startMenu();
+                    TextEngine.clearScreen();
+                } else {
+                    setName(command);
+                    break;
+                }
+            } else {
+                TextEngine.printWithDelays("Please enter a name.", true);
+            }
+
+        }
+        TextEngine.printWithDelays(space + "Your name has been changed to " + brightYellowStart + name + brightEnd, false);
+        TextEngine.enterToNext();
+        Main.startMenu();
+    }
 }
