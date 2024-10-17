@@ -642,9 +642,9 @@ public class Main {
         String healthColor;
         String resetColor = "\033[0m"; // reset to default color
         if(getSavedPlace() != null) {
-            TextEngine.printNoDelay(Player.getName()+"'s Adventure through the "+getSavedPlace(), false);
+            TextEngine.printNoDelay(Player.getName()+"'s adventure through the "+getSavedPlace(), false);
         } else {
-            TextEngine.printNoDelay(Player.getName()+"'s Adventure", false);
+            TextEngine.printNoDelay(Player.getName()+"'s adventure", false);
         }
         if(Player.getHealth() > Player.getMaxHealth()/2) {
             healthColor = greenColor;
