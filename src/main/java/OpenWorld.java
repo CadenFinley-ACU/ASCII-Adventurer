@@ -579,7 +579,7 @@ public class OpenWorld extends Room {
             switch (command.toLowerCase().trim()) {
                 case "the ocean kingdom" -> {
                     if (Dungeon.completedDungeons > 7) {
-                        DesertOasisDungeon.startRoom();
+                        OceanKingdomDungeon.startRoom();
                     } else {
                         TextEngine.printWithDelays("You must complete The Desert Pyramid dungeon first.\n Try going to the south", true);
                     }
@@ -1697,7 +1697,7 @@ public class OpenWorld extends Room {
                 }
                 case "the desert pyramid" -> {
                     if (Dungeon.completedDungeons > 0) {
-                        DarkForestDungeon.startRoom();
+                        DesertPyramidDungeon.startRoom();
                     } else {
                         TextEngine.printWithDelays("You must complete The Desert Plains dungeon first.\nTry going south", true);
                     }
@@ -1979,9 +1979,9 @@ public class OpenWorld extends Room {
                     roomSave = 64;
                     Main.loadSave();
                 }
-                case "the desrt pyramid" -> {
+                case "the desert pyramid" -> {
                     if (Dungeon.completedDungeons > 3) {
-                        DarkForestDungeon.startRoom();
+                        DesertPyramidDungeon.startRoom();
                     } else {
                         TextEngine.printWithDelays("You must complete The Desert Plains dungeon first.\nTry going south", true);
                     }
