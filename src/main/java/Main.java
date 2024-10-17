@@ -63,6 +63,8 @@ public class Main {
 
         InventoryManager.createItem("weapon", "god slayer hammer", 100); //dungeon 8
 
+        InventoryManager.createItem("weapon", "K.O. Cannon", 10000); //dungeon shop
+
         //*  ************************************************************************************ */
         InventoryManager.createItem("armor", "shield", 2); //village shop
 
