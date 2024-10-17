@@ -68,7 +68,9 @@ public class MountainTopDungeon extends Dungeon {
                     //lastPosition = currentPlayerPosition.clone();
                     roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = mountainTopDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
                 } else {
-                    currentPlayerPosition = lastPosition.clone();
+                    int[] buffer = currentPlayerPosition.clone();
+                    currentPlayerPosition = lastPosition.clone(); // Save the current position before moving
+                    lastPosition = buffer.clone();
                     Main.loadSave();
                 }
             } else {
@@ -86,7 +88,19 @@ public class MountainTopDungeon extends Dungeon {
             if (hasItemInRoom("key", 1)) {
                 roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = mountainTopDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
             } else {
-                currentPlayerPosition = lastPosition.clone();
+                int[] buffer = currentPlayerPosition.clone();
+                currentPlayerPosition = lastPosition.clone(); // Save the current position before moving
+                lastPosition = buffer.clone();
+                Main.loadSave();
+            }
+        }
+        if (mountainTopDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] == 7 && roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] == 0) {
+            if (hasItemInRoom("heart container", 1)) {
+                roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = mountainTopDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
+            } else {
+                int[] buffer = currentPlayerPosition.clone();
+                currentPlayerPosition = lastPosition.clone(); // Save the current position before moving
+                lastPosition = buffer.clone();
                 Main.loadSave();
             }
         }
@@ -98,12 +112,7 @@ public class MountainTopDungeon extends Dungeon {
             dungeonShop();
         }
         if (mountainTopDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] == 4 && roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] == 0) {
-            TextEngine.printWithDelays("You have entered a room with a mini boss", false);
-            Player.changeHealth(Enemy.spawnEnemy("Minotaur", 1));
-            Room.hasItemInRoom("heart container", 1);
-            //lastPosition = currentPlayerPosition.clone();
-            roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = mountainTopDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
-            Main.loadSave();
+            miniBossSequence();
         }
         if (mountainTopDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] == 8 && roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] == 0) {
             TextEngine.printWithDelays("You have entered the boss room", false);
@@ -244,8 +253,25 @@ public class MountainTopDungeon extends Dungeon {
         } else {
             TextEngine.printWithDelays("You have entered a room with a " + enemyType + " and were ambushed!", false);
         }
-        Player.changeHealth(Enemy.spawnEnemy(enemyType, numberOfEnemies));
-        //lastPosition = currentPlayerPosition.clone();
+        TextEngine.printWithDelays("What is your command? " + yellowColor + "fight" + resetColor + " or " + yellowColor + "run" + resetColor, true);
+        ignore = Room.console.readLine();
+        command = Room.console.readLine();
+        switch (command) {
+            case "fight" -> {
+                Player.changeHealth(Enemy.spawnEnemy(enemyType, numberOfEnemies));
+            }
+            case "run" -> {
+                TextEngine.printWithDelays("You have successfully ran away from the enemies", false);
+                TextEngine.enterToNext();
+                int[] buffer = currentPlayerPosition.clone();
+                currentPlayerPosition = lastPosition.clone(); // Save the current position before moving
+                lastPosition = buffer.clone();
+                Main.loadSave();
+            }
+            default -> {
+                defaultDungeonArgs(command);
+            }
+        }
         roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = mountainTopDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
         Main.loadSave();
     }
@@ -259,8 +285,52 @@ public class MountainTopDungeon extends Dungeon {
         } else {
             TextEngine.printWithDelays("You have entered a room with a " + enemyType + " and were ambushed!", false);
         }
-        Player.changeHealth(Enemy.spawnEnemy(enemyType, numberOfEnemies));
+        TextEngine.printWithDelays("They seem to be trying to protect something...", false);
+        TextEngine.printWithDelays("What is your command? " + yellowColor + "fight" + resetColor + " or " + yellowColor + "run" + resetColor, true);
+        ignore = Room.console.readLine();
+        command = Room.console.readLine();
+        switch (command) {
+            case "fight" -> {
+                Player.changeHealth(Enemy.spawnEnemy(enemyType, numberOfEnemies));
+            }
+            case "run" -> {
+                TextEngine.printWithDelays("You have successfully ran away from the enemies", false);
+                TextEngine.enterToNext();
+                int[] buffer = currentPlayerPosition.clone();
+                currentPlayerPosition = lastPosition.clone(); // Save the current position before moving
+                lastPosition = buffer.clone();
+                Main.loadSave();
+            }
+            default -> {
+                defaultDungeonArgs(command);
+            }
+        }
         mountainTopDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] = 5;
+        Main.loadSave();
+    }
+
+    private static void miniBossSequence() throws InterruptedException {
+        TextEngine.printWithDelays("You have entered a room with a mini boss", false);
+        TextEngine.printWithDelays("What is your command? " + yellowColor + "fight" + resetColor + " or " + yellowColor + "run" + resetColor, true);
+        ignore = Room.console.readLine();
+        command = Room.console.readLine();
+        switch (command) {
+            case "fight" -> {
+                Player.changeHealth(Enemy.spawnEnemy("Minotaur", 1));
+            }
+            case "run" -> {
+                TextEngine.printWithDelays("You have successfully ran away from the mini boss", false);
+                TextEngine.enterToNext();
+                int[] buffer = currentPlayerPosition.clone();
+                currentPlayerPosition = lastPosition.clone(); // Save the current position before moving
+                lastPosition = buffer.clone();
+                Main.loadSave();
+            }
+            default -> {
+                defaultDungeonArgs(command);
+            }
+        }
+        mountainTopDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] = 7;
         Main.loadSave();
     }
 }

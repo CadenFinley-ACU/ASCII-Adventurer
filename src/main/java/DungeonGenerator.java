@@ -398,7 +398,7 @@ public class DungeonGenerator {
                             System.out.print(yellowColor + "[P] " + resetColor);
                         } else if (isAdjacent(i, j, passedPosition)) {
                             switch (passedMatrix[i][j]) {
-                                case 2, 5 -> {
+                                case 2, 5, 7 -> {
                                     if (unlocked[i][j] > 0) {
                                         System.out.print("[■] ");
                                     } else {
@@ -423,13 +423,6 @@ public class DungeonGenerator {
                             }
                         } else if (unlocked[i][j] > 0) {
                             switch (unlocked[i][j]) { //icon for visited rooms
-                                case 2, 5 -> {
-                                    if (isAdjacent(i, j, passedPosition)) {
-                                        System.out.print("[~] ");
-                                    } else {
-                                        System.out.print(greenColor + "[I] " + resetColor); // Special marker for item rooms 
-                                    }
-                                }
                                 case 6 ->
                                     System.out.print(greenColor + "[$] " + resetColor); // Special marker for shop/trap room
                                 case 8 ->
@@ -439,13 +432,6 @@ public class DungeonGenerator {
                                         System.out.print("[~] ");
                                     } else {
                                         System.out.print("[S] ");
-                                    }
-                                }
-                                case 4 -> {
-                                    if (isAdjacent(i, j, passedPosition)) {
-                                        System.out.print("[~] ");
-                                    } else {
-                                        System.out.print(redColor + "[!] " + resetColor);
                                     }
                                 }
                                 default -> {
@@ -477,7 +463,7 @@ public class DungeonGenerator {
                             System.out.print(yellowColor + "[P] " + resetColor);
                         } else {
                             switch (passedMatrix[i][j]) {
-                                case 2, 3, 5 -> {
+                                case 2, 3, 5, 7 -> {
                                     if (unlocked[i][j] > 0) {
                                         if (isAdjacent(i, j, passedPosition)) {
                                             System.out.print("[~] ");
@@ -698,7 +684,7 @@ public class DungeonGenerator {
                 room[0][6] = " ";
                 room[0][8] = " ";
             }
-            case 2, 5 -> {
+            case 2, 5, 7 -> {
                 if (visitedRoom[x - 1][y] > 0) {
                     room[0][7] = " ";
                 } else {
@@ -744,7 +730,7 @@ public class DungeonGenerator {
                 room[4][6] = " ";
                 room[4][8] = " ";
             }
-            case 2, 5 -> {
+            case 2, 5, 7 -> {
                 if (visitedRoom[x + 1][y] > 0) {
                     room[4][7] = " ";
                 } else {
@@ -788,7 +774,7 @@ public class DungeonGenerator {
             case 1, 3, 9 -> {
                 room[2][0] = " ";
             }
-            case 2, 5 -> {
+            case 2, 5, 7 -> {
                 if (visitedRoom[x][y - 1] > 0) {
                     room[2][0] = " ";
                 } else {
@@ -822,7 +808,7 @@ public class DungeonGenerator {
             case 1, 3, 9 -> {
                 room[2][14] = " ";
             }
-            case 2, 5 -> {
+            case 2, 5, 7 -> {
                 if (visitedRoom[x][y + 1] > 0) {
                     room[2][14] = " ";
                 } else {
@@ -884,6 +870,10 @@ public class DungeonGenerator {
                 case 5 -> {
                     room[2][5] = "P"; // key Room
                     room[2][7] = greenColor + "K" + resetColor; // key
+                }
+                case 7 -> {
+                    room[2][5] = "P"; // heart container Room
+                    room[2][7] = redColor + "H" + resetColor; // heart container
                 }
                 case 6 -> {
                     room[2][5] = "P"; // Shop Room
