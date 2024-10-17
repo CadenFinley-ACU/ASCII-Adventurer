@@ -463,7 +463,7 @@ public class DungeonGenerator {
                             System.out.print(yellowColor + "[P] " + resetColor);
                         } else {
                             switch (passedMatrix[i][j]) {
-                                case 2, 3, 5, 7 -> {
+                                case 2, 7 -> {
                                     if (unlocked[i][j] > 0) {
                                         if (isAdjacent(i, j, passedPosition)) {
                                             System.out.print("[~] ");
@@ -472,6 +472,17 @@ public class DungeonGenerator {
                                         }
                                     } else {
                                         System.out.print(greenColor + "[?] " + resetColor);
+                                    }
+                                }
+                                case 3, 5 -> {
+                                    if (unlocked[i][j] > 0) {
+                                        if (isAdjacent(i, j, passedPosition)) {
+                                            System.out.print("[~] ");
+                                        } else {
+                                            System.out.print("[■] ");
+                                        }
+                                    } else {
+                                        System.out.print(greenColor + "[K] " + resetColor);
                                     }
                                 }
                                 case 8 ->

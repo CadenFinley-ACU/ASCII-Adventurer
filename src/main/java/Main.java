@@ -162,24 +162,12 @@ public class Main {
 
     
      
-               
         
-          
-              
-          
-                              
-          
-                  
         
            
               
              
                 
-           
-         
-           
-           
-           
            
 
     
@@ -636,24 +624,13 @@ public class Main {
     }
 
     public static void printStatus() { //print the status of the player
-        String redColor = "\033[1;31m"; // red color
-        String yellowColor = "\033[1;33m"; // yellow color
-        String greenColor = "\033[1;32m"; // green color
-        String healthColor;
-        String resetColor = "\033[0m"; // reset to default color
         if(getSavedPlace() != null) {
             TextEngine.printNoDelay(Player.getName()+"'s adventure through the "+getSavedPlace(), false);
         } else {
             TextEngine.printNoDelay(Player.getName()+"'s adventure", false);
         }
-        if(Player.getHealth() > Player.getMaxHealth()/2) {
-            healthColor = greenColor;
-        } else if (Player.getHealth() <= Player.getMaxHealth() / 2 && Player.getHealth() > (Player.getMaxHealth() / 4)+(Player.getMaxHealth()/10)) {
-            healthColor = yellowColor;
-        } else {
-            healthColor = redColor;
-        }
-        TextEngine.printNoDelay("Health: " + healthColor+Player.getHealth()+resetColor, false);
+        //TextEngine.printNoDelay("Health: " + healthColor+Player.getHealth()+resetColor, false);
+        Player.drawHealthBar();
         TextEngine.printNoDelay("\n", false);
     }
 

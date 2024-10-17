@@ -29,6 +29,7 @@ public class Player {
     public static String resetColor = "\033[0m"; // reset to default color
     public static String redColor = "\033[1;31m"; // red color
     public static String greenColor = "\033[1;32m"; // green color
+    public static String healthColor = "";
 
     public static void playerStart() throws InterruptedException { //start the player
         maxHealth = 100;
@@ -303,25 +304,11 @@ public class Player {
     }
 
     public static void printStats() throws InterruptedException { //print the stats
-        String redColor = "\033[1;31m"; // red color
-        String yellowColor = "\033[1;33m"; // yellow color
-        String greenColor = "\033[1;32m"; // green color
-        String healthColor;
-        String resetColor = "\033[0m"; // reset to default color
-
-        if (getHealth() > getMaxHealth() / 2) {
-            healthColor = greenColor;
-        } else if (getHealth() <= getMaxHealth() / 2 && getHealth() > (getMaxHealth() / 4) + (getMaxHealth() / 10)) {
-            healthColor = yellowColor;
-        } else {
-            healthColor = redColor;
-        }
-
         InventoryManager.setStatsToHighestInInventory();
         TextEngine.clearScreen();
         TextEngine.printNoDelay("Player Stats:", false);
         TextEngine.printNoDelay("Name: " + name, false);
-        TextEngine.printNoDelay("Health: " + healthColor + health + resetColor + "/" + maxHealth, false);
+        drawHealthBar();
         TextEngine.printNoDelay("Gold: " + gold, false);
         TextEngine.printNoDelay("Damage: " + damage, false);
         TextEngine.printNoDelay("Defense: " + defense, false);
@@ -546,5 +533,29 @@ public class Player {
         TextEngine.printWithDelays(space + "Your name has been changed to " + brightYellowStart + name + brightEnd, false);
         TextEngine.enterToNext();
         Main.startMenu();
+    }
+
+    public static void drawHealthBar() {
+        int hearts = 20;
+        int filledBars = (int) Math.round(((double) health / maxHealth) * hearts);
+        if (getHealth() > Player.getMaxHealth() / 2) {
+            healthColor = greenColor;
+        } else if (getHealth() <= getMaxHealth() / 2 && getHealth() > (getMaxHealth() / 4) + (getMaxHealth() / 10)) {
+            healthColor = yellowColor;
+        } else {
+            healthColor = redColor;
+        }
+        StringBuilder bar = new StringBuilder("[");
+        for (int i = 0; i < hearts; i++) {
+            if (i < filledBars) {
+                bar.append(healthColor).append("█").append(resetColor);
+            } else {
+                bar.append("_");
+            }
+        }
+        bar.append("]");
+        String healthBar = bar.toString();
+        TextEngine.printNoDelay("Health: " + health + " / " + maxHealth, false);
+        System.out.println(healthBar);
     }
 }
