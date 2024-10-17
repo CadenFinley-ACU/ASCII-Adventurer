@@ -146,6 +146,8 @@ public class DesertPyramidDungeon extends Dungeon {
         if (completed) {
             TextEngine.printWithDelays("You have completed this dungeon. You can now type " + yellowColor + "leave" + resetColor + " to exit this dungeon.", false);
         }
+        System.out.println("Type " + yellowColor + "map" + resetColor + " to see the map.");
+        System.out.println();
         TextEngine.printWithDelays("You can move in the following directions: ", false);
         //System.out.println(availableMove[0] + "" + availableMove[1] + "" + availableMove[2] + "" + availableMove[3]);
         if (availableMove[0] > 0) {

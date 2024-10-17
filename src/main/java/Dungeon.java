@@ -130,39 +130,113 @@ public class Dungeon extends Room {
                 }
             }
             case "map" -> {
-                Main.screenRefresh();
-                TextEngine.printWithDelays("You open your map and see the following:\n", false);
-                System.out.println();
                 switch (currentDungeon) {
                     case "Meadow" -> {
-                        DungeonGenerator.printAdjacentRoomsAndCurrentRoomAndUnlockedRooms(meadowDungeon, MeadowDungeon.roomsBeenTo, currentPlayerPosition, MeadowDungeon.mapRevealed);
+                        if (ableToUseMenuCommands()) {
+                            Main.screenRefresh();
+                            TextEngine.printWithDelays("You open your map and see the following:\n", false);
+                            System.out.println();
+                            DungeonGenerator.printAdjacentRoomsAndCurrentRoomAndUnlockedRooms(meadowDungeon, MeadowDungeon.roomsBeenTo, currentPlayerPosition, MeadowDungeon.mapRevealed);
+                            System.out.println();
+                            TextEngine.enterToNext();
+                            Main.loadSave();
+                        } else {
+                            TextEngine.printWithDelays("You cannot use the map right now", true);
+                        }
                     }
                     case "Dark Forest" -> {
-                        DungeonGenerator.printAdjacentRoomsAndCurrentRoomAndUnlockedRooms(darkForestDungeon, DarkForestDungeon.roomsBeenTo, currentPlayerPosition, DarkForestDungeon.mapRevealed);
+                        if (ableToUseMenuCommands()) {
+                            Main.screenRefresh();
+                            TextEngine.printWithDelays("You open your map and see the following:\n", false);
+                            System.out.println();
+                            DungeonGenerator.printAdjacentRoomsAndCurrentRoomAndUnlockedRooms(darkForestDungeon, DarkForestDungeon.roomsBeenTo, currentPlayerPosition, DarkForestDungeon.mapRevealed);
+                            System.out.println();
+                            TextEngine.enterToNext();
+                            Main.loadSave();
+                        } else {
+                            TextEngine.printWithDelays("You cannot use the map right now", true);
+                        }
                     }
                     case "Mountain Cave" -> {
-                        DungeonGenerator.printAdjacentRoomsAndCurrentRoomAndUnlockedRooms(mountainCaveDungeon, MountainCaveDungeon.roomsBeenTo, currentPlayerPosition, MountainCaveDungeon.mapRevealed);
+                        if (ableToUseMenuCommands()) {
+                            Main.screenRefresh();
+                            TextEngine.printWithDelays("You open your map and see the following:\n", false);
+                            System.out.println();
+                            DungeonGenerator.printAdjacentRoomsAndCurrentRoomAndUnlockedRooms(mountainCaveDungeon, MountainCaveDungeon.roomsBeenTo, currentPlayerPosition, MountainCaveDungeon.mapRevealed);
+                            System.out.println();
+                            TextEngine.enterToNext();
+                            Main.loadSave();
+                        } else {
+                            TextEngine.printWithDelays("You cannot use the map right now", true);
+                        }
                     }
                     case "Mountain Top" -> {
-                        DungeonGenerator.printAdjacentRoomsAndCurrentRoomAndUnlockedRooms(mountainTopDungeon, MountainTopDungeon.roomsBeenTo, currentPlayerPosition, MountainTopDungeon.mapRevealed);
+                        if (ableToUseMenuCommands()) {
+                            Main.screenRefresh();
+                            TextEngine.printWithDelays("You open your map and see the following:\n", false);
+                            System.out.println();
+                            DungeonGenerator.printAdjacentRoomsAndCurrentRoomAndUnlockedRooms(mountainTopDungeon, MountainTopDungeon.roomsBeenTo, currentPlayerPosition, MountainTopDungeon.mapRevealed);
+                            System.out.println();
+                            TextEngine.enterToNext();
+                            Main.loadSave();
+                        } else {
+                            TextEngine.printWithDelays("You cannot use the map right now", true);
+                        }
                     }
                     case "Desert Oasis" -> {
-                        DungeonGenerator.printAdjacentRoomsAndCurrentRoomAndUnlockedRooms(desertOasisDungeon, DesertOasisDungeon.roomsBeenTo, currentPlayerPosition, DesertOasisDungeon.mapRevealed);
+                        if (ableToUseMenuCommands()) {
+                            Main.screenRefresh();
+                            TextEngine.printWithDelays("You open your map and see the following:\n", false);
+                            System.out.println();
+                            DungeonGenerator.printAdjacentRoomsAndCurrentRoomAndUnlockedRooms(desertOasisDungeon, DesertOasisDungeon.roomsBeenTo, currentPlayerPosition, DesertOasisDungeon.mapRevealed);
+                            System.out.println();
+                            TextEngine.enterToNext();
+                            Main.loadSave();
+                        } else {
+                            TextEngine.printWithDelays("You cannot use the map right now", true);
+                        }
                     }
                     case "Desert Plains" -> {
-                        DungeonGenerator.printAdjacentRoomsAndCurrentRoomAndUnlockedRooms(desertPlainsDungeon, DesertPlainsDungeon.roomsBeenTo, currentPlayerPosition, DesertPlainsDungeon.mapRevealed);
+                        if (ableToUseMenuCommands()) {
+                            Main.screenRefresh();
+                            TextEngine.printWithDelays("You open your map and see the following:\n", false);
+                            System.out.println();
+                            DungeonGenerator.printAdjacentRoomsAndCurrentRoomAndUnlockedRooms(desertPlainsDungeon, DesertPlainsDungeon.roomsBeenTo, currentPlayerPosition, DesertPlainsDungeon.mapRevealed);
+                            System.out.println();
+                            TextEngine.enterToNext();
+                            Main.loadSave();
+                        } else {
+                            TextEngine.printWithDelays("You cannot use the map right now", true);
+                        }
                     }
                     case "Desert Pyramid" -> {
-                        DungeonGenerator.printAdjacentRoomsAndCurrentRoomAndUnlockedRooms(desertPyramidDungeon, DesertPyramidDungeon.roomsBeenTo, currentPlayerPosition, DesertPyramidDungeon.mapRevealed);
+                        if (ableToUseMenuCommands()) {
+                            Main.screenRefresh();
+                            TextEngine.printWithDelays("You open your map and see the following:\n", false);
+                            System.out.println();
+                            DungeonGenerator.printAdjacentRoomsAndCurrentRoomAndUnlockedRooms(desertPyramidDungeon, DesertPyramidDungeon.roomsBeenTo, currentPlayerPosition, DesertPyramidDungeon.mapRevealed);
+                            System.out.println();
+                            TextEngine.enterToNext();
+                            Main.loadSave();
+                        } else {
+                            TextEngine.printWithDelays("You cannot use the map right now", true);
+                        }
                     }
                     case "Ocean Kingdom" -> {
-                        DungeonGenerator.printAdjacentRoomsAndCurrentRoomAndUnlockedRooms(oceanKingdomDungeon, OceanKingdomDungeon.roomsBeenTo, currentPlayerPosition, OceanKingdomDungeon.mapRevealed);
+                        if (ableToUseMenuCommands()) {
+                            Main.screenRefresh();
+                            TextEngine.printWithDelays("You open your map and see the following:\n", false);
+                            System.out.println();
+                            DungeonGenerator.printAdjacentRoomsAndCurrentRoomAndUnlockedRooms(oceanKingdomDungeon, OceanKingdomDungeon.roomsBeenTo, currentPlayerPosition, OceanKingdomDungeon.mapRevealed);
+                            System.out.println();
+                            TextEngine.enterToNext();
+                            Main.loadSave();
+                        } else {
+                            TextEngine.printWithDelays("You cannot use the map right now", true);
+                        }
                     }
                     //add more dungeons here if needed
                 }
-                System.out.println();
-                TextEngine.enterToNext();
-                Main.loadSave();
             }
             default -> {
                 Main.inGameDefaultTextHandling(data);
@@ -666,6 +740,42 @@ public class Dungeon extends Room {
             }
             default -> {
                 return false;
+            }
+        }
+    }
+
+    public static boolean ableToUseMenuCommands() {
+        if ("OpenWorld".equals(Main.getSavedPlace()) || "Village".equals(Main.getSavedPlace())) {
+            return true;
+        }
+        
+        switch (currentDungeon) {
+            case "Meadow" -> {
+                return (!(meadowDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] == 3 || meadowDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] == 4 || (meadowDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] == 1 && MeadowDungeon.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] == 0)));
+            }
+            case "Dark Forest" -> {
+                return (!(darkForestDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] == 3 || darkForestDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] == 4 || (darkForestDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] == 1 && DarkForestDungeon.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] == 0)));
+            }
+            case "Mountain Cave" -> {
+                return (!(mountainCaveDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] == 3 || mountainCaveDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] == 4 || (mountainCaveDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] == 1 && MountainCaveDungeon.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] == 0)));
+            }
+            case "Mountain Top" -> {
+                return (!(mountainTopDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] == 3 || mountainTopDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] == 4 || (mountainTopDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] == 1 && MountainTopDungeon.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] == 0)));
+            }
+            case "Desert Oasis" -> {
+                return (!(desertOasisDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] == 3 || desertOasisDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] == 4 || (desertOasisDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] == 1 && DesertOasisDungeon.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] == 0)));
+            }
+            case "Desert Plains" -> {
+                return (!(desertPlainsDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] == 3 || desertPlainsDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] == 4 || (desertPlainsDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] == 1 && DesertPlainsDungeon.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] == 0)));
+            }
+            case "Desert Pyramid" -> {
+                return (!(desertPyramidDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] == 3 || desertPyramidDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] == 4 || (desertPyramidDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] == 1 && DesertPyramidDungeon.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] == 0)));
+            }
+            case "Ocean Kingdom" -> {
+                return (!(oceanKingdomDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] == 3 || oceanKingdomDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] == 4 || (oceanKingdomDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] == 1 && OceanKingdomDungeon.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] == 0)));
+            }
+            default -> {
+                return true;
             }
         }
     }

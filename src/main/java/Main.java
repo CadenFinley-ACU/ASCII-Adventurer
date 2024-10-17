@@ -300,17 +300,6 @@ public class Main {
               
 
     
-    
-                                                         
-              
-                                                                 
-              
-        
-                 
-              
-             
-
-    
      
              
 
@@ -321,34 +310,53 @@ public class Main {
     
     
         
-                  
             
-            
-                 
+                      
+                
+                
+                     
+                          
+                    
+                          
+                       
+                
                       
                 
                       
-                   
-            
-                  
-            
-                  
-            
-            
                 
+                
+                    
+                    
+                     
+                       
+                
+                
+                     
+                    
+                       
+                
+                      
+                
+                      
+                
+                      
+                  
+              
+        
+            
+                      
+                
+                
+                    
+                    
+                     
+                       
                 
                  
-                   
-            
-            
-                 
+                    
+                       
                 
-                   
-            
-                  
-            
-                  
-            
+                      
                   
               
               
@@ -386,11 +394,7 @@ public class Main {
              
 
     
-    
-                                                         
-              
-                                                                 
-              
+                                                             
              
 
     
@@ -408,11 +412,7 @@ public class Main {
     
 
     private static void displayHelp() throws InterruptedException { //main menu help command
-        if (getSavedPlace().equals("OpenWorld")) {
             TextEngine.printWithDelays("Things you could say:\n" +yellowColor+ "stats" +resetColor+" to see your stats\n" +yellowColor+ "inventory" +resetColor+ " to see your inventory\n" +yellowColor+ "heal" +resetColor+ " to heal you health using any available healing potions\n" +yellowColor+ "settings" +resetColor+ " or type " +yellowColor+ "save" +resetColor+ " to save\n" +yellowColor+ "map" +resetColor+ " to see the map\n" +yellowColor+ "exit" +resetColor+ " to return to the main menu.", true);
-        } else {
-            TextEngine.printWithDelays("Things you could say:\n" +yellowColor+ "stats" +resetColor+ " to see your stats\n" +yellowColor+ "inventory" +resetColor+ " to see your inventory\n" +yellowColor+ "heal" +resetColor+ " to heal you health using any available healing potions\n" +yellowColor+ "settings" +resetColor+ " or type " +yellowColor+ "save" +resetColor+ " to save\n" +yellowColor+ "exit" +resetColor+ " to return to the main menu.", true);
-        }
     }
 
     private static void exitGame() throws InterruptedException {   //exit game command
@@ -448,38 +448,58 @@ public class Main {
     }
 
     public static void inGameDefaultTextHandling(String data) throws InterruptedException { //default in game commands
-        switch (data) {
-            case "help" ->
-                displayInGameHelp();
-            case "inventory" ->
-                Player.openInventory();
-            case "settings" ->
-                SettingsMenu.start();
-            case "save" ->  {
-                checkSave(getSavedPlace());
-                TextEngine.printWithDelays("Game saved!", false);
-                TextEngine.enterToNext();
-            }
-            case "exit" -> {
-                TextEngine.printWithDelays("Returning to main menu.", false);
-                TextEngine.clearScreen();
-                GameSaveSerialization.saveGame();
-                startMenu();
-            }
-            case "heal" ->
-                Player.heal();
-            case "stats" ->
-                Player.printStats();
-            case "map" -> {
-                if (getSavedPlace().equals("OpenWorld")) {
-                    Player.printMap();
-                } else {
-                    TextEngine.printWithDelays("You cannot use that command here.", true);
+        if (!Dungeon.ableToUseMenuCommands()){
+            switch (data) {
+                case "help" ->
+                    displayHelp();
+                case "save" ->  {
+                    checkSave(getSavedPlace());
+                    TextEngine.printWithDelays("Game saved!", true);
                 }
+                case "exit" -> {
+                    TextEngine.printWithDelays("Returning to main menu.", false);
+                    TextEngine.clearScreen();
+                    GameSaveSerialization.saveGame();
+                    startMenu();
+                }
+                default ->
+                    invalidCommandWithBuffer();
             }
-            default ->
-                invalidCommandWithBuffer();
         }
+        else { 
+            switch (data) {
+                case "help" ->
+                    displayHelp();
+                case "inventory" ->
+                    Player.openInventory();
+                case "settings" ->
+                    SettingsMenu.start();
+                case "save" ->  {
+                    checkSave(getSavedPlace());
+                    TextEngine.printWithDelays("Game saved!", false);
+                    TextEngine.enterToNext();
+                }
+                case "exit" -> {
+                    TextEngine.printWithDelays("Returning to main menu.", false);
+                    TextEngine.clearScreen();
+                    GameSaveSerialization.saveGame();
+                    startMenu();
+                }
+                case "heal" ->
+                    Player.heal();
+                case "stats" ->
+                    Player.printStats();
+                case "map" -> {
+                    if (getSavedPlace().equals("OpenWorld")) {
+                        Player.printMap();
+                    } else {
+                        TextEngine.printWithDelays("You cannot use that command here.", true);
+                    }
+                }
+                default ->
+                    invalidCommandWithBuffer();
+            }
+        }  
     }
 
     public static void invalidCommandWithBuffer() throws InterruptedException {
@@ -488,18 +508,6 @@ public class Main {
 
     public static void invalidCommand() throws InterruptedException {
         TextEngine.printWithDelays("I'm sorry, I don't understand that command.", false);
-    }
-
-    private static void displayInGameHelp() throws InterruptedException { //in game help command
-        if (getSavedPlace().equals("Dungeon")) {
-            TextEngine.printWithDelays("You can type " +yellowColor+ "restart" +resetColor+ " to restart the dungeon", false);
-        }
-        if (getSavedPlace().equals("OpenWorld")) {
-            TextEngine.printWithDelays("Things you could say:\n" +yellowColor+ "stats" +resetColor+ " to see your stats\n" +yellowColor+ "inventory" +resetColor+ " to see your inventory\n" +yellowColor+ "heal" +resetColor+ " to heal you health using any available healing potions\n" +yellowColor+ "settings" +resetColor+ " or type " +yellowColor+ "save" +resetColor+ " to save\n" +yellowColor+ "map" +resetColor+ " to see the map\n" +yellowColor+ "exit" +resetColor+ " to return to the main menu.", true);
-        } else {
-            TextEngine.printWithDelays("Things you could say:\n" +yellowColor+ "stats" +resetColor+ " to see your stats\n" +yellowColor+ "inventory" +resetColor+ " to see your inventory\n" +yellowColor+ "heal" +resetColor+ " to heal you health using any available healing potions\n" +yellowColor+ "settings" +resetColor+ " or type " +yellowColor+ "save" +resetColor+ " to save\n" +yellowColor+ "exit" +resetColor+ " to return to the main menu.", true);
-        }
-
     }
 
     public static void saveSpace(String place) throws InterruptedException { //save game command

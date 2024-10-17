@@ -665,6 +665,59 @@ public class DungeonGenerator {
             {"|", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "|"},
             {"└", "─", "─", "─", "─", "─", "─", "─", "─", "─", "─", "─", "─", "─", "┘"}
         };
+        //render room objects
+        if (visitedRoom[x][y] > 0) {
+            room[2][7] = "P"; // Player
+        } else {
+            switch (localDungeon[x][y]) {
+                case 1, 3 -> {
+                    room[2][7] = "P"; // Player
+                    List<int[]> emptySpots = new ArrayList<>();
+                    Random random = new Random();
+                    // Collect all empty spots in the room
+                    for (int row = 0; row < room.length; row++) {
+                        for (int col = 0; col < room[row].length; col++) {
+                            if (room[row][col].equals(" ")) { // Assuming ' ' represents an empty spot
+                                emptySpots.add(new int[]{row, col});
+                            }
+                        }
+                    }
+                    // Place enemies at random empty spots
+                    for (int i = 0; i < numberofEnemies && !emptySpots.isEmpty(); i++) {
+                        int randomIndex = random.nextInt(emptySpots.size());
+                        int[] spot = emptySpots.remove(randomIndex);
+                        room[spot[0]][spot[1]] = redColor + "E" + resetColor; // Enemy
+                    }
+                }
+                case 2 -> {
+                    room[2][5] = "P"; // Item Room
+                    room[2][7] = greenColor + "C" + resetColor; // Item
+                }
+                case 5 -> {
+                    room[2][5] = "P"; // key Room
+                    room[2][7] = greenColor + "K" + resetColor; // key
+                }
+                case 7 -> {
+                    room[2][5] = "P"; // heart container Room
+                    room[2][7] = redColor + "H" + resetColor; // heart container
+                }
+                case 6 -> {
+                    room[2][5] = "P"; // Shop Room
+                    room[2][7] = greenColor + "$" + resetColor; // Shop
+                }
+                case 4 -> {
+                    room[2][5] = "P"; // Mini Boss Room
+                    room[2][7] = redColor + "M" + resetColor; // Mini Boss
+                }
+                case 8 -> {
+                    room[2][5] = "P"; // Boss Room
+                    room[2][7] = redColor + "B" + resetColor; // Boss
+                }
+                default -> {
+                    room[2][7] = "P"; // Default
+                }
+            }
+        }
         //get the last postino to render the last position icon
         if (Dungeon.lastPosition != null) {
             if (x - 1 == Dungeon.lastPosition[0] && y == Dungeon.lastPosition[1]) {
@@ -839,60 +892,6 @@ public class DungeonGenerator {
                 room[2][14] = "│";
         }
 
-        //render room objects
-        if (visitedRoom[x][y] > 0) {
-            room[2][7] = "P"; // Player
-        } else {
-            switch (localDungeon[x][y]) {
-                case 1, 3 -> {
-                    room[2][7] = "P"; // Player
-                    List<int[]> emptySpots = new ArrayList<>();
-                    Random random = new Random();
-                    // Collect all empty spots in the room
-                    for (int row = 0; row < room.length; row++) {
-                        for (int col = 0; col < room[row].length; col++) {
-                            if (room[row][col].equals(" ")) { // Assuming ' ' represents an empty spot
-                                emptySpots.add(new int[]{row, col});
-                            }
-                        }
-                    }
-                    // Place enemies at random empty spots
-                    for (int i = 0; i < numberofEnemies && !emptySpots.isEmpty(); i++) {
-                        int randomIndex = random.nextInt(emptySpots.size());
-                        int[] spot = emptySpots.remove(randomIndex);
-                        room[spot[0]][spot[1]] = redColor + "E" + resetColor; // Enemy
-                    }
-                }
-                case 2 -> {
-                    room[2][5] = "P"; // Item Room
-                    room[2][7] = greenColor + "C" + resetColor; // Item
-                }
-                case 5 -> {
-                    room[2][5] = "P"; // key Room
-                    room[2][7] = greenColor + "K" + resetColor; // key
-                }
-                case 7 -> {
-                    room[2][5] = "P"; // heart container Room
-                    room[2][7] = redColor + "H" + resetColor; // heart container
-                }
-                case 6 -> {
-                    room[2][5] = "P"; // Shop Room
-                    room[2][7] = greenColor + "$" + resetColor; // Shop
-                }
-                case 4 -> {
-                    room[2][5] = "P"; // Mini Boss Room
-                    room[2][7] = redColor + "M" + resetColor; // Mini Boss
-                }
-                case 8 -> {
-                    room[2][5] = "P"; // Boss Room
-                    room[2][7] = redColor + "B" + resetColor; // Boss
-                }
-                default -> {
-                    room[2][7] = "P"; // Default
-                }
-            }
-        }
-
         // Print the room to the console
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 15; j++) {
@@ -900,7 +899,6 @@ public class DungeonGenerator {
             }
             System.out.println();
         }
-        System.out.println("Type " + yellowColor + "map" + resetColor + " to see the map.");
         System.out.println();
     }
 }
