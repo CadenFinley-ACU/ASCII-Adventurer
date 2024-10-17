@@ -91,7 +91,10 @@ public class OceanKingdomDungeon extends Dungeon {
                         Main.loadSave();
                     }
                     case "no" -> {
-                        handleDirectionsAndCommands();
+                        int[] buffer = currentPlayerPosition.clone();
+                        currentPlayerPosition = lastPosition.clone(); // Save the current position before moving
+                        lastPosition = buffer.clone();
+                        Main.loadSave();
                     }
                     default -> {
                         defaultDungeonArgs(command);
