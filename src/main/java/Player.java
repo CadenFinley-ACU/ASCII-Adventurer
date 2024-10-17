@@ -59,10 +59,12 @@ public class Player {
         command = console.readLine();
         switch (command) {
             case "1" -> {
-                SpawnRoom.startRoom();
+                Main.saveSpace("SpawnRoom");
+                Main.loadSave();
             }
             case "2" -> {
-                OpenWorld.startRoom();
+                Main.saveSpace("OpenWorld");
+                Main.loadSave();
             }
             case "3" -> {
                 TextEngine.printNoDelay(" 1:Meadow\n 2:Dark Forest\n 3:Mountain Cave\n 4:Mountain Top\n 5:Desert Oasis\n 6:Desert Plains\n 7 Desert Pyramid\n 8:Ocean Kingdom", false);
@@ -71,31 +73,48 @@ public class Player {
                 command = console.readLine();
                 switch (command) {
                     case "1" -> {
-                        MeadowDungeon.startRoom();
+                        Room.room = "Meadow Dungeon";
+                        Main.checkSave(Room.room);
+                        Main.loadSave();
                     }
                     case "2" -> {
-                        DarkForestDungeon.startRoom();
+                        Room.room = "Dark Forest Dungeon";
+                        Main.checkSave(Room.room);
+                        Main.loadSave();
                     }
                     case "3" -> {
-                        MountainCaveDungeon.startRoom();
+                        Room.room = "Mountain Cave Dungeon";
+                        Main.checkSave(Room.room);
+                        Main.loadSave();
                     }
                     case "4" -> {
-                        MountainTopDungeon.startRoom();
+                        Room.room = "Mountain Top Dungeon";
+                        Main.checkSave(Room.room);
+                        Main.loadSave();
                     }
                     case "5" -> {
-                        DesertOasisDungeon.startRoom();
+                        Room.room = "Desert Oasis Dungeon";
+                        Main.checkSave(Room.room);
+                        Main.loadSave();
                     }
                     case "6" -> {
-                        DesertPlainsDungeon.startRoom();
+                        Room.room = "Desert Plains Dungeon";
+                        Main.checkSave(Room.room);
+                        Main.loadSave();
                     }
                     case "7" -> {
-                        DesertPyramidDungeon.startRoom();
+                        Room.room = "Desert Pyramid Dungeon";
+                        Main.checkSave(Room.room);
+                        Main.loadSave();
                     }
                     case "8" -> {
-                        OceanKingdomDungeon.startRoom();
+                        Room.room = "Ocean Kingdom Dungeon";
+                        Main.checkSave(Room.room);
+                        Main.loadSave();
                     }
                     default -> {
-                        SpawnRoom.startRoom();
+                        Main.saveSpace("SpawnRoom");
+                        Main.loadSave();
                     }
                 }
             }
