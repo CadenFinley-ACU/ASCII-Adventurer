@@ -453,6 +453,7 @@ public class DungeonGenerator {
                 }
                 System.out.println();
             }
+            System.out.println();
             System.out.println("Map Key: [P] Player, [?] Item Room, [B] Boss Room, [S] Spawn Room, [$] Shop Room");
             System.out.println(" [~] Available Moves, [ ] Unvisited Room, [■] Visited Room");
         } else {
@@ -523,6 +524,7 @@ public class DungeonGenerator {
                 }
                 System.out.println();
             }
+            System.out.println();
             System.out.println("Map Key: [P] Player, [?] Item Room, [B] Boss Room, [S] Spawn Room, [$] Shop Room");
         }
     }

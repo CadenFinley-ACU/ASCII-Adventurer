@@ -28,7 +28,7 @@ public class MountainTopDungeon extends Dungeon {
         if (!visited) {
             fresh();
             visited = true;
-            items = new ArrayList<>(List.of("great sword", "knight armor", "greater health potion"));
+            items = new ArrayList<>(List.of("great sword", "knight armor"));
         }
         if (!"Mountain Top Dungeon".equals(Main.getSavedPlace())) {
             currentPlayerPosition = DungeonGenerator.findValue(Dungeon.mountainTopDungeon, 9);

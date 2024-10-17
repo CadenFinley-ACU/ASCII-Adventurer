@@ -412,10 +412,10 @@ public class Dungeon extends Room {
         TextEngine.printNoDelay("Inventory: " + Player.getTotalNumberOfItemsInInventory() + "/" + Player.inventorySize, false);
         TextEngine.printNoDelay("\n", false);
         TextEngine.printWithDelays("Welcome to the Dungeon shop Traveler! I snuck into this dungeon a long time ago and got lost.\nMaybe some of these items can help you on your journey.\nWhat would you like to buy?", false);
-        while (true) {
-            switch (localDungeon) {
-                case "Meadow", "Dark Forest", "Mountain Cave", "Mountain Top" -> {
-                    TextEngine.printNoDelay(yellowColor + "health potion" + resetColor + " ~20 gold\n" + yellowColor + "magic map" + resetColor + " ~50\n" + yellowColor + "K.O. Cannon" + resetColor + " ~3000 gold\nor " + yellowColor + " leave" + resetColor, true);
+        switch (localDungeon) {
+            case "Meadow", "Dark Forest", "Mountain Cave", "Mountain Top" -> {
+                TextEngine.printNoDelay(yellowColor + "health potion" + resetColor + " ~20 gold\n" + yellowColor + "magic map" + resetColor + " ~50\n" + yellowColor + "K.O. Cannon" + resetColor + " ~3000 gold\nor " + yellowColor + " leave" + resetColor, true);
+                while (true) {
                     ignore = Room.console.readLine();
                     command = Room.console.readLine();
                     switch (command.toLowerCase().trim()) {
@@ -461,8 +461,10 @@ public class Dungeon extends Room {
                         }
                     }
                 }
-                case "Desert Oasis", "Desert Plains", "Desert Pyramid" -> {
-                    TextEngine.printNoDelay(yellowColor + "greater health potion" + resetColor + " ~50 gold\n" + yellowColor + "magic map" + resetColor + " ~50\n" + yellowColor + "K.O. Cannon" + resetColor + " ~3000 gold\nor " + yellowColor + " leave" + resetColor, true);
+            }
+            case "Desert Oasis", "Desert Plains", "Desert Pyramid" -> {
+                TextEngine.printNoDelay(yellowColor + "greater health potion" + resetColor + " ~50 gold\n" + yellowColor + "magic map" + resetColor + " ~50\n" + yellowColor + "K.O. Cannon" + resetColor + " ~3000 gold\nor " + yellowColor + " leave" + resetColor, true);
+                while (true) {
                     ignore = Room.console.readLine();
                     command = Room.console.readLine();
                     switch (command.toLowerCase().trim()) {
@@ -508,8 +510,10 @@ public class Dungeon extends Room {
                         }
                     }
                 }
-                case "Ocean Kingdom" -> {
-                    TextEngine.printNoDelay(yellowColor + "super health potion" + resetColor + " ~75 gold\n" + yellowColor + "magic map" + resetColor + " ~50\n" + yellowColor + "K.O. Cannon" + resetColor + " ~3000 gold\nor " + yellowColor + " leave" + resetColor, true);
+            }
+            case "Ocean Kingdom" -> {
+                TextEngine.printNoDelay(yellowColor + "super health potion" + resetColor + " ~75 gold\n" + yellowColor + "magic map" + resetColor + " ~50\n" + yellowColor + "K.O. Cannon" + resetColor + " ~3000 gold\nor " + yellowColor + " leave" + resetColor, true);
+                while (true) {
                     ignore = Room.console.readLine();
                     command = Room.console.readLine();
                     switch (command.toLowerCase().trim()) {

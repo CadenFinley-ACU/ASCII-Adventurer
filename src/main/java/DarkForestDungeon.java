@@ -27,7 +27,7 @@ public class DarkForestDungeon extends Dungeon {
     public static void startRoom() throws InterruptedException { //start room
         if (!visited) {
             fresh();
-            items = new ArrayList<>(List.of("broad sword", "full armor kit", "health potion"));
+            items = new ArrayList<>(List.of("broad sword", "full armor kit"));
             visited = true;
         }
         if (!"Dark Forest Dungeon".equals(Main.getSavedPlace())) {

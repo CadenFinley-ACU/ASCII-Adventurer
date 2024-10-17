@@ -28,7 +28,7 @@ public class DesertPyramidDungeon extends Dungeon {
         if (!visited) {
             fresh();
             visited = true;
-            items = new ArrayList<>(List.of("excalibur", "angel armor", "super health potion"));
+            items = new ArrayList<>(List.of("excalibur", "angel armor"));
         }
         if (!"Desert Pyramid Dungeon".equals(Main.getSavedPlace())) {
             currentPlayerPosition = DungeonGenerator.findValue(Dungeon.desertPyramidDungeon, 9);

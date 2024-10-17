@@ -28,7 +28,7 @@ public class MountainCaveDungeon extends Dungeon {
         if (!visited) {
             fresh();
             visited = true;
-            items = new ArrayList<>(List.of("better sword", "ninja armor", "health potion"));
+            items = new ArrayList<>(List.of("better sword", "ninja armor"));
         }
         if (!"Mountain Cave Dungeon".equals(Main.getSavedPlace())) {
             currentPlayerPosition = DungeonGenerator.findValue(Dungeon.mountainCaveDungeon, 9);

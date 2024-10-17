@@ -28,7 +28,7 @@ public class DesertOasisDungeon extends Dungeon {
         if (!visited) {
             fresh();
             visited = true;
-            items = new ArrayList<>(List.of("master sword", "royal armor", "greater health potion"));
+            items = new ArrayList<>(List.of("master sword", "royal armor"));
         }
         if (!"Desert Oasis Dungeon".equals(Main.getSavedPlace())) {
             currentPlayerPosition = DungeonGenerator.findValue(Dungeon.desertOasisDungeon, 9);

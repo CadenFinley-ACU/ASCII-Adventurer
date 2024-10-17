@@ -28,7 +28,7 @@ public class OceanKingdomDungeon extends Dungeon {
         if (!visited) {
             fresh();
             visited = true;
-            items = new ArrayList<>(List.of("god slayer hammer", "god slayer armor", "super health potion"));
+            items = new ArrayList<>(List.of("god slayer hammer", "god slayer armor"));
         }
         if (!"Ocean Kingdom Dungeon".equals(Main.getSavedPlace())) {
             currentPlayerPosition = DungeonGenerator.findValue(Dungeon.oceanKingdomDungeon, 9);

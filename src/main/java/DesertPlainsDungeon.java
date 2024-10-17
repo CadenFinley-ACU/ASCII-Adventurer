@@ -27,7 +27,7 @@ public class DesertPlainsDungeon extends Dungeon {
     public static void startRoom() throws InterruptedException { //start room
         if (!visited) {
             fresh();
-            items = new ArrayList<>(List.of("legendary sword", "demon armor", "greater health potion"));
+            items = new ArrayList<>(List.of("legendary sword", "demon armor"));
             visited = true;
         }
         if (!"Desert Plains Dungeon".equals(Main.getSavedPlace())) {
