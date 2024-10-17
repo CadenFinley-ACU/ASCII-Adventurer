@@ -92,7 +92,7 @@ public class Main {
         InventoryManager.createItem("potion", "Backpack", 15);
         InventoryManager.createItem("potion", "Large Backpack", 30);
 
-        InventoryManager.createItem("potion", "heart container", 10);
+        InventoryManager.createItem("potion", "heart container", 20);
 
         InventoryManager.createItem("key", "key", 0);
     }
