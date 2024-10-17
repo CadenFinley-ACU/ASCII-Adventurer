@@ -473,7 +473,7 @@ public class DungeonGenerator {
                         } else {
                             switch (passedMatrix[i][j]) {
                                 case 2, 7 -> {
-                                    if (unlocked[i][j] > 0) {
+                                    if (unlocked[i][j] == 2 || unlocked[i][j] == 7) {
                                         if (isAdjacent(i, j, passedPosition)) {
                                             System.out.print("[~] ");
                                         } else {
@@ -484,7 +484,7 @@ public class DungeonGenerator {
                                     }
                                 }
                                 case 3, 5 -> {
-                                    if (unlocked[i][j] > 0) {
+                                    if (unlocked[i][j] == 3 || unlocked[i][j] == 5) {
                                         if (isAdjacent(i, j, passedPosition)) {
                                             System.out.print("[~] ");
                                         } else {
@@ -497,7 +497,7 @@ public class DungeonGenerator {
                                 case 8 ->
                                     System.out.print(redColor + "[B] " + resetColor);
                                 case 4 -> {
-                                    if (unlocked[i][j] > 0) {
+                                    if (unlocked[i][j] == 4) {
                                         if (isAdjacent(i, j, passedPosition)) {
                                             System.out.print("[~] ");
                                         } else {
@@ -514,7 +514,7 @@ public class DungeonGenerator {
                                     System.out.print(greenColor + "[$] " + resetColor);
                                 }
                                 case 1 -> {
-                                    if (unlocked[i][j] > 0) {
+                                    if (unlocked[i][j] == 1) {
                                         if (isAdjacent(i, j, passedPosition)) {
                                             System.out.print("[~] ");
                                         } else {
@@ -525,7 +525,7 @@ public class DungeonGenerator {
                                     }
                                 }
                                 case 10 -> {
-                                    if (unlocked[i][j] > 0) {
+                                    if (unlocked[i][j] == 10) {
                                         if (isAdjacent(i, j, passedPosition)) {
                                             System.out.print("[~] ");
                                         } else {
