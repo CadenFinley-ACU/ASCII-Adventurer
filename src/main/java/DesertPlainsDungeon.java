@@ -93,7 +93,8 @@ public class DesertPlainsDungeon extends Dungeon {
         if (desertPlainsDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] == 1 && roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] == 0) {
             fightRandomEnemies();
         }
-        if (desertPlainsDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] == 6 && roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] == 0) {
+        if (desertPlainsDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] == 6) {
+            roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = desertPlainsDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
             dungeonShop();
         }
         if (desertPlainsDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] == 4 && roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] == 0) {

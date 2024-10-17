@@ -94,6 +94,7 @@ public class OceanKingdomDungeon extends Dungeon {
             fightRandomEnemies();
         }
         if (oceanKingdomDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] == 6) {
+            roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = oceanKingdomDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
             dungeonShop();
         }
         if (oceanKingdomDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] == 4 && roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] == 0) {

@@ -93,6 +93,7 @@ public class MeadowDungeon extends Dungeon {
             fightRandomEnemies();
         }
         if (meadowDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] == 6) {
+            roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = meadowDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
             dungeonShop();
         }
         if (meadowDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] == 4 && roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] == 0) {
