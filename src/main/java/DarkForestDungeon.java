@@ -22,6 +22,7 @@ public class DarkForestDungeon extends Dungeon {
     private static final Random rand = new Random();
     public static boolean completed = false;
     public static boolean visited = false;
+    public static boolean mapRevealed;
 
     public static void startRoom() throws InterruptedException { //start room
         if (!visited) {
@@ -41,6 +42,7 @@ public class DarkForestDungeon extends Dungeon {
     }
 
     public static void fresh() { //fresh
+        mapRevealed = false;
         visited = false;
         completed = false;
         spawnPosition = DungeonGenerator.findValue(Dungeon.darkForestDungeon, 9);
@@ -92,10 +94,7 @@ public class DarkForestDungeon extends Dungeon {
             fightRandomEnemies();
         }
         if (darkForestDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] == 6 && roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] == 0) {
-            trappedRoom();
-            //lastPosition = currentPlayerPosition.clone();
-            roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = darkForestDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
-            Main.loadSave();
+            dungeonShop();
         }
         if (darkForestDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] == 4 && roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] == 0) {
             TextEngine.printWithDelays("You have entered a room with a mini boss", false);

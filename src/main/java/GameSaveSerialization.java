@@ -151,8 +151,25 @@ public class GameSaveSerialization {
         writeList(DesertPyramidDungeon.items, filePath);
         writeSeparator(filePath);
         writeList(OceanKingdomDungeon.items, filePath);
-        serializeAllLines(filePath, filePath);
+        writeSeparator(filePath);
+        writeValue(String.valueOf(MeadowDungeon.mapRevealed), filePath);
+        writeSeparator(filePath);
+        writeValue(String.valueOf(DarkForestDungeon.mapRevealed), filePath);
+        writeSeparator(filePath);
+        writeValue(String.valueOf(MountainCaveDungeon.mapRevealed), filePath);
+        writeSeparator(filePath);
+        writeValue(String.valueOf(MountainTopDungeon.mapRevealed), filePath);
+        writeSeparator(filePath);
+        writeValue(String.valueOf(DesertOasisDungeon.mapRevealed), filePath);
+        writeSeparator(filePath);
+        writeValue(String.valueOf(DesertPlainsDungeon.mapRevealed), filePath);
+        writeSeparator(filePath);
+        writeValue(String.valueOf(DesertPyramidDungeon.mapRevealed), filePath);
+        writeSeparator(filePath);
+        writeValue(String.valueOf(OceanKingdomDungeon.mapRevealed), filePath);
 
+        //do this after all other data is saved
+        serializeAllLines(filePath, filePath);
     }
 
     public static void loadGameSave() {
@@ -180,6 +197,7 @@ public class GameSaveSerialization {
                         }
                     }
                 }
+                //read decrypted data
                 buffer = reader.readLine();
                 String name = String.valueOf(reader.readLine());
                 buffer = reader.readLine();
@@ -299,6 +317,23 @@ public class GameSaveSerialization {
                 DesertPyramidDungeon.items = readList(reader);
                 buffer = reader.readLine();
                 OceanKingdomDungeon.items = readList(reader);
+                buffer = reader.readLine();
+                MeadowDungeon.mapRevealed = Boolean.parseBoolean(reader.readLine());
+                buffer = reader.readLine();
+                DarkForestDungeon.mapRevealed = Boolean.parseBoolean(reader.readLine());
+                buffer = reader.readLine();
+                MountainCaveDungeon.mapRevealed = Boolean.parseBoolean(reader.readLine());
+                buffer = reader.readLine();
+                MountainTopDungeon.mapRevealed = Boolean.parseBoolean(reader.readLine());
+                buffer = reader.readLine();
+                DesertOasisDungeon.mapRevealed = Boolean.parseBoolean(reader.readLine());
+                buffer = reader.readLine();
+                DesertPlainsDungeon.mapRevealed = Boolean.parseBoolean(reader.readLine());
+                buffer = reader.readLine();
+                DesertPyramidDungeon.mapRevealed = Boolean.parseBoolean(reader.readLine());
+                buffer = reader.readLine();
+                OceanKingdomDungeon.mapRevealed = Boolean.parseBoolean(reader.readLine());
+
             } catch (IOException | NumberFormatException e) {
                 e.printStackTrace();
                 System.out.println("Save File Corrupt or Invalid... ");
