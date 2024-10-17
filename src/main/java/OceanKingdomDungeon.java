@@ -74,11 +74,29 @@ public class OceanKingdomDungeon extends Dungeon {
                     Main.loadSave();
                 }
             } else {
-                TextEngine.printWithDelays("You have found all of the items in the dungeon.", false);
-                TextEngine.enterToNext();
-                //lastPosition = currentPlayerPosition.clone();
-                roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = oceanKingdomDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
-                Main.loadSave();
+                fairySequence();
+            }
+        }
+        if (oceanKingdomDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] == 10 && roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] == 0) {
+            TextEngine.printWithDelays("You have entered a room with a mystical fairy", false);
+            TextEngine.printWithDelays("The fairy has granted you a wish of healing?", false);
+            TextEngine.printWithDelays("Do you want to take it?" + yellowColor + "yes" + resetColor + " or " + yellowColor + "no" + resetColor, true);
+            while (true) {
+                ignore = Room.console.readLine();
+                command = Room.console.readLine();
+                switch (command) {
+                    case "yes" -> {
+                        Player.fairyHeal();
+                        roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = oceanKingdomDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
+                        Main.loadSave();
+                    }
+                    case "no" -> {
+                        handleDirectionsAndCommands();
+                    }
+                    default -> {
+                        defaultDungeonArgs(command);
+                    }
+                }
             }
         }
         if (oceanKingdomDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] == 3 && roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] == 0) {
@@ -326,28 +344,10 @@ public class OceanKingdomDungeon extends Dungeon {
         Player.changeHealth(Enemy.spawnEnemy("Leviathan", 1));
         oceanKingdomDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] = 7;
         Main.loadSave();
-        // TextEngine.printWithDelays("What is your command? " + yellowColor + "fight" + resetColor + " or " + yellowColor + "run" + resetColor, true);
-        // while (true) {
-        //     ignore = Room.console.readLine();
-        //     command = Room.console.readLine();
-        //     switch (command) {
-        //         case "fight" -> {
-        //             Player.changeHealth(Enemy.spawnEnemy("Leviathan", 1));
-        //             oceanKingdomDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] = 7;
-        //             Main.loadSave();
-        //         }
-        //         case "run" -> {
-        //             TextEngine.printWithDelays("You have successfully ran away from the mini boss", false);
-        //             TextEngine.enterToNext();
-        //             int[] buffer = currentPlayerPosition.clone();
-        //             currentPlayerPosition = lastPosition.clone(); // Save the current position before moving
-        //             lastPosition = buffer.clone();
-        //             Main.loadSave();
-        //         }
-        //         default -> {
-        //             defaultDungeonArgs(command);
-        //         }
-        //     }
-        // }
+    }
+
+    private static void fairySequence() throws InterruptedException {
+        oceanKingdomDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] = 10;
+        Main.loadSave();
     }
 }

@@ -18,6 +18,7 @@ public class DungeonGenerator {
     public static String resetColor = "\u001B[0m";
     public static String redColor = "\u001B[31m";
     public static String greenColor = "\u001B[32m";
+    public static String pinkColor = "\u001B[35m";
 
     public static void wipe() {
         matrix = null;
@@ -726,12 +727,16 @@ public class DungeonGenerator {
                     room[2][5] = "P"; // Boss Room
                     room[2][7] = redColor + "B" + resetColor; // Boss
                 }
+                case 10 -> {
+                    room[2][5] = "P"; // fairy Room
+                    room[2][7] = pinkColor + "F" + resetColor; // fairy
+                }
                 default -> {
                     room[2][7] = "P"; // Default
                 }
             }
         }
-        //get the last postino to render the last position icon
+        //get the last postinon to render the last position icon
         if (Dungeon.lastPosition != null) {
             if (x - 1 == Dungeon.lastPosition[0] && y == Dungeon.lastPosition[1]) {
                 moves[0] = 15;
@@ -787,6 +792,11 @@ public class DungeonGenerator {
                 room[0][6] = " ";
                 room[0][8] = " ";
             }
+            case 10 -> {
+                room[0][7] = pinkColor + "F" + resetColor;
+                room[0][6] = " ";
+                room[0][8] = " ";
+            }
             default ->
                 room[0][7] = "─";
         }
@@ -833,6 +843,11 @@ public class DungeonGenerator {
                 room[4][6] = " ";
                 room[4][8] = " ";
             }
+            case 10 -> {
+                room[4][7] = pinkColor + "F" + resetColor;
+                room[4][6] = " ";
+                room[4][8] = " ";
+            }
             default ->
                 room[4][7] = "─";
         }
@@ -866,6 +881,9 @@ public class DungeonGenerator {
             }
             case 6 -> {
                 room[2][0] = greenColor + "$" + resetColor;
+            }
+            case 10 -> {
+                room[2][0] = pinkColor + "F" + resetColor;
             }
             default ->
                 room[2][0] = "│";
@@ -901,6 +919,9 @@ public class DungeonGenerator {
             case 6 -> {
                 room[2][14] = greenColor + "$" + resetColor;
             }
+            case 10 -> {
+                room[2][14] = pinkColor + "F" + resetColor;
+            }
             default ->
                 room[2][14] = "│";
         }
@@ -915,3 +936,18 @@ public class DungeonGenerator {
         System.out.println();
     }
 }
+
+/*
+ * key
+ * 1 = enemy rooms
+ * 2 - item rooms
+ * 3 - enemy key rooms
+ * 4 - mini boss rooms
+ * 5 - key rooms
+ * 6 - shop rooms
+ * 7 - heart container rooms
+ * 8 - boss rooms
+ * 9 - spawn room
+ * 10 - fairy rooms
+ * 15 - last position
+ */

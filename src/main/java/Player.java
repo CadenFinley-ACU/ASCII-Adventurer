@@ -191,6 +191,12 @@ public class Player {
         TextEngine.enterToNext();
     }
 
+    public static void fairyHeal() throws InterruptedException {
+        health = maxHealth;
+        TextEngine.printNoDelay("You have been fully healed by the fairy!", false);
+        TextEngine.enterToNext();
+    }
+
     public static int getDamageCalc() {
         return (defense + (damage - (damage / 3)));
     }
