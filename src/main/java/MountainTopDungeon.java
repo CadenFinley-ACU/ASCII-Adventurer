@@ -288,7 +288,11 @@ public class MountainTopDungeon extends Dungeon {
         } else {
             TextEngine.printWithDelays("You have entered a room with a " + enemyType + " and were ambushed!", false);
         }
-        TextEngine.printWithDelays("They seem to be trying to protect something...", false);
+        if (numberOfEnemies > 1) {
+            TextEngine.printWithDelays("They seem to be trying to protect something...", false);
+        } else {
+            TextEngine.printWithDelays("It seems to be trying to protect something...", false);
+        }
         TextEngine.printWithDelays("What is your command? " + yellowColor + "fight" + resetColor + " or " + yellowColor + "run" + resetColor, true);
         while (true) {
             ignore = Room.console.readLine();

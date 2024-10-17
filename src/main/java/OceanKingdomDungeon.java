@@ -116,7 +116,7 @@ public class OceanKingdomDungeon extends Dungeon {
         }
         if (oceanKingdomDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] == 8 && roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] == 0) {
             TextEngine.printWithDelays("You have entered the boss room", false);
-            Player.changeHealth(Enemy.spawnEnemy("Kracken", 1));
+            Player.changeHealth(Enemy.spawnEnemy("Kraken", 1));
             TextEngine.printWithDelays("You have defeated the boss and completed the dungeon!", false);
             TextEngine.enterToNext();
             //lastPosition = currentPlayerPosition.clone();
@@ -288,7 +288,11 @@ public class OceanKingdomDungeon extends Dungeon {
         } else {
             TextEngine.printWithDelays("You have entered a room with a " + enemyType + " and were ambushed!", false);
         }
-        TextEngine.printWithDelays("They seem to be trying to protect something...", false);
+        if (numberOfEnemies > 1) {
+            TextEngine.printWithDelays("They seem to be trying to protect something...", false);
+        } else {
+            TextEngine.printWithDelays("It seems to be trying to protect something...", false);
+        }
         TextEngine.printWithDelays("What is your command? " + yellowColor + "fight" + resetColor + " or " + yellowColor + "run" + resetColor, true);
         while (true) {
             ignore = Room.console.readLine();

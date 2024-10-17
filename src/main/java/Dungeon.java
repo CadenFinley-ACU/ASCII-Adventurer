@@ -463,7 +463,7 @@ public class Dungeon extends Room {
                 }
             }
             case "Desert Oasis", "Desert Plains", "Desert Pyramid" -> {
-                TextEngine.printNoDelay(yellowColor + "greater health potion" + resetColor + " ~50 gold\n" + yellowColor + "magic map" + resetColor + " ~50\n" + yellowColor + "K.O. Cannon" + resetColor + " ~3000 gold\nor " + yellowColor + " leave" + resetColor, true);
+                TextEngine.printNoDelay(yellowColor + "greater health potion" + resetColor + " ~50 gold\n" + yellowColor + "magic map" + resetColor + " ~150\n" + yellowColor + "K.O. Cannon" + resetColor + " ~3000 gold\nor " + yellowColor + " leave" + resetColor, true);
                 while (true) {
                     ignore = Room.console.readLine();
                     command = Room.console.readLine();
@@ -472,8 +472,8 @@ public class Dungeon extends Room {
                             buyMultiple("greater health potion", 50);
                         }
                         case "magic map" -> {
-                            if (Player.getGold() >= 100 && !checkIfCurrentDungeonIsRevealed()) {
-                                Player.changeGold(-100);
+                            if (Player.getGold() >= 150 && !checkIfCurrentDungeonIsRevealed()) {
+                                Player.changeGold(-150);
                                 Dungeon.useMagicMap();
                                 keepShopping();
                                 break;
@@ -512,7 +512,7 @@ public class Dungeon extends Room {
                 }
             }
             case "Ocean Kingdom" -> {
-                TextEngine.printNoDelay(yellowColor + "super health potion" + resetColor + " ~75 gold\n" + yellowColor + "magic map" + resetColor + " ~50\n" + yellowColor + "K.O. Cannon" + resetColor + " ~3000 gold\nor " + yellowColor + " leave" + resetColor, true);
+                TextEngine.printNoDelay(yellowColor + "super health potion" + resetColor + " ~75 gold\n" + yellowColor + "magic map" + resetColor + " ~250\n" + yellowColor + "K.O. Cannon" + resetColor + " ~3000 gold\nor " + yellowColor + " leave" + resetColor, true);
                 while (true) {
                     ignore = Room.console.readLine();
                     command = Room.console.readLine();
@@ -521,8 +521,8 @@ public class Dungeon extends Room {
                             buyMultiple("super health potion", 75);
                         }
                         case "magic map" -> {
-                            if (Player.getGold() >= 200 && !checkIfCurrentDungeonIsRevealed()) {
-                                Player.changeGold(-200);
+                            if (Player.getGold() >= 250 && !checkIfCurrentDungeonIsRevealed()) {
+                                Player.changeGold(-250);
                                 Dungeon.useMagicMap();
                                 keepShopping();
                                 break;

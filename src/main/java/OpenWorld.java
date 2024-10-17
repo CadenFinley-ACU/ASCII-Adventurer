@@ -578,7 +578,7 @@ public class OpenWorld extends Room {
             }
             switch (command.toLowerCase().trim()) {
                 case "the ocean kingdom" -> {
-                    if (Dungeon.completedDungeons > 7) {
+                    if (Dungeon.completedDungeons > 6) {
                         OceanKingdomDungeon.startRoom();
                     } else {
                         TextEngine.printWithDelays("You must complete The Desert Pyramid dungeon first.\n Try going to the south", true);
