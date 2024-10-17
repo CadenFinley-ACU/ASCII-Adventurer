@@ -423,16 +423,31 @@ public class DungeonGenerator {
                             }
                         } else if (unlocked[i][j] > 0) {
                             switch (unlocked[i][j]) { //icon for visited rooms
-                                case 2, 5 ->
-                                    System.out.print(greenColor + "[I] " + resetColor); // Special marker for item rooms 
+                                case 2, 5 -> {
+                                    if (isAdjacent(i, j, passedPosition)) {
+                                        System.out.print("[~] ");
+                                    } else {
+                                        System.out.print(greenColor + "[I] " + resetColor); // Special marker for item rooms 
+                                    }
+                                }
                                 case 6 ->
                                     System.out.print(greenColor + "[$] " + resetColor); // Special marker for shop/trap room
                                 case 8 ->
                                     System.out.print(redColor + "[B] " + resetColor); // Special marker for boss room
-                                case 9 ->
-                                    System.out.print("[S] "); // Special marker for start room
-                                case 4 ->
-                                    System.out.print(redColor + "[!] " + resetColor); // Special marker for mini boss room
+                                case 9 -> {
+                                    if (isAdjacent(i, j, passedPosition)) {
+                                        System.out.print("[~] ");
+                                    } else {
+                                        System.out.print("[S] ");
+                                    }
+                                }
+                                case 4 -> {
+                                    if (isAdjacent(i, j, passedPosition)) {
+                                        System.out.print("[~] ");
+                                    } else {
+                                        System.out.print(redColor + "[!] " + resetColor);
+                                    }
+                                }
                                 default -> {
                                     if (isAdjacent(i, j, passedPosition)) {
                                         System.out.print("[~] ");
@@ -464,7 +479,11 @@ public class DungeonGenerator {
                             switch (passedMatrix[i][j]) {
                                 case 2, 3, 5 -> {
                                     if (unlocked[i][j] > 0) {
-                                        System.out.print("[■] ");
+                                        if (isAdjacent(i, j, passedPosition)) {
+                                            System.out.print("[~] ");
+                                        } else {
+                                            System.out.print("[■] ");
+                                        }
                                     } else {
                                         System.out.print(greenColor + "[?] " + resetColor);
                                     }
@@ -473,7 +492,11 @@ public class DungeonGenerator {
                                     System.out.print(redColor + "[B] " + resetColor);
                                 case 4 -> {
                                     if (unlocked[i][j] > 0) {
-                                        System.out.print("[■] ");
+                                        if (isAdjacent(i, j, passedPosition)) {
+                                            System.out.print("[~] ");
+                                        } else {
+                                            System.out.print("[■] ");
+                                        }
                                     } else {
                                         System.out.print(redColor + "[!] " + resetColor);
                                     }
@@ -482,15 +505,15 @@ public class DungeonGenerator {
                                     System.out.print("[S] ");
                                 }
                                 case 6 -> {
-                                    if (unlocked[i][j] > 0) {
-                                        System.out.print("[■] ");
-                                    } else {
-                                        System.out.print(greenColor + "[$] " + resetColor);
-                                    }
+                                    System.out.print(greenColor + "[$] " + resetColor);
                                 }
                                 case 1 -> {
                                     if (unlocked[i][j] > 0) {
-                                        System.out.print("[■] ");
+                                        if (isAdjacent(i, j, passedPosition)) {
+                                            System.out.print("[~] ");
+                                        } else {
+                                            System.out.print("[■] ");
+                                        }
                                     } else {
                                         System.out.print("[ ] ");
                                     }
