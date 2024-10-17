@@ -282,7 +282,6 @@ public class Dungeon extends Room {
         DesertPyramidDungeon.fresh();
         OceanKingdomDungeon.fresh();
         completedDungeons = 0;
-        GameSaveSerialization.saveGame();
     }
 
     public static void dungeonCheck() throws InterruptedException {
