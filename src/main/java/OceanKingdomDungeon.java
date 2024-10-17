@@ -266,8 +266,7 @@ public class OceanKingdomDungeon extends Dungeon {
                     Main.loadSave();
                 }
                 case "run" -> {
-                    TextEngine.printWithDelays("You have successfully ran away from the enemies", false);
-                    TextEngine.enterToNext();
+                    Player.changeHealth(Enemy.runSpawnEnemy(enemyType, numberOfEnemies));
                     int[] buffer = currentPlayerPosition.clone();
                     currentPlayerPosition = lastPosition.clone(); // Save the current position before moving
                     lastPosition = buffer.clone();
@@ -301,8 +300,7 @@ public class OceanKingdomDungeon extends Dungeon {
                     Main.loadSave();
                 }
                 case "run" -> {
-                    TextEngine.printWithDelays("You have successfully ran away from the enemies", false);
-                    TextEngine.enterToNext();
+                    Player.changeHealth(Enemy.runSpawnEnemy(enemyType, numberOfEnemies));
                     int[] buffer = currentPlayerPosition.clone();
                     currentPlayerPosition = lastPosition.clone(); // Save the current position before moving
                     lastPosition = buffer.clone();
@@ -317,28 +315,31 @@ public class OceanKingdomDungeon extends Dungeon {
 
     private static void miniBossSequence() throws InterruptedException {
         TextEngine.printWithDelays("You have entered a room with a mini boss", false);
-        TextEngine.printWithDelays("What is your command? " + yellowColor + "fight" + resetColor + " or " + yellowColor + "run" + resetColor, true);
-        while (true) {
-            ignore = Room.console.readLine();
-            command = Room.console.readLine();
-            switch (command) {
-                case "fight" -> {
-                    Player.changeHealth(Enemy.spawnEnemy("Leviathan", 1));
-                    oceanKingdomDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] = 7;
-                    Main.loadSave();
-                }
-                case "run" -> {
-                    TextEngine.printWithDelays("You have successfully ran away from the mini boss", false);
-                    TextEngine.enterToNext();
-                    int[] buffer = currentPlayerPosition.clone();
-                    currentPlayerPosition = lastPosition.clone(); // Save the current position before moving
-                    lastPosition = buffer.clone();
-                    Main.loadSave();
-                }
-                default -> {
-                    defaultDungeonArgs(command);
-                }
-            }
-        }
+        Player.changeHealth(Enemy.spawnEnemy("Leviathan", 1));
+        oceanKingdomDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] = 7;
+        Main.loadSave();
+        // TextEngine.printWithDelays("What is your command? " + yellowColor + "fight" + resetColor + " or " + yellowColor + "run" + resetColor, true);
+        // while (true) {
+        //     ignore = Room.console.readLine();
+        //     command = Room.console.readLine();
+        //     switch (command) {
+        //         case "fight" -> {
+        //             Player.changeHealth(Enemy.spawnEnemy("Leviathan", 1));
+        //             oceanKingdomDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] = 7;
+        //             Main.loadSave();
+        //         }
+        //         case "run" -> {
+        //             TextEngine.printWithDelays("You have successfully ran away from the mini boss", false);
+        //             TextEngine.enterToNext();
+        //             int[] buffer = currentPlayerPosition.clone();
+        //             currentPlayerPosition = lastPosition.clone(); // Save the current position before moving
+        //             lastPosition = buffer.clone();
+        //             Main.loadSave();
+        //         }
+        //         default -> {
+        //             defaultDungeonArgs(command);
+        //         }
+        //     }
+        // }
     }
 }
