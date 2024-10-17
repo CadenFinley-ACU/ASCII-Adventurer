@@ -101,6 +101,9 @@ public abstract class SettingsMenu {
                         continue;
                     }
                 }
+                case "change name" -> {
+                    Player.changeName();
+                }
                 case "exit" -> {
                     leave();
                     TextEngine.clearScreen();
@@ -194,6 +197,9 @@ public abstract class SettingsMenu {
                         TextEngine.clearScreen();
                         continue;
                     }
+                }
+                case "change name" -> {
+                    Player.changeName();
                 }
                 case "exit" -> {
                     leaveToStart();
