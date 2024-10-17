@@ -380,7 +380,15 @@ public class Dungeon extends Room {
                 command = Room.console.readLine();
                 switch (command.toLowerCase().trim()) {
                     case "yes" -> {
-                        return InventoryManager.useKey();
+                        if (InventoryManager.useKey()) {
+                            TextEngine.printWithDelays("The key was a perfect fit!", false);
+                            TextEngine.enterToNext();
+                            return true;
+                        } else {
+                            TextEngine.printWithDelays("You need a key to unlock the door to the boss room, i'm sure there is one around here somewhere", false);
+                            TextEngine.enterToNext();
+                            return false;
+                        }
                     }
                     case "no" -> {
                         return false;
@@ -665,49 +673,49 @@ public class Dungeon extends Room {
     }
 
     private static void leave() throws InterruptedException {
-        int[] buffer = currentPlayerPosition.clone();
-        currentPlayerPosition = lastPosition.clone(); // Save the current position before moving
-        lastPosition = buffer.clone();
+        // int[] buffer = currentPlayerPosition.clone();
+        // currentPlayerPosition = lastPosition.clone(); // Save the current position before moving
+        // lastPosition = buffer.clone();
         switch (currentDungeon) {
             case "Meadow" -> {
                 TextEngine.printWithDelays("You leave the shop and return to the Meadow Dungeon.", false);
                 TextEngine.enterToNext();
-                MeadowDungeon.startRoom();
+                MeadowDungeon.handleDirectionsAndCommands();
             }
             case "Dark Forest" -> {
                 TextEngine.printWithDelays("You leave the shop and return to the Dark Forest Dungeon.", false);
                 TextEngine.enterToNext();
-                DarkForestDungeon.startRoom();
+                DarkForestDungeon.handleDirectionsAndCommands();
             }
             case "Mountain Cave" -> {
                 TextEngine.printWithDelays("You leave the shop and return to the Mountain Cave Dungeon.", false);
                 TextEngine.enterToNext();
-                MountainCaveDungeon.startRoom();
+                MountainCaveDungeon.handleDirectionsAndCommands();
             }
             case "Mountain Top" -> {
                 TextEngine.printWithDelays("You leave the shop and return to the Mountain Top Dungeon.", false);
                 TextEngine.enterToNext();
-                MountainTopDungeon.startRoom();
+                MountainTopDungeon.handleDirectionsAndCommands();
             }
             case "Desert Oasis" -> {
                 TextEngine.printWithDelays("You leave the shop and return to the Desert Oasis Dungeon.", false);
                 TextEngine.enterToNext();
-                DesertOasisDungeon.startRoom();
+                DesertOasisDungeon.handleDirectionsAndCommands();
             }
             case "Desert Plains" -> {
                 TextEngine.printWithDelays("You leave the shop and return to the Desert Plains Dungeon.", false);
                 TextEngine.enterToNext();
-                DesertPlainsDungeon.startRoom();
+                DesertPlainsDungeon.handleDirectionsAndCommands();
             }
             case "Desert Pyramid" -> {
                 TextEngine.printWithDelays("You leave the shop and return to the Desert Pyramid Dungeon.", false);
                 TextEngine.enterToNext();
-                DesertPyramidDungeon.startRoom();
+                DesertPyramidDungeon.handleDirectionsAndCommands();
             }
             case "Ocean Kingdom" -> {
                 TextEngine.printWithDelays("You leave the shop and return to the Ocean Kingdom Dungeon.", false);
                 TextEngine.enterToNext();
-                OceanKingdomDungeon.startRoom();
+                OceanKingdomDungeon.handleDirectionsAndCommands();
             }
         }
     }
@@ -748,7 +756,7 @@ public class Dungeon extends Room {
         if ("OpenWorld".equals(Main.getSavedPlace()) || "Village".equals(Main.getSavedPlace())) {
             return true;
         }
-        
+
         switch (currentDungeon) {
             case "Meadow" -> {
                 return (!(meadowDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] == 3 || meadowDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] == 4 || (meadowDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] == 1 && MeadowDungeon.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] == 0)));

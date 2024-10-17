@@ -138,7 +138,7 @@ public class MountainTopDungeon extends Dungeon {
         return false;
     }
 
-    private static void handleDirectionsAndCommands() throws InterruptedException {
+    public static void handleDirectionsAndCommands() throws InterruptedException {
         Main.screenRefresh();
         DungeonGenerator.drawRoom(mountainTopDungeon, roomsBeenTo, currentPlayerPosition[0], currentPlayerPosition[1], 0);
         availableMove = DungeonGenerator.getDirections(mountainTopDungeon, currentPlayerPosition[0], currentPlayerPosition[1]);

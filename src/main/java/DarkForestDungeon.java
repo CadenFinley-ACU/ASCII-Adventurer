@@ -52,7 +52,7 @@ public class DarkForestDungeon extends Dungeon {
         lastPosition = spawnPosition.clone();
     }
 
-    private static void startRooms() throws InterruptedException {
+    public static void startRooms() throws InterruptedException {
         numberOfEnemies = rand.nextInt(4);
         enemyType = enemies.get(rand.nextInt(enemies.size()));
         availableMove = null;
@@ -135,7 +135,7 @@ public class DarkForestDungeon extends Dungeon {
         return false;
     }
 
-    private static void handleDirectionsAndCommands() throws InterruptedException {
+    public static void handleDirectionsAndCommands() throws InterruptedException {
         Main.screenRefresh();
         DungeonGenerator.drawRoom(darkForestDungeon, roomsBeenTo, currentPlayerPosition[0], currentPlayerPosition[1], 0);
         availableMove = DungeonGenerator.getDirections(darkForestDungeon, currentPlayerPosition[0], currentPlayerPosition[1]);

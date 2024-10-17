@@ -139,7 +139,7 @@ public class DesertPyramidDungeon extends Dungeon {
         return false;
     }
 
-    private static void handleDirectionsAndCommands() throws InterruptedException {
+    public static void handleDirectionsAndCommands() throws InterruptedException {
         Main.screenRefresh();
         DungeonGenerator.drawRoom(desertPyramidDungeon, roomsBeenTo, currentPlayerPosition[0], currentPlayerPosition[1], 0);
         availableMove = DungeonGenerator.getDirections(desertPyramidDungeon, currentPlayerPosition[0], currentPlayerPosition[1]);

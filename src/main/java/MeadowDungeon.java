@@ -52,7 +52,7 @@ public class MeadowDungeon extends Dungeon {
         lastPosition = spawnPosition.clone();
     }
 
-    private static void startRooms() throws InterruptedException {
+    public static void startRooms() throws InterruptedException {
         numberOfEnemies = rand.nextInt(3);
         enemyType = enemies.get(rand.nextInt(enemies.size()));
         availableMove = null;
@@ -137,7 +137,7 @@ public class MeadowDungeon extends Dungeon {
         return false;
     }
 
-    private static void handleDirectionsAndCommands() throws InterruptedException {
+    public static void handleDirectionsAndCommands() throws InterruptedException {
         Main.screenRefresh();
         DungeonGenerator.drawRoom(meadowDungeon, roomsBeenTo, currentPlayerPosition[0], currentPlayerPosition[1], 0);
         availableMove = DungeonGenerator.getDirections(meadowDungeon, currentPlayerPosition[0], currentPlayerPosition[1]);

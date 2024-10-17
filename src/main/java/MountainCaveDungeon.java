@@ -139,7 +139,7 @@ public class MountainCaveDungeon extends Dungeon {
         return false;
     }
 
-    private static void handleDirectionsAndCommands() throws InterruptedException {
+    public static void handleDirectionsAndCommands() throws InterruptedException {
         Main.screenRefresh();
         DungeonGenerator.drawRoom(mountainCaveDungeon, roomsBeenTo, currentPlayerPosition[0], currentPlayerPosition[1], 0);
         availableMove = DungeonGenerator.getDirections(mountainCaveDungeon, currentPlayerPosition[0], currentPlayerPosition[1]);
