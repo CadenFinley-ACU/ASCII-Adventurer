@@ -395,7 +395,7 @@ public class DungeonGenerator {
                 for (int j = 0; j < passedMatrix.length; j++) {
                     if (passedMatrix[i][j] != 0) {
                         if (i == passedPosition[0] && j == passedPosition[1]) {
-                            System.out.print("[P] ");
+                            System.out.print(yellowColor + "[P] " + resetColor);
                         } else if (isAdjacent(i, j, passedPosition)) {
                             switch (passedMatrix[i][j]) {
                                 case 2, 5, 4 ->
@@ -440,7 +440,7 @@ public class DungeonGenerator {
                 for (int j = 0; j < passedMatrix.length; j++) {
                     if (passedMatrix[i][j] != 0) {
                         if (i == passedPosition[0] && j == passedPosition[1]) {
-                            System.out.print("[P] ");
+                            System.out.print(yellowColor + "[P] " + resetColor);
                         } else {
                             switch (passedMatrix[i][j]) {
                                 case 2, 3, 5 ->
