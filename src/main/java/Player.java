@@ -25,6 +25,10 @@ public class Player {
     public static Map<String, Integer> inventory = new HashMap<>();
     public static int playerX = 0;
     public static int playerY = 0;
+    public static String yellowColor = "\033[1;33m"; // yellow color
+    public static String resetColor = "\033[0m"; // reset to default color
+    public static String redColor = "\033[1;31m"; // red color
+    public static String greenColor = "\033[1;32m"; // green color
 
     public static void playerStart() throws InterruptedException { //start the player
         maxHealth = 100;
@@ -465,14 +469,14 @@ public class Player {
                 map[0][1] = "[ ! ]";
             }
             default -> {
-                map[9][8] = "[ D ]";
-                map[8][8] = "[ D ]";
-                map[4][4] = "[ D ]";
-                map[0][7] = "[ D ]";
-                map[10][1] = "[ D ]";
-                map[9][1] = "[ D ]";
-                map[8][1] = "[ D ]";
-                map[0][1] = "[ D ]";
+                map[9][8] = redColor + "[ D ]" + resetColor;
+                map[8][8] = redColor + "[ D ]" + resetColor;
+                map[4][4] = redColor + "[ D ]" + resetColor;
+                map[0][7] = redColor + "[ D ]" + resetColor;
+                map[10][1] = redColor + "[ D ]" + resetColor;
+                map[9][1] = redColor + "[ D ]" + resetColor;
+                map[8][1] = redColor + "[ D ]" + resetColor;
+                map[0][1] = redColor + "[ D ]" + resetColor;
             }
 
         }
@@ -480,19 +484,25 @@ public class Player {
         System.out.println("Map: ");
         for (String[] row : map) {
             for (String cell : row) {
-                System.out.print(cell + " ");
+                if ("[ V ]".equals(cell)) {
+                    System.out.print(greenColor + cell + resetColor + " ");
+                } else if ("[ ! ]".equals(cell)) {
+                    System.out.print(redColor + cell + resetColor + " ");
+                } else if ("[ P ]".equals(cell)) {
+                    System.out.print(yellowColor + cell + resetColor + " ");
+                } else {
+                    System.out.print(cell + " ");
+                }
             }
             System.out.println();
         }
         map[playerY][playerX] = "[   ]"; // Reset the player's position
-        String yellowColor = "\033[1;33m"; // yellow color
-        String resetColor = "\033[0m"; // reset to default color
         System.out.println("Key: ");
-        System.out.println(" '!' = Next Dungeon");
+        System.out.println(redColor + " '!'" + resetColor + " = Next Dungeon");
         System.out.println(" 'D' = Unlocked Dungeon");
         System.out.println(" 'L' = Locked Dungeon");
-        System.out.println(" 'V' = Village");
-        System.out.println(" 'P' = Player");
+        System.out.println(greenColor + " 'V'" + resetColor + "= Village");
+        System.out.println(yellowColor + " 'P'" + resetColor + " = Player");
         System.out.println();
         System.out.println("If you are still feeling lost type " + yellowColor + "help" + resetColor + " for a list of commands.");
         TextEngine.enterToNext();
