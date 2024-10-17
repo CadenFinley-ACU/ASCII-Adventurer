@@ -419,6 +419,13 @@ public class DungeonGenerator {
                                         System.out.print(redColor + "[!] " + resetColor);
                                     }
                                 }
+                                case 10 -> {
+                                    if (unlocked[i][j] > 0) {
+                                        System.out.print("[■] ");
+                                    } else {
+                                        System.out.print(pinkColor + "[F] " + resetColor);
+                                    }
+                                }
                                 default ->
                                     System.out.print("[~] ");
                             }
@@ -455,7 +462,7 @@ public class DungeonGenerator {
                 System.out.println();
             }
             System.out.println();
-            System.out.println("Map Key: [P] Player, [?] Item Room, [B] Boss Room, [S] Spawn Room, [$] Shop Room");
+            System.out.println("Map Key: [P] Player, [?] Item Room, [B] Boss Room, [S] Spawn Room, [$] Shop Room, [F] Fairy Room");
             System.out.println(" [~] Available Moves, [ ] Unvisited Room, [■] Visited Room");
         } else {
             for (int i = 0; i < passedMatrix.length; i++) {
@@ -517,6 +524,17 @@ public class DungeonGenerator {
                                         System.out.print("[ ] ");
                                     }
                                 }
+                                case 10 -> {
+                                    if (unlocked[i][j] > 0) {
+                                        if (isAdjacent(i, j, passedPosition)) {
+                                            System.out.print("[~] ");
+                                        } else {
+                                            System.out.print("[■] ");
+                                        }
+                                    } else {
+                                        System.out.print(pinkColor + "[F] " + resetColor);
+                                    }
+                                }
                             }
                         }
                     } else {
@@ -526,7 +544,7 @@ public class DungeonGenerator {
                 System.out.println();
             }
             System.out.println();
-            System.out.println("Map Key: [P] Player, [?] Item Room, [B] Boss Room, [S] Spawn Room, [$] Shop Room");
+            System.out.println("Map Key: [P] Player, [?] Item Room, [B] Boss Room, [S] Spawn Room, [$] Shop Room, [F] Fairy Room");
         }
     }
 
