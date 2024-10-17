@@ -412,7 +412,6 @@ public class DungeonGenerator {
                                 case 6 ->
                                     System.out.print(greenColor + "[$] " + resetColor);
                                 case 4 -> {
-
                                     if (unlocked[i][j] > 0) {
                                         System.out.print("[■] ");
                                     } else {
@@ -434,8 +433,13 @@ public class DungeonGenerator {
                                     System.out.print("[S] "); // Special marker for start room
                                 case 4 ->
                                     System.out.print(redColor + "[!] " + resetColor); // Special marker for mini boss room
-                                default ->
-                                    System.out.print("[■] "); // Default case for other values
+                                default -> {
+                                    if (isAdjacent(i, j, passedPosition)) {
+                                        System.out.print("[~] ");
+                                    } else {
+                                        System.out.print("[■] "); // Default case for other values
+                                    }
+                                }
                             }
                         } else {
                             System.out.print("[ ] "); // Print brackets around non-zero values
