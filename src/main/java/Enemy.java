@@ -13,57 +13,121 @@ public class Enemy {
     public final static Console console = System.console();
     public static String command;
     public static String ignore;
-    private static final Map<String, Integer> enemyDamageValues = Map.copyOf(Map.ofEntries( //name of enemy / damage values for each enemy
-            //enemies
-            Map.entry("Goblin", 5),
-            Map.entry("Orc", 10),
-            Map.entry("Troll", 15),
-            Map.entry("Bandit", 3),
-            Map.entry("Spider", 5),
-            Map.entry("Giant Rat", 7),
-            Map.entry("Skeleton", 5),
-            Map.entry("Zombie", 7),
-            Map.entry("Ghost", 10),
-            Map.entry("Demon", 15),
-            Map.entry("Vampire", 20),
-            Map.entry("Werewolf", 25),
-            Map.entry("Witch", 35),
-            Map.entry("Giant", 40),
-            Map.entry("Mummy", 30),
-            Map.entry("Slime", 2),
-            Map.entry("Mimic", 5),
-            Map.entry("Gargoyle", 20),
-            Map.entry("Sea Serpent", 50),
-            Map.entry("Sea Monster", 60),
-            Map.entry("Sea Witch", 55),
-            Map.entry("Sea Dragon", 70),
-            Map.entry("Sea Giant", 60),
-            //minibosses
-            Map.entry("Golem", 20), //dungeon 1
-            Map.entry("Forest Guardian", 25), //dungeon 2  //forest area
+    private static Map<String, Integer> enemyDamageValues;
 
-            Map.entry("Elemental", 35), //dungeon 3
-            Map.entry("Minotaur", 45), //dungeon 4  //mountain area
+    public static void createEnemies() {
+        enemyDamageValues = null;
+        if (Dungeon.resetedAfterWin && Main.gameComplete) {
+            //powered up enemies
+            enemyDamageValues = Map.copyOf(Map.ofEntries( //name of enemy / damage values for each enemy
+                    //enemies
+                    Map.entry("Goblin", 25),
+                    Map.entry("Orc", 50),
+                    Map.entry("Troll", 60),
+                    Map.entry("Bandit", 15),
+                    Map.entry("Spider", 25),
+                    Map.entry("Giant Rat", 35),
+                    Map.entry("Skeleton", 30),
+                    Map.entry("Zombie", 25),
+                    Map.entry("Ghost", 30),
+                    Map.entry("Demon", 50),
+                    Map.entry("Vampire", 50),
+                    Map.entry("Werewolf", 60),
+                    Map.entry("Witch", 40),
+                    Map.entry("Giant", 50),
+                    Map.entry("Mummy", 50),
+                    Map.entry("Slime", 10),
+                    Map.entry("Mimic", 10),
+                    Map.entry("Gargoyle", 40),
+                    Map.entry("Sea Serpent", 80),
+                    Map.entry("Sea Monster", 100),
+                    Map.entry("Sea Witch", 70),
+                    Map.entry("Sea Dragon", 90),
+                    Map.entry("Sea Giant", 80),
+                    //minibosses
+                    Map.entry("Golem", 100), //dungeon 1
+                    Map.entry("Forest Guardian", 150), //dungeon 2  //forest area
 
-            Map.entry("Sphinx", 60), //dungeon 5
-            Map.entry("Cyclops", 80), //dungeon 6  //desert area
-            Map.entry("Medusa", 100), //dungeon 7
+                    Map.entry("Elemental", 200), //dungeon 3
+                    Map.entry("Minotaur", 250), //dungeon 4  //mountain area
 
-            Map.entry("Leviathan", 150), //dungeon 8 //ocean area
+                    Map.entry("Sphinx", 300), //dungeon 5
+                    Map.entry("Cyclops", 350), //dungeon 6  //desert area
+                    Map.entry("Medusa", 400), //dungeon 7
 
-            //bosses
-            Map.entry("Forest Giant", 30), //dungeon 1 
-            Map.entry("Forest Spirit", 45), //dungeon 2
+                    Map.entry("Leviathan", 450), //dungeon 8 //ocean area
 
-            Map.entry("Wyvern", 50), //dungeon 3
-            Map.entry("Ice Dragon", 60), //dungeon 4
+                    //bosses
+                    Map.entry("Forest Giant", 450), //dungeon 1 
+                    Map.entry("Forest Spirit", 500), //dungeon 2
 
-            Map.entry("Phoenix", 70), //dungeon 5
-            Map.entry("Giant Scorpion", 100), //dungeon 6
-            Map.entry("Giant Sand Worm", 110), //dungeon 7
+                    Map.entry("Wyvern", 550), //dungeon 3
+                    Map.entry("Ice Dragon", 600), //dungeon 4
 
-            Map.entry("Kraken", 200) //dungeon 8
-    ));
+                    Map.entry("Phoenix", 650), //dungeon 5
+                    Map.entry("Giant Scorpion", 700), //dungeon 6
+                    Map.entry("Giant Sand Worm", 750), //dungeon 7
+
+                    Map.entry("Kraken", 800) //dungeon 8
+            ));
+        } else {
+            enemyDamageValues = Map.copyOf(Map.ofEntries( //name of enemy / damage values for each enemy
+                    //enemies
+                    Map.entry("Goblin", 5),
+                    Map.entry("Orc", 10),
+                    Map.entry("Troll", 15),
+                    Map.entry("Bandit", 3),
+                    Map.entry("Spider", 5),
+                    Map.entry("Giant Rat", 7),
+                    Map.entry("Skeleton", 5),
+                    Map.entry("Zombie", 7),
+                    Map.entry("Ghost", 10),
+                    Map.entry("Demon", 15),
+                    Map.entry("Vampire", 20),
+                    Map.entry("Werewolf", 25),
+                    Map.entry("Witch", 35),
+                    Map.entry("Giant", 40),
+                    Map.entry("Mummy", 30),
+                    Map.entry("Slime", 2),
+                    Map.entry("Mimic", 5),
+                    Map.entry("Gargoyle", 20),
+                    Map.entry("Sea Serpent", 50),
+                    Map.entry("Sea Monster", 60),
+                    Map.entry("Sea Witch", 55),
+                    Map.entry("Sea Dragon", 70),
+                    Map.entry("Sea Giant", 60),
+                    //minibosses
+                    Map.entry("Golem", 20), //dungeon 1
+                    Map.entry("Forest Guardian", 25), //dungeon 2  //forest area
+
+                    Map.entry("Elemental", 35), //dungeon 3
+                    Map.entry("Minotaur", 45), //dungeon 4  //mountain area
+
+                    Map.entry("Sphinx", 60), //dungeon 5
+                    Map.entry("Cyclops", 80), //dungeon 6  //desert area
+                    Map.entry("Medusa", 100), //dungeon 7
+
+                    Map.entry("Leviathan", 150), //dungeon 8 //ocean area
+
+                    //bosses
+                    Map.entry("Forest Giant", 30), //dungeon 1 
+                    Map.entry("Forest Spirit", 45), //dungeon 2
+
+                    Map.entry("Wyvern", 50), //dungeon 3
+                    Map.entry("Ice Dragon", 60), //dungeon 4
+
+                    Map.entry("Phoenix", 70), //dungeon 5
+                    Map.entry("Giant Scorpion", 100), //dungeon 6
+                    Map.entry("Giant Sand Worm", 110), //dungeon 7
+
+                    Map.entry("Kraken", 200) //dungeon 8
+            ));
+        }
+    }
+
+    public static void resetEnemies() {
+        createEnemies();
+    }
 
     public static int spawnEnemy(String type, int quantity) throws InterruptedException { // Return the total damage as negative int so that you can change health
         String brightRedStart = "\033[1;31m"; // Start bright red text

@@ -39,6 +39,9 @@ public class Main {
         TextEngine.printNoDelay("Creating Game Items...", false);
         createGameItems();
         TextEngine.printNoDelay("Game Items Created!", false);
+        TextEngine.printNoDelay("Creating Enemies...", false);
+        Enemy.createEnemies();
+        TextEngine.printNoDelay("Enemies Created!", false);
         TextEngine.printWithDelays("Starting Game!", false);
         startMenu();
     }
@@ -86,7 +89,6 @@ public class Main {
         InventoryManager.createItem("armor", "god slayer armor", 75); //dungeon 8
 
         //*  ************************************************************************************ */
-        
         InventoryManager.createItem("potion", "health potion", 15); //village level 1 | dungeon 0,1,2
         InventoryManager.createItem("potion", "greater health potion", 30); //village level 2 | dungeon 3,4,5
         InventoryManager.createItem("potion", "super health potion", 50); //village level 3 | dungeon 6,7,8
@@ -234,6 +236,7 @@ public class Main {
     
         
         
+        
                 
         
             
@@ -244,6 +247,8 @@ public class Main {
         
         
         
+          
+          
           
           
              
@@ -550,6 +555,8 @@ public class Main {
     public static void wipeSave() throws InterruptedException { //wipe save command
         playerCreated = false;
         savedPlace = null;
+        gameComplete = false;
+        Dungeon.resetedAfterWin = false;
         Room.reset("all");
         Player.setName(null);
         Dungeon.generateDungeons();
@@ -563,6 +570,7 @@ public class Main {
                 e.printStackTrace();
             }
         GameSaveSerialization.saveGame();
+        Enemy.resetEnemies();
     }
 
     public static String getSavedPlace() { //get the saved place

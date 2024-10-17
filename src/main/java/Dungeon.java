@@ -12,10 +12,12 @@ public class Dungeon extends Room {
 
     static String resetColor = "\033[0m"; // reset to default color
     static String yellowColor = "\033[1;33m"; // yellow color
+    static String redColor = "\033[0;31m"; // red color
     public static String currentDungeon;
     public static int completedDungeons = 0;
     public static int numberOfEnemies;
     public static String enemyType;
+    public static boolean resetedAfterWin = false;
 
     public static int[][] meadowDungeon;
     public static int[][] darkForestDungeon;
@@ -238,6 +240,31 @@ public class Dungeon extends Room {
                     //add more dungeons here if needed
                 }
             }
+            case "reset" -> {
+                if (Main.gameComplete) {
+                    TextEngine.printWithDelays("This command will reset" + yellowColor + "ALL" + resetColor + "Dungeons!", false);
+                    TextEngine.printWithDelays("Are you sure you want to do this? " + redColor + "yes" + resetColor + " or " + yellowColor + "no" + resetColor, true);
+                    while (true) {
+                        ignore = Room.console.readLine();
+                        command = Room.console.readLine();
+                        switch (command.toLowerCase().trim()) {
+                            case "yes" -> {
+                                resetedAfterWin = true;
+                                resetAll();
+                                TextEngine.printWithDelays(redColor + "All dungeons have been reset and their difficulty has been increased! Good Luck!" + resetColor, false);
+                                TextEngine.enterToNext();
+                                OpenWorld.roomSave = 74;
+                                OpenWorld.startRoom();
+                            }
+                            default -> {
+                                Main.inGameDefaultTextHandling(data);
+                            }
+                        }
+                    }
+                } else {
+                    Main.inGameDefaultTextHandling(data);
+                }
+            }
             default -> {
                 Main.inGameDefaultTextHandling(data);
             }
@@ -255,6 +282,7 @@ public class Dungeon extends Room {
         DesertPyramidDungeon.fresh();
         OceanKingdomDungeon.fresh();
         completedDungeons = 0;
+        GameSaveSerialization.saveGame();
     }
 
     public static void dungeonCheck() throws InterruptedException {

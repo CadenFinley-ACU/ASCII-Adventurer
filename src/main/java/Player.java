@@ -458,14 +458,25 @@ public class Player {
                 map[0][1] = "[ ! ]";
             }
             default -> {
-                map[9][8] = redColor + "[ D ]" + resetColor;
-                map[8][8] = redColor + "[ D ]" + resetColor;
-                map[4][4] = redColor + "[ D ]" + resetColor;
-                map[0][7] = redColor + "[ D ]" + resetColor;
-                map[10][1] = redColor + "[ D ]" + resetColor;
-                map[9][1] = redColor + "[ D ]" + resetColor;
-                map[8][1] = redColor + "[ D ]" + resetColor;
-                map[0][1] = redColor + "[ D ]" + resetColor;
+                if (Dungeon.resetedAfterWin) {
+                    map[9][8] = redColor + "[ D ]" + resetColor;
+                    map[8][8] = redColor + "[ D ]" + resetColor;
+                    map[4][4] = redColor + "[ D ]" + resetColor;
+                    map[0][7] = redColor + "[ D ]" + resetColor;
+                    map[10][1] = redColor + "[ D ]" + resetColor;
+                    map[9][1] = redColor + "[ D ]" + resetColor;
+                    map[8][1] = redColor + "[ D ]" + resetColor;
+                    map[0][1] = redColor + "[ D ]" + resetColor;
+                } else {
+                    map[9][8] = "[ D ]";
+                    map[8][8] = "[ D ]";
+                    map[4][4] = "[ D ]";
+                    map[0][7] = "[ D ]";
+                    map[10][1] = "[ D ]";
+                    map[9][1] = "[ D ]";
+                    map[8][1] = "[ D ]";
+                    map[0][1] = "[ D ]";
+                }
             }
 
         }

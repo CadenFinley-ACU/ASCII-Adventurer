@@ -146,6 +146,9 @@ public class OceanKingdomDungeon extends Dungeon {
         if (completed) {
             TextEngine.printWithDelays("You have completed this dungeon. You can now type " + yellowColor + "leave" + resetColor + " to exit this dungeon.", false);
         }
+        if (Main.gameComplete) {
+            TextEngine.printWithDelays("You have completed the game. You can now type " + yellowColor + "reset" + resetColor + " to reset the dungeon.", false);
+        }
         System.out.println("Type " + yellowColor + "map" + resetColor + " to see the map.");
         System.out.println();
         TextEngine.printWithDelays("You can move in the following directions: ", false);
