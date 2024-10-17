@@ -815,7 +815,7 @@ public class DungeonGenerator {
                 }
                 case 2 -> {
                     room[2][5] = "P"; // Item Room
-                    room[2][7] = greenColor + "I" + resetColor; // Item
+                    room[2][7] = greenColor + "C" + resetColor; // Item
                 }
                 case 5 -> {
                     room[2][5] = "P"; // key Room

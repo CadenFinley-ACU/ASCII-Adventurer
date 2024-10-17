@@ -326,6 +326,9 @@ public class Dungeon extends Room {
     public static void dungeonShop() throws InterruptedException {
         Main.screenRefresh();
         String localDungeon = currentDungeon;
+        TextEngine.printNoDelay("Gold: " + Player.getGold(), false);
+        TextEngine.printNoDelay("Inventory: " + Player.getTotalNumberOfItemsInInventory() + "/" + Player.inventorySize, false);
+        TextEngine.printNoDelay("\n", false);
         TextEngine.printWithDelays("Welcome to the Dungeon shop Traveler! I snuck into this dungeon a long time ago and got lost.\nMaybe some of these items can help you on your journey.\nWhat would you like to buy?", false);
         while (true) {
             switch (localDungeon) {
