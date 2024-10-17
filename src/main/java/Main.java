@@ -162,9 +162,6 @@ public class Main {
 
     
      
-        
-           
-                
                
         
           
@@ -173,7 +170,11 @@ public class Main {
                               
           
                   
-         
+        
+           
+              
+             
+                
            
          
            
@@ -640,7 +641,11 @@ public class Main {
         String greenColor = "\033[1;32m"; // green color
         String healthColor;
         String resetColor = "\033[0m"; // reset to default color
-        TextEngine.printNoDelay(Player.getName(), false);
+        if(getSavedPlace() != null) {
+            TextEngine.printNoDelay(Player.getName()+"'s Adventure through the "+getSavedPlace(), false);
+        } else {
+            TextEngine.printNoDelay(Player.getName()+"'s Adventure", false);
+        }
         if(Player.getHealth() > Player.getMaxHealth()/2) {
             healthColor = greenColor;
         } else if (Player.getHealth() <= Player.getMaxHealth() / 2 && Player.getHealth() > (Player.getMaxHealth() / 4)+(Player.getMaxHealth()/10)) {
@@ -649,9 +654,6 @@ public class Main {
             healthColor = redColor;
         }
         TextEngine.printNoDelay("Health: " + healthColor+Player.getHealth()+resetColor, false);
-        if (getSavedPlace() != null) {
-            TextEngine.printNoDelay("Location: " + getSavedPlace(), false);
-        }
         TextEngine.printNoDelay("\n", false);
     }
 
