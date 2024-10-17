@@ -149,6 +149,8 @@ public class Player {
 
     public static void changeInventorySize(int change) throws InterruptedException { //change the inventory size
         inventorySize += change;
+        TextEngine.printWithDelays("Inventory size increased by " + change + " to " + inventorySize + "!", false);
+        TextEngine.enterToNext();
     }
 
     public static int getInventorySize() { //get the inventory size
@@ -545,7 +547,7 @@ public class Player {
         } else {
             healthColor = redColor;
         }
-        StringBuilder bar = new StringBuilder("[");
+        StringBuilder bar = new StringBuilder("|");
         for (int i = 0; i < hearts; i++) {
             if (i < filledBars) {
                 bar.append(healthColor).append("█").append(resetColor);
@@ -553,7 +555,7 @@ public class Player {
                 bar.append("_");
             }
         }
-        bar.append("]");
+        bar.append("|");
         String healthBar = bar.toString();
         TextEngine.printNoDelay("Health: " + health + " / " + maxHealth, false);
         System.out.println(healthBar);
