@@ -59,7 +59,6 @@ public class DesertPlainsDungeon extends Dungeon {
         Main.screenRefresh();
         DungeonGenerator.drawRoom(desertPlainsDungeon, roomsBeenTo, currentPlayerPosition[0], currentPlayerPosition[1], numberOfEnemies);
         directionsString = new ArrayList<>();
-
         if (desertPlainsDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] == 2 && roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] == 0) {
             if (!items.isEmpty()) {
                 String randomItem = items.get(rand.nextInt(items.size()));
@@ -157,7 +156,6 @@ public class DesertPlainsDungeon extends Dungeon {
                 directionsString.add("boss room");
             } else {
                 directionsString.add("west");
-
             }
         }
         if (availableMove[3] > 0) {
@@ -165,7 +163,6 @@ public class DesertPlainsDungeon extends Dungeon {
                 directionsString.add("boss room");
             } else {
                 directionsString.add("east");
-
             }
         }
         TextEngine.printNoDelay(yellowColor + directionsString.toString() + resetColor, true);

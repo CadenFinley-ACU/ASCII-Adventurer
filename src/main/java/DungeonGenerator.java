@@ -671,7 +671,7 @@ public class DungeonGenerator {
 
     public static void drawRoom(int[][] localDungeon, int[][] visitedRoom, int x, int y, int numberofEnemies) {
         int[] moves = getDirections(localDungeon, x, y);
-
+        //default room layout
         String[][] room = {
             {"┌", "─", "─", "─", "─", "─", "─", "─", "─", "─", "─", "─", "─", "─", "┐"},
             {"|", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "|"},
@@ -679,6 +679,7 @@ public class DungeonGenerator {
             {"|", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "|"},
             {"└", "─", "─", "─", "─", "─", "─", "─", "─", "─", "─", "─", "─", "─", "┘"}
         };
+        //get the last postino to render the last position icon
         if (Dungeon.lastPosition != null) {
             if (x - 1 == Dungeon.lastPosition[0] && y == Dungeon.lastPosition[1]) {
                 moves[0] = 15;
@@ -690,7 +691,7 @@ public class DungeonGenerator {
                 moves[3] = 15;
             }
         }
-        // Mark possible moves
+        // render all 4 possible moves with ajacent rooms icon
         switch (moves[0]) {
             case 1, 3, 9 -> {
                 room[0][7] = " ";
@@ -852,7 +853,7 @@ public class DungeonGenerator {
                 room[2][14] = "│";
         }
 
-        //render room
+        //render room objects
         if (visitedRoom[x][y] > 0) {
             room[2][7] = "P"; // Player
         } else {
