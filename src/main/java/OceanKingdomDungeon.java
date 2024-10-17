@@ -124,6 +124,7 @@ public class OceanKingdomDungeon extends Dungeon {
             if (!completed) {
                 completedDungeons++;
                 completed = true;
+                Main.gameComplete = true;
             }
             lastPosition = null;
             OpenWorld.startRoom();

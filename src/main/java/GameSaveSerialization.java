@@ -167,6 +167,9 @@ public class GameSaveSerialization {
         writeValue(String.valueOf(DesertPyramidDungeon.mapRevealed), filePath);
         writeSeparator(filePath);
         writeValue(String.valueOf(OceanKingdomDungeon.mapRevealed), filePath);
+        writeSeparator(filePath);
+        writeValue(String.valueOf(Main.gameComplete), filePath);
+        writeSeparator(filePath);
 
         //do this after all other data is saved
         serializeAllLines(filePath, filePath);
@@ -333,6 +336,8 @@ public class GameSaveSerialization {
                 DesertPyramidDungeon.mapRevealed = Boolean.parseBoolean(reader.readLine());
                 buffer = reader.readLine();
                 OceanKingdomDungeon.mapRevealed = Boolean.parseBoolean(reader.readLine());
+                buffer = reader.readLine();
+                Main.gameComplete = Boolean.parseBoolean(reader.readLine());
 
             } catch (IOException | NumberFormatException e) {
                 e.printStackTrace();

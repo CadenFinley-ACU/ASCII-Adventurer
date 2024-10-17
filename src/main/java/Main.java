@@ -22,6 +22,7 @@ public class Main {
     public static String savedPlace = null;
     private static final String OS_NAME = System.getProperty("os.name");
     public static Map<String, Integer> savedInventory = new HashMap<>();
+    public static boolean gameComplete = false;
 
     public static void main(String[] args) throws InterruptedException { //main game start
         TextEngine.clearScreen();
@@ -85,6 +86,7 @@ public class Main {
         InventoryManager.createItem("armor", "god slayer armor", 75); //dungeon 8
 
         //*  ************************************************************************************ */
+        
         InventoryManager.createItem("potion", "health potion", 15); //village level 1 | dungeon 0,1,2
         InventoryManager.createItem("potion", "greater health potion", 30); //village level 2 | dungeon 3,4,5
         InventoryManager.createItem("potion", "super health potion", 50); //village level 3 | dungeon 6,7,8

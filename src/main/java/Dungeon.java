@@ -367,6 +367,9 @@ public class Dungeon extends Room {
                         TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", feeling a sense of adventure as you leave the open paths behind.\n Ahead, you notice the entrance to the next dungeon lying just to the north, west.\n\n", false);
                 }
             }
+            case 8 -> {
+                TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + "\n Congratulations! You have ridded the world of these evil dungeons!\n You have now unlocked the ability to go and rechallenge the old dungeons! ", false);
+            }
             default ->
                 TextEngine.printWithDelays("this function isnt working right", false);
         }
@@ -760,7 +763,6 @@ public class Dungeon extends Room {
         if ("OpenWorld".equals(Main.getSavedPlace()) || "Village".equals(Main.getSavedPlace())) {
             return true;
         }
-
         switch (currentDungeon) {
             case "Meadow" -> {
                 return (!(meadowDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] == 3 || meadowDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] == 4 || (meadowDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] == 1 && MeadowDungeon.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] == 0)));
