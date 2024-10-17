@@ -255,26 +255,28 @@ public class MountainCaveDungeon extends Dungeon {
             TextEngine.printWithDelays("You have entered a room with a " + enemyType + " and were ambushed!", false);
         }
         TextEngine.printWithDelays("What is your command? " + yellowColor + "fight" + resetColor + " or " + yellowColor + "run" + resetColor, true);
-        ignore = Room.console.readLine();
-        command = Room.console.readLine();
-        switch (command) {
-            case "fight" -> {
-                Player.changeHealth(Enemy.spawnEnemy(enemyType, numberOfEnemies));
-            }
-            case "run" -> {
-                TextEngine.printWithDelays("You have successfully ran away from the enemies", false);
-                TextEngine.enterToNext();
-                int[] buffer = currentPlayerPosition.clone();
-                currentPlayerPosition = lastPosition.clone(); // Save the current position before moving
-                lastPosition = buffer.clone();
-                Main.loadSave();
-            }
-            default -> {
-                defaultDungeonArgs(command);
+        while (true) {
+            ignore = Room.console.readLine();
+            command = Room.console.readLine();
+            switch (command) {
+                case "fight" -> {
+                    Player.changeHealth(Enemy.spawnEnemy(enemyType, numberOfEnemies));
+                    roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = mountainCaveDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
+                    Main.loadSave();
+                }
+                case "run" -> {
+                    TextEngine.printWithDelays("You have successfully ran away from the enemies", false);
+                    TextEngine.enterToNext();
+                    int[] buffer = currentPlayerPosition.clone();
+                    currentPlayerPosition = lastPosition.clone(); // Save the current position before moving
+                    lastPosition = buffer.clone();
+                    Main.loadSave();
+                }
+                default -> {
+                    defaultDungeonArgs(command);
+                }
             }
         }
-        roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = mountainCaveDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
-        Main.loadSave();
     }
 
     public static void keyRoomSequence() throws InterruptedException {
@@ -288,50 +290,54 @@ public class MountainCaveDungeon extends Dungeon {
         }
         TextEngine.printWithDelays("They seem to be trying to protect something...", false);
         TextEngine.printWithDelays("What is your command? " + yellowColor + "fight" + resetColor + " or " + yellowColor + "run" + resetColor, true);
-        ignore = Room.console.readLine();
-        command = Room.console.readLine();
-        switch (command) {
-            case "fight" -> {
-                Player.changeHealth(Enemy.spawnEnemy(enemyType, numberOfEnemies));
-            }
-            case "run" -> {
-                TextEngine.printWithDelays("You have successfully ran away from the enemies", false);
-                TextEngine.enterToNext();
-                int[] buffer = currentPlayerPosition.clone();
-                currentPlayerPosition = lastPosition.clone(); // Save the current position before moving
-                lastPosition = buffer.clone();
-                Main.loadSave();
-            }
-            default -> {
-                defaultDungeonArgs(command);
+        while (true) {
+            ignore = Room.console.readLine();
+            command = Room.console.readLine();
+            switch (command) {
+                case "fight" -> {
+                    Player.changeHealth(Enemy.spawnEnemy(enemyType, numberOfEnemies));
+                    mountainCaveDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] = 5;
+                    Main.loadSave();
+                }
+                case "run" -> {
+                    TextEngine.printWithDelays("You have successfully ran away from the enemies", false);
+                    TextEngine.enterToNext();
+                    int[] buffer = currentPlayerPosition.clone();
+                    currentPlayerPosition = lastPosition.clone(); // Save the current position before moving
+                    lastPosition = buffer.clone();
+                    Main.loadSave();
+                }
+                default -> {
+                    defaultDungeonArgs(command);
+                }
             }
         }
-        mountainCaveDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] = 5;
-        Main.loadSave();
     }
 
     private static void miniBossSequence() throws InterruptedException {
         TextEngine.printWithDelays("You have entered a room with a mini boss", false);
         TextEngine.printWithDelays("What is your command? " + yellowColor + "fight" + resetColor + " or " + yellowColor + "run" + resetColor, true);
-        ignore = Room.console.readLine();
-        command = Room.console.readLine();
-        switch (command) {
-            case "fight" -> {
-                Player.changeHealth(Enemy.spawnEnemy("Elemental", 1));
-            }
-            case "run" -> {
-                TextEngine.printWithDelays("You have successfully ran away from the mini boss", false);
-                TextEngine.enterToNext();
-                int[] buffer = currentPlayerPosition.clone();
-                currentPlayerPosition = lastPosition.clone(); // Save the current position before moving
-                lastPosition = buffer.clone();
-                Main.loadSave();
-            }
-            default -> {
-                defaultDungeonArgs(command);
+        while (true) {
+            ignore = Room.console.readLine();
+            command = Room.console.readLine();
+            switch (command) {
+                case "fight" -> {
+                    Player.changeHealth(Enemy.spawnEnemy("Elemental", 1));
+                    mountainCaveDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] = 7;
+                    Main.loadSave();
+                }
+                case "run" -> {
+                    TextEngine.printWithDelays("You have successfully ran away from the mini boss", false);
+                    TextEngine.enterToNext();
+                    int[] buffer = currentPlayerPosition.clone();
+                    currentPlayerPosition = lastPosition.clone(); // Save the current position before moving
+                    lastPosition = buffer.clone();
+                    Main.loadSave();
+                }
+                default -> {
+                    defaultDungeonArgs(command);
+                }
             }
         }
-        mountainCaveDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] = 7;
-        Main.loadSave();
     }
 }

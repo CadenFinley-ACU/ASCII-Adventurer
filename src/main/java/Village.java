@@ -425,49 +425,51 @@ public class Village extends Room {
 
     private static void buyMultiple(String type, int cost) throws InterruptedException { //buy multiple clause for certain items in village shop
         TextEngine.printWithDelays("How many would you like to buy?", true);
-        ignore = console.readLine();
-        command = console.readLine();
-        if (TextEngine.checkValidInput(command)) {
-            try {
-                Integer.valueOf(command);
-            } catch (NumberFormatException e) {
-                Main.invalidCommand();
-                TextEngine.enterToNext();
-                buyMultiple(type, cost);
-            }
-            int totalCost = cost * Integer.parseInt(command);
-            if (Player.getGold() >= totalCost && !command.equals("0")) {
-                if (Player.hasRoomInInventory(Integer.parseInt(command))) {
-                    Player.changeGold(-totalCost);
-                    Player.putItem(type, Integer.parseInt(command));
-                    keepShopping();
-                } else {
-                    TextEngine.printWithDelays("You do not have enough space in your inventory to buy " + command + " " + type + "s", false);
+        while (true) {
+            ignore = console.readLine();
+            command = console.readLine();
+            if (TextEngine.checkValidInput(command)) {
+                try {
+                    Integer.valueOf(command);
+                } catch (NumberFormatException e) {
+                    Main.invalidCommand();
                     TextEngine.enterToNext();
-                    keepShopping();
+                    buyMultiple(type, cost);
+                }
+                int totalCost = cost * Integer.parseInt(command);
+                if (Player.getGold() >= totalCost && !command.equals("0")) {
+                    if (Player.hasRoomInInventory(Integer.parseInt(command))) {
+                        Player.changeGold(-totalCost);
+                        Player.putItem(type, Integer.parseInt(command));
+                        keepShopping();
+                    } else {
+                        TextEngine.printWithDelays("You do not have enough space in your inventory to buy " + command + " " + type + "s", false);
+                        TextEngine.enterToNext();
+                        keepShopping();
+                    }
+                } else {
+                    switch (command) {
+                        case "0" -> {
+                            TextEngine.printWithDelays("You did not buy any " + type + "s.", false);
+                            TextEngine.enterToNext();
+                            keepShopping();
+                        }
+                        case "1" -> {
+                            TextEngine.printWithDelays("You do not have enough gold to buy a " + command, false);
+                            TextEngine.enterToNext();
+                            keepShopping();
+                        }
+                        default -> {
+                            TextEngine.printWithDelays("You do not have enough gold to buy " + command + " potions", false);
+                            TextEngine.enterToNext();
+                            keepShopping();
+                        }
+                    }
                 }
             } else {
-                switch (command) {
-                    case "0" -> {
-                        TextEngine.printWithDelays("You did not buy any " + type + "s.", false);
-                        TextEngine.enterToNext();
-                        keepShopping();
-                    }
-                    case "1" -> {
-                        TextEngine.printWithDelays("You do not have enough gold to buy a " + command, false);
-                        TextEngine.enterToNext();
-                        keepShopping();
-                    }
-                    default -> {
-                        TextEngine.printWithDelays("You do not have enough gold to buy " + command + " potions", false);
-                        TextEngine.enterToNext();
-                        keepShopping();
-                    }
-                }
+                Main.invalidCommand();
+                keepShopping();
             }
-        } else {
-            Main.invalidCommand();
-            keepShopping();
         }
     }
 
