@@ -73,43 +73,35 @@ public class Player {
                 command = console.readLine();
                 switch (command) {
                     case "1" -> {
-                        Room.room = "Meadow Dungeon";
-                        Main.checkSave(Room.room);
+                        Main.saveSpace("Meadow Dungeon");
                         Main.loadSave();
                     }
                     case "2" -> {
-                        Room.room = "Dark Forest Dungeon";
-                        Main.checkSave(Room.room);
+                        Main.saveSpace("Dark Forest Dungeon");
                         Main.loadSave();
                     }
                     case "3" -> {
-                        Room.room = "Mountain Cave Dungeon";
-                        Main.checkSave(Room.room);
+                        Main.saveSpace("Mountain Cave Dungeon");
                         Main.loadSave();
                     }
                     case "4" -> {
-                        Room.room = "Mountain Top Dungeon";
-                        Main.checkSave(Room.room);
+                        Main.saveSpace("Mountain Top Dungeon");
                         Main.loadSave();
                     }
                     case "5" -> {
-                        Room.room = "Desert Oasis Dungeon";
-                        Main.checkSave(Room.room);
+                        Main.saveSpace("Desert Oasis Dungeon");
                         Main.loadSave();
                     }
                     case "6" -> {
-                        Room.room = "Desert Plains Dungeon";
-                        Main.checkSave(Room.room);
+                        Main.saveSpace("Desert Plains Dungeon");
                         Main.loadSave();
                     }
                     case "7" -> {
-                        Room.room = "Desert Pyramid Dungeon";
-                        Main.checkSave(Room.room);
+                        Main.saveSpace("Desert Pyramid Dungeon");
                         Main.loadSave();
                     }
                     case "8" -> {
-                        Room.room = "Ocean Kingdom Dungeon";
-                        Main.checkSave(Room.room);
+                        Main.saveSpace("Ocean Kingdom Dungeon");
                         Main.loadSave();
                     }
                     default -> {
