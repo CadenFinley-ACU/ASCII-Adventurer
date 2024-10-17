@@ -811,7 +811,11 @@ public class DungeonGenerator {
                 room[0][8] = " ";
             }
             case 10 -> {
-                room[0][7] = pinkColor + "F" + resetColor;
+                if (visitedRoom[x - 1][y] > 0) {
+                    room[0][7] = " ";
+                } else {
+                    room[0][7] = pinkColor + "F" + resetColor;
+                }
                 room[0][6] = " ";
                 room[0][8] = " ";
             }
@@ -862,7 +866,11 @@ public class DungeonGenerator {
                 room[4][8] = " ";
             }
             case 10 -> {
-                room[4][7] = pinkColor + "F" + resetColor;
+                if (visitedRoom[x + 1][y] > 0) {
+                    room[4][7] = " ";
+                } else {
+                    room[4][7] = pinkColor + "F" + resetColor;
+                }
                 room[4][6] = " ";
                 room[4][8] = " ";
             }
@@ -901,7 +909,11 @@ public class DungeonGenerator {
                 room[2][0] = greenColor + "$" + resetColor;
             }
             case 10 -> {
-                room[2][0] = pinkColor + "F" + resetColor;
+                if (visitedRoom[x][y - 1] > 0) {
+                    room[2][0] = " ";
+                } else {
+                    room[2][0] = pinkColor + "F" + resetColor;
+                }
             }
             default ->
                 room[2][0] = "│";
@@ -938,7 +950,11 @@ public class DungeonGenerator {
                 room[2][14] = greenColor + "$" + resetColor;
             }
             case 10 -> {
-                room[2][14] = pinkColor + "F" + resetColor;
+                if (visitedRoom[x][y + 1] > 0) {
+                    room[2][14] = " ";
+                } else {
+                    room[2][14] = pinkColor + "F" + resetColor;
+                }
             }
             default ->
                 room[2][14] = "│";
