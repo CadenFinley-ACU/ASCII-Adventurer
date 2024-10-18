@@ -499,6 +499,7 @@ public class Village extends Room {
 
     private static void leave() throws InterruptedException { //leave the village
         TextEngine.clearScreen();
+        OpenWorld.previousRoomSave = OpenWorld.roomSave;
         OpenWorld.startRoom();
     }
 }

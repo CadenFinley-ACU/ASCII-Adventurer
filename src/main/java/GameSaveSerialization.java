@@ -172,6 +172,8 @@ public class GameSaveSerialization {
         writeSeparator(filePath);
         writeValue(String.valueOf(Dungeon.resetedAfterWin), filePath);
         writeSeparator(filePath);
+        writeValue(String.valueOf(OpenWorld.previousRoomSave), filePath);
+        writeSeparator(filePath);
 
         //do this after all other data is saved
         serializeAllLines(filePath, filePath);
@@ -342,6 +344,8 @@ public class GameSaveSerialization {
                 Main.gameComplete = Boolean.parseBoolean(reader.readLine());
                 buffer = reader.readLine();
                 Dungeon.resetedAfterWin = Boolean.parseBoolean(reader.readLine());
+                buffer = reader.readLine();
+                OpenWorld.previousRoomSave = Integer.parseInt(reader.readLine());
 
             } catch (IOException | NumberFormatException e) {
                 e.printStackTrace();

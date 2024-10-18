@@ -14,9 +14,10 @@ public class Room {
     public static String command;
     public static String ignore;
     public static String room = null;
+    public static String redColor = "\033[0;31m"; // red color
+    public static String resetColor = "\033[0m"; // reset to default color
 
     public static boolean hasChestInRoom(String itemName, int quantity) throws InterruptedException {
-        String resetColor = "\033[0m"; // reset to default color
         String yellowColor = "\033[1;33m"; // yellow color
 
         TextEngine.printWithDelays("Hey! There is a chest in this room! ", false);
@@ -38,7 +39,6 @@ public class Room {
     }
 
     public static boolean hasItemInRoom(String itemName, int quantity) throws InterruptedException {
-        String resetColor = "\033[0m"; // reset to default color
         String yellowColor = "\033[1;33m"; // yellow color
 
         // Display item information
@@ -128,7 +128,71 @@ public class Room {
         int centerY = currentRoom.length / 2;
         currentRoom[centerY][centerX] = "P";
 
-        //draw enemies in the room at random postions that arent the same as the player  
+        //draw enemies in the room at random postions that arent the same as the player
+        String enemyRender = "E";
+        if (OpenWorld.enemyType != null) {
+            switch (OpenWorld.enemyType) {
+                case "Goblin" ->
+                    enemyRender = "G";
+                case "Orc" ->
+                    enemyRender = "O";
+                case "Troll" ->
+                    enemyRender = "T";
+                case "Bandit" ->
+                    enemyRender = "B";
+                case "Spider" ->
+                    enemyRender = "S";
+                case "Giant Rat" ->
+                    enemyRender = "R";
+                case "Skeleton" ->
+                    enemyRender = "S";
+                case "Zombie" ->
+                    enemyRender = "Z";
+                case "Ghost" ->
+                    enemyRender = "G";
+                case "Demon" ->
+                    enemyRender = "D";
+                case "Vampire" ->
+                    enemyRender = "V";
+                case "Werewolf" ->
+                    enemyRender = "W";
+                case "Witch" ->
+                    enemyRender = "W";
+                case "Giant" ->
+                    enemyRender = "G";
+                case "Mummy" ->
+                    enemyRender = "M";
+                case "Slime" ->
+                    enemyRender = "S";
+                case "Mimic" ->
+                    enemyRender = "M";
+                case "Gargoyle" ->
+                    enemyRender = "G";
+                case "Sea Serpent" ->
+                    enemyRender = "S";
+                case "Sea Monster" ->
+                    enemyRender = "M";
+                case "Sea Witch" ->
+                    enemyRender = "W";
+                case "Sea Dragon" ->
+                    enemyRender = "D";
+                case "Sea Giant" ->
+                    enemyRender = "G";
+                default ->
+                    enemyRender = "E";
+            }
+        }
+        if (OpenWorld.encounter && OpenWorld.numberOfEnemies > 0) {
+            for (int i = 0; i < OpenWorld.numberOfEnemies;) {
+                int enemyX = random.nextInt(currentRoom[0].length);
+                int enemyY = random.nextInt(currentRoom.length);
+                if (!(currentRoom[enemyY][enemyX].equals("P") || enemyX == 0)) {
+                    currentRoom[enemyY][enemyX] = redColor + enemyRender + resetColor;
+                    i++;
+                }
+            }
+        }
+
         for (String[] currentRoom1 : currentRoom) {
             currentRoom1[0] = " ";
         }
@@ -158,7 +222,7 @@ public class Room {
         for (String[] room1 : room) {
             for (int j = 0; j < room1.length; j++) {
                 if (random.nextDouble() < 0.5) { // 50% chance
-                    room1[j] = "\""; // Grass
+                    room1[j] = Player.G + "\"" + Player.R; // Grass
                 }
             }
         }
@@ -168,7 +232,7 @@ public class Room {
         for (String[] room1 : room) {
             for (int j = 0; j < room1.length; j++) {
                 if (random.nextDouble() < 0.5) { // 50% chance
-                    room1[j] = "."; // Sand
+                    room1[j] = Player.S + "." + Player.R; // Sand
                 }
             }
         }
@@ -178,7 +242,7 @@ public class Room {
         for (String[] room1 : room) {
             for (int j = 0; j < room1.length; j++) {
                 if (random.nextDouble() < 0.5) { // 50% chance
-                    room1[j] = "~"; // Sand
+                    room1[j] = Player.b + "~" + Player.R; // Water
                 }
             }
         }

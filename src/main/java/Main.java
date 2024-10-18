@@ -316,6 +316,7 @@ public class Main {
                           
                     
                           
+                            
                        
                 
                       
@@ -488,10 +489,11 @@ public class Main {
                 case "stats" ->
                     Player.printStats();
                 case "map" -> {
-                    if (getSavedPlace().equals("OpenWorld")) {
+                    if (getSavedPlace().equals("OpenWorld") && !OpenWorld.inFight) {
+                        OpenWorld.previousRoomSave = OpenWorld.roomSave;
                         Player.printMap();
                     } else {
-                        TextEngine.printWithDelays("You cannot use that command here.", true);
+                        TextEngine.printWithDelays("You cannot use that command right now.", true);
                     }
                 }
                 default ->
