@@ -242,19 +242,24 @@ public class Dungeon extends Room {
             }
             case "reset" -> {
                 if (Main.gameComplete) {
-                    TextEngine.printWithDelays("This command will reset" + yellowColor + "ALL" + resetColor + "Dungeons!", false);
+                    TextEngine.printWithDelays("This command will reset" + yellowColor + " ALL " + resetColor + "Dungeons!", false);
                     TextEngine.printWithDelays("Are you sure you want to do this? " + redColor + "yes" + resetColor + " or " + yellowColor + "no" + resetColor, true);
                     while (true) {
                         ignore = Room.console.readLine();
                         command = Room.console.readLine();
                         switch (command.toLowerCase().trim()) {
                             case "yes" -> {
-                                resetedAfterWin = true;
-                                resetAll();
                                 TextEngine.printWithDelays(redColor + "All dungeons have been reset and their difficulty has been increased! Good Luck!" + resetColor, false);
                                 TextEngine.enterToNext();
+                                resetedAfterWin = true;
+                                resetAll();
+                                Enemy.resetEnemies();
+                                completedDungeons = 8;
                                 OpenWorld.roomSave = 74;
-                                OpenWorld.startRoom();
+                                room = "OpenWorld";
+                                Main.checkSave(room);
+                                GameSaveSerialization.saveGame();
+                                Main.loadSave();
                             }
                             default -> {
                                 Main.inGameDefaultTextHandling(data);

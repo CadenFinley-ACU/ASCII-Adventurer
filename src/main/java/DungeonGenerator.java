@@ -687,7 +687,7 @@ public class DungeonGenerator {
         return count;
     }
 
-    public static void drawRoom(int[][] localDungeon, int[][] visitedRoom, int x, int y, int numberofEnemies) {
+    public static void drawRoom(int[][] localDungeon, int[][] visitedRoom, int x, int y, int numberofEnemies, boolean revealed) {
         int[] moves = getDirections(localDungeon, x, y);
         //default room layout
         String[][] room = {
@@ -715,10 +715,66 @@ public class DungeonGenerator {
                         }
                     }
                     // Place enemies at random empty spots
+                    if (localDungeon[x][y] == 3) {
+                        if (numberofEnemies < 1) {
+                            numberofEnemies = 1;
+                        }
+                    }
                     for (int i = 0; i < numberofEnemies && !emptySpots.isEmpty(); i++) {
                         int randomIndex = random.nextInt(emptySpots.size());
                         int[] spot = emptySpots.remove(randomIndex);
-                        room[spot[0]][spot[1]] = redColor + "E" + resetColor; // Enemy
+                        String enemyRender;
+                        switch (Dungeon.enemyType) {
+                            case "Goblin" ->
+                                enemyRender = "G";
+                            case "Orc" ->
+                                enemyRender = "O";
+                            case "Troll" ->
+                                enemyRender = "T";
+                            case "Bandit" ->
+                                enemyRender = "B";
+                            case "Spider" ->
+                                enemyRender = "S";
+                            case "Giant Rat" ->
+                                enemyRender = "R";
+                            case "Skeleton" ->
+                                enemyRender = "S";
+                            case "Zombie" ->
+                                enemyRender = "Z";
+                            case "Ghost" ->
+                                enemyRender = "G";
+                            case "Demon" ->
+                                enemyRender = "D";
+                            case "Vampire" ->
+                                enemyRender = "V";
+                            case "Werewolf" ->
+                                enemyRender = "W";
+                            case "Witch" ->
+                                enemyRender = "W";
+                            case "Giant" ->
+                                enemyRender = "G";
+                            case "Mummy" ->
+                                enemyRender = "M";
+                            case "Slime" ->
+                                enemyRender = "S";
+                            case "Mimic" ->
+                                enemyRender = "M";
+                            case "Gargoyle" ->
+                                enemyRender = "G";
+                            case "Sea Serpent" ->
+                                enemyRender = "S";
+                            case "Sea Monster" ->
+                                enemyRender = "M";
+                            case "Sea Witch" ->
+                                enemyRender = "W";
+                            case "Sea Dragon" ->
+                                enemyRender = "D";
+                            case "Sea Giant" ->
+                                enemyRender = "G";
+                            default ->
+                                enemyRender = "E";
+                        }
+                        room[spot[0]][spot[1]] = redColor + enemyRender + resetColor; // Enemy
                     }
                 }
                 case 2 -> {
@@ -769,7 +825,13 @@ public class DungeonGenerator {
         // render all 4 possible moves with ajacent rooms icon
         switch (moves[0]) {
             case 1, 3, 9 -> {
-                room[0][7] = " ";
+                if (moves[0] == 3) {
+                    if (revealed) {
+                        room[0][7] = greenColor + "K" + resetColor;
+                    }
+                } else {
+                    room[0][7] = " ";
+                }
                 room[0][6] = " ";
                 room[0][8] = " ";
             }
@@ -777,7 +839,15 @@ public class DungeonGenerator {
                 if (visitedRoom[x - 1][y] > 0) {
                     room[0][7] = " ";
                 } else {
-                    room[0][7] = greenColor + "?" + resetColor;
+                    if (revealed) {
+                        if (moves[0] == 5) {
+                            room[0][7] = greenColor + "K" + resetColor;
+                        } else {
+                            room[0][7] = greenColor + "I" + resetColor;
+                        }
+                    } else {
+                        room[0][7] = greenColor + "?" + resetColor;
+                    }
                 }
                 room[0][6] = " ";
                 room[0][8] = " ";
@@ -824,7 +894,13 @@ public class DungeonGenerator {
         }
         switch (moves[1]) {
             case 1, 3, 9 -> {
-                room[4][7] = " ";
+                if (moves[1] == 3) {
+                    if (revealed) {
+                        room[4][7] = greenColor + "K" + resetColor;
+                    }
+                } else {
+                    room[4][7] = " ";
+                }
                 room[4][6] = " ";
                 room[4][8] = " ";
             }
@@ -832,7 +908,15 @@ public class DungeonGenerator {
                 if (visitedRoom[x + 1][y] > 0) {
                     room[4][7] = " ";
                 } else {
-                    room[4][7] = greenColor + "?" + resetColor;
+                    if (revealed) {
+                        if (moves[1] == 5) {
+                            room[4][7] = greenColor + "K" + resetColor;
+                        } else {
+                            room[4][7] = greenColor + "I" + resetColor;
+                        }
+                    } else {
+                        room[4][7] = greenColor + "?" + resetColor;
+                    }
                 }
                 room[4][6] = " ";
                 room[4][8] = " ";
@@ -879,13 +963,27 @@ public class DungeonGenerator {
         }
         switch (moves[2]) {
             case 1, 3, 9 -> {
-                room[2][0] = " ";
+                if (moves[2] == 3) {
+                    if (revealed) {
+                        room[2][0] = greenColor + "K" + resetColor;
+                    }
+                } else {
+                    room[2][0] = " ";
+                }
             }
             case 2, 5, 7 -> {
                 if (visitedRoom[x][y - 1] > 0) {
                     room[2][0] = " ";
                 } else {
-                    room[2][0] = greenColor + "?" + resetColor;
+                    if (revealed) {
+                        if (moves[2] == 5) {
+                            room[2][0] = greenColor + "K" + resetColor;
+                        } else {
+                            room[2][0] = greenColor + "I" + resetColor;
+                        }
+                    } else {
+                        room[2][0] = greenColor + "?" + resetColor;
+                    }
                 }
             }
             case 4 -> {
@@ -920,13 +1018,27 @@ public class DungeonGenerator {
         }
         switch (moves[3]) {
             case 1, 3, 9 -> {
-                room[2][14] = " ";
+                if (moves[3] == 3) {
+                    if (revealed) {
+                        room[2][14] = greenColor + "K" + resetColor;
+                    }
+                } else {
+                    room[2][14] = " ";
+                }
             }
             case 2, 5, 7 -> {
                 if (visitedRoom[x][y + 1] > 0) {
                     room[2][14] = " ";
                 } else {
-                    room[2][14] = greenColor + "?" + resetColor;
+                    if (revealed) {
+                        if (moves[3] == 5) {
+                            room[2][14] = greenColor + "K" + resetColor;
+                        } else {
+                            room[2][14] = greenColor + "I" + resetColor;
+                        }
+                    } else {
+                        room[2][14] = greenColor + "?" + resetColor;
+                    }
                 }
             }
             case 4 -> {

@@ -57,7 +57,7 @@ public class DesertPlainsDungeon extends Dungeon {
         enemyType = enemies.get(rand.nextInt(enemies.size()));
         availableMove = null;
         Main.screenRefresh();
-        DungeonGenerator.drawRoom(desertPlainsDungeon, roomsBeenTo, currentPlayerPosition[0], currentPlayerPosition[1], numberOfEnemies);
+        DungeonGenerator.drawRoom(desertPlainsDungeon, roomsBeenTo, currentPlayerPosition[0], currentPlayerPosition[1], numberOfEnemies, mapRevealed);
         directionsString = new ArrayList<>();
         if (desertPlainsDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] == 2 && roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] == 0) {
             if (!items.isEmpty()) {
@@ -160,7 +160,7 @@ public class DesertPlainsDungeon extends Dungeon {
 
     public static void handleDirectionsAndCommands() throws InterruptedException {
         Main.screenRefresh();
-        DungeonGenerator.drawRoom(desertPlainsDungeon, roomsBeenTo, currentPlayerPosition[0], currentPlayerPosition[1], 0);
+        DungeonGenerator.drawRoom(desertPlainsDungeon, roomsBeenTo, currentPlayerPosition[0], currentPlayerPosition[1], 0, mapRevealed);
         availableMove = DungeonGenerator.getDirections(desertPlainsDungeon, currentPlayerPosition[0], currentPlayerPosition[1]);
         if (completed) {
             TextEngine.printWithDelays("You have completed this dungeon. You can now type " + yellowColor + "leave" + resetColor + " to exit this dungeon.", false);
