@@ -50,7 +50,6 @@ public class Enemy {
 
                     Map.entry("Elemental", 200), //dungeon 3
                     Map.entry("Minotaur", 250), //dungeon 4  //mountain area
-
                     Map.entry("Sphinx", 300), //dungeon 5
                     Map.entry("Cyclops", 350), //dungeon 6  //desert area
                     Map.entry("Medusa", 400), //dungeon 7
