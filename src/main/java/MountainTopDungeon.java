@@ -54,6 +54,8 @@ public class MountainTopDungeon extends Dungeon {
     }
 
     private static void startRooms() throws InterruptedException {
+        currentMiniBoss = "Minotaur";
+        currentBoss = "Ice Dragon";
         numberOfEnemies = rand.nextInt(7);
         enemyType = enemies.get(rand.nextInt(enemies.size()));
         availableMove = null;

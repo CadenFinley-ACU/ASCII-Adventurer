@@ -53,6 +53,8 @@ public class DarkForestDungeon extends Dungeon {
     }
 
     public static void startRooms() throws InterruptedException {
+        currentMiniBoss = "Forest Guardian";
+        currentBoss = "Forest Spirit";
         numberOfEnemies = rand.nextInt(4);
         enemyType = enemies.get(rand.nextInt(enemies.size()));
         availableMove = null;

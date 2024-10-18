@@ -795,11 +795,53 @@ public class DungeonGenerator {
                 }
                 case 4 -> {
                     room[2][5] = "P"; // Mini Boss Room
-                    room[2][7] = redColor + "M" + resetColor; // Mini Boss
+                    String miniBossRender;
+                    switch (Dungeon.currentMiniBoss) {
+                        case "Golem" ->
+                            miniBossRender = "G";
+                        case "Forest Guardian" ->
+                            miniBossRender = "F";
+                        case "Elemental" ->
+                            miniBossRender = "E";
+                        case "Minotaur" ->
+                            miniBossRender = "M";
+                        case "Sphinx" ->
+                            miniBossRender = "S";
+                        case "Cyclops" ->
+                            miniBossRender = "C";
+                        case "Medusa" ->
+                            miniBossRender = "M";
+                        case "Leviathan" ->
+                            miniBossRender = "L";
+                        default ->
+                            miniBossRender = "M";
+                    }
+                    room[2][7] = redColor + miniBossRender + resetColor; // Mini Boss
                 }
                 case 8 -> {
                     room[2][5] = "P"; // Boss Room
-                    room[2][7] = redColor + "B" + resetColor; // Boss
+                    String bossRender;
+                    switch (Dungeon.currentBoss) {
+                        case "Forest Giant" ->
+                            bossRender = "F";
+                        case "Forest Spirit" ->
+                            bossRender = "S";
+                        case "Wyvern" ->
+                            bossRender = "W";
+                        case "Ice Dragon" ->
+                            bossRender = "I";
+                        case "Phoenix" ->
+                            bossRender = "P";
+                        case "Giant Scorpion" ->
+                            bossRender = "S";
+                        case "Giant Sand Worm" ->
+                            bossRender = "W";
+                        case "Kraken" ->
+                            bossRender = "K";
+                        default ->
+                            bossRender = "B";
+                    }
+                    room[2][7] = redColor + bossRender + resetColor; // Boss
                 }
                 case 10 -> {
                     room[2][5] = "P"; // fairy Room

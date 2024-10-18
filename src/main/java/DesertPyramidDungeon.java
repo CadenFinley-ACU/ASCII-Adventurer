@@ -53,6 +53,8 @@ public class DesertPyramidDungeon extends Dungeon {
     }
 
     private static void startRooms() throws InterruptedException {
+        currentBoss = "Giant Sand Worm";
+        currentMiniBoss = "Medusa";
         numberOfEnemies = rand.nextInt(4);
         enemyType = enemies.get(rand.nextInt(enemies.size()));
         availableMove = null;

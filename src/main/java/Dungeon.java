@@ -32,6 +32,9 @@ public class Dungeon extends Room {
     public static int[] lastPosition = null; // Variable to store the last position
     public static boolean previousAutoSettings;
 
+    public static String currentMiniBoss;
+    public static String currentBoss;
+
     public static List<String> missedItems = new ArrayList<>();
 
     public static void generateDungeons() { //generates all 8 dungeons and stores them in their respective variables

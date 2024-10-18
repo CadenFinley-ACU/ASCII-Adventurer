@@ -53,6 +53,8 @@ public class MeadowDungeon extends Dungeon {
     }
 
     public static void startRooms() throws InterruptedException {
+        currentMiniBoss = "Golem";
+        currentBoss = "Forest Giant";
         numberOfEnemies = rand.nextInt(3);
         enemyType = enemies.get(rand.nextInt(enemies.size()));
         availableMove = null;

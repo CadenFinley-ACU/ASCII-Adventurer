@@ -54,6 +54,8 @@ public class DesertOasisDungeon extends Dungeon {
     }
 
     private static void startRooms() throws InterruptedException {
+        currentMiniBoss = "Sphinx";
+        currentBoss = "Phoenix";
         numberOfEnemies = rand.nextInt(3);
         enemyType = enemies.get(rand.nextInt(enemies.size()));
         availableMove = null;

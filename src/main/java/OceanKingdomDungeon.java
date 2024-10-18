@@ -53,6 +53,8 @@ public class OceanKingdomDungeon extends Dungeon {
     }
 
     private static void startRooms() throws InterruptedException {
+        currentBoss = "Kraken";
+        currentMiniBoss = "Leviathan";
         numberOfEnemies = rand.nextInt(4);
         enemyType = enemies.get(rand.nextInt(enemies.size()));
         availableMove = null;

@@ -53,6 +53,8 @@ public class MountainCaveDungeon extends Dungeon {
     }
 
     private static void startRooms() throws InterruptedException {
+        currentBoss = "Wyvern";
+        currentMiniBoss = "Elemental";
         numberOfEnemies = rand.nextInt(5);
         enemyType = enemies.get(rand.nextInt(enemies.size()));
         availableMove = null;
