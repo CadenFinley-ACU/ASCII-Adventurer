@@ -38,7 +38,7 @@ public class OpenWorld extends Room {
             enemyType = enemies.get(rand.nextInt(enemies.size())); //at some point make some enemies environment exclusive
             boolean encounter1 = rand.nextBoolean();
             boolean encounter2 = rand.nextBoolean();
-            encounter = encounter1 && encounter2;
+            encounter = encounter1 || encounter2;
         }
 
         switch (roomSave) {
