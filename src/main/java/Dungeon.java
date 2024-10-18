@@ -295,6 +295,8 @@ public class Dungeon extends Room {
     public static void dungeonCheck() throws InterruptedException {
         if (OpenWorld.holdCommand == null) {
             OpenWorld.holdCommand = "onward";
+            TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ".", resetedAfterWin);
+            return;
         }
         switch (completedDungeons) {
             case 0 -> {// the meadow dungeon
