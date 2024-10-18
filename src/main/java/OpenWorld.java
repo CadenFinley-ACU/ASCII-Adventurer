@@ -36,9 +36,7 @@ public class OpenWorld extends Room {
             //determine open world encounter
             numberOfEnemies = rand.nextInt(3);
             enemyType = enemies.get(rand.nextInt(enemies.size())); //at some point make some enemies environment exclusive
-            boolean encounter1 = rand.nextBoolean();
-            boolean encounter2 = rand.nextBoolean();
-            encounter = encounter1 || encounter2;
+            encounter = (rand.nextInt(100) < 20); // 20% chance of encounter
         }
 
         switch (roomSave) {
