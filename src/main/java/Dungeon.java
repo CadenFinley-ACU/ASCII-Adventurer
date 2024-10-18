@@ -795,7 +795,7 @@ public class Dungeon extends Room {
     }
 
     public static boolean ableToUseMenuCommands() {
-        if ("OpenWorld".equals(Main.getSavedPlace()) || "Village".equals(Main.getSavedPlace())) {
+        if ("OpenWorld".equals(Main.getSavedPlace()) || "Village".equals(Main.getSavedPlace()) || "SpawnRoom".equals(Main.getSavedPlace())) {
             return true;
         }
         switch (currentDungeon) {
