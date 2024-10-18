@@ -101,4 +101,72 @@ public class Room {
             }
         }
     }
+
+    public static void drawCurrentRoom(String setting) {
+        String[][] currentRoom = {
+            {" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "},
+            {" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "},
+            {" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "},
+            {" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "},
+            {" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "}
+        };
+        switch (setting.toLowerCase()) {
+            case "mountain" ->
+                fillMountain(currentRoom);
+            case "grassland" ->
+                fillGrassland(currentRoom);
+            case "desert" ->
+                fillDesert(currentRoom);
+            default ->
+                fillEmpty(currentRoom);
+        }
+
+        int centerX = currentRoom[0].length / 2;
+        int centerY = currentRoom.length / 2;
+        currentRoom[centerY][centerX] = "P";
+
+        for (String[] currentRoom1 : currentRoom) {
+            currentRoom1[0] = " ";
+        }
+
+        for (String[] row : currentRoom) {
+            for (String cell : row) {
+                System.out.print(cell);
+            }
+            System.out.println();
+        }
+        System.out.println();
+    }
+
+    private static void fillMountain(String[][] room) {
+        for (String[] room1 : room) {
+            for (int j = 0; j < room1.length; j++) {
+                room1[j] = "^"; // Mountain peak
+            }
+        }
+    }
+
+    private static void fillGrassland(String[][] room) {
+        for (String[] room1 : room) {
+            for (int j = 0; j < room1.length; j++) {
+                room1[j] = "\""; // Grass
+            }
+        }
+    }
+
+    private static void fillDesert(String[][] room) {
+        for (String[] room1 : room) {
+            for (int j = 0; j < room1.length; j++) {
+                room1[j] = "."; // Sand
+            }
+        }
+    }
+
+    private static void fillEmpty(String[][] room) {
+        for (String[] room1 : room) {
+            for (int j = 0; j < room1.length; j++) {
+                room1[j] = " "; // Empty space
+            }
+        }
+    }
 }

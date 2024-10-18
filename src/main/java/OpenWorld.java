@@ -394,6 +394,7 @@ public class OpenWorld extends Room {
                 room73();
             }
             case 74 -> {
+                drawCurrentRoom("grassland");
                 Player.playerX = 4;
                 Player.playerY = 10;
                 roomNumber = 74;

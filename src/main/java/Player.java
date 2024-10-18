@@ -28,7 +28,13 @@ public class Player {
     public static String yellowColor = "\033[1;33m"; // yellow color
     public static String resetColor = "\033[0m"; // reset to default color
     public static String redColor = "\033[1;31m"; // red color
-    public static String greenColor = "\033[1;32m"; // green color
+    public static String greenColor = "\033[1;32m"; // green color'
+    public static String G = "\033[0;32m"; // deep grass color
+    public static String b = "\033[1;34m"; // blue color
+    public static String g = "\033[0;37m"; // bright gray color
+    public static String s = "\033[0;33m"; // sand color
+    public static String S = "\033[1;37m"; // snow color
+    public static String R = "\033[0m"; // reset to default color
     public static String healthColor = "";
 
     public static void playerStart() throws InterruptedException { //start the player
@@ -367,17 +373,17 @@ public class Player {
 
         String[][] map = {
             //  0       1          2       3         4       5         6       7       8
-            {"     ", "[ D ]", "[   ]", "[   ]", "[   ]", "[   ]", "[   ]", "[ D ]", "     ", "", ""}, //0
-            {"     ", "[   ]", "     ", "     ", "     ", "[   ]", "[   ]", "[   ]", "     ", "", ""}, //1
-            {"     ", "[   ]", "     ", "     ", "     ", "[   ]", "[   ]", "[   ]", "     ", "", ""}, //2
-            {"     ", "[   ]", "     ", "     ", "     ", "[   ]", "[   ]", "[   ]", "[ V ]", "", ""}, //3
-            {"[   ]", "[   ]", "     ", "     ", "[ D ]", "[   ]", "[   ]", "[   ]", "[   ]", "", ""}, //4
-            {"[   ]", "[   ]", "[   ]", "     ", "[   ]", "[   ]", "[   ]", "[   ]", "[   ]", "", ""}, //5
-            {"[   ]", "[   ]", "[   ]", "[   ]", "[   ]", "[   ]", "[   ]", "[   ]", "[   ]", "", ""}, //6
-            {"[ V ]", "[   ]", "[   ]", "[   ]", "[   ]", "[   ]", "[   ]", "[   ]", "[   ]", "", ""}, //7
-            {"     ", "[ D ]", "[   ]", "[   ]", "[   ]", "[   ]", "[   ]", "[   ]", "[ D ]", "", ""}, //8
-            {"     ", "[ D ]", "[   ]", "[   ]", "[   ]", "[   ]", "[   ]", "[   ]", "[ D ]", "", ""}, //9
-            {"     ", "[ D ]", "[   ]", "[   ]", "[   ]", "[ V ]", "     ", "    ", "     ", "", ""} //10
+            {"     ", b + "[ D ]" + R, b + "[   ]" + R, s + "[   ]" + R, s + "[   ]" + R, s + "[   ]" + R, S + "[   ]" + R, S + "[ D ]" + R, "     ", "", ""}, //0
+            {"     ", b + "[   ]" + R, "     ", "     ", "     ", g + "[   ]" + R, g + "[   ]" + R, S + "[   ]" + R, "     ", "", ""}, //1
+            {"     ", b + "[   ]" + R, "     ", "     ", "     ", g + "[   ]" + R, g + "[   ]" + R, g + "[   ]" + R, "     ", "", ""}, //2
+            {"     ", s + "[   ]" + R, "     ", "     ", "     ", g + "[   ]" + R, g + "[   ]" + R, g + "[   ]" + R, g + "[ V ]" + R, "", ""}, //3
+            {s + "[   ]" + R, s + "[   ]" + R, "     ", "     ", g + "[ D ]" + R, g + "[   ]" + R, g + "[   ]" + R, g + "[   ]" + R, g + "[   ]" + R, "", ""}, //4
+            {s + "[   ]" + R, s + "[   ]" + R, s + "[   ]" + R, "     ", g + "[   ]" + R, g + "[   ]" + R, g + "[   ]" + R, g + "[   ]" + R, g + "[   ]" + R, "", ""}, //5
+            {s + "[   ]" + R, s + "[   ]" + R, s + "[   ]" + R, G + "[   ]" + R, G + "[   ]" + R, G + "[   ]" + R, G + "[   ]" + R, G + "[   ]" + R, G + "[   ]" + R, "", ""}, //6
+            {s + "[ V ]" + R, s + "[   ]" + R, s + "[   ]" + R, G + "[   ]" + R, G + "[   ]" + R, G + "[   ]" + R, G + "[   ]" + R, G + "[   ]" + R, G + "[   ]" + R, "", ""}, //7
+            {"     ", s + "[ D ]" + R, s + "[   ]" + R, G + "[   ]" + R, G + "[   ]" + R, G + "[   ]" + R, G + "[   ]" + R, G + "[   ]" + R, G + "[ D ]" + R, "", ""}, //8
+            {"     ", s + "[ D ]" + R, s + "[   ]" + R, G + "[   ]" + R, G + "[   ]" + R, G + "[   ]" + R, G + "[   ]" + R, G + "[   ]" + R, G + "[ D ]" + R, "", ""}, //9
+            {"     ", s + "[ D ]" + R, s + "[   ]" + R, G + "[   ]" + R, G + "[   ]" + R, G + "[ V ]" + R, "     ", "    ", "     ", "", ""} //10
         };
 
         // Update the map with the player's position
@@ -490,14 +496,19 @@ public class Player {
         System.out.println("Map: ");
         for (String[] row : map) {
             for (String cell : row) {
-                if ("[ V ]".equals(cell)) {
-                    System.out.print(greenColor + cell + resetColor + " ");
-                } else if ("[ ! ]".equals(cell)) {
-                    System.out.print(redColor + cell + resetColor + " ");
-                } else if ("[ P ]".equals(cell)) {
-                    System.out.print(yellowColor + cell + resetColor + " ");
-                } else {
+                if (null == cell) {
                     System.out.print(cell + " ");
+                } else {
+                    switch (cell) {
+                        case "[ V ]" ->
+                            System.out.print(greenColor + cell + resetColor + " ");
+                        case "[ ! ]" ->
+                            System.out.print(redColor + cell + resetColor + " ");
+                        case "[ P ]" ->
+                            System.out.print(yellowColor + cell + resetColor + " ");
+                        default ->
+                            System.out.print(cell + " ");
+                    }
                 }
             }
             System.out.println();
@@ -555,7 +566,7 @@ public class Player {
     }
 
     public static void drawHealthBar() {
-        int hearts = 20;
+        int hearts = 21;
         int filledBars = (int) Math.round(((double) health / maxHealth) * hearts);
         if (getHealth() > Player.getMaxHealth() / 2) {
             healthColor = greenColor;
