@@ -586,7 +586,13 @@ public class OpenWorld extends Room {
                         return;
                     }
                     case "run" -> {
-                        Player.changeHealth(Enemy.runSpawnEnemy(enemyType, numberOfEnemies));
+                        boolean runSafe = rand.nextBoolean();
+                        if (!runSafe) {
+                            Player.changeHealth(Enemy.runSpawnEnemy(enemyType, numberOfEnemies));
+                        } else {
+                            TextEngine.printWithDelays("You managed to escape!", false);
+                            TextEngine.enterToNext();
+                        }
                         inFight = false;
                         encounter = false;
                         Main.screenRefresh();
