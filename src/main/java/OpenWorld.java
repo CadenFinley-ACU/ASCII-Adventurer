@@ -23,7 +23,7 @@ public class OpenWorld extends Room {
     public static int numberOfEnemies;
     public static String enemyType;
     public static boolean encounter = false;
-    private static final List<String> enemies = new ArrayList<>(List.of("Goblin", "Skeleton", "Slime", "Bandit"));
+    private static final List<String> enemies = new ArrayList<>(List.of("Goblin", "Skeleton", "Slime", "Bandit", "Spider"));//at some point make some enemies environment exclusive
     public static boolean inFight = false;
 
     public static void startRoom() throws InterruptedException { //start room
