@@ -102,7 +102,7 @@ public class Room {
         }
     }
 
-    public static void drawCurrentRoom(String setting) {
+    public static void drawCurrentRoom() {
         String[][] currentRoom = {
             {" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "},
             {" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "},
@@ -110,6 +110,7 @@ public class Room {
             {" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "},
             {" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "}
         };
+        String setting = Player.getColorOfPlayerPostitionTile();
         switch (setting.toLowerCase()) {
             case "mountain" ->
                 fillMountain(currentRoom);
@@ -117,6 +118,8 @@ public class Room {
                 fillGrassland(currentRoom);
             case "desert" ->
                 fillDesert(currentRoom);
+            case "ocean" ->
+                fillOcean(currentRoom);
             default ->
                 fillEmpty(currentRoom);
         }
@@ -125,6 +128,7 @@ public class Room {
         int centerY = currentRoom.length / 2;
         currentRoom[centerY][centerX] = "P";
 
+        //draw enemies in the room at random postions that arent the same as the player  
         for (String[] currentRoom1 : currentRoom) {
             currentRoom1[0] = " ";
         }
@@ -138,10 +142,14 @@ public class Room {
         System.out.println();
     }
 
+    private static final Random random = new Random();
+
     private static void fillMountain(String[][] room) {
         for (String[] room1 : room) {
             for (int j = 0; j < room1.length; j++) {
-                room1[j] = "^"; // Mountain peak
+                if (random.nextDouble() < 0.5) { // 50% chance
+                    room1[j] = "^"; // Mountain peak
+                }
             }
         }
     }
@@ -149,7 +157,9 @@ public class Room {
     private static void fillGrassland(String[][] room) {
         for (String[] room1 : room) {
             for (int j = 0; j < room1.length; j++) {
-                room1[j] = "\""; // Grass
+                if (random.nextDouble() < 0.5) { // 50% chance
+                    room1[j] = "\""; // Grass
+                }
             }
         }
     }
@@ -157,7 +167,19 @@ public class Room {
     private static void fillDesert(String[][] room) {
         for (String[] room1 : room) {
             for (int j = 0; j < room1.length; j++) {
-                room1[j] = "."; // Sand
+                if (random.nextDouble() < 0.5) { // 50% chance
+                    room1[j] = "."; // Sand
+                }
+            }
+        }
+    }
+
+    private static void fillOcean(String[][] room) {
+        for (String[] room1 : room) {
+            for (int j = 0; j < room1.length; j++) {
+                if (random.nextDouble() < 0.5) { // 50% chance
+                    room1[j] = "~"; // Sand
+                }
             }
         }
     }
@@ -165,7 +187,9 @@ public class Room {
     private static void fillEmpty(String[][] room) {
         for (String[] room1 : room) {
             for (int j = 0; j < room1.length; j++) {
-                room1[j] = " "; // Empty space
+                if (random.nextDouble() < 0.5) { // 50% chance
+                    room1[j] = " "; // Empty space
+                }
             }
         }
     }

@@ -25,330 +25,385 @@ public class OpenWorld extends Room {
                 Player.playerX = 2;
                 Player.playerY = 0;
                 roomNumber = 2;
+                drawCurrentRoom();
                 room2(); //start room
             }
             case 3 -> {
                 Player.playerX = 3;
                 Player.playerY = 0;
                 roomNumber = 3;
+                drawCurrentRoom();
                 room3(); //start room
             }
             case 4 -> {
                 Player.playerX = 4;
                 Player.playerY = 0;
                 roomNumber = 4;
+                drawCurrentRoom();
                 room4(); //start room
             }
             case 5 -> {
                 Player.playerX = 5;
                 Player.playerY = 0;
                 roomNumber = 5;
+                drawCurrentRoom();
                 room5(); //start room
             }
             case 6 -> {
                 Player.playerX = 6;
                 Player.playerY = 0;
                 roomNumber = 6;
+                drawCurrentRoom();
                 room6(); //start room
             }
             case 8 -> {
                 Player.playerX = 1;
                 Player.playerY = 1;
                 roomNumber = 8;
+                drawCurrentRoom();
                 room8(); //start room
             }
             case 9 -> {
                 Player.playerX = 5;
                 Player.playerY = 1;
                 roomNumber = 9;
+                drawCurrentRoom();
                 room9(); //start room
             }
             case 10 -> {
                 Player.playerX = 6;
                 Player.playerY = 1;
                 roomNumber = 10;
+                drawCurrentRoom();
                 room10(); //start room
             }
             case 11 -> {
                 Player.playerX = 7;
                 Player.playerY = 1;
                 roomNumber = 11;
+                drawCurrentRoom();
                 room11(); //start room
             }
             case 12 -> {
                 Player.playerX = 1;
                 Player.playerY = 2;
                 roomNumber = 12;
+                drawCurrentRoom();
                 room12(); //start room
             }
             case 13 -> {
                 Player.playerX = 5;
                 Player.playerY = 2;
                 roomNumber = 13;
+                drawCurrentRoom();
                 room13(); //start room
             }
             case 14 -> {
                 Player.playerX = 6;
                 Player.playerY = 2;
                 roomNumber = 14;
+                drawCurrentRoom();
                 room14(); //start room
             }
             case 15 -> {
                 Player.playerX = 7;
                 Player.playerY = 2;
                 roomNumber = 15;
+                drawCurrentRoom();
                 room15(); //start room
             }
             case 16 -> {
                 Player.playerX = 1;
                 Player.playerY = 3;
                 roomNumber = 16;
+                drawCurrentRoom();
                 room16(); //start room
             }
             case 17 -> {
                 Player.playerX = 5;
                 Player.playerY = 3;
                 roomNumber = 17;
+                drawCurrentRoom();
                 room17(); //start room
             }
             case 18 -> {
                 Player.playerX = 6;
                 Player.playerY = 3;
                 roomNumber = 18;
+                drawCurrentRoom();
                 room18(); //start room
             }
             case 19 -> {
                 Player.playerX = 7;
                 Player.playerY = 3;
                 roomNumber = 19;
+                drawCurrentRoom();
                 room19(); //start room
             }
             case 21 -> {
                 Player.playerX = 0;
                 Player.playerY = 4;
                 roomNumber = 21;
+                drawCurrentRoom();
                 room21();
             }
             case 22 -> {
                 Player.playerX = 1;
                 Player.playerY = 4;
                 roomNumber = 22;
+                drawCurrentRoom();
                 room22();
             }
             case 25 -> {
                 Player.playerX = 5;
                 Player.playerY = 4;
                 roomNumber = 25;
+                drawCurrentRoom();
                 room25();
             }
             case 26 -> {
                 Player.playerX = 6;
                 Player.playerY = 4;
                 roomNumber = 26;
+                drawCurrentRoom();
                 room26();
             }
             case 27 -> {
                 Player.playerX = 3;
                 Player.playerY = 8;
                 roomNumber = 27;
+                drawCurrentRoom();
                 room27();
             }
             case 28 -> {
                 Player.playerX = 7;
                 Player.playerY = 4;
                 roomNumber = 28;
+                drawCurrentRoom();
                 room28();
             }
             case 29 -> {
                 Player.playerX = 8;
                 Player.playerY = 4;
                 roomNumber = 29;
+                drawCurrentRoom();
                 room29();
             }
             case 30 -> {
                 Player.playerX = 0;
                 Player.playerY = 5;
                 roomNumber = 30;
+                drawCurrentRoom();
                 room30();
             }
             case 31 -> {
                 Player.playerX = 1;
                 Player.playerY = 5;
                 roomNumber = 31;
+                drawCurrentRoom();
                 room31();
             }
             case 32 -> {
                 Player.playerX = 2;
                 Player.playerY = 5;
                 roomNumber = 32;
+                drawCurrentRoom();
                 room32();
             }
             case 33 -> {
                 Player.playerX = 5;
                 Player.playerY = 5;
                 roomNumber = 33;
+                drawCurrentRoom();
                 room33();
             }
             case 34 -> {
                 Player.playerX = 6;
                 Player.playerY = 5;
                 roomNumber = 34;
+                drawCurrentRoom();
                 room34();
             }
             case 35 -> {
                 Player.playerX = 7;
                 Player.playerY = 5;
                 roomNumber = 35;
+                drawCurrentRoom();
                 room35();
             }
             case 36 -> {
                 Player.playerX = 8;
                 Player.playerY = 5;
                 roomNumber = 36;
+                drawCurrentRoom();
                 room36();
             }
             case 37 -> {
                 Player.playerX = 0;
                 Player.playerY = 6;
                 roomNumber = 37;
+                drawCurrentRoom();
                 room37();
             }
             case 38 -> {
                 Player.playerX = 1;
                 Player.playerY = 6;
                 roomNumber = 38;
+                drawCurrentRoom();
                 room38();
             }
             case 39 -> {
                 Player.playerX = 2;
                 Player.playerY = 6;
                 roomNumber = 39;
+                drawCurrentRoom();
                 room39();
             }
             case 40 -> {
                 Player.playerX = 3;
                 Player.playerY = 6;
                 roomNumber = 40;
+                drawCurrentRoom();
                 room40();
             }
             case 41 -> {
                 Player.playerX = 4;
                 Player.playerY = 6;
                 roomNumber = 41;
+                drawCurrentRoom();
                 room41();
             }
             case 42 -> {
                 Player.playerX = 5;
                 Player.playerY = 6;
                 roomNumber = 42;
+                drawCurrentRoom();
                 room42();
             }
             case 43 -> {
                 Player.playerX = 6;
                 Player.playerY = 6;
                 roomNumber = 43;
+                drawCurrentRoom();
                 room43();
             }
             case 44 -> {
                 Player.playerX = 7;
                 Player.playerY = 6;
                 roomNumber = 44;
+                drawCurrentRoom();
                 room44();
             }
             case 45 -> {
                 Player.playerX = 8;
                 Player.playerY = 6;
                 roomNumber = 45;
+                drawCurrentRoom();
                 room45();
             }
             case 47 -> {
                 Player.playerX = 1;
                 Player.playerY = 7;
                 roomNumber = 47;
+                drawCurrentRoom();
                 room47();
             }
             case 48 -> {
                 Player.playerX = 2;
                 Player.playerY = 7;
                 roomNumber = 48;
+                drawCurrentRoom();
                 room48();
             }
             case 49 -> {
                 Player.playerX = 3;
                 Player.playerY = 7;
                 roomNumber = 49;
+                drawCurrentRoom();
                 room49();
             }
             case 50 -> {
                 Player.playerX = 4;
                 Player.playerY = 7;
                 roomNumber = 50;
+                drawCurrentRoom();
                 room50();
             }
             case 51 -> {
                 Player.playerX = 5;
                 Player.playerY = 7;
                 roomNumber = 51;
+                drawCurrentRoom();
                 room51();
             }
             case 52 -> {
                 Player.playerX = 6;
                 Player.playerY = 7;
                 roomNumber = 52;
+                drawCurrentRoom();
                 room52();
             }
             case 53 -> {
                 Player.playerX = 7;
                 Player.playerY = 7;
                 roomNumber = 53;
+                drawCurrentRoom();
                 room53();
             }
             case 54 -> {
                 Player.playerX = 8;
                 Player.playerY = 7;
                 roomNumber = 54;
+                drawCurrentRoom();
                 room54();
             }
             case 55 -> {
                 Player.playerX = 2;
                 Player.playerY = 8;
                 roomNumber = 55;
+                drawCurrentRoom();
                 room55();
             }
             case 57 -> {
                 Player.playerX = 4;
                 Player.playerY = 8;
                 roomNumber = 57;
+                drawCurrentRoom();
                 room57();
             }
             case 58 -> {
                 Player.playerX = 5;
                 Player.playerY = 8;
                 roomNumber = 58;
+                drawCurrentRoom();
                 room58();
             }
             case 59 -> {
                 Player.playerX = 6;
                 Player.playerY = 8;
                 roomNumber = 59;
+                drawCurrentRoom();
                 room59();
             }
             case 60 -> {
                 Player.playerX = 7;
                 Player.playerY = 8;
                 roomNumber = 60;
+                drawCurrentRoom();
                 room60();
             }
             case 62 -> {
                 Player.playerX = 4;
                 Player.playerY = 5;
                 roomNumber = 62;
+                drawCurrentRoom();
                 room62();
             }
             case 64 -> {
                 Player.playerX = 2;
                 Player.playerY = 9;
                 roomNumber = 64;
+                drawCurrentRoom();
                 room64();
             }
             case 65 -> {
@@ -361,43 +416,49 @@ public class OpenWorld extends Room {
                 Player.playerX = 4;
                 Player.playerY = 9;
                 roomNumber = 66;
+                drawCurrentRoom();
                 room66();
             }
             case 67 -> {
                 Player.playerX = 5;
                 Player.playerY = 9;
                 roomNumber = 67;
+                drawCurrentRoom();
                 room67();
             }
             case 68 -> {
                 Player.playerX = 6;
                 Player.playerY = 9;
                 roomNumber = 68;
+                drawCurrentRoom();
                 room68();
             }
             case 69 -> {
                 Player.playerX = 7;
                 Player.playerY = 9;
                 roomNumber = 69;
+                drawCurrentRoom();
                 room69();
             }
             case 72 -> {
                 Player.playerX = 2;
                 Player.playerY = 10;
                 roomNumber = 72;
+                drawCurrentRoom();
                 room72();
             }
             case 73 -> {
                 Player.playerX = 3;
                 Player.playerY = 10;
                 roomNumber = 73;
+                drawCurrentRoom();
                 room73();
             }
             case 74 -> {
-                drawCurrentRoom("grassland");
                 Player.playerX = 4;
                 Player.playerY = 10;
                 roomNumber = 74;
+                drawCurrentRoom();
                 room74();
             }
         }

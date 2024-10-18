@@ -370,7 +370,6 @@ public class Player {
 
     public static void printMap() throws InterruptedException {
         TextEngine.clearScreen();
-
         String[][] map = {
             //  0       1          2       3         4       5         6       7       8
             {"     ", b + "[ D ]" + R, b + "[   ]" + R, s + "[   ]" + R, s + "[   ]" + R, s + "[   ]" + R, S + "[   ]" + R, S + "[ D ]" + R, "     ", "", ""}, //0
@@ -381,11 +380,10 @@ public class Player {
             {s + "[   ]" + R, s + "[   ]" + R, s + "[   ]" + R, "     ", g + "[   ]" + R, g + "[   ]" + R, g + "[   ]" + R, g + "[   ]" + R, g + "[   ]" + R, "", ""}, //5
             {s + "[   ]" + R, s + "[   ]" + R, s + "[   ]" + R, G + "[   ]" + R, G + "[   ]" + R, G + "[   ]" + R, G + "[   ]" + R, G + "[   ]" + R, G + "[   ]" + R, "", ""}, //6
             {s + "[ V ]" + R, s + "[   ]" + R, s + "[   ]" + R, G + "[   ]" + R, G + "[   ]" + R, G + "[   ]" + R, G + "[   ]" + R, G + "[   ]" + R, G + "[   ]" + R, "", ""}, //7
-            {"     ", s + "[ D ]" + R, s + "[   ]" + R, G + "[   ]" + R, G + "[   ]" + R, G + "[   ]" + R, G + "[   ]" + R, G + "[   ]" + R, G + "[ D ]" + R, "", ""}, //8
-            {"     ", s + "[ D ]" + R, s + "[   ]" + R, G + "[   ]" + R, G + "[   ]" + R, G + "[   ]" + R, G + "[   ]" + R, G + "[   ]" + R, G + "[ D ]" + R, "", ""}, //9
-            {"     ", s + "[ D ]" + R, s + "[   ]" + R, G + "[   ]" + R, G + "[   ]" + R, G + "[ V ]" + R, "     ", "    ", "     ", "", ""} //10
+            {"     ", s + "[ D ]" + R, s + "[   ]" + R, s + "[   ]" + R, G + "[   ]" + R, G + "[   ]" + R, G + "[   ]" + R, G + "[   ]" + R, G + "[ D ]" + R, "", ""}, //8
+            {"     ", s + "[ D ]" + R, s + "[   ]" + R, s + "[   ]" + R, G + "[   ]" + R, G + "[   ]" + R, G + "[   ]" + R, G + "[   ]" + R, G + "[ D ]" + R, "", ""}, //9
+            {"     ", s + "[ D ]" + R, s + "[   ]" + R, s + "[   ]" + R, G + "[   ]" + R, G + "[ V ]" + R, "     ", "    ", "     ", "", ""} //10
         };
-
         // Update the map with the player's position
         map[playerY][playerX] = "[ P ]";
         switch (Dungeon.completedDungeons) {
@@ -587,5 +585,43 @@ public class Player {
         String healthBar = bar.toString();
         TextEngine.printNoDelay("Health: " + health + " / " + maxHealth, false);
         System.out.println(healthBar);
+    }
+
+    public static String getColorOfPlayerPostitionTile() {
+        //     public static String G = "\033[0;32m"; // deep grass color
+        // public static String b = "\033[1;34m"; // blue color
+        // public static String g = "\033[0;37m"; // bright gray color
+        // public static String s = "\033[0;33m"; // sand color
+        // public static String S = "\033[1;37m"; // snow color
+        String[][] map = {
+            //  0    1    2    3    4    5    6    7    8
+            {" ", "b", "b", "s", "s", "s", "S", "S", " ", "", ""}, //0
+            {" ", "b", " ", " ", " ", "g", "g", "S", " ", "", ""}, //1
+            {" ", "b", " ", " ", " ", "g", "g", "g", " ", "", ""}, //2
+            {" ", "s", " ", " ", " ", "g", "g", "g", "g", "", ""}, //3
+            {"s", "s", " ", " ", "g", "g", "g", "g", "g", "", ""}, //4
+            {"s", "s", "s", " ", "g", "g", "g", "g", "g", "", ""}, //5
+            {"s", "s", "s", "G", "G", "G", "G", "G", "G", "", ""}, //6
+            {"s", "s", "s", "G", "G", "G", "G", "G", "G", "", ""}, //7
+            {" ", "s", "s", "s", "G", "G", "G", "G", "G", "", ""}, //8
+            {" ", "s", "s", "s", "G", "G", "G", "G", "G", "", ""}, //9
+            {" ", "s", "s", "s", "G", "G", " ", " ", " ", "", ""} //10
+        };
+        Map<String, String> colorToEnvironment = new HashMap<>();
+        colorToEnvironment.put("G", "grassland"); // Green
+        colorToEnvironment.put("s", "desert");    // Yellow
+        colorToEnvironment.put("S", "mountain"); // White
+        colorToEnvironment.put("b", "ocean");     // Blue
+        colorToEnvironment.put("g", "mountain"); // Gray
+        String tileValue = String.valueOf(map[playerY][playerX]);
+
+        for (Map.Entry<String, String> entry : colorToEnvironment.entrySet()) {
+            if (tileValue == null ? (entry.getKey()) == null : tileValue.equals(entry.getKey())) {
+                //System.out.println("test" + entry.getValue());
+                return entry.getValue();
+            }
+        }
+        //System.out.println("test" + "Unknown environment");
+        return "unknown";
     }
 }
