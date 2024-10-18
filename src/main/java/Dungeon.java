@@ -10,8 +10,14 @@ import java.util.List;
  */
 public class Dungeon extends Room {
 
+    static String resetColor = "\033[0m"; // reset to default color
+    static String yellowColor = "\033[1;33m"; // yellow color
+    static String redColor = "\033[0;31m"; // red color
     public static String currentDungeon;
     public static int completedDungeons = 0;
+    public static int numberOfEnemies;
+    public static String enemyType;
+    public static boolean resetedAfterWin = false;
 
     public static int[][] meadowDungeon;
     public static int[][] darkForestDungeon;
@@ -25,6 +31,9 @@ public class Dungeon extends Room {
     public static int[] currentPlayerPosition = null;
     public static int[] lastPosition = null; // Variable to store the last position
     public static boolean previousAutoSettings;
+
+    public static String currentMiniBoss;
+    public static String currentBoss;
 
     public static List<String> missedItems = new ArrayList<>();
 
@@ -46,6 +55,7 @@ public class Dungeon extends Room {
                     case "Meadow" -> {
                         if (MeadowDungeon.completed) {
                             TextEngine.printWithDelays("You leave the dungeon and return to the open world.", false);
+                            lastPosition = null;
                             TextEngine.enterToNext();
                             OpenWorld.startRoom();
                         } else {
@@ -55,6 +65,7 @@ public class Dungeon extends Room {
                     case "Dark Forest" -> {
                         if (DarkForestDungeon.completed) {
                             TextEngine.printWithDelays("You leave the dungeon and return to the open world.", false);
+                            lastPosition = null;
                             TextEngine.enterToNext();
                             OpenWorld.startRoom();
                         } else {
@@ -64,6 +75,7 @@ public class Dungeon extends Room {
                     case "Mountain Cave" -> {
                         if (MountainCaveDungeon.completed) {
                             TextEngine.printWithDelays("You leave the dungeon and return to the open world.", false);
+                            lastPosition = null;
                             TextEngine.enterToNext();
                             OpenWorld.startRoom();
                         } else {
@@ -73,6 +85,7 @@ public class Dungeon extends Room {
                     case "Mountain Top" -> {
                         if (MountainTopDungeon.completed) {
                             TextEngine.printWithDelays("You leave the dungeon and return to the open world.", false);
+                            lastPosition = null;
                             TextEngine.enterToNext();
                             OpenWorld.startRoom();
                         } else {
@@ -82,6 +95,7 @@ public class Dungeon extends Room {
                     case "Desert Oasis" -> {
                         if (DesertOasisDungeon.completed) {
                             TextEngine.printWithDelays("You leave the dungeon and return to the open world.", false);
+                            lastPosition = null;
                             TextEngine.enterToNext();
                             OpenWorld.startRoom();
                         } else {
@@ -100,6 +114,7 @@ public class Dungeon extends Room {
                     case "Desert Pyramid" -> {
                         if (DesertPyramidDungeon.completed) {
                             TextEngine.printWithDelays("You leave the dungeon and return to the open world.", false);
+                            lastPosition = null;
                             TextEngine.enterToNext();
                             OpenWorld.startRoom();
                         } else {
@@ -109,6 +124,7 @@ public class Dungeon extends Room {
                     case "Ocean Kingdom" -> {
                         if (OceanKingdomDungeon.completed) {
                             TextEngine.printWithDelays("You leave the dungeon and return to the open world.", false);
+                            lastPosition = null;
                             TextEngine.enterToNext();
                             OpenWorld.startRoom();
                         } else {
@@ -119,39 +135,143 @@ public class Dungeon extends Room {
                 }
             }
             case "map" -> {
-                Main.screenRefresh();
-                TextEngine.printWithDelays("You open your map and see the following:\n", false);
-                System.out.println();
                 switch (currentDungeon) {
                     case "Meadow" -> {
-                        DungeonGenerator.printAdjacentRoomsAndCurrentRoomAndUnlockedRooms(meadowDungeon, MeadowDungeon.roomsBeenTo, currentPlayerPosition);
+                        if (ableToUseMenuCommands()) {
+                            Main.screenRefresh();
+                            TextEngine.printWithDelays("You open your map and see the following:\n", false);
+                            System.out.println();
+                            DungeonGenerator.printAdjacentRoomsAndCurrentRoomAndUnlockedRooms(meadowDungeon, MeadowDungeon.roomsBeenTo, currentPlayerPosition, MeadowDungeon.mapRevealed);
+                            System.out.println();
+                            TextEngine.enterToNext();
+                            Main.loadSave();
+                        } else {
+                            TextEngine.printWithDelays("You cannot use the map right now", true);
+                        }
                     }
                     case "Dark Forest" -> {
-                        DungeonGenerator.printAdjacentRoomsAndCurrentRoomAndUnlockedRooms(darkForestDungeon, DarkForestDungeon.roomsBeenTo, currentPlayerPosition);
+                        if (ableToUseMenuCommands()) {
+                            Main.screenRefresh();
+                            TextEngine.printWithDelays("You open your map and see the following:\n", false);
+                            System.out.println();
+                            DungeonGenerator.printAdjacentRoomsAndCurrentRoomAndUnlockedRooms(darkForestDungeon, DarkForestDungeon.roomsBeenTo, currentPlayerPosition, DarkForestDungeon.mapRevealed);
+                            System.out.println();
+                            TextEngine.enterToNext();
+                            Main.loadSave();
+                        } else {
+                            TextEngine.printWithDelays("You cannot use the map right now", true);
+                        }
                     }
                     case "Mountain Cave" -> {
-                        DungeonGenerator.printAdjacentRoomsAndCurrentRoomAndUnlockedRooms(mountainCaveDungeon, MountainCaveDungeon.roomsBeenTo, currentPlayerPosition);
+                        if (ableToUseMenuCommands()) {
+                            Main.screenRefresh();
+                            TextEngine.printWithDelays("You open your map and see the following:\n", false);
+                            System.out.println();
+                            DungeonGenerator.printAdjacentRoomsAndCurrentRoomAndUnlockedRooms(mountainCaveDungeon, MountainCaveDungeon.roomsBeenTo, currentPlayerPosition, MountainCaveDungeon.mapRevealed);
+                            System.out.println();
+                            TextEngine.enterToNext();
+                            Main.loadSave();
+                        } else {
+                            TextEngine.printWithDelays("You cannot use the map right now", true);
+                        }
                     }
                     case "Mountain Top" -> {
-                        DungeonGenerator.printAdjacentRoomsAndCurrentRoomAndUnlockedRooms(mountainTopDungeon, MountainTopDungeon.roomsBeenTo, currentPlayerPosition);
+                        if (ableToUseMenuCommands()) {
+                            Main.screenRefresh();
+                            TextEngine.printWithDelays("You open your map and see the following:\n", false);
+                            System.out.println();
+                            DungeonGenerator.printAdjacentRoomsAndCurrentRoomAndUnlockedRooms(mountainTopDungeon, MountainTopDungeon.roomsBeenTo, currentPlayerPosition, MountainTopDungeon.mapRevealed);
+                            System.out.println();
+                            TextEngine.enterToNext();
+                            Main.loadSave();
+                        } else {
+                            TextEngine.printWithDelays("You cannot use the map right now", true);
+                        }
                     }
                     case "Desert Oasis" -> {
-                        DungeonGenerator.printAdjacentRoomsAndCurrentRoomAndUnlockedRooms(desertOasisDungeon, DesertOasisDungeon.roomsBeenTo, currentPlayerPosition);
+                        if (ableToUseMenuCommands()) {
+                            Main.screenRefresh();
+                            TextEngine.printWithDelays("You open your map and see the following:\n", false);
+                            System.out.println();
+                            DungeonGenerator.printAdjacentRoomsAndCurrentRoomAndUnlockedRooms(desertOasisDungeon, DesertOasisDungeon.roomsBeenTo, currentPlayerPosition, DesertOasisDungeon.mapRevealed);
+                            System.out.println();
+                            TextEngine.enterToNext();
+                            Main.loadSave();
+                        } else {
+                            TextEngine.printWithDelays("You cannot use the map right now", true);
+                        }
                     }
                     case "Desert Plains" -> {
-                        DungeonGenerator.printAdjacentRoomsAndCurrentRoomAndUnlockedRooms(desertPlainsDungeon, DesertPlainsDungeon.roomsBeenTo, currentPlayerPosition);
+                        if (ableToUseMenuCommands()) {
+                            Main.screenRefresh();
+                            TextEngine.printWithDelays("You open your map and see the following:\n", false);
+                            System.out.println();
+                            DungeonGenerator.printAdjacentRoomsAndCurrentRoomAndUnlockedRooms(desertPlainsDungeon, DesertPlainsDungeon.roomsBeenTo, currentPlayerPosition, DesertPlainsDungeon.mapRevealed);
+                            System.out.println();
+                            TextEngine.enterToNext();
+                            Main.loadSave();
+                        } else {
+                            TextEngine.printWithDelays("You cannot use the map right now", true);
+                        }
                     }
                     case "Desert Pyramid" -> {
-                        DungeonGenerator.printAdjacentRoomsAndCurrentRoomAndUnlockedRooms(desertPyramidDungeon, DesertPyramidDungeon.roomsBeenTo, currentPlayerPosition);
+                        if (ableToUseMenuCommands()) {
+                            Main.screenRefresh();
+                            TextEngine.printWithDelays("You open your map and see the following:\n", false);
+                            System.out.println();
+                            DungeonGenerator.printAdjacentRoomsAndCurrentRoomAndUnlockedRooms(desertPyramidDungeon, DesertPyramidDungeon.roomsBeenTo, currentPlayerPosition, DesertPyramidDungeon.mapRevealed);
+                            System.out.println();
+                            TextEngine.enterToNext();
+                            Main.loadSave();
+                        } else {
+                            TextEngine.printWithDelays("You cannot use the map right now", true);
+                        }
                     }
                     case "Ocean Kingdom" -> {
-                        DungeonGenerator.printAdjacentRoomsAndCurrentRoomAndUnlockedRooms(oceanKingdomDungeon, OceanKingdomDungeon.roomsBeenTo, currentPlayerPosition);
+                        if (ableToUseMenuCommands()) {
+                            Main.screenRefresh();
+                            TextEngine.printWithDelays("You open your map and see the following:\n", false);
+                            System.out.println();
+                            DungeonGenerator.printAdjacentRoomsAndCurrentRoomAndUnlockedRooms(oceanKingdomDungeon, OceanKingdomDungeon.roomsBeenTo, currentPlayerPosition, OceanKingdomDungeon.mapRevealed);
+                            System.out.println();
+                            TextEngine.enterToNext();
+                            Main.loadSave();
+                        } else {
+                            TextEngine.printWithDelays("You cannot use the map right now", true);
+                        }
                     }
                     //add more dungeons here if needed
                 }
-                System.out.println();
-                TextEngine.enterToNext();
-                Main.loadSave();
+            }
+            case "reset" -> {
+                if (Main.gameComplete) {
+                    TextEngine.printWithDelays("This command will reset" + yellowColor + " ALL " + resetColor + "Dungeons!", false);
+                    TextEngine.printWithDelays("Are you sure you want to do this? " + redColor + "yes" + resetColor + " or " + yellowColor + "no" + resetColor, true);
+                    while (true) {
+                        ignore = Room.console.readLine();
+                        command = Room.console.readLine();
+                        switch (command.toLowerCase().trim()) {
+                            case "yes" -> {
+                                TextEngine.printWithDelays(redColor + "All dungeons have been reset and their difficulty has been increased! Good Luck!" + resetColor, false);
+                                TextEngine.enterToNext();
+                                resetedAfterWin = true;
+                                resetAll();
+                                Enemy.resetEnemies();
+                                completedDungeons = 8;
+                                OpenWorld.roomSave = 74;
+                                room = "OpenWorld";
+                                Main.checkSave(room);
+                                GameSaveSerialization.saveGame();
+                                Main.loadSave();
+                            }
+                            default -> {
+                                Main.inGameDefaultTextHandling(data);
+                            }
+                        }
+                    }
+                } else {
+                    Main.inGameDefaultTextHandling(data);
+                }
             }
             default -> {
                 Main.inGameDefaultTextHandling(data);
@@ -172,21 +292,14 @@ public class Dungeon extends Room {
         completedDungeons = 0;
     }
 
-    public static void autoCheck() {
-        previousAutoSettings = Player.autoFight;
-        if (Player.autoFight) {
-            Player.autoFight = false;
-        }
-    }
-
     public static void dungeonCheck() throws InterruptedException {
-        if (OpenWorld.holdCommand != null) {
+        if (OpenWorld.holdCommand == null) {
             OpenWorld.holdCommand = "onward";
         }
         switch (completedDungeons) {
             case 0 -> {// the meadow dungeon
                 switch (OpenWorld.roomNumber) {
-                    case 73,74 ->
+                    case 73, 74 ->
                         TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", feeling a sense of adventure as you leave the open paths behind.\n Ahead, you notice the entrance to the next dungeon lying just to the north, east.\n\n ", false);
                     case 65, 66, 68 ->
                         TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", feeling a sense of adventure as you leave the open paths behind.\n Ahead, you notice the entrance to the next dungeon lying just to the east.\n\n", false);
@@ -206,13 +319,13 @@ public class Dungeon extends Room {
             }
             case 2 -> {// The Mountain Cave Dungeon
                 switch (OpenWorld.roomNumber) {
-                    case 66,57,50,41 ->
+                    case 66, 57, 50, 41 ->
                         TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", feeling a sense of adventure as you leave the open paths behind.\n Ahead, you notice the entrance to the next dungeon lying just to the north.\n\n", false);
                     case 33, 34, 35, 36, 42, 43, 44, 45, 51, 52, 53, 58, 59, 68 ->
                         TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", feeling a sense of adventure as you leave the open paths behind.\n Ahead, you notice the entrance to the next dungeon lying just to the north, west.\n\n", false);
                     case 21, 22 ->
                         TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", feeling a sense of adventure as you leave the open paths behind.\n Ahead, you notice the entrance to the next dungeon lying just to the east.\n\n", false);
-                    case 30, 31, 32, 37, 38, 39, 40,48, 49, 27, 65, 73 ->
+                    case 30, 31, 32, 37, 38, 39, 40, 48, 49, 27, 65, 73 ->
                         TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", feeling a sense of adventure as you leave the open paths behind.\n Ahead, you notice the entrance to the next dungeon lying just to the north, east\n\n", false);
                     case 17, 18, 13, 14, 15, 9, 10, 5 ->
                         TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", feeling a sense of adventure as you leave the open paths behind.\n Ahead, you notice the entrance to the next dungeon lying just to the south, west.\n\n", false);
@@ -289,8 +402,430 @@ public class Dungeon extends Room {
                         TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", feeling a sense of adventure as you leave the open paths behind.\n Ahead, you notice the entrance to the next dungeon lying just to the north, west.\n\n", false);
                 }
             }
+            case 8 -> {
+                TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + "\n Congratulations! You have ridded the world of these evil dungeons!\n You have now unlocked the ability to go and rechallenge the old dungeons! ", false);
+            }
             default ->
                 TextEngine.printWithDelays("this function isnt working right", false);
+        }
+    }
+
+    public static boolean confirmBossContinue() throws InterruptedException {
+        if (Player.inventory.containsKey("key")) {
+            TextEngine.printWithDelays("Would you like to unlock the door to the boss room? " + yellowColor + "yes" + resetColor + " or " + yellowColor + "no" + resetColor, true);
+            while (true) {
+                ignore = Room.console.readLine();
+                command = Room.console.readLine();
+                switch (command.toLowerCase().trim()) {
+                    case "yes" -> {
+                        if (InventoryManager.useKey()) {
+                            TextEngine.printWithDelays("The key was a perfect fit!", false);
+                            TextEngine.enterToNext();
+                            return true;
+                        } else {
+                            TextEngine.printWithDelays("You need a key to unlock the door to the boss room, i'm sure there is one around here somewhere", false);
+                            TextEngine.enterToNext();
+                            return false;
+                        }
+                    }
+                    case "no" -> {
+                        return false;
+                    }
+                    default -> {
+                        Dungeon.defaultDungeonArgs(command.toLowerCase());
+                    }
+                }
+            }
+        } else {
+            TextEngine.printWithDelays("You need a key to unlock the door to the boss room, i'm sure there is one around here somewhere", false);
+            TextEngine.enterToNext();
+            return false;
+        }
+    }
+
+    public static void dungeonShop() throws InterruptedException {
+        Main.screenRefresh();
+        String localDungeon = currentDungeon;
+        TextEngine.printNoDelay("Gold: " + Player.getGold(), false);
+        TextEngine.printNoDelay("Inventory: " + Player.getTotalNumberOfItemsInInventory() + "/" + Player.inventorySize, false);
+        TextEngine.printNoDelay("\n", false);
+        TextEngine.printWithDelays("Welcome to the Dungeon shop Traveler! I snuck into this dungeon a long time ago and got lost.\nMaybe some of these items can help you on your journey.\nWhat would you like to buy?", false);
+        switch (localDungeon) {
+            case "Meadow", "Dark Forest", "Mountain Cave", "Mountain Top" -> {
+                TextEngine.printNoDelay(yellowColor + "health potion" + resetColor + " ~20 gold\n" + yellowColor + "magic map" + resetColor + " ~50\n" + yellowColor + "K.O. Cannon" + resetColor + " ~3000 gold\nor " + yellowColor + " leave" + resetColor, true);
+                while (true) {
+                    ignore = Room.console.readLine();
+                    command = Room.console.readLine();
+                    switch (command.toLowerCase().trim()) {
+                        case "health potion" -> {
+                            buyMultiple("health potion", 20);
+                        }
+                        case "magic map" -> {
+                            if (Player.getGold() >= 50 && !checkIfCurrentDungeonIsRevealed()) {
+                                Player.changeGold(-50);
+                                Dungeon.useMagicMap();
+                                keepShopping();
+                                break;
+                            } else {
+                                TextEngine.printWithDelays("You don't have enough gold for that", false);
+                                keepShopping();
+                                break;
+                            }
+                        }
+                        case "k.o. cannon" -> {
+                            if (Player.getGold() >= 3000) {
+                                if (Player.hasRoomInInventory(1)) {
+                                    Player.changeGold(-3000);
+                                    Player.putItem("K.O. Cannon", 1);
+                                    keepShopping();
+                                    break;
+                                } else {
+                                    TextEngine.printWithDelays("You do not have enough space in your inventory to buy a K.O. Cannon", false);
+                                    TextEngine.enterToNext();
+                                    keepShopping();
+                                    break;
+                                }
+                            } else {
+                                TextEngine.printWithDelays("You don't have enough gold for that", false);
+                                keepShopping();
+                                break;
+                            }
+                        }
+                        case "leave" -> {
+                            leave();
+                        }
+                        default -> {
+                            Dungeon.defaultDungeonArgs(command.toLowerCase());
+                        }
+                    }
+                }
+            }
+            case "Desert Oasis", "Desert Plains", "Desert Pyramid" -> {
+                TextEngine.printNoDelay(yellowColor + "greater health potion" + resetColor + " ~50 gold\n" + yellowColor + "magic map" + resetColor + " ~150\n" + yellowColor + "K.O. Cannon" + resetColor + " ~3000 gold\nor " + yellowColor + " leave" + resetColor, true);
+                while (true) {
+                    ignore = Room.console.readLine();
+                    command = Room.console.readLine();
+                    switch (command.toLowerCase().trim()) {
+                        case "greater health potion" -> {
+                            buyMultiple("greater health potion", 50);
+                        }
+                        case "magic map" -> {
+                            if (Player.getGold() >= 150 && !checkIfCurrentDungeonIsRevealed()) {
+                                Player.changeGold(-150);
+                                Dungeon.useMagicMap();
+                                keepShopping();
+                                break;
+                            } else {
+                                TextEngine.printWithDelays("You don't have enough gold for that", false);
+                                keepShopping();
+                                break;
+                            }
+                        }
+                        case "k.o. cannon" -> {
+                            if (Player.getGold() >= 3000) {
+                                if (Player.hasRoomInInventory(1)) {
+                                    Player.changeGold(-3000);
+                                    Player.putItem("K.O. Cannon", 1);
+                                    keepShopping();
+                                    break;
+                                } else {
+                                    TextEngine.printWithDelays("You do not have enough space in your inventory to buy a K.O. Cannon", false);
+                                    TextEngine.enterToNext();
+                                    keepShopping();
+                                    break;
+                                }
+                            } else {
+                                TextEngine.printWithDelays("You don't have enough gold for that", false);
+                                keepShopping();
+                                break;
+                            }
+                        }
+                        case "leave" -> {
+                            leave();
+                        }
+                        default -> {
+                            Dungeon.defaultDungeonArgs(command.toLowerCase());
+                        }
+                    }
+                }
+            }
+            case "Ocean Kingdom" -> {
+                TextEngine.printNoDelay(yellowColor + "super health potion" + resetColor + " ~75 gold\n" + yellowColor + "magic map" + resetColor + " ~250\n" + yellowColor + "K.O. Cannon" + resetColor + " ~3000 gold\nor " + yellowColor + " leave" + resetColor, true);
+                while (true) {
+                    ignore = Room.console.readLine();
+                    command = Room.console.readLine();
+                    switch (command.toLowerCase().trim()) {
+                        case "super health potion" -> {
+                            buyMultiple("super health potion", 75);
+                        }
+                        case "magic map" -> {
+                            if (Player.getGold() >= 250 && !checkIfCurrentDungeonIsRevealed()) {
+                                Player.changeGold(-250);
+                                Dungeon.useMagicMap();
+                                keepShopping();
+                                break;
+                            } else {
+                                TextEngine.printWithDelays("You don't have enough gold for that", false);
+                                keepShopping();
+                                break;
+                            }
+                        }
+                        case "k.o. cannon" -> {
+                            if (Player.getGold() >= 3000) {
+                                if (Player.hasRoomInInventory(1)) {
+                                    Player.changeGold(-3000);
+                                    Player.putItem("K.O. Cannon", 1);
+                                    keepShopping();
+                                    break;
+                                } else {
+                                    TextEngine.printWithDelays("You do not have enough space in your inventory to buy a K.O. Cannon", false);
+                                    TextEngine.enterToNext();
+                                    keepShopping();
+                                    break;
+                                }
+                            } else {
+                                TextEngine.printWithDelays("You don't have enough gold for that", false);
+                                keepShopping();
+                                break;
+                            }
+                        }
+                        case "leave" -> {
+                            leave();
+                        }
+                        default -> {
+                            Dungeon.defaultDungeonArgs(command.toLowerCase());
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private static void buyMultiple(String type, int cost) throws InterruptedException { //buy multiple clause for certain items in village shop
+        TextEngine.printWithDelays("How many would you like to buy?", true);
+        while (true) {
+            ignore = console.readLine();
+            command = console.readLine();
+            if (TextEngine.checkValidInput(command)) {
+                try {
+                    Integer.valueOf(command);
+                } catch (NumberFormatException e) {
+                    Main.invalidCommand();
+                    TextEngine.enterToNext();
+                    buyMultiple(type, cost);
+                }
+                int totalCost = cost * Integer.parseInt(command);
+                if (Player.getGold() >= totalCost && !command.equals("0")) {
+                    if (Player.hasRoomInInventory(Integer.parseInt(command))) {
+                        Player.changeGold(-totalCost);
+                        Player.putItem(type, Integer.parseInt(command));
+                        keepShopping();
+                    } else {
+                        TextEngine.printWithDelays("You do not have enough space in your inventory to buy " + command + " " + type + "s", false);
+                        TextEngine.enterToNext();
+                        keepShopping();
+                    }
+                } else {
+                    switch (command) {
+                        case "0" -> {
+                            TextEngine.printWithDelays("You did not buy any " + type + "s.", false);
+                            TextEngine.enterToNext();
+                            keepShopping();
+                        }
+                        case "1" -> {
+                            TextEngine.printWithDelays("You do not have enough gold to buy a " + command, false);
+                            TextEngine.enterToNext();
+                            keepShopping();
+                        }
+                        default -> {
+                            TextEngine.printWithDelays("You do not have enough gold to buy " + command + " potions", false);
+                            TextEngine.enterToNext();
+                            keepShopping();
+                        }
+                    }
+                }
+            } else {
+                Main.invalidCommand();
+                keepShopping();
+            }
+        }
+    }
+
+    private static void keepShopping() throws InterruptedException { //keep shopping
+        TextEngine.printWithDelays("Would you like to keep shopping? " + yellowColor + "yes" + resetColor + " or " + yellowColor + "no" + resetColor, true);
+        while (true) {
+            ignore = console.readLine();
+            command = console.readLine();
+            switch (command.toLowerCase().trim()) {
+                case "yes" -> {
+                    dungeonShop();
+                }
+                case "no" -> {
+                    leave();
+                }
+                default ->
+                    defaultDungeonArgs(command.toLowerCase());
+            }
+        }
+    }
+
+    private static void useMagicMap() throws InterruptedException {
+        switch (currentDungeon) {
+            case "Meadow" -> {
+                TextEngine.printWithDelays("You use the magic map...\nIt revealed the layout of the Meadow Dungeon!", false);
+                TextEngine.enterToNext();
+                MeadowDungeon.mapRevealed = true;
+            }
+            case "Dark Forest" -> {
+                TextEngine.printWithDelays("You use the magic map...\nIt revealed the layout of the Dark Forest Dungeon!", false);
+                TextEngine.enterToNext();
+                DarkForestDungeon.mapRevealed = true;
+            }
+            case "Mountain Cave" -> {
+                TextEngine.printWithDelays("You use the magic map...\nIt revealed the layout of the Mountain Cave Dungeon!", false);
+                TextEngine.enterToNext();
+                MountainCaveDungeon.mapRevealed = true;
+            }
+            case "Mountain Top" -> {
+                TextEngine.printWithDelays("You use the magic map...\nIt revealed the layout of the Mountain Top Dungeon!", false);
+                TextEngine.enterToNext();
+                MountainTopDungeon.mapRevealed = true;
+            }
+            case "Desert Oasis" -> {
+                TextEngine.printWithDelays("You use the magic map...\nIt revealed the layout of the Desert Oasis Dungeon!", false);
+                TextEngine.enterToNext();
+                DesertOasisDungeon.mapRevealed = true;
+            }
+            case "Desert Plains" -> {
+                TextEngine.printWithDelays("You use the magic map...\nIt revealed the layout of the Desert Plains Dungeon!", false);
+                TextEngine.enterToNext();
+                DesertPlainsDungeon.mapRevealed = true;
+            }
+            case "Desert Pyramid" -> {
+                TextEngine.printWithDelays("You use the magic map...\nIt revealed the layout of the Desert Pyramid Dungeon!", false);
+                TextEngine.enterToNext();
+                DesertPyramidDungeon.mapRevealed = true;
+            }
+            case "Ocean Kingdom" -> {
+                TextEngine.printWithDelays("You use the magic map...\nIt revealed the layout of the Ocean Kingdom Dungeon!", false);
+                TextEngine.enterToNext();
+                OceanKingdomDungeon.mapRevealed = true;
+            }
+        }
+    }
+
+    private static void leave() throws InterruptedException {
+        // int[] buffer = currentPlayerPosition.clone();
+        // currentPlayerPosition = lastPosition.clone(); // Save the current position before moving
+        // lastPosition = buffer.clone();
+        switch (currentDungeon) {
+            case "Meadow" -> {
+                TextEngine.printWithDelays("You leave the shop and return to the Meadow Dungeon.", false);
+                TextEngine.enterToNext();
+                MeadowDungeon.handleDirectionsAndCommands();
+            }
+            case "Dark Forest" -> {
+                TextEngine.printWithDelays("You leave the shop and return to the Dark Forest Dungeon.", false);
+                TextEngine.enterToNext();
+                DarkForestDungeon.handleDirectionsAndCommands();
+            }
+            case "Mountain Cave" -> {
+                TextEngine.printWithDelays("You leave the shop and return to the Mountain Cave Dungeon.", false);
+                TextEngine.enterToNext();
+                MountainCaveDungeon.handleDirectionsAndCommands();
+            }
+            case "Mountain Top" -> {
+                TextEngine.printWithDelays("You leave the shop and return to the Mountain Top Dungeon.", false);
+                TextEngine.enterToNext();
+                MountainTopDungeon.handleDirectionsAndCommands();
+            }
+            case "Desert Oasis" -> {
+                TextEngine.printWithDelays("You leave the shop and return to the Desert Oasis Dungeon.", false);
+                TextEngine.enterToNext();
+                DesertOasisDungeon.handleDirectionsAndCommands();
+            }
+            case "Desert Plains" -> {
+                TextEngine.printWithDelays("You leave the shop and return to the Desert Plains Dungeon.", false);
+                TextEngine.enterToNext();
+                DesertPlainsDungeon.handleDirectionsAndCommands();
+            }
+            case "Desert Pyramid" -> {
+                TextEngine.printWithDelays("You leave the shop and return to the Desert Pyramid Dungeon.", false);
+                TextEngine.enterToNext();
+                DesertPyramidDungeon.handleDirectionsAndCommands();
+            }
+            case "Ocean Kingdom" -> {
+                TextEngine.printWithDelays("You leave the shop and return to the Ocean Kingdom Dungeon.", false);
+                TextEngine.enterToNext();
+                OceanKingdomDungeon.handleDirectionsAndCommands();
+            }
+        }
+    }
+
+    private static boolean checkIfCurrentDungeonIsRevealed() {
+        switch (currentDungeon) {
+            case "Meadow" -> {
+                return MeadowDungeon.mapRevealed;
+            }
+            case "Dark Forest" -> {
+                return DarkForestDungeon.mapRevealed;
+            }
+            case "Mountain Cave" -> {
+                return MountainCaveDungeon.mapRevealed;
+            }
+            case "Mountain Top" -> {
+                return MountainTopDungeon.mapRevealed;
+            }
+            case "Desert Oasis" -> {
+                return DesertOasisDungeon.mapRevealed;
+            }
+            case "Desert Plains" -> {
+                return DesertPlainsDungeon.mapRevealed;
+            }
+            case "Desert Pyramid" -> {
+                return DesertPyramidDungeon.mapRevealed;
+            }
+            case "Ocean Kingdom" -> {
+                return OceanKingdomDungeon.mapRevealed;
+            }
+            default -> {
+                return false;
+            }
+        }
+    }
+
+    public static boolean ableToUseMenuCommands() {
+        if ("OpenWorld".equals(Main.getSavedPlace()) || "Village".equals(Main.getSavedPlace()) || "SpawnRoom".equals(Main.getSavedPlace())) {
+            return true;
+        }
+        switch (currentDungeon) {
+            case "Meadow" -> {
+                return (!(meadowDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] == 3 || meadowDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] == 4 || (meadowDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] == 1 && MeadowDungeon.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] == 0)));
+            }
+            case "Dark Forest" -> {
+                return (!(darkForestDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] == 3 || darkForestDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] == 4 || (darkForestDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] == 1 && DarkForestDungeon.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] == 0)));
+            }
+            case "Mountain Cave" -> {
+                return (!(mountainCaveDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] == 3 || mountainCaveDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] == 4 || (mountainCaveDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] == 1 && MountainCaveDungeon.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] == 0)));
+            }
+            case "Mountain Top" -> {
+                return (!(mountainTopDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] == 3 || mountainTopDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] == 4 || (mountainTopDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] == 1 && MountainTopDungeon.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] == 0)));
+            }
+            case "Desert Oasis" -> {
+                return (!(desertOasisDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] == 3 || desertOasisDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] == 4 || (desertOasisDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] == 1 && DesertOasisDungeon.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] == 0)));
+            }
+            case "Desert Plains" -> {
+                return (!(desertPlainsDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] == 3 || desertPlainsDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] == 4 || (desertPlainsDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] == 1 && DesertPlainsDungeon.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] == 0)));
+            }
+            case "Desert Pyramid" -> {
+                return (!(desertPyramidDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] == 3 || desertPyramidDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] == 4 || (desertPyramidDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] == 1 && DesertPyramidDungeon.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] == 0)));
+            }
+            case "Ocean Kingdom" -> {
+                return (!(oceanKingdomDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] == 3 || oceanKingdomDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] == 4 || (oceanKingdomDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] == 1 && OceanKingdomDungeon.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] == 0)));
+            }
+            default -> {
+                return true;
+            }
         }
     }
 }

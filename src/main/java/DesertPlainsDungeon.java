@@ -11,32 +11,26 @@ import java.util.Random;
 
 public class DesertPlainsDungeon extends Dungeon {
 
-    static String resetColor = "\033[0m"; // reset to default color
-    static String yellowColor = "\033[1;33m"; // yellow color
-
     private static int[] spawnPosition = DungeonGenerator.findValue(Dungeon.desertPlainsDungeon, 9);
     private static int[] bossRoom = DungeonGenerator.findValue(Dungeon.desertPlainsDungeon, 8);
-    private static int[] save = DungeonGenerator.findValue(Dungeon.desertPlainsDungeon, 9);
     public static int[][] roomsBeenTo = DungeonGenerator.createRoomsBeenTo(Dungeon.desertPlainsDungeon.length);
     public static String direction;
     public static int[] availableMove;
     public static ArrayList<String> directionsString;
-    private static int foundItemRooms = DungeonGenerator.numberOfRooms(Dungeon.desertPlainsDungeon, 2);
     public static List<String> items;
     private static final List<String> enemies = new ArrayList<>(List.of("Orc", "Troll", "Mummy", "Demon"));
     private static final Random rand = new Random();
     public static boolean completed = false;
     public static boolean visited = false;
+    public static boolean mapRevealed;
 
     public static void startRoom() throws InterruptedException { //start room
         if (!visited) {
             fresh();
-            items = new ArrayList<>(List.of("legendary sword", "demon armor", "greater health potion"));
+            items = new ArrayList<>(List.of("legendary sword", "demon armor"));
             visited = true;
         }
-        if ("Desert Plains Dungeon".equals(Main.getSavedPlace())) {
-            currentPlayerPosition = save;
-        } else {
+        if (!"Desert Plains Dungeon".equals(Main.getSavedPlace())) {
             currentPlayerPosition = DungeonGenerator.findValue(Dungeon.desertPlainsDungeon, 9);
         }
         room = "Desert Plains Dungeon";
@@ -48,82 +42,112 @@ public class DesertPlainsDungeon extends Dungeon {
     }
 
     public static void fresh() { //fresh
+        mapRevealed = false;
         visited = false;
         completed = false;
-        foundItemRooms = DungeonGenerator.numberOfRooms(Dungeon.desertPlainsDungeon, 2);
         spawnPosition = DungeonGenerator.findValue(Dungeon.desertPlainsDungeon, 9);
         bossRoom = DungeonGenerator.findValue(Dungeon.desertPlainsDungeon, 8);
         Dungeon.currentPlayerPosition = spawnPosition;
         roomsBeenTo = DungeonGenerator.createRoomsBeenTo(Dungeon.desertPlainsDungeon.length);
-        save = spawnPosition;
         lastPosition = spawnPosition.clone();
     }
 
     private static void startRooms() throws InterruptedException {
+        currentMiniBoss = "Cyclops";
+        currentBoss = "Giant Scorpion";
+        numberOfEnemies = rand.nextInt(5);
+        enemyType = enemies.get(rand.nextInt(enemies.size()));
         availableMove = null;
         Main.screenRefresh();
-        DungeonGenerator.drawRoom(desertPlainsDungeon, roomsBeenTo, currentPlayerPosition[0], currentPlayerPosition[1]);
+        DungeonGenerator.drawRoom(desertPlainsDungeon, roomsBeenTo, currentPlayerPosition[0], currentPlayerPosition[1], numberOfEnemies, mapRevealed);
         directionsString = new ArrayList<>();
-
         if (desertPlainsDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] == 2 && roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] == 0) {
             if (!items.isEmpty()) {
                 String randomItem = items.get(rand.nextInt(items.size()));
                 if (hasChestInRoom(randomItem, 1)) {
                     items.remove(randomItem);
-                    lastPosition = currentPlayerPosition.clone();
+                    //lastPosition = currentPlayerPosition.clone();
                     roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = desertPlainsDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
                 } else {
-                    currentPlayerPosition = lastPosition.clone();
-                    save = currentPlayerPosition.clone();
+                    int[] buffer = currentPlayerPosition.clone();
+                    currentPlayerPosition = lastPosition.clone(); // Save the current position before moving
+                    lastPosition = buffer.clone();
                     Main.loadSave();
                 }
             } else {
-                TextEngine.printWithDelays("You have found all of the items in the dungeon.", false);
-                TextEngine.enterToNext();
-                lastPosition = currentPlayerPosition.clone();
-                roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = desertPlainsDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
-                Main.loadSave();
+                fairySequence();
+            }
+        }
+        if (desertPlainsDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] == 10 && roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] == 0) {
+            TextEngine.printWithDelays("You have entered a room with a mystical fairy", false);
+            TextEngine.printWithDelays("The fairy has granted you a wish of healing?", false);
+            TextEngine.printWithDelays("Do you want to take it? " + yellowColor + "yes" + resetColor + " or " + yellowColor + "no" + resetColor, true);
+            while (true) {
+                ignore = Room.console.readLine();
+                command = Room.console.readLine();
+                switch (command) {
+                    case "yes" -> {
+                        Player.fairyHeal();
+                        roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = desertPlainsDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
+                        Main.loadSave();
+                    }
+                    case "no" -> {
+                        int[] buffer = currentPlayerPosition.clone();
+                        currentPlayerPosition = lastPosition.clone(); // Save the current position before moving
+                        lastPosition = buffer.clone();
+                        Main.loadSave();
+                    }
+                    default -> {
+                        defaultDungeonArgs(command);
+                    }
+                }
             }
         }
         if (desertPlainsDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] == 3 && roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] == 0) {
-            if (hasLockedChestInRoom("heart container", 1)) {
-                lastPosition = currentPlayerPosition.clone();
+            keyRoomSequence();
+        }
+        if (desertPlainsDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] == 5 && roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] == 0) {
+            if (hasItemInRoom("key", 1)) {
                 roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = desertPlainsDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
             } else {
-                currentPlayerPosition = lastPosition.clone();
-                save = currentPlayerPosition.clone();
+                int[] buffer = currentPlayerPosition.clone();
+                currentPlayerPosition = lastPosition.clone(); // Save the current position before moving
+                lastPosition = buffer.clone();
+                Main.loadSave();
+            }
+        }
+        if (desertPlainsDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] == 7 && roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] == 0) {
+            if (hasItemInRoom("heart container", 1)) {
+                roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = desertPlainsDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
+            } else {
+                int[] buffer = currentPlayerPosition.clone();
+                currentPlayerPosition = lastPosition.clone(); // Save the current position before moving
+                lastPosition = buffer.clone();
                 Main.loadSave();
             }
         }
         if (desertPlainsDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] == 1 && roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] == 0) {
-            fightRandomEnemies(5);
+            fightRandomEnemies();
         }
-        if (desertPlainsDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] == 6 && roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] == 0) {
-            trappedRoom();
-            lastPosition = currentPlayerPosition.clone();
+        if (desertPlainsDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] == 6) {
             roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = desertPlainsDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
-            Main.loadSave();
+            dungeonShop();
         }
         if (desertPlainsDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] == 4 && roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] == 0) {
-            TextEngine.printWithDelays("You have entered a room with a mini boss", false);
-            Player.changeHealth(Enemy.spawnEnemy("Cyclops", 1));
-            Room.hasItemInRoom("heart container", 1);
-            lastPosition = currentPlayerPosition.clone();
-            roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = desertPlainsDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
-            Main.loadSave();
+            miniBossSequence();
         }
         if (desertPlainsDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] == 8 && roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] == 0) {
             TextEngine.printWithDelays("You have entered the boss room", false);
             Player.changeHealth(Enemy.spawnEnemy("Giant Scorpion", 1));
             TextEngine.printWithDelays("You have defeated the boss and completed the dungeon!", false);
             TextEngine.enterToNext();
-            lastPosition = currentPlayerPosition.clone();
+            //lastPosition = currentPlayerPosition.clone();
             roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = desertPlainsDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
             if (!completed) {
                 completedDungeons++;
                 completed = true;
             }
-            Player.autoFight = Dungeon.previousAutoSettings;
+            lastPosition = null;
             OpenWorld.startRoom();
         }
         handleDirectionsAndCommands();
@@ -136,32 +160,15 @@ public class DesertPlainsDungeon extends Dungeon {
         return false;
     }
 
-    private static boolean confirmBossContinue() throws InterruptedException {
-        TextEngine.printWithDelays("Are you sure you want to continue to the boss room? (" + yellowColor + "yes" + resetColor + " or " + yellowColor + "no" + resetColor + ")", true);
-        while (true) {
-            ignore = Room.console.readLine();
-            command = Room.console.readLine();
-            switch (command.toLowerCase().trim()) {
-                case "yes" -> {
-                    return true;
-                }
-                case "no" -> {
-                    return false;
-                }
-                default -> {
-                    Dungeon.defaultDungeonArgs(command.toLowerCase());
-                }
-            }
-        }
-    }
-
-    private static void handleDirectionsAndCommands() throws InterruptedException {
+    public static void handleDirectionsAndCommands() throws InterruptedException {
         Main.screenRefresh();
-        DungeonGenerator.drawRoom(desertPlainsDungeon, roomsBeenTo, currentPlayerPosition[0], currentPlayerPosition[1]);
+        DungeonGenerator.drawRoom(desertPlainsDungeon, roomsBeenTo, currentPlayerPosition[0], currentPlayerPosition[1], 0, mapRevealed);
         availableMove = DungeonGenerator.getDirections(desertPlainsDungeon, currentPlayerPosition[0], currentPlayerPosition[1]);
         if (completed) {
             TextEngine.printWithDelays("You have completed this dungeon. You can now type " + yellowColor + "leave" + resetColor + " to exit this dungeon.", false);
         }
+        System.out.println("Type " + yellowColor + "map" + resetColor + " to see the map.");
+        System.out.println();
         TextEngine.printWithDelays("You can move in the following directions: ", false);
         //System.out.println(availableMove[0] + "" + availableMove[1] + "" + availableMove[2] + "" + availableMove[3]);
         if (availableMove[0] > 0) {
@@ -183,7 +190,6 @@ public class DesertPlainsDungeon extends Dungeon {
                 directionsString.add("boss room");
             } else {
                 directionsString.add("west");
-
             }
         }
         if (availableMove[3] > 0) {
@@ -191,7 +197,6 @@ public class DesertPlainsDungeon extends Dungeon {
                 directionsString.add("boss room");
             } else {
                 directionsString.add("east");
-
             }
         }
         TextEngine.printNoDelay(yellowColor + directionsString.toString() + resetColor, true);
@@ -204,7 +209,6 @@ public class DesertPlainsDungeon extends Dungeon {
                         lastPosition = currentPlayerPosition.clone(); // Save the current position before moving
                         roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = desertPlainsDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
                         currentPlayerPosition[0] -= 1;
-                        save = currentPlayerPosition.clone();
                         Main.loadSave();
                     } else {
                         Dungeon.defaultDungeonArgs(direction.toLowerCase());
@@ -215,7 +219,6 @@ public class DesertPlainsDungeon extends Dungeon {
                         lastPosition = currentPlayerPosition.clone(); // Save the current position before moving
                         roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = desertPlainsDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
                         currentPlayerPosition[1] += 1;
-                        save = currentPlayerPosition.clone();
                         Main.loadSave();
                     } else {
                         Dungeon.defaultDungeonArgs(direction.toLowerCase());
@@ -226,7 +229,6 @@ public class DesertPlainsDungeon extends Dungeon {
                         lastPosition = currentPlayerPosition.clone(); // Save the current position before moving
                         roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = desertPlainsDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
                         currentPlayerPosition[0] += 1;
-                        save = currentPlayerPosition.clone();
                         Main.loadSave();
                     } else {
                         Dungeon.defaultDungeonArgs(direction.toLowerCase());
@@ -237,7 +239,6 @@ public class DesertPlainsDungeon extends Dungeon {
                         lastPosition = currentPlayerPosition.clone(); // Save the current position before moving
                         roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = desertPlainsDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
                         currentPlayerPosition[1] -= 1;
-                        save = currentPlayerPosition.clone();
                         Main.loadSave();
                     } else {
                         Dungeon.defaultDungeonArgs(direction.toLowerCase());
@@ -248,7 +249,6 @@ public class DesertPlainsDungeon extends Dungeon {
                         lastPosition = currentPlayerPosition.clone(); // Save the current position before moving
                         roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = desertPlainsDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
                         currentPlayerPosition = bossRoom;
-                        save = currentPlayerPosition.clone();
                         Main.loadSave();
                     } else {
                         Main.loadSave();
@@ -261,22 +261,91 @@ public class DesertPlainsDungeon extends Dungeon {
         }
     }
 
-    public static void fightRandomEnemies(int number) throws InterruptedException {
-        int numberOfEnemies = rand.nextInt(number);
+    public static void fightRandomEnemies() throws InterruptedException {
         if (numberOfEnemies == 0) {
             TextEngine.printWithDelays("There were no enemies in this room", false);
             TextEngine.enterToNext();
-            lastPosition = currentPlayerPosition.clone();
+            //lastPosition = currentPlayerPosition.clone();
             roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = desertPlainsDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
             Main.loadSave();
             return;
         }
-        TextEngine.printWithDelays("You have entered a room with enemies and were ambushed!", false);
-        String enemyType = enemies.get(rand.nextInt(enemies.size()));
-        Player.changeHealth(Enemy.spawnEnemy(enemyType, numberOfEnemies));
-        lastPosition = currentPlayerPosition.clone();
-        roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = desertPlainsDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
+        if (numberOfEnemies > 1) {
+            TextEngine.printWithDelays("You have entered a room with " + numberOfEnemies + " " + enemyType + "s in this room!\nYou were ambushed!", false);
+        } else {
+            TextEngine.printWithDelays("You have entered a room with a " + enemyType + " and were ambushed!", false);
+        }
+        TextEngine.printWithDelays("What is your command? " + yellowColor + "fight" + resetColor + " or " + yellowColor + "run" + resetColor, true);
+        while (true) {
+            ignore = Room.console.readLine();
+            command = Room.console.readLine();
+            switch (command) {
+                case "fight" -> {
+                    Player.changeHealth(Enemy.spawnEnemy(enemyType, numberOfEnemies));
+                    roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = desertPlainsDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
+                    Main.loadSave();
+                }
+                case "run" -> {
+                    Player.changeHealth(Enemy.runSpawnEnemy(enemyType, numberOfEnemies));
+                    int[] buffer = currentPlayerPosition.clone();
+                    currentPlayerPosition = lastPosition.clone(); // Save the current position before moving
+                    lastPosition = buffer.clone();
+                    Main.loadSave();
+                }
+                default -> {
+                    defaultDungeonArgs(command);
+                }
+            }
+        }
+    }
+
+    public static void keyRoomSequence() throws InterruptedException {
+        if (numberOfEnemies == 0) {
+            numberOfEnemies = 1;
+        }
+        if (numberOfEnemies > 1) {
+            TextEngine.printWithDelays("You have entered a room with " + numberOfEnemies + " " + enemyType + "s in this room!\nYou were ambushed!", false);
+        } else {
+            TextEngine.printWithDelays("You have entered a room with a " + enemyType + " and were ambushed!", false);
+        }
+        if (numberOfEnemies > 1) {
+            TextEngine.printWithDelays("They seem to be trying to protect something...", false);
+        } else {
+            TextEngine.printWithDelays("It seems to be trying to protect something...", false);
+        }
+        TextEngine.printWithDelays("What is your command? " + yellowColor + "fight" + resetColor + " or " + yellowColor + "run" + resetColor, true);
+        while (true) {
+            ignore = Room.console.readLine();
+            command = Room.console.readLine();
+            switch (command) {
+                case "fight" -> {
+                    Player.changeHealth(Enemy.spawnEnemy(enemyType, numberOfEnemies));
+                    desertPlainsDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] = 5;
+                    Main.loadSave();
+                }
+                case "run" -> {
+                    Player.changeHealth(Enemy.runSpawnEnemy(enemyType, numberOfEnemies));
+                    int[] buffer = currentPlayerPosition.clone();
+                    currentPlayerPosition = lastPosition.clone(); // Save the current position before moving
+                    lastPosition = buffer.clone();
+                    Main.loadSave();
+                }
+                default -> {
+                    defaultDungeonArgs(command);
+                }
+            }
+        }
+    }
+
+    private static void miniBossSequence() throws InterruptedException {
+        TextEngine.printWithDelays("You have entered a room with a mini boss", false);
+        Player.changeHealth(Enemy.spawnEnemy("Cyclops", 1));
+        desertPlainsDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] = 7;
         Main.loadSave();
     }
 
+    private static void fairySequence() throws InterruptedException {
+        desertPlainsDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] = 10;
+        Main.loadSave();
+    }
 }

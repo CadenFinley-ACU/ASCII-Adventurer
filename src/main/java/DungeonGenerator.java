@@ -14,6 +14,11 @@ public class DungeonGenerator {
     public static int[][] matrix;
     public static int fails = 0;
     public static int runs = 0;
+    public static String yellowColor = "\u001B[33m";
+    public static String resetColor = "\u001B[0m";
+    public static String redColor = "\u001B[31m";
+    public static String greenColor = "\u001B[32m";
+    public static String pinkColor = "\u001B[35m";
 
     public static void wipe() {
         matrix = null;
@@ -96,7 +101,7 @@ public class DungeonGenerator {
         // Randomly add 1 rare item (3) ensuring it is connected to the main path
         addRandom(matrix, rand, 1, 3);
 
-        // Randomly add 1 trap room (6) ensuring it is connected to the main path
+        // Randomly add 1 shop room (6) ensuring it is connected to the main path
         addRandom(matrix, rand, 1, 6);
 
         // Randomly add mini boss rooms (4) ensuring it is connected to the main path
@@ -301,7 +306,7 @@ public class DungeonGenerator {
         if (pos9 == null || pos8 == null || pos3 == null || pos2 == null || pos4 == null || pos6 == null) {
             return false;
         }
-        return (isPathConnected(localMatrix, pos9[0], pos9[1], pos8[0], pos8[1]) && isPathConnected(localMatrix, pos9[0], pos9[1], pos3[0], pos3[1]) && isPathConnected(localMatrix, pos9[0], pos9[1], pos2[0], pos2[1]) && isPathConnected(localMatrix, pos9[0], pos9[1], pos4[0], pos4[1]) && !isAdjacent(pos8[0], pos8[1], pos6) && numberOfRooms(matrix, 2) >= 2);
+        return (isPathConnected(localMatrix, pos9[0], pos9[1], pos8[0], pos8[1]) && isPathConnected(localMatrix, pos9[0], pos9[1], pos3[0], pos3[1]) && isPathConnected(localMatrix, pos9[0], pos9[1], pos2[0], pos2[1]) && isPathConnected(localMatrix, pos9[0], pos9[1], pos4[0], pos4[1]) && !isAdjacent(pos8[0], pos8[1], pos6) && !isAdjacent(pos8[0], pos8[1], pos4) && numberOfRooms(matrix, 2) >= 2);
     }
 
     /**
@@ -385,63 +390,161 @@ public class DungeonGenerator {
      * @param unlocked The matrix indicating which rooms have been unlocked.
      * @param passedPosition The current position of the player in the dungeon.
      */
-    public static void printAdjacentRoomsAndCurrentRoomAndUnlockedRooms(int[][] passedMatrix, int[][] unlocked, int[] passedPosition) {
-        for (int i = 0; i < passedMatrix.length; i++) {
-            for (int j = 0; j < passedMatrix.length; j++) {
-                if (passedMatrix[i][j] != 0) {
-                    if (i == passedPosition[0] && j == passedPosition[1]) {
-                        System.out.print("[P] ");
-                    } else if (isAdjacent(i, j, passedPosition)) {
-                        switch (passedMatrix[i][j]) { //icon for unvisited rooms
-                            case 8 ->
-                                System.out.print("[B] "); // Special marker for value 8
-                            case 0 ->
-                                System.out.print("[ ] "); // Empty room
-                            case 4 -> {
-                                if (unlocked[i][j] > 0) {
-                                    System.out.print("[■] "); // Special marker for value 4
-                                } else {
-                                    System.out.print("[!] "); // Special marker for value 3
+    public static void printAdjacentRoomsAndCurrentRoomAndUnlockedRooms(int[][] passedMatrix, int[][] unlocked, int[] passedPosition, boolean revealed) {
+        if (!revealed) {
+            for (int i = 0; i < passedMatrix.length; i++) {
+                for (int j = 0; j < passedMatrix.length; j++) {
+                    if (passedMatrix[i][j] != 0) {
+                        if (i == passedPosition[0] && j == passedPosition[1]) {
+                            System.out.print(yellowColor + "[P] " + resetColor);
+                        } else if (isAdjacent(i, j, passedPosition)) {
+                            switch (passedMatrix[i][j]) {
+                                case 2, 5, 7 -> {
+                                    if (unlocked[i][j] > 0) {
+                                        System.out.print("[■] ");
+                                    } else {
+                                        System.out.print(greenColor + "[?] " + resetColor);
+                                    }
+                                }
+                                case 8 ->
+                                    System.out.print(redColor + "[B] " + resetColor);
+                                case 9 ->
+                                    System.out.print("[S] ");
+                                case 6 ->
+                                    System.out.print(greenColor + "[$] " + resetColor);
+                                case 4 -> {
+                                    if (unlocked[i][j] > 0) {
+                                        System.out.print("[■] ");
+                                    } else {
+                                        System.out.print(redColor + "[!] " + resetColor);
+                                    }
+                                }
+                                case 10 -> {
+                                    if (unlocked[i][j] > 0) {
+                                        System.out.print("[■] ");
+                                    } else {
+                                        System.out.print(pinkColor + "[F] " + resetColor);
+                                    }
+                                }
+                                default ->
+                                    System.out.print("[~] ");
+                            }
+                        } else if (unlocked[i][j] > 0) {
+                            switch (unlocked[i][j]) { //icon for visited rooms
+                                case 6 ->
+                                    System.out.print(greenColor + "[$] " + resetColor); // Special marker for shop/trap room
+                                case 8 ->
+                                    System.out.print(redColor + "[B] " + resetColor); // Special marker for boss room
+                                case 9 -> {
+                                    if (isAdjacent(i, j, passedPosition)) {
+                                        System.out.print("[~] ");
+                                    } else {
+                                        System.out.print("[S] ");
+                                    }
+                                }
+                                default -> {
+                                    if (isAdjacent(i, j, passedPosition)) {
+                                        System.out.print("[~] ");
+                                    } else {
+                                        System.out.print("[■] "); // Default case for other values
+                                    }
                                 }
                             }
-                            case 3, 2 -> {
-                                if (unlocked[i][j] > 0) {
-                                    System.out.print("[I] "); // Special marker for value 3
-                                } else {
-                                    System.out.print("[?] "); // Special marker for value 3  
-                                }
-                            }
-                            case 6 -> {
-                                if (unlocked[i][j] > 0) {
-                                    System.out.print("[■] "); // Special marker for value 6
-                                } else {
-                                    System.out.print("[?] "); // Special marker for value 3
-                                }
-                            }
-                            default ->
-                                System.out.print("[~] "); // Default case for other values
+                        } else {
+                            System.out.print("[ ] "); // Print brackets around non-zero values
                         }
-                    } else if (unlocked[i][j] > 0) {
-                        switch (unlocked[i][j]) { //icon for visited rooms
-                            case 9 ->
-                                System.out.print("[*] "); // Special marker for value 9
-                            case 2 ->
-                                System.out.print("[I] "); // Special marker for value 
-                            case 3 ->
-                                System.out.print("[I] "); // Special marker for value 3
-                            default ->
-                                System.out.print("[■] "); // Default case for other values
-                        }
+                    } else if (unlocked[i][j] == 1) {
+                        System.out.print("[ ] "); // Print brackets around 0 values if unlocked
                     } else {
-                        System.out.print("[ ] "); // Print brackets around non-zero values
+                        System.out.print("    "); // No brackets around 0 values
                     }
-                } else if (unlocked[i][j] == 1) {
-                    System.out.print("[ ] "); // Print brackets around 0 values if unlocked
-                } else {
-                    System.out.print("    "); // No brackets around 0 values
                 }
+                System.out.println();
             }
             System.out.println();
+            System.out.println("Map Key: [P] Player, [?] Item Room, [B] Boss Room, [S] Spawn Room, [$] Shop Room, [F] Fairy Room");
+            System.out.println(" [~] Available Moves, [ ] Unvisited Room, [■] Visited Room");
+        } else {
+            for (int i = 0; i < passedMatrix.length; i++) {
+                for (int j = 0; j < passedMatrix.length; j++) {
+                    if (passedMatrix[i][j] != 0) {
+                        if (i == passedPosition[0] && j == passedPosition[1]) {
+                            System.out.print(yellowColor + "[P] " + resetColor);
+                        } else {
+                            switch (passedMatrix[i][j]) {
+                                case 2, 7 -> {
+                                    if (unlocked[i][j] == 2 || unlocked[i][j] == 7) {
+                                        if (isAdjacent(i, j, passedPosition)) {
+                                            System.out.print("[~] ");
+                                        } else {
+                                            System.out.print("[■] ");
+                                        }
+                                    } else {
+                                        System.out.print(greenColor + "[?] " + resetColor);
+                                    }
+                                }
+                                case 3, 5 -> {
+                                    if (unlocked[i][j] == 3 || unlocked[i][j] == 5) {
+                                        if (isAdjacent(i, j, passedPosition)) {
+                                            System.out.print("[~] ");
+                                        } else {
+                                            System.out.print("[■] ");
+                                        }
+                                    } else {
+                                        System.out.print(greenColor + "[K] " + resetColor);
+                                    }
+                                }
+                                case 8 ->
+                                    System.out.print(redColor + "[B] " + resetColor);
+                                case 4 -> {
+                                    if (unlocked[i][j] == 4) {
+                                        if (isAdjacent(i, j, passedPosition)) {
+                                            System.out.print("[~] ");
+                                        } else {
+                                            System.out.print("[■] ");
+                                        }
+                                    } else {
+                                        System.out.print(redColor + "[!] " + resetColor);
+                                    }
+                                }
+                                case 9 -> {
+                                    System.out.print("[S] ");
+                                }
+                                case 6 -> {
+                                    System.out.print(greenColor + "[$] " + resetColor);
+                                }
+                                case 1 -> {
+                                    if (unlocked[i][j] == 1) {
+                                        if (isAdjacent(i, j, passedPosition)) {
+                                            System.out.print("[~] ");
+                                        } else {
+                                            System.out.print("[■] ");
+                                        }
+                                    } else {
+                                        System.out.print("[ ] ");
+                                    }
+                                }
+                                case 10 -> {
+                                    if (unlocked[i][j] == 10) {
+                                        if (isAdjacent(i, j, passedPosition)) {
+                                            System.out.print("[~] ");
+                                        } else {
+                                            System.out.print("[■] ");
+                                        }
+                                    } else {
+                                        System.out.print(pinkColor + "[F] " + resetColor);
+                                    }
+                                }
+                            }
+                        }
+                    } else {
+                        System.out.print("    ");
+                    }
+                }
+                System.out.println();
+            }
+            System.out.println();
+            System.out.println("Map Key: [P] Player, [?] Item Room, [B] Boss Room, [S] Spawn Room, [$] Shop Room, [F] Fairy Room");
         }
     }
 
@@ -584,168 +687,456 @@ public class DungeonGenerator {
         return count;
     }
 
-    public static void drawRoom(int[][] localDungeon, int[][] visitedRoom, int x, int y) {
+    public static void drawRoom(int[][] localDungeon, int[][] visitedRoom, int x, int y, int numberofEnemies, boolean revealed) {
         int[] moves = getDirections(localDungeon, x, y);
-
-        char[][] room = {
-            {'┌', '─', '─', '─', '─', '─', '─', '─', '─', '─', '─', '─', '─', '─', '┐'},
-            {'|', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '|'},
-            {'|', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '|'},
-            {'|', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '|'},
-            {'└', '─', '─', '─', '─', '─', '─', '─', '─', '─', '─', '─', '─', '─', '┘'}
+        //default room layout
+        String[][] room = {
+            {"┌", "─", "─", "─", "─", "─", "─", "─", "─", "─", "─", "─", "─", "─", "┐"},
+            {"|", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "|"},
+            {"|", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "|"},
+            {"|", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "|"},
+            {"└", "─", "─", "─", "─", "─", "─", "─", "─", "─", "─", "─", "─", "─", "┘"}
         };
-
-        // Mark possible moves
-        switch (moves[0]) {
-            case 1, 9 -> {
-                room[0][7] = ' ';
-                //room[0][7] = '↑';
-                room[0][6] = ' ';
-                room[0][8] = ' ';
-            }
-            case 2, 3, 6 -> {
-                room[0][7] = '?';
-                //room[1][7] = '↑';
-                room[0][6] = ' ';
-                room[0][8] = ' ';
-            }
-            case 4 -> {
-                room[0][7] = '!';
-                //room[1][7] = '↑';
-                room[0][6] = ' ';
-                room[0][8] = ' ';
-            }
-            case 8 -> {
-                room[0][7] = 'B';
-                //room[1][7] = '↑';
-                room[0][6] = ' ';
-                room[0][8] = ' ';
-            }
-            default ->
-                room[0][7] = '─';
-        }
-        switch (moves[1]) {
-            case 1, 9 -> {
-                room[4][7] = ' ';
-                //room[4][7] = '↓';
-                room[4][6] = ' ';
-                room[4][8] = ' ';
-            }
-            case 2, 3, 6 -> {
-                room[4][7] = '?';
-                //room[3][7] = '↓';
-                room[4][6] = ' ';
-                room[4][8] = ' ';
-            }
-            case 4 -> {
-                room[4][7] = '!';
-                //room[3][7] = '↓';
-                room[4][6] = ' ';
-                room[4][8] = ' ';
-            }
-            case 8 -> {
-                room[4][7] = 'B';
-                //room[3][7] = '↓';
-                room[4][6] = ' ';
-                room[4][8] = ' ';
-            }
-            default ->
-                room[4][7] = '─';
-        }
-        switch (moves[2]) {
-            case 1, 9 -> {
-                room[2][0] = ' ';
-                //room[2][0] = '←';
-                //room[1][0] = ' ';
-                //room[3][0] = ' ';
-            }
-            case 2, 3, 6 -> {
-                room[2][0] = '?';
-                //room[2][1] = '←';
-                //room[1][0] = ' ';
-                //room[3][0] = ' ';
-            }
-            case 4 -> {
-                room[2][0] = '!';
-                //room[2][1] = '←';
-                //room[1][0] = ' ';
-                //room[3][0] = ' ';
-            }
-            case 8 -> {
-                room[2][0] = 'B';
-                //room[2][1] = '←';
-                //room[1][0] = ' ';
-                //room[3][0] = ' ';
-            }
-            default ->
-                room[2][0] = '│';
-        }
-        switch (moves[3]) {
-            case 1, 9 -> {
-                room[2][14] = ' ';
-                //room[2][14] = '→';
-                //room[1][14] = ' ';
-                //room[3][14] = ' ';
-            }
-            case 2, 3, 6 -> {
-                room[2][14] = '?';
-                //room[2][13] = '→';
-                //room[1][14] = ' ';
-                //room[3][14] = ' ';
-            }
-            case 4 -> {
-                room[2][14] = '!';
-                //room[2][13] = '→';
-                //room[1][14] = ' ';
-                //room[3][14] = ' ';
-            }
-            case 8 -> {
-                room[2][14] = 'B';
-                //room[2][13] = '→';
-                //room[1][14] = ' ';
-                //room[3][14] = ' ';
-            }
-            default ->
-                room[2][14] = '│';
-        }
+        //render room objects
         if (visitedRoom[x][y] > 0) {
-            room[2][7] = 'P'; // Player
+            room[2][7] = "P"; // Player
         } else {
             switch (localDungeon[x][y]) {
-                case 1 -> {
-                    room[2][7] = 'P'; // Player
+                case 1, 3 -> {
+                    room[2][7] = "P"; // Player
+                    List<int[]> emptySpots = new ArrayList<>();
+                    Random random = new Random();
+                    // Collect all empty spots in the room
+                    for (int row = 0; row < room.length; row++) {
+                        for (int col = 0; col < room[row].length; col++) {
+                            if (room[row][col].equals(" ")) { // Assuming ' ' represents an empty spot
+                                emptySpots.add(new int[]{row, col});
+                            }
+                        }
+                    }
+                    // Place enemies at random empty spots
+                    if (localDungeon[x][y] == 3) {
+                        if (numberofEnemies < 1) {
+                            numberofEnemies = 1;
+                        }
+                    }
+                    for (int i = 0; i < numberofEnemies && !emptySpots.isEmpty(); i++) {
+                        int randomIndex = random.nextInt(emptySpots.size());
+                        int[] spot = emptySpots.remove(randomIndex);
+                        String enemyRender;
+                        switch (Dungeon.enemyType) {
+                            case "Goblin" ->
+                                enemyRender = "G";
+                            case "Orc" ->
+                                enemyRender = "O";
+                            case "Troll" ->
+                                enemyRender = "T";
+                            case "Bandit" ->
+                                enemyRender = "B";
+                            case "Spider" ->
+                                enemyRender = "S";
+                            case "Giant Rat" ->
+                                enemyRender = "R";
+                            case "Skeleton" ->
+                                enemyRender = "S";
+                            case "Zombie" ->
+                                enemyRender = "Z";
+                            case "Ghost" ->
+                                enemyRender = "G";
+                            case "Demon" ->
+                                enemyRender = "D";
+                            case "Vampire" ->
+                                enemyRender = "V";
+                            case "Werewolf" ->
+                                enemyRender = "W";
+                            case "Witch" ->
+                                enemyRender = "W";
+                            case "Giant" ->
+                                enemyRender = "G";
+                            case "Mummy" ->
+                                enemyRender = "M";
+                            case "Slime" ->
+                                enemyRender = "S";
+                            case "Mimic" ->
+                                enemyRender = "M";
+                            case "Gargoyle" ->
+                                enemyRender = "G";
+                            case "Sea Serpent" ->
+                                enemyRender = "S";
+                            case "Sea Monster" ->
+                                enemyRender = "M";
+                            case "Sea Witch" ->
+                                enemyRender = "W";
+                            case "Sea Dragon" ->
+                                enemyRender = "D";
+                            case "Sea Giant" ->
+                                enemyRender = "G";
+                            default ->
+                                enemyRender = "E";
+                        }
+                        room[spot[0]][spot[1]] = redColor + enemyRender + resetColor; // Enemy
+                    }
                 }
-                case 2, 3 -> {
-                    room[2][5] = 'P'; // Item Room
-                    room[2][7] = 'I'; // Item
+                case 2 -> {
+                    room[2][5] = "P"; // Item Room
+                    room[2][7] = greenColor + "C" + resetColor; // Item
+                }
+                case 5 -> {
+                    room[2][5] = "P"; // key Room
+                    room[2][7] = greenColor + "K" + resetColor; // key
+                }
+                case 7 -> {
+                    room[2][5] = "P"; // heart container Room
+                    room[2][7] = redColor + "H" + resetColor; // heart container
                 }
                 case 6 -> {
-                    room[2][5] = 'P'; // Trap Room
-                    room[2][7] = 'T'; // Trap
+                    room[2][5] = "P"; // Shop Room
+                    room[2][7] = greenColor + "$" + resetColor; // Shop
                 }
                 case 4 -> {
-                    room[2][5] = 'P'; // Mini Boss Room
-                    room[2][7] = 'M'; // Mini Boss
+                    room[2][5] = "P"; // Mini Boss Room
+                    String miniBossRender;
+                    switch (Dungeon.currentMiniBoss) {
+                        case "Golem" ->
+                            miniBossRender = "G";
+                        case "Forest Guardian" ->
+                            miniBossRender = "F";
+                        case "Elemental" ->
+                            miniBossRender = "E";
+                        case "Minotaur" ->
+                            miniBossRender = "M";
+                        case "Sphinx" ->
+                            miniBossRender = "S";
+                        case "Cyclops" ->
+                            miniBossRender = "C";
+                        case "Medusa" ->
+                            miniBossRender = "M";
+                        case "Leviathan" ->
+                            miniBossRender = "L";
+                        default ->
+                            miniBossRender = "M";
+                    }
+                    room[2][7] = redColor + miniBossRender + resetColor; // Mini Boss
                 }
                 case 8 -> {
-                    room[2][5] = 'P'; // Boss Room
-                    room[2][7] = 'B'; // Boss
+                    room[2][5] = "P"; // Boss Room
+                    String bossRender;
+                    switch (Dungeon.currentBoss) {
+                        case "Forest Giant" ->
+                            bossRender = "F";
+                        case "Forest Spirit" ->
+                            bossRender = "S";
+                        case "Wyvern" ->
+                            bossRender = "W";
+                        case "Ice Dragon" ->
+                            bossRender = "I";
+                        case "Phoenix" ->
+                            bossRender = "P";
+                        case "Giant Scorpion" ->
+                            bossRender = "S";
+                        case "Giant Sand Worm" ->
+                            bossRender = "W";
+                        case "Kraken" ->
+                            bossRender = "K";
+                        default ->
+                            bossRender = "B";
+                    }
+                    room[2][7] = redColor + bossRender + resetColor; // Boss
+                }
+                case 10 -> {
+                    room[2][5] = "P"; // fairy Room
+                    room[2][7] = pinkColor + "F" + resetColor; // fairy
                 }
                 default -> {
-                    room[2][7] = 'P'; // Default
+                    room[2][7] = "P"; // Default
                 }
             }
         }
+        //get the last postinon to render the last position icon
+        if (Dungeon.lastPosition != null) {
+            if (x - 1 == Dungeon.lastPosition[0] && y == Dungeon.lastPosition[1]) {
+                moves[0] = 15;
+            } else if (x + 1 == Dungeon.lastPosition[0] && y == Dungeon.lastPosition[1]) {
+                moves[1] = 15;
+            } else if (x == Dungeon.lastPosition[0] && y - 1 == Dungeon.lastPosition[1]) {
+                moves[2] = 15;
+            } else if (x == Dungeon.lastPosition[0] && y + 1 == Dungeon.lastPosition[1]) {
+                moves[3] = 15;
+            }
+        }
+        // render all 4 possible moves with ajacent rooms icon
+        switch (moves[0]) {
+            case 1, 3, 9 -> {
+                if (moves[0] == 3) {
+                    if (revealed) {
+                        room[0][7] = greenColor + "K" + resetColor;
+                    }
+                } else {
+                    room[0][7] = " ";
+                }
+                room[0][6] = " ";
+                room[0][8] = " ";
+            }
+            case 2, 5, 7 -> {
+                if (visitedRoom[x - 1][y] > 0) {
+                    room[0][7] = " ";
+                } else {
+                    if (revealed) {
+                        if (moves[0] == 5) {
+                            room[0][7] = greenColor + "K" + resetColor;
+                        } else {
+                            room[0][7] = greenColor + "I" + resetColor;
+                        }
+                    } else {
+                        room[0][7] = greenColor + "?" + resetColor;
+                    }
+                }
+                room[0][6] = " ";
+                room[0][8] = " ";
+            }
+            case 4 -> {
+                if (visitedRoom[x - 1][y] > 0) {
+                    room[0][7] = " ";
+                } else {
+                    room[0][7] = redColor + "!" + resetColor;
+                }
+                room[0][6] = " ";
+                room[0][8] = " ";
+            }
+            case 8 -> {
+                if (visitedRoom[x - 1][y] > 0) {
+                    room[0][7] = " ";
+                } else {
+                    room[0][7] = redColor + "B" + resetColor;
+                }
+                room[0][6] = " ";
+                room[0][8] = " ";
+            }
+            case 15 -> {
+                room[0][7] = yellowColor + "*" + resetColor;
+                room[0][6] = " ";
+                room[0][8] = " ";
+            }
+            case 6 -> {
+                room[0][7] = greenColor + "$" + resetColor;
+                room[0][6] = " ";
+                room[0][8] = " ";
+            }
+            case 10 -> {
+                if (visitedRoom[x - 1][y] > 0) {
+                    room[0][7] = " ";
+                } else {
+                    room[0][7] = pinkColor + "F" + resetColor;
+                }
+                room[0][6] = " ";
+                room[0][8] = " ";
+            }
+            default ->
+                room[0][7] = "─";
+        }
+        switch (moves[1]) {
+            case 1, 3, 9 -> {
+                if (moves[1] == 3) {
+                    if (revealed) {
+                        room[4][7] = greenColor + "K" + resetColor;
+                    }
+                } else {
+                    room[4][7] = " ";
+                }
+                room[4][6] = " ";
+                room[4][8] = " ";
+            }
+            case 2, 5, 7 -> {
+                if (visitedRoom[x + 1][y] > 0) {
+                    room[4][7] = " ";
+                } else {
+                    if (revealed) {
+                        if (moves[1] == 5) {
+                            room[4][7] = greenColor + "K" + resetColor;
+                        } else {
+                            room[4][7] = greenColor + "I" + resetColor;
+                        }
+                    } else {
+                        room[4][7] = greenColor + "?" + resetColor;
+                    }
+                }
+                room[4][6] = " ";
+                room[4][8] = " ";
+            }
+            case 4 -> {
+                if (visitedRoom[x + 1][y] > 0) {
+                    room[4][7] = " ";
+                } else {
+                    room[4][7] = redColor + "!" + resetColor;
+                }
+                room[4][6] = " ";
+                room[4][8] = " ";
+            }
+            case 8 -> {
+                if (visitedRoom[x + 1][y] > 0) {
+                    room[4][7] = " ";
+                } else {
+                    room[4][7] = redColor + "B" + resetColor;
+                }
+                room[4][6] = " ";
+                room[4][8] = " ";
+            }
+            case 15 -> {
+                room[4][7] = yellowColor + "*" + resetColor;
+                room[4][6] = " ";
+                room[4][8] = " ";
+            }
+            case 6 -> {
+                room[4][7] = greenColor + "$" + resetColor;
+                room[4][6] = " ";
+                room[4][8] = " ";
+            }
+            case 10 -> {
+                if (visitedRoom[x + 1][y] > 0) {
+                    room[4][7] = " ";
+                } else {
+                    room[4][7] = pinkColor + "F" + resetColor;
+                }
+                room[4][6] = " ";
+                room[4][8] = " ";
+            }
+            default ->
+                room[4][7] = "─";
+        }
+        switch (moves[2]) {
+            case 1, 3, 9 -> {
+                if (moves[2] == 3) {
+                    if (revealed) {
+                        room[2][0] = greenColor + "K" + resetColor;
+                    }
+                } else {
+                    room[2][0] = " ";
+                }
+            }
+            case 2, 5, 7 -> {
+                if (visitedRoom[x][y - 1] > 0) {
+                    room[2][0] = " ";
+                } else {
+                    if (revealed) {
+                        if (moves[2] == 5) {
+                            room[2][0] = greenColor + "K" + resetColor;
+                        } else {
+                            room[2][0] = greenColor + "I" + resetColor;
+                        }
+                    } else {
+                        room[2][0] = greenColor + "?" + resetColor;
+                    }
+                }
+            }
+            case 4 -> {
+                if (visitedRoom[x][y - 1] > 0) {
+                    room[2][0] = " ";
+                } else {
+                    room[2][0] = redColor + "!" + resetColor;
+                }
+            }
+            case 8 -> {
+                if (visitedRoom[x][y - 1] > 0) {
+                    room[2][0] = " ";
+                } else {
+                    room[2][0] = redColor + "B" + resetColor;
+                }
+            }
+            case 15 -> {
+                room[2][0] = yellowColor + "*" + resetColor;
+            }
+            case 6 -> {
+                room[2][0] = greenColor + "$" + resetColor;
+            }
+            case 10 -> {
+                if (visitedRoom[x][y - 1] > 0) {
+                    room[2][0] = " ";
+                } else {
+                    room[2][0] = pinkColor + "F" + resetColor;
+                }
+            }
+            default ->
+                room[2][0] = "│";
+        }
+        switch (moves[3]) {
+            case 1, 3, 9 -> {
+                if (moves[3] == 3) {
+                    if (revealed) {
+                        room[2][14] = greenColor + "K" + resetColor;
+                    }
+                } else {
+                    room[2][14] = " ";
+                }
+            }
+            case 2, 5, 7 -> {
+                if (visitedRoom[x][y + 1] > 0) {
+                    room[2][14] = " ";
+                } else {
+                    if (revealed) {
+                        if (moves[3] == 5) {
+                            room[2][14] = greenColor + "K" + resetColor;
+                        } else {
+                            room[2][14] = greenColor + "I" + resetColor;
+                        }
+                    } else {
+                        room[2][14] = greenColor + "?" + resetColor;
+                    }
+                }
+            }
+            case 4 -> {
+                if (visitedRoom[x][y + 1] > 0) {
+                    room[2][14] = " ";
+                } else {
+                    room[2][14] = redColor + "!" + resetColor;
+                }
+            }
+            case 8 -> {
+                if (visitedRoom[x][y + 1] > 0) {
+                    room[2][14] = " ";
+                } else {
+                    room[2][14] = redColor + "B" + resetColor;
+                }
+            }
+            case 15 -> {
+                room[2][14] = yellowColor + "*" + resetColor;
+            }
+            case 6 -> {
+                room[2][14] = greenColor + "$" + resetColor;
+            }
+            case 10 -> {
+                if (visitedRoom[x][y + 1] > 0) {
+                    room[2][14] = " ";
+                } else {
+                    room[2][14] = pinkColor + "F" + resetColor;
+                }
+            }
+            default ->
+                room[2][14] = "│";
+        }
+
         // Print the room to the console
-        String yellowColor = "\033[1;33m"; // Yellow color
-        String resetColor = "\033[0m"; // Reset to default color
         for (int i = 0; i < 5; i++) {
+            System.out.print("    ");
             for (int j = 0; j < 15; j++) {
                 System.out.print(room[i][j]);
             }
             System.out.println();
         }
-        System.out.println("Type " + yellowColor + "map" + resetColor + " to see the map.");
         System.out.println();
     }
 }
+
+/*
+ * key
+ * 1 = enemy rooms
+ * 2 - item rooms
+ * 3 - enemy key rooms
+ * 4 - mini boss rooms
+ * 5 - key rooms
+ * 6 - shop rooms
+ * 7 - heart container rooms
+ * 8 - boss rooms
+ * 9 - spawn room
+ * 10 - fairy rooms
+ * 15 - last position
+ */

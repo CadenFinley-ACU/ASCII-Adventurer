@@ -151,44 +151,50 @@ public class InventoryManager extends Player {
 
     private static void tossItem(String item) throws InterruptedException { //toss an item
         int amount = 1;
-        if (inventory.get(item) != null) {
-            if (inventory.get(item) > 1) {
-                TextEngine.printWithDelays("How many would you like to toss?\n" + getIndividualItemString(item), true);
-                console.readLine();
-                command = console.readLine();
-                try {
-                    Integer.valueOf(command);
-                } catch (NumberFormatException e) {
-                    Main.invalidCommand();
-                    TextEngine.enterToNext();
-                    Player.openInventory();
-                }
-                if (Integer.valueOf(command) > inventory.get(item)) {
-                    TextEngine.printWithDelays("You do not have that many items.", false);
-                    TextEngine.enterToNext();
-                    Player.openInventory();
+        if (!"key".equals(item)) {
+            if (inventory.get(item) != null) {
+                if (inventory.get(item) > 1) {
+                    TextEngine.printWithDelays("How many would you like to toss?\n" + getIndividualItemString(item), true);
+                    console.readLine();
+                    command = console.readLine();
+                    try {
+                        Integer.valueOf(command);
+                    } catch (NumberFormatException e) {
+                        Main.invalidCommand();
+                        TextEngine.enterToNext();
+                        Player.openInventory();
+                    }
+                    if (Integer.valueOf(command) > inventory.get(item)) {
+                        TextEngine.printWithDelays("You do not have that many items.", false);
+                        TextEngine.enterToNext();
+                        Player.openInventory();
+                    } else {
+                        amount = Integer.parseInt(command);
+                        inventory.put(item, inventory.get(item) - amount);
+                        setStatsToHighestInInventory();
+                    }
                 } else {
-                    amount = Integer.parseInt(command);
                     inventory.put(item, inventory.get(item) - amount);
                     setStatsToHighestInInventory();
                 }
+                if (inventory.get(item) <= 0) {
+                    inventory.remove(item);
+                    setStatsToHighestInInventory();
+                }
+                if (amount > 1) {
+                    TextEngine.printWithDelays("You have tossed " + amount + " x" + item + "s", false);
+                } else {
+                    TextEngine.printWithDelays("You have tossed " + amount + " x" + item, false);
+                }
+                TextEngine.enterToNext();
+                Player.openInventory();
             } else {
-                inventory.put(item, inventory.get(item) - amount);
-                setStatsToHighestInInventory();
+                TextEngine.printWithDelays("You do not have that item.", false);
+                TextEngine.enterToNext();
+                Player.openInventory();
             }
-            if (inventory.get(item) <= 0) {
-                inventory.remove(item);
-                setStatsToHighestInInventory();
-            }
-            if (amount > 1) {
-                TextEngine.printWithDelays("You have tossed " + amount + " x" + item + "s", false);
-            } else {
-                TextEngine.printWithDelays("You have tossed " + amount + " x" + item, false);
-            }
-            TextEngine.enterToNext();
-            Player.openInventory();
         } else {
-            TextEngine.printWithDelays("You do not have that item.", false);
+            TextEngine.printWithDelays("You cannot drop the key.", false);
             TextEngine.enterToNext();
             Player.openInventory();
         }
@@ -293,12 +299,14 @@ public class InventoryManager extends Player {
         }
     }
 
-    public static void useKey() {
+    public static boolean useKey() {
         if (Player.inventory.containsKey("key") && Player.inventory.get("key") > 0) {
             Player.inventory.put("key", inventory.get("key") - 1);
             if (Player.inventory.get("key") == 0) {
                 Player.inventory.remove("key");
             }
+            return true;
         }
+        return false;
     }
 }

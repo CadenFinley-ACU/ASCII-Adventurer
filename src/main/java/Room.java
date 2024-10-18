@@ -15,35 +15,6 @@ public class Room {
     public static String ignore;
     public static String room = null;
 
-    public static boolean hasLockedChestInRoom(String item, int quantity) throws InterruptedException {
-        String resetColor = "\033[0m"; // reset to default color
-        String yellowColor = "\033[1;33m"; // yellow color
-
-        TextEngine.printWithDelays("Hey! There is a locked chest in this room! ", false);
-        TextEngine.printWithDelays("What is your command" + yellowColor + " unlock it " + resetColor + "or " + yellowColor + "leave it" + resetColor, true);
-        while (true) {
-            ignore = console.readLine();
-            command = console.readLine();
-            switch (command.toLowerCase().trim()) {
-                case "unlock it" -> {
-                    if (Player.inventory.containsKey("key") && Player.inventory.get("key") > 0) {
-                        InventoryManager.useKey();
-                        return hasItemInRoom(item, quantity);
-                    } else {
-                        TextEngine.printWithDelays("You need a key to open this chest! I think the village has a few for sale...", false);
-                        TextEngine.enterToNext();
-                        return false;
-                    }
-                }
-                case "leave it" -> {
-                    return false;
-                }
-                default ->
-                    Main.inGameDefaultTextHandling(command);
-            }
-        }
-    }
-
     public static boolean hasChestInRoom(String itemName, int quantity) throws InterruptedException {
         String resetColor = "\033[0m"; // reset to default color
         String yellowColor = "\033[1;33m"; // yellow color
@@ -127,6 +98,98 @@ public class Room {
                 SpawnRoom.resetAll();
                 OpenWorld.resetAll();
                 Dungeon.resetAll();
+            }
+        }
+    }
+
+    public static void drawCurrentRoom() {
+        String[][] currentRoom = {
+            {" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "},
+            {" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "},
+            {" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "},
+            {" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "},
+            {" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "}
+        };
+        String setting = Player.getColorOfPlayerPostitionTile();
+        switch (setting.toLowerCase()) {
+            case "mountain" ->
+                fillMountain(currentRoom);
+            case "grassland" ->
+                fillGrassland(currentRoom);
+            case "desert" ->
+                fillDesert(currentRoom);
+            case "ocean" ->
+                fillOcean(currentRoom);
+            default ->
+                fillEmpty(currentRoom);
+        }
+
+        int centerX = currentRoom[0].length / 2;
+        int centerY = currentRoom.length / 2;
+        currentRoom[centerY][centerX] = "P";
+
+        //draw enemies in the room at random postions that arent the same as the player  
+        for (String[] currentRoom1 : currentRoom) {
+            currentRoom1[0] = " ";
+        }
+
+        for (String[] row : currentRoom) {
+            for (String cell : row) {
+                System.out.print(cell);
+            }
+            System.out.println();
+        }
+        System.out.println();
+    }
+
+    private static final Random random = new Random();
+
+    private static void fillMountain(String[][] room) {
+        for (String[] room1 : room) {
+            for (int j = 0; j < room1.length; j++) {
+                if (random.nextDouble() < 0.5) { // 50% chance
+                    room1[j] = "^"; // Mountain peak
+                }
+            }
+        }
+    }
+
+    private static void fillGrassland(String[][] room) {
+        for (String[] room1 : room) {
+            for (int j = 0; j < room1.length; j++) {
+                if (random.nextDouble() < 0.5) { // 50% chance
+                    room1[j] = "\""; // Grass
+                }
+            }
+        }
+    }
+
+    private static void fillDesert(String[][] room) {
+        for (String[] room1 : room) {
+            for (int j = 0; j < room1.length; j++) {
+                if (random.nextDouble() < 0.5) { // 50% chance
+                    room1[j] = "."; // Sand
+                }
+            }
+        }
+    }
+
+    private static void fillOcean(String[][] room) {
+        for (String[] room1 : room) {
+            for (int j = 0; j < room1.length; j++) {
+                if (random.nextDouble() < 0.5) { // 50% chance
+                    room1[j] = "~"; // Sand
+                }
+            }
+        }
+    }
+
+    private static void fillEmpty(String[][] room) {
+        for (String[] room1 : room) {
+            for (int j = 0; j < room1.length; j++) {
+                if (random.nextDouble() < 0.5) { // 50% chance
+                    room1[j] = " "; // Empty space
+                }
             }
         }
     }

@@ -23,9 +23,19 @@ public class Player {
     private static int damage; //find way to set damage automatically to strongest weapon in inventory
     private static int defense; //find way to set defense automatically to the strongest 4-5 defense items combined
     public static Map<String, Integer> inventory = new HashMap<>();
-    public static boolean autoFight = false;
     public static int playerX = 0;
     public static int playerY = 0;
+    public static String yellowColor = "\033[1;33m"; // yellow color
+    public static String resetColor = "\033[0m"; // reset to default color
+    public static String redColor = "\033[1;31m"; // red color
+    public static String greenColor = "\033[1;32m"; // green color'
+    public static String G = "\033[0;32m"; // deep grass color
+    public static String b = "\033[1;34m"; // blue color
+    public static String g = "\033[0;37m"; // bright gray color
+    public static String s = "\033[0;33m"; // sand color
+    public static String S = "\033[1;37m"; // snow color
+    public static String R = "\033[0m"; // reset to default color
+    public static String healthColor = "";
 
     public static void playerStart() throws InterruptedException { //start the player
         maxHealth = 100;
@@ -60,10 +70,12 @@ public class Player {
         command = console.readLine();
         switch (command) {
             case "1" -> {
-                SpawnRoom.startRoom();
+                Main.saveSpace("SpawnRoom");
+                Main.loadSave();
             }
             case "2" -> {
-                OpenWorld.startRoom();
+                Main.saveSpace("OpenWorld");
+                Main.loadSave();
             }
             case "3" -> {
                 TextEngine.printNoDelay(" 1:Meadow\n 2:Dark Forest\n 3:Mountain Cave\n 4:Mountain Top\n 5:Desert Oasis\n 6:Desert Plains\n 7 Desert Pyramid\n 8:Ocean Kingdom", false);
@@ -72,31 +84,40 @@ public class Player {
                 command = console.readLine();
                 switch (command) {
                     case "1" -> {
-                        MeadowDungeon.startRoom();
+                        Main.saveSpace("Meadow Dungeon");
+                        Main.loadSave();
                     }
                     case "2" -> {
-                        DarkForestDungeon.startRoom();
+                        Main.saveSpace("Dark Forest Dungeon");
+                        Main.loadSave();
                     }
                     case "3" -> {
-                        MountainCaveDungeon.startRoom();
+                        Main.saveSpace("Mountain Cave Dungeon");
+                        Main.loadSave();
                     }
                     case "4" -> {
-                        MountainTopDungeon.startRoom();
+                        Main.saveSpace("Mountain Top Dungeon");
+                        Main.loadSave();
                     }
                     case "5" -> {
-                        DesertOasisDungeon.startRoom();
+                        Main.saveSpace("Desert Oasis Dungeon");
+                        Main.loadSave();
                     }
                     case "6" -> {
-                        DesertPlainsDungeon.startRoom();
+                        Main.saveSpace("Desert Plains Dungeon");
+                        Main.loadSave();
                     }
                     case "7" -> {
-                        DesertPyramidDungeon.startRoom();
+                        Main.saveSpace("Desert Pyramid Dungeon");
+                        Main.loadSave();
                     }
                     case "8" -> {
-                        OceanKingdomDungeon.startRoom();
+                        Main.saveSpace("Ocean Kingdom Dungeon");
+                        Main.loadSave();
                     }
                     default -> {
-                        SpawnRoom.startRoom();
+                        Main.saveSpace("SpawnRoom");
+                        Main.loadSave();
                     }
                 }
             }
@@ -134,6 +155,8 @@ public class Player {
 
     public static void changeInventorySize(int change) throws InterruptedException { //change the inventory size
         inventorySize += change;
+        TextEngine.printWithDelays("Inventory size increased by " + change + " to " + inventorySize + "!", false);
+        TextEngine.enterToNext();
     }
 
     public static int getInventorySize() { //get the inventory size
@@ -171,6 +194,12 @@ public class Player {
             Main.startMenu();
         }
 
+        TextEngine.enterToNext();
+    }
+
+    public static void fairyHeal() throws InterruptedException {
+        health = maxHealth;
+        TextEngine.printNoDelay("You have been fully healed by the fairy!", false);
         TextEngine.enterToNext();
     }
 
@@ -289,25 +318,11 @@ public class Player {
     }
 
     public static void printStats() throws InterruptedException { //print the stats
-        String redColor = "\033[1;31m"; // red color
-        String yellowColor = "\033[1;33m"; // yellow color
-        String greenColor = "\033[1;32m"; // green color
-        String healthColor;
-        String resetColor = "\033[0m"; // reset to default color
-
-        if (getHealth() > getMaxHealth() / 2) {
-            healthColor = greenColor;
-        } else if (getHealth() <= getMaxHealth() / 2 && getHealth() > (getMaxHealth() / 4) + (getMaxHealth() / 10)) {
-            healthColor = yellowColor;
-        } else {
-            healthColor = redColor;
-        }
-
         InventoryManager.setStatsToHighestInInventory();
         TextEngine.clearScreen();
         TextEngine.printNoDelay("Player Stats:", false);
         TextEngine.printNoDelay("Name: " + name, false);
-        TextEngine.printNoDelay("Health: " + healthColor + health + resetColor + "/" + maxHealth, false);
+        drawHealthBar();
         TextEngine.printNoDelay("Gold: " + gold, false);
         TextEngine.printNoDelay("Damage: " + damage, false);
         TextEngine.printNoDelay("Defense: " + defense, false);
@@ -355,22 +370,20 @@ public class Player {
 
     public static void printMap() throws InterruptedException {
         TextEngine.clearScreen();
-
         String[][] map = {
             //  0       1          2       3         4       5         6       7       8
-            {"     ", "[ D ]", "[   ]", "[   ]", "[   ]", "[   ]", "[   ]", "[ D ]", "     ", "", ""}, //0
-            {"     ", "[   ]", "     ", "     ", "     ", "[   ]", "[   ]", "[   ]", "     ", "", ""}, //1
-            {"     ", "[   ]", "     ", "     ", "     ", "[   ]", "[   ]", "[   ]", "     ", "", ""}, //2
-            {"     ", "[   ]", "     ", "     ", "     ", "[   ]", "[   ]", "[   ]", "[ V ]", "", ""}, //3
-            {"[   ]", "[   ]", "     ", "     ", "[ D ]", "[   ]", "[   ]", "[   ]", "[   ]", "", ""}, //4
-            {"[   ]", "[   ]", "[   ]", "     ", "[   ]", "[   ]", "[   ]", "[   ]", "[   ]", "", ""}, //5
-            {"[   ]", "[   ]", "[   ]", "[   ]", "[   ]", "[   ]", "[   ]", "[   ]", "[   ]", "", ""}, //6
-            {"[ V ]", "[   ]", "[   ]", "[   ]", "[   ]", "[   ]", "[   ]", "[   ]", "[   ]", "", ""}, //7
-            {"     ", "[ D ]", "[   ]", "[   ]", "[   ]", "[   ]", "[   ]", "[   ]", "[ D ]", "", ""}, //8
-            {"     ", "[ D ]", "[   ]", "[   ]", "[   ]", "[   ]", "[   ]", "[   ]", "[ D ]", "", ""}, //9
-            {"     ", "[ D ]", "[   ]", "[   ]", "[   ]", "[ V ]", "     ", "    ", "     ", "", ""} //10
+            {"     ", b + "[ D ]" + R, b + "[   ]" + R, s + "[   ]" + R, s + "[   ]" + R, s + "[   ]" + R, S + "[   ]" + R, S + "[ D ]" + R, "     ", "", ""}, //0
+            {"     ", b + "[   ]" + R, "     ", "     ", "     ", g + "[   ]" + R, g + "[   ]" + R, S + "[   ]" + R, "     ", "", ""}, //1
+            {"     ", b + "[   ]" + R, "     ", "     ", "     ", g + "[   ]" + R, g + "[   ]" + R, g + "[   ]" + R, "     ", "", ""}, //2
+            {"     ", s + "[   ]" + R, "     ", "     ", "     ", g + "[   ]" + R, g + "[   ]" + R, g + "[   ]" + R, g + "[ V ]" + R, "", ""}, //3
+            {s + "[   ]" + R, s + "[   ]" + R, "     ", "     ", g + "[ D ]" + R, g + "[   ]" + R, g + "[   ]" + R, g + "[   ]" + R, g + "[   ]" + R, "", ""}, //4
+            {s + "[   ]" + R, s + "[   ]" + R, s + "[   ]" + R, "     ", g + "[   ]" + R, g + "[   ]" + R, g + "[   ]" + R, g + "[   ]" + R, g + "[   ]" + R, "", ""}, //5
+            {s + "[   ]" + R, s + "[   ]" + R, s + "[   ]" + R, G + "[   ]" + R, G + "[   ]" + R, G + "[   ]" + R, G + "[   ]" + R, G + "[   ]" + R, G + "[   ]" + R, "", ""}, //6
+            {s + "[ V ]" + R, s + "[   ]" + R, s + "[   ]" + R, G + "[   ]" + R, G + "[   ]" + R, G + "[   ]" + R, G + "[   ]" + R, G + "[   ]" + R, G + "[   ]" + R, "", ""}, //7
+            {"     ", s + "[ D ]" + R, s + "[   ]" + R, s + "[   ]" + R, G + "[   ]" + R, G + "[   ]" + R, G + "[   ]" + R, G + "[   ]" + R, G + "[ D ]" + R, "", ""}, //8
+            {"     ", s + "[ D ]" + R, s + "[   ]" + R, s + "[   ]" + R, G + "[   ]" + R, G + "[   ]" + R, G + "[   ]" + R, G + "[   ]" + R, G + "[ D ]" + R, "", ""}, //9
+            {"     ", s + "[ D ]" + R, s + "[   ]" + R, s + "[   ]" + R, G + "[   ]" + R, G + "[ V ]" + R, "     ", "    ", "     ", "", ""} //10
         };
-
         // Update the map with the player's position
         map[playerY][playerX] = "[ P ]";
         switch (Dungeon.completedDungeons) {
@@ -455,14 +468,25 @@ public class Player {
                 map[0][1] = "[ ! ]";
             }
             default -> {
-                map[9][8] = "[ D ]";
-                map[8][8] = "[ D ]";
-                map[4][4] = "[ D ]";
-                map[0][7] = "[ D ]";
-                map[10][1] = "[ D ]";
-                map[9][1] = "[ D ]";
-                map[8][1] = "[ D ]";
-                map[0][1] = "[ D ]";
+                if (Dungeon.resetedAfterWin) {
+                    map[9][8] = redColor + "[ D ]" + resetColor;
+                    map[8][8] = redColor + "[ D ]" + resetColor;
+                    map[4][4] = redColor + "[ D ]" + resetColor;
+                    map[0][7] = redColor + "[ D ]" + resetColor;
+                    map[10][1] = redColor + "[ D ]" + resetColor;
+                    map[9][1] = redColor + "[ D ]" + resetColor;
+                    map[8][1] = redColor + "[ D ]" + resetColor;
+                    map[0][1] = redColor + "[ D ]" + resetColor;
+                } else {
+                    map[9][8] = "[ D ]";
+                    map[8][8] = "[ D ]";
+                    map[4][4] = "[ D ]";
+                    map[0][7] = "[ D ]";
+                    map[10][1] = "[ D ]";
+                    map[9][1] = "[ D ]";
+                    map[8][1] = "[ D ]";
+                    map[0][1] = "[ D ]";
+                }
             }
 
         }
@@ -470,19 +494,30 @@ public class Player {
         System.out.println("Map: ");
         for (String[] row : map) {
             for (String cell : row) {
-                System.out.print(cell + " ");
+                if (null == cell) {
+                    System.out.print(cell + " ");
+                } else {
+                    switch (cell) {
+                        case "[ V ]" ->
+                            System.out.print(greenColor + cell + resetColor + " ");
+                        case "[ ! ]" ->
+                            System.out.print(redColor + cell + resetColor + " ");
+                        case "[ P ]" ->
+                            System.out.print(yellowColor + cell + resetColor + " ");
+                        default ->
+                            System.out.print(cell + " ");
+                    }
+                }
             }
             System.out.println();
         }
         map[playerY][playerX] = "[   ]"; // Reset the player's position
-        String yellowColor = "\033[1;33m"; // yellow color
-        String resetColor = "\033[0m"; // reset to default color
         System.out.println("Key: ");
-        System.out.println(" '!' = Next Dungeon");
+        System.out.println(redColor + " '!'" + resetColor + " = Next Dungeon");
         System.out.println(" 'D' = Unlocked Dungeon");
         System.out.println(" 'L' = Locked Dungeon");
-        System.out.println(" 'V' = Village");
-        System.out.println(" 'P' = Player");
+        System.out.println(greenColor + " 'V'" + resetColor + "= Village");
+        System.out.println(yellowColor + " 'P'" + resetColor + " = Player");
         System.out.println();
         System.out.println("If you are still feeling lost type " + yellowColor + "help" + resetColor + " for a list of commands.");
         TextEngine.enterToNext();
@@ -500,5 +535,93 @@ public class Player {
         gold = localGold;
         inventory = localInventory;
         inventorySize = localInventorySize;
+    }
+
+    public static void changeName() throws InterruptedException {
+        String brightYellowStart = "\033[1;33m";
+        String brightEnd = "\033[0m";
+        String space = "     ";
+        TextEngine.printWithDelays(space + "What is your new name hero?", true);
+        while (true) {
+            ignore = console.readLine();
+            command = console.readLine();
+            if (command != null && !command.isEmpty()) {
+                if ("exit".equals(command)) {
+                    Main.startMenu();
+                    TextEngine.clearScreen();
+                } else {
+                    setName(command);
+                    break;
+                }
+            } else {
+                TextEngine.printWithDelays("Please enter a name.", true);
+            }
+
+        }
+        TextEngine.printWithDelays(space + "Your name has been changed to " + brightYellowStart + name + brightEnd, false);
+        TextEngine.enterToNext();
+        Main.startMenu();
+    }
+
+    public static void drawHealthBar() {
+        int hearts = 21;
+        int filledBars = (int) Math.round(((double) health / maxHealth) * hearts);
+        if (getHealth() > Player.getMaxHealth() / 2) {
+            healthColor = greenColor;
+        } else if (getHealth() <= getMaxHealth() / 2 && getHealth() > (getMaxHealth() / 4) + (getMaxHealth() / 10)) {
+            healthColor = yellowColor;
+        } else {
+            healthColor = redColor;
+        }
+        StringBuilder bar = new StringBuilder("|");
+        for (int i = 0; i < hearts; i++) {
+            if (i < filledBars) {
+                bar.append(healthColor).append("█").append(resetColor);
+            } else {
+                bar.append("_");
+            }
+        }
+        bar.append("|");
+        String healthBar = bar.toString();
+        TextEngine.printNoDelay("Health: " + health + " / " + maxHealth, false);
+        System.out.println(healthBar);
+    }
+
+    public static String getColorOfPlayerPostitionTile() {
+        //     public static String G = "\033[0;32m"; // deep grass color
+        // public static String b = "\033[1;34m"; // blue color
+        // public static String g = "\033[0;37m"; // bright gray color
+        // public static String s = "\033[0;33m"; // sand color
+        // public static String S = "\033[1;37m"; // snow color
+        String[][] map = {
+            //  0    1    2    3    4    5    6    7    8
+            {" ", "b", "b", "s", "s", "s", "S", "S", " ", "", ""}, //0
+            {" ", "b", " ", " ", " ", "g", "g", "S", " ", "", ""}, //1
+            {" ", "b", " ", " ", " ", "g", "g", "g", " ", "", ""}, //2
+            {" ", "s", " ", " ", " ", "g", "g", "g", "g", "", ""}, //3
+            {"s", "s", " ", " ", "g", "g", "g", "g", "g", "", ""}, //4
+            {"s", "s", "s", " ", "g", "g", "g", "g", "g", "", ""}, //5
+            {"s", "s", "s", "G", "G", "G", "G", "G", "G", "", ""}, //6
+            {"s", "s", "s", "G", "G", "G", "G", "G", "G", "", ""}, //7
+            {" ", "s", "s", "s", "G", "G", "G", "G", "G", "", ""}, //8
+            {" ", "s", "s", "s", "G", "G", "G", "G", "G", "", ""}, //9
+            {" ", "s", "s", "s", "G", "G", " ", " ", " ", "", ""} //10
+        };
+        Map<String, String> colorToEnvironment = new HashMap<>();
+        colorToEnvironment.put("G", "grassland"); // Green
+        colorToEnvironment.put("s", "desert");    // Yellow
+        colorToEnvironment.put("S", "mountain"); // White
+        colorToEnvironment.put("b", "ocean");     // Blue
+        colorToEnvironment.put("g", "mountain"); // Gray
+        String tileValue = String.valueOf(map[playerY][playerX]);
+
+        for (Map.Entry<String, String> entry : colorToEnvironment.entrySet()) {
+            if (tileValue == null ? (entry.getKey()) == null : tileValue.equals(entry.getKey())) {
+                //System.out.println("test" + entry.getValue());
+                return entry.getValue();
+            }
+        }
+        //System.out.println("test" + "Unknown environment");
+        return "unknown";
     }
 }

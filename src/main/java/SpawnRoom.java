@@ -50,7 +50,7 @@ public class SpawnRoom extends Room {
             command = console.readLine();
             switch (command.toLowerCase().trim()) {
                 case "north" -> {
-                    roomSave++;
+                    roomSave = 1;
                     Main.loadSave();
                 }
                 default ->
@@ -67,7 +67,7 @@ public class SpawnRoom extends Room {
         TextEngine.printWithDelays("As you approach the light, your eyes catch the glint of a sword lying on the ground.", false);
         while (true) {
             if (hasItemInRoom("sword", 1)) {
-                roomSave++;
+                roomSave = 2;
                 OpenWorld.startRoom();
             } else {
                 TextEngine.printWithDelays("You must take the sword!\nIt is too dangerous to go alone!", false);

@@ -27,13 +27,13 @@ public abstract class TextEngine {
             if (String.valueOf(ch).matches("^[a-zA-Z0-9]+$")) {
                 switch (speedSetting) {
                     case "Slow" ->
-                        TimeUnit.MILLISECONDS.sleep(40);
+                        TimeUnit.MILLISECONDS.sleep(30);
                     case "Fast" ->
-                        TimeUnit.MILLISECONDS.sleep(15);
+                        TimeUnit.MILLISECONDS.sleep(10);
                     case "NoDelay" ->
                         TimeUnit.MILLISECONDS.sleep(0);
                     default -> {
-                        TimeUnit.MILLISECONDS.sleep(30);
+                        TimeUnit.MILLISECONDS.sleep(20);
                     }
                 }
             } else {

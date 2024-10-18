@@ -43,47 +43,53 @@ public class Village extends Room {
                     switch (OpenWorld.saveRoomNumber) {
                         case 74, 67 -> {
                             TextEngine.printWithDelays("Witch way would you like to leave the village\n you can go west to go to the desert\n or north to the forest", false);
-                            TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "north" + resetColor + " or " + yellowColor + "west" + resetColor+ " to decide", true);
+                            TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "north" + resetColor + " or " + yellowColor + "west" + resetColor + " to decide", true);
                             while (true) {
                                 ignore = console.readLine();
                                 command = console.readLine();
                                 if ("north".equals(command) || "east".equals(command) || "south".equals(command) || "west".equals(command)) {
                                     OpenWorld.holdCommand = command;
-                                }switch (command.toLowerCase().trim().trim()) {
+                                }
+                                switch (command.toLowerCase().trim().trim()) {
                                     case "north" -> {
                                         OpenWorld.roomSave = 67;
                                         leave();
-                                    }case "west" -> {
+                                    }
+                                    case "west" -> {
                                         OpenWorld.roomSave = 74;
                                         leave();
-                                    }default ->
+                                    }
+                                    default ->
                                         Main.inGameDefaultTextHandling(command);
                                 }
                             }
                         }
                         case 47, 37 -> {
                             TextEngine.printWithDelays("Witch way would you like to leave the village\n you can go west to go to the desert\n or north to the forest", false);
-                            TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "north" + resetColor + " or " + yellowColor + "east" + resetColor+ " to decide", true);
+                            TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "north" + resetColor + " or " + yellowColor + "east" + resetColor + " to decide", true);
                             while (true) {
                                 ignore = console.readLine();
                                 command = console.readLine();
                                 if ("north".equals(command) || "east".equals(command) || "south".equals(command) || "west".equals(command)) {
                                     OpenWorld.holdCommand = command;
-                                }switch (command.toLowerCase().trim().trim()) {
+                                }
+                                switch (command.toLowerCase().trim().trim()) {
                                     case "north" -> {
                                         OpenWorld.roomSave = 37;
                                         leave();
-                                    }case "east" -> {
+                                    }
+                                    case "east" -> {
                                         OpenWorld.roomSave = 47;
                                         leave();
-                                    }default ->
+                                    }
+                                    default ->
                                         Main.inGameDefaultTextHandling(command);
                                 }
                             }
                         }
                         default -> {
                             TextEngine.printWithDelays("Witch way would you like to leave the village\n you can go west to go to the desert\n or north to the forest", false);
-                            TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "south" + resetColor + " or " + yellowColor + "west" + resetColor+ " to decide", true);
+                            TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "south" + resetColor + " or " + yellowColor + "west" + resetColor + " to decide", true);
                             while (true) {
                                 ignore = console.readLine();
                                 command = console.readLine();
@@ -94,10 +100,12 @@ public class Village extends Room {
                                     case "south" -> {
                                         OpenWorld.roomSave = 29;
                                         leave();
-                                    }case "west" -> {
+                                    }
+                                    case "west" -> {
                                         OpenWorld.roomSave = 19;
                                         leave();
-                                    }default ->
+                                    }
+                                    default ->
                                         Main.inGameDefaultTextHandling(command);
                                 }
                             }
@@ -261,7 +269,6 @@ public class Village extends Room {
                 = "What would you like to buy?\n"
                 + brightYellowStart + " health potion" + brightBoldEnd + "~15 gold\n"
                 + brightYellowStart + " shield" + brightBoldEnd + "~20 gold\n"
-                + brightYellowStart + " key" + brightBoldEnd + "~30 gold\n"
                 + "Or type " + brightYellowStart + "leave" + brightBoldEnd + " to exit the shop";
 
         // Use the modified message with bold items
@@ -292,9 +299,6 @@ public class Village extends Room {
                         keepShopping();
                     }
                 }
-                case "key" -> {
-                    buyMultiple("key", 30);
-                }
                 case "heart container" -> {
                     buyMultiple("heart container", 50);
                 }
@@ -324,7 +328,6 @@ public class Village extends Room {
                 = "What would you like to buy:\n"
                 + brightYellowStart + " greater health potion" + brightBoldEnd + "~30 gold\n"
                 + brightYellowStart + " ninja armor" + brightBoldEnd + "~100 gold\n"
-                + brightYellowStart + " key" + brightBoldEnd + "~30 gold\n"
                 + "or " + brightYellowStart + "leave" + brightBoldEnd;
 
         // Use the modified message with bold items
@@ -355,9 +358,6 @@ public class Village extends Room {
                         keepShopping();
                     }
                 }
-                case "key" -> {
-                    buyMultiple("key", 30);
-                }
                 case "leave" -> {
                     Main.loadSave();
                 }
@@ -384,7 +384,6 @@ public class Village extends Room {
                 = "What would you like to buy:\n"
                 + brightYellowStart + "super health potion" + brightBoldEnd + "~50 gold\n"
                 + brightYellowStart + "demon armor" + brightBoldEnd + "~200 gold\n"
-                + brightYellowStart + "key" + brightBoldEnd + "~30 gold\n"
                 + "or " + brightYellowStart + "leave" + brightBoldEnd;
 
         // Use the modified message with bold items
@@ -415,9 +414,6 @@ public class Village extends Room {
                         keepShopping();
                     }
                 }
-                case "key" -> {
-                    buyMultiple("key", 30);
-                }
                 case "leave" -> {
                     Main.loadSave();
                 }
@@ -429,49 +425,51 @@ public class Village extends Room {
 
     private static void buyMultiple(String type, int cost) throws InterruptedException { //buy multiple clause for certain items in village shop
         TextEngine.printWithDelays("How many would you like to buy?", true);
-        ignore = console.readLine();
-        command = console.readLine();
-        if (TextEngine.checkValidInput(command)) {
-            try {
-                Integer.valueOf(command);
-            } catch (NumberFormatException e) {
-                Main.invalidCommand();
-                TextEngine.enterToNext();
-                buyMultiple(type, cost);
-            }
-            int totalCost = cost * Integer.parseInt(command);
-            if (Player.getGold() >= totalCost && !command.equals("0")) {
-                if (Player.hasRoomInInventory(Integer.parseInt(command))) {
-                    Player.changeGold(-totalCost);
-                    Player.putItem(type, Integer.parseInt(command));
-                    keepShopping();
-                } else {
-                    TextEngine.printWithDelays("You do not have enough space in your inventory to buy " + command + " " + type + "s", false);
+        while (true) {
+            ignore = console.readLine();
+            command = console.readLine();
+            if (TextEngine.checkValidInput(command)) {
+                try {
+                    Integer.valueOf(command);
+                } catch (NumberFormatException e) {
+                    Main.invalidCommand();
                     TextEngine.enterToNext();
-                    keepShopping();
+                    buyMultiple(type, cost);
+                }
+                int totalCost = cost * Integer.parseInt(command);
+                if (Player.getGold() >= totalCost && !command.equals("0")) {
+                    if (Player.hasRoomInInventory(Integer.parseInt(command))) {
+                        Player.changeGold(-totalCost);
+                        Player.putItem(type, Integer.parseInt(command));
+                        keepShopping();
+                    } else {
+                        TextEngine.printWithDelays("You do not have enough space in your inventory to buy " + command + " " + type + "s", false);
+                        TextEngine.enterToNext();
+                        keepShopping();
+                    }
+                } else {
+                    switch (command) {
+                        case "0" -> {
+                            TextEngine.printWithDelays("You did not buy any " + type + "s.", false);
+                            TextEngine.enterToNext();
+                            keepShopping();
+                        }
+                        case "1" -> {
+                            TextEngine.printWithDelays("You do not have enough gold to buy a " + command, false);
+                            TextEngine.enterToNext();
+                            keepShopping();
+                        }
+                        default -> {
+                            TextEngine.printWithDelays("You do not have enough gold to buy " + command + " potions", false);
+                            TextEngine.enterToNext();
+                            keepShopping();
+                        }
+                    }
                 }
             } else {
-                switch (command) {
-                    case "0" -> {
-                        TextEngine.printWithDelays("You did not buy any " + type + "s.", false);
-                        TextEngine.enterToNext();
-                        keepShopping();
-                    }
-                    case "1" -> {
-                        TextEngine.printWithDelays("You do not have enough gold to buy a " + command, false);
-                        TextEngine.enterToNext();
-                        keepShopping();
-                    }
-                    default -> {
-                        TextEngine.printWithDelays("You do not have enough gold to buy " + command + " potions", false);
-                        TextEngine.enterToNext();
-                        keepShopping();
-                    }
-                }
+                Main.invalidCommand();
+                keepShopping();
             }
-        } else {
-            Main.invalidCommand();
-            keepShopping();
         }
     }
 

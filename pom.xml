@@ -15,7 +15,6 @@
         <maven.compiler.source>20</maven.compiler.source>
         <maven.compiler.target>20</maven.compiler.target>
     </properties>
-
     <dependencies>
         <dependency>
             <groupId>junit</groupId>
@@ -23,6 +22,14 @@
             <version>4.12</version>
             <scope>test</scope>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/clojure-interop/javax.sound -->
+        <!-- <dependency>
+            <groupId>clojure-interop</groupId>
+            <artifactId>javax.sound</artifactId>
+            <version>1.0.5</version>
+        </dependency> -->
+
+
     </dependencies>
 
     <build>

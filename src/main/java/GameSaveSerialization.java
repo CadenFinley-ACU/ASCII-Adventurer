@@ -26,6 +26,7 @@ public class GameSaveSerialization {
     private final static Console console = System.console();
     public static String filePath = ".game_save.txt";
     public static String runtimePath = ".runtime.txt";
+    //change file path manually in main in functions that call this class
 
     public static void saveGame() {
         try (FileWriter writer = new FileWriter(filePath, false)) {
@@ -150,6 +151,29 @@ public class GameSaveSerialization {
         writeList(DesertPyramidDungeon.items, filePath);
         writeSeparator(filePath);
         writeList(OceanKingdomDungeon.items, filePath);
+        writeSeparator(filePath);
+        writeValue(String.valueOf(MeadowDungeon.mapRevealed), filePath);
+        writeSeparator(filePath);
+        writeValue(String.valueOf(DarkForestDungeon.mapRevealed), filePath);
+        writeSeparator(filePath);
+        writeValue(String.valueOf(MountainCaveDungeon.mapRevealed), filePath);
+        writeSeparator(filePath);
+        writeValue(String.valueOf(MountainTopDungeon.mapRevealed), filePath);
+        writeSeparator(filePath);
+        writeValue(String.valueOf(DesertOasisDungeon.mapRevealed), filePath);
+        writeSeparator(filePath);
+        writeValue(String.valueOf(DesertPlainsDungeon.mapRevealed), filePath);
+        writeSeparator(filePath);
+        writeValue(String.valueOf(DesertPyramidDungeon.mapRevealed), filePath);
+        writeSeparator(filePath);
+        writeValue(String.valueOf(OceanKingdomDungeon.mapRevealed), filePath);
+        writeSeparator(filePath);
+        writeValue(String.valueOf(Main.gameComplete), filePath);
+        writeSeparator(filePath);
+        writeValue(String.valueOf(Dungeon.resetedAfterWin), filePath);
+        writeSeparator(filePath);
+
+        //do this after all other data is saved
         serializeAllLines(filePath, filePath);
     }
 
@@ -178,6 +202,7 @@ public class GameSaveSerialization {
                         }
                     }
                 }
+                //read decrypted data
                 buffer = reader.readLine();
                 String name = String.valueOf(reader.readLine());
                 buffer = reader.readLine();
@@ -297,6 +322,27 @@ public class GameSaveSerialization {
                 DesertPyramidDungeon.items = readList(reader);
                 buffer = reader.readLine();
                 OceanKingdomDungeon.items = readList(reader);
+                buffer = reader.readLine();
+                MeadowDungeon.mapRevealed = Boolean.parseBoolean(reader.readLine());
+                buffer = reader.readLine();
+                DarkForestDungeon.mapRevealed = Boolean.parseBoolean(reader.readLine());
+                buffer = reader.readLine();
+                MountainCaveDungeon.mapRevealed = Boolean.parseBoolean(reader.readLine());
+                buffer = reader.readLine();
+                MountainTopDungeon.mapRevealed = Boolean.parseBoolean(reader.readLine());
+                buffer = reader.readLine();
+                DesertOasisDungeon.mapRevealed = Boolean.parseBoolean(reader.readLine());
+                buffer = reader.readLine();
+                DesertPlainsDungeon.mapRevealed = Boolean.parseBoolean(reader.readLine());
+                buffer = reader.readLine();
+                DesertPyramidDungeon.mapRevealed = Boolean.parseBoolean(reader.readLine());
+                buffer = reader.readLine();
+                OceanKingdomDungeon.mapRevealed = Boolean.parseBoolean(reader.readLine());
+                buffer = reader.readLine();
+                Main.gameComplete = Boolean.parseBoolean(reader.readLine());
+                buffer = reader.readLine();
+                Dungeon.resetedAfterWin = Boolean.parseBoolean(reader.readLine());
+
             } catch (IOException | NumberFormatException e) {
                 e.printStackTrace();
                 System.out.println("Save File Corrupt or Invalid... ");
