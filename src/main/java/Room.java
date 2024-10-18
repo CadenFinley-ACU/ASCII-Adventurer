@@ -16,6 +16,8 @@ public class Room {
     public static String room = null;
     public static String redColor = "\033[0;31m"; // red color
     public static String resetColor = "\033[0m"; // reset to default color
+    public static String bufferedEnviroment = null;
+    public static String environment = null;
 
     public static boolean hasChestInRoom(String itemName, int quantity) throws InterruptedException {
         String yellowColor = "\033[1;33m"; // yellow color
@@ -102,7 +104,7 @@ public class Room {
         }
     }
 
-    public static void drawCurrentRoom() {
+    public static void drawCurrentRoom() throws InterruptedException {
         String[][] currentRoom = {
             {" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "},
             {" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "},
@@ -111,6 +113,7 @@ public class Room {
             {" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "}
         };
         String setting = Player.getColorOfPlayerPostitionTile();
+        environment = setting;
         switch (setting.toLowerCase()) {
             case "mountain" ->
                 fillMountain(currentRoom);
@@ -204,6 +207,21 @@ public class Room {
             System.out.println();
         }
         System.out.println();
+        if (checkNewEnvironment()) {
+            switch (setting) {
+                case "mountain" ->
+                    TextEngine.printWithDelays("You are in the mountain area", false);
+                case "grassland" ->
+                    TextEngine.printWithDelays("You have entered the forest.", false);
+                case "desert" ->
+                    TextEngine.printWithDelays("You have entered the desert.", false);
+                case "ocean" ->
+                    TextEngine.printWithDelays("You are in the ocean area", false);
+                default ->
+                    TextEngine.printWithDelays("You are in an empty area", false);
+            }
+        }
+        bufferedEnviroment = environment;
     }
 
     private static final Random random = new Random();
@@ -256,5 +274,9 @@ public class Room {
                 }
             }
         }
+    }
+
+    private static boolean checkNewEnvironment() {
+        return !environment.equals(bufferedEnviroment);
     }
 }
