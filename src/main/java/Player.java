@@ -602,10 +602,10 @@ public class Player {
             {" ", "s", " ", " ", " ", "g", "g", "g", "g", "", ""}, //3
             {"s", "s", " ", " ", "g", "g", "g", "g", "g", "", ""}, //4
             {"s", "s", "s", " ", "g", "g", "g", "g", "g", "", ""}, //5
-            {"s", "s", "s", "G", "G", "G", "G", "G", "G", "", ""}, //6
-            {"s", "s", "s", "G", "G", "G", "G", "G", "G", "", ""}, //7
-            {" ", "s", "s", "s", "G", "G", "G", "G", "G", "", ""}, //8
-            {" ", "s", "s", "s", "G", "G", "G", "G", "G", "", ""}, //9
+            {"s", "s", "s", "G", "G", "G", "G", "F", "F", "", ""}, //6
+            {"s", "s", "s", "G", "G", "G", "G", "F", "F", "", ""}, //7
+            {" ", "s", "s", "s", "G", "G", "F", "F", "F", "", ""}, //8
+            {" ", "s", "s", "s", "G", "G", "F", "F", "F", "", ""}, //9
             {" ", "s", "s", "s", "G", "G", " ", " ", " ", "", ""} //10
         };
         Map<String, String> colorToEnvironment = new HashMap<>();
@@ -614,6 +614,7 @@ public class Player {
         colorToEnvironment.put("S", "mountain"); // White
         colorToEnvironment.put("b", "ocean");     // Blue
         colorToEnvironment.put("g", "mountain"); // Gray
+        colorToEnvironment.put("F", "lost forest"); // Gray
         String tileValue = String.valueOf(map[playerY][playerX]);
 
         for (Map.Entry<String, String> entry : colorToEnvironment.entrySet()) {

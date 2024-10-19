@@ -179,31 +179,12 @@ public class GameSaveSerialization {
         serializeAllLines(filePath, filePath);
     }
 
-    public static void loadGameSave() {
+    public static void loadGameSave() throws InterruptedException {
         String buffer = "";
         deserializeToFile(filePath);
         try (BufferedReader reader = new BufferedReader(new FileReader(runtimePath))) {
             try {
                 int version = Integer.parseInt(reader.readLine());
-                if (version != versionID) {
-                    System.out.println("Save File Version Mismatch... ");
-                    TextEngine.printWithDelays("Would you like to load the save? (yes or no)", true);
-                    while (true) {
-                        ignore = console.readLine();
-                        command = console.readLine();
-                        switch (command.toLowerCase()) {
-                            case "yes" -> {
-                                break;
-                            }
-                            case "no" -> {
-                                Main.wipeSave();
-                                Main.startMenu();
-                            }
-                            default ->
-                                System.out.println("Invalid Command");
-                        }
-                    }
-                }
                 //read decrypted data
                 buffer = reader.readLine();
                 String name = String.valueOf(reader.readLine());
@@ -348,7 +329,6 @@ public class GameSaveSerialization {
                 OpenWorld.previousRoomSave = Integer.parseInt(reader.readLine());
 
             } catch (IOException | NumberFormatException e) {
-                e.printStackTrace();
                 System.out.println("Save File Corrupt or Invalid... ");
                 TextEngine.printWithDelays("Erasing Save File and Restarting...", false);
                 TextEngine.enterToNext();
@@ -358,7 +338,11 @@ public class GameSaveSerialization {
 
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println("Save File Not Found... ");
+            TextEngine.printWithDelays("Restarting...", false);
+            TextEngine.enterToNext();
+            TextEngine.clearScreen();
+            Main.startMenu();
         }
     }
 
