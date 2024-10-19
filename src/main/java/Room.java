@@ -296,7 +296,7 @@ public class Room {
     private static void fillGrassland(String[][] room) {
         for (String[] room1 : room) {
             for (int j = 0; j < room1.length; j++) {
-                if (random.nextDouble() < 0.5) { // 50% chance
+                if (random.nextDouble() < 0.7) { // 70% chance
                     if (random.nextDouble() < 0.5) { // 50% chance
                         room1[j] = Player.G + "\"" + Player.R; // Grass
                     } else {
@@ -310,11 +310,15 @@ public class Room {
     private static void fillDesert(String[][] room) {
         for (String[] room1 : room) {
             for (int j = 0; j < room1.length; j++) {
-                if (random.nextDouble() < 0.5) { // 50% chance
-                    if (random.nextDouble() < 0.5) { // 50% chance
-                        room1[j] = Player.s + "." + Player.R; // Sand
+                if (random.nextDouble() < 0.7) { // 70% chance
+                    if (random.nextDouble() < 0.07) { // 7% chance
+                        room1[j] = Player.G + "|" + Player.R; // cactus
                     } else {
-                        room1[j] = Player.s + "~" + Player.R; // Oasis
+                        if (random.nextDouble() < 0.75) { // 75 chance
+                            room1[j] = Player.s + "." + Player.R; // Sand
+                        } else {
+                            room1[j] = Player.s + "~" + Player.R; // Oasis
+                        }
                     }
                 }
             }
@@ -324,9 +328,7 @@ public class Room {
     private static void fillOcean(String[][] room) {
         for (String[] room1 : room) {
             for (int j = 0; j < room1.length; j++) {
-                if (random.nextDouble() < 0.5) { // 50% chance
-                    room1[j] = Player.b + "~" + Player.R; // Water
-                }
+                room1[j] = Player.b + "~" + Player.R; // Water
             }
         }
     }
@@ -334,11 +336,11 @@ public class Room {
     private static void fillForest(String[][] room) {
         for (String[] room1 : room) {
             for (int j = 0; j < room1.length; j++) {
-                if (random.nextDouble() < 0.5) { // 50% chance
-                    if (random.nextDouble() < 0.5) { // 50% chance
-                        room1[j] = Player.B + "|" + Player.R; // Grass
+                if (random.nextDouble() < 0.7) { // 7% chance
+                    if (random.nextDouble() < 0.20) { // 20% chance
+                        room1[j] = Player.B + "|" + Player.R; // Tree
                     } else if (random.nextDouble() < 0.5) {
-                        room1[j] = Player.G + "`" + Player.R; // Tree
+                        room1[j] = Player.G + "\"" + Player.R; // grass
                     } else {
                         room1[j] = Player.G + "," + Player.R; // Bush
                     }
