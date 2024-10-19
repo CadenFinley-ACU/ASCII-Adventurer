@@ -771,6 +771,16 @@ public class DungeonGenerator {
                                 enemyRender = "D";
                             case "Sea Giant" ->
                                 enemyRender = "G";
+                            case "Scorpion" ->
+                                enemyRender = "S";
+                            case "Mountain Lion" ->
+                                enemyRender = "M";
+                            case "Barbarian" ->
+                                enemyRender = "B";
+                            case "Shark" ->
+                                enemyRender = "S";
+                            case "Pirate" ->
+                                enemyRender = "P";
                             default ->
                                 enemyRender = "E";
                         }

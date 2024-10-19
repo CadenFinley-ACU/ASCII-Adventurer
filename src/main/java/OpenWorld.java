@@ -23,7 +23,7 @@ public class OpenWorld extends Room {
     public static int numberOfEnemies;
     public static String enemyType;
     public static boolean encounter = false;
-    private static final List<String> enemies = new ArrayList<>(List.of("Goblin", "Skeleton", "Slime", "Bandit", "Spider"));//at some point make some enemies environment exclusive
+    private static List<String> enemies;
     public static boolean inFight = false;
 
     public static void startRoom() throws InterruptedException { //start room
@@ -33,6 +33,27 @@ public class OpenWorld extends Room {
         Main.screenRefresh();
 
         if (checkChangeInRoom()) {
+            enemies = null;
+            switch (Player.getColorOfPlayerPostitionTile()) {
+                case "grassland" -> {
+                    enemies = new ArrayList<>(List.of("Goblin", "Slime", "Bandit"));//at some point make some enemies environment exclusive
+                }
+                case "desert" -> {
+                    enemies = new ArrayList<>(List.of("Scorpion", "Barbarian", "Bandit"));//at some point make some enemies environment exclusive
+                }
+                case "mountain" -> {
+                    enemies = new ArrayList<>(List.of("Goblin", "Mountain Lion", "Mimic", "Orc"));//at some point make some enemies environment exclusive
+                }
+                case "ocean" -> {
+                    enemies = new ArrayList<>(List.of("Pirate", "Shark", "Bandit"));//at some point make some enemies environment exclusive
+                }
+                case "lost forest" -> {
+                    enemies = new ArrayList<>(List.of("Skeleton", "Slime", "Zombie", "Orc", "Bandit"));//at some point make some enemies environment exclusive
+                }
+                default -> {
+                    enemies = new ArrayList<>(List.of("Goblin", "Slime", "Bandit"));//at some point make some enemies environment exclusive
+                }
+            }
             //determine open world encounter
             numberOfEnemies = rand.nextInt(3);
             enemyType = enemies.get(rand.nextInt(enemies.size())); //at some point make some enemies environment exclusive

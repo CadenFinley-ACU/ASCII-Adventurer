@@ -72,6 +72,11 @@ public class Enemy {
         } else {
             enemyDamageValues = Map.copyOf(Map.ofEntries( //name of enemy / damage values for each enemy
                     //enemies
+                    Map.entry("Mountain Lion", 10),
+                    Map.entry("Barbarian", 5),
+                    Map.entry("Shark", 5),
+                    Map.entry("Pirate", 10),
+                    Map.entry("Scorpion", 7),
                     Map.entry("Goblin", 5),
                     Map.entry("Orc", 10),
                     Map.entry("Troll", 15),
