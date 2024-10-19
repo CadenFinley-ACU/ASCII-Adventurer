@@ -106,6 +106,10 @@ public class Room {
     }
 
     public static void reRenderSameRoom() throws InterruptedException {
+        if (currentRenderedRoom == null) {
+            drawCurrentRoom();
+            return;
+        }
         for (String[] row : currentRenderedRoom) {
             for (String cell : row) {
                 System.out.print(cell);
