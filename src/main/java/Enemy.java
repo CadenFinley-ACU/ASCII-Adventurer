@@ -187,7 +187,11 @@ public class Enemy {
                     TextEngine.printWithDelays(space + brightGreenStart + "You beat the " + type + "!" + brightGreenEnd, false);
                 }
                 // Update player's gold
-                Player.changeGold(((enemyDamageValues.get(type) / 3) * quantity));
+                int goldChange = ((enemyDamageValues.get(type) / (5 / 2)) * quantity);
+                if (goldChange < 1) {
+                    goldChange = 1;
+                }
+                Player.changeGold(goldChange);
             }
         } else {
             // Check the player's health
