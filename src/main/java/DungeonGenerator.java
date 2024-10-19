@@ -880,6 +880,8 @@ public class DungeonGenerator {
                 if (moves[0] == 3) {
                     if (revealed) {
                         room[0][7] = greenColor + "K" + resetColor;
+                    } else {
+                        room[0][7] = " ";
                     }
                 } else {
                     room[0][7] = " ";
@@ -949,6 +951,8 @@ public class DungeonGenerator {
                 if (moves[1] == 3) {
                     if (revealed) {
                         room[4][7] = greenColor + "K" + resetColor;
+                    } else {
+                        room[4][7] = " ";
                     }
                 } else {
                     room[4][7] = " ";
@@ -1018,6 +1022,8 @@ public class DungeonGenerator {
                 if (moves[2] == 3) {
                     if (revealed) {
                         room[2][0] = greenColor + "K" + resetColor;
+                    } else {
+                        room[2][0] = " ";
                     }
                 } else {
                     room[2][0] = " ";
@@ -1073,6 +1079,8 @@ public class DungeonGenerator {
                 if (moves[3] == 3) {
                     if (revealed) {
                         room[2][14] = greenColor + "K" + resetColor;
+                    } else {
+                        room[2][14] = " ";
                     }
                 } else {
                     room[2][14] = " ";

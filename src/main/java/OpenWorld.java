@@ -585,7 +585,7 @@ public class OpenWorld extends Room {
                 Player.playerX = 4;
                 Player.playerY = 10;
                 roomNumber = 74;
-                drawCurrentRoom();
+                reRenderSameRoom();
                 room74();
             }
         }
@@ -2063,7 +2063,7 @@ public class OpenWorld extends Room {
                     Main.loadSave();
                 }
                 case "the desert pyramid" -> {
-                    if (Dungeon.completedDungeons > 0) {
+                    if (Dungeon.completedDungeons > 5) {
                         previousRoomSave = roomSave;
                         DesertPyramidDungeon.startRoom();
                     } else {
@@ -2379,7 +2379,7 @@ public class OpenWorld extends Room {
                     Main.loadSave();
                 }
                 case "the desert pyramid" -> {
-                    if (Dungeon.completedDungeons > 3) {
+                    if (Dungeon.completedDungeons > 5) {
                         previousRoomSave = roomSave;
                         DesertPyramidDungeon.startRoom();
                     } else {
