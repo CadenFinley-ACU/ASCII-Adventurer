@@ -18,7 +18,13 @@ public class Room {
     public static String resetColor = "\033[0m"; // reset to default color
     public static String bufferedEnviroment = null;
     public static String environment = null;
-    public static String[][] currentRenderedRoom = null;
+    public static String[][] currentRoom = {
+        {" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "},
+        {" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "},
+        {" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "},
+        {" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "},
+        {" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "}
+    };
 
     public static boolean hasChestInRoom(String itemName, int quantity) throws InterruptedException {
         String yellowColor = "\033[1;33m"; // yellow color
@@ -106,39 +112,43 @@ public class Room {
     }
 
     public static void reRenderSameRoom() throws InterruptedException {
-        if (currentRenderedRoom == null) {
-            drawCurrentRoom();
-            return;
-        }
-        for (String[] row : currentRenderedRoom) {
-            for (String cell : row) {
-                System.out.print(cell);
+        if (OpenWorld.wasInFight) {
+            OpenWorld.wasInFight = false;
+            for (String[] row : currentRoom) {
+                for (String cell : row) {
+                    if (cell.equals(redColor + "E" + resetColor) || cell.equals(redColor + "G" + resetColor) || cell.equals(redColor + "O" + resetColor) || cell.equals(redColor + "T" + resetColor) || cell.equals(redColor + "B" + resetColor) || cell.equals(redColor + "S" + resetColor) || cell.equals(redColor + "R" + resetColor) || cell.equals(redColor + "D" + resetColor) || cell.equals(redColor + "V" + resetColor) || cell.equals(redColor + "W" + resetColor) || cell.equals(redColor + "M" + resetColor) || cell.equals(redColor + "G" + resetColor) || cell.equals(redColor + "P" + resetColor) || cell.equals(redColor + "S" + resetColor) || cell.equals(redColor + "Z" + resetColor)) {
+                        cell = " ";
+                    }
+                    System.out.print(cell);
+                }
+                System.out.println();
             }
             System.out.println();
-        }
-        System.out.println();
-        String setting = Player.getColorOfPlayerPostitionTile();
-        if (checkNewEnvironment()) {
-            switch (setting) {
-                case "mountain" ->
-                    TextEngine.printWithDelays("You have entered the mountain area", false);
-                case "grassland" ->
-                    TextEngine.printWithDelays("You have entered the grassy plains.", false);
-                case "desert" ->
-                    TextEngine.printWithDelays("You have entered the desert.", false);
-                case "ocean" ->
-                    TextEngine.printWithDelays("You have enter the ocean area", false);
-                case "lost forest" ->
-                    TextEngine.printWithDelays("You have entered the lost forest", false);
-                default ->
-                    TextEngine.printWithDelays("You are in an empty area", false);
+            String setting = Player.getColorOfPlayerPostitionTile();
+            if (checkNewEnvironment()) {
+                switch (setting) {
+                    case "mountain" ->
+                        TextEngine.printWithDelays("You have entered the mountain area", false);
+                    case "grassland" ->
+                        TextEngine.printWithDelays("You have entered the grassy plains.", false);
+                    case "desert" ->
+                        TextEngine.printWithDelays("You have entered the desert.", false);
+                    case "ocean" ->
+                        TextEngine.printWithDelays("You have enter the ocean area", false);
+                    case "lost forest" ->
+                        TextEngine.printWithDelays("You have entered the lost forest", false);
+                    default ->
+                        TextEngine.printWithDelays("You are in an empty area", false);
+                }
             }
+            bufferedEnviroment = environment;
+        } else {
+            drawCurrentRoom();
         }
-        bufferedEnviroment = environment;
     }
 
     public static void drawCurrentRoom() throws InterruptedException {
-        String[][] currentRoom = {
+        currentRoom = new String[][]{
             {" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "},
             {" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "},
             {" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "},
@@ -161,11 +171,12 @@ public class Room {
             default ->
                 fillEmpty(currentRoom);
         }
-
+        for (String[] currentRoom1 : currentRoom) {
+            currentRoom1[0] = " ";
+        }
         int centerX = currentRoom[0].length / 2;
         int centerY = currentRoom.length / 2;
         currentRoom[centerY][centerX] = "P";
-
         //draw enemies in the room at random postions that arent the same as the player
         String enemyRender = "E";
         if (OpenWorld.enemyType != null) {
@@ -230,10 +241,6 @@ public class Room {
                     enemyRender = "E";
             }
         }
-        for (String[] currentRoom1 : currentRoom) {
-            currentRoom1[0] = " ";
-        }
-        currentRenderedRoom = currentRoom;
         if (OpenWorld.encounter && OpenWorld.numberOfEnemies > 0) {
             for (int i = 0; i < OpenWorld.numberOfEnemies;) {
                 int enemyX = random.nextInt(currentRoom[0].length);
@@ -244,7 +251,6 @@ public class Room {
                 }
             }
         }
-
         for (String[] row : currentRoom) {
             for (String cell : row) {
                 System.out.print(cell);

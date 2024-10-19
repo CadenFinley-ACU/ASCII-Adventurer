@@ -25,6 +25,7 @@ public class OpenWorld extends Room {
     public static boolean encounter = false;
     private static List<String> enemies;
     public static boolean inFight = false;
+    public static boolean wasInFight = false;
 
     public static void startRoom() throws InterruptedException { //start room
         room = "OpenWorld";
@@ -36,28 +37,44 @@ public class OpenWorld extends Room {
             enemies = null;
             switch (Player.getColorOfPlayerPostitionTile()) {
                 case "grassland" -> {
+                    numberOfEnemies = rand.nextInt(3);
+                    encounter = (rand.nextInt(100) < 15); // 15% chance of encounter
                     enemies = new ArrayList<>(List.of("Goblin", "Slime", "Bandit"));//at some point make some enemies environment exclusive
                 }
                 case "desert" -> {
+                    numberOfEnemies = rand.nextInt(5);
+                    encounter = (rand.nextInt(100) < 25); // 25% chance of encounter
                     enemies = new ArrayList<>(List.of("Scorpion", "Barbarian", "Bandit"));//at some point make some enemies environment exclusive
                 }
                 case "mountain" -> {
+                    numberOfEnemies = rand.nextInt(3);
+                    encounter = (rand.nextInt(100) < 30); // 30% chance of encounter
                     enemies = new ArrayList<>(List.of("Goblin", "Mountain Lion", "Mimic", "Orc"));//at some point make some enemies environment exclusive
                 }
                 case "ocean" -> {
-                    enemies = new ArrayList<>(List.of("Pirate", "Shark", "Bandit"));//at some point make some enemies environment exclusive
+                    numberOfEnemies = rand.nextInt(7);
+                    encounter = (rand.nextInt(100) < 40); // 40% chance of encounter
+                    enemies = new ArrayList<>(List.of("Pirate", "Shark"));//at some point make some enemies environment exclusive
                 }
                 case "lost forest" -> {
+                    encounter = (rand.nextInt(100) < 35); // 35% chance of encounter
+                    numberOfEnemies = rand.nextInt(5);
                     enemies = new ArrayList<>(List.of("Skeleton", "Slime", "Zombie", "Orc", "Bandit"));//at some point make some enemies environment exclusive
                 }
                 default -> {
+                    encounter = (rand.nextInt(100) < 15); // 15% chance of encounter
+                    numberOfEnemies = rand.nextInt(3);
                     enemies = new ArrayList<>(List.of("Goblin", "Slime", "Bandit"));//at some point make some enemies environment exclusive
                 }
             }
             //determine open world encounter
-            numberOfEnemies = rand.nextInt(3);
-            enemyType = enemies.get(rand.nextInt(enemies.size())); //at some point make some enemies environment exclusive
-            encounter = (rand.nextInt(100) < 20); // 20% chance of encounter
+            if (numberOfEnemies == 0) {
+                numberOfEnemies = 1;
+            }
+            if (!encounter) {
+                numberOfEnemies = 0;
+            }
+            enemyType = enemies.get(rand.nextInt(enemies.size()));
         }
 
         switch (roomSave) {
@@ -587,6 +604,7 @@ public class OpenWorld extends Room {
         if (encounter && numberOfEnemies > 0) {
             drawCurrentRoom();
             inFight = true;
+            wasInFight = true;
             if (numberOfEnemies == 1) {
                 TextEngine.printWithDelays("You were ambushed by " + numberOfEnemies + " " + enemyType + "!", false);
             } else {
