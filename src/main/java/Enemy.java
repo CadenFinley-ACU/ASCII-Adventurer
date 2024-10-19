@@ -21,6 +21,11 @@ public class Enemy {
             //powered up enemies
             enemyDamageValues = Map.copyOf(Map.ofEntries( //name of enemy / damage values for each enemy
                     //enemies
+                    Map.entry("Mountain Lion", 20),
+                    Map.entry("Barbarian", 10),
+                    Map.entry("Shark", 10),
+                    Map.entry("Pirate", 20),
+                    Map.entry("Scorpion", 15),
                     Map.entry("Goblin", 25),
                     Map.entry("Orc", 50),
                     Map.entry("Troll", 60),
@@ -101,26 +106,26 @@ public class Enemy {
                     Map.entry("Sea Dragon", 70),
                     Map.entry("Sea Giant", 60),
                     //minibosses
-                    Map.entry("Golem", 20), //dungeon 1
-                    Map.entry("Forest Guardian", 25), //dungeon 2  //forest area
+                    Map.entry("Golem", 35), //dungeon 1
+                    Map.entry("Forest Guardian", 45), //dungeon 2  //forest area
 
-                    Map.entry("Elemental", 35), //dungeon 3
-                    Map.entry("Minotaur", 45), //dungeon 4  //mountain area
+                    Map.entry("Elemental", 60), //dungeon 3
+                    Map.entry("Minotaur", 65), //dungeon 4  //mountain area
 
-                    Map.entry("Sphinx", 60), //dungeon 5
+                    Map.entry("Sphinx", 75), //dungeon 5
                     Map.entry("Cyclops", 80), //dungeon 6  //desert area
                     Map.entry("Medusa", 100), //dungeon 7
 
                     Map.entry("Leviathan", 150), //dungeon 8 //ocean area
 
                     //bosses
-                    Map.entry("Forest Giant", 30), //dungeon 1 
-                    Map.entry("Forest Spirit", 45), //dungeon 2
+                    Map.entry("Forest Giant", 50), //dungeon 1 
+                    Map.entry("Forest Spirit", 55), //dungeon 2
 
-                    Map.entry("Wyvern", 50), //dungeon 3
-                    Map.entry("Ice Dragon", 60), //dungeon 4
+                    Map.entry("Wyvern", 70), //dungeon 3
+                    Map.entry("Ice Dragon", 80), //dungeon 4
 
-                    Map.entry("Phoenix", 70), //dungeon 5
+                    Map.entry("Phoenix", 90), //dungeon 5
                     Map.entry("Giant Scorpion", 100), //dungeon 6
                     Map.entry("Giant Sand Worm", 110), //dungeon 7
 
@@ -182,7 +187,7 @@ public class Enemy {
                     TextEngine.printWithDelays(space + brightGreenStart + "You beat the " + type + "!" + brightGreenEnd, false);
                 }
                 // Update player's gold
-                Player.changeGold((int) (enemyDamageValues.get(type) - quantity * (float) (3 / 2)) * quantity);
+                Player.changeGold(((enemyDamageValues.get(type) / 3) * quantity));
             }
         } else {
             // Check the player's health

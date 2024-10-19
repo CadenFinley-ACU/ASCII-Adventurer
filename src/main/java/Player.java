@@ -20,8 +20,8 @@ public class Player {
     public static String ignore;
     public static int inventorySize;
     private static int gold;
-    private static int damage; //find way to set damage automatically to strongest weapon in inventory
-    private static int defense; //find way to set defense automatically to the strongest 4-5 defense items combined
+    private static int damage;
+    private static int defense;
     public static Map<String, Integer> inventory = new HashMap<>();
     public static int playerX = 0;
     public static int playerY = 0;
@@ -169,7 +169,7 @@ public class Player {
         String brightGreenStart = "\033[1;32m";
         String brightEnd = "\033[0m";
         String space = "     ";
-        int damageCalc = (defense + (damage - (damage / 3)));
+        int damageCalc = (defense + (damage - (damage / 4)));
 
         if (change < 0) {
             change += damageCalc;
