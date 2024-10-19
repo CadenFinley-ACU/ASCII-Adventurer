@@ -222,15 +222,15 @@ public class Room {
         if (checkNewEnvironment()) {
             switch (setting) {
                 case "mountain" ->
-                    TextEngine.printWithDelays("You are in the mountain area", false);
+                    TextEngine.printWithDelays("You have entered the mountain area", false);
                 case "grassland" ->
                     TextEngine.printWithDelays("You have entered the grassy plains.", false);
                 case "desert" ->
                     TextEngine.printWithDelays("You have entered the desert.", false);
                 case "ocean" ->
-                    TextEngine.printWithDelays("You are in the ocean area", false);
+                    TextEngine.printWithDelays("You have enter the ocean area", false);
                 case "lost forest" ->
-                    TextEngine.printWithDelays("You are in the lost forest", false);
+                    TextEngine.printWithDelays("You have entered the lost forest", false);
                 default ->
                     TextEngine.printWithDelays("You are in an empty area", false);
             }
@@ -244,7 +244,11 @@ public class Room {
         for (String[] room1 : room) {
             for (int j = 0; j < room1.length; j++) {
                 if (random.nextDouble() < 0.5) { // 50% chance
-                    room1[j] = "^"; // Mountain peak
+                    if (random.nextDouble() < 0.5) { // 50% chance
+                        room1[j] = Player.g + "^" + resetColor; // Mountain peak
+                    } else {
+                        room1[j] = Player.S + "." + resetColor; // Mountain snow
+                    }
                 }
             }
         }
@@ -269,9 +273,9 @@ public class Room {
             for (int j = 0; j < room1.length; j++) {
                 if (random.nextDouble() < 0.5) { // 50% chance
                     if (random.nextDouble() < 0.5) { // 50% chance
-                        room1[j] = Player.S + "." + Player.R; // Sand
+                        room1[j] = Player.s + "." + Player.R; // Sand
                     } else {
-                        room1[j] = Player.S + "~" + Player.R; // Oasis
+                        room1[j] = Player.s + "~" + Player.R; // Oasis
                     }
                 }
             }
