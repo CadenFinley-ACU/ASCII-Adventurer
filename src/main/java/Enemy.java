@@ -148,7 +148,11 @@ public class Enemy {
             TextEngine.printWithDelays(space + brightRedStart + "You fight the " + type + "!" + brightRedEnd, false);
         }
         checkhealth(type, quantity, true);
-        return 0 - (enemyDamageValues.get(type) * quantity);
+        int damage = 0 - (enemyDamageValues.get(type) * quantity);
+        if (damage > -1) {
+            damage = -1;
+        }
+        return damage;
     }
 
     public static int runSpawnEnemy(String type, int quantity) throws InterruptedException {

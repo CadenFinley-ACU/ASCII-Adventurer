@@ -169,7 +169,7 @@ public class Player {
         String brightGreenStart = "\033[1;32m";
         String brightEnd = "\033[0m";
         String space = "     ";
-        int damageCalc = (defense + (damage - (damage / 4)));
+        int damageCalc = (defense + (damage / 3));
 
         if (change < 0) {
             change += damageCalc;
