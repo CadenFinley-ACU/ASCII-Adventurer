@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch4jConfig>
+  <dontWrapJar>false</dontWrapJar>
+  <headerType>console</headerType>
+  <jar>C:\Users\blade\OneDrive\Documents\GitHub\BarrettHall\ASCII-Adventurer\game\asciiadventurer.jar</jar>
+  <outfile>C:\Users\blade\OneDrive\Documents\GitHub\ASCII-Adventurer.exe</outfile>
+  <errTitle>You need to download the correct version of java</errTitle>
+  <cmdLine></cmdLine>
+  <chdir>.</chdir>
+  <priority>normal</priority>
+  <downloadUrl>https://www.java.com/download/</downloadUrl>
+  <supportUrl>https://github.com/CadenFinley-ACU/ASCII-Adventurer</supportUrl>
+  <stayAlive>false</stayAlive>
+  <restartOnCrash>false</restartOnCrash>
+  <manifest></manifest>
+  <icon>C:\Users\blade\Downloads\aculogo.ico</icon>
+  <singleInstance>
+    <mutexName>asciiadventurer</mutexName>
+    <windowTitle>ASCII Adventurer</windowTitle>
+  </singleInstance>
+  <jre>
+    <path>%JAVA_HOME%;%PATH%</path>
+    <requiresJdk>false</requiresJdk>
+    <requires64Bit>true</requires64Bit>
+    <minVersion>1.19.0</minVersion>
+    <maxVersion></maxVersion>
+    <initialHeapSize>1048</initialHeapSize>
+    <maxHeapSize>3048</maxHeapSize>
+  </jre>
+  <versionInfo>
+    <fileVersion>1.0.0.0</fileVersion>
+    <txtFileVersion>1</txtFileVersion>
+    <fileDescription>ASCII-Adventurer SE F24</fileDescription>
+    <copyright>NONE</copyright>
+    <productVersion>1.0.0.0</productVersion>
+    <txtProductVersion>asciiadventurer</txtProductVersion>
+    <productName>ASCII-Adventurer</productName>
+    <companyName></companyName>
+    <internalName>asciiadventurer</internalName>
+    <originalFilename>ASCII-Adventurer.exe</originalFilename>
+    <trademarks></trademarks>
+    <language>ENGLISH_US</language>
+  </versionInfo>
+  <messages>
+    <startupErr>An error occurred while starting the application.</startupErr>
+    <jreNotFoundErr>This application requires a Java Runtime Environment.</jreNotFoundErr>
+    <jreVersionErr>This application requires a Java Runtime Environment</jreVersionErr>
+    <launcherErr>The registry refers to a nonexistent Java Runtime Environment installation or the runtime is corrupted.</launcherErr>
+    <instanceAlreadyExistsMsg>An application instance is already running.</instanceAlreadyExistsMsg>
+  </messages>
+</launch4jConfig>
