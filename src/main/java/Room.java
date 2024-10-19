@@ -123,6 +123,8 @@ public class Room {
                 fillDesert(currentRoom);
             case "ocean" ->
                 fillOcean(currentRoom);
+            case "lost forest" ->
+                fillForest(currentRoom);
             default ->
                 fillEmpty(currentRoom);
         }
@@ -222,11 +224,13 @@ public class Room {
                 case "mountain" ->
                     TextEngine.printWithDelays("You are in the mountain area", false);
                 case "grassland" ->
-                    TextEngine.printWithDelays("You have entered the forest.", false);
+                    TextEngine.printWithDelays("You have entered the grassy plains.", false);
                 case "desert" ->
                     TextEngine.printWithDelays("You have entered the desert.", false);
                 case "ocean" ->
                     TextEngine.printWithDelays("You are in the ocean area", false);
+                case "lost forest" ->
+                    TextEngine.printWithDelays("You are in the lost forest", false);
                 default ->
                     TextEngine.printWithDelays("You are in an empty area", false);
             }
@@ -250,7 +254,11 @@ public class Room {
         for (String[] room1 : room) {
             for (int j = 0; j < room1.length; j++) {
                 if (random.nextDouble() < 0.5) { // 50% chance
-                    room1[j] = Player.G + "\"" + Player.R; // Grass
+                    if (random.nextDouble() < 0.5) { // 50% chance
+                        room1[j] = Player.G + "\"" + Player.R; // Grass
+                    } else {
+                        room1[j] = Player.G + "B" + Player.R; // Dirt
+                    }
                 }
             }
         }
@@ -260,7 +268,11 @@ public class Room {
         for (String[] room1 : room) {
             for (int j = 0; j < room1.length; j++) {
                 if (random.nextDouble() < 0.5) { // 50% chance
-                    room1[j] = Player.S + "." + Player.R; // Sand
+                    if (random.nextDouble() < 0.5) { // 50% chance
+                        room1[j] = Player.S + "." + Player.R; // Sand
+                    } else {
+                        room1[j] = Player.S + "~" + Player.R; // Oasis
+                    }
                 }
             }
         }
@@ -271,6 +283,22 @@ public class Room {
             for (int j = 0; j < room1.length; j++) {
                 if (random.nextDouble() < 0.5) { // 50% chance
                     room1[j] = Player.b + "~" + Player.R; // Water
+                }
+            }
+        }
+    }
+
+    private static void fillForest(String[][] room) {
+        for (String[] room1 : room) {
+            for (int j = 0; j < room1.length; j++) {
+                if (random.nextDouble() < 0.5) { // 50% chance
+                    if (random.nextDouble() < 0.5) { // 50% chance
+                        room1[j] = Player.B + "|" + Player.R; // Grass
+                    } else if (random.nextDouble() < 0.5) {
+                        room1[j] = Player.G + "," + Player.R; // Tree
+                    } else {
+                        room1[j] = Player.G + "'" + Player.R; // Bush
+                    }
                 }
             }
         }

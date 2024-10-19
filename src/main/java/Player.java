@@ -35,6 +35,7 @@ public class Player {
     public static String s = "\033[0;33m"; // sand color
     public static String S = "\033[1;37m"; // snow color
     public static String R = "\033[0m"; // reset to default color
+    public static String B = "\033[0;33m"; // brown color
     public static String healthColor = "";
 
     public static void playerStart() throws InterruptedException { //start the player
