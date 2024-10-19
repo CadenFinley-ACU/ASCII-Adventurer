@@ -513,7 +513,7 @@ public class GameSaveSerialization {
 
             //System.out.println("File deserialized and written to: " + outputFilePath);
         } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
+            System.out.println("Error deserializing file: " + e.getMessage());
         }
     }
 }
