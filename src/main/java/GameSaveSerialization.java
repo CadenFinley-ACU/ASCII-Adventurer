@@ -245,7 +245,6 @@ public class GameSaveSerialization {
                 buffer = reader.readLine();
                 Room.room = reader.readLine();
                 buffer = reader.readLine();
-
                 MeadowDungeon.completed = Boolean.parseBoolean(reader.readLine());
                 buffer = reader.readLine();
                 MeadowDungeon.visited = Boolean.parseBoolean(reader.readLine());
@@ -278,7 +277,6 @@ public class GameSaveSerialization {
                 buffer = reader.readLine();
                 OceanKingdomDungeon.visited = Boolean.parseBoolean(reader.readLine());
                 buffer = reader.readLine();
-
                 MeadowDungeon.items = readList(reader);
                 buffer = reader.readLine();
                 DarkForestDungeon.items = readList(reader);
@@ -295,7 +293,6 @@ public class GameSaveSerialization {
                 buffer = reader.readLine();
                 OceanKingdomDungeon.items = readList(reader);
                 buffer = reader.readLine();
-
                 MeadowDungeon.mapRevealed = Boolean.parseBoolean(reader.readLine());
                 buffer = reader.readLine();
                 DarkForestDungeon.mapRevealed = Boolean.parseBoolean(reader.readLine());
@@ -312,14 +309,12 @@ public class GameSaveSerialization {
                 buffer = reader.readLine();
                 OceanKingdomDungeon.mapRevealed = Boolean.parseBoolean(reader.readLine());
                 buffer = reader.readLine();
-
                 Main.gameComplete = Boolean.parseBoolean(reader.readLine());
                 buffer = reader.readLine();
                 Dungeon.resetedAfterWin = Boolean.parseBoolean(reader.readLine());
                 buffer = reader.readLine();
                 OpenWorld.previousRoomSave = Integer.parseInt(reader.readLine());
                 buffer = reader.readLine();
-
                 Dungeon.meadowDungeon = readMatrix(reader);
                 buffer = reader.readLine();
                 Dungeon.darkForestDungeon = readMatrix(reader);
@@ -336,7 +331,6 @@ public class GameSaveSerialization {
                 buffer = reader.readLine();
                 Dungeon.oceanKingdomDungeon = readMatrix(reader);
                 buffer = reader.readLine();
-
                 MeadowDungeon.roomsBeenTo = readMatrix(reader);
                 buffer = reader.readLine();
                 DarkForestDungeon.roomsBeenTo = readMatrix(reader);
@@ -352,7 +346,6 @@ public class GameSaveSerialization {
                 DesertPyramidDungeon.roomsBeenTo = readMatrix(reader);
                 buffer = reader.readLine();
                 OceanKingdomDungeon.roomsBeenTo = readMatrix(reader);
-
             } catch (IOException | NumberFormatException e) {
                 e.printStackTrace();
                 System.out.println("Save File Corrupt or Invalid... ");
