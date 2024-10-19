@@ -254,10 +254,18 @@ public class Room {
         for (String[] room1 : room) {
             for (int j = 0; j < room1.length; j++) {
                 if (random.nextDouble() < 0.5) { // 50% chance
-                    if (random.nextDouble() < 0.5) { // 50% chance
-                        room1[j] = Player.G + "\"" + Player.R; // Grass
-                    } else {
-                        room1[j] = Player.G + "B" + Player.R; // Dirt
+                    for (int i = 0; i < 1;) {
+                        if (random.nextDouble() < 0.5) { // 50% chance
+                            if (" ".equals(room1[j])) {
+                                room1[j] = Player.G + "\"" + Player.R; // Grass
+                                i++;
+                            }
+                        } else {
+                            if (" ".equals(room1[j])) {
+                                room1[j] = Player.G + "'" + Player.R; // Bush
+                                i++;
+                            }
+                        }
                     }
                 }
             }
@@ -293,9 +301,9 @@ public class Room {
             for (int j = 0; j < room1.length; j++) {
                 if (random.nextDouble() < 0.5) { // 50% chance
                     if (random.nextDouble() < 0.5) { // 50% chance
-                        room1[j] = Player.B + "|" + Player.R; // Grass
-                    } else if (random.nextDouble() < 0.5) {
                         room1[j] = Player.G + "," + Player.R; // Tree
+                    } else if (random.nextDouble() < 0.5) {
+                        room1[j] = Player.B + "|" + Player.R; // Grass
                     } else {
                         room1[j] = Player.G + "'" + Player.R; // Bush
                     }
