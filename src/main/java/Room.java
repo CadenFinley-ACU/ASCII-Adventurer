@@ -18,6 +18,7 @@ public class Room {
     public static String resetColor = "\033[0m"; // reset to default color
     public static String bufferedEnviroment = null;
     public static String environment = null;
+    public static String[][] currentRenderedRoom = null;
 
     public static boolean hasChestInRoom(String itemName, int quantity) throws InterruptedException {
         String yellowColor = "\033[1;33m"; // yellow color
@@ -102,6 +103,34 @@ public class Room {
                 Dungeon.resetAll();
             }
         }
+    }
+
+    public static void reRenderSameRoom() throws InterruptedException {
+        for (String[] row : currentRenderedRoom) {
+            for (String cell : row) {
+                System.out.print(cell);
+            }
+            System.out.println();
+        }
+        System.out.println();
+        String setting = Player.getColorOfPlayerPostitionTile();
+        if (checkNewEnvironment()) {
+            switch (setting) {
+                case "mountain" ->
+                    TextEngine.printWithDelays("You have entered the mountain area", false);
+                case "grassland" ->
+                    TextEngine.printWithDelays("You have entered the grassy plains.", false);
+                case "desert" ->
+                    TextEngine.printWithDelays("You have entered the desert.", false);
+                case "ocean" ->
+                    TextEngine.printWithDelays("You have enter the ocean area", false);
+                case "lost forest" ->
+                    TextEngine.printWithDelays("You have entered the lost forest", false);
+                default ->
+                    TextEngine.printWithDelays("You are in an empty area", false);
+            }
+        }
+        bufferedEnviroment = environment;
     }
 
     public static void drawCurrentRoom() throws InterruptedException {
@@ -197,6 +226,10 @@ public class Room {
                     enemyRender = "E";
             }
         }
+        for (String[] currentRoom1 : currentRoom) {
+            currentRoom1[0] = " ";
+        }
+        currentRenderedRoom = currentRoom;
         if (OpenWorld.encounter && OpenWorld.numberOfEnemies > 0) {
             for (int i = 0; i < OpenWorld.numberOfEnemies;) {
                 int enemyX = random.nextInt(currentRoom[0].length);
@@ -206,10 +239,6 @@ public class Room {
                     i++;
                 }
             }
-        }
-
-        for (String[] currentRoom1 : currentRoom) {
-            currentRoom1[0] = " ";
         }
 
         for (String[] row : currentRoom) {
@@ -261,7 +290,7 @@ public class Room {
                     if (random.nextDouble() < 0.5) { // 50% chance
                         room1[j] = Player.G + "\"" + Player.R; // Grass
                     } else {
-                        room1[j] = Player.G + "'" + Player.R; // Bush
+                        room1[j] = Player.G + "," + Player.R; // Bush
                     }
                 }
             }
@@ -299,9 +328,9 @@ public class Room {
                     if (random.nextDouble() < 0.5) { // 50% chance
                         room1[j] = Player.B + "|" + Player.R; // Grass
                     } else if (random.nextDouble() < 0.5) {
-                        room1[j] = Player.G + "," + Player.R; // Tree
+                        room1[j] = Player.G + "`" + Player.R; // Tree
                     } else {
-                        room1[j] = Player.G + "'" + Player.R; // Bush
+                        room1[j] = Player.G + "," + Player.R; // Bush
                     }
                 }
             }

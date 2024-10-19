@@ -492,7 +492,7 @@ public class Player {
 
         }
         // Print the map
-        String darkPurpleStart = "\033[38;2;255;165;0m"; // ACU Purple
+        String orangeColor = "\033[38;2;255;165;0m"; // ACU Purple
         System.out.println("Map: ");
         for (String[] row : map) {
             for (String cell : row) {
@@ -505,7 +505,7 @@ public class Player {
                         case "[ ! ]" ->
                             System.out.print(redColor + cell + resetColor + " ");
                         case "[ P ]" ->
-                            System.out.print(darkPurpleStart + cell + resetColor + " ");
+                            System.out.print(orangeColor + cell + resetColor + " ");
                         default ->
                             System.out.print(cell + " ");
                     }

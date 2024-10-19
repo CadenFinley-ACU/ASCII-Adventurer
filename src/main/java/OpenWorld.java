@@ -73,7 +73,7 @@ public class OpenWorld extends Room {
                 Player.playerY = 0;
                 roomNumber = 2;
                 fightEnemies();
-                drawCurrentRoom();
+                reRenderSameRoom();
                 room2(); //start room
             }
             case 3 -> {
@@ -81,7 +81,7 @@ public class OpenWorld extends Room {
                 Player.playerY = 0;
                 roomNumber = 3;
                 fightEnemies();
-                drawCurrentRoom();
+                reRenderSameRoom();
                 room3(); //start room
             }
             case 4 -> {
@@ -89,7 +89,7 @@ public class OpenWorld extends Room {
                 Player.playerY = 0;
                 roomNumber = 4;
                 fightEnemies();
-                drawCurrentRoom();
+                reRenderSameRoom();
                 room4(); //start room
             }
             case 5 -> {
@@ -97,7 +97,7 @@ public class OpenWorld extends Room {
                 Player.playerY = 0;
                 roomNumber = 5;
                 fightEnemies();
-                drawCurrentRoom();
+                reRenderSameRoom();
                 room5(); //start room
             }
             case 6 -> {
@@ -105,7 +105,7 @@ public class OpenWorld extends Room {
                 Player.playerY = 0;
                 roomNumber = 6;
                 fightEnemies();
-                drawCurrentRoom();
+                reRenderSameRoom();
                 room6(); //start room
             }
             case 8 -> {
@@ -113,7 +113,7 @@ public class OpenWorld extends Room {
                 Player.playerY = 1;
                 roomNumber = 8;
                 fightEnemies();
-                drawCurrentRoom();
+                reRenderSameRoom();
                 room8(); //start room
             }
             case 9 -> {
@@ -121,7 +121,7 @@ public class OpenWorld extends Room {
                 Player.playerY = 1;
                 roomNumber = 9;
                 fightEnemies();
-                drawCurrentRoom();
+                reRenderSameRoom();
                 room9(); //start room
             }
             case 10 -> {
@@ -129,7 +129,7 @@ public class OpenWorld extends Room {
                 Player.playerY = 1;
                 roomNumber = 10;
                 fightEnemies();
-                drawCurrentRoom();
+                reRenderSameRoom();
                 room10(); //start room
             }
             case 11 -> {
@@ -137,7 +137,7 @@ public class OpenWorld extends Room {
                 Player.playerY = 1;
                 roomNumber = 11;
                 fightEnemies();
-                drawCurrentRoom();
+                reRenderSameRoom();
                 room11(); //start room
             }
             case 12 -> {
@@ -145,7 +145,7 @@ public class OpenWorld extends Room {
                 Player.playerY = 2;
                 roomNumber = 12;
                 fightEnemies();
-                drawCurrentRoom();
+                reRenderSameRoom();
                 room12(); //start room
             }
             case 13 -> {
@@ -153,7 +153,7 @@ public class OpenWorld extends Room {
                 Player.playerY = 2;
                 roomNumber = 13;
                 fightEnemies();
-                drawCurrentRoom();
+                reRenderSameRoom();
                 room13(); //start room
             }
             case 14 -> {
@@ -161,7 +161,7 @@ public class OpenWorld extends Room {
                 Player.playerY = 2;
                 roomNumber = 14;
                 fightEnemies();
-                drawCurrentRoom();
+                reRenderSameRoom();
                 room14(); //start room
             }
             case 15 -> {
@@ -169,7 +169,7 @@ public class OpenWorld extends Room {
                 Player.playerY = 2;
                 roomNumber = 15;
                 fightEnemies();
-                drawCurrentRoom();
+                reRenderSameRoom();
                 room15(); //start room
             }
             case 16 -> {
@@ -177,7 +177,7 @@ public class OpenWorld extends Room {
                 Player.playerY = 3;
                 roomNumber = 16;
                 fightEnemies();
-                drawCurrentRoom();
+                reRenderSameRoom();
                 room16(); //start room
             }
             case 17 -> {
@@ -185,7 +185,7 @@ public class OpenWorld extends Room {
                 Player.playerY = 3;
                 roomNumber = 17;
                 fightEnemies();
-                drawCurrentRoom();
+                reRenderSameRoom();
                 room17(); //start room
             }
             case 18 -> {
@@ -193,7 +193,7 @@ public class OpenWorld extends Room {
                 Player.playerY = 3;
                 roomNumber = 18;
                 fightEnemies();
-                drawCurrentRoom();
+                reRenderSameRoom();
                 room18(); //start room
             }
             case 19 -> {
@@ -201,7 +201,7 @@ public class OpenWorld extends Room {
                 Player.playerY = 3;
                 roomNumber = 19;
                 fightEnemies();
-                drawCurrentRoom();
+                reRenderSameRoom();
                 room19(); //start room
             }
             case 21 -> {
@@ -209,7 +209,7 @@ public class OpenWorld extends Room {
                 Player.playerY = 4;
                 roomNumber = 21;
                 fightEnemies();
-                drawCurrentRoom();
+                reRenderSameRoom();
                 room21();
             }
             case 22 -> {
@@ -217,7 +217,7 @@ public class OpenWorld extends Room {
                 Player.playerY = 4;
                 roomNumber = 22;
                 fightEnemies();
-                drawCurrentRoom();
+                reRenderSameRoom();
                 room22();
             }
             case 25 -> {
@@ -225,7 +225,7 @@ public class OpenWorld extends Room {
                 Player.playerY = 4;
                 roomNumber = 25;
                 fightEnemies();
-                drawCurrentRoom();
+                reRenderSameRoom();
                 room25();
             }
             case 26 -> {
@@ -233,7 +233,7 @@ public class OpenWorld extends Room {
                 Player.playerY = 4;
                 roomNumber = 26;
                 fightEnemies();
-                drawCurrentRoom();
+                reRenderSameRoom();
                 room26();
             }
             case 27 -> {
@@ -241,7 +241,7 @@ public class OpenWorld extends Room {
                 Player.playerY = 8;
                 roomNumber = 27;
                 fightEnemies();
-                drawCurrentRoom();
+                reRenderSameRoom();
                 room27();
             }
             case 28 -> {
@@ -249,7 +249,7 @@ public class OpenWorld extends Room {
                 Player.playerY = 4;
                 roomNumber = 28;
                 fightEnemies();
-                drawCurrentRoom();
+                reRenderSameRoom();
                 room28();
             }
             case 29 -> {
@@ -257,7 +257,7 @@ public class OpenWorld extends Room {
                 Player.playerY = 4;
                 roomNumber = 29;
                 fightEnemies();
-                drawCurrentRoom();
+                reRenderSameRoom();
                 room29();
             }
             case 30 -> {
@@ -265,7 +265,7 @@ public class OpenWorld extends Room {
                 Player.playerY = 5;
                 roomNumber = 30;
                 fightEnemies();
-                drawCurrentRoom();
+                reRenderSameRoom();
                 room30();
             }
             case 31 -> {
@@ -273,7 +273,7 @@ public class OpenWorld extends Room {
                 Player.playerY = 5;
                 roomNumber = 31;
                 fightEnemies();
-                drawCurrentRoom();
+                reRenderSameRoom();
                 room31();
             }
             case 32 -> {
@@ -281,7 +281,7 @@ public class OpenWorld extends Room {
                 Player.playerY = 5;
                 roomNumber = 32;
                 fightEnemies();
-                drawCurrentRoom();
+                reRenderSameRoom();
                 room32();
             }
             case 33 -> {
@@ -289,7 +289,7 @@ public class OpenWorld extends Room {
                 Player.playerY = 5;
                 roomNumber = 33;
                 fightEnemies();
-                drawCurrentRoom();
+                reRenderSameRoom();
                 room33();
             }
             case 34 -> {
@@ -297,7 +297,7 @@ public class OpenWorld extends Room {
                 Player.playerY = 5;
                 roomNumber = 34;
                 fightEnemies();
-                drawCurrentRoom();
+                reRenderSameRoom();
                 room34();
             }
             case 35 -> {
@@ -305,7 +305,7 @@ public class OpenWorld extends Room {
                 Player.playerY = 5;
                 roomNumber = 35;
                 fightEnemies();
-                drawCurrentRoom();
+                reRenderSameRoom();
                 room35();
             }
             case 36 -> {
@@ -313,7 +313,7 @@ public class OpenWorld extends Room {
                 Player.playerY = 5;
                 roomNumber = 36;
                 fightEnemies();
-                drawCurrentRoom();
+                reRenderSameRoom();
                 room36();
             }
             case 37 -> {
@@ -321,7 +321,7 @@ public class OpenWorld extends Room {
                 Player.playerY = 6;
                 roomNumber = 37;
                 fightEnemies();
-                drawCurrentRoom();
+                reRenderSameRoom();
                 room37();
             }
             case 38 -> {
@@ -329,7 +329,7 @@ public class OpenWorld extends Room {
                 Player.playerY = 6;
                 roomNumber = 38;
                 fightEnemies();
-                drawCurrentRoom();
+                reRenderSameRoom();
                 room38();
             }
             case 39 -> {
@@ -337,7 +337,7 @@ public class OpenWorld extends Room {
                 Player.playerY = 6;
                 roomNumber = 39;
                 fightEnemies();
-                drawCurrentRoom();
+                reRenderSameRoom();
                 room39();
             }
             case 40 -> {
@@ -345,7 +345,7 @@ public class OpenWorld extends Room {
                 Player.playerY = 6;
                 roomNumber = 40;
                 fightEnemies();
-                drawCurrentRoom();
+                reRenderSameRoom();
                 room40();
             }
             case 41 -> {
@@ -353,7 +353,7 @@ public class OpenWorld extends Room {
                 Player.playerY = 6;
                 roomNumber = 41;
                 fightEnemies();
-                drawCurrentRoom();
+                reRenderSameRoom();
                 room41();
             }
             case 42 -> {
@@ -361,7 +361,7 @@ public class OpenWorld extends Room {
                 Player.playerY = 6;
                 roomNumber = 42;
                 fightEnemies();
-                drawCurrentRoom();
+                reRenderSameRoom();
                 room42();
             }
             case 43 -> {
@@ -369,7 +369,7 @@ public class OpenWorld extends Room {
                 Player.playerY = 6;
                 roomNumber = 43;
                 fightEnemies();
-                drawCurrentRoom();
+                reRenderSameRoom();
                 room43();
             }
             case 44 -> {
@@ -377,7 +377,7 @@ public class OpenWorld extends Room {
                 Player.playerY = 6;
                 roomNumber = 44;
                 fightEnemies();
-                drawCurrentRoom();
+                reRenderSameRoom();
                 room44();
             }
             case 45 -> {
@@ -385,7 +385,7 @@ public class OpenWorld extends Room {
                 Player.playerY = 6;
                 roomNumber = 45;
                 fightEnemies();
-                drawCurrentRoom();
+                reRenderSameRoom();
                 room45();
             }
             case 47 -> {
@@ -393,7 +393,7 @@ public class OpenWorld extends Room {
                 Player.playerY = 7;
                 roomNumber = 47;
                 fightEnemies();
-                drawCurrentRoom();
+                reRenderSameRoom();
                 room47();
             }
             case 48 -> {
@@ -401,7 +401,7 @@ public class OpenWorld extends Room {
                 Player.playerY = 7;
                 roomNumber = 48;
                 fightEnemies();
-                drawCurrentRoom();
+                reRenderSameRoom();
                 room48();
             }
             case 49 -> {
@@ -409,7 +409,7 @@ public class OpenWorld extends Room {
                 Player.playerY = 7;
                 roomNumber = 49;
                 fightEnemies();
-                drawCurrentRoom();
+                reRenderSameRoom();
                 room49();
             }
             case 50 -> {
@@ -417,7 +417,7 @@ public class OpenWorld extends Room {
                 Player.playerY = 7;
                 roomNumber = 50;
                 fightEnemies();
-                drawCurrentRoom();
+                reRenderSameRoom();
                 room50();
             }
             case 51 -> {
@@ -425,7 +425,7 @@ public class OpenWorld extends Room {
                 Player.playerY = 7;
                 roomNumber = 51;
                 fightEnemies();
-                drawCurrentRoom();
+                reRenderSameRoom();
                 room51();
             }
             case 52 -> {
@@ -433,7 +433,7 @@ public class OpenWorld extends Room {
                 Player.playerY = 7;
                 roomNumber = 52;
                 fightEnemies();
-                drawCurrentRoom();
+                reRenderSameRoom();
                 room52();
             }
             case 53 -> {
@@ -441,7 +441,7 @@ public class OpenWorld extends Room {
                 Player.playerY = 7;
                 roomNumber = 53;
                 fightEnemies();
-                drawCurrentRoom();
+                reRenderSameRoom();
                 room53();
             }
             case 54 -> {
@@ -449,7 +449,7 @@ public class OpenWorld extends Room {
                 Player.playerY = 7;
                 roomNumber = 54;
                 fightEnemies();
-                drawCurrentRoom();
+                reRenderSameRoom();
                 room54();
             }
             case 55 -> {
@@ -457,7 +457,7 @@ public class OpenWorld extends Room {
                 Player.playerY = 8;
                 roomNumber = 55;
                 fightEnemies();
-                drawCurrentRoom();
+                reRenderSameRoom();
                 room55();
             }
             case 57 -> {
@@ -465,7 +465,7 @@ public class OpenWorld extends Room {
                 Player.playerY = 8;
                 roomNumber = 57;
                 fightEnemies();
-                drawCurrentRoom();
+                reRenderSameRoom();
                 room57();
             }
             case 58 -> {
@@ -473,7 +473,7 @@ public class OpenWorld extends Room {
                 Player.playerY = 8;
                 roomNumber = 58;
                 fightEnemies();
-                drawCurrentRoom();
+                reRenderSameRoom();
                 room58();
             }
             case 59 -> {
@@ -481,7 +481,7 @@ public class OpenWorld extends Room {
                 Player.playerY = 8;
                 roomNumber = 59;
                 fightEnemies();
-                drawCurrentRoom();
+                reRenderSameRoom();
                 room59();
             }
             case 60 -> {
@@ -489,7 +489,7 @@ public class OpenWorld extends Room {
                 Player.playerY = 8;
                 roomNumber = 60;
                 fightEnemies();
-                drawCurrentRoom();
+                reRenderSameRoom();
                 room60();
             }
             case 62 -> {
@@ -497,7 +497,7 @@ public class OpenWorld extends Room {
                 Player.playerY = 5;
                 roomNumber = 62;
                 fightEnemies();
-                drawCurrentRoom();
+                reRenderSameRoom();
                 room62();
             }
             case 64 -> {
@@ -505,7 +505,7 @@ public class OpenWorld extends Room {
                 Player.playerY = 9;
                 roomNumber = 64;
                 fightEnemies();
-                drawCurrentRoom();
+                reRenderSameRoom();
                 room64();
             }
             case 65 -> {
@@ -513,7 +513,7 @@ public class OpenWorld extends Room {
                 Player.playerY = 9;
                 roomNumber = 65;
                 fightEnemies();
-                drawCurrentRoom();
+                reRenderSameRoom();
                 room65();
             }
             case 66 -> {
@@ -521,7 +521,7 @@ public class OpenWorld extends Room {
                 Player.playerY = 9;
                 roomNumber = 66;
                 fightEnemies();
-                drawCurrentRoom();
+                reRenderSameRoom();
                 room66();
             }
             case 67 -> {
@@ -529,7 +529,7 @@ public class OpenWorld extends Room {
                 Player.playerY = 9;
                 roomNumber = 67;
                 fightEnemies();
-                drawCurrentRoom();
+                reRenderSameRoom();
                 room67();
             }
             case 68 -> {
@@ -537,7 +537,7 @@ public class OpenWorld extends Room {
                 Player.playerY = 9;
                 roomNumber = 68;
                 fightEnemies();
-                drawCurrentRoom();
+                reRenderSameRoom();
                 room68();
             }
             case 69 -> {
@@ -545,7 +545,7 @@ public class OpenWorld extends Room {
                 Player.playerY = 9;
                 roomNumber = 69;
                 fightEnemies();
-                drawCurrentRoom();
+                reRenderSameRoom();
                 room69();
             }
             case 72 -> {
@@ -553,7 +553,7 @@ public class OpenWorld extends Room {
                 Player.playerY = 10;
                 roomNumber = 72;
                 fightEnemies();
-                drawCurrentRoom();
+                reRenderSameRoom();
                 room72();
             }
             case 73 -> {
@@ -561,7 +561,7 @@ public class OpenWorld extends Room {
                 Player.playerY = 10;
                 roomNumber = 73;
                 fightEnemies();
-                drawCurrentRoom();
+                reRenderSameRoom();
                 room73();
             }
             case 74 -> {
