@@ -1,13 +1,13 @@
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-
 
 //Written by Caden Finley
 //This is unused in this program
 public class OpenWorldGenerator {
 
-    private static final int SIZE = 11;
+    private static final int SIZE = 20;
     private static int[][] matrix;
     private List<int[]> positions;
     private List<int[]> fivePositions;
@@ -60,26 +60,26 @@ public class OpenWorldGenerator {
         int distanceOffset = SIZE / 3;
         for (int[] pos : positions) {
             int currentDistanceOffset = distanceOffset;
-            
+
             if (pos[0] == 5 || pos[1] == 5) {
                 currentDistanceOffset = distanceOffset - 1;
             }
             if (pos[0] == 8 || pos[1] == 8) {
                 currentDistanceOffset = distanceOffset + 1;
             }
-            
+
             // Compare positions with value 8 to themselves
             if (pos[0] == 5 && pos[1] == 5) {
                 currentDistanceOffset = distanceOffset;
             }
-            
+
             // Compare positions with value 5 to themselves
             if (pos[0] == 8 && pos[1] == 8) {
                 currentDistanceOffset = distanceOffset;
             }
-            
-            if ((Math.abs(pos[0] - row) < currentDistanceOffset && Math.abs(pos[1] - col) < currentDistanceOffset) &&
-                (Math.abs(ninePosition[0] - row) < distanceOffset && Math.abs(ninePosition[1] - col) < distanceOffset)) {
+
+            if ((Math.abs(pos[0] - row) < currentDistanceOffset && Math.abs(pos[1] - col) < currentDistanceOffset)
+                    && (Math.abs(ninePosition[0] - row) < distanceOffset && Math.abs(ninePosition[1] - col) < distanceOffset)) {
                 return false;
             }
         }
@@ -121,6 +121,7 @@ public class OpenWorldGenerator {
             matrix[x1][y1] = 1;
         }
     }
+
     public void drawCircleFromNine() {
         int centerX = -1, centerY = -1;
 
@@ -133,7 +134,9 @@ public class OpenWorldGenerator {
                     break;
                 }
             }
-            if (centerX != -1) break;
+            if (centerX != -1) {
+                break;
+            }
         }
 
         if (centerX == -1 || centerY == -1) {
@@ -143,7 +146,7 @@ public class OpenWorldGenerator {
 
         // Calculate the maximum radius with reduced randomness
         int baseRadius = Math.min(Math.min(centerX, SIZE - centerX - 1), Math.min(centerY, SIZE - centerY - 1));
-        int radius = baseRadius+1; // Randomly reduce the radius by up to 1 unit
+        int radius = baseRadius + 1; // Randomly reduce the radius by up to 1 unit
 
         // Draw the circle using the midpoint circle algorithm with reduced randomness
         int x = radius;
@@ -152,14 +155,30 @@ public class OpenWorldGenerator {
 
         while (y <= x) {
             // Set the points in all octants with reduced randomness
-            if (random.nextInt(10) < 8) setPoint(centerX + x, centerY + y);
-            if (random.nextInt(10) < 8) setPoint(centerX + y, centerY + x);
-            if (random.nextInt(10) < 8) setPoint(centerX - x, centerY + y);
-            if (random.nextInt(10) < 8) setPoint(centerX - y, centerY + x);
-            if (random.nextInt(10) < 8) setPoint(centerX - x, centerY - y);
-            if (random.nextInt(10) < 8) setPoint(centerX - y, centerY - x);
-            if (random.nextInt(10) < 8) setPoint(centerX + x, centerY - y);
-            if (random.nextInt(10) < 8) setPoint(centerX + y, centerY - x);
+            if (random.nextInt(10) < 8) {
+                setPoint(centerX + x, centerY + y);
+            }
+            if (random.nextInt(10) < 8) {
+                setPoint(centerX + y, centerY + x);
+            }
+            if (random.nextInt(10) < 8) {
+                setPoint(centerX - x, centerY + y);
+            }
+            if (random.nextInt(10) < 8) {
+                setPoint(centerX - y, centerY + x);
+            }
+            if (random.nextInt(10) < 8) {
+                setPoint(centerX - x, centerY - y);
+            }
+            if (random.nextInt(10) < 8) {
+                setPoint(centerX - y, centerY - x);
+            }
+            if (random.nextInt(10) < 8) {
+                setPoint(centerX + x, centerY - y);
+            }
+            if (random.nextInt(10) < 8) {
+                setPoint(centerX + y, centerY - x);
+            }
             y++;
             if (decisionOver2 <= 0) {
                 decisionOver2 += 2 * y + 1; // Change in decision criterion for y -> y+1
@@ -186,17 +205,18 @@ public class OpenWorldGenerator {
                     int dx = centerX - i;
                     int dy = centerY - j;
                     if (dx * dx + dy * dy <= radius * radius && matrix[i][j] == 0) {
-                        matrix[i][j] = 1;   
+                        matrix[i][j] = 1;
                     }
                 }
             }
         }
     }
-    private static int countRooms(){
+
+    private static int countRooms() {
         int count = 0;
         for (int i = 0; i < SIZE; i++) {
             for (int j = 0; j < SIZE; j++) {
-                if(matrix[i][j] != 0){
+                if (matrix[i][j] != 0) {
                     count++;
                 }
             }
@@ -208,9 +228,15 @@ public class OpenWorldGenerator {
         int count9 = 0, count8 = 0, count5 = 0;
         for (int i = 0; i < SIZE; i++) {
             for (int j = 0; j < SIZE; j++) {
-                if (matrix[i][j] == 9) count9++;
-                if (matrix[i][j] == 8) count8++;
-                if (matrix[i][j] == 5) count5++;
+                if (matrix[i][j] == 9) {
+                    count9++;
+                }
+                if (matrix[i][j] == 8) {
+                    count8++;
+                }
+                if (matrix[i][j] == 5) {
+                    count5++;
+                }
             }
         }
         return count9 == 1 && count8 == 8 && count5 == 4;
@@ -239,16 +265,22 @@ public class OpenWorldGenerator {
         for (int i = 0; i < SIZE; i++) {
             for (int j = 0; j < SIZE; j++) {
                 switch (matrix[i][j]) {
-                    case 9 -> System.out.print("X");
-                    case 8 -> System.out.print("D");
-                    case 5 -> System.out.print("V");
-                    case 1 -> System.out.print(".");
-                    default -> System.out.print(" ");
+                    case 9 ->
+                        System.out.print("X");
+                    case 8 ->
+                        System.out.print("D");
+                    case 5 ->
+                        System.out.print("V");
+                    case 1 ->
+                        System.out.print(".");
+                    default ->
+                        System.out.print(" ");
                 }
             }
             System.out.println();
         }
     }
+
     public static int[][] getMatrix() {
         OpenWorldGenerator modifier = new OpenWorldGenerator();
         modifier.generateMatrix();
