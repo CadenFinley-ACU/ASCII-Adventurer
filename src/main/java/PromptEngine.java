@@ -41,7 +41,7 @@ public class PromptEngine {
             String dungeonDistanceGauge;
             String villagePrompt;
             String dungeonPrompt;
-
+            TextEngine.printNoDelay("Loading...", false);
             if (villageDirection == null || villageDirection.isEmpty() || villageDirection.equals("No village found")) {
                 villageDirection = "There is no village nearby";
             }
@@ -82,8 +82,9 @@ public class PromptEngine {
             } else {
                 dungeonPrompt = "The " + nextDungeon + " is to the " + dungeonNextDirection + " and is " + dungeonDistanceGauge + ".";
             }
-            //return chatGPT("Pick the best and most accurite prompt out of these three prompts useing these facts: The player is in a " + setting + " village. " + villagePrompt + " " + dungeonPrompt + " " + extra + "The prompts are as follows: 1-" + chatGPT("Generate a me a prompt for a text adventure game. Always state the direction of the structure if it is given and the distance if it is given. Do this in around " + promptLength + " words or less using this info: The player is in a " + setting + villagePrompt + dungeonPrompt + ".") + "2-" + chatGPT("Generate a me a prompt for a text adventure game. Always state the direction of the structure if it is given and the distance if it is given. Do this in around " + promptLength + " words or less using this info: The player is in a " + setting + villagePrompt + dungeonPrompt + ".") + "3-" + chatGPT("Generate a me a prompt for a text adventure game. Always state the direction of the structure if it is given and the distance if it is given. Do this in around " + promptLength + " words or less using this info: The player is in a " + setting + villagePrompt + dungeonPrompt + ".") + "\n");
-            TextEngine.printNoDelay("Loading...", false);
+            //String prompt1 = chatGPT("Generate a me a prompt for a text adventure game. Always state the direction of the structure if it is given and the distance if it is given. Do this in around " + promptLength + " words or less using this info: The player is in a " + setting + villagePrompt + dungeonPrompt + ".") + "\n";
+            //String prompt2 = chatGPT("Generate a me a prompt for a text adventure game. Always state the direction of the structure if it is given and the distance if it is given. Do this in around " + promptLength + " words or less using this info: The player is in a " + setting + villagePrompt + dungeonPrompt + ".") + "\n";
+            //prompt = chatGPT("Pick the best and most accurite prompt out of these two prompts useing these facts: The player is in a " + setting + " village. " + villagePrompt + " " + dungeonPrompt + " The promps are: " + prompt1 + " and " + prompt2) + "\n";
             prompt = chatGPT("Generate a me a prompt for a text adventure game. Always state the direction of the structure if it is given and the distance if it is given. Do this in around " + promptLength + " words or less using this info: The player is in a " + setting + villagePrompt + dungeonPrompt + ".") + "\n";
             Main.screenRefresh();
         }
