@@ -26,6 +26,7 @@ public class Main {
 
     public static void main(String[] args) throws InterruptedException { //main game start
         TextEngine.clearScreen();
+        TextEngine.printNoDelay("Loading...", false);
         if (!hasSave()) {
             TextEngine.printNoDelay("Generating Dungeons...", false);
             TextEngine.printNoDelay("(P.S. if this takes more than ~10 seconds, restart the game.)", false);
@@ -35,6 +36,16 @@ public class Main {
             TextEngine.printNoDelay("Locating Save File...", false);
             GameSaveSerialization.loadGameSave();
             TextEngine.printNoDelay("Save File Located!", false);
+            if (PromptEngine.aiGenerationEnabled) {
+                TextEngine.printNoDelay("Testing OpenAI API Connection...", false);
+                if (PromptEngine.testAPIKey(PromptEngine.userAPIKey)) {
+                    TextEngine.printNoDelay("OpenAI API Connection Successful!", false);
+                } else {
+                    TextEngine.printNoDelay("OpenAI API Connection Failed. Please check your internet connection and API key", false);
+                    TextEngine.printNoDelay("AI Generation Disabled", false);
+                    PromptEngine.aiGenerationEnabled = false;
+                }
+            }
         }
         TextEngine.printNoDelay("Creating Game Items...", false);
         createGameItems();
@@ -44,6 +55,7 @@ public class Main {
         TextEngine.printNoDelay("Enemies Created!", false);
         TextEngine.printWithDelays("Starting Game!", false);
         startMenu();
+
     }
 
     private static void createGameItems() { //initalize all the items in the game
@@ -152,7 +164,7 @@ public class Main {
         if (getOS_NAME().contains("Mac")) {
             darkPurpleStart = "\033[1;33m";
         }
-        System.err.println(
+        System.out.println(
                 darkPurpleStart
                 + 
 
@@ -244,6 +256,8 @@ public class Main {
                  
                  
              
+          
+          
         
         
         
@@ -562,6 +576,8 @@ public class Main {
         Room.reset("all");
         Player.setName(null);
         Dungeon.generateDungeons();
+        PromptEngine.aiGenerationEnabled = false;
+        PromptEngine.userAPIKey = null;
         try {
             FileWriter fwOb = new FileWriter(".runtime.txt", false); 
             PrintWriter pwOb = new PrintWriter(fwOb, false);

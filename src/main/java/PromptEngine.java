@@ -176,7 +176,7 @@ public class PromptEngine {
             aiGenerationEnabled = responseContent != null && !responseContent.isEmpty();
             return responseContent != null && !responseContent.isEmpty();
         } catch (IOException e) {
-            TextEngine.printNoDelay("API Key failed. Please try again.", false);
+            TextEngine.printNoDelay("API Key failed. Please check your API key and internet connection", false);
             aiGenerationEnabled = false;
             return false;
         }
