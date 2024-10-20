@@ -17,16 +17,38 @@ public class PromptEngine {
         String dungeonNextDirection = Player.getCompassDirectionToClosestDungeon();
         String setting = Player.getColorOfPlayerPostitionTile();
         int distanceToVillage = Player.distanceToVillage();
+        int distanceToDungeon = Player.distanceToNextDungeon();
+        String villageDistanceGauge;
+        String dungeonDistanceGauge;
+        if (villageDirection == null || villageDirection.isEmpty() || villageDirection.equals("No village found")) {
+            villageDirection = "There is no village nearby.";
+        }
+        if (nextDungeon == null || nextDungeon.isEmpty() || nextDungeon.equals("No dungeon found")) {
+            nextDungeon = "There is no dungeon nearby.";
+        }
+        if (setting == null || setting.isEmpty()) {
+            setting = "generic";
+        }
         if (extraInfo == null || extraInfo.isEmpty()) {
             extraInfo = "no extra info";
         }
         if (dungeonNextDirection == null || dungeonNextDirection.isEmpty() || dungeonNextDirection.equals("No dungeon found")) {
             dungeonNextDirection = "There is no dungeon nearby.";
         }
+        if (distanceToDungeon > 0) {
+            dungeonDistanceGauge = "The next dungeon is " + distanceToDungeon + " tiles away.";
+        } else {
+            dungeonDistanceGauge = "There is no dungeon nearby.";
+        }
+        if (distanceToVillage > 0) {
+            villageDistanceGauge = "The village is " + distanceToVillage + " tiles away.";
+        } else {
+            villageDistanceGauge = "There is no village nearby.";
+        }
         //return chatGPT("Generate me a prompt for a text adventure game. The village is to the " + villageDirection + ". The next dungeon is to the " + dungeonNextDirection + ". The next dungeon is called " + nextDungeon + ". The setting is " + setting + ". (100 words or less)");
         //debug
         //System.out.println("villageDirection: " + villageDirection + " nextDungeon: " + nextDungeon + " dungeonNextDirection: " + dungeonNextDirection + " setting: " + setting + " extraInfo: " + extraInfo);
-        return chatGPT("Generate a me a prompt for a text adventure game. The player is in a " + setting + " setting. The village is to the " + villageDirection + ". The next dungeon is to the " + dungeonNextDirection + ". The next dungeon is called " + nextDungeon + ". " + extraInfo + " (50 words or less)");
+        return chatGPT("Generate a me a prompt for a text adventure game. The player is in a " + setting + " setting. The village is to the " + villageDirection + "and is " + villageDistanceGauge + ". The next dungeon is to the " + dungeonNextDirection + "and is " + dungeonDistanceGauge + ". The next dungeon is called " + nextDungeon + ". " + extraInfo + " (50 words or less)");
     }
 
     private static String chatGPT(String message) {

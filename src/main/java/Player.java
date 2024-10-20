@@ -679,28 +679,28 @@ public class Player {
         int deltaY = closestVillageY - playerY;
 
         if (deltaX == 0 && deltaY < 0) {
-            return "N";
+            return "North";
         }
         if (deltaX > 0 && deltaY < 0) {
-            return "NE";
+            return "Northeast";
         }
         if (deltaX > 0 && deltaY == 0) {
-            return "E";
+            return "East";
         }
         if (deltaX > 0 && deltaY > 0) {
-            return "SE";
+            return "Southeast";
         }
         if (deltaX == 0 && deltaY > 0) {
-            return "S";
+            return "South";
         }
         if (deltaX < 0 && deltaY > 0) {
-            return "SW";
+            return "South west";
         }
         if (deltaX < 0 && deltaY == 0) {
-            return "W";
+            return "West";
         }
         if (deltaX < 0 && deltaY < 0) {
-            return "NW";
+            return "Northwest";
         }
 
         return "Unknown direction";
@@ -840,28 +840,28 @@ public class Player {
         // System.out.println("Closest Dungeon Position: (" + closestDungeonX + ", " + closestDungeonY + ")");
         // System.out.println("DeltaX: " + deltaX + ", DeltaY: " + deltaY);
         if (deltaX == 0 && deltaY < 0) {
-            return "N";
+            return "North";
         }
         if (deltaX > 0 && deltaY < 0) {
-            return "NE";
+            return "Northeast";
         }
         if (deltaX > 0 && deltaY == 0) {
-            return "E";
+            return "East";
         }
         if (deltaX > 0 && deltaY > 0) {
-            return "SE";
+            return "Southeast";
         }
         if (deltaX == 0 && deltaY > 0) {
-            return "S";
+            return "South";
         }
         if (deltaX < 0 && deltaY > 0) {
-            return "SW";
+            return "South west";
         }
         if (deltaX < 0 && deltaY == 0) {
-            return "W";
+            return "West";
         }
         if (deltaX < 0 && deltaY < 0) {
-            return "NW";
+            return "Northwest";
         }
 
         return "Unknown direction";
@@ -921,6 +921,9 @@ public class Player {
                     }
                 }
             }
+        }
+        if (closestVillageX == -1 || closestVillageY == -1) {
+            return -1;
         }
         return (int) minDistance;
     }
@@ -1045,6 +1048,9 @@ public class Player {
                     }
                 }
             }
+        }
+        if (closestDungeonX == -1 || closestDungeonY == -1) {
+            return -1;
         }
         return (int) minDistance;
     }
