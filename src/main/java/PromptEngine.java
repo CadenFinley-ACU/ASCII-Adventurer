@@ -5,15 +5,28 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Arrays;
+import java.util.List;
 
 // Written by Caden Finley ACU 2024
 // October 19, 2024
 public class PromptEngine {
 
+    private static final String yellowColor = "\u001B[33m";
+    private static final String resetColor = "\u001B[0m";
+
     public static String userAPIKey = null;
     public static boolean aiGenerationEnabled = false;
     public static int promptLength = 30;
     private static String prompt = null;
+    private static final List<String> keywords = Arrays.asList(
+            "village", "meadow", "dungeon", "dark forest", "mountain cave", "mountain top",
+            "desert pyramid", "desert oasis", "desert plains", "ocean kingdom", "next dungeon",
+            "north", "south", "east", "west", "northeast", "northwest", "southeast", "southwest",
+            "Village", "Meadow", "Dungeon", "Dark Forest", "Mountain Cave", "Mountain Top",
+            "Desert Pyramid", "Desert Oasis", "Desert Plains", "Ocean Kingdom", "Next dungeon",
+            "North", "South", "East", "West", "Northeast", "Northwest", "Southeast", "Southwest"
+    );
 
     public static void buildPrompt() throws InterruptedException {
         if (aiGenerationEnabled) {
@@ -78,6 +91,10 @@ public class PromptEngine {
     public static String returnPrompt() throws InterruptedException {
         if (prompt == null || prompt.isEmpty()) {
             buildPrompt();
+        }
+        // Highlight keywords
+        for (String keyword : keywords) {
+            prompt = prompt.replaceAll("\\b" + keyword + "\\b", yellowColor + keyword + resetColor);
         }
         return prompt;
     }

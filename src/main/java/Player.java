@@ -578,6 +578,12 @@ public class Player {
 
     public static void drawHealthBar() {
         int hearts = maxHealth / 20;
+        if (hearts == 0) {
+            hearts = 1;
+        }
+        if (hearts > 25) {
+            hearts = 25;
+        }
         int filledBars = (int) Math.round(((double) health / maxHealth) * hearts);
         if (getHealth() > Player.getMaxHealth() / 2) {
             healthColor = greenColor;
@@ -855,7 +861,7 @@ public class Player {
             return "South";
         }
         if (deltaX < 0 && deltaY > 0) {
-            return "South west";
+            return "Southwest";
         }
         if (deltaX < 0 && deltaY == 0) {
             return "West";
