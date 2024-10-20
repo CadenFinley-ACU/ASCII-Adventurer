@@ -6,6 +6,8 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+// Written by Caden Finley ACU 2024
+// October 19, 2024
 public class PromptEngine {
 
     public static String userAPIKey = null;
