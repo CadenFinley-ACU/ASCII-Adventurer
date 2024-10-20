@@ -89,6 +89,7 @@ public class OpenWorld extends Room {
                 Player.playerX = 2;
                 Player.playerY = 0;
                 roomNumber = 2;
+                PromptEngine.buildPrompt();
                 fightEnemies();
                 reRenderSameRoom();
                 room2(); //start room
@@ -97,6 +98,7 @@ public class OpenWorld extends Room {
                 Player.playerX = 3;
                 Player.playerY = 0;
                 roomNumber = 3;
+                PromptEngine.buildPrompt();
                 fightEnemies();
                 reRenderSameRoom();
                 room3(); //start room
@@ -105,6 +107,7 @@ public class OpenWorld extends Room {
                 Player.playerX = 4;
                 Player.playerY = 0;
                 roomNumber = 4;
+                PromptEngine.buildPrompt();
                 fightEnemies();
                 reRenderSameRoom();
                 room4(); //start room
@@ -113,6 +116,7 @@ public class OpenWorld extends Room {
                 Player.playerX = 5;
                 Player.playerY = 0;
                 roomNumber = 5;
+                PromptEngine.buildPrompt();
                 fightEnemies();
                 reRenderSameRoom();
                 room5(); //start room
@@ -121,6 +125,7 @@ public class OpenWorld extends Room {
                 Player.playerX = 6;
                 Player.playerY = 0;
                 roomNumber = 6;
+                PromptEngine.buildPrompt();
                 fightEnemies();
                 reRenderSameRoom();
                 room6(); //start room
@@ -129,6 +134,7 @@ public class OpenWorld extends Room {
                 Player.playerX = 1;
                 Player.playerY = 1;
                 roomNumber = 8;
+                PromptEngine.buildPrompt();
                 fightEnemies();
                 reRenderSameRoom();
                 room8(); //start room
@@ -137,6 +143,7 @@ public class OpenWorld extends Room {
                 Player.playerX = 5;
                 Player.playerY = 1;
                 roomNumber = 9;
+                PromptEngine.buildPrompt();
                 fightEnemies();
                 reRenderSameRoom();
                 room9(); //start room
@@ -145,6 +152,7 @@ public class OpenWorld extends Room {
                 Player.playerX = 6;
                 Player.playerY = 1;
                 roomNumber = 10;
+                PromptEngine.buildPrompt();
                 fightEnemies();
                 reRenderSameRoom();
                 room10(); //start room
@@ -153,6 +161,7 @@ public class OpenWorld extends Room {
                 Player.playerX = 7;
                 Player.playerY = 1;
                 roomNumber = 11;
+                PromptEngine.buildPrompt();
                 fightEnemies();
                 reRenderSameRoom();
                 room11(); //start room
@@ -161,6 +170,7 @@ public class OpenWorld extends Room {
                 Player.playerX = 1;
                 Player.playerY = 2;
                 roomNumber = 12;
+                PromptEngine.buildPrompt();
                 fightEnemies();
                 reRenderSameRoom();
                 room12(); //start room
@@ -169,6 +179,7 @@ public class OpenWorld extends Room {
                 Player.playerX = 5;
                 Player.playerY = 2;
                 roomNumber = 13;
+                PromptEngine.buildPrompt();
                 fightEnemies();
                 reRenderSameRoom();
                 room13(); //start room
@@ -177,6 +188,7 @@ public class OpenWorld extends Room {
                 Player.playerX = 6;
                 Player.playerY = 2;
                 roomNumber = 14;
+                PromptEngine.buildPrompt();
                 fightEnemies();
                 reRenderSameRoom();
                 room14(); //start room
@@ -185,6 +197,7 @@ public class OpenWorld extends Room {
                 Player.playerX = 7;
                 Player.playerY = 2;
                 roomNumber = 15;
+                PromptEngine.buildPrompt();
                 fightEnemies();
                 reRenderSameRoom();
                 room15(); //start room
@@ -193,6 +206,7 @@ public class OpenWorld extends Room {
                 Player.playerX = 1;
                 Player.playerY = 3;
                 roomNumber = 16;
+                PromptEngine.buildPrompt();
                 fightEnemies();
                 reRenderSameRoom();
                 room16(); //start room
@@ -201,6 +215,7 @@ public class OpenWorld extends Room {
                 Player.playerX = 5;
                 Player.playerY = 3;
                 roomNumber = 17;
+                PromptEngine.buildPrompt();
                 fightEnemies();
                 reRenderSameRoom();
                 room17(); //start room
@@ -209,6 +224,7 @@ public class OpenWorld extends Room {
                 Player.playerX = 6;
                 Player.playerY = 3;
                 roomNumber = 18;
+                PromptEngine.buildPrompt();
                 fightEnemies();
                 reRenderSameRoom();
                 room18(); //start room
@@ -217,6 +233,7 @@ public class OpenWorld extends Room {
                 Player.playerX = 7;
                 Player.playerY = 3;
                 roomNumber = 19;
+                PromptEngine.buildPrompt();
                 fightEnemies();
                 reRenderSameRoom();
                 room19(); //start room
@@ -225,6 +242,7 @@ public class OpenWorld extends Room {
                 Player.playerX = 0;
                 Player.playerY = 4;
                 roomNumber = 21;
+                PromptEngine.buildPrompt();
                 fightEnemies();
                 reRenderSameRoom();
                 room21();
@@ -233,6 +251,7 @@ public class OpenWorld extends Room {
                 Player.playerX = 1;
                 Player.playerY = 4;
                 roomNumber = 22;
+                PromptEngine.buildPrompt();
                 fightEnemies();
                 reRenderSameRoom();
                 room22();
@@ -241,6 +260,7 @@ public class OpenWorld extends Room {
                 Player.playerX = 5;
                 Player.playerY = 4;
                 roomNumber = 25;
+                PromptEngine.buildPrompt();
                 fightEnemies();
                 reRenderSameRoom();
                 room25();
@@ -249,6 +269,7 @@ public class OpenWorld extends Room {
                 Player.playerX = 6;
                 Player.playerY = 4;
                 roomNumber = 26;
+                PromptEngine.buildPrompt();
                 fightEnemies();
                 reRenderSameRoom();
                 room26();
@@ -257,6 +278,7 @@ public class OpenWorld extends Room {
                 Player.playerX = 3;
                 Player.playerY = 8;
                 roomNumber = 27;
+                PromptEngine.buildPrompt();
                 fightEnemies();
                 reRenderSameRoom();
                 room27();
@@ -265,6 +287,7 @@ public class OpenWorld extends Room {
                 Player.playerX = 7;
                 Player.playerY = 4;
                 roomNumber = 28;
+                PromptEngine.buildPrompt();
                 fightEnemies();
                 reRenderSameRoom();
                 room28();
@@ -273,6 +296,7 @@ public class OpenWorld extends Room {
                 Player.playerX = 8;
                 Player.playerY = 4;
                 roomNumber = 29;
+                PromptEngine.buildPrompt();
                 fightEnemies();
                 reRenderSameRoom();
                 room29();
@@ -281,6 +305,7 @@ public class OpenWorld extends Room {
                 Player.playerX = 0;
                 Player.playerY = 5;
                 roomNumber = 30;
+                PromptEngine.buildPrompt();
                 fightEnemies();
                 reRenderSameRoom();
                 room30();
@@ -289,6 +314,7 @@ public class OpenWorld extends Room {
                 Player.playerX = 1;
                 Player.playerY = 5;
                 roomNumber = 31;
+                PromptEngine.buildPrompt();
                 fightEnemies();
                 reRenderSameRoom();
                 room31();
@@ -297,6 +323,7 @@ public class OpenWorld extends Room {
                 Player.playerX = 2;
                 Player.playerY = 5;
                 roomNumber = 32;
+                PromptEngine.buildPrompt();
                 fightEnemies();
                 reRenderSameRoom();
                 room32();
@@ -305,6 +332,7 @@ public class OpenWorld extends Room {
                 Player.playerX = 5;
                 Player.playerY = 5;
                 roomNumber = 33;
+                PromptEngine.buildPrompt();
                 fightEnemies();
                 reRenderSameRoom();
                 room33();
@@ -313,6 +341,7 @@ public class OpenWorld extends Room {
                 Player.playerX = 6;
                 Player.playerY = 5;
                 roomNumber = 34;
+                PromptEngine.buildPrompt();
                 fightEnemies();
                 reRenderSameRoom();
                 room34();
@@ -321,6 +350,7 @@ public class OpenWorld extends Room {
                 Player.playerX = 7;
                 Player.playerY = 5;
                 roomNumber = 35;
+                PromptEngine.buildPrompt();
                 fightEnemies();
                 reRenderSameRoom();
                 room35();
@@ -329,6 +359,7 @@ public class OpenWorld extends Room {
                 Player.playerX = 8;
                 Player.playerY = 5;
                 roomNumber = 36;
+                PromptEngine.buildPrompt();
                 fightEnemies();
                 reRenderSameRoom();
                 room36();
@@ -337,6 +368,7 @@ public class OpenWorld extends Room {
                 Player.playerX = 0;
                 Player.playerY = 6;
                 roomNumber = 37;
+                PromptEngine.buildPrompt();
                 fightEnemies();
                 reRenderSameRoom();
                 room37();
@@ -345,6 +377,7 @@ public class OpenWorld extends Room {
                 Player.playerX = 1;
                 Player.playerY = 6;
                 roomNumber = 38;
+                PromptEngine.buildPrompt();
                 fightEnemies();
                 reRenderSameRoom();
                 room38();
@@ -353,6 +386,7 @@ public class OpenWorld extends Room {
                 Player.playerX = 2;
                 Player.playerY = 6;
                 roomNumber = 39;
+                PromptEngine.buildPrompt();
                 fightEnemies();
                 reRenderSameRoom();
                 room39();
@@ -361,6 +395,7 @@ public class OpenWorld extends Room {
                 Player.playerX = 3;
                 Player.playerY = 6;
                 roomNumber = 40;
+                PromptEngine.buildPrompt();
                 fightEnemies();
                 reRenderSameRoom();
                 room40();
@@ -369,6 +404,7 @@ public class OpenWorld extends Room {
                 Player.playerX = 4;
                 Player.playerY = 6;
                 roomNumber = 41;
+                PromptEngine.buildPrompt();
                 fightEnemies();
                 reRenderSameRoom();
                 room41();
@@ -377,6 +413,7 @@ public class OpenWorld extends Room {
                 Player.playerX = 5;
                 Player.playerY = 6;
                 roomNumber = 42;
+                PromptEngine.buildPrompt();
                 fightEnemies();
                 reRenderSameRoom();
                 room42();
@@ -385,6 +422,7 @@ public class OpenWorld extends Room {
                 Player.playerX = 6;
                 Player.playerY = 6;
                 roomNumber = 43;
+                PromptEngine.buildPrompt();
                 fightEnemies();
                 reRenderSameRoom();
                 room43();
@@ -393,6 +431,7 @@ public class OpenWorld extends Room {
                 Player.playerX = 7;
                 Player.playerY = 6;
                 roomNumber = 44;
+                PromptEngine.buildPrompt();
                 fightEnemies();
                 reRenderSameRoom();
                 room44();
@@ -401,6 +440,7 @@ public class OpenWorld extends Room {
                 Player.playerX = 8;
                 Player.playerY = 6;
                 roomNumber = 45;
+                PromptEngine.buildPrompt();
                 fightEnemies();
                 reRenderSameRoom();
                 room45();
@@ -409,6 +449,7 @@ public class OpenWorld extends Room {
                 Player.playerX = 1;
                 Player.playerY = 7;
                 roomNumber = 47;
+                PromptEngine.buildPrompt();
                 fightEnemies();
                 reRenderSameRoom();
                 room47();
@@ -417,6 +458,7 @@ public class OpenWorld extends Room {
                 Player.playerX = 2;
                 Player.playerY = 7;
                 roomNumber = 48;
+                PromptEngine.buildPrompt();
                 fightEnemies();
                 reRenderSameRoom();
                 room48();
@@ -425,6 +467,7 @@ public class OpenWorld extends Room {
                 Player.playerX = 3;
                 Player.playerY = 7;
                 roomNumber = 49;
+                PromptEngine.buildPrompt();
                 fightEnemies();
                 reRenderSameRoom();
                 room49();
@@ -433,6 +476,7 @@ public class OpenWorld extends Room {
                 Player.playerX = 4;
                 Player.playerY = 7;
                 roomNumber = 50;
+                PromptEngine.buildPrompt();
                 fightEnemies();
                 reRenderSameRoom();
                 room50();
@@ -441,6 +485,7 @@ public class OpenWorld extends Room {
                 Player.playerX = 5;
                 Player.playerY = 7;
                 roomNumber = 51;
+                PromptEngine.buildPrompt();
                 fightEnemies();
                 reRenderSameRoom();
                 room51();
@@ -449,6 +494,7 @@ public class OpenWorld extends Room {
                 Player.playerX = 6;
                 Player.playerY = 7;
                 roomNumber = 52;
+                PromptEngine.buildPrompt();
                 fightEnemies();
                 reRenderSameRoom();
                 room52();
@@ -457,6 +503,7 @@ public class OpenWorld extends Room {
                 Player.playerX = 7;
                 Player.playerY = 7;
                 roomNumber = 53;
+                PromptEngine.buildPrompt();
                 fightEnemies();
                 reRenderSameRoom();
                 room53();
@@ -465,6 +512,7 @@ public class OpenWorld extends Room {
                 Player.playerX = 8;
                 Player.playerY = 7;
                 roomNumber = 54;
+                PromptEngine.buildPrompt();
                 fightEnemies();
                 reRenderSameRoom();
                 room54();
@@ -473,6 +521,7 @@ public class OpenWorld extends Room {
                 Player.playerX = 2;
                 Player.playerY = 8;
                 roomNumber = 55;
+                PromptEngine.buildPrompt();
                 fightEnemies();
                 reRenderSameRoom();
                 room55();
@@ -481,6 +530,7 @@ public class OpenWorld extends Room {
                 Player.playerX = 4;
                 Player.playerY = 8;
                 roomNumber = 57;
+                PromptEngine.buildPrompt();
                 fightEnemies();
                 reRenderSameRoom();
                 room57();
@@ -489,6 +539,7 @@ public class OpenWorld extends Room {
                 Player.playerX = 5;
                 Player.playerY = 8;
                 roomNumber = 58;
+                PromptEngine.buildPrompt();
                 fightEnemies();
                 reRenderSameRoom();
                 room58();
@@ -497,6 +548,7 @@ public class OpenWorld extends Room {
                 Player.playerX = 6;
                 Player.playerY = 8;
                 roomNumber = 59;
+                PromptEngine.buildPrompt();
                 fightEnemies();
                 reRenderSameRoom();
                 room59();
@@ -505,6 +557,7 @@ public class OpenWorld extends Room {
                 Player.playerX = 7;
                 Player.playerY = 8;
                 roomNumber = 60;
+                PromptEngine.buildPrompt();
                 fightEnemies();
                 reRenderSameRoom();
                 room60();
@@ -513,6 +566,7 @@ public class OpenWorld extends Room {
                 Player.playerX = 4;
                 Player.playerY = 5;
                 roomNumber = 62;
+                PromptEngine.buildPrompt();
                 fightEnemies();
                 reRenderSameRoom();
                 room62();
@@ -521,6 +575,7 @@ public class OpenWorld extends Room {
                 Player.playerX = 2;
                 Player.playerY = 9;
                 roomNumber = 64;
+                PromptEngine.buildPrompt();
                 fightEnemies();
                 reRenderSameRoom();
                 room64();
@@ -529,6 +584,7 @@ public class OpenWorld extends Room {
                 Player.playerX = 3;
                 Player.playerY = 9;
                 roomNumber = 65;
+                PromptEngine.buildPrompt();
                 fightEnemies();
                 reRenderSameRoom();
                 room65();
@@ -537,6 +593,7 @@ public class OpenWorld extends Room {
                 Player.playerX = 4;
                 Player.playerY = 9;
                 roomNumber = 66;
+                PromptEngine.buildPrompt();
                 fightEnemies();
                 reRenderSameRoom();
                 room66();
@@ -545,6 +602,7 @@ public class OpenWorld extends Room {
                 Player.playerX = 5;
                 Player.playerY = 9;
                 roomNumber = 67;
+                PromptEngine.buildPrompt();
                 fightEnemies();
                 reRenderSameRoom();
                 room67();
@@ -553,6 +611,7 @@ public class OpenWorld extends Room {
                 Player.playerX = 6;
                 Player.playerY = 9;
                 roomNumber = 68;
+                PromptEngine.buildPrompt();
                 fightEnemies();
                 reRenderSameRoom();
                 room68();
@@ -561,6 +620,7 @@ public class OpenWorld extends Room {
                 Player.playerX = 7;
                 Player.playerY = 9;
                 roomNumber = 69;
+                PromptEngine.buildPrompt();
                 fightEnemies();
                 reRenderSameRoom();
                 room69();
@@ -569,6 +629,7 @@ public class OpenWorld extends Room {
                 Player.playerX = 2;
                 Player.playerY = 10;
                 roomNumber = 72;
+                PromptEngine.buildPrompt();
                 fightEnemies();
                 reRenderSameRoom();
                 room72();
@@ -577,6 +638,7 @@ public class OpenWorld extends Room {
                 Player.playerX = 3;
                 Player.playerY = 10;
                 roomNumber = 73;
+                PromptEngine.buildPrompt();
                 fightEnemies();
                 reRenderSameRoom();
                 room73();
@@ -585,6 +647,7 @@ public class OpenWorld extends Room {
                 Player.playerX = 4;
                 Player.playerY = 10;
                 roomNumber = 74;
+                PromptEngine.buildPrompt();
                 reRenderSameRoom();
                 room74();
             }
@@ -644,7 +707,7 @@ public class OpenWorld extends Room {
 
     private static void room2() throws InterruptedException {
         if (PromptEngine.aiGenerationEnabled) {
-            TextEngine.printWithDelays(PromptEngine.buildAndReturnPrompt(""), false);
+            TextEngine.printWithDelays(PromptEngine.returnPrompt(), false);
         } else {
             if (Dungeon.completedDungeons <= 7) {
                 TextEngine.printWithDelays("You find yourself standing right by the entrance to The Ocean Kingdom dungeon,\n    its ancient stone archway beckoning you to enter.\n\n", false);
@@ -684,7 +747,7 @@ public class OpenWorld extends Room {
 
     private static void room3() throws InterruptedException {
         if (PromptEngine.aiGenerationEnabled) {
-            TextEngine.printWithDelays(PromptEngine.buildAndReturnPrompt(""), false);
+            TextEngine.printWithDelays(PromptEngine.returnPrompt(), false);
         } else {
             Dungeon.dungeonCheck();
         }
@@ -716,7 +779,7 @@ public class OpenWorld extends Room {
 
     private static void room4() throws InterruptedException {
         if (PromptEngine.aiGenerationEnabled) {
-            TextEngine.printWithDelays(PromptEngine.buildAndReturnPrompt(""), false);
+            TextEngine.printWithDelays(PromptEngine.returnPrompt(), false);
         } else {
             Dungeon.dungeonCheck();
         }
@@ -747,7 +810,7 @@ public class OpenWorld extends Room {
 
     private static void room5() throws InterruptedException {
         if (PromptEngine.aiGenerationEnabled) {
-            TextEngine.printWithDelays(PromptEngine.buildAndReturnPrompt(""), false);
+            TextEngine.printWithDelays(PromptEngine.returnPrompt(), false);
         } else {
             if (Dungeon.completedDungeons <= 2) {
                 TextEngine.printWithDelays("You find yourself standing right by the entrance to The Mountain Cave Dungeon,\n    its ancient stone archway beckoning you to enter.\n\n", false);
@@ -788,7 +851,7 @@ public class OpenWorld extends Room {
 
     private static void room6() throws InterruptedException {
         if (PromptEngine.aiGenerationEnabled) {
-            TextEngine.printWithDelays(PromptEngine.buildAndReturnPrompt(""), false);
+            TextEngine.printWithDelays(PromptEngine.returnPrompt(), false);
         } else {
             if (Dungeon.completedDungeons <= 6) {
                 TextEngine.printWithDelays("You find yourself standing right by the entrance to The Mountain Top dungeon,\n    its ancient stone archway beckoning you to enter.\n\n", false);
@@ -831,7 +894,7 @@ public class OpenWorld extends Room {
 
     private static void room8() throws InterruptedException {
         if (PromptEngine.aiGenerationEnabled) {
-            TextEngine.printWithDelays(PromptEngine.buildAndReturnPrompt(""), false);
+            TextEngine.printWithDelays(PromptEngine.returnPrompt(), false);
         } else {
             if (Dungeon.completedDungeons <= 7) {
                 TextEngine.printWithDelays("You find yourself standing right by the entrance to The Ocean Kingdom dungeon,\n    its ancient stone archway beckoning you to enter.\n\n", false);
@@ -869,7 +932,7 @@ public class OpenWorld extends Room {
 
     private static void room9() throws InterruptedException {
         if (PromptEngine.aiGenerationEnabled) {
-            TextEngine.printWithDelays(PromptEngine.buildAndReturnPrompt(""), false);
+            TextEngine.printWithDelays(PromptEngine.returnPrompt(), false);
         } else {
             Dungeon.dungeonCheck();
         }
@@ -905,7 +968,7 @@ public class OpenWorld extends Room {
 
     private static void room10() throws InterruptedException {
         if (PromptEngine.aiGenerationEnabled) {
-            TextEngine.printWithDelays(PromptEngine.buildAndReturnPrompt(""), false);
+            TextEngine.printWithDelays(PromptEngine.returnPrompt(), false);
         } else {
             if (Dungeon.completedDungeons <= 4) {
                 TextEngine.printWithDelays("You find yourself standing right by the entrance to The Desert Oasis dungeon,\n    its ancient stone archway beckoning you to enter.\n\n", false);
@@ -950,7 +1013,7 @@ public class OpenWorld extends Room {
 
     private static void room11() throws InterruptedException {
         if (PromptEngine.aiGenerationEnabled) {
-            TextEngine.printWithDelays(PromptEngine.buildAndReturnPrompt(""), false);
+            TextEngine.printWithDelays(PromptEngine.returnPrompt(), false);
         } else {
             if (Dungeon.completedDungeons <= 6) {
                 TextEngine.printWithDelays("You find yourself standing right by the entrance to The Mountain Top dungeon,\n    its ancient stone archway beckoning you to enter.\n\n", false);
@@ -993,7 +1056,7 @@ public class OpenWorld extends Room {
 
     private static void room12() throws InterruptedException {
         if (PromptEngine.aiGenerationEnabled) {
-            TextEngine.printWithDelays(PromptEngine.buildAndReturnPrompt(""), false);
+            TextEngine.printWithDelays(PromptEngine.returnPrompt(), false);
         } else {
             Dungeon.dungeonCheck();
         }
@@ -1024,7 +1087,7 @@ public class OpenWorld extends Room {
 
     private static void room13() throws InterruptedException {
         if (PromptEngine.aiGenerationEnabled) {
-            TextEngine.printWithDelays(PromptEngine.buildAndReturnPrompt(""), false);
+            TextEngine.printWithDelays(PromptEngine.returnPrompt(), false);
         } else {
             Dungeon.dungeonCheck();
         }
@@ -1060,7 +1123,7 @@ public class OpenWorld extends Room {
 
     private static void room14() throws InterruptedException {
         if (PromptEngine.aiGenerationEnabled) {
-            TextEngine.printWithDelays(PromptEngine.buildAndReturnPrompt(""), false);
+            TextEngine.printWithDelays(PromptEngine.returnPrompt(), false);
         } else {
             Dungeon.dungeonCheck();
         }
@@ -1101,7 +1164,7 @@ public class OpenWorld extends Room {
 
     private static void room15() throws InterruptedException {
         if (PromptEngine.aiGenerationEnabled) {
-            TextEngine.printWithDelays(PromptEngine.buildAndReturnPrompt(""), false);
+            TextEngine.printWithDelays(PromptEngine.returnPrompt(), false);
         } else {
             Dungeon.dungeonCheck();
         }
@@ -1137,7 +1200,7 @@ public class OpenWorld extends Room {
 
     private static void room16() throws InterruptedException {
         if (PromptEngine.aiGenerationEnabled) {
-            TextEngine.printWithDelays(PromptEngine.buildAndReturnPrompt(""), false);
+            TextEngine.printWithDelays(PromptEngine.returnPrompt(), false);
         } else {
             Dungeon.dungeonCheck();
         }
@@ -1168,7 +1231,7 @@ public class OpenWorld extends Room {
 
     private static void room17() throws InterruptedException {
         if (PromptEngine.aiGenerationEnabled) {
-            TextEngine.printWithDelays(PromptEngine.buildAndReturnPrompt(""), false);
+            TextEngine.printWithDelays(PromptEngine.returnPrompt(), false);
         } else {
             Dungeon.dungeonCheck();
         }
@@ -1204,7 +1267,7 @@ public class OpenWorld extends Room {
 
     private static void room18() throws InterruptedException {
         if (PromptEngine.aiGenerationEnabled) {
-            TextEngine.printWithDelays(PromptEngine.buildAndReturnPrompt(""), false);
+            TextEngine.printWithDelays(PromptEngine.returnPrompt(), false);
         } else {
             if (Dungeon.completedDungeons <= 6) {
                 TextEngine.printWithDelays("You find yourself standing right by the entrance to The Desert Pyramid dungeon,\n    its ancient stone archway beckoning you to enter.\n\n", false);
@@ -1249,7 +1312,7 @@ public class OpenWorld extends Room {
 
     private static void room19() throws InterruptedException {
         if (PromptEngine.aiGenerationEnabled) {
-            TextEngine.printWithDelays(PromptEngine.buildAndReturnPrompt(""), false);
+            TextEngine.printWithDelays(PromptEngine.returnPrompt(), false);
         } else {
             Dungeon.dungeonCheck();
         }
@@ -1291,7 +1354,7 @@ public class OpenWorld extends Room {
 
     private static void room21() throws InterruptedException {
         if (PromptEngine.aiGenerationEnabled) {
-            TextEngine.printWithDelays(PromptEngine.buildAndReturnPrompt(""), false);
+            TextEngine.printWithDelays(PromptEngine.returnPrompt(), false);
         } else {
             Dungeon.dungeonCheck();
         }
@@ -1323,7 +1386,7 @@ public class OpenWorld extends Room {
 
     private static void room22() throws InterruptedException {
         if (PromptEngine.aiGenerationEnabled) {
-            TextEngine.printWithDelays(PromptEngine.buildAndReturnPrompt(""), false);
+            TextEngine.printWithDelays(PromptEngine.returnPrompt(), false);
         } else {
             Dungeon.dungeonCheck();
         }
@@ -1360,7 +1423,7 @@ public class OpenWorld extends Room {
 
     private static void room25() throws InterruptedException {
         if (PromptEngine.aiGenerationEnabled) {
-            TextEngine.printWithDelays(PromptEngine.buildAndReturnPrompt(""), false);
+            TextEngine.printWithDelays(PromptEngine.returnPrompt(), false);
         } else {
             if (Dungeon.completedDungeons <= 5) {
                 TextEngine.printWithDelays("You find yourself standing right by the entrance to The Mountain Cave dungeon,\n    its ancient stone archway beckoning you to enter.\n\n", false);
@@ -1408,7 +1471,7 @@ public class OpenWorld extends Room {
 
     private static void room26() throws InterruptedException {
         if (PromptEngine.aiGenerationEnabled) {
-            TextEngine.printWithDelays(PromptEngine.buildAndReturnPrompt(""), false);
+            TextEngine.printWithDelays(PromptEngine.returnPrompt(), false);
         } else {
             Dungeon.dungeonCheck();
         }
@@ -1449,7 +1512,7 @@ public class OpenWorld extends Room {
 
     private static void room27() throws InterruptedException {
         if (PromptEngine.aiGenerationEnabled) {
-            TextEngine.printWithDelays(PromptEngine.buildAndReturnPrompt(""), false);
+            TextEngine.printWithDelays(PromptEngine.returnPrompt(), false);
         } else {
             Dungeon.dungeonCheck();
         }
@@ -1491,7 +1554,7 @@ public class OpenWorld extends Room {
 
     private static void room28() throws InterruptedException {
         if (PromptEngine.aiGenerationEnabled) {
-            TextEngine.printWithDelays(PromptEngine.buildAndReturnPrompt(""), false);
+            TextEngine.printWithDelays(PromptEngine.returnPrompt(), false);
         } else {
             Dungeon.dungeonCheck();
         }
@@ -1532,7 +1595,7 @@ public class OpenWorld extends Room {
 
     private static void room29() throws InterruptedException {
         if (PromptEngine.aiGenerationEnabled) {
-            TextEngine.printWithDelays(PromptEngine.buildAndReturnPrompt(""), false);
+            TextEngine.printWithDelays(PromptEngine.returnPrompt(), false);
         } else {
             Dungeon.dungeonCheck();
         }
@@ -1569,7 +1632,7 @@ public class OpenWorld extends Room {
 
     private static void room30() throws InterruptedException {
         if (PromptEngine.aiGenerationEnabled) {
-            TextEngine.printWithDelays(PromptEngine.buildAndReturnPrompt(""), false);
+            TextEngine.printWithDelays(PromptEngine.returnPrompt(), false);
         } else {
             Dungeon.dungeonCheck();
         }
@@ -1605,7 +1668,7 @@ public class OpenWorld extends Room {
 
     private static void room31() throws InterruptedException {
         if (PromptEngine.aiGenerationEnabled) {
-            TextEngine.printWithDelays(PromptEngine.buildAndReturnPrompt(""), false);
+            TextEngine.printWithDelays(PromptEngine.returnPrompt(), false);
         } else {
             Dungeon.dungeonCheck();
         }
@@ -1646,7 +1709,7 @@ public class OpenWorld extends Room {
 
     private static void room32() throws InterruptedException {
         if (PromptEngine.aiGenerationEnabled) {
-            TextEngine.printWithDelays(PromptEngine.buildAndReturnPrompt(""), false);
+            TextEngine.printWithDelays(PromptEngine.returnPrompt(), false);
         } else {
             Dungeon.dungeonCheck();
         }
@@ -1677,7 +1740,7 @@ public class OpenWorld extends Room {
 
     private static void room33() throws InterruptedException {
         if (PromptEngine.aiGenerationEnabled) {
-            TextEngine.printWithDelays(PromptEngine.buildAndReturnPrompt(""), false);
+            TextEngine.printWithDelays(PromptEngine.returnPrompt(), false);
         } else {
             Dungeon.dungeonCheck();
         }
@@ -1719,7 +1782,7 @@ public class OpenWorld extends Room {
 
     private static void room34() throws InterruptedException {
         if (PromptEngine.aiGenerationEnabled) {
-            TextEngine.printWithDelays(PromptEngine.buildAndReturnPrompt(""), false);
+            TextEngine.printWithDelays(PromptEngine.returnPrompt(), false);
         } else {
             Dungeon.dungeonCheck();
         }
@@ -1761,7 +1824,7 @@ public class OpenWorld extends Room {
 
     private static void room35() throws InterruptedException {
         if (PromptEngine.aiGenerationEnabled) {
-            TextEngine.printWithDelays(PromptEngine.buildAndReturnPrompt(""), false);
+            TextEngine.printWithDelays(PromptEngine.returnPrompt(), false);
         } else {
             Dungeon.dungeonCheck();
         }
@@ -1803,7 +1866,7 @@ public class OpenWorld extends Room {
 
     private static void room36() throws InterruptedException {
         if (PromptEngine.aiGenerationEnabled) {
-            TextEngine.printWithDelays(PromptEngine.buildAndReturnPrompt(""), false);
+            TextEngine.printWithDelays(PromptEngine.returnPrompt(), false);
         } else {
             Dungeon.dungeonCheck();
         }
@@ -1840,7 +1903,7 @@ public class OpenWorld extends Room {
 
     private static void room37() throws InterruptedException {
         if (PromptEngine.aiGenerationEnabled) {
-            TextEngine.printWithDelays(PromptEngine.buildAndReturnPrompt(""), false);
+            TextEngine.printWithDelays(PromptEngine.returnPrompt(), false);
         } else {
             Dungeon.dungeonCheck();
         }
@@ -1878,7 +1941,7 @@ public class OpenWorld extends Room {
 
     private static void room38() throws InterruptedException {
         if (PromptEngine.aiGenerationEnabled) {
-            TextEngine.printWithDelays(PromptEngine.buildAndReturnPrompt(""), false);
+            TextEngine.printWithDelays(PromptEngine.returnPrompt(), false);
         } else {
             Dungeon.dungeonCheck();
         }
@@ -1920,7 +1983,7 @@ public class OpenWorld extends Room {
 
     private static void room39() throws InterruptedException {
         if (PromptEngine.aiGenerationEnabled) {
-            TextEngine.printWithDelays(PromptEngine.buildAndReturnPrompt(""), false);
+            TextEngine.printWithDelays(PromptEngine.returnPrompt(), false);
         } else {
             Dungeon.dungeonCheck();
         }
@@ -1962,7 +2025,7 @@ public class OpenWorld extends Room {
 
     private static void room40() throws InterruptedException {
         if (PromptEngine.aiGenerationEnabled) {
-            TextEngine.printWithDelays(PromptEngine.buildAndReturnPrompt(""), false);
+            TextEngine.printWithDelays(PromptEngine.returnPrompt(), false);
         } else {
             Dungeon.dungeonCheck();
         }
@@ -1999,7 +2062,7 @@ public class OpenWorld extends Room {
 
     private static void room41() throws InterruptedException {
         if (PromptEngine.aiGenerationEnabled) {
-            TextEngine.printWithDelays(PromptEngine.buildAndReturnPrompt(""), false);
+            TextEngine.printWithDelays(PromptEngine.returnPrompt(), false);
         } else {
             Dungeon.dungeonCheck();
         }
@@ -2040,7 +2103,7 @@ public class OpenWorld extends Room {
 
     private static void room42() throws InterruptedException {
         if (PromptEngine.aiGenerationEnabled) {
-            TextEngine.printWithDelays(PromptEngine.buildAndReturnPrompt(""), false);
+            TextEngine.printWithDelays(PromptEngine.returnPrompt(), false);
         } else {
             Dungeon.dungeonCheck();
         }
@@ -2081,7 +2144,7 @@ public class OpenWorld extends Room {
 
     private static void room43() throws InterruptedException {
         if (PromptEngine.aiGenerationEnabled) {
-            TextEngine.printWithDelays(PromptEngine.buildAndReturnPrompt(""), false);
+            TextEngine.printWithDelays(PromptEngine.returnPrompt(), false);
         } else {
             Dungeon.dungeonCheck();
         }
@@ -2122,7 +2185,7 @@ public class OpenWorld extends Room {
 
     private static void room44() throws InterruptedException {
         if (PromptEngine.aiGenerationEnabled) {
-            TextEngine.printWithDelays(PromptEngine.buildAndReturnPrompt(""), false);
+            TextEngine.printWithDelays(PromptEngine.returnPrompt(), false);
         } else {
             Dungeon.dungeonCheck();
         }
@@ -2163,7 +2226,7 @@ public class OpenWorld extends Room {
 
     private static void room45() throws InterruptedException {
         if (PromptEngine.aiGenerationEnabled) {
-            TextEngine.printWithDelays(PromptEngine.buildAndReturnPrompt(""), false);
+            TextEngine.printWithDelays(PromptEngine.returnPrompt(), false);
         } else {
             Dungeon.dungeonCheck();
         }
@@ -2199,7 +2262,7 @@ public class OpenWorld extends Room {
 
     private static void room47() throws InterruptedException {
         if (PromptEngine.aiGenerationEnabled) {
-            TextEngine.printWithDelays(PromptEngine.buildAndReturnPrompt(""), false);
+            TextEngine.printWithDelays(PromptEngine.returnPrompt(), false);
         } else {
             if (Dungeon.completedDungeons <= 4) {
                 TextEngine.printWithDelays("You find yourself standing right by the entrance to The Desert Pyramid dungeon,\n    its ancient stone archway beckoning you to enter.\n\n", false);
@@ -2248,7 +2311,7 @@ public class OpenWorld extends Room {
 
     private static void room48() throws InterruptedException {
         if (PromptEngine.aiGenerationEnabled) {
-            TextEngine.printWithDelays(PromptEngine.buildAndReturnPrompt(""), false);
+            TextEngine.printWithDelays(PromptEngine.returnPrompt(), false);
         } else {
             Dungeon.dungeonCheck();
         }
@@ -2289,7 +2352,7 @@ public class OpenWorld extends Room {
 
     private static void room49() throws InterruptedException {
         if (PromptEngine.aiGenerationEnabled) {
-            TextEngine.printWithDelays(PromptEngine.buildAndReturnPrompt(""), false);
+            TextEngine.printWithDelays(PromptEngine.returnPrompt(), false);
         } else {
             Dungeon.dungeonCheck();
         }
@@ -2331,7 +2394,7 @@ public class OpenWorld extends Room {
 
     private static void room50() throws InterruptedException {
         if (PromptEngine.aiGenerationEnabled) {
-            TextEngine.printWithDelays(PromptEngine.buildAndReturnPrompt(""), false);
+            TextEngine.printWithDelays(PromptEngine.returnPrompt(), false);
         } else {
             Dungeon.dungeonCheck();
         }
@@ -2372,7 +2435,7 @@ public class OpenWorld extends Room {
 
     private static void room51() throws InterruptedException {
         if (PromptEngine.aiGenerationEnabled) {
-            TextEngine.printWithDelays(PromptEngine.buildAndReturnPrompt(""), false);
+            TextEngine.printWithDelays(PromptEngine.returnPrompt(), false);
         } else {
             Dungeon.dungeonCheck();
         }
@@ -2414,7 +2477,7 @@ public class OpenWorld extends Room {
 
     private static void room52() throws InterruptedException {
         if (PromptEngine.aiGenerationEnabled) {
-            TextEngine.printWithDelays(PromptEngine.buildAndReturnPrompt(""), false);
+            TextEngine.printWithDelays(PromptEngine.returnPrompt(), false);
         } else {
             Dungeon.dungeonCheck();
         }
@@ -2456,7 +2519,7 @@ public class OpenWorld extends Room {
 
     private static void room53() throws InterruptedException {
         if (PromptEngine.aiGenerationEnabled) {
-            TextEngine.printWithDelays(PromptEngine.buildAndReturnPrompt(""), false);
+            TextEngine.printWithDelays(PromptEngine.returnPrompt(), false);
         } else {
             Dungeon.dungeonCheck();
         }
@@ -2498,7 +2561,7 @@ public class OpenWorld extends Room {
 
     private static void room54() throws InterruptedException {
         if (PromptEngine.aiGenerationEnabled) {
-            TextEngine.printWithDelays(PromptEngine.buildAndReturnPrompt(""), false);
+            TextEngine.printWithDelays(PromptEngine.returnPrompt(), false);
         } else {
             if (Dungeon.completedDungeons <= 2) {
                 TextEngine.printWithDelays("You find yourself standing right by the entrance to The Dark Forest dungeon,\n    its ancient stone archway beckoning you to enter.\n\n", false);
@@ -2542,7 +2605,7 @@ public class OpenWorld extends Room {
 
     private static void room55() throws InterruptedException {
         if (PromptEngine.aiGenerationEnabled) {
-            TextEngine.printWithDelays(PromptEngine.buildAndReturnPrompt(""), false);
+            TextEngine.printWithDelays(PromptEngine.returnPrompt(), false);
         } else {
             if (Dungeon.completedDungeons <= 4) {
                 TextEngine.printWithDelays("You find yourself standing right by the entrance to The Desert Pyramid dungeon,\n    its ancient stone archway beckoning you to enter.\n\n", false);
@@ -2590,7 +2653,7 @@ public class OpenWorld extends Room {
 
     private static void room57() throws InterruptedException {
         if (PromptEngine.aiGenerationEnabled) {
-            TextEngine.printWithDelays(PromptEngine.buildAndReturnPrompt(""), false);
+            TextEngine.printWithDelays(PromptEngine.returnPrompt(), false);
         } else {
             Dungeon.dungeonCheck();
         }
@@ -2631,7 +2694,7 @@ public class OpenWorld extends Room {
 
     private static void room58() throws InterruptedException {
         if (PromptEngine.aiGenerationEnabled) {
-            TextEngine.printWithDelays(PromptEngine.buildAndReturnPrompt(""), false);
+            TextEngine.printWithDelays(PromptEngine.returnPrompt(), false);
         } else {
             Dungeon.dungeonCheck();
         }
@@ -2673,7 +2736,7 @@ public class OpenWorld extends Room {
 
     private static void room59() throws InterruptedException {
         if (PromptEngine.aiGenerationEnabled) {
-            TextEngine.printWithDelays(PromptEngine.buildAndReturnPrompt(""), false);
+            TextEngine.printWithDelays(PromptEngine.returnPrompt(), false);
         } else {
             Dungeon.dungeonCheck();
         }
@@ -2714,7 +2777,7 @@ public class OpenWorld extends Room {
 
     private static void room60() throws InterruptedException {
         if (PromptEngine.aiGenerationEnabled) {
-            TextEngine.printWithDelays(PromptEngine.buildAndReturnPrompt(""), false);
+            TextEngine.printWithDelays(PromptEngine.returnPrompt(), false);
         } else {
             if (Dungeon.completedDungeons <= 1) {
                 TextEngine.printWithDelays("You find yourself standing right by the entrance to The Dark Forest dungeon,\n    its ancient stone archway beckoning you to enter.\n\n", false);
@@ -2762,7 +2825,7 @@ public class OpenWorld extends Room {
 
     private static void room62() throws InterruptedException {
         if (PromptEngine.aiGenerationEnabled) {
-            TextEngine.printWithDelays(PromptEngine.buildAndReturnPrompt(""), false);
+            TextEngine.printWithDelays(PromptEngine.returnPrompt(), false);
         } else {
             if (Dungeon.completedDungeons <= 5) {
                 TextEngine.printWithDelays("You find yourself standing right by the entrance to The Mountain Cave dungeon,\n    its ancient stone archway beckoning you to enter.\n\n", false);
@@ -2806,7 +2869,7 @@ public class OpenWorld extends Room {
 
     private static void room64() throws InterruptedException {
         if (PromptEngine.aiGenerationEnabled) {
-            TextEngine.printWithDelays(PromptEngine.buildAndReturnPrompt(""), false);
+            TextEngine.printWithDelays(PromptEngine.returnPrompt(), false);
         } else {
             if (Dungeon.completedDungeons <= 3) {
                 TextEngine.printWithDelays("You find yourself standing right by the entrance to The Desert Plains dungeon,\n    its ancient stone archway beckoning you to enter.\n\n", false);
@@ -2854,7 +2917,7 @@ public class OpenWorld extends Room {
 
     private static void room65() throws InterruptedException {
         if (PromptEngine.aiGenerationEnabled) {
-            TextEngine.printWithDelays(PromptEngine.buildAndReturnPrompt(""), false);
+            TextEngine.printWithDelays(PromptEngine.returnPrompt(), false);
         } else {
             Dungeon.dungeonCheck();
         }
@@ -2896,7 +2959,7 @@ public class OpenWorld extends Room {
 
     private static void room66() throws InterruptedException {
         if (PromptEngine.aiGenerationEnabled) {
-            TextEngine.printWithDelays(PromptEngine.buildAndReturnPrompt(""), false);
+            TextEngine.printWithDelays(PromptEngine.returnPrompt(), false);
         } else {
             Dungeon.dungeonCheck();
         }
@@ -2937,7 +3000,7 @@ public class OpenWorld extends Room {
 
     private static void room67() throws InterruptedException {
         if (PromptEngine.aiGenerationEnabled) {
-            TextEngine.printWithDelays(PromptEngine.buildAndReturnPrompt(""), false);
+            TextEngine.printWithDelays(PromptEngine.returnPrompt(), false);
         } else {
             Dungeon.dungeonCheck();
         }
@@ -2981,7 +3044,7 @@ public class OpenWorld extends Room {
     private static void room68() throws InterruptedException {
 
         if (PromptEngine.aiGenerationEnabled) {
-            TextEngine.printWithDelays(PromptEngine.buildAndReturnPrompt(""), false);
+            TextEngine.printWithDelays(PromptEngine.returnPrompt(), false);
         } else {
             Dungeon.dungeonCheck();
         }
@@ -3017,7 +3080,7 @@ public class OpenWorld extends Room {
 
     private static void room69() throws InterruptedException {
         if (PromptEngine.aiGenerationEnabled) {
-            TextEngine.printWithDelays(PromptEngine.buildAndReturnPrompt(""), false);
+            TextEngine.printWithDelays(PromptEngine.returnPrompt(), false);
         } else {
             if (Dungeon.completedDungeons < 1) {
                 TextEngine.printWithDelays("You find yourself standing right by the entrance to The Meadow dungeon,\n    its ancient stone archway beckoning you to enter.\n\n", false);
@@ -3056,7 +3119,7 @@ public class OpenWorld extends Room {
 
     private static void room72() throws InterruptedException {
         if (PromptEngine.aiGenerationEnabled) {
-            TextEngine.printWithDelays(PromptEngine.buildAndReturnPrompt(""), false);
+            TextEngine.printWithDelays(PromptEngine.returnPrompt(), false);
         } else {
             if (Dungeon.completedDungeons <= 2) {
                 TextEngine.printWithDelays("You find yourself standing right by the entrance to The Desert Oasis dungeon,\n    its ancient stone archway beckoning you to enter.\n\n", false);
@@ -3099,7 +3162,7 @@ public class OpenWorld extends Room {
 
     private static void room73() throws InterruptedException {
         if (PromptEngine.aiGenerationEnabled) {
-            TextEngine.printWithDelays(PromptEngine.buildAndReturnPrompt(""), false);
+            TextEngine.printWithDelays(PromptEngine.returnPrompt(), false);
         } else {
             Dungeon.dungeonCheck();
         }
@@ -3136,7 +3199,7 @@ public class OpenWorld extends Room {
 
     private static void room74() throws InterruptedException {
         if (PromptEngine.aiGenerationEnabled) {
-            TextEngine.printWithDelays(PromptEngine.buildAndReturnPrompt("You have just entered the Open World for the first time"), false);
+            TextEngine.printWithDelays(PromptEngine.returnPrompt(), false);
         } else {
             Dungeon.dungeonCheck();
         }

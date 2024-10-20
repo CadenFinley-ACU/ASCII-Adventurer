@@ -117,21 +117,102 @@ public abstract class SettingsMenu {
                 }
                 case "ai" -> {
                     if (PromptEngine.aiGenerationEnabled) {
-                        TextEngine.printNoDelay("AI generation is already enabled. Would you like to disable it?", true);
+                        TextEngine.printNoDelay("AI generation is already enabled. Would you like to disable it? (yes, no, or more settings)", true);
                         ignore = console.readLine();
                         command = console.readLine();
-                        if (command.toLowerCase().trim().equals("yes")) {
-                            PromptEngine.aiGenerationEnabled = false;
-                            PromptEngine.userAPIKey = null;
-                            TextEngine.printWithDelays("AI generation disabled.", false);
-                            TextEngine.enterToNext();
-                            TextEngine.clearScreen();
-                            leave();
-                        } else {
-                            TextEngine.printWithDelays("AI generation remains enabled.", false);
-                            TextEngine.enterToNext();
-                            TextEngine.clearScreen();
-                            leave();
+                        switch (command) {
+                            case "yes" -> {
+                                PromptEngine.aiGenerationEnabled = false;
+                                PromptEngine.userAPIKey = null;
+                                TextEngine.printWithDelays("AI generation disabled.", false);
+                                TextEngine.enterToNext();
+                                TextEngine.clearScreen();
+                                leave();
+                            }
+                            case "no" -> {
+                                TextEngine.printWithDelays("AI generation remains enabled.", false);
+                                TextEngine.enterToNext();
+                                TextEngine.clearScreen();
+                                leave();
+                            }
+                            case "more settings" -> {
+                                TextEngine.printNoDelay("Would you like to 'change' your API key or 'change advanced' settings or exit?", true);
+                                ignore = console.readLine();
+                                command = console.readLine();
+                                switch (command) {
+                                    case "change" -> {
+                                        TextEngine.printNoDelay("Please enter your OpenAI API key:", true);
+                                        ignore = console.readLine();
+                                        command = console.readLine();
+                                        if (PromptEngine.testAPIKey(command)) {
+                                            PromptEngine.userAPIKey = command;
+                                            TextEngine.printWithDelays("API key accepted. AI generation enabled.", false);
+                                            TextEngine.enterToNext();
+                                            TextEngine.clearScreen();
+                                            leave();
+                                        } else {
+                                            TextEngine.printWithDelays("API key not accepted.", false);
+                                            TextEngine.enterToNext();
+                                            TextEngine.clearScreen();
+                                            start();
+                                        }
+                                    }
+                                    case "change advanced" -> {
+                                        TextEngine.printNoDelay("This is the advanced settings menu.", false);
+                                        TextEngine.printWithDelays("You can change the 'prompt length or exit", true);
+                                        ignore = console.readLine();
+                                        command = console.readLine();
+                                        switch (command) {
+                                            case "prompt length" -> {
+                                                TextEngine.printNoDelay("Please enter the prompt length you would like to set: (short, medium, long, or exit)", true);
+                                                ignore = console.readLine();
+                                                command = console.readLine();
+                                                switch (command) {
+                                                    case "short" -> {
+                                                        PromptEngine.setPromptLength("short");
+                                                        TextEngine.printWithDelays("Prompt length set to short.", false);
+                                                        TextEngine.enterToNext();
+                                                        TextEngine.clearScreen();
+                                                        leave();
+                                                    }
+                                                    case "medium" -> {
+                                                        PromptEngine.setPromptLength("medium");
+                                                        TextEngine.printWithDelays("Prompt length set to medium.", false);
+                                                        TextEngine.enterToNext();
+                                                        TextEngine.clearScreen();
+                                                        leave();
+                                                    }
+                                                    case "long" -> {
+                                                        PromptEngine.setPromptLength("long");
+                                                        TextEngine.printWithDelays("Prompt length set to long.", false);
+                                                        TextEngine.enterToNext();
+                                                        TextEngine.clearScreen();
+                                                        leave();
+                                                    }
+                                                    case "exit" -> {
+                                                        leave();
+                                                        TextEngine.clearScreen();
+                                                    }
+                                                    default ->
+                                                        TextEngine.printWithDelays("I'm sorry, I don't understand that command.", true);
+                                                }
+                                            }
+                                            case "exit" -> {
+                                                leave();
+                                                TextEngine.clearScreen();
+                                            }
+                                            default ->
+                                                TextEngine.printWithDelays("I'm sorry, I don't understand that command.", true);
+                                        }
+                                    }
+                                    case "exit" -> {
+                                        leave();
+                                        TextEngine.clearScreen();
+                                    }
+                                    default ->
+                                        TextEngine.printWithDelays("I'm sorry, I don't understand that command.", true);
+                                }
+                            }
                         }
                     } else {
                         TextEngine.printNoDelay("(This feature is still experimental)", false);
@@ -262,21 +343,102 @@ public abstract class SettingsMenu {
                 }
                 case "ai" -> {
                     if (PromptEngine.aiGenerationEnabled) {
-                        TextEngine.printNoDelay("AI generation is already enabled. Would you like to disable it?", true);
+                        TextEngine.printNoDelay("AI generation is already enabled. Would you like to disable it? (yes, no, or more settings)", true);
                         ignore = console.readLine();
                         command = console.readLine();
-                        if (command.toLowerCase().trim().equals("yes")) {
-                            PromptEngine.aiGenerationEnabled = false;
-                            PromptEngine.userAPIKey = null;
-                            TextEngine.printWithDelays("AI generation disabled.", false);
-                            TextEngine.enterToNext();
-                            TextEngine.clearScreen();
-                            leaveToStart();
-                        } else {
-                            TextEngine.printWithDelays("AI generation remains enabled.", false);
-                            TextEngine.enterToNext();
-                            TextEngine.clearScreen();
-                            leaveToStart();
+                        switch (command) {
+                            case "yes" -> {
+                                PromptEngine.aiGenerationEnabled = false;
+                                PromptEngine.userAPIKey = null;
+                                TextEngine.printWithDelays("AI generation disabled.", false);
+                                TextEngine.enterToNext();
+                                TextEngine.clearScreen();
+                                leaveToStart();
+                            }
+                            case "no" -> {
+                                TextEngine.printWithDelays("AI generation remains enabled.", false);
+                                TextEngine.enterToNext();
+                                TextEngine.clearScreen();
+                                leaveToStart();
+                            }
+                            case "more settings" -> {
+                                TextEngine.printNoDelay("Would you like to 'change' your API key or 'change advanced' settings or exit?", true);
+                                ignore = console.readLine();
+                                command = console.readLine();
+                                switch (command) {
+                                    case "change" -> {
+                                        TextEngine.printNoDelay("Please enter your OpenAI API key:", true);
+                                        ignore = console.readLine();
+                                        command = console.readLine();
+                                        if (PromptEngine.testAPIKey(command)) {
+                                            PromptEngine.userAPIKey = command;
+                                            TextEngine.printWithDelays("API key accepted. AI generation enabled.", false);
+                                            TextEngine.enterToNext();
+                                            TextEngine.clearScreen();
+                                            leaveToStart();
+                                        } else {
+                                            TextEngine.printWithDelays("API key not accepted.", false);
+                                            TextEngine.enterToNext();
+                                            TextEngine.clearScreen();
+                                            startFromStartMenu();
+                                        }
+                                    }
+                                    case "change advanced" -> {
+                                        TextEngine.printNoDelay("This is the advanced settings menu.", false);
+                                        TextEngine.printWithDelays("You can change the 'prompt length or exit", true);
+                                        ignore = console.readLine();
+                                        command = console.readLine();
+                                        switch (command) {
+                                            case "prompt length" -> {
+                                                TextEngine.printNoDelay("Please enter the prompt length you would like to set: (short, medium, long, or exit)", true);
+                                                ignore = console.readLine();
+                                                command = console.readLine();
+                                                switch (command) {
+                                                    case "short" -> {
+                                                        PromptEngine.setPromptLength("short");
+                                                        TextEngine.printWithDelays("Prompt length set to short.", false);
+                                                        TextEngine.enterToNext();
+                                                        TextEngine.clearScreen();
+                                                        leaveToStart();
+                                                    }
+                                                    case "medium" -> {
+                                                        PromptEngine.setPromptLength("medium");
+                                                        TextEngine.printWithDelays("Prompt length set to medium.", false);
+                                                        TextEngine.enterToNext();
+                                                        TextEngine.clearScreen();
+                                                        leaveToStart();
+                                                    }
+                                                    case "long" -> {
+                                                        PromptEngine.setPromptLength("long");
+                                                        TextEngine.printWithDelays("Prompt length set to long.", false);
+                                                        TextEngine.enterToNext();
+                                                        TextEngine.clearScreen();
+                                                        leaveToStart();
+                                                    }
+                                                    case "exit" -> {
+                                                        leaveToStart();
+                                                        TextEngine.clearScreen();
+                                                    }
+                                                    default ->
+                                                        TextEngine.printWithDelays("I'm sorry, I don't understand that command.", true);
+                                                }
+                                            }
+                                            case "exit" -> {
+                                                leaveToStart();
+                                                TextEngine.clearScreen();
+                                            }
+                                            default ->
+                                                TextEngine.printWithDelays("I'm sorry, I don't understand that command.", true);
+                                        }
+                                    }
+                                    case "exit" -> {
+                                        leaveToStart();
+                                        TextEngine.clearScreen();
+                                    }
+                                    default ->
+                                        TextEngine.printWithDelays("I'm sorry, I don't understand that command.", true);
+                                }
+                            }
                         }
                     } else {
                         TextEngine.printNoDelay("(This feature is still experimental)", false);

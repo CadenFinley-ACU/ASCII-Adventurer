@@ -396,67 +396,67 @@ public class DungeonGenerator {
                 for (int j = 0; j < passedMatrix.length; j++) {
                     if (passedMatrix[i][j] != 0) {
                         if (i == passedPosition[0] && j == passedPosition[1]) {
-                            System.out.print(yellowColor + "[P] " + resetColor);
+                            System.out.print(yellowColor + "[ P ] " + resetColor);
                         } else if (isAdjacent(i, j, passedPosition)) {
                             switch (passedMatrix[i][j]) {
                                 case 2, 5, 7 -> {
                                     if (unlocked[i][j] > 0) {
-                                        System.out.print("[■] ");
+                                        System.out.print("[ ■ ] ");
                                     } else {
-                                        System.out.print(greenColor + "[?] " + resetColor);
+                                        System.out.print(greenColor + "[ ? ] " + resetColor);
                                     }
                                 }
                                 case 8 ->
-                                    System.out.print(redColor + "[B] " + resetColor);
+                                    System.out.print(redColor + "[ B ] " + resetColor);
                                 case 9 ->
-                                    System.out.print("[S] ");
+                                    System.out.print("[ S ] ");
                                 case 6 ->
-                                    System.out.print(greenColor + "[$] " + resetColor);
+                                    System.out.print(greenColor + "[ $ ] " + resetColor);
                                 case 4 -> {
                                     if (unlocked[i][j] > 0) {
-                                        System.out.print("[■] ");
+                                        System.out.print("[ ■ ] ");
                                     } else {
-                                        System.out.print(redColor + "[!] " + resetColor);
+                                        System.out.print(redColor + "[ ! ] " + resetColor);
                                     }
                                 }
                                 case 10 -> {
                                     if (unlocked[i][j] > 0) {
-                                        System.out.print("[■] ");
+                                        System.out.print("[ ■ ] ");
                                     } else {
-                                        System.out.print(pinkColor + "[F] " + resetColor);
+                                        System.out.print(pinkColor + "[ F ] " + resetColor);
                                     }
                                 }
                                 default ->
-                                    System.out.print("[~] ");
+                                    System.out.print("[ ~ ] ");
                             }
                         } else if (unlocked[i][j] > 0) {
                             switch (unlocked[i][j]) { //icon for visited rooms
                                 case 6 ->
-                                    System.out.print(greenColor + "[$] " + resetColor); // Special marker for shop/trap room
+                                    System.out.print(greenColor + "[ $ ] " + resetColor); // Special marker for shop/trap room
                                 case 8 ->
-                                    System.out.print(redColor + "[B] " + resetColor); // Special marker for boss room
+                                    System.out.print(redColor + "[ B ] " + resetColor); // Special marker for boss room
                                 case 9 -> {
                                     if (isAdjacent(i, j, passedPosition)) {
-                                        System.out.print("[~] ");
+                                        System.out.print("[ ~ ] ");
                                     } else {
-                                        System.out.print("[S] ");
+                                        System.out.print("[ S ] ");
                                     }
                                 }
                                 default -> {
                                     if (isAdjacent(i, j, passedPosition)) {
-                                        System.out.print("[~] ");
+                                        System.out.print("[ ~ ] ");
                                     } else {
-                                        System.out.print("[■] "); // Default case for other values
+                                        System.out.print("[ ■ ] "); // Default case for other values
                                     }
                                 }
                             }
                         } else {
-                            System.out.print("[ ] "); // Print brackets around non-zero values
+                            System.out.print("[   ] "); // Print brackets around non-zero values
                         }
                     } else if (unlocked[i][j] == 1) {
-                        System.out.print("[ ] "); // Print brackets around 0 values if unlocked
+                        System.out.print("[   ] "); // Print brackets around 0 values if unlocked
                     } else {
-                        System.out.print("    "); // No brackets around 0 values
+                        System.out.print("      "); // No brackets around 0 values
                     }
                 }
                 System.out.println();
@@ -469,76 +469,76 @@ public class DungeonGenerator {
                 for (int j = 0; j < passedMatrix.length; j++) {
                     if (passedMatrix[i][j] != 0) {
                         if (i == passedPosition[0] && j == passedPosition[1]) {
-                            System.out.print(yellowColor + "[P] " + resetColor);
+                            System.out.print(yellowColor + "[ P ] " + resetColor);
                         } else {
                             switch (passedMatrix[i][j]) {
                                 case 2, 7 -> {
                                     if (unlocked[i][j] == 2 || unlocked[i][j] == 7) {
                                         if (isAdjacent(i, j, passedPosition)) {
-                                            System.out.print("[~] ");
+                                            System.out.print("[ ~ ] ");
                                         } else {
-                                            System.out.print("[■] ");
+                                            System.out.print("[ ■ ] ");
                                         }
                                     } else {
-                                        System.out.print(greenColor + "[?] " + resetColor);
+                                        System.out.print(greenColor + "[ ? ] " + resetColor);
                                     }
                                 }
                                 case 3, 5 -> {
                                     if (unlocked[i][j] == 3 || unlocked[i][j] == 5) {
                                         if (isAdjacent(i, j, passedPosition)) {
-                                            System.out.print("[~] ");
+                                            System.out.print("[ ~ ] ");
                                         } else {
-                                            System.out.print("[■] ");
+                                            System.out.print("[ ■ ] ");
                                         }
                                     } else {
-                                        System.out.print(greenColor + "[K] " + resetColor);
+                                        System.out.print(greenColor + "[ K ] " + resetColor);
                                     }
                                 }
                                 case 8 ->
-                                    System.out.print(redColor + "[B] " + resetColor);
+                                    System.out.print(redColor + "[ B ] " + resetColor);
                                 case 4 -> {
                                     if (unlocked[i][j] == 4) {
                                         if (isAdjacent(i, j, passedPosition)) {
-                                            System.out.print("[~] ");
+                                            System.out.print("[ ~ ] ");
                                         } else {
-                                            System.out.print("[■] ");
+                                            System.out.print("[ ■ ] ");
                                         }
                                     } else {
-                                        System.out.print(redColor + "[!] " + resetColor);
+                                        System.out.print(redColor + "[ ! ] " + resetColor);
                                     }
                                 }
                                 case 9 -> {
-                                    System.out.print("[S] ");
+                                    System.out.print("[ S ] ");
                                 }
                                 case 6 -> {
-                                    System.out.print(greenColor + "[$] " + resetColor);
+                                    System.out.print(greenColor + "[ $ ] " + resetColor);
                                 }
                                 case 1 -> {
                                     if (unlocked[i][j] == 1) {
                                         if (isAdjacent(i, j, passedPosition)) {
-                                            System.out.print("[~] ");
+                                            System.out.print("[ ~ ] ");
                                         } else {
-                                            System.out.print("[■] ");
+                                            System.out.print("[ ■ ] ");
                                         }
                                     } else {
-                                        System.out.print("[ ] ");
+                                        System.out.print("[   ] ");
                                     }
                                 }
                                 case 10 -> {
                                     if (unlocked[i][j] == 10) {
                                         if (isAdjacent(i, j, passedPosition)) {
-                                            System.out.print("[~] ");
+                                            System.out.print("[ ~ ] ");
                                         } else {
-                                            System.out.print("[■] ");
+                                            System.out.print("[ ■ ] ");
                                         }
                                     } else {
-                                        System.out.print(pinkColor + "[F] " + resetColor);
+                                        System.out.print(pinkColor + "[ F ] " + resetColor);
                                     }
                                 }
                             }
                         }
                     } else {
-                        System.out.print("    ");
+                        System.out.print("      ");
                     }
                 }
                 System.out.println();

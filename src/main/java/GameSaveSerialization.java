@@ -178,6 +178,8 @@ public class GameSaveSerialization {
         writeSeparator(filePath);
         writeValue(String.valueOf(PromptEngine.aiGenerationEnabled), filePath);
         writeSeparator(filePath);
+        writeValue(String.valueOf(PromptEngine.promptLength), filePath);
+        writeSeparator(filePath);
 
         //do this after all other data is saved
         serializeAllLines(filePath, filePath);
@@ -335,6 +337,8 @@ public class GameSaveSerialization {
                 PromptEngine.userAPIKey = reader.readLine();
                 buffer = reader.readLine();
                 PromptEngine.aiGenerationEnabled = Boolean.parseBoolean(reader.readLine());
+                buffer = reader.readLine();
+                PromptEngine.promptLength = Integer.parseInt(reader.readLine());
 
             } catch (IOException | NumberFormatException e) {
                 System.out.println("Save File Corrupt or Invalid... ");
@@ -506,6 +510,7 @@ public class GameSaveSerialization {
         }
     }
 
+    @SuppressWarnings("unchecked")
     public static void deserializeToFile(String serializedFilePath) {
         File outputFilePath = new File(runtimePath);
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(serializedFilePath)); BufferedWriter bw = new BufferedWriter(new FileWriter(outputFilePath))) {
