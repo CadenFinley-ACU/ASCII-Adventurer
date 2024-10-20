@@ -24,6 +24,9 @@ public abstract class SettingsMenu {
         TextEngine.printNoDelay("This is the settings menu. Here you can change the speed of the text.", false);
         TextEngine.printNoDelay("The current speed is set to: " + TextEngine.speedSetting, false);
         TextEngine.printWithDelays("You can change the speed to: " + yellowColor + "Slow" + resetColor + ", " + yellowColor + "Normal" + resetColor + ", " + yellowColor + "Fast" + resetColor + ", or " + yellowColor + "NoDelay" + resetColor, false);
+        TextEngine.printWithDelays("You can also type: " + yellowColor + "AI " + resetColor + "to enable or disable AI generated prompts in game", false);
+        TextEngine.printWithDelays("(This is still experimental and requires you to have your own API key and an internet connection...)", false);
+        TextEngine.printWithDelays("You can also type: " + yellowColor + "change name " + resetColor + "to change your name", false);
         TextEngine.printWithDelays("Type " + yellowColor + "exit" + resetColor + " to leave this menu", true);
         while (true) {
             ignore = console.readLine();
@@ -38,13 +41,15 @@ public abstract class SettingsMenu {
                     command = console.readLine();
                     if (command.toLowerCase().trim().equals("yes")) {
                         TextEngine.printWithDelays("Settings saved.", false);
+                        TextEngine.enterToNext();
                         TextEngine.clearScreen();
                         leave();
                     } else {
                         TextEngine.printWithDelays("Settings not saved.", false);
+                        TextEngine.enterToNext();
                         TextEngine.speedSetting = lastSavedState;
                         TextEngine.clearScreen();
-                        continue;
+                        start();
                     }
                 }
                 case "normal" -> {
@@ -56,13 +61,15 @@ public abstract class SettingsMenu {
                     command = console.readLine();
                     if (command.toLowerCase().trim().equals("yes")) {
                         TextEngine.printWithDelays("Settings saved.", false);
+                        TextEngine.enterToNext();
                         TextEngine.clearScreen();
                         leave();
                     } else {
                         TextEngine.printWithDelays("Settings not saved.", false);
+                        TextEngine.enterToNext();
                         TextEngine.speedSetting = lastSavedState;
                         TextEngine.clearScreen();
-                        continue;
+                        start();
                     }
                 }
                 case "fast" -> {
@@ -74,13 +81,15 @@ public abstract class SettingsMenu {
                     command = console.readLine();
                     if (command.toLowerCase().trim().equals("yes")) {
                         TextEngine.printWithDelays("Settings saved.", false);
+                        TextEngine.enterToNext();
                         TextEngine.clearScreen();
                         leave();
                     } else {
                         TextEngine.printWithDelays("Settings not saved.", false);
+                        TextEngine.enterToNext();
                         TextEngine.speedSetting = lastSavedState;
                         TextEngine.clearScreen();
-                        continue;
+                        start();
                     }
                 }
                 case "nodelay" -> {
@@ -92,17 +101,56 @@ public abstract class SettingsMenu {
                     command = console.readLine();
                     if (command.toLowerCase().trim().equals("yes")) {
                         TextEngine.printWithDelays("Settings saved.", false);
+                        TextEngine.enterToNext();
                         TextEngine.clearScreen();
                         leave();
                     } else {
                         TextEngine.printWithDelays("Settings not saved.", false);
+                        TextEngine.enterToNext();
                         TextEngine.speedSetting = lastSavedState;
                         TextEngine.clearScreen();
-                        continue;
+                        start();
                     }
                 }
                 case "change name" -> {
                     Player.changeName();
+                }
+                case "ai" -> {
+                    if (PromptEngine.aiGenerationEnabled) {
+                        TextEngine.printNoDelay("AI generation is already enabled. Would you like to disable it?", true);
+                        ignore = console.readLine();
+                        command = console.readLine();
+                        if (command.toLowerCase().trim().equals("yes")) {
+                            PromptEngine.aiGenerationEnabled = false;
+                            PromptEngine.userAPIKey = null;
+                            TextEngine.printWithDelays("AI generation disabled.", false);
+                            TextEngine.enterToNext();
+                            TextEngine.clearScreen();
+                            leave();
+                        } else {
+                            TextEngine.printWithDelays("AI generation remains enabled.", false);
+                            TextEngine.enterToNext();
+                            TextEngine.clearScreen();
+                            leave();
+                        }
+                    } else {
+                        TextEngine.printNoDelay("(This feature is still experimental)", false);
+                        TextEngine.printNoDelay("Please enter your OpenAI API key:", true);
+                        ignore = console.readLine();
+                        command = console.readLine();
+                        if (PromptEngine.testAPIKey(command)) {
+                            PromptEngine.userAPIKey = command;
+                            TextEngine.printWithDelays("API key accepted. AI generation enabled.", false);
+                            TextEngine.enterToNext();
+                            TextEngine.clearScreen();
+                            leave();
+                        } else {
+                            TextEngine.printWithDelays("API key not accepted.", false);
+                            TextEngine.enterToNext();
+                            TextEngine.clearScreen();
+                            start();
+                        }
+                    }
                 }
                 case "exit" -> {
                     leave();
@@ -121,6 +169,9 @@ public abstract class SettingsMenu {
         TextEngine.printNoDelay("This is the settings menu. Here you can change the speed of the text.", false);
         TextEngine.printNoDelay("The current speed is set to: " + TextEngine.speedSetting, false);
         TextEngine.printWithDelays("You can change the speed to: " + yellowColor + "Slow" + resetColor + ", " + yellowColor + "Normal" + resetColor + ", " + yellowColor + "Fast" + resetColor + ", or " + yellowColor + "NoDelay" + resetColor, false);
+        TextEngine.printWithDelays("You can also type: " + yellowColor + "AI " + resetColor + "to enable or disable AI generated prompts in game", false);
+        TextEngine.printWithDelays("(This is still experimental and requires you to have your own API key and an internet connection...)", false);
+        TextEngine.printWithDelays("You can also type: " + yellowColor + "change name " + resetColor + "to change your name", false);
         TextEngine.printWithDelays("Type " + yellowColor + "exit" + resetColor + " to leave this menu", true);
         while (true) {
             ignore = console.readLine();
@@ -135,13 +186,15 @@ public abstract class SettingsMenu {
                     command = console.readLine();
                     if (command.toLowerCase().trim().equals("yes")) {
                         TextEngine.printWithDelays("Settings saved.", false);
+                        TextEngine.enterToNext();
                         TextEngine.clearScreen();
                         leaveToStart();
                     } else {
                         TextEngine.printWithDelays("Settings not saved.", false);
+                        TextEngine.enterToNext();
                         TextEngine.speedSetting = lastSavedState;
                         TextEngine.clearScreen();
-                        continue;
+                        startFromStartMenu();
                     }
                 }
                 case "normal" -> {
@@ -153,13 +206,15 @@ public abstract class SettingsMenu {
                     command = console.readLine();
                     if (command.toLowerCase().trim().equals("yes")) {
                         TextEngine.printWithDelays("Settings saved.", false);
+                        TextEngine.enterToNext();
                         TextEngine.clearScreen();
                         leaveToStart();
                     } else {
                         TextEngine.printWithDelays("Settings not saved.", false);
+                        TextEngine.enterToNext();
                         TextEngine.speedSetting = lastSavedState;
                         TextEngine.clearScreen();
-                        continue;
+                        startFromStartMenu();
                     }
                 }
                 case "fast" -> {
@@ -171,13 +226,15 @@ public abstract class SettingsMenu {
                     command = console.readLine();
                     if (command.toLowerCase().trim().equals("yes")) {
                         TextEngine.printWithDelays("Settings saved.", false);
+                        TextEngine.enterToNext();
                         TextEngine.clearScreen();
                         leaveToStart();
                     } else {
                         TextEngine.printWithDelays("Settings not saved.", false);
+                        TextEngine.enterToNext();
                         TextEngine.speedSetting = lastSavedState;
                         TextEngine.clearScreen();
-                        continue;
+                        startFromStartMenu();
                     }
                 }
                 case "nodelay" -> {
@@ -189,17 +246,56 @@ public abstract class SettingsMenu {
                     command = console.readLine();
                     if (command.toLowerCase().trim().equals("yes")) {
                         TextEngine.printWithDelays("Settings saved.", false);
+                        TextEngine.enterToNext();
                         TextEngine.clearScreen();
                         leaveToStart();
                     } else {
                         TextEngine.printWithDelays("Settings not saved.", false);
+                        TextEngine.enterToNext();
                         TextEngine.speedSetting = lastSavedState;
                         TextEngine.clearScreen();
-                        continue;
+                        startFromStartMenu();
                     }
                 }
                 case "change name" -> {
                     Player.changeName();
+                }
+                case "ai" -> {
+                    if (PromptEngine.aiGenerationEnabled) {
+                        TextEngine.printNoDelay("AI generation is already enabled. Would you like to disable it?", true);
+                        ignore = console.readLine();
+                        command = console.readLine();
+                        if (command.toLowerCase().trim().equals("yes")) {
+                            PromptEngine.aiGenerationEnabled = false;
+                            PromptEngine.userAPIKey = null;
+                            TextEngine.printWithDelays("AI generation disabled.", false);
+                            TextEngine.enterToNext();
+                            TextEngine.clearScreen();
+                            leaveToStart();
+                        } else {
+                            TextEngine.printWithDelays("AI generation remains enabled.", false);
+                            TextEngine.enterToNext();
+                            TextEngine.clearScreen();
+                            leaveToStart();
+                        }
+                    } else {
+                        TextEngine.printNoDelay("(This feature is still experimental)", false);
+                        TextEngine.printNoDelay("Please enter your OpenAI API key:", true);
+                        ignore = console.readLine();
+                        command = console.readLine();
+                        if (PromptEngine.testAPIKey(command)) {
+                            PromptEngine.userAPIKey = command;
+                            TextEngine.printWithDelays("API key accepted. AI generation enabled.", false);
+                            TextEngine.enterToNext();
+                            TextEngine.clearScreen();
+                            leaveToStart();
+                        } else {
+                            TextEngine.printWithDelays("API key not accepted.", false);
+                            TextEngine.enterToNext();
+                            TextEngine.clearScreen();
+                            startFromStartMenu();
+                        }
+                    }
                 }
                 case "exit" -> {
                     leaveToStart();

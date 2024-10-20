@@ -638,4 +638,414 @@ public class Player {
         //System.out.println("test" + "Unknown environment");
         return "unknown";
     }
+
+    public static String getCompassDirectionToClosestVillage() {
+        String[][] map = {
+            {"     ", "", "", "", "", "", "", "", "     ", "", ""}, //0
+            {"     ", "", "     ", "     ", "     ", "", "", "", "     ", "", ""}, //1
+            {"     ", "", "     ", "     ", "     ", "", "", "", "     ", "", ""}, //2
+            {"     ", "", "     ", "     ", "     ", "", "", "", "[ V ]", "", ""}, //3
+            {"", "", "     ", "     ", "", "", "", "", "", "", ""}, //4
+            {"", "", "", "     ", "", "", "", "", "", "", ""}, //5
+            {"", "", "", "", "", "", "", "", "", "", ""}, //6
+            {"[ V ]", "", "", "", "", "", "", "", "", "", ""}, //7
+            {"     ", "", "", "", "", "", "", "", "", "", ""}, //8
+            {"     ", "", "", "", "", "", "", "", "", "", ""}, //9
+            {"     ", "", "", "", "", "[ V ]", "     ", "    ", "     ", "", ""} //10
+        };
+
+        int closestVillageX = -1;
+        int closestVillageY = -1;
+        double minDistance = Double.MAX_VALUE;
+
+        for (int y = 0; y < map.length; y++) {
+            for (int x = 0; x < map[y].length; x++) {
+                if ("[ V ]".equals(map[y][x])) {
+                    double distance = Math.sqrt(Math.pow(x - playerX, 2) + Math.pow(y - playerY, 2));
+                    if (distance < minDistance) {
+                        minDistance = distance;
+                        closestVillageX = x;
+                        closestVillageY = y;
+                    }
+                }
+            }
+        }
+
+        if (closestVillageX == -1 || closestVillageY == -1) {
+            return "No village found";
+        }
+
+        int deltaX = closestVillageX - playerX;
+        int deltaY = closestVillageY - playerY;
+
+        if (deltaX == 0 && deltaY < 0) {
+            return "N";
+        }
+        if (deltaX > 0 && deltaY < 0) {
+            return "NE";
+        }
+        if (deltaX > 0 && deltaY == 0) {
+            return "E";
+        }
+        if (deltaX > 0 && deltaY > 0) {
+            return "SE";
+        }
+        if (deltaX == 0 && deltaY > 0) {
+            return "S";
+        }
+        if (deltaX < 0 && deltaY > 0) {
+            return "SW";
+        }
+        if (deltaX < 0 && deltaY == 0) {
+            return "W";
+        }
+        if (deltaX < 0 && deltaY < 0) {
+            return "NW";
+        }
+
+        return "Unknown direction";
+    }
+
+    public static String getCompassDirectionToClosestDungeon() {
+        String[][] map = {
+            {"     ", "[ D ]", "", "", "", "", "", "[ D ]", "     ", "", ""}, //0
+            {"     ", "", "     ", "     ", "     ", "", "", "", "     ", "", ""}, //1
+            {"     ", "", "     ", "     ", "     ", "", "", "", "     ", "", ""}, //2
+            {"     ", "", "     ", "     ", "     ", "", "", "", "", "", ""}, //3
+            {"", "", "     ", "     ", "[ D ]", "", "", "", "", "", ""}, //4
+            {"", "", "", "     ", "", "", "", "", "", "", ""}, //5
+            {"", "", "", "", "", "", "", "", "", "", ""}, //6
+            {"", "", "", "", "", "", "", "", "", "", ""}, //7
+            {"     ", "[ D ]", "", "", "", "", "", "", "[ D ]", "", ""}, //8
+            {"     ", "[ D ]", "", "", "", "", "", "", "[ D ]", "", ""}, //9
+            {"     ", "[ D ]", "", "", "", "", "", "    ", "     ", "", ""} //10
+        };
+        switch (Dungeon.completedDungeons) {
+            case 0 -> {
+                map[9][8] = "[ ! ]";
+                map[8][8] = "[ L ]";
+                map[4][4] = "[ L ]";
+                map[0][7] = "[ L ]";
+                map[10][1] = "[ L ]";
+                map[9][1] = "[ L ]";
+                map[8][1] = "[ L ]";
+                map[0][1] = "[ L ]";
+            }
+            case 1 -> {
+                map[9][8] = "[ D ]";
+                map[8][8] = "[ ! ]";
+                map[4][4] = "[ L ]";
+                map[0][7] = "[ L ]";
+                map[10][1] = "[ L ]";
+                map[9][1] = "[ L ]";
+                map[8][1] = "[ L ]";
+                map[0][1] = "[ L ]";
+            }
+            case 2 -> {
+                map[9][8] = "[ D ]";
+                map[8][8] = "[ D ]";
+                map[4][4] = "[ ! ]";
+                map[0][7] = "[ L ]";
+                map[10][1] = "[ L ]";
+                map[9][1] = "[ L ]";
+                map[8][1] = "[ L ]";
+                map[0][1] = "[ L ]";
+            }
+            case 3 -> {
+                map[9][8] = "[ D ]";
+                map[8][8] = "[ D ]";
+                map[4][4] = "[ D ]";
+                map[0][7] = "[ ! ]";
+                map[10][1] = "[ L ]";
+                map[9][1] = "[ L ]";
+                map[8][1] = "[ L ]";
+                map[0][1] = "[ L ]";
+            }
+            case 4 -> {
+                map[9][8] = "[ D ]";
+                map[8][8] = "[ D ]";
+                map[4][4] = "[ D ]";
+                map[0][7] = "[ D ]";
+                map[10][1] = "[ ! ]";
+                map[9][1] = "[ L ]";
+                map[8][1] = "[ L ]";
+                map[0][1] = "[ L ]";
+            }
+            case 5 -> {
+                map[9][8] = "[ D ]";
+                map[8][8] = "[ D ]";
+                map[4][4] = "[ D ]";
+                map[0][7] = "[ D ]";
+                map[10][1] = "[ D ]";
+                map[9][1] = "[ ! ]";
+                map[8][1] = "[ L ]";
+                map[0][1] = "[ L ]";
+            }
+            case 6 -> {
+                map[9][8] = "[ D ]";
+                map[8][8] = "[ D ]";
+                map[4][4] = "[ D ]";
+                map[0][7] = "[ D ]";
+                map[10][1] = "[ D ]";
+                map[9][1] = "[ D ]";
+                map[8][1] = "[ ! ]";
+                map[0][1] = "[ L ]";
+            }
+            case 7 -> {
+                map[9][8] = "[ D ]";
+                map[8][8] = "[ D ]";
+                map[4][4] = "[ D ]";
+                map[0][7] = "[ D ]";
+                map[10][1] = "[ D ]";
+                map[9][1] = "[ D ]";
+                map[8][1] = "[ D ]";
+                map[0][1] = "[ ! ]";
+            }
+            default -> {
+                map[9][8] = "[ D ]";
+                map[8][8] = "[ D ]";
+                map[4][4] = "[ D ]";
+                map[0][7] = "[ D ]";
+                map[10][1] = "[ D ]";
+                map[9][1] = "[ D ]";
+                map[8][1] = "[ D ]";
+                map[0][1] = "[ D ]";
+            }
+        }
+        int closestDungeonX = -1;
+        int closestDungeonY = -1;
+        double minDistance = Double.MAX_VALUE;
+
+        for (int y = 0; y < map.length; y++) {
+            for (int x = 0; x < map[y].length; x++) {
+                if ("[ ! ]".equals(map[y][x])) {
+                    double distance = Math.sqrt(Math.pow(x - playerX, 2) + Math.pow(y - playerY, 2));
+                    if (distance < minDistance) {
+                        minDistance = distance;
+                        closestDungeonX = x;
+                        closestDungeonY = y;
+                    }
+                }
+            }
+        }
+
+        if (closestDungeonX == -1 || closestDungeonY == -1) {
+            return "No dungeon found";
+        }
+
+        int deltaX = closestDungeonX - playerX;
+        int deltaY = closestDungeonY - playerY;
+
+        // System.out.println("Player Position: (" + playerX + ", " + playerY + ")");
+        // System.out.println("Closest Dungeon Position: (" + closestDungeonX + ", " + closestDungeonY + ")");
+        // System.out.println("DeltaX: " + deltaX + ", DeltaY: " + deltaY);
+        if (deltaX == 0 && deltaY < 0) {
+            return "N";
+        }
+        if (deltaX > 0 && deltaY < 0) {
+            return "NE";
+        }
+        if (deltaX > 0 && deltaY == 0) {
+            return "E";
+        }
+        if (deltaX > 0 && deltaY > 0) {
+            return "SE";
+        }
+        if (deltaX == 0 && deltaY > 0) {
+            return "S";
+        }
+        if (deltaX < 0 && deltaY > 0) {
+            return "SW";
+        }
+        if (deltaX < 0 && deltaY == 0) {
+            return "W";
+        }
+        if (deltaX < 0 && deltaY < 0) {
+            return "NW";
+        }
+
+        return "Unknown direction";
+    }
+
+    public static String getNextDungeon() {
+        return switch (Dungeon.completedDungeons) {
+            case 0 ->
+                "Meadow Dungeon";
+            case 1 ->
+                "Dark Forest Dungeon";
+            case 2 ->
+                "Mountain Cave Dungeon";
+            case 3 ->
+                "Mountain Top Dungeon";
+            case 4 ->
+                "Desert Oasis Dungeon";
+            case 5 ->
+                "Desert Plains Dungeon";
+            case 6 ->
+                "Desert Pyramid Dungeon";
+            case 7 ->
+                "Ocean Kingdom Dungeon";
+            case 8 ->
+                "You have completed all of the dungeons!";
+            default ->
+                "SpawnRoom";
+        };
+    }
+
+    public static int distanceToVillage() {
+        String[][] map = {
+            {"     ", "", "", "", "", "", "", "", "     ", "", ""}, //0
+            {"     ", "", "     ", "     ", "     ", "", "", "", "     ", "", ""}, //1
+            {"     ", "", "     ", "     ", "     ", "", "", "", "     ", "", ""}, //2
+            {"     ", "", "     ", "     ", "     ", "", "", "", "[ V ]", "", ""}, //3
+            {"", "", "     ", "     ", "", "", "", "", "", "", ""}, //4
+            {"", "", "", "     ", "", "", "", "", "", "", ""}, //5
+            {"", "", "", "", "", "", "", "", "", "", ""}, //6
+            {"[ V ]", "", "", "", "", "", "", "", "", "", ""}, //7
+            {"     ", "", "", "", "", "", "", "", "", "", ""}, //8
+            {"     ", "", "", "", "", "", "", "", "", "", ""}, //9
+            {"     ", "", "", "", "", "[ V ]", "     ", "    ", "     ", "", ""} //10
+        };
+        int closestVillageX = -1;
+        int closestVillageY = -1;
+        double minDistance = Double.MAX_VALUE;
+
+        for (int y = 0; y < map.length; y++) {
+            for (int x = 0; x < map[y].length; x++) {
+                if ("[ V ]".equals(map[y][x])) {
+                    double distance = Math.sqrt(Math.pow(x - playerX, 2) + Math.pow(y - playerY, 2));
+                    if (distance < minDistance) {
+                        minDistance = distance;
+                        closestVillageX = x;
+                        closestVillageY = y;
+                    }
+                }
+            }
+        }
+        return (int) minDistance;
+    }
+
+    public static int distanceToNextDungeon() {
+        String[][] map = {
+            {"     ", "[ D ]", "", "", "", "", "", "[ D ]", "     ", "", ""}, //0
+            {"     ", "", "     ", "     ", "     ", "", "", "", "     ", "", ""}, //1
+            {"     ", "", "     ", "     ", "     ", "", "", "", "     ", "", ""}, //2
+            {"     ", "", "     ", "     ", "     ", "", "", "", "", "", ""}, //3
+            {"", "", "     ", "     ", "[ D ]", "", "", "", "", "", ""}, //4
+            {"", "", "", "     ", "", "", "", "", "", "", ""}, //5
+            {"", "", "", "", "", "", "", "", "", "", ""}, //6
+            {"", "", "", "", "", "", "", "", "", "", ""}, //7
+            {"     ", "[ D ]", "", "", "", "", "", "", "[ D ]", "", ""}, //8
+            {"     ", "[ D ]", "", "", "", "", "", "", "[ D ]", "", ""}, //9
+            {"     ", "[ D ]", "", "", "", "", "", "    ", "     ", "", ""} //10
+        };
+        switch (Dungeon.completedDungeons) {
+            case 0 -> {
+                map[9][8] = "[ ! ]";
+                map[8][8] = "[ L ]";
+                map[4][4] = "[ L ]";
+                map[0][7] = "[ L ]";
+                map[10][1] = "[ L ]";
+                map[9][1] = "[ L ]";
+                map[8][1] = "[ L ]";
+                map[0][1] = "[ L ]";
+            }
+            case 1 -> {
+                map[9][8] = "[ D ]";
+                map[8][8] = "[ ! ]";
+                map[4][4] = "[ L ]";
+                map[0][7] = "[ L ]";
+                map[10][1] = "[ L ]";
+                map[9][1] = "[ L ]";
+                map[8][1] = "[ L ]";
+                map[0][1] = "[ L ]";
+            }
+            case 2 -> {
+                map[9][8] = "[ D ]";
+                map[8][8] = "[ D ]";
+                map[4][4] = "[ ! ]";
+                map[0][7] = "[ L ]";
+                map[10][1] = "[ L ]";
+                map[9][1] = "[ L ]";
+                map[8][1] = "[ L ]";
+                map[0][1] = "[ L ]";
+            }
+            case 3 -> {
+                map[9][8] = "[ D ]";
+                map[8][8] = "[ D ]";
+                map[4][4] = "[ D ]";
+                map[0][7] = "[ ! ]";
+                map[10][1] = "[ L ]";
+                map[9][1] = "[ L ]";
+                map[8][1] = "[ L ]";
+                map[0][1] = "[ L ]";
+            }
+            case 4 -> {
+                map[9][8] = "[ D ]";
+                map[8][8] = "[ D ]";
+                map[4][4] = "[ D ]";
+                map[0][7] = "[ D ]";
+                map[10][1] = "[ ! ]";
+                map[9][1] = "[ L ]";
+                map[8][1] = "[ L ]";
+                map[0][1] = "[ L ]";
+            }
+            case 5 -> {
+                map[9][8] = "[ D ]";
+                map[8][8] = "[ D ]";
+                map[4][4] = "[ D ]";
+                map[0][7] = "[ D ]";
+                map[10][1] = "[ D ]";
+                map[9][1] = "[ ! ]";
+                map[8][1] = "[ L ]";
+                map[0][1] = "[ L ]";
+            }
+            case 6 -> {
+                map[9][8] = "[ D ]";
+                map[8][8] = "[ D ]";
+                map[4][4] = "[ D ]";
+                map[0][7] = "[ D ]";
+                map[10][1] = "[ D ]";
+                map[9][1] = "[ D ]";
+                map[8][1] = "[ ! ]";
+                map[0][1] = "[ L ]";
+            }
+            case 7 -> {
+                map[9][8] = "[ D ]";
+                map[8][8] = "[ D ]";
+                map[4][4] = "[ D ]";
+                map[0][7] = "[ D ]";
+                map[10][1] = "[ D ]";
+                map[9][1] = "[ D ]";
+                map[8][1] = "[ D ]";
+                map[0][1] = "[ ! ]";
+            }
+            default -> {
+                map[9][8] = "[ D ]";
+                map[8][8] = "[ D ]";
+                map[4][4] = "[ D ]";
+                map[0][7] = "[ D ]";
+                map[10][1] = "[ D ]";
+                map[9][1] = "[ D ]";
+                map[8][1] = "[ D ]";
+                map[0][1] = "[ D ]";
+            }
+        }
+        int closestDungeonX = -1;
+        int closestDungeonY = -1;
+        double minDistance = Double.MAX_VALUE;
+        for (int y = 0; y < map.length; y++) {
+            for (int x = 0; x < map[y].length; x++) {
+                if ("[ ! ]".equals(map[y][x])) {
+                    double distance = Math.sqrt(Math.pow(x - playerX, 2) + Math.pow(y - playerY, 2));
+                    if (distance < minDistance) {
+                        minDistance = distance;
+                        closestDungeonX = x;
+                        closestDungeonY = y;
+                    }
+                }
+            }
+        }
+        return (int) minDistance;
+    }
 }

@@ -174,6 +174,10 @@ public class GameSaveSerialization {
         writeSeparator(filePath);
         writeValue(String.valueOf(OpenWorld.previousRoomSave), filePath);
         writeSeparator(filePath);
+        writeValue(PromptEngine.userAPIKey, filePath);
+        writeSeparator(filePath);
+        writeValue(String.valueOf(PromptEngine.aiGenerationEnabled), filePath);
+        writeSeparator(filePath);
 
         //do this after all other data is saved
         serializeAllLines(filePath, filePath);
@@ -327,6 +331,10 @@ public class GameSaveSerialization {
                 Dungeon.resetedAfterWin = Boolean.parseBoolean(reader.readLine());
                 buffer = reader.readLine();
                 OpenWorld.previousRoomSave = Integer.parseInt(reader.readLine());
+                buffer = reader.readLine();
+                PromptEngine.userAPIKey = reader.readLine();
+                buffer = reader.readLine();
+                PromptEngine.aiGenerationEnabled = Boolean.parseBoolean(reader.readLine());
 
             } catch (IOException | NumberFormatException e) {
                 System.out.println("Save File Corrupt or Invalid... ");
