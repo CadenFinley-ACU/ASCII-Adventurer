@@ -5,52 +5,98 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Arrays;
+import java.util.List;
 
 // Written by Caden Finley ACU 2024
 // October 19, 2024
 public class PromptEngine {
 
+    private static final String yellowColor = "\u001B[33m";
+    private static final String resetColor = "\u001B[0m";
+
     public static String userAPIKey = null;
     public static boolean aiGenerationEnabled = false;
+    public static int promptLength = 30;
+    private static String prompt = null;
+    private static final List<String> keywords = Arrays.asList(
+            "village", "meadow", "dungeon", "dark forest", "mountain cave", "mountain top",
+            "desert pyramid", "desert oasis", "desert plains", "ocean kingdom", "next dungeon",
+            "north", "south", "east", "west", "northeast", "northwest", "southeast", "southwest",
+            "Village", "Meadow", "Dungeon", "Dark Forest", "Mountain Cave", "Mountain Top",
+            "Desert Pyramid", "Desert Oasis", "Desert Plains", "Ocean Kingdom", "Next dungeon",
+            "North", "South", "East", "West", "Northeast", "Northwest", "Southeast", "Southwest"
+    );
 
-    public static String buildAndReturnPrompt(String extraInfo) {
-        String villageDirection = Player.getCompassDirectionToClosestVillage();
-        String nextDungeon = Player.getNextDungeon();
-        String dungeonNextDirection = Player.getCompassDirectionToClosestDungeon();
-        String setting = Player.getColorOfPlayerPostitionTile();
-        int distanceToVillage = Player.distanceToVillage();
-        int distanceToDungeon = Player.distanceToNextDungeon();
-        String villageDistanceGauge;
-        String dungeonDistanceGauge;
-        if (villageDirection == null || villageDirection.isEmpty() || villageDirection.equals("No village found")) {
-            villageDirection = "There is no village nearby.";
+    public static void buildPrompt() throws InterruptedException {
+        if (aiGenerationEnabled) {
+            String villageDirection = Player.getCompassDirectionToClosestVillage();
+            String nextDungeon = Player.getNextDungeon();
+            String dungeonNextDirection = Player.getCompassDirectionToClosestDungeon();
+            String setting = Player.getColorOfPlayerPostitionTile();
+            int distanceToVillage = Player.distanceToVillage();
+            int distanceToDungeon = Player.distanceToNextDungeon();
+            String villageDistanceGauge;
+            String dungeonDistanceGauge;
+            String villagePrompt;
+            String dungeonPrompt;
+
+            if (villageDirection == null || villageDirection.isEmpty() || villageDirection.equals("No village found")) {
+                villageDirection = "There is no village nearby";
+            }
+            if (nextDungeon == null || nextDungeon.isEmpty() || nextDungeon.equals("No dungeon found")) {
+                nextDungeon = "There is no dungeon nearby";
+            }
+            if (setting == null || setting.isEmpty()) {
+                setting = "generic";
+            }
+            if (dungeonNextDirection == null || dungeonNextDirection.isEmpty() || dungeonNextDirection.equals("No dungeon found")) {
+                dungeonNextDirection = "There is no dungeon nearby";
+            }
+            if (distanceToDungeon > 0) {
+                if (distanceToDungeon == 1) {
+                    dungeonDistanceGauge = "Right next to the player";
+                } else {
+                    dungeonDistanceGauge = distanceToDungeon + " tiles away";
+                }
+            } else {
+                dungeonDistanceGauge = "There is no dungeon nearby.";
+            }
+            if (distanceToVillage > 0) {
+                if (distanceToVillage == 1) {
+                    villageDistanceGauge = "Right next to the player";
+                } else {
+                    villageDistanceGauge = distanceToVillage + " tiles away";
+                }
+            } else {
+                villageDistanceGauge = "There is no village nearby";
+            }
+            if (distanceToVillage == 0) {
+                villagePrompt = "The village is directly to the " + villageDirection + ".";
+            } else {
+                villagePrompt = "The village is to the " + villageDirection + " and is " + villageDistanceGauge + ".";
+            }
+            if (distanceToDungeon == 0) {
+                dungeonPrompt = "The " + nextDungeon + " is directly to the " + dungeonNextDirection + ".";
+            } else {
+                dungeonPrompt = "The " + nextDungeon + " is to the " + dungeonNextDirection + " and is " + dungeonDistanceGauge + ".";
+            }
+            //return chatGPT("Pick the best and most accurite prompt out of these three prompts useing these facts: The player is in a " + setting + " village. " + villagePrompt + " " + dungeonPrompt + " " + extra + "The prompts are as follows: 1-" + chatGPT("Generate a me a prompt for a text adventure game. Always state the direction of the structure if it is given and the distance if it is given. Do this in around " + promptLength + " words or less using this info: The player is in a " + setting + villagePrompt + dungeonPrompt + ".") + "2-" + chatGPT("Generate a me a prompt for a text adventure game. Always state the direction of the structure if it is given and the distance if it is given. Do this in around " + promptLength + " words or less using this info: The player is in a " + setting + villagePrompt + dungeonPrompt + ".") + "3-" + chatGPT("Generate a me a prompt for a text adventure game. Always state the direction of the structure if it is given and the distance if it is given. Do this in around " + promptLength + " words or less using this info: The player is in a " + setting + villagePrompt + dungeonPrompt + ".") + "\n");
+            TextEngine.printNoDelay("Loading...", false);
+            prompt = chatGPT("Generate a me a prompt for a text adventure game. Always state the direction of the structure if it is given and the distance if it is given. Do this in around " + promptLength + " words or less using this info: The player is in a " + setting + villagePrompt + dungeonPrompt + ".") + "\n";
+            Main.screenRefresh();
         }
-        if (nextDungeon == null || nextDungeon.isEmpty() || nextDungeon.equals("No dungeon found")) {
-            nextDungeon = "There is no dungeon nearby.";
+    }
+
+    public static String returnPrompt() throws InterruptedException {
+        if (prompt == null || prompt.isEmpty()) {
+            buildPrompt();
         }
-        if (setting == null || setting.isEmpty()) {
-            setting = "generic";
+        // Highlight keywords
+        for (String keyword : keywords) {
+            prompt = prompt.replaceAll("\\b" + keyword + "\\b", yellowColor + keyword + resetColor);
         }
-        if (extraInfo == null || extraInfo.isEmpty()) {
-            extraInfo = "no extra info";
-        }
-        if (dungeonNextDirection == null || dungeonNextDirection.isEmpty() || dungeonNextDirection.equals("No dungeon found")) {
-            dungeonNextDirection = "There is no dungeon nearby.";
-        }
-        if (distanceToDungeon > 0) {
-            dungeonDistanceGauge = "The next dungeon is " + distanceToDungeon + " tiles away.";
-        } else {
-            dungeonDistanceGauge = "There is no dungeon nearby.";
-        }
-        if (distanceToVillage > 0) {
-            villageDistanceGauge = "The village is " + distanceToVillage + " tiles away.";
-        } else {
-            villageDistanceGauge = "There is no village nearby.";
-        }
-        //return chatGPT("Generate me a prompt for a text adventure game. The village is to the " + villageDirection + ". The next dungeon is to the " + dungeonNextDirection + ". The next dungeon is called " + nextDungeon + ". The setting is " + setting + ". (100 words or less)");
-        //debug
-        //System.out.println("villageDirection: " + villageDirection + " nextDungeon: " + nextDungeon + " dungeonNextDirection: " + dungeonNextDirection + " setting: " + setting + " extraInfo: " + extraInfo);
-        return chatGPT("Generate a me a prompt for a text adventure game. The player is in a " + setting + " setting. The village is to the " + villageDirection + "and is " + villageDistanceGauge + ". The next dungeon is to the " + dungeonNextDirection + "and is " + dungeonDistanceGauge + ". The next dungeon is called " + nextDungeon + ". " + extraInfo + " (50 words or less)");
+        return prompt;
     }
 
     private static String chatGPT(String message) {
@@ -130,10 +176,22 @@ public class PromptEngine {
             aiGenerationEnabled = responseContent != null && !responseContent.isEmpty();
             return responseContent != null && !responseContent.isEmpty();
         } catch (IOException e) {
-            e.printStackTrace();
             TextEngine.printNoDelay("API Key failed. Please try again.", false);
             aiGenerationEnabled = false;
             return false;
         }
+    }
+
+    public static void setPromptLength(String length) {
+        promptLength = switch (length) {
+            case "short" ->
+                30;
+            case "medium" ->
+                50;
+            case "long" ->
+                75;
+            default ->
+                30;
+        };
     }
 }
