@@ -7,11 +7,11 @@
   <errTitle>You need to download the correct version of java</errTitle>
   <cmdLine></cmdLine>
   <chdir>.</chdir>
-  <priority>normal</priority>
+  <priority>high</priority>
   <downloadUrl>https://www.java.com/download/</downloadUrl>
   <supportUrl>https://github.com/CadenFinley-ACU/ASCII-Adventurer</supportUrl>
   <stayAlive>false</stayAlive>
-  <restartOnCrash>false</restartOnCrash>
+  <restartOnCrash>true</restartOnCrash>
   <manifest></manifest>
   <icon>C:\Users\blade\Downloads\aculogo.ico</icon>
   <singleInstance>
