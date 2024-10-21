@@ -224,9 +224,9 @@ public class Player {
         gold += change;
 
         if (change < 0) {
-            TextEngine.printWithDelays(space + brightRedStart + "You lost " + Math.abs(change) + " gold! " + brightEnd + "(" + getGold() + ")", false);
+            TextEngine.printWithDelays(space + brightRedStart + "You lost " + Math.abs(change) + " gold! " + "(" + getGold() + ")" + brightEnd, false);
         } else {
-            TextEngine.printWithDelays(space + brightGreenStart + "You gained " + change + " gold!" + brightEnd + "(" + getGold() + ")", false);
+            TextEngine.printWithDelays(space + brightGreenStart + "You gained " + change + " gold! " + "(" + getGold() + ")" + brightEnd, false);
         }
     }
 
