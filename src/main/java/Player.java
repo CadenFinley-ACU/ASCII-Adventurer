@@ -937,7 +937,7 @@ public class Player {
         if (closestVillageX == -1 || closestVillageY == -1) {
             return -1;
         }
-        return minDistance;
+        return minDistance - 1;
     }
 
     public static int distanceToNextDungeon() {
@@ -1064,6 +1064,6 @@ public class Player {
         if (closestDungeonX == -1 || closestDungeonY == -1) {
             return -1;
         }
-        return (int) minDistance;
+        return (int) minDistance - 1;
     }
 }
