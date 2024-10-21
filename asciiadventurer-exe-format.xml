@@ -7,7 +7,7 @@
   <errTitle>You need to download the correct version of java</errTitle>
   <cmdLine></cmdLine>
   <chdir>.</chdir>
-  <priority>high</priority>
+  <priority>normal</priority>
   <downloadUrl>https://www.java.com/download/</downloadUrl>
   <supportUrl>https://github.com/CadenFinley-ACU/ASCII-Adventurer</supportUrl>
   <stayAlive>false</stayAlive>
