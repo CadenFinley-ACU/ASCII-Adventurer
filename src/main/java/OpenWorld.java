@@ -2552,8 +2552,7 @@ public class OpenWorld extends Room {
                     previousRoomSave = roomSave;
                     roomSave = 52;
                     Main.loadSave();
-                }
-                default ->
+                }default ->
                     Main.inGameDefaultTextHandling(command);
             }
         }
@@ -2583,21 +2582,18 @@ public class OpenWorld extends Room {
                     previousRoomSave = roomSave;
                     roomSave = 45;
                     Main.loadSave();
-                }
-                case "the dark forest" -> {
+                }case "the dark forest" -> {
                     if (Dungeon.completedDungeons > 0) {
                         previousRoomSave = roomSave;
                         DarkForestDungeon.startRoom();
                     } else {
                         TextEngine.printWithDelays("You must complete The Meadow dungeon first.\nTry going south", true);
                     }
-                }
-                case "west" -> {
+                }case "west" -> {
                     previousRoomSave = roomSave;
                     roomSave = 53;
                     Main.loadSave();
-                }
-                default ->
+                }default ->
                     Main.inGameDefaultTextHandling(command);
             }
         }
@@ -2626,26 +2622,22 @@ public class OpenWorld extends Room {
                     previousRoomSave = roomSave;
                     roomSave = 48;
                     Main.loadSave();
-                }
-                case "east" -> {
+                }case "east" -> {
                     previousRoomSave = roomSave;
                     roomSave = 27;
                     Main.loadSave();
-                }
-                case "south" -> {
+                }case "south" -> {
                     previousRoomSave = roomSave;
                     roomSave = 64;
                     Main.loadSave();
-                }
-                case "the desert pyramid" -> {
+                }case "the desert pyramid" -> {
                     if (Dungeon.completedDungeons > 5) {
                         previousRoomSave = roomSave;
                         DesertPyramidDungeon.startRoom();
                     } else {
                         TextEngine.printWithDelays("You must complete The Desert Plains dungeon first.\nTry going south", true);
                     }
-                }
-                default ->
+                }default ->
                     Main.inGameDefaultTextHandling(command);
             }
         }
@@ -2670,23 +2662,19 @@ public class OpenWorld extends Room {
                     previousRoomSave = roomSave;
                     roomSave = 50;
                     Main.loadSave();
-                }
-                case "east" -> {
+                }case "east" -> {
                     previousRoomSave = roomSave;
                     roomSave = 58;
                     Main.loadSave();
-                }
-                case "south" -> {
+                }case "south" -> {
                     previousRoomSave = roomSave;
                     roomSave = 66;
                     Main.loadSave();
-                }
-                case "west" -> {
+                }case "west" -> {
                     previousRoomSave = roomSave;
                     roomSave = 27;
                     Main.loadSave();
-                }
-                default ->
+                }default ->
                     Main.inGameDefaultTextHandling(command);
             }
         }
@@ -2706,29 +2694,24 @@ public class OpenWorld extends Room {
             command = console.readLine();
             if ("north".equals(command) || "east".equals(command) || "south".equals(command) || "west".equals(command)) {
                 holdCommand = command;
-            }
-            switch (command.toLowerCase().trim()) {
+            }switch (command.toLowerCase().trim()) {
                 case "north" -> {
                     previousRoomSave = roomSave;
                     roomSave = 51;
                     Main.loadSave();
-                }
-                case "east" -> {
+                }case "east" -> {
                     previousRoomSave = roomSave;
                     roomSave = 59;
                     Main.loadSave();
-                }
-                case "south" -> {
+                }case "south" -> {
                     previousRoomSave = roomSave;
                     roomSave = 67;
                     Main.loadSave();
-                }
-                case "west" -> {
+                }case "west" -> {
                     previousRoomSave = roomSave;
                     roomSave = 57;
                     Main.loadSave();
-                }
-                default ->
+                }default ->
                     Main.inGameDefaultTextHandling(command);
             }
         }
@@ -2753,23 +2736,19 @@ public class OpenWorld extends Room {
                     previousRoomSave = roomSave;
                     roomSave = 52;
                     Main.loadSave();
-                }
-                case "east" -> {
+                }case "east" -> {
                     previousRoomSave = roomSave;
                     roomSave = 60;
                     Main.loadSave();
-                }
-                case "south" -> {
+                }case "south" -> {
                     previousRoomSave = roomSave;
                     roomSave = 68;
                     Main.loadSave();
-                }
-                case "west" -> {
+                }case "west" -> {
                     previousRoomSave = roomSave;
                     roomSave = 58;
                     Main.loadSave();
-                }
-                default ->
+                }default ->
                     Main.inGameDefaultTextHandling(command);
             }
         }
@@ -2798,26 +2777,22 @@ public class OpenWorld extends Room {
                     previousRoomSave = roomSave;
                     roomSave = 53;
                     Main.loadSave();
-                }
-                case "the dark forest" -> {
+                }case "the dark forest" -> {
                     if (Dungeon.completedDungeons > 0) {
                         previousRoomSave = roomSave;
                         DarkForestDungeon.startRoom();
                     } else {
                         TextEngine.printWithDelays("You must complete The Meadow dungeon first.\nTry going south", true);
                     }
-                }
-                case "south" -> {
+                }case "south" -> {
                     previousRoomSave = roomSave;
                     roomSave = 69;
                     Main.loadSave();
-                }
-                case "west" -> {
+                }case "west" -> {
                     previousRoomSave = roomSave;
                     roomSave = 59;
                     Main.loadSave();
-                }
-                default ->
+                }default ->
                     Main.inGameDefaultTextHandling(command);
             }
         }
@@ -2847,21 +2822,18 @@ public class OpenWorld extends Room {
                     previousRoomSave = roomSave;
                     roomSave = 33;
                     Main.loadSave();
-                }
-                case "south" -> {
+                }case "south" -> {
                     previousRoomSave = roomSave;
                     roomSave = 41;
                     Main.loadSave();
-                }
-                case "the mountain cave" -> {
+                }case "the mountain cave" -> {
                     if (Dungeon.completedDungeons > 1) {
                         previousRoomSave = roomSave;
                         MountainCaveDungeon.startRoom();
                     } else {
                         TextEngine.printWithDelays("You must complete The Dark Forest first.\nTry going south east", true);
                     }
-                }
-                default ->
+                }default ->
                     Main.inGameDefaultTextHandling(command);
             }
         }
@@ -2890,26 +2862,22 @@ public class OpenWorld extends Room {
                     previousRoomSave = roomSave;
                     roomSave = 55;
                     Main.loadSave();
-                }
-                case "east" -> {
+                }case "east" -> {
                     previousRoomSave = roomSave;
                     roomSave = 65;
                     Main.loadSave();
-                }
-                case "south" -> {
+                }case "south" -> {
                     previousRoomSave = roomSave;
                     roomSave = 72;
                     Main.loadSave();
-                }
-                case "the desert plains" -> {
+                }case "the desert plains" -> {
                     if (Dungeon.completedDungeons > 4) {
                         previousRoomSave = roomSave;
                         DesertPlainsDungeon.startRoom();
                     } else {
                         TextEngine.printWithDelays("You must complete The Desert Oasis dungeons first.\nTry going to the south south", true);
                     }
-                }
-                default ->
+                }default ->
                     Main.inGameDefaultTextHandling(command);
             }
         }
@@ -2935,23 +2903,19 @@ public class OpenWorld extends Room {
                     previousRoomSave = roomSave;
                     roomSave = 27;
                     Main.loadSave();
-                }
-                case "east" -> {
+                }case "east" -> {
                     previousRoomSave = roomSave;
                     roomSave = 66;
                     Main.loadSave();
-                }
-                case "south" -> {
+                }case "south" -> {
                     previousRoomSave = roomSave;
                     roomSave = 73;
                     Main.loadSave();
-                }
-                case "west" -> {
+                }case "west" -> {
                     previousRoomSave = roomSave;
                     roomSave = 64;
                     Main.loadSave();
-                }
-                default ->
+                }default ->
                     Main.inGameDefaultTextHandling(command);
             }
         }
@@ -2976,23 +2940,19 @@ public class OpenWorld extends Room {
                     previousRoomSave = roomSave;
                     roomSave = 57;
                     Main.loadSave();
-                }
-                case "east" -> {
+                }case "east" -> {
                     previousRoomSave = roomSave;
                     roomSave = 67;
                     Main.loadSave();
-                }
-                case "south" -> {
+                }case "south" -> {
                     previousRoomSave = roomSave;
                     roomSave = 74;
                     Main.loadSave();
-                }
-                case "west" -> {
+                }case "west" -> {
                     previousRoomSave = roomSave;
                     roomSave = 65;
                     Main.loadSave();
-                }
-                default ->
+                }default ->
                     Main.inGameDefaultTextHandling(command);
             }
         }
@@ -3018,24 +2978,20 @@ public class OpenWorld extends Room {
                     previousRoomSave = roomSave;
                     roomSave = 58;
                     Main.loadSave();
-                }
-                case "east" -> {
+                }case "east" -> {
                     previousRoomSave = roomSave;
                     roomSave = 68;
                     Main.loadSave();
-                }
-                case "the village" -> {
+                }case "the village" -> {
                     previousRoomSave = roomSave;
                     saveRoomNumber = roomNumber;
                     roomSave = 1;
                     Main.loadSave();
-                }
-                case "west" -> {
+                }case "west" -> {
                     previousRoomSave = roomSave;
                     roomSave = 66;
                     Main.loadSave();
-                }
-                default ->
+                }default ->
                     Main.inGameDefaultTextHandling(command);
             }
         }
@@ -3061,18 +3017,15 @@ public class OpenWorld extends Room {
                     previousRoomSave = roomSave;
                     roomSave = 59;
                     Main.loadSave();
-                }
-                case "east" -> {
+                }case "east" -> {
                     previousRoomSave = roomSave;
                     roomSave = 69;
                     Main.loadSave();
-                }
-                case "west" -> {
+                }case "west" -> {
                     previousRoomSave = roomSave;
                     roomSave = 67;
                     Main.loadSave();
-                }
-                default ->
+                }default ->
                     Main.inGameDefaultTextHandling(command);
             }
         }
@@ -3101,17 +3054,14 @@ public class OpenWorld extends Room {
                     previousRoomSave = roomSave;
                     roomSave = 60;
                     Main.loadSave();
-                }
-                case "the meadow" -> {
+                }case "the meadow" -> {
                     previousRoomSave = roomSave;
                     MeadowDungeon.startRoom();
-                }
-                case "west" -> {
+                }case "west" -> {
                     previousRoomSave = roomSave;
                     roomSave = 68;
                     Main.loadSave();
-                }
-                default ->
+                }default ->
                     Main.inGameDefaultTextHandling(command);
             }
         }
@@ -3140,21 +3090,18 @@ public class OpenWorld extends Room {
                     previousRoomSave = roomSave;
                     roomSave = 64;
                     Main.loadSave();
-                }
-                case "east" -> {
+                }case "east" -> {
                     previousRoomSave = roomSave;
                     roomSave = 73;
                     Main.loadSave();
-                }
-                case "the desert oasis" -> {
+                }case "the desert oasis" -> {
                     if (Dungeon.completedDungeons > 3) {
                         previousRoomSave = roomSave;
                         DesertOasisDungeon.startRoom();
                     } else {
                         TextEngine.printWithDelays("You must complete The Mountain Top dungeon first.\n Try going to the north, east", true);
                     }
-                }
-                default ->
+                }default ->
                     Main.inGameDefaultTextHandling(command);
             }
         }
@@ -3180,18 +3127,15 @@ public class OpenWorld extends Room {
                     previousRoomSave = roomSave;
                     roomSave = 65;
                     Main.loadSave();
-                }
-                case "east" -> {
+                }case "east" -> {
                     previousRoomSave = roomSave;
                     roomSave = 74;
                     Main.loadSave();
-                }
-                case "west" -> {
+                }case "west" -> {
                     previousRoomSave = roomSave;
                     roomSave = 72;
                     Main.loadSave();
-                }
-                default ->
+                }default ->
                     Main.inGameDefaultTextHandling(command);
             }
         }
@@ -3216,19 +3160,16 @@ public class OpenWorld extends Room {
                     previousRoomSave = roomSave;
                     roomSave = 66;
                     Main.loadSave();
-                }
-                case "the village" -> {
+                }case "the village" -> {
                     previousRoomSave = roomSave;
                     saveRoomNumber = roomNumber;
                     roomSave = 1;
                     Main.loadSave();
-                }
-                case "west" -> {
+                }case "west" -> {
                     previousRoomSave = roomSave;
                     roomSave = 73;
                     Main.loadSave();
-                }
-                default ->
+                }default ->
                     Main.inGameDefaultTextHandling(command);
             }
         }

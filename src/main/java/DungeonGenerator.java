@@ -462,8 +462,8 @@ public class DungeonGenerator {
                 System.out.println();
             }
             System.out.println();
-            System.out.println("Map Key: [P] Player, [?] Item Room, [B] Boss Room, [S] Spawn Room, [$] Shop Room, [F] Fairy Room");
-            System.out.println(" [~] Available Moves, [ ] Unvisited Room, [■] Visited Room");
+            System.out.println("Map Key: [P] Player,\n [?] Item Room,\n [B] Boss Room,\n [S] Spawn Room,\n [$] Shop Room,\n [F] Fairy Room");
+            System.out.println(" [~] Available Moves,\n [ ] Unvisited Room,\n [■] Visited Room");
         } else {
             for (int i = 0; i < passedMatrix.length; i++) {
                 for (int j = 0; j < passedMatrix.length; j++) {
