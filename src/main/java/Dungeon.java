@@ -829,8 +829,8 @@ public class Dungeon extends Room {
     }
 
     public static void dungeonIntroText() throws InterruptedException {
-        TextEngine.printWithDelays("You have entered The " + currentDungeon + "!", false);
-        TextEngine.printWithDelays("To beat the dungeon you must beat the" + currentBoss + "!\nBe on the look out for treasure rooms! They hold some powerful loot.\nYou can always type help to see what commands you have available!\nGood Luck!", false);
+        TextEngine.printWithDelays("You have entered The " + yellowColor + currentDungeon + resetColor + "!", false);
+        TextEngine.printWithDelays("To beat the dungeon you must beat the " + yellowColor + currentBoss + resetColor + "!\nBe on the look out for treasure rooms! They hold some powerful loot.\nYou can always type help to see what commands you have available!\nGood Luck!", false);
         TextEngine.enterToNext();
     }
 }

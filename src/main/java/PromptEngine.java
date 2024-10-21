@@ -145,7 +145,6 @@ public class PromptEngine {
     }
 
     public static boolean testAPIKey(String apiKey) {
-        // For the sake of the demo, we will assume the API key is valid.
         // userAPIKey = apiKey;
         // aiGenerationEnabled = true;
         // return true;

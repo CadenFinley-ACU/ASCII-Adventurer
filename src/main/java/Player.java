@@ -337,6 +337,15 @@ public class Player {
             inventorySize = 200;
             putItem("k.o. cannon", 10);
             Main.loadSave();
+        } else if ("complete".equals(command) && name.equals("Debug!")) {
+            maxHealth = 10000;
+            health = maxHealth;
+            gold = 20000000;
+            inventorySize = 200;
+            putItem("k.o. cannon", 10);
+            Dungeon.completedDungeons = 8;
+            Main.gameComplete = true;
+            Main.loadSave();
         } else {
             command = null;
             Main.loadSave();
@@ -911,12 +920,12 @@ public class Player {
         };
         int closestVillageX = -1;
         int closestVillageY = -1;
-        double minDistance = Double.MAX_VALUE;
+        int minDistance = Integer.MAX_VALUE;
 
         for (int y = 0; y < map.length; y++) {
             for (int x = 0; x < map[y].length; x++) {
                 if ("[ V ]".equals(map[y][x])) {
-                    double distance = Math.sqrt(Math.pow(x - playerX, 2) + Math.pow(y - playerY, 2));
+                    int distance = Math.abs(x - playerX) + Math.abs(y - playerY);
                     if (distance < minDistance) {
                         minDistance = distance;
                         closestVillageX = x;
@@ -928,7 +937,7 @@ public class Player {
         if (closestVillageX == -1 || closestVillageY == -1) {
             return -1;
         }
-        return (int) minDistance;
+        return minDistance;
     }
 
     public static int distanceToNextDungeon() {
@@ -1043,7 +1052,7 @@ public class Player {
         for (int y = 0; y < map.length; y++) {
             for (int x = 0; x < map[y].length; x++) {
                 if ("[ ! ]".equals(map[y][x])) {
-                    double distance = Math.sqrt(Math.pow(x - playerX, 2) + Math.pow(y - playerY, 2));
+                    int distance = Math.abs(x - playerX) + Math.abs(y - playerY);
                     if (distance < minDistance) {
                         minDistance = distance;
                         closestDungeonX = x;

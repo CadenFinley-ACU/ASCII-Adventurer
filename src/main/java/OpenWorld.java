@@ -714,9 +714,9 @@ public class OpenWorld extends Room {
             } else {
                 TextEngine.printWithDelays("Congrats! you have beaten The Ocean Kingdom dungeon,\n     time to go back to a village rest up, check out the shop, and head to the next dungeon.\n\n", false);
             }
+            TextEngine.printWithDelays("As you walk, you notice the winding paths leading back to the village,\n    where the comforting sights and sounds of town life await you.", false);
         }
         //TextEngine.printWithDelays("        You have entered the deep sea\n\n", false);
-        TextEngine.printWithDelays("As you walk, you notice the winding paths leading back to the village,\n    where the comforting sights and sounds of town life await you.", false);
         TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
         TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "east" + resetColor + " or " + yellowColor + "The Ocean Kingdom" + resetColor + " to decide", true);
         while (true) {
@@ -750,9 +750,9 @@ public class OpenWorld extends Room {
             TextEngine.printWithDelays(PromptEngine.returnPrompt(), false);
         } else {
             Dungeon.dungeonCheck();
+            TextEngine.printWithDelays("Warning: Stepping into a dungeon will trigger battles,\n    but you may uncover valuable treasures within its chambers if you manage to survive.\n", false);
         }
         // TextEngine.printWithDelays("    You have entered the deep sea", false);
-        TextEngine.printWithDelays("Warning: Stepping into a dungeon will trigger battles,\n    but you may uncover valuable treasures within its chambers if you manage to survive.\n", false);
         TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "east" + resetColor + ", or " + yellowColor + "west" + resetColor + " to make your choice", true);
         while (true) {
             ignore = console.readLine();
@@ -782,8 +782,8 @@ public class OpenWorld extends Room {
             TextEngine.printWithDelays(PromptEngine.returnPrompt(), false);
         } else {
             Dungeon.dungeonCheck();
+            TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
         }
-        TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
         TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "east" + resetColor + ", or " + yellowColor + "west" + resetColor + " to continue your journey ", true);
         while (true) {
             ignore = console.readLine();
@@ -817,9 +817,9 @@ public class OpenWorld extends Room {
             } else {
                 TextEngine.printWithDelays("Congrets! you have beaten The Mountain Cave dungeon,\n     time to go back to a village rest up, check out the shop, and head to the next dungeon.\n\n", false);
             }
+            TextEngine.printWithDelays("Warning: Stepping into a dungeon will trigger battles,\n    but you may uncover valuable treasures within its chambers if you manage to survive.\n", false);
         }
         //TextEngine.printWithDelays("    You have started to climb the mountain", false);
-        TextEngine.printWithDelays("Warning: Stepping into a dungeon will trigger battles,\n    but you may uncover valuable treasures within its chambers if you manage to survive.\n", false);
         TextEngine.printWithDelays("Which path will you choose? Type " + yellowColor + "east" + resetColor + ", " + yellowColor + "south" + resetColor + ", or " + yellowColor + "west" + resetColor + " to continue your journey", true);
         while (true) {
             ignore = console.readLine();
@@ -858,8 +858,8 @@ public class OpenWorld extends Room {
             } else {
                 TextEngine.printWithDelays("Congrets! you have beaten The Mountain Top dungeon,\n     time to go back to a village rest up, check out the shop, and head to the next dungeon.\n\n", false);
             }
+            TextEngine.printWithDelays("Warning: Stepping into a dungeon will trigger battles,\n    but you may uncover valuable treasures within its chambers if you manage to survive.\n", false);
         }
-        TextEngine.printWithDelays("Warning: Stepping into a dungeon will trigger battles,\n    but you may uncover valuable treasures within its chambers if you manage to survive.\n", false);
         TextEngine.printWithDelays("Which path will you choose? Type " + yellowColor + "The Mountain Top" + resetColor + ", " + yellowColor + "south" + resetColor + ", or " + yellowColor + "west" + resetColor + " to continue your journey", true);
         while (true) {
             ignore = console.readLine();
@@ -901,8 +901,8 @@ public class OpenWorld extends Room {
             } else {
                 TextEngine.printWithDelays("Congrats! you have beaten The Ocean Kingdom dungeon,\n     time to go back to a village rest up, check out the shop, and head to the next dungeon.\n\n", false);
             }
+            TextEngine.printWithDelays("Warning: Stepping into a dungeon will trigger battles,\n    but you may uncover valuable treasures within its chambers if you manage to survive.\n", false);
         }
-        TextEngine.printWithDelays("Warning: Stepping into a dungeon will trigger battles,\n    but you may uncover valuable treasures within its chambers if you manage to survive.\n", false);
         TextEngine.printWithDelays("Which path will you choose? Type " + yellowColor + "north" + resetColor + ", or " + yellowColor + "south" + resetColor + " to continue your journey", true);
         while (true) {
             ignore = console.readLine();
@@ -975,8 +975,8 @@ public class OpenWorld extends Room {
             } else {
                 TextEngine.printWithDelays("Congrats! you have beaten The Mountain Cave dungeon,\n     time to go back to a village rest up, check out the shop, and head to the next dungeon.\n\n", false);
             }
+            TextEngine.printWithDelays("Warning: Stepping into a dungeon will trigger battles,\n    but you may uncover valuable treasures within its chambers if you manage to survive.\n", false);
         }
-        TextEngine.printWithDelays("Warning: Stepping into a dungeon will trigger battles,\n    but you may uncover valuable treasures within its chambers if you manage to survive.\n", false);
         TextEngine.printWithDelays("Which path will you choose? Type " + yellowColor + "north" + resetColor + ", " + yellowColor + "east" + resetColor + ", " + yellowColor + "south" + resetColor + ", or " + yellowColor + "west" + resetColor + "  to continue your journey", true);
         while (true) {
             ignore = console.readLine();
@@ -1020,8 +1020,8 @@ public class OpenWorld extends Room {
             } else {
                 TextEngine.printWithDelays("Congrats! you have beaten The Mountain Top dungeon,\n     time to go back to a village rest up, check out the shop, and head to the next dungeon.\n\n", false);
             }
+            TextEngine.printWithDelays("Worrning: going into a dungeon you will trigger fights, but you might find something in the rooms\nIf you do not DIE", false);
         }
-        TextEngine.printWithDelays("Worrning: going into a dungeon you will trigger fights, but you might find something in the rooms\nIf you do not DIE", false);
         TextEngine.printWithDelays("Which path will you choose? Type " + yellowColor + "The Mountain Top" + resetColor + ", " + yellowColor + "south" + resetColor + ", or " + yellowColor + "west" + resetColor + " to continue your journey", true);
         while (true) {
             ignore = console.readLine();
@@ -1274,8 +1274,8 @@ public class OpenWorld extends Room {
             } else {
                 TextEngine.printWithDelays("Congrats! you have beaten The Mountain Cave dungeon,\n     time to go back to a village rest up, check out the shop, and head to the next dungeon.\n\n", false);
             }
+            TextEngine.printWithDelays("Warning: Stepping into a dungeon will trigger battles,\n    but you may uncover valuable treasures within its chambers if you manage to survive.\n", false);
         }
-        TextEngine.printWithDelays("Warning: Stepping into a dungeon will trigger battles,\n    but you may uncover valuable treasures within its chambers if you manage to survive.\n", false);
         TextEngine.printWithDelays("Which path will you choose? Type " + yellowColor + "north" + resetColor + ", " + yellowColor + "east" + resetColor + ", " + yellowColor + "south" + resetColor + " or " + yellowColor + "west" + resetColor + " to continue your journey", true);
         while (true) {
             ignore = console.readLine();

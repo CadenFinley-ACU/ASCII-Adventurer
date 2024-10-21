@@ -13,10 +13,12 @@ public abstract class TextEngine {
 
     public static String speedSetting = "Normal";
     public final static Console console = System.console();
+    public static String yellowColor = "\033[1;33m";
+    public static String resetColor = "\033[0m";
 
     public static void printWithDelays(String data, boolean buffer) throws InterruptedException { //use buffer is you are accepting input after the text is printed
         if (buffer) {
-            data = data + " (press enter to type)";
+            data = data + yellowColor + " (press enter to type)" + resetColor;
         }
         if (data.charAt(data.length() - 1) != '\n' && !buffer) {
             data = data + "\n";
@@ -46,7 +48,7 @@ public abstract class TextEngine {
 
     public static void printNoDelay(String data, boolean buffer) { //use buffer is you are accepting input after the text is printed
         if (buffer) {
-            data = data + " (press enter to type)";
+            data = data + yellowColor + " (press enter to type)" + resetColor;
         }
         if (data.charAt(data.length() - 1) != '\n' && !buffer) {
             data = data + "\n";
@@ -71,7 +73,7 @@ public abstract class TextEngine {
     }
 
     public static void enterToNext() throws InterruptedException { //adds a pause and waits for enter
-        printNoDelay("Press Enter to continue", false);
+        printNoDelay(yellowColor + "Press Enter to continue" + resetColor, false);
         console.readLine();
     }
 

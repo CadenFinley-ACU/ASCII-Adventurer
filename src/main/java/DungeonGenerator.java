@@ -24,11 +24,6 @@ public class DungeonGenerator {
         matrix = null;
     }
 
-    /**
-     * Starts the dungeon generation process.
-     *
-     * @param pass The size of the matrix to generate.
-     */
     public static void start(int pass) {
         runs++;
         if (pass < 5) {
@@ -136,16 +131,6 @@ public class DungeonGenerator {
         start(size);
     }
 
-    /**
-     * Draws a path of 1's to connect two points in the matrix.
-     *
-     * @param matrix The matrix to draw the path in.
-     * @param x1 The starting x-coordinate.
-     * @param y1 The starting y-coordinate.
-     * @param x2 The ending x-coordinate.
-     * @param y2 The ending y-coordinate.
-     * @param rand The Random instance to use for generating random deviations.
-     */
     private static void drawPath(int[][] matrix, int x1, int y1, int x2, int y2, Random rand) {
         while (x1 != x2 || y1 != y2) {
             if (rand.nextBoolean()) {
@@ -170,15 +155,6 @@ public class DungeonGenerator {
         }
     }
 
-    /**
-     * Adds random values to the matrix ensuring they are connected to the main
-     * path.
-     *
-     * @param matrix The matrix to add values to.
-     * @param rand The Random instance to use for generating random positions.
-     * @param minOnes The minimum number of values to add.
-     * @param num The value to add to the matrix.
-     */
     private static void addRandom(int[][] matrix, Random rand, int minOnes, int num) {
         int addedOnes = 0;
         while (addedOnes < minOnes) {
@@ -192,17 +168,6 @@ public class DungeonGenerator {
         }
     }
 
-    /**
-     * Checks if a position in the matrix is connected to the main path.
-     *
-     * Algorithm: Adjacency check.
-     *
-     * @param matrix The matrix to check.
-     * @param x The x-coordinate of the position to check.
-     * @param y The y-coordinate of the position to check.
-     * @return True if the position is connected to the main path, false
-     * otherwise.
-     */
     private static boolean isConnected(int[][] matrix, int x, int y) {
         int[] dx = {-1, 1, 0, 0};
         int[] dy = {0, 0, -1, 1};
@@ -216,14 +181,6 @@ public class DungeonGenerator {
         return false;
     }
 
-    /**
-     * Ensures that only one value greater than zero is adjacent to the value 8
-     * in the matrix.
-     *
-     * @param matrix The matrix to modify.
-     * @param x The x-coordinate of the position to check.
-     * @param y The y-coordinate of the position to check.
-     */
     private static void ensureSingleAdjacent(int[][] matrix, int x, int y) {
         int[] dx = {-1, 1, 0, 0};
         int[] dy = {0, 0, -1, 1};
@@ -241,20 +198,6 @@ public class DungeonGenerator {
         }
     }
 
-    /**
-     * Checks if there is a path connecting two points in the matrix.
-     *
-     * Algorithm: Breadth-First Search (BFS). Time Complexity: O(n^2) where n is
-     * the size of the matrix.
-     *
-     * @param matrix The matrix to check.
-     * @param x1 The starting x-coordinate.
-     * @param y1 The starting y-coordinate.
-     * @param x2 The ending x-coordinate.
-     * @param y2 The ending y-coordinate.
-     * @return True if there is a path connecting the two points, false
-     * otherwise.
-     */
     public static boolean isPathConnected(int[][] matrix, int x1, int y1, int x2, int y2) {
         int size = matrix.length;
         boolean[][] visited = new boolean[size][size];
@@ -288,12 +231,6 @@ public class DungeonGenerator {
         return false;
     }
 
-    /**
-     * Tests if the matrix meets certain criteria.
-     *
-     * @param arrays The matrix to test.
-     * @return True if the matrix meets the criteria, false otherwise.
-     */
     public static boolean testArrays(int[][] arrays) {
         int[][] localMatrix = arrays;
         int[] pos9 = findValue(localMatrix, 9);
@@ -309,17 +246,6 @@ public class DungeonGenerator {
         return (isPathConnected(localMatrix, pos9[0], pos9[1], pos8[0], pos8[1]) && isPathConnected(localMatrix, pos9[0], pos9[1], pos3[0], pos3[1]) && isPathConnected(localMatrix, pos9[0], pos9[1], pos2[0], pos2[1]) && isPathConnected(localMatrix, pos9[0], pos9[1], pos4[0], pos4[1]) && !isAdjacent(pos8[0], pos8[1], pos6) && !isAdjacent(pos8[0], pos8[1], pos4) && numberOfRooms(matrix, 2) >= 2);
     }
 
-    /**
-     * Finds the coordinates of a value in the matrix.
-     *
-     * Algorithm: Linear search. Time Complexity: O(n^2) where n is the size of
-     * the matrix.
-     *
-     * @param matrix The matrix to search.
-     * @param value The value to find.
-     * @return The coordinates of the value as an array [x, y], or null if not
-     * found.
-     */
     public static int[] findValue(int[][] matrix, int value) {
         for (int i = 0; i < matrix.length; i++) {
             for (int j = 0; j < matrix[i].length; j++) {
@@ -331,21 +257,10 @@ public class DungeonGenerator {
         return null;
     }
 
-    /**
-     * Returns the generated matrix.
-     *
-     * @return The generated matrix.
-     */
     public static int[][] returnMatrix() {
         return matrix;
     }
 
-    /**
-     * Generates a valid matrix with a path connecting the values 8 and 9.
-     *
-     * @param size The size of the matrix to generate.
-     * @return The generated matrix.
-     */
     public static int[][] generateValidMatrix(int size) {
         int[][] localMatrix;
         Random random = new Random();
@@ -364,11 +279,6 @@ public class DungeonGenerator {
         return localMatrix;
     }
 
-    /**
-     * Prints the generated matrix.
-     *
-     * @param size The size of the matrix to print.
-     */
     public static void printMap(int[][] passedMatrix) {
         for (int[] passedMatrix1 : passedMatrix) {
             for (int j = 0; j < passedMatrix.length; j++) {
@@ -382,14 +292,6 @@ public class DungeonGenerator {
         }
     }
 
-    /**
-     * Prints the adjacent rooms, the current room, and unlocked rooms in the
-     * dungeon matrix.
-     *
-     * @param passedMatrix The matrix representing the dungeon layout.
-     * @param unlocked The matrix indicating which rooms have been unlocked.
-     * @param passedPosition The current position of the player in the dungeon.
-     */
     public static void printAdjacentRoomsAndCurrentRoomAndUnlockedRooms(int[][] passedMatrix, int[][] unlocked, int[] passedPosition, boolean revealed) {
         if (!revealed) {
             for (int i = 0; i < passedMatrix.length; i++) {
@@ -548,28 +450,12 @@ public class DungeonGenerator {
         }
     }
 
-    /**
-     * Checks if a given position is adjacent to the player's current position.
-     *
-     * @param x The x-coordinate of the position to check.
-     * @param y The y-coordinate of the position to check.
-     * @param playerPosition The current position of the player.
-     * @return True if the position is adjacent to the player's position, false
-     * otherwise.
-     */
     private static boolean isAdjacent(int x, int y, int[] playerPosition) {
         int px = playerPosition[0];
         int py = playerPosition[1];
         return (Math.abs(px - x) == 1 && py == y) || (Math.abs(py - y) == 1 && px == x);
     }
 
-    /**
-     * Trims off the unreachable parts of the matrix.
-     *
-     * @param matrix The matrix to trim.
-     * @param startPosition The starting position of the player.
-     * @return The trimmed matrix.
-     */
     public static int[][] trimUnreachableParts(int[][] matrix, int[] startPosition) {
         int rows = matrix.length;
         int cols = matrix[0].length;
@@ -611,27 +497,11 @@ public class DungeonGenerator {
         return matrix;
     }
 
-    /**
-     * Generates and returns a valid matrix with a path connecting the values 8
-     * and 9.
-     *
-     * @param size The size of the matrix to generate.
-     * @return The generated matrix.
-     */
     public static int[][] generateAndReturnMatrix(int size) {
         start(size);
         return matrix;
     }
 
-    /**
-     * Returns an array of all adjacent values greater than 0 to a given point
-     * on the passed matrix.
-     *
-     * @param matrix The matrix to check.
-     * @param x The x-coordinate of the point.
-     * @param y The y-coordinate of the point.
-     * @return An array of adjacent values greater than 0.
-     */
     public static int[] getDirections(int[][] matrix, int x, int y) {
         List<Integer> directions = new ArrayList<>();
         int[] dx = {-1, 1, 0, 0};
@@ -648,13 +518,6 @@ public class DungeonGenerator {
         return directions.stream().mapToInt(i -> i).toArray();
     }
 
-    /**
-     * Creates a 2D array representing rooms that have been visited. Each
-     * element in the array is initialized to 0.
-     *
-     * @param size the size of the 2D array (size x size)
-     * @return a 2D array with all elements initialized to 0
-     */
     public static int[][] createRoomsBeenTo(int size) {
         int[][] temp = new int[size][size];
         for (int i = 0; i < size; i++) {
@@ -665,16 +528,6 @@ public class DungeonGenerator {
         return temp;
     }
 
-    /**
-     * Counts the number of rooms in the matrix that match the specified value.
-     *
-     * This method is only used by TestSuite_Adventure.java and is not part of
-     * the main program.
-     *
-     * @param matrix the 2D array representing the rooms
-     * @param find the value to count in the matrix
-     * @return the number of rooms that match the specified value
-     */
     public static int numberOfRooms(int[][] matrix, int find) {
         int count = 0;
         for (int[] ints : matrix) {
