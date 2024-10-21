@@ -178,7 +178,6 @@ public class Main {
 
     
      
-           
         
         
            
@@ -660,7 +659,7 @@ public class Main {
         }
         //TextEngine.printNoDelay("Health: " + healthColor+Player.getHealth()+resetColor, false);
         Player.drawHealthBar();
-        TextEngine.printNoDelay("Gold: " + Player.getGold(), false);
+        //TextEngine.printNoDelay("Gold: " + Player.getGold(), false);
         TextEngine.printNoDelay("\n", false);
     }
 

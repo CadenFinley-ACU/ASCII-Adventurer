@@ -594,6 +594,9 @@ public class Player {
             hearts = 25;
         }
         int filledBars = (int) Math.round(((double) health / maxHealth) * hearts);
+        if (filledBars == 0 && health > 0) {
+            filledBars = 1;
+        }
         if (getHealth() > Player.getMaxHealth() / 2) {
             healthColor = greenColor;
         } else if (getHealth() <= getMaxHealth() / 2 && getHealth() > (getMaxHealth() / 4) + (getMaxHealth() / 10)) {
