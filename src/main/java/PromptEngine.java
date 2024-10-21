@@ -50,7 +50,7 @@ public class PromptEngine {
                 nextDungeon = "There is no dungeon nearby";
             }
             if (setting == null || setting.isEmpty()) {
-                setting = "generic";
+                setting = "grassland";
             }
             if (dungeonNextDirection == null || dungeonNextDirection.isEmpty() || dungeonNextDirection.equals("No dungeon found")) {
                 dungeonNextDirection = "There is no dungeon nearby";
