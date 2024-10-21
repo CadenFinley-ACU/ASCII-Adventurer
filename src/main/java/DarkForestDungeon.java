@@ -77,6 +77,10 @@ public class DarkForestDungeon extends Dungeon {
                 fairySequence();
             }
         }
+        if (darkForestDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] == 9 && roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] == 0) {
+            Dungeon.dungeonIntroText();
+            roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = darkForestDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
+        }
         if (darkForestDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] == 10 && roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] == 0) {
             TextEngine.printWithDelays("You have entered a room with a mystical fairy", false);
             TextEngine.printWithDelays("The fairy has granted you a wish of healing?", false);

@@ -38,17 +38,17 @@ public class OpenWorld extends Room {
             switch (Player.getColorOfPlayerPostitionTile()) {
                 case "grassland" -> {
                     numberOfEnemies = rand.nextInt(3);
-                    encounter = (rand.nextInt(100) < 15); // 15% chance of encounter
+                    encounter = (rand.nextInt(100) < 25); // 15% chance of encounter
                     enemies = new ArrayList<>(List.of("Goblin", "Slime", "Bandit"));//at some point make some enemies environment exclusive
                 }
                 case "desert" -> {
                     numberOfEnemies = rand.nextInt(5);
-                    encounter = (rand.nextInt(100) < 25); // 25% chance of encounter
+                    encounter = (rand.nextInt(100) < 35); // 25% chance of encounter
                     enemies = new ArrayList<>(List.of("Scorpion", "Barbarian", "Bandit"));//at some point make some enemies environment exclusive
                 }
-                case "mountain" -> {
+                case "mountain", "mountain top" -> {
                     numberOfEnemies = rand.nextInt(3);
-                    encounter = (rand.nextInt(100) < 30); // 30% chance of encounter
+                    encounter = (rand.nextInt(100) < 40); // 30% chance of encounter
                     enemies = new ArrayList<>(List.of("Goblin", "Mountain Lion", "Mimic", "Orc"));//at some point make some enemies environment exclusive
                 }
                 case "ocean" -> {
@@ -57,12 +57,12 @@ public class OpenWorld extends Room {
                     enemies = new ArrayList<>(List.of("Pirate", "Shark"));//at some point make some enemies environment exclusive
                 }
                 case "lost forest" -> {
-                    encounter = (rand.nextInt(100) < 35); // 35% chance of encounter
+                    encounter = (rand.nextInt(100) < 40); // 35% chance of encounter
                     numberOfEnemies = rand.nextInt(5);
                     enemies = new ArrayList<>(List.of("Skeleton", "Slime", "Zombie", "Orc", "Bandit"));//at some point make some enemies environment exclusive
                 }
                 default -> {
-                    encounter = (rand.nextInt(100) < 15); // 15% chance of encounter
+                    encounter = (rand.nextInt(100) < 25); // 15% chance of encounter
                     numberOfEnemies = rand.nextInt(3);
                     enemies = new ArrayList<>(List.of("Goblin", "Slime", "Bandit"));//at some point make some enemies environment exclusive
                 }

@@ -61,7 +61,10 @@ public class OceanKingdomDungeon extends Dungeon {
         Main.screenRefresh();
         DungeonGenerator.drawRoom(oceanKingdomDungeon, roomsBeenTo, currentPlayerPosition[0], currentPlayerPosition[1], numberOfEnemies, mapRevealed);
         directionsString = new ArrayList<>();
-
+        if (oceanKingdomDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] == 9 && roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] == 0) {
+            Dungeon.dungeonIntroText();
+            roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = oceanKingdomDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
+        }
         if (oceanKingdomDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] == 2 && roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] == 0) {
             if (!items.isEmpty()) {
                 String randomItem = items.get(rand.nextInt(items.size()));

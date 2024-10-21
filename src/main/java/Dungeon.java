@@ -717,9 +717,9 @@ public class Dungeon extends Room {
     }
 
     private static void leave() throws InterruptedException {
-        // int[] buffer = currentPlayerPosition.clone();
-        // currentPlayerPosition = lastPosition.clone(); // Save the current position before moving
-        // lastPosition = buffer.clone();
+        int[] buffer = currentPlayerPosition.clone();
+        currentPlayerPosition = lastPosition.clone(); // Save the current position before moving
+        lastPosition = buffer.clone();
         switch (currentDungeon) {
             case "Meadow" -> {
                 TextEngine.printWithDelays("You leave the shop and return to the Meadow Dungeon.", false);
@@ -829,5 +829,11 @@ public class Dungeon extends Room {
                 return true;
             }
         }
+    }
+
+    public static void dungeonIntroText() throws InterruptedException {
+        TextEngine.printWithDelays("You have entered The " + currentDungeon + "!", false);
+        TextEngine.printWithDelays("To beat the dungeon you must beat the" + currentBoss + "!\nBe on the look out for treasure rooms! They hold some powerful loot.\nYou can always type help to see what commands you have available!\nGood Luck!", false);
+        TextEngine.enterToNext();
     }
 }

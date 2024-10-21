@@ -629,7 +629,7 @@ public class Player {
         Map<String, String> colorToEnvironment = new HashMap<>();
         colorToEnvironment.put("G", "grassland"); // Green
         colorToEnvironment.put("s", "desert");    // Yellow
-        colorToEnvironment.put("S", "mountain"); // White
+        colorToEnvironment.put("S", "mountain top"); // White
         colorToEnvironment.put("b", "ocean");     // Blue
         colorToEnvironment.put("g", "mountain"); // Gray
         colorToEnvironment.put("F", "lost forest"); // Gray
@@ -842,9 +842,6 @@ public class Player {
         int deltaX = closestDungeonX - playerX;
         int deltaY = closestDungeonY - playerY;
 
-        // System.out.println("Player Position: (" + playerX + ", " + playerY + ")");
-        // System.out.println("Closest Dungeon Position: (" + closestDungeonX + ", " + closestDungeonY + ")");
-        // System.out.println("DeltaX: " + deltaX + ", DeltaY: " + deltaY);
         if (deltaX == 0 && deltaY < 0) {
             return "North";
         }

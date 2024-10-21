@@ -78,6 +78,10 @@ public class DesertPlainsDungeon extends Dungeon {
                 fairySequence();
             }
         }
+        if (desertPlainsDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] == 9 && roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] == 0) {
+            Dungeon.dungeonIntroText();
+            roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = desertPlainsDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
+        }
         if (desertPlainsDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] == 10 && roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] == 0) {
             TextEngine.printWithDelays("You have entered a room with a mystical fairy", false);
             TextEngine.printWithDelays("The fairy has granted you a wish of healing?", false);
