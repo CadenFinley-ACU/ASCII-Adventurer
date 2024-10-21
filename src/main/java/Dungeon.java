@@ -717,9 +717,6 @@ public class Dungeon extends Room {
     }
 
     private static void leave() throws InterruptedException {
-        int[] buffer = currentPlayerPosition.clone();
-        currentPlayerPosition = lastPosition.clone(); // Save the current position before moving
-        lastPosition = buffer.clone();
         switch (currentDungeon) {
             case "Meadow" -> {
                 TextEngine.printWithDelays("You leave the shop and return to the Meadow Dungeon.", false);
