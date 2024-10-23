@@ -170,7 +170,7 @@ public class Enemy {
             quantity = 1;
         }
         checkhealth(type, quantity, false);
-        int damage = enemyDamageValues.get(type) / 2 * quantity;
+        int damage = (enemyDamageValues.get(type) * quantity) / 2;
         if (damage < 1) {
             damage = 1;
         }

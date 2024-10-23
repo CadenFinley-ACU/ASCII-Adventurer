@@ -633,6 +633,8 @@ public class DungeonGenerator {
                                 enemyRender = "S";
                             case "Pirate" ->
                                 enemyRender = "P";
+                            case "Minotaur" ->
+                                enemyRender = "M";
                             default ->
                                 enemyRender = "E";
                         }
