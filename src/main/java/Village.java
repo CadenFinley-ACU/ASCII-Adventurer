@@ -114,7 +114,7 @@ public class Village extends Room {
                 case "portal" -> {
                     if (Dungeon.completedDungeons > 5) {
                         TextEngine.printWithDelays("Which area would you like to warp to?", false);
-                        TextEngine.printWithDelays("Forest, Mountain, Desert, Ocean?", false);
+                        TextEngine.printWithDelays("Forest, Mountain, Desert, Ocean?", true);
                         ignore = console.readLine();
                         command = console.readLine();
                         switch (command.toLowerCase()) {

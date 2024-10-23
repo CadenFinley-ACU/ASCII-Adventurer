@@ -328,7 +328,7 @@ public class Player {
         TextEngine.printNoDelay("Damage: " + damage, false);
         TextEngine.printNoDelay("Defense: " + defense, false);
         TextEngine.printNoDelay("Inventory: " + getTotalNumberOfItemsInInventory() + "/" + inventorySize, false);
-        TextEngine.printNoDelay("Press Enter to continue", false);
+        TextEngine.printNoDelay(yellowColor + "Press Enter to continue" + resetColor, false);
         command = console.readLine();
         if ("[][][]3>CadenTesting".equals(command)) {
             maxHealth = 10000;
