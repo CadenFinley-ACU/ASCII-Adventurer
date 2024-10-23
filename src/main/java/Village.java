@@ -114,16 +114,16 @@ public class Village extends Room {
                         command = console.readLine();
                         switch (command.toLowerCase()) {
                             case "forest" -> {
-                                OpenWorld.roomSave = 4;
+                                OpenWorld.roomSave = 60;
                                 OpenWorld.startRoom();
                             }case "mountain" -> {
                                 OpenWorld.roomSave = 5;
                                 OpenWorld.startRoom();
                             }case "desert" -> {
-                                OpenWorld.roomSave = 10;
+                                OpenWorld.roomSave = 50;
                                 OpenWorld.startRoom();
                             }case "ocean" -> {
-                                OpenWorld.roomSave = 9;
+                                OpenWorld.roomSave = 3;
                                 OpenWorld.startRoom();
                             }default ->
                                 Main.inGameDefaultTextHandling(command);

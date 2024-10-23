@@ -544,7 +544,7 @@ public class DungeonGenerator {
                 System.out.println();
             }
             System.out.println();
-            System.out.println("Map Key: [P] Player, [?] Item Room, [B] Boss Room, [S] Spawn Room, [$] Shop Room, [F] Fairy Room");
+            System.out.println("Map Key: [P] Player,\n [?] Item Room,\n [B] Boss Room,\n [S] Spawn Room,\n [$] Shop Room,\n [F] Fairy Room,\n [k] Key Room");
         }
     }
 
