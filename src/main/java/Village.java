@@ -14,7 +14,6 @@ public class Village extends Room {
         room = "Village";
         Main.checkSave(room);
         Main.screenRefresh();
-        //maybe something here in the futre that adds rondomness or more advanced feature to certain villages to make them all not the exact same
         TextEngine.printWithDelays("You step into the village, surrounded by the hustle and bustle of life.\nVarious buildings dot the landscape, each offering something unique.", false);
         if (Dungeon.completedDungeons > 5) {
             TextEngine.printWithDelays("You can now warp to different areas using the " + yellowColor + "portal" + resetColor, false);
@@ -109,7 +108,7 @@ public class Village extends Room {
                 case "portal" -> {
                     if (Dungeon.completedDungeons > 5) {
                         TextEngine.printWithDelays("Which area would you like to warp to?", false);
-                        TextEngine.printWithDelays("Forest, Mountain, Desert, Ocean?", false);
+                        TextEngine.printWithDelays("Forest, Mountain, Desert, Ocean?", true);
                         ignore = console.readLine();
                         command = console.readLine();
                         switch (command.toLowerCase()) {
@@ -258,7 +257,7 @@ public class Village extends Room {
         TextEngine.printNoDelay(shopMessage, true);
 
         while (true) {
-            ignore = console.readLine(); // It's unclear what this line does, so it's kept.
+            ignore = console.readLine();
             command = console.readLine();
 
             switch (command.toLowerCase().trim()) {
@@ -313,7 +312,7 @@ public class Village extends Room {
         TextEngine.printNoDelay(shopMessage, true);
 
         while (true) {
-            ignore = console.readLine(); // It's unclear what this line does, so it's kept.
+            ignore = console.readLine();
             command = console.readLine();
 
             switch (command.toLowerCase().trim()) {
@@ -366,7 +365,7 @@ public class Village extends Room {
         TextEngine.printNoDelay(shopMessage, true);
 
         while (true) {
-            ignore = console.readLine(); // It's unclear what this line does, so it's kept.
+            ignore = console.readLine();
             command = console.readLine();
 
             switch (command.toLowerCase().trim()) {

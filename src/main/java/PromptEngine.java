@@ -42,6 +42,7 @@ public class PromptEngine {
             String villagePrompt;
             String dungeonPrompt;
             TextEngine.printNoDelay("Loading...", false);
+
             if (villageDirection == null || villageDirection.isEmpty() || villageDirection.equals("No village found")) {
                 villageDirection = "There is no village nearby";
             }
@@ -49,13 +50,13 @@ public class PromptEngine {
                 nextDungeon = "There is no dungeon nearby";
             }
             if (setting == null || setting.isEmpty()) {
-                setting = "generic";
+                setting = "grassland";
             }
             if (dungeonNextDirection == null || dungeonNextDirection.isEmpty() || dungeonNextDirection.equals("No dungeon found")) {
                 dungeonNextDirection = "There is no dungeon nearby";
             }
             if (distanceToDungeon > 0) {
-                if (distanceToDungeon == 1) {
+                if (distanceToDungeon == 0) {
                     dungeonDistanceGauge = "Right next to the player";
                 } else {
                     dungeonDistanceGauge = distanceToDungeon + " tiles away";
@@ -64,7 +65,7 @@ public class PromptEngine {
                 dungeonDistanceGauge = "There is no dungeon nearby.";
             }
             if (distanceToVillage > 0) {
-                if (distanceToVillage == 1) {
+                if (distanceToVillage == 0) {
                     villageDistanceGauge = "Right next to the player";
                 } else {
                     villageDistanceGauge = distanceToVillage + " tiles away";
@@ -82,10 +83,7 @@ public class PromptEngine {
             } else {
                 dungeonPrompt = "The " + nextDungeon + " is to the " + dungeonNextDirection + " and is " + dungeonDistanceGauge + ".";
             }
-            //String prompt1 = chatGPT("Generate a me a prompt for a text adventure game. Always state the direction of the structure if it is given and the distance if it is given. Do this in around " + promptLength + " words or less using this info: The player is in a " + setting + villagePrompt + dungeonPrompt + ".") + "\n";
-            //String prompt2 = chatGPT("Generate a me a prompt for a text adventure game. Always state the direction of the structure if it is given and the distance if it is given. Do this in around " + promptLength + " words or less using this info: The player is in a " + setting + villagePrompt + dungeonPrompt + ".") + "\n";
-            //prompt = chatGPT("Pick the best and most accurite prompt out of these two prompts useing these facts: The player is in a " + setting + " village. " + villagePrompt + " " + dungeonPrompt + " The promps are: " + prompt1 + " and " + prompt2) + "\n";
-            prompt = chatGPT("Generate a me a prompt for a text adventure game. Always state the direction of the structure if it is given and the distance if it is given. Do this in around " + promptLength + " words or less using this info: The player is in a " + setting + villagePrompt + dungeonPrompt + ".") + "\n";
+            prompt = chatGPT("Generate a me a prompt for a text adventure game designed for highschoolers. Always state the direction of the structure if it is given and the distance if it is given. When giving direction do not abbreviate the direction. Do this in around " + promptLength + " words or less using this info: The player is in a " + setting + villagePrompt + dungeonPrompt + ".") + "\n";
             Main.screenRefresh();
         }
     }
@@ -145,11 +143,10 @@ public class PromptEngine {
     }
 
     public static boolean testAPIKey(String apiKey) {
-        // For the sake of the demo, we will assume the API key is valid.
         // userAPIKey = apiKey;
         // aiGenerationEnabled = true;
         // return true;
-        String testMessage = "This is a test message to validate the API key.";
+        String testMessage = "This is a test message to check if the API key is valid.";
         try {
             String url = "https://api.openai.com/v1/chat/completions";
             String model = "gpt-3.5-turbo";

@@ -164,16 +164,11 @@ public class Enemy {
         } else {
             TextEngine.printWithDelays(space + brightRedStart + "You run from the " + type + "!" + brightRedEnd, false);
         }
-        if (quantity < 2) {
-            quantity = 0;
-        } else {
-            quantity = 1;
-        }
-        checkhealth(type, quantity, false);
-        int damage = enemyDamageValues.get(type) / 2 * quantity;
+        int damage = (enemyDamageValues.get(type) * quantity) / 2;
         if (damage < 1) {
             damage = 1;
         }
+        checkhealth(type, quantity, false);
         return 0 - (damage);
     }
 
@@ -199,7 +194,7 @@ public class Enemy {
             }
         } else {
             // Check the player's health
-            if (!(Player.getHealth() <= (enemyDamageValues.get(type) / 2 * quantity) - Player.getDamageCalc())) {
+            if (!(Player.getHealth() <= ((enemyDamageValues.get(type) * quantity) / 2) - Player.getDamageCalc())) {
                 // Print victory message in green
                 if (quantity > 1) {
                     TextEngine.printWithDelays(space + brightGreenStart + "You escaped the " + quantity + " " + type + "s!" + brightGreenEnd, false);

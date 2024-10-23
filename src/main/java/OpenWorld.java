@@ -15,7 +15,6 @@ public class OpenWorld extends Room {
     public static String holdCommand = null;
     static int roomNumber = 0;
     static int saveRoomNumber = 0;
-    static String resetColor = "\033[0m"; // reset to default color
     static String yellowColor = "\033[1;33m"; // yellow color
     private static final Random rand = new Random();
     public static int previousRoomSave = 74;
@@ -23,6 +22,7 @@ public class OpenWorld extends Room {
     public static int numberOfEnemies;
     public static String enemyType;
     public static boolean encounter = false;
+    private static int encounterRate;
     private static List<String> enemies;
     public static boolean inFight = false;
     public static boolean wasInFight = false;
@@ -32,50 +32,50 @@ public class OpenWorld extends Room {
         Main.checkSave(room);
         GameSaveSerialization.saveGame();
         Main.screenRefresh();
-
+        enemies = new ArrayList<>(List.of("Goblin", "Slime", "Bandit"));
         if (checkChangeInRoom()) {
-            enemies = null;
             switch (Player.getColorOfPlayerPostitionTile()) {
                 case "grassland" -> {
                     numberOfEnemies = rand.nextInt(3);
-                    encounter = (rand.nextInt(100) < 15); // 15% chance of encounter
-                    enemies = new ArrayList<>(List.of("Goblin", "Slime", "Bandit"));//at some point make some enemies environment exclusive
+                    encounterRate = 25;
+                    enemies = new ArrayList<>(List.of("Goblin", "Slime", "Bandit"));
                 }
                 case "desert" -> {
                     numberOfEnemies = rand.nextInt(5);
-                    encounter = (rand.nextInt(100) < 25); // 25% chance of encounter
-                    enemies = new ArrayList<>(List.of("Scorpion", "Barbarian", "Bandit"));//at some point make some enemies environment exclusive
+                    encounterRate = 30;
+                    enemies = new ArrayList<>(List.of("Scorpion", "Barbarian", "Bandit"));
                 }
-                case "mountain" -> {
+                case "mountain", "mountain top" -> {
                     numberOfEnemies = rand.nextInt(3);
-                    encounter = (rand.nextInt(100) < 30); // 30% chance of encounter
-                    enemies = new ArrayList<>(List.of("Goblin", "Mountain Lion", "Mimic", "Orc"));//at some point make some enemies environment exclusive
+                    encounterRate = 30;
+                    enemies = new ArrayList<>(List.of("Goblin", "Mountain Lion", "Mimic", "Orc"));
                 }
                 case "ocean" -> {
                     numberOfEnemies = rand.nextInt(7);
-                    encounter = (rand.nextInt(100) < 40); // 40% chance of encounter
-                    enemies = new ArrayList<>(List.of("Pirate", "Shark"));//at some point make some enemies environment exclusive
+                    encounterRate = 40;
+                    enemies = new ArrayList<>(List.of("Pirate", "Shark"));
                 }
                 case "lost forest" -> {
-                    encounter = (rand.nextInt(100) < 35); // 35% chance of encounter
+                    encounterRate = 40;
                     numberOfEnemies = rand.nextInt(5);
-                    enemies = new ArrayList<>(List.of("Skeleton", "Slime", "Zombie", "Orc", "Bandit"));//at some point make some enemies environment exclusive
+                    enemies = new ArrayList<>(List.of("Skeleton", "Slime", "Zombie", "Orc", "Bandit"));
                 }
                 default -> {
-                    encounter = (rand.nextInt(100) < 15); // 15% chance of encounter
+                    encounterRate = 25;
                     numberOfEnemies = rand.nextInt(3);
-                    enemies = new ArrayList<>(List.of("Goblin", "Slime", "Bandit"));//at some point make some enemies environment exclusive
+                    enemies = new ArrayList<>(List.of("Goblin", "Slime", "Bandit"));
                 }
             }
-            //determine open world encounter
-            if (numberOfEnemies == 0) {
-                numberOfEnemies = 1;
-            }
-            if (!encounter) {
-                numberOfEnemies = 0;
-            }
-            enemyType = enemies.get(rand.nextInt(enemies.size()));
         }
+        encounter = (rand.nextInt(100) <= encounterRate);
+        //determine open world encounter
+        if (numberOfEnemies == 0) {
+            numberOfEnemies = 1;
+        }
+        if (!encounter) {
+            numberOfEnemies = 0;
+        }
+        enemyType = enemies.get(rand.nextInt(enemies.size()));
 
         switch (roomSave) {
             case 1 -> {
@@ -714,10 +714,14 @@ public class OpenWorld extends Room {
             } else {
                 TextEngine.printWithDelays("Congrats! you have beaten The Ocean Kingdom dungeon,\n     time to go back to a village rest up, check out the shop, and head to the next dungeon.\n\n", false);
             }
+            TextEngine.printWithDelays("As you walk, you notice the winding paths leading back to the village,\n    where the comforting sights and sounds of town life await you.", false);
         }
         //TextEngine.printWithDelays("        You have entered the deep sea\n\n", false);
+<<<<<<< HEAD
         TextEngine.printWithDelays("Warning: Stepping into a dungeon will trigger battles,\n    but you may uncover valuable treasures within its chambers if you manage to survive.\n", false);
         TextEngine.printWithDelays("As you walk, you notice the winding paths leading back to the village,\n    where the comforting sights and sounds of town life await you.", false);
+=======
+>>>>>>> main
         TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
         TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "east" + resetColor + " or " + yellowColor + "The Ocean Kingdom" + resetColor + " to decide", true);
         while (true) {
@@ -751,6 +755,7 @@ public class OpenWorld extends Room {
             TextEngine.printWithDelays(PromptEngine.returnPrompt(), false);
         } else {
             Dungeon.dungeonCheck();
+            TextEngine.printWithDelays("Warning: Stepping into a dungeon will trigger battles,\n    but you may uncover valuable treasures within its chambers if you manage to survive.\n", false);
         }
         // TextEngine.printWithDelays("    You have entered the deep sea", false);
         TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "east" + resetColor + ", or " + yellowColor + "west" + resetColor + " to make your choice", true);
@@ -782,8 +787,8 @@ public class OpenWorld extends Room {
             TextEngine.printWithDelays(PromptEngine.returnPrompt(), false);
         } else {
             Dungeon.dungeonCheck();
+            TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
         }
-        TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
         TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "east" + resetColor + ", or " + yellowColor + "west" + resetColor + " to continue your journey ", true);
         while (true) {
             ignore = console.readLine();
@@ -817,9 +822,9 @@ public class OpenWorld extends Room {
             } else {
                 TextEngine.printWithDelays("Congrets! you have beaten The Mountain Cave dungeon,\n     time to go back to a village rest up, check out the shop, and head to the next dungeon.\n\n", false);
             }
+            TextEngine.printWithDelays("Warning: Stepping into a dungeon will trigger battles,\n    but you may uncover valuable treasures within its chambers if you manage to survive.\n", false);
         }
         //TextEngine.printWithDelays("    You have started to climb the mountain", false);
-        TextEngine.printWithDelays("Warning: Stepping into a dungeon will trigger battles,\n    but you may uncover valuable treasures within its chambers if you manage to survive.\n", false);
         TextEngine.printWithDelays("Which path will you choose? Type " + yellowColor + "east" + resetColor + ", " + yellowColor + "south" + resetColor + ", or " + yellowColor + "west" + resetColor + " to continue your journey", true);
         while (true) {
             ignore = console.readLine();
@@ -858,8 +863,8 @@ public class OpenWorld extends Room {
             } else {
                 TextEngine.printWithDelays("Congrets! you have beaten The Mountain Top dungeon,\n     time to go back to a village rest up, check out the shop, and head to the next dungeon.\n\n", false);
             }
+            TextEngine.printWithDelays("Warning: Stepping into a dungeon will trigger battles,\n    but you may uncover valuable treasures within its chambers if you manage to survive.\n", false);
         }
-        TextEngine.printWithDelays("Warning: Stepping into a dungeon will trigger battles,\n    but you may uncover valuable treasures within its chambers if you manage to survive.\n", false);
         TextEngine.printWithDelays("Which path will you choose? Type " + yellowColor + "The Mountain Top" + resetColor + ", " + yellowColor + "south" + resetColor + ", or " + yellowColor + "west" + resetColor + " to continue your journey", true);
         while (true) {
             ignore = console.readLine();
@@ -901,9 +906,14 @@ public class OpenWorld extends Room {
             } else {
                 TextEngine.printWithDelays("Congrats! you have beaten The Ocean Kingdom dungeon,\n     time to go back to a village rest up, check out the shop, and head to the next dungeon.\n\n", false);
             }
+            TextEngine.printWithDelays("Warning: Stepping into a dungeon will trigger battles,\n    but you may uncover valuable treasures within its chambers if you manage to survive.\n", false);
         }
+<<<<<<< HEAD
         TextEngine.printWithDelays("Warning: Stepping into a dungeon will trigger battles,\n    but you may uncover valuable treasures within its chambers if you manage to survive.\n", false);
         TextEngine.printWithDelays("Which path will you choose? Type " + yellowColor + "The Ocean Kingdom" + resetColor + ", or " + yellowColor + "south" + resetColor + " to continue your journey", true);
+=======
+        TextEngine.printWithDelays("Which path will you choose? Type " + yellowColor + "north" + resetColor + ", or " + yellowColor + "south" + resetColor + " to continue your journey", true);
+>>>>>>> main
         while (true) {
             ignore = console.readLine();
             command = console.readLine();
@@ -975,8 +985,8 @@ public class OpenWorld extends Room {
             } else {
                 TextEngine.printWithDelays("Congrats! you have beaten The Mountain Cave dungeon,\n     time to go back to a village rest up, check out the shop, and head to the next dungeon.\n\n", false);
             }
+            TextEngine.printWithDelays("Warning: Stepping into a dungeon will trigger battles,\n    but you may uncover valuable treasures within its chambers if you manage to survive.\n", false);
         }
-        TextEngine.printWithDelays("Warning: Stepping into a dungeon will trigger battles,\n    but you may uncover valuable treasures within its chambers if you manage to survive.\n", false);
         TextEngine.printWithDelays("Which path will you choose? Type " + yellowColor + "north" + resetColor + ", " + yellowColor + "east" + resetColor + ", " + yellowColor + "south" + resetColor + ", or " + yellowColor + "west" + resetColor + "  to continue your journey", true);
         while (true) {
             ignore = console.readLine();
@@ -1020,8 +1030,12 @@ public class OpenWorld extends Room {
             } else {
                 TextEngine.printWithDelays("Congrats! you have beaten The Mountain Top dungeon,\n     time to go back to a village rest up, check out the shop, and head to the next dungeon.\n\n", false);
             }
+            TextEngine.printWithDelays("Worrning: going into a dungeon you will trigger fights, but you might find something in the rooms\nIf you do not DIE", false);
         }
+<<<<<<< HEAD
         TextEngine.printWithDelays("Warrning: going into a dungeon you will trigger fights, but you might find something in the rooms\nIf you do not DIE", false);
+=======
+>>>>>>> main
         TextEngine.printWithDelays("Which path will you choose? Type " + yellowColor + "The Mountain Top" + resetColor + ", " + yellowColor + "south" + resetColor + ", or " + yellowColor + "west" + resetColor + " to continue your journey", true);
         while (true) {
             ignore = console.readLine();
@@ -1274,8 +1288,8 @@ public class OpenWorld extends Room {
             } else {
                 TextEngine.printWithDelays("Congrats! you have beaten The Mountain Cave dungeon,\n     time to go back to a village rest up, check out the shop, and head to the next dungeon.\n\n", false);
             }
+            TextEngine.printWithDelays("Warning: Stepping into a dungeon will trigger battles,\n    but you may uncover valuable treasures within its chambers if you manage to survive.\n", false);
         }
-        TextEngine.printWithDelays("Warning: Stepping into a dungeon will trigger battles,\n    but you may uncover valuable treasures within its chambers if you manage to survive.\n", false);
         TextEngine.printWithDelays("Which path will you choose? Type " + yellowColor + "north" + resetColor + ", " + yellowColor + "east" + resetColor + ", " + yellowColor + "south" + resetColor + " or " + yellowColor + "west" + resetColor + " to continue your journey", true);
         while (true) {
             ignore = console.readLine();

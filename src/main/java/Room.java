@@ -158,7 +158,7 @@ public class Room {
         String setting = Player.getColorOfPlayerPostitionTile();
         environment = setting;
         switch (setting.toLowerCase()) {
-            case "mountain" ->
+            case "mountain", "mountain top" ->
                 fillMountain(currentRoom);
             case "grassland" ->
                 fillGrassland(currentRoom);
@@ -262,14 +262,16 @@ public class Room {
             switch (setting) {
                 case "mountain" ->
                     TextEngine.printWithDelays("You have entered the mountain area", false);
+                case "mountain top" ->
+                    TextEngine.printWithDelays("You have scaled the mountain top", false);
                 case "grassland" ->
                     TextEngine.printWithDelays("You have entered the grassy plains.", false);
                 case "desert" ->
-                    TextEngine.printWithDelays("You have entered the desert.", false);
+                    TextEngine.printWithDelays("You have treked into the desert.", false);
                 case "ocean" ->
-                    TextEngine.printWithDelays("You have enter the ocean area", false);
+                    TextEngine.printWithDelays("You have swam into the ocean area", false);
                 case "lost forest" ->
-                    TextEngine.printWithDelays("You have entered the lost forest", false);
+                    TextEngine.printWithDelays("You have wandered into the lost forest", false);
                 default ->
                     TextEngine.printWithDelays("You are in an empty area", false);
             }

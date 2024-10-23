@@ -224,9 +224,9 @@ public class Player {
         gold += change;
 
         if (change < 0) {
-            TextEngine.printWithDelays(space + brightRedStart + "You lost " + Math.abs(change) + " gold!" + brightEnd, false);
+            TextEngine.printWithDelays(space + brightRedStart + "You lost " + Math.abs(change) + " gold! " + "(" + getGold() + ")" + brightEnd, false);
         } else {
-            TextEngine.printWithDelays(space + brightGreenStart + "You gained " + change + " gold!" + brightEnd, false);
+            TextEngine.printWithDelays(space + brightGreenStart + "You gained " + change + " gold! " + "(" + getGold() + ")" + brightEnd, false);
         }
     }
 
@@ -328,7 +328,7 @@ public class Player {
         TextEngine.printNoDelay("Damage: " + damage, false);
         TextEngine.printNoDelay("Defense: " + defense, false);
         TextEngine.printNoDelay("Inventory: " + getTotalNumberOfItemsInInventory() + "/" + inventorySize, false);
-        TextEngine.printNoDelay("Press Enter to continue", false);
+        TextEngine.printNoDelay(yellowColor + "Press Enter to continue" + resetColor, false);
         command = console.readLine();
         if ("[][][]3>CadenTesting".equals(command)) {
             maxHealth = 10000;
@@ -336,6 +336,15 @@ public class Player {
             gold = 20000000;
             inventorySize = 200;
             putItem("k.o. cannon", 10);
+            Main.loadSave();
+        } else if ("complete".equals(command) && name.equals("Debug!")) {
+            maxHealth = 10000;
+            health = maxHealth;
+            gold = 20000000;
+            inventorySize = 200;
+            putItem("k.o. cannon", 10);
+            Dungeon.completedDungeons = 8;
+            Main.gameComplete = true;
             Main.loadSave();
         } else {
             command = null;
@@ -585,6 +594,9 @@ public class Player {
             hearts = 25;
         }
         int filledBars = (int) Math.round(((double) health / maxHealth) * hearts);
+        if (filledBars == 0 && health > 0) {
+            filledBars = 1;
+        }
         if (getHealth() > Player.getMaxHealth() / 2) {
             healthColor = greenColor;
         } else if (getHealth() <= getMaxHealth() / 2 && getHealth() > (getMaxHealth() / 4) + (getMaxHealth() / 10)) {
@@ -629,7 +641,7 @@ public class Player {
         Map<String, String> colorToEnvironment = new HashMap<>();
         colorToEnvironment.put("G", "grassland"); // Green
         colorToEnvironment.put("s", "desert");    // Yellow
-        colorToEnvironment.put("S", "mountain"); // White
+        colorToEnvironment.put("S", "mountain top"); // White
         colorToEnvironment.put("b", "ocean");     // Blue
         colorToEnvironment.put("g", "mountain"); // Gray
         colorToEnvironment.put("F", "lost forest"); // Gray
@@ -842,9 +854,6 @@ public class Player {
         int deltaX = closestDungeonX - playerX;
         int deltaY = closestDungeonY - playerY;
 
-        // System.out.println("Player Position: (" + playerX + ", " + playerY + ")");
-        // System.out.println("Closest Dungeon Position: (" + closestDungeonX + ", " + closestDungeonY + ")");
-        // System.out.println("DeltaX: " + deltaX + ", DeltaY: " + deltaY);
         if (deltaX == 0 && deltaY < 0) {
             return "North";
         }
@@ -914,12 +923,12 @@ public class Player {
         };
         int closestVillageX = -1;
         int closestVillageY = -1;
-        double minDistance = Double.MAX_VALUE;
+        int minDistance = Integer.MAX_VALUE;
 
         for (int y = 0; y < map.length; y++) {
             for (int x = 0; x < map[y].length; x++) {
                 if ("[ V ]".equals(map[y][x])) {
-                    double distance = Math.sqrt(Math.pow(x - playerX, 2) + Math.pow(y - playerY, 2));
+                    int distance = Math.abs(x - playerX) + Math.abs(y - playerY);
                     if (distance < minDistance) {
                         minDistance = distance;
                         closestVillageX = x;
@@ -931,7 +940,7 @@ public class Player {
         if (closestVillageX == -1 || closestVillageY == -1) {
             return -1;
         }
-        return (int) minDistance;
+        return minDistance - 1;
     }
 
     public static int distanceToNextDungeon() {
@@ -1046,7 +1055,7 @@ public class Player {
         for (int y = 0; y < map.length; y++) {
             for (int x = 0; x < map[y].length; x++) {
                 if ("[ ! ]".equals(map[y][x])) {
-                    double distance = Math.sqrt(Math.pow(x - playerX, 2) + Math.pow(y - playerY, 2));
+                    int distance = Math.abs(x - playerX) + Math.abs(y - playerY);
                     if (distance < minDistance) {
                         minDistance = distance;
                         closestDungeonX = x;
@@ -1058,6 +1067,6 @@ public class Player {
         if (closestDungeonX == -1 || closestDungeonY == -1) {
             return -1;
         }
-        return (int) minDistance;
+        return (int) minDistance - 1;
     }
 }
