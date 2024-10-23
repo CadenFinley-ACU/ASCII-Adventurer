@@ -164,16 +164,11 @@ public class Enemy {
         } else {
             TextEngine.printWithDelays(space + brightRedStart + "You run from the " + type + "!" + brightRedEnd, false);
         }
-        if (quantity < 2) {
-            quantity = 0;
-        } else {
-            quantity = 1;
-        }
         int damage = (enemyDamageValues.get(type) * quantity) / 2;
         if (damage < 1) {
             damage = 1;
         }
-        runCheckHealth(damage, quantity, type);
+        checkhealth(type, quantity, false);
         return 0 - (damage);
     }
 
@@ -199,7 +194,7 @@ public class Enemy {
             }
         } else {
             // Check the player's health
-            if (!(Player.getHealth() <= (enemyDamageValues.get(type) / 2 * quantity) - Player.getDamageCalc())) {
+            if (!(Player.getHealth() <= ((enemyDamageValues.get(type) * quantity) / 2) - Player.getDamageCalc())) {
                 // Print victory message in green
                 if (quantity > 1) {
                     TextEngine.printWithDelays(space + brightGreenStart + "You escaped the " + quantity + " " + type + "s!" + brightGreenEnd, false);
@@ -207,24 +202,6 @@ public class Enemy {
                     TextEngine.printWithDelays(space + brightGreenStart + "You escaped the " + type + "!" + brightGreenEnd, false);
                 }
             }
-        }
-    }
-
-    private static void runCheckHealth(int damage, int quantity, String type) throws InterruptedException {
-        String brightGreenStart = "\033[1;32m"; // Start bright green text
-        String brightGreenEnd = "\033[0m"; // Reset formatting
-        String space = "     ";
-        // Check the player's health
-        if (!(Player.getHealth() <= (damage) - Player.getDamageCalc())) {
-            // Print victory message in green
-            if (quantity > 1) {
-                TextEngine.printWithDelays(space + brightGreenStart + "You escaped the " + quantity + " " + type + "s!" + brightGreenEnd, false);
-            } else {
-                TextEngine.printWithDelays(space + brightGreenStart + "You escaped the " + type + "!" + brightGreenEnd, false);
-            }
-        } else {
-            damage = 0;
-            runCheckHealth(damage, quantity, type);
         }
     }
 }
