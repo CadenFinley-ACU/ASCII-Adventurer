@@ -32,9 +32,8 @@ public class OpenWorld extends Room {
         Main.checkSave(room);
         GameSaveSerialization.saveGame();
         Main.screenRefresh();
-
+        enemies = new ArrayList<>(List.of("Goblin", "Slime", "Bandit"));
         if (checkChangeInRoom()) {
-            enemies = null;
             switch (Player.getColorOfPlayerPostitionTile()) {
                 case "grassland" -> {
                     numberOfEnemies = rand.nextInt(3);
