@@ -18,12 +18,12 @@ public class TestSuite_Adventure {
 
     @After
     public void tearDown() {
-        // System.out.println("-----------------------------");
-        // System.out.println("Tests run: " + testsrun);
-        // System.out.println("Dungeons Generated: " + DungeonGenerator.runs + " Fails: " + DungeonGenerator.fails);
-        // System.out.println(((float) DungeonGenerator.fails / DungeonGenerator.runs) * 100 + "% failure rate");
-        // System.out.println("For every test run, " + (float) DungeonGenerator.runs / testsrun + " dungeons were generated");
-        // System.out.println("-----------------------------");
+        System.out.println("-----------------------------");
+        System.out.println("Tests run: " + testsrun);
+        System.out.println("Dungeons Generated: " + DungeonGenerator.runs + " Fails: " + DungeonGenerator.fails);
+        System.out.println(((float) DungeonGenerator.fails / DungeonGenerator.runs) * 100 + "% failure rate");
+        System.out.println("For every test run, " + (float) DungeonGenerator.runs / testsrun + " dungeons were generated");
+        System.out.println("-----------------------------");
     }
 
     @Test
