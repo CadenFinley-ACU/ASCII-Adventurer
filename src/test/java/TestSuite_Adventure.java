@@ -18,12 +18,12 @@ public class TestSuite_Adventure {
 
     @After
     public void tearDown() {
-        System.out.println("-----------------------------");
-        System.out.println("Tests run: " + testsrun);
-        System.out.println("Dungeons Generated: " + DungeonGenerator.runs + " Fails: " + DungeonGenerator.fails);
-        System.out.println(((float) DungeonGenerator.fails / DungeonGenerator.runs) * 100 + "% failure rate");
-        System.out.println("For every test run, " + (float) DungeonGenerator.runs / testsrun + " dungeons were generated");
-        System.out.println("-----------------------------");
+        // System.out.println("-----------------------------");
+        // System.out.println("Tests run: " + testsrun);
+        // System.out.println("Dungeons Generated: " + DungeonGenerator.runs + " Fails: " + DungeonGenerator.fails);
+        // System.out.println(((float) DungeonGenerator.fails / DungeonGenerator.runs) * 100 + "% failure rate");
+        // System.out.println("For every test run, " + (float) DungeonGenerator.runs / testsrun + " dungeons were generated");
+        // System.out.println("-----------------------------");
     }
 
     @Test
@@ -302,6 +302,97 @@ public class TestSuite_Adventure {
 
     @Test
     public void testOpenWorldGen10000() {
+        for (int i = 0; i < 1000; i++) {
+            int[][] matrix = OpenWorldGenerator.getMatrix();
+            boolean connected = OpenWorldGenerator.validateMatrix();
+            assertTrue("There should be a path connecting 9 and 8 with values higher than 0", connected);
+            OpenWorldGenerator.printMatrix();
+        }
+    }
+
+    @Test
+    public void testOpenWorldGen10001() {
+        for (int i = 0; i < 1000; i++) {
+            int[][] matrix = OpenWorldGenerator.getMatrix();
+            boolean connected = OpenWorldGenerator.validateMatrix();
+            assertTrue("There should be a path connecting 9 and 8 with values higher than 0", connected);
+            OpenWorldGenerator.printMatrix();
+        }
+    }
+    @Test
+    public void testOpenWorldGen10002() {
+        for (int i = 0; i < 1000; i++) {
+            int[][] matrix = OpenWorldGenerator.getMatrix();
+            boolean connected = OpenWorldGenerator.validateMatrix();
+            assertTrue("There should be a path connecting 9 and 8 with values higher than 0", connected);
+            OpenWorldGenerator.printMatrix();
+        }
+    }
+    @Test
+    public void testOpenWorldGen10003() {
+        for (int i = 0; i < 1000; i++) {
+            int[][] matrix = OpenWorldGenerator.getMatrix();
+            boolean connected = OpenWorldGenerator.validateMatrix();
+            assertTrue("There should be a path connecting 9 and 8 with values higher than 0", connected);
+            OpenWorldGenerator.printMatrix();
+        }
+    }
+    @Test
+    public void testOpenWorldGen10004() {
+        for (int i = 0; i < 1000; i++) {
+            int[][] matrix = OpenWorldGenerator.getMatrix();
+            boolean connected = OpenWorldGenerator.validateMatrix();
+            assertTrue("There should be a path connecting 9 and 8 with values higher than 0", connected);
+            OpenWorldGenerator.printMatrix();
+        }
+    }
+    @Test
+    public void testOpenWorldGen10005() {
+        for (int i = 0; i < 1000; i++) {
+            int[][] matrix = OpenWorldGenerator.getMatrix();
+            boolean connected = OpenWorldGenerator.validateMatrix();
+            assertTrue("There should be a path connecting 9 and 8 with values higher than 0", connected);
+            OpenWorldGenerator.printMatrix();
+        }
+    }
+    @Test
+    public void testOpenWorldGen10006() {
+        for (int i = 0; i < 1000; i++) {
+            int[][] matrix = OpenWorldGenerator.getMatrix();
+            boolean connected = OpenWorldGenerator.validateMatrix();
+            assertTrue("There should be a path connecting 9 and 8 with values higher than 0", connected);
+            OpenWorldGenerator.printMatrix();
+        }
+    }
+    @Test
+    public void testOpenWorldGen10007() {
+        for (int i = 0; i < 1000; i++) {
+            int[][] matrix = OpenWorldGenerator.getMatrix();
+            boolean connected = OpenWorldGenerator.validateMatrix();
+            assertTrue("There should be a path connecting 9 and 8 with values higher than 0", connected);
+            OpenWorldGenerator.printMatrix();
+        }
+    }
+    @Test
+    public void testOpenWorldGen10008() {
+        for (int i = 0; i < 1000; i++) {
+            int[][] matrix = OpenWorldGenerator.getMatrix();
+            boolean connected = OpenWorldGenerator.validateMatrix();
+            assertTrue("There should be a path connecting 9 and 8 with values higher than 0", connected);
+            OpenWorldGenerator.printMatrix();
+        }
+    }
+    @Test
+    public void testOpenWorldGen10009() {
+        for (int i = 0; i < 1000; i++) {
+            int[][] matrix = OpenWorldGenerator.getMatrix();
+            boolean connected = OpenWorldGenerator.validateMatrix();
+            assertTrue("There should be a path connecting 9 and 8 with values higher than 0", connected);
+            OpenWorldGenerator.printMatrix();
+        }
+    }
+    @Test
+    public void testOpenWorldGen10010() {
         for (int i = 0; i < 1000; i++) {
             int[][] matrix = OpenWorldGenerator.getMatrix();
             boolean connected = OpenWorldGenerator.validateMatrix();
