@@ -340,15 +340,4 @@ public class DesertOasisDungeon extends Dungeon {
         }
     }
 
-    private static void miniBossSequence() throws InterruptedException {
-        TextEngine.printWithDelays("You have entered a room with a mini boss", false);
-        Player.changeHealth(Enemy.spawnEnemy("Sphinx", 1));
-        desertOasisDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] = 7;
-        Main.loadSave();
-    }
-
-    private static void fairySequence() throws InterruptedException {
-        desertOasisDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] = 10;
-        Main.loadSave();
-    }
 }

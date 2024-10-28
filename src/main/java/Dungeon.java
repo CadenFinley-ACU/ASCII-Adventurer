@@ -30,7 +30,6 @@ public class Dungeon extends Room {
 
     public static int[] currentPlayerPosition = null;
     public static int[] lastPosition = null; // Variable to store the last position
-    public static boolean previousAutoSettings;
 
     public static String currentMiniBoss;
     public static String currentBoss;
@@ -311,9 +310,9 @@ public class Dungeon extends Room {
             }
             case 1 -> {// the dark forest dungeon
                 switch (OpenWorld.roomNumber) {
-                    case 72, 73,74, 64, 65, 66, 67, 68, 69->
+                    case 72, 73, 74, 64, 65, 66, 67, 68, 69 ->
                         TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", feeling a sense of adventure as you leave the open paths behind.\n Ahead, you notice the entrance to the next dungeon lying just to the north, east.\n\n", false);
-                    case 55, 27, 57, 58, 59, 60->
+                    case 55, 27, 57, 58, 59, 60 ->
                         TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", feeling a sense of adventure as you leave the open paths behind.\n Ahead, you notice the entrance to the next dungeon lying just to the east.\n\n", false);
                     default ->
                         TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", feeling a sense of adventure as you leave the open paths behind.\n Ahead, you notice the entrance to the next dungeon lying just to the south, east.\n\n", false);
@@ -323,7 +322,7 @@ public class Dungeon extends Room {
                 switch (OpenWorld.roomNumber) {
                     case 74, 66, 57, 50, 41, 62 ->
                         TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", feeling a sense of adventure as you leave the open paths behind.\n Ahead, you notice the entrance to the next dungeon lying just to the north.\n\n", false);
-                    case 33, 34, 35, 36, 42, 43, 44, 45, 51, 52, 53,54, 58, 59,60,67, 68, 69 ->
+                    case 33, 34, 35, 36, 42, 43, 44, 45, 51, 52, 53, 54, 58, 59, 60, 67, 68, 69 ->
                         TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", feeling a sense of adventure as you leave the open paths behind.\n Ahead, you notice the entrance to the next dungeon lying just to the north, west.\n\n", false);
                     case 21, 22 ->
                         TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", feeling a sense of adventure as you leave the open paths behind.\n Ahead, you notice the entrance to the next dungeon lying just to the east.\n\n", false);
@@ -832,5 +831,67 @@ public class Dungeon extends Room {
         TextEngine.printWithDelays("You have entered " + yellowColor + "The " + currentDungeon + resetColor + "!", false);
         TextEngine.printWithDelays("To beat the dungeon you must beat the " + yellowColor + currentBoss + resetColor + "!\nBe on the look out for treasure rooms! They hold some powerful loot.\nYou can always type help to see what commands you have available!\nGood Luck!", false);
         TextEngine.enterToNext();
+    }
+
+    public static void miniBossSequence() throws InterruptedException {
+        TextEngine.printWithDelays("You have entered a room with a mini boss", false);
+        Player.changeHealth(Enemy.spawnEnemy(currentMiniBoss, 1));
+        switch (currentDungeon) {
+            case "Meadow" -> {
+                meadowDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] = 7;
+            }
+            case "Dark Forest" -> {
+                darkForestDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] = 7;
+            }
+            case "Mountain Cave" -> {
+                mountainCaveDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] = 7;
+            }
+            case "Mountain Top" -> {
+                mountainTopDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] = 7;
+            }
+            case "Desert Oasis" -> {
+                desertOasisDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] = 7;
+            }
+            case "Desert Plains" -> {
+                desertPlainsDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] = 7;
+            }
+            case "Desert Pyramid" -> {
+                desertPyramidDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] = 7;
+            }
+            case "Ocean Kingdom" -> {
+                oceanKingdomDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] = 7;
+            }
+        }
+        Main.loadSave();
+    }
+
+    public static void fairySequence() throws InterruptedException {
+        switch (currentDungeon) {
+            case "Meadow" -> {
+                meadowDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] = 10;
+            }
+            case "Dark Forest" -> {
+                darkForestDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] = 10;
+            }
+            case "Mountain Cave" -> {
+                mountainCaveDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] = 10;
+            }
+            case "Mountain Top" -> {
+                mountainTopDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] = 10;
+            }
+            case "Desert Oasis" -> {
+                desertOasisDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] = 10;
+            }
+            case "Desert Plains" -> {
+                desertPlainsDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] = 10;
+            }
+            case "Desert Pyramid" -> {
+                desertPyramidDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] = 10;
+            }
+            case "Ocean Kingdom" -> {
+                oceanKingdomDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] = 10;
+            }
+        }
+        Main.loadSave();
     }
 }
