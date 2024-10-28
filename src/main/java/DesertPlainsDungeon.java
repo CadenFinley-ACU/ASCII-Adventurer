@@ -83,52 +83,16 @@ public class DesertPlainsDungeon extends Dungeon {
             roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = desertPlainsDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
         }
         if (desertPlainsDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] == 10 && roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] == 0) {
-            TextEngine.printWithDelays("You have entered a room with a mystical fairy", false);
-            TextEngine.printWithDelays("The fairy has granted you a wish of healing?", false);
-            TextEngine.printWithDelays("Do you want to take it? " + yellowColor + "yes" + resetColor + " or " + yellowColor + "no" + resetColor, true);
-            while (true) {
-                ignore = Room.console.readLine();
-                command = Room.console.readLine();
-                switch (command) {
-                    case "yes" -> {
-                        Player.fairyHeal();
-                        roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = desertPlainsDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
-                        Main.loadSave();
-                    }
-                    case "no" -> {
-                        int[] buffer = currentPlayerPosition.clone();
-                        currentPlayerPosition = lastPosition.clone(); // Save the current position before moving
-                        lastPosition = buffer.clone();
-                        Main.loadSave();
-                    }
-                    default -> {
-                        defaultDungeonArgs(command);
-                    }
-                }
-            }
+            fairyRoom();
         }
         if (desertPlainsDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] == 3 && roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] == 0) {
             keyRoomSequence();
         }
         if (desertPlainsDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] == 5 && roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] == 0) {
-            if (hasItemInRoom("key", 1)) {
-                roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = desertPlainsDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
-            } else {
-                int[] buffer = currentPlayerPosition.clone();
-                currentPlayerPosition = lastPosition.clone(); // Save the current position before moving
-                lastPosition = buffer.clone();
-                Main.loadSave();
-            }
+            keyRoom();
         }
         if (desertPlainsDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] == 7 && roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] == 0) {
-            if (hasItemInRoom("heart container", 1)) {
-                roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = desertPlainsDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
-            } else {
-                int[] buffer = currentPlayerPosition.clone();
-                currentPlayerPosition = lastPosition.clone(); // Save the current position before moving
-                lastPosition = buffer.clone();
-                Main.loadSave();
-            }
+            heartContainerRoom();
         }
         if (desertPlainsDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] == 1 && roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] == 0) {
             fightRandomEnemies();
@@ -155,13 +119,6 @@ public class DesertPlainsDungeon extends Dungeon {
             OpenWorld.startRoom();
         }
         handleDirectionsAndCommands();
-    }
-
-    private static boolean testIfBossRoom(int check) throws InterruptedException {
-        if (check != 0) {
-            return check == 8;
-        }
-        return false;
     }
 
     public static void handleDirectionsAndCommands() throws InterruptedException {
@@ -264,81 +221,4 @@ public class DesertPlainsDungeon extends Dungeon {
             }
         }
     }
-
-    public static void fightRandomEnemies() throws InterruptedException {
-        if (numberOfEnemies == 0) {
-            TextEngine.printWithDelays("There were no enemies in this room", false);
-            TextEngine.enterToNext();
-            //lastPosition = currentPlayerPosition.clone();
-            roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = desertPlainsDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
-            Main.loadSave();
-            return;
-        }
-        if (numberOfEnemies > 1) {
-            TextEngine.printWithDelays("You have entered a room with " + numberOfEnemies + " " + enemyType + "s in this room!\nYou were ambushed!", false);
-        } else {
-            TextEngine.printWithDelays("You have entered a room with a " + enemyType + " and were ambushed!", false);
-        }
-        TextEngine.printWithDelays("What is your command? " + yellowColor + "fight" + resetColor + " or " + yellowColor + "run" + resetColor, true);
-        while (true) {
-            ignore = Room.console.readLine();
-            command = Room.console.readLine();
-            switch (command) {
-                case "fight" -> {
-                    Player.changeHealth(Enemy.spawnEnemy(enemyType, numberOfEnemies));
-                    roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = desertPlainsDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
-                    Main.loadSave();
-                }
-                case "run" -> {
-                    Player.changeHealth(Enemy.runSpawnEnemy(enemyType, numberOfEnemies));
-                    int[] buffer = currentPlayerPosition.clone();
-                    currentPlayerPosition = lastPosition.clone(); // Save the current position before moving
-                    lastPosition = buffer.clone();
-                    Main.loadSave();
-                }
-                default -> {
-                    defaultDungeonArgs(command);
-                }
-            }
-        }
-    }
-
-    public static void keyRoomSequence() throws InterruptedException {
-        if (numberOfEnemies == 0) {
-            numberOfEnemies = 1;
-        }
-        if (numberOfEnemies > 1) {
-            TextEngine.printWithDelays("You have entered a room with " + numberOfEnemies + " " + enemyType + "s in this room!\nYou were ambushed!", false);
-        } else {
-            TextEngine.printWithDelays("You have entered a room with a " + enemyType + " and were ambushed!", false);
-        }
-        if (numberOfEnemies > 1) {
-            TextEngine.printWithDelays("They seem to be trying to protect something...", false);
-        } else {
-            TextEngine.printWithDelays("It seems to be trying to protect something...", false);
-        }
-        TextEngine.printWithDelays("What is your command? " + yellowColor + "fight" + resetColor + " or " + yellowColor + "run" + resetColor, true);
-        while (true) {
-            ignore = Room.console.readLine();
-            command = Room.console.readLine();
-            switch (command) {
-                case "fight" -> {
-                    Player.changeHealth(Enemy.spawnEnemy(enemyType, numberOfEnemies));
-                    desertPlainsDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] = 5;
-                    Main.loadSave();
-                }
-                case "run" -> {
-                    Player.changeHealth(Enemy.runSpawnEnemy(enemyType, numberOfEnemies));
-                    int[] buffer = currentPlayerPosition.clone();
-                    currentPlayerPosition = lastPosition.clone(); // Save the current position before moving
-                    lastPosition = buffer.clone();
-                    Main.loadSave();
-                }
-                default -> {
-                    defaultDungeonArgs(command);
-                }
-            }
-        }
-    }
-
 }
