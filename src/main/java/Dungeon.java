@@ -828,8 +828,8 @@ public class Dungeon extends Room {
     }
 
     public static void dungeonIntroText() throws InterruptedException {
-        TextEngine.printWithDelays("You have entered " + yellowColor + "The " + currentDungeon + resetColor + "!", false);
-        TextEngine.printWithDelays("To beat the dungeon you must beat the " + yellowColor + currentBoss + resetColor + "!\nBe on the look out for treasure rooms! They hold some powerful loot.\nYou can always type help to see what commands you have available!\nGood Luck!", false);
+        TextEngine.printWithDelays("You have entered " + redColor + "The " + currentDungeon + resetColor + "!", false);
+        TextEngine.printWithDelays("To beat the dungeon you must beat the " + redColor + currentBoss + resetColor + "!\nBe on the look out for treasure rooms! They hold some powerful loot.\nYou can always type help to see what commands you have available!\nGood Luck!", false);
         TextEngine.enterToNext();
         switch (currentDungeon) {
             case "Meadow" -> {
@@ -927,9 +927,9 @@ public class Dungeon extends Room {
             numberOfEnemies = 1;
         }
         if (numberOfEnemies > 1) {
-            TextEngine.printWithDelays("You have entered a room with " + numberOfEnemies + " " + enemyType + "s in this room!\nYou were ambushed!", false);
+            TextEngine.printWithDelays("You have entered a room with " + numberOfEnemies + " " + redColor + enemyType + resetColor + "s in this room!\nYou were ambushed!", false);
         } else {
-            TextEngine.printWithDelays("You have entered a room with a " + enemyType + " and were ambushed!", false);
+            TextEngine.printWithDelays("You have entered a room with a " + redColor + enemyType + resetColor + " and were ambushed!", false);
         }
         if (numberOfEnemies > 1) {
             TextEngine.printWithDelays("They seem to be trying to protect something...", false);
@@ -1019,9 +1019,9 @@ public class Dungeon extends Room {
             return;
         }
         if (numberOfEnemies > 1) {
-            TextEngine.printWithDelays("You have entered a room with " + numberOfEnemies + " " + enemyType + "s in this room!\nYou were ambushed!", false);
+            TextEngine.printWithDelays("You have entered a room with " + numberOfEnemies + " " + redColor + enemyType + resetColor + "s in this room!\nYou were ambushed!", false);
         } else {
-            TextEngine.printWithDelays("You have entered a room with a " + enemyType + " and were ambushed!", false);
+            TextEngine.printWithDelays("You have entered a room with a " + redColor + enemyType + resetColor + " and were ambushed!", false);
         }
         TextEngine.printWithDelays("What is your command? " + yellowColor + "fight" + resetColor + " or " + yellowColor + "run" + resetColor, true);
         while (true) {
