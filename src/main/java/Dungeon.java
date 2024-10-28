@@ -1057,6 +1057,7 @@ public class Dungeon extends Room {
                         }
                     }
                     Main.loadSave();
+                    return;
                 }
                 case "run" -> {
                     Player.changeHealth(Enemy.runSpawnEnemy(enemyType, numberOfEnemies));
