@@ -79,8 +79,7 @@ public class DesertPlainsDungeon extends Dungeon {
             }
         }
         if (desertPlainsDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] == 9 && roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] == 0) {
-            Dungeon.dungeonIntroText();
-            roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = desertPlainsDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
+            dungeonIntroText();
         }
         if (desertPlainsDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] == 10 && roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] == 0) {
             fairyRoom();
