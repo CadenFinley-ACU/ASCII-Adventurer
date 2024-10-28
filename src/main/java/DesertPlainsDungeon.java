@@ -66,7 +66,6 @@ public class DesertPlainsDungeon extends Dungeon {
                 String randomItem = items.get(rand.nextInt(items.size()));
                 if (hasChestInRoom(randomItem, 1)) {
                     items.remove(randomItem);
-                    //lastPosition = currentPlayerPosition.clone();
                     roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = desertPlainsDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
                 } else {
                     int[] buffer = currentPlayerPosition.clone();
@@ -130,7 +129,6 @@ public class DesertPlainsDungeon extends Dungeon {
         System.out.println("Type " + yellowColor + "map" + resetColor + " to see the map.");
         System.out.println();
         TextEngine.printWithDelays("You can move in the following directions: ", false);
-        //System.out.println(availableMove[0] + "" + availableMove[1] + "" + availableMove[2] + "" + availableMove[3]);
         if (availableMove[0] > 0) {
             if (testIfBossRoom(availableMove[0])) {
                 directionsString.add("boss room");

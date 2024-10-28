@@ -151,7 +151,6 @@ public class MountainCaveDungeon extends Dungeon {
                 directionsString.add("boss room");
             } else {
                 directionsString.add("west");
-
             }
         }
         if (availableMove[3] > 0) {
@@ -159,7 +158,6 @@ public class MountainCaveDungeon extends Dungeon {
                 directionsString.add("boss room");
             } else {
                 directionsString.add("east");
-
             }
         }
         TextEngine.printNoDelay(yellowColor + directionsString.toString() + resetColor, true);

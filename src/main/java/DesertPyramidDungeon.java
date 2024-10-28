@@ -61,13 +61,11 @@ public class DesertPyramidDungeon extends Dungeon {
         Main.screenRefresh();
         DungeonGenerator.drawRoom(desertPyramidDungeon, roomsBeenTo, currentPlayerPosition[0], currentPlayerPosition[1], numberOfEnemies, mapRevealed);
         directionsString = new ArrayList<>();
-
         if (desertPyramidDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] == 2 && roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] == 0) {
             if (!items.isEmpty()) {
                 String randomItem = items.get(rand.nextInt(items.size()));
                 if (hasChestInRoom(randomItem, 1)) {
                     items.remove(randomItem);
-                    //lastPosition = currentPlayerPosition.clone();
                     roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = desertPyramidDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
                 } else {
                     int[] buffer = currentPlayerPosition.clone();
@@ -110,7 +108,6 @@ public class DesertPyramidDungeon extends Dungeon {
             TextEngine.printWithDelays("You have defeated the boss and completed the dungeon!", false);
             TextEngine.enterToNext();
             Room.hasItemInRoom("Large Backpack", 1);
-            //lastPosition = currentPlayerPosition.clone();
             roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = desertPyramidDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
             if (!completed) {
                 completedDungeons++;
@@ -132,7 +129,6 @@ public class DesertPyramidDungeon extends Dungeon {
         System.out.println("Type " + yellowColor + "map" + resetColor + " to see the map.");
         System.out.println();
         TextEngine.printWithDelays("You can move in the following directions: ", false);
-        //System.out.println(availableMove[0] + "" + availableMove[1] + "" + availableMove[2] + "" + availableMove[3]);
         if (availableMove[0] > 0) {
             if (testIfBossRoom(availableMove[0])) {
                 directionsString.add("boss room");
@@ -152,7 +148,6 @@ public class DesertPyramidDungeon extends Dungeon {
                 directionsString.add("boss room");
             } else {
                 directionsString.add("west");
-
             }
         }
         if (availableMove[3] > 0) {
@@ -160,7 +155,6 @@ public class DesertPyramidDungeon extends Dungeon {
                 directionsString.add("boss room");
             } else {
                 directionsString.add("east");
-
             }
         }
         TextEngine.printNoDelay(yellowColor + directionsString.toString() + resetColor, true);

@@ -107,7 +107,6 @@ public class DesertOasisDungeon extends Dungeon {
             Player.changeHealth(Enemy.spawnEnemy("Phoenix", 1));
             TextEngine.printWithDelays("You have defeated the boss and completed the dungeon!", false);
             TextEngine.enterToNext();
-            //lastPosition = currentPlayerPosition.clone();
             roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = desertOasisDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
             if (!completed) {
                 completedDungeons++;
@@ -129,7 +128,6 @@ public class DesertOasisDungeon extends Dungeon {
         System.out.println("Type " + yellowColor + "map" + resetColor + " to see the map.");
         System.out.println();
         TextEngine.printWithDelays("You can move in the following directions: ", false);
-        //System.out.println(availableMove[0] + "" + availableMove[1] + "" + availableMove[2] + "" + availableMove[3]);
         if (availableMove[0] > 0) {
             if (testIfBossRoom(availableMove[0])) {
                 directionsString.add("boss room");

@@ -29,7 +29,6 @@ public class MountainTopDungeon extends Dungeon {
             fresh();
             visited = true;
             items = new ArrayList<>(List.of("great sword", "knight armor"));
-
         }
         if (!"Mountain Top Dungeon".equals(Main.getSavedPlace())) {
             currentPlayerPosition = DungeonGenerator.findValue(Dungeon.mountainTopDungeon, 9);
@@ -70,7 +69,6 @@ public class MountainTopDungeon extends Dungeon {
                 String randomItem = items.get(rand.nextInt(items.size()));
                 if (hasChestInRoom(randomItem, 1)) {
                     items.remove(randomItem);
-                    //lastPosition = currentPlayerPosition.clone();
                     roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = mountainTopDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
                 } else {
                     int[] buffer = currentPlayerPosition.clone();
@@ -109,7 +107,6 @@ public class MountainTopDungeon extends Dungeon {
             Player.changeHealth(Enemy.spawnEnemy("Ice Dragon", 1));
             TextEngine.printWithDelays("You have defeated the boss and completed the dungeon!", false);
             TextEngine.enterToNext();
-            //lastPosition = currentPlayerPosition.clone();
             roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = mountainTopDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
             if (!completed) {
                 completedDungeons++;
@@ -131,7 +128,6 @@ public class MountainTopDungeon extends Dungeon {
         System.out.println("Type " + yellowColor + "map" + resetColor + " to see the map.");
         System.out.println();
         TextEngine.printWithDelays("You can move in the following directions: ", false);
-        //System.out.println(availableMove[0] + "" + availableMove[1] + "" + availableMove[2] + "" + availableMove[3]);
         if (availableMove[0] > 0) {
             if (testIfBossRoom(availableMove[0])) {
                 directionsString.add("boss room");
@@ -151,7 +147,6 @@ public class MountainTopDungeon extends Dungeon {
                 directionsString.add("boss room");
             } else {
                 directionsString.add("west");
-
             }
         }
         if (availableMove[3] > 0) {
@@ -159,7 +154,6 @@ public class MountainTopDungeon extends Dungeon {
                 directionsString.add("boss room");
             } else {
                 directionsString.add("east");
-
             }
         }
         TextEngine.printNoDelay(yellowColor + directionsString.toString() + resetColor, true);
