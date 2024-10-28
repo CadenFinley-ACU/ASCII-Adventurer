@@ -88,6 +88,12 @@ public class PromptEngine {
         }
     }
 
+    public static void buildHelpPrompt(String[] availableCommands) throws InterruptedException {
+        if (aiGenerationEnabled) {
+            prompt = chatGPT("Generate a help prompt for a text adventure game designed for highschoolers. The player can use the following commands: " + String.join(", ", availableCommands) + ".") + "\n";
+        }
+    }
+
     public static String returnPrompt() throws InterruptedException {
         if (prompt == null || prompt.isEmpty()) {
             buildPrompt();

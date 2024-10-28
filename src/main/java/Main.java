@@ -23,6 +23,7 @@ public class Main {
     private static final String OS_NAME = System.getProperty("os.name");
     public static Map<String, Integer> savedInventory = new HashMap<>();
     public static boolean gameComplete = false;
+    public static String[] COMMANDS;
 
     public static void main(String[] args) throws InterruptedException { //main game start
         TextEngine.clearScreen();
@@ -129,6 +130,7 @@ public class Main {
 
     private static void handleMenuCommands() throws InterruptedException { //main menu command handling
         while (true) {
+            COMMANDS = new String[]{"start", "settings", "exit"};
             ignore = console.readLine();
             command = console.readLine();
             switch (command.toLowerCase().trim()) {
@@ -155,6 +157,7 @@ public class Main {
                 default ->
                     TextEngine.printWithDelays("I'm sorry, I don't understand that command.", true);
             }
+            COMMANDS = null;
         }
     }
 
@@ -321,7 +324,8 @@ public class Main {
 
     
     
-        
+          
+            
             
                       
                 
@@ -354,8 +358,11 @@ public class Main {
                 
                       
                   
+            
+                      
               
-        
+          
+            
             
                       
                 
@@ -371,6 +378,8 @@ public class Main {
                 
                       
                   
+            
+                 
               
               
 
@@ -407,7 +416,12 @@ public class Main {
              
 
     
-                                                             
+    
+                                                                 
+              
+         
+            
+                
              
 
     
@@ -425,7 +439,12 @@ public class Main {
     
 
     private static void displayHelp() throws InterruptedException { //main menu help command
-            TextEngine.printWithDelays("Things you could say:\n" +yellowColor+ "stats" +resetColor+" to see your stats\n" +yellowColor+ "inventory" +resetColor+ " to see your inventory\n" +yellowColor+ "heal" +resetColor+ " to heal you health using any available healing potions\n" +yellowColor+ "settings" +resetColor+ " or type " +yellowColor+ "save" +resetColor+ " to save\n" +yellowColor+ "map" +resetColor+ " to see the map\n" +yellowColor+ "exit" +resetColor+ " to return to the main menu.", true);
+            if (PromptEngine.aiGenerationEnabled && false) {
+                PromptEngine.buildHelpPrompt(COMMANDS);
+                TextEngine.printWithDelays(PromptEngine.returnPrompt(), false);
+            } else {
+                TextEngine.printWithDelays("Things you could say:\n" +yellowColor+ "stats" +resetColor+" to see your stats\n" +yellowColor+ "inventory" +resetColor+ " to see your inventory\n" +yellowColor+ "heal" +resetColor+ " to heal you health using any available healing potions\n" +yellowColor+ "settings" +resetColor+ " or type " +yellowColor+ "save" +resetColor+ " to save\n" +yellowColor+ "map" +resetColor+ " to see the map\n" +yellowColor+ "exit" +resetColor+ " to return to the main menu.", true);
+            }
     }
 
     private static void exitGame() throws InterruptedException {   //exit game command
@@ -462,6 +481,7 @@ public class Main {
 
     public static void inGameDefaultTextHandling(String data) throws InterruptedException { //default in game commands
         if (!Dungeon.ableToUseMenuCommands()){
+            COMMANDS = new String[] {"help", "save", "exit"};
             switch (data.toLowerCase().trim()) {
                 case "help" ->
                     displayHelp();
@@ -478,8 +498,10 @@ public class Main {
                 default ->
                     invalidCommandWithBuffer();
             }
+            COMMANDS = null;
         }
         else { 
+            COMMANDS = new String[] {"help", "inventory", "settings", "save", "exit", "heal", "stats", "map"};
             switch (data.toLowerCase().trim()) {
                 case "help" ->
                     displayHelp();
@@ -513,6 +535,7 @@ public class Main {
                 default ->
                     invalidCommandWithBuffer();
             }
+            COMMANDS = null;
         }  
     }
 

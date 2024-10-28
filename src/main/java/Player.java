@@ -330,7 +330,7 @@ public class Player {
         TextEngine.printNoDelay("Inventory: " + getTotalNumberOfItemsInInventory() + "/" + inventorySize, false);
         TextEngine.printNoDelay(yellowColor + "Press Enter to continue" + resetColor, false);
         command = console.readLine();
-        if ("[][][]3>CadenTesting".equals(command)) {
+        if ("[][][]CadenTesting".equals(command)) {
             maxHealth = 10000;
             health = maxHealth;
             gold = 20000000;
