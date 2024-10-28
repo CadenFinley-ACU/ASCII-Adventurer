@@ -1060,6 +1060,7 @@ public class Player {
                         minDistance = distance;
                         closestDungeonX = x;
                         closestDungeonY = y;
+                        break;
                     }
                 }
             }
