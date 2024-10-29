@@ -167,298 +167,40 @@ public class Main {
         if (getOS_NAME().contains("Mac")) {
             darkPurpleStart = "\033[1;33m";
         }
-        System.out.println(
-                darkPurpleStart
-                + 
+        System.out.println(darkPurpleStart + "    _    ____   ____ ___ ___ ");
+        System.out.println("   / \\  / ___| / ___|_ _|_ _| ");
+        System.out.println("  / _ \\ \\___ \\| |    | | | |  ");
+        System.out.println(" / ___ \\ ___) | |___ | | | |  ");
+        System.out.println("/_/ _ \\_\\____/ \\____|___|___| _ ");
+        System.out.println("   / \\   __| |_   _____ _ __ | |_ _   _ _ __ ___ _ __ ");
+        System.out.println("  / _ \\ / _` \\ \\ / / _ \\ '_ \\| __| | | | '__/ _ \\ '__|");
+        System.out.println(" / ___ \\ (_| |\\ V /  __/ | | | |_| |_| | | |  __/ |   ");
+        System.out.println("/_/   \\_\\__,_| \\_/ \\___|_| |_|\\__|\\__,_|_|  \\___|_|   ");
+        System.out.println(brightBoldEnd);
 
-     
-           
-
-    
-    
-        
-             
-
-    
-     
-        
-        
-           
-              
-             
-                
-           
-
-    
-    
-        
-              
-              
-        
-            
-              
-             
-            
-              
-          
-          
-         
-                         
-          
-           
-             
-
-    
-    
-        
-              
-        
-              
-          
-          
-                         
-             
-
-    
-    
-        
-              
-        
-            
-                      
-        
-                    
-        
-             
-
-    
-    
-        
-            
-                
-              
-
-    
-             
-            
-           
-
-    
-     
-           
-
-    
-    
-        
-        
-        
-                
-        
-            
-            
-                 
-                 
-             
-          
-          
-        
-        
-        
-          
-          
-          
-          
-             
-
-    
-    
-        
-            
-                      
-                
-                      
-                
-                      
-                
-                      
-                
-                      
-                
-                      
-                
-                      
-                
-                      
-                
-                      
-                
-                      
-                
-                      
-                
-                      
-                  
-            
-            
-              
-        
-              
-                
-             
-
-    
-      
-        
-         
-            
-                
-              
-
-    
-     
-             
-
-    
-     
-             
-
-    
-    
-          
-            
-            
-                      
-                
-                
-                     
-                          
-                    
-                          
-                            
-                       
-                
-                      
-                
-                      
-                
-                
-                    
-                    
-                     
-                       
-                
-                
-                     
-                    
-                       
-                
-                      
-                
-                      
-                
-                      
-                  
-            
-                      
-              
-          
-            
-            
-                      
-                
-                
-                    
-                    
-                     
-                       
-                
-                 
-                    
-                       
-                
-                      
-                  
-            
-                 
-              
-              
-
-    
-    
-        
-           
-           
-           
-        
-          
-             
-
-    
-       
-          
-              
-
-    
-    
-        
-        
-        
-        
-                
-        
-            
-            
-                 
-                 
-             
-         
-        
-             
-
-    
-    
-                                                                 
-              
-         
-            
-                
-             
-
-    
-      """
-                                   _     ____     ____ ___ ___                                     
-                                  / \\  / ___|   / ___|_ _|_ _|           Now with AI!                         
-                                 / _ \\ \\___ \\| |    | | | |                                     
-                                / ___ \\ ___) | |___ | | | | |                                   
-                               /_/ _ \\_\\____/ \\____|___|___|    _ _____ _   _ ____  _____ ____  
-                                  / \\  |  _ \\ \\   / / ____| \\ | |_   _| | | |  _ \\| ____|  _ \\ 
-                                 / _ \\ | | | \\ \\ / /|  _| |  \\| | | | | | | | |_) |  _|  | |_) |
-                                / ___ \\| |_| |\\ V /  | |___| |\\  | | | | |_| |  _ <| |___ |  _ < 
-                               /_/   \\_\\____/  \\_/  |_____|_| \\_| |_|  \\___/|_| \\_\\___ __|_| \\_\\""" + brightBoldEnd);
     }
-    
 
     private static void displayHelp() throws InterruptedException { //main menu help command
-            if (PromptEngine.aiGenerationEnabled && false) {
-                PromptEngine.buildHelpPrompt(COMMANDS);
-                TextEngine.printWithDelays(PromptEngine.returnPrompt(), false);
-            } else {
-                TextEngine.printWithDelays("Things you could say:\n" +yellowColor+ "stats" +resetColor+" to see your stats\n" +yellowColor+ "inventory" +resetColor+ " to see your inventory\n" +yellowColor+ "heal" +resetColor+ " to heal you health using any available healing potions\n" +yellowColor+ "settings" +resetColor+ " or type " +yellowColor+ "save" +resetColor+ " to save\n" +yellowColor+ "map" +resetColor+ " to see the map\n" +yellowColor+ "exit" +resetColor+ " to return to the main menu.", true);
-            }
+        if (PromptEngine.aiGenerationEnabled && false) {
+            PromptEngine.buildHelpPrompt(COMMANDS);
+            TextEngine.printWithDelays(PromptEngine.returnPrompt(), false);
+        } else {
+            TextEngine.printWithDelays("Things you could say:\n" + yellowColor + "stats" + resetColor + " to see your stats\n" + yellowColor + "inventory" + resetColor + " to see your inventory\n" + yellowColor + "heal" + resetColor + " to heal you health using any available healing potions\n" + yellowColor + "settings" + resetColor + " or type " + yellowColor + "save" + resetColor + " to save\n" + yellowColor + "map" + resetColor + " to see the map\n" + yellowColor + "exit" + resetColor + " to return to the main menu.", true);
+        }
     }
 
     private static void exitGame() throws InterruptedException {   //exit game command
         GameSaveSerialization.saveGame();
         TextEngine.printWithDelays("See ya next time!", false);
         try {
-            FileWriter fwOb = new FileWriter(".runtime.txt", false); 
+            FileWriter fwOb = new FileWriter(".runtime.txt", false);
             PrintWriter pwOb = new PrintWriter(fwOb, false);
             pwOb.flush();
             pwOb.close();
             fwOb.close();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         TextEngine.enterToNext();
         TextEngine.clearScreen();
         System.exit(0);
@@ -480,12 +222,12 @@ public class Main {
     }
 
     public static void inGameDefaultTextHandling(String data) throws InterruptedException { //default in game commands
-        if (!Dungeon.ableToUseMenuCommands()){
-            COMMANDS = new String[] {"help", "save", "exit"};
+        if (!Dungeon.ableToUseMenuCommands()) {
+            COMMANDS = new String[]{"help", "save", "exit"};
             switch (data.toLowerCase().trim()) {
                 case "help" ->
                     displayHelp();
-                case "save" ->  {
+                case "save" -> {
                     checkSave(getSavedPlace());
                     TextEngine.printWithDelays("Game saved!", true);
                 }
@@ -499,9 +241,8 @@ public class Main {
                     invalidCommandWithBuffer();
             }
             COMMANDS = null;
-        }
-        else { 
-            COMMANDS = new String[] {"help", "inventory", "settings", "save", "exit", "heal", "stats", "map"};
+        } else {
+            COMMANDS = new String[]{"help", "inventory", "settings", "save", "exit", "heal", "stats", "map"};
             switch (data.toLowerCase().trim()) {
                 case "help" ->
                     displayHelp();
@@ -509,7 +250,7 @@ public class Main {
                     Player.openInventory();
                 case "settings" ->
                     SettingsMenu.start();
-                case "save" ->  {
+                case "save" -> {
                     checkSave(getSavedPlace());
                     TextEngine.printWithDelays("Game saved!", false);
                     TextEngine.enterToNext();
@@ -536,7 +277,7 @@ public class Main {
                     invalidCommandWithBuffer();
             }
             COMMANDS = null;
-        }  
+        }
     }
 
     public static void invalidCommandWithBuffer() throws InterruptedException {
@@ -557,7 +298,7 @@ public class Main {
 
     public static void loadSave() throws InterruptedException { //load saved game command
         if (getSavedPlace() == null) {
-            playerCreated = false;  
+            playerCreated = false;
             Player.playerStart();
         } else {
             GameSaveSerialization.saveGame();
@@ -602,14 +343,14 @@ public class Main {
         PromptEngine.aiGenerationEnabled = false;
         PromptEngine.userAPIKey = null;
         try {
-            FileWriter fwOb = new FileWriter(".runtime.txt", false); 
+            FileWriter fwOb = new FileWriter(".runtime.txt", false);
             PrintWriter pwOb = new PrintWriter(fwOb, false);
             pwOb.flush();
             pwOb.close();
             fwOb.close();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         GameSaveSerialization.saveGame();
         Enemy.resetEnemies();
     }
@@ -645,7 +386,7 @@ public class Main {
     }
 
     private static void promptLoadSavedGame() throws InterruptedException { //prompt to load saved game
-        TextEngine.printWithDelays("Would you like to load your saved game? (" +yellowColor+ "yes" +resetColor+ " or " +yellowColor+ "no" +resetColor+ ") ", true);
+        TextEngine.printWithDelays("Would you like to load your saved game? (" + yellowColor + "yes" + resetColor + " or " + yellowColor + "no" + resetColor + ") ", true);
         ignore = console.readLine();
         command = console.readLine();
         if (command.toLowerCase().equals("no")) {
@@ -658,7 +399,7 @@ public class Main {
     private static void confirmWipeSave() throws InterruptedException { //confirm to wipe save
         String textState = TextEngine.speedSetting;
         TextEngine.speedSetting = "Slow";
-        TextEngine.printWithDelays("All data will be wiped if you proceed. (" +yellowColor+ "yes" +resetColor+ " or " +yellowColor+ "no" +resetColor+ ") ", false);
+        TextEngine.printWithDelays("All data will be wiped if you proceed. (" + yellowColor + "yes" + resetColor + " or " + yellowColor + "no" + resetColor + ") ", false);
         TextEngine.printWithDelays("Are you sure?", true);
         ignore = console.readLine();
         command = console.readLine();
@@ -675,10 +416,10 @@ public class Main {
     }
 
     public static void printStatus() { //print the status of the player
-        if(getSavedPlace() != null) {
-            TextEngine.printNoDelay(Player.getName()+"'s adventure through the "+getSavedPlace(), false);
+        if (getSavedPlace() != null) {
+            TextEngine.printNoDelay(Player.getName() + "'s adventure through the " + getSavedPlace(), false);
         } else {
-            TextEngine.printNoDelay(Player.getName()+"'s adventure", false);
+            TextEngine.printNoDelay(Player.getName() + "'s adventure", false);
         }
         //TextEngine.printNoDelay("Health: " + healthColor+Player.getHealth()+resetColor, false);
         Player.drawHealthBar();
