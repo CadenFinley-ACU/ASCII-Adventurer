@@ -62,20 +62,7 @@ public class DarkForestDungeon extends Dungeon {
         DungeonGenerator.drawRoom(darkForestDungeon, roomsBeenTo, currentPlayerPosition[0], currentPlayerPosition[1], numberOfEnemies, mapRevealed);
         directionsString = new ArrayList<>();
         if (darkForestDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] == 2 && roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] == 0) {
-            if (!items.isEmpty()) {
-                String randomItem = items.get(rand.nextInt(items.size()));
-                if (hasChestInRoom(randomItem, 1)) {
-                    items.remove(randomItem);
-                    roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = darkForestDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
-                } else {
-                    int[] buffer = currentPlayerPosition.clone();
-                    currentPlayerPosition = lastPosition.clone(); // Save the current position before moving
-                    lastPosition = buffer.clone();
-                    Main.loadSave();
-                }
-            } else {
-                fairySequence();
-            }
+            itemRoom(items);
         }
         if (darkForestDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] == 9 && roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] == 0) {
             dungeonIntroText();
@@ -103,18 +90,7 @@ public class DarkForestDungeon extends Dungeon {
             miniBossSequence();
         }
         if (darkForestDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] == 8 && roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] == 0) {
-            TextEngine.printWithDelays("You have entered the boss room", false);
-            Player.changeHealth(Enemy.spawnEnemy("Forest Spirit", 1));
-            TextEngine.printWithDelays("You have defeated the boss and completed the dungeon!", false);
-            TextEngine.enterToNext();
-            //lastPosition = currentPlayerPosition.clone();
-            roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = darkForestDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
-            if (!completed) {
-                completedDungeons++;
-                completed = true;
-            }
-            lastPosition = null;
-            OpenWorld.startRoom();
+            bossRoom();
         }
         handleDirectionsAndCommands();
     }

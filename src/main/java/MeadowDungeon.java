@@ -65,20 +65,7 @@ public class MeadowDungeon extends Dungeon {
             dungeonIntroText();
         }
         if (meadowDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] == 2 && roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] == 0) {
-            if (!items.isEmpty()) {
-                String randomItem = items.get(rand.nextInt(items.size()));
-                if (hasChestInRoom(randomItem, 1)) {
-                    items.remove(randomItem);
-                    roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = meadowDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
-                } else {
-                    int[] buffer = currentPlayerPosition.clone();
-                    currentPlayerPosition = lastPosition.clone(); // Save the current position before moving
-                    lastPosition = buffer.clone();
-                    Main.loadSave();
-                }
-            } else {
-                fairySequence();
-            }
+            itemRoom(items);
         }
         if (meadowDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] == 10 && roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] == 0) {
             fairyRoom();
@@ -103,17 +90,7 @@ public class MeadowDungeon extends Dungeon {
             miniBossSequence();
         }
         if (meadowDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] == 8 && roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] == 0) {
-            TextEngine.printWithDelays("You have entered the boss room", false);
-            Player.changeHealth(Enemy.spawnEnemy("Forest Giant", 1));
-            TextEngine.printWithDelays("You have defeated the boss and completed the dungeon!", false);
-            TextEngine.enterToNext();
-            roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = meadowDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
-            if (!completed) {
-                completedDungeons++;
-                completed = true;
-            }
-            lastPosition = null;
-            OpenWorld.startRoom();
+            bossRoom();
         }
         handleDirectionsAndCommands();
     }

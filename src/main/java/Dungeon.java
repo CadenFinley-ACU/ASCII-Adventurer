@@ -1,6 +1,7 @@
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
  * Dungeon Class
@@ -18,6 +19,8 @@ public class Dungeon extends Room {
     public static int numberOfEnemies;
     public static String enemyType;
     public static boolean resetedAfterWin = false;
+
+    private static Random rand;
 
     public static int[][] meadowDungeon;
     public static int[][] darkForestDungeon;
@@ -1201,5 +1204,123 @@ public class Dungeon extends Room {
             return check == 8;
         }
         return false;
+    }
+
+    public static void itemRoom(List<String> localItems) throws InterruptedException {
+        if (!localItems.isEmpty()) {
+            String randomItem = localItems.get(rand.nextInt(localItems.size()));
+            if (hasChestInRoom(randomItem, 1)) {
+                switch (currentDungeon) {
+                    case "Meadow" -> {
+                        MeadowDungeon.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = meadowDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
+                        MeadowDungeon.items.remove(randomItem);
+                    }
+                    case "Dark Forest" -> {
+                        DarkForestDungeon.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = darkForestDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
+                        DarkForestDungeon.items.remove(randomItem);
+                    }
+                    case "Mountain Cave" -> {
+                        MountainCaveDungeon.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = mountainCaveDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
+                        MountainCaveDungeon.items.remove(randomItem);
+                    }
+                    case "Mountain Top" -> {
+                        MountainTopDungeon.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = mountainTopDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
+                        MountainTopDungeon.items.remove(randomItem);
+                    }
+                    case "Desert Oasis" -> {
+                        DesertOasisDungeon.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = desertOasisDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
+                        DesertOasisDungeon.items.remove(randomItem);
+                    }
+                    case "Desert Plains" -> {
+                        DesertPlainsDungeon.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = desertPlainsDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
+                        DesertPlainsDungeon.items.remove(randomItem);
+                    }
+                    case "Desert Pyramid" -> {
+                        DesertPyramidDungeon.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = desertPyramidDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
+                        DesertPyramidDungeon.items.remove(randomItem);
+                    }
+                    case "Ocean Kingdom" -> {
+                        OceanKingdomDungeon.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = oceanKingdomDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
+                        OceanKingdomDungeon.items.remove(randomItem);
+                    }
+                }
+                Main.loadSave();
+            } else {
+                int[] buffer = currentPlayerPosition.clone();
+                currentPlayerPosition = lastPosition.clone(); // Save the current position before moving
+                lastPosition = buffer.clone();
+                Main.loadSave();
+            }
+        } else {
+            fairySequence();
+        }
+    }
+
+    public static void bossRoom() throws InterruptedException {
+        TextEngine.printWithDelays("You have entered the boss room", false);
+        Player.changeHealth(Enemy.spawnEnemy(currentBoss, 1));
+        TextEngine.printWithDelays("You have defeated the boss and completed the dungeon!", false);
+        TextEngine.enterToNext();
+        switch (currentDungeon) {
+            case "Meadow" -> {
+                MeadowDungeon.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = meadowDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
+                if (!MeadowDungeon.completed) {
+                    completedDungeons++;
+                    MeadowDungeon.completed = true;
+                }
+            }
+            case "Dark Forest" -> {
+                DarkForestDungeon.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = darkForestDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
+                if (!DarkForestDungeon.completed) {
+                    completedDungeons++;
+                    DarkForestDungeon.completed = true;
+                }
+            }
+            case "Mountain Cave" -> {
+                MountainCaveDungeon.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = mountainCaveDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
+                if (!MountainCaveDungeon.completed) {
+                    completedDungeons++;
+                    MountainCaveDungeon.completed = true;
+                }
+            }
+            case "Mountain Top" -> {
+                MountainTopDungeon.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = mountainTopDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
+                if (!MountainTopDungeon.completed) {
+                    completedDungeons++;
+                    MountainTopDungeon.completed = true;
+                }
+            }
+            case "Desert Oasis" -> {
+                DesertOasisDungeon.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = desertOasisDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
+                if (!DesertOasisDungeon.completed) {
+                    completedDungeons++;
+                    DesertOasisDungeon.completed = true;
+                }
+            }
+            case "Desert Plains" -> {
+                DesertPlainsDungeon.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = desertPlainsDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
+                if (!DesertPlainsDungeon.completed) {
+                    completedDungeons++;
+                    DesertPlainsDungeon.completed = true;
+                }
+            }
+            case "Desert Pyramid" -> {
+                DesertPyramidDungeon.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = desertPyramidDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
+                if (!DesertPyramidDungeon.completed) {
+                    completedDungeons++;
+                    DesertPyramidDungeon.completed = true;
+                }
+            }
+            case "Ocean Kingdom" -> {
+                OceanKingdomDungeon.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = oceanKingdomDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
+                if (!OceanKingdomDungeon.completed) {
+                    completedDungeons++;
+                    OceanKingdomDungeon.completed = true;
+                    Main.gameComplete = true;
+                }
+            }
+        }
+        lastPosition = null;
+        OpenWorld.startRoom();
     }
 }

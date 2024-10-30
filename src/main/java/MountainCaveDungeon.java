@@ -65,21 +65,7 @@ public class MountainCaveDungeon extends Dungeon {
             dungeonIntroText();
         }
         if (mountainCaveDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] == 2 && roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] == 0) {
-            if (!items.isEmpty()) {
-                String randomItem = items.get(rand.nextInt(items.size()));
-                if (hasChestInRoom(randomItem, 1)) {
-                    items.remove(randomItem);
-                    //lastPosition = currentPlayerPosition.clone();
-                    roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = mountainCaveDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
-                } else {
-                    int[] buffer = currentPlayerPosition.clone();
-                    currentPlayerPosition = lastPosition.clone(); // Save the current position before moving
-                    lastPosition = buffer.clone();
-                    Main.loadSave();
-                }
-            } else {
-                fairySequence();
-            }
+            itemRoom(items);
         }
         if (mountainCaveDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] == 10 && roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] == 0) {
             fairyRoom();
@@ -104,19 +90,7 @@ public class MountainCaveDungeon extends Dungeon {
             miniBossSequence();
         }
         if (mountainCaveDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] == 8 && roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] == 0) {
-            TextEngine.printWithDelays("You have entered the boss room", false);
-            Player.changeHealth(Enemy.spawnEnemy("Wyvern", 1));
-            TextEngine.printWithDelays("You have defeated the boss and completed the dungeon!", false);
-            TextEngine.enterToNext();
-            Room.hasItemInRoom("Backpack", 1);
-            //lastPosition = currentPlayerPosition.clone();
-            roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = mountainCaveDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
-            if (!completed) {
-                completedDungeons++;
-                completed = true;
-            }
-            lastPosition = null;
-            OpenWorld.startRoom();
+            bossRoom();
         }
         handleDirectionsAndCommands();
     }
