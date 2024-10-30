@@ -425,7 +425,7 @@ public class Main {
         //TextEngine.printNoDelay("Health: " + healthColor+Player.getHealth()+resetColor, false);
         Player.drawHealthBar();
         //TextEngine.printNoDelay("Gold: " + Player.getGold(), false);
-        TextEngine.printNoDelay("\n", false);
+        System.out.println();
     }
 
     public static void screenRefresh() throws InterruptedException { //refresh the screen

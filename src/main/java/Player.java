@@ -286,7 +286,7 @@ public class Player {
         while (true) {
             ignore = console.readLine();
             command = console.readLine();
-            if (command != null && !command.isEmpty()) {
+            if (command != null && !command.isEmpty() && command.length() < 13) {
                 if ("exit".equals(command)) {
                     Main.startMenu();
                     TextEngine.clearScreen();
@@ -567,7 +567,7 @@ public class Player {
         while (true) {
             ignore = console.readLine();
             command = console.readLine();
-            if (command != null && !command.isEmpty()) {
+            if (command != null && !command.isEmpty() && command.length() < 13) {
                 if ("exit".equals(command)) {
                     Main.startMenu();
                     TextEngine.clearScreen();
@@ -614,7 +614,7 @@ public class Player {
         }
         bar.append("|");
         String healthBar = bar.toString();
-        TextEngine.printNoDelay("Health: " + health + " / " + maxHealth, false);
+        System.out.println("Health: " + health + " / " + maxHealth);
         System.out.println(healthBar);
     }
 
