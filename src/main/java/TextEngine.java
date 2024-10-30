@@ -34,7 +34,10 @@ public abstract class TextEngine {
             if (line != null && !line.isEmpty()) {
                 String[] dimensions = line.split(" ");
                 if (dimensions.length == 2) {
-                    return Integer.parseInt(dimensions[1]) + 10;
+                    int length = Integer.parseInt(dimensions[0]) + 10;
+                    if (length > 70) {
+                        return length;
+                    }
                 }
             }
         } catch (Exception e) {
