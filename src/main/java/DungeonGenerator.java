@@ -18,9 +18,13 @@ public class DungeonGenerator {
     public static String redColor = "\u001B[31m";
     public static String greenColor = "\u001B[32m";
     public static String pinkColor = "\u001B[35m";
+    private static int[] coord8;
+    private static int[] coord9;
 
     public static void wipe() {
         matrix = null;
+        coord8 = null;
+        coord9 = null;
     }
 
     public static void start(int pass) {
@@ -65,8 +69,8 @@ public class DungeonGenerator {
         drawPath(matrix, x1, y1, x2, y2, rand);
 
         // Save coordinates of 8 and 9
-        int[] coord9 = {x1, y1};
-        int[] coord8 = {x2, y2};
+        coord9 = new int[]{x1, y1};
+        coord8 = new int[]{x2, y2};
 
         // Remove 8 and 9 temporarily
         matrix[coord9[0]][coord9[1]] = 0;
@@ -74,32 +78,32 @@ public class DungeonGenerator {
 
         //determines how many random rooms are added
         // Randomly add at least size+size/2 more 1's ensuring they are connected to the main path
-        addRandom(matrix, rand, size + (int) changeRatio, 1);
+        addRandom(matrix, rand, size + (int) changeRatio, 1, size);
 
         float itemRoomRatio = ((2 * size) - 5.5f) - (size / 2);
 
         if (itemRoomRatio >= size - 5) {
             itemRoomRatio = size / 2;
         }
-        if (itemRoomRatio < 1) {
-            itemRoomRatio = 1;
+        if (itemRoomRatio < 2) {
+            itemRoomRatio = 2;
         }
 
         // Randomly add item rooms (2-5) ensuring they are connected to the main path 2-5 are item rooms
-        if (size > 7) {
-            addRandom(matrix, rand, 2, 2);
+        if (size < 7) {
+            addRandom(matrix, rand, 2, 2, size);
         } else {
-            addRandom(matrix, rand, (int) itemRoomRatio, 2);
+            addRandom(matrix, rand, (int) itemRoomRatio, 2, size);
         }
 
         // Randomly add 1 rare item (3) ensuring it is connected to the main path
-        addRandom(matrix, rand, 1, 3);
+        addRandom(matrix, rand, 1, 3, size);
 
         // Randomly add 1 shop room (6) ensuring it is connected to the main path
-        addRandom(matrix, rand, 1, 6);
+        addRandom(matrix, rand, 1, 6, size);
 
         // Randomly add mini boss rooms (4) ensuring it is connected to the main path
-        addRandom(matrix, rand, 1, 4);
+        addRandom(matrix, rand, 1, 4, size);
 
         // Randomly add shop rooms (4) ensuring it is connected to the main path
         //addRandom(matrix, rand, 1, 7);
@@ -127,6 +131,7 @@ public class DungeonGenerator {
             System.out.println("-------------------------------");
         }
         fails++;
+        wipe();
         start(size);
     }
 
@@ -152,18 +157,31 @@ public class DungeonGenerator {
                 matrix[x1][y1] = 1;
             }
         }
+        if (testing) {
+            printMap(matrix);
+        }
     }
 
-    private static void addRandom(int[][] matrix, Random rand, int minOnes, int num) {
+    private static void addRandom(int[][] matrix, Random rand, int minOnes, int num, int matrixSize) {
         int addedOnes = 0;
         while (addedOnes < minOnes) {
             int x, y;
             do {
                 x = rand.nextInt(matrix.length);
                 y = rand.nextInt(matrix.length);
-            } while (matrix[x][y] != 0 || !isConnected(matrix, x, y) || matrix[x][y] > 2);
+            } while (!isConnected(matrix, x, y) || matrix[x][y] > 1 || (coord8[0] == x && coord8[1] == y) || (coord9[0] == x && coord9[1] == y));
             matrix[x][y] = num;
             addedOnes++;
+        }
+        if (testing) {
+            printMap(matrix);
+        }
+        if (numberOfAllRooms(matrix) < matrixSize + 2) {
+            if (testing) {
+                System.out.println(redColor + "Not enough rooms, retrying..." + resetColor);
+            }
+            wipe();
+            start(matrixSize);
         }
     }
 
@@ -289,6 +307,8 @@ public class DungeonGenerator {
             }
             System.out.println();
         }
+        System.out.println();
+
     }
 
     public static void printAdjacentRoomsAndCurrentRoomAndUnlockedRooms(int[][] passedMatrix, int[][] unlocked, int[] passedPosition, boolean revealed) {
@@ -483,7 +503,9 @@ public class DungeonGenerator {
                 }
             }
         }
-
+        if (testing) {
+            printMap(matrix);
+        }
         // Set all unreachable cells to 0
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
@@ -492,7 +514,9 @@ public class DungeonGenerator {
                 }
             }
         }
-
+        if (testing) {
+            printMap(matrix);
+        }
         return matrix;
     }
 
@@ -532,6 +556,18 @@ public class DungeonGenerator {
         for (int[] ints : matrix) {
             for (int j = 0; j < matrix.length; j++) {
                 if (ints[j] == find) {
+                    count++;
+                }
+            }
+        }
+        return count;
+    }
+
+    public static int numberOfAllRooms(int[][] matrix) {
+        int count = 0;
+        for (int[] ints : matrix) {
+            for (int j = 0; j < matrix.length; j++) {
+                if (ints[j] != 0) {
                     count++;
                 }
             }
