@@ -13,13 +13,14 @@ public class DesertPlainsDungeon extends Dungeon {
 
     private static int[] spawnPosition = DungeonGenerator.findValue(Dungeon.desertPlainsDungeon, 9);
     private static int[] bossRoom = DungeonGenerator.findValue(Dungeon.desertPlainsDungeon, 8);
-    public static int[][] roomsBeenTo = DungeonGenerator.createRoomsBeenTo(Dungeon.desertPlainsDungeon.length);
-    public static String direction;
-    public static int[] availableMove;
-    public static ArrayList<String> directionsString;
-    public static List<String> items;
+    private static String direction;
+    private static int[] availableMove;
+    private static ArrayList<String> directionsString;
     private static final List<String> enemies = new ArrayList<>(List.of("Orc", "Troll", "Mummy", "Demon"));
     private static final Random rand = new Random();
+
+    public static List<String> items;
+    public static int[][] roomsBeenTo = DungeonGenerator.createRoomsBeenTo(Dungeon.desertPlainsDungeon.length);
     public static boolean completed = false;
     public static boolean visited = false;
     public static boolean mapRevealed;
@@ -133,7 +134,7 @@ public class DesertPlainsDungeon extends Dungeon {
                 directionsString.add("east");
             }
         }
-        TextEngine.printNoDelay(yellowColor + directionsString.toString() + resetColor, true);
+        TextEngine.printNoDelay(directionsInString(directionsString), true);
         while (true) {
             ignore = Room.console.readLine();
             direction = Room.console.readLine();

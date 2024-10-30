@@ -1323,4 +1323,17 @@ public class Dungeon extends Room {
         lastPosition = null;
         OpenWorld.startRoom();
     }
+
+    public static String directionsInString(ArrayList<String> list) {
+        StringBuilder sb = new StringBuilder();
+        for (Object item : list) {
+            sb.append(yellowColor).append(item.toString()).append(resetColor);
+            sb.append(", ");
+        }
+        // Remove the last comma and space
+        if (sb.length() > 0) {
+            sb.setLength(sb.length() - 2);
+        }
+        return sb.toString();
+    }
 }

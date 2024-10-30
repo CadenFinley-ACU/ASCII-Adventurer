@@ -13,13 +13,14 @@ public class MountainCaveDungeon extends Dungeon {
 
     private static int[] spawnPosition = DungeonGenerator.findValue(Dungeon.mountainCaveDungeon, 9);
     private static int[] bossRoom = DungeonGenerator.findValue(Dungeon.mountainCaveDungeon, 8);
-    public static int[][] roomsBeenTo = DungeonGenerator.createRoomsBeenTo(Dungeon.mountainCaveDungeon.length);
-    public static String direction;
-    public static int[] availableMove;
-    public static ArrayList<String> directionsString;
-    public static List<String> items;
+    private static String direction;
+    private static int[] availableMove;
+    private static ArrayList<String> directionsString;
     private static final List<String> enemies = new ArrayList<>(List.of("Troll", "Skeleton", "Orc", "Ghost", "Demon", "Zombie"));
     private static final Random rand = new Random();
+
+    public static List<String> items;
+    public static int[][] roomsBeenTo = DungeonGenerator.createRoomsBeenTo(Dungeon.mountainCaveDungeon.length);
     public static boolean completed = false;
     public static boolean visited = false;
     public static boolean mapRevealed;
@@ -133,7 +134,7 @@ public class MountainCaveDungeon extends Dungeon {
                 directionsString.add("east");
             }
         }
-        TextEngine.printNoDelay(yellowColor + directionsString.toString() + resetColor, true);
+        TextEngine.printNoDelay(directionsInString(directionsString), true);
         while (true) {
             ignore = Room.console.readLine();
             direction = Room.console.readLine();

@@ -2,6 +2,7 @@
 import java.io.Console;
 import java.io.File;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
@@ -25,7 +26,7 @@ public class Main {
     public static boolean gameComplete = false;
     public static String[] COMMANDS;
 
-    public static void main(String[] args) throws InterruptedException { //main game start
+    public static void main(String[] args) throws InterruptedException, IOException { //main game start
         TextEngine.clearScreen();
         TextEngine.printNoDelay("Loading...", false);
         if (!hasSave()) {
