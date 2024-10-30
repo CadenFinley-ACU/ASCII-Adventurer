@@ -104,7 +104,7 @@ public abstract class TextEngine {
                     currentLineWidth = 0;
                 }
             }
-            if (currentLineWidth > 0 && currentLineWidth < MAX_LINE_WIDTH) {
+            if (currentLineWidth > 0) {
                 System.out.print(' ');
                 currentLineWidth++;
             }
