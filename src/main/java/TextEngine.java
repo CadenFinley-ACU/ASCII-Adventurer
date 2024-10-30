@@ -10,6 +10,9 @@ import java.util.concurrent.TimeUnit;
  *
  * Text Adventure Game SE374 F24 Final Project Caden Finley Albert Tucker
  * Grijesh Shrestha
+ *
+ * Written by Caden Finley
+ *
  */
 public abstract class TextEngine {
 
@@ -78,6 +81,9 @@ public abstract class TextEngine {
                     currentLineWidth = 0;
                 }
             }
+            if (word.contains("\n")) {
+                currentLineWidth = 0;
+            }
             for (char ch : word.toCharArray()) {
                 if (String.valueOf(ch).matches("^[a-zA-Z0-9]+$") && !String.valueOf(ch).matches(" ")) {
                     switch (speedSetting) {
@@ -94,8 +100,11 @@ public abstract class TextEngine {
                 }
                 System.out.print(ch);
                 currentLineWidth++;
+                if (ch == '\n') {
+                    currentLineWidth = 0;
+                }
             }
-            if (currentLineWidth > 0) {
+            if (currentLineWidth > 0 && currentLineWidth < MAX_LINE_WIDTH) {
                 System.out.print(' ');
                 currentLineWidth++;
             }
@@ -124,9 +133,15 @@ public abstract class TextEngine {
                     currentLineWidth = 0;
                 }
             }
+            if (word.contains("\n")) {
+                currentLineWidth = 0;
+            }
             for (char ch : word.toCharArray()) {
                 System.out.print(ch);
                 currentLineWidth++;
+                if (ch == '\n') {
+                    currentLineWidth = 0;
+                }
             }
             System.out.print(' '); // Print the space after the word
             currentLineWidth++;
