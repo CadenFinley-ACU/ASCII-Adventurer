@@ -50,6 +50,8 @@ public abstract class TextEngine {
         int width = getTerminalWidth();
         if (width != -1) {
             MAX_LINE_WIDTH = width;
+        } else {
+            MAX_LINE_WIDTH = 80;
         }
     }
 
