@@ -49,7 +49,6 @@ public class DesertOasisDungeon extends Dungeon {
         spawnPosition = DungeonGenerator.findValue(Dungeon.desertOasisDungeon, 9);
         bossRoom = DungeonGenerator.findValue(Dungeon.desertOasisDungeon, 8);
         Dungeon.currentPlayerPosition = spawnPosition;
-        currentPlayerPosition = spawnPosition;
         roomsBeenTo = DungeonGenerator.createRoomsBeenTo(Dungeon.desertOasisDungeon.length);
         lastPosition = spawnPosition.clone();
     }
