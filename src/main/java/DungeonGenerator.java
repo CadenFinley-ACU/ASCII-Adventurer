@@ -35,7 +35,6 @@ public class DungeonGenerator {
             start(5);
             return;
         }
-
         int size = pass;
         if (size % 2 == 0) {
             size++;
