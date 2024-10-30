@@ -152,7 +152,6 @@ public class DungeonGenerator {
                     x1 += (x1 < x2) ? 1 : -1;
                 }
             }
-
             if (matrix[x1][y1] == 0) {
                 matrix[x1][y1] = 1;
             }
@@ -202,7 +201,6 @@ public class DungeonGenerator {
         int[] dx = {-1, 1, 0, 0};
         int[] dy = {0, 0, -1, 1};
         int adjacentNonZeroCount = 0;
-
         for (int i = 0; i < 4; i++) {
             int nx = x + dx[i];
             int ny = y + dy[i];
@@ -221,30 +219,24 @@ public class DungeonGenerator {
         Queue<int[]> queue = new LinkedList<>();
         queue.add(new int[]{x1, y1});
         visited[x1][y1] = true;
-
         int[] dx = {-1, 1, 0, 0};
         int[] dy = {0, 0, -1, 1};
-
         while (!queue.isEmpty()) {
             int[] current = queue.poll();
             int cx = current[0];
             int cy = current[1];
-
             if (cx == x2 && cy == y2) {
                 return true;
             }
-
             for (int i = 0; i < 4; i++) {
                 int nx = cx + dx[i];
                 int ny = cy + dy[i];
-
                 if (nx >= 0 && nx < size && ny >= 0 && ny < size && !visited[nx][ny] && matrix[nx][ny] > 0) {
                     queue.add(new int[]{nx, ny});
                     visited[nx][ny] = true;
                 }
             }
         }
-
         return false;
     }
 
@@ -296,6 +288,108 @@ public class DungeonGenerator {
         return localMatrix;
     }
 
+    private static boolean isAdjacent(int x, int y, int[] playerPosition) {
+        int px = playerPosition[0];
+        int py = playerPosition[1];
+        return (Math.abs(px - x) == 1 && py == y) || (Math.abs(py - y) == 1 && px == x);
+    }
+
+    public static int[][] trimUnreachableParts(int[][] matrix, int[] startPosition) {
+        int rows = matrix.length;
+        int cols = matrix[0].length;
+        boolean[][] visited = new boolean[rows][cols];
+        Queue<int[]> queue = new LinkedList<>();
+        queue.add(startPosition);
+        visited[startPosition[0]][startPosition[1]] = true;
+        // Directions for moving up, down, left, right
+        int[] dx = {-1, 1, 0, 0};
+        int[] dy = {0, 0, -1, 1};
+        // Perform BFS to mark all reachable cells
+        while (!queue.isEmpty()) {
+            int[] current = queue.poll();
+            int x = current[0];
+            int y = current[1];
+            for (int i = 0; i < 4; i++) {
+                int nx = x + dx[i];
+                int ny = y + dy[i];
+                if (nx >= 0 && nx < rows && ny >= 0 && ny < cols && !visited[nx][ny] && matrix[nx][ny] != 0) {
+                    queue.add(new int[]{nx, ny});
+                    visited[nx][ny] = true;
+                }
+            }
+        }
+        if (testing) {
+            printMap(matrix);
+        }
+        // Set all unreachable cells to 0
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                if (!visited[i][j]) {
+                    matrix[i][j] = 0;
+                }
+            }
+        }
+        if (testing) {
+            printMap(matrix);
+        }
+        return matrix;
+    }
+
+    public static int[][] generateAndReturnMatrix(int size) {
+        start(size);
+        return matrix;
+    }
+
+    public static int[] getDirections(int[][] matrix, int x, int y) {
+        List<Integer> directions = new ArrayList<>();
+        int[] dx = {-1, 1, 0, 0};
+        int[] dy = {0, 0, -1, 1};
+        for (int i = 0; i < 4; i++) {
+            int nx = x + dx[i];
+            int ny = y + dy[i];
+            if (nx >= 0 && nx < matrix.length && ny >= 0 && ny < matrix[0].length) {
+                directions.add(matrix[nx][ny]);
+            } else {
+                directions.add(0); // Add 0 if out of bounds
+            }
+        }
+        return directions.stream().mapToInt(i -> i).toArray();
+    }
+
+    public static int[][] createRoomsBeenTo(int size) {
+        int[][] temp = new int[size][size];
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
+                temp[i][j] = 0;
+            }
+        }
+        return temp;
+    }
+
+    public static int numberOfRooms(int[][] matrix, int find) {
+        int count = 0;
+        for (int[] ints : matrix) {
+            for (int j = 0; j < matrix.length; j++) {
+                if (ints[j] == find) {
+                    count++;
+                }
+            }
+        }
+        return count;
+    }
+
+    public static int numberOfAllRooms(int[][] matrix) {
+        int count = 0;
+        for (int[] ints : matrix) {
+            for (int j = 0; j < matrix.length; j++) {
+                if (ints[j] != 0) {
+                    count++;
+                }
+            }
+        }
+        return count;
+    }
+
     public static void printMap(int[][] passedMatrix) {
         for (int[] passedMatrix1 : passedMatrix) {
             for (int j = 0; j < passedMatrix.length; j++) {
@@ -308,7 +402,6 @@ public class DungeonGenerator {
             System.out.println();
         }
         System.out.println();
-
     }
 
     public static void printAdjacentRoomsAndCurrentRoomAndUnlockedRooms(int[][] passedMatrix, int[][] unlocked, int[] passedPosition, boolean revealed) {
@@ -467,112 +560,6 @@ public class DungeonGenerator {
             System.out.println();
             System.out.println("Map Key: [P] Player,\n [?] Item Room,\n [B] Boss Room,\n [S] Spawn Room,\n [$] Shop Room,\n [F] Fairy Room,\n [k] Key Room");
         }
-    }
-
-    private static boolean isAdjacent(int x, int y, int[] playerPosition) {
-        int px = playerPosition[0];
-        int py = playerPosition[1];
-        return (Math.abs(px - x) == 1 && py == y) || (Math.abs(py - y) == 1 && px == x);
-    }
-
-    public static int[][] trimUnreachableParts(int[][] matrix, int[] startPosition) {
-        int rows = matrix.length;
-        int cols = matrix[0].length;
-        boolean[][] visited = new boolean[rows][cols];
-        Queue<int[]> queue = new LinkedList<>();
-        queue.add(startPosition);
-        visited[startPosition[0]][startPosition[1]] = true;
-
-        // Directions for moving up, down, left, right
-        int[] dx = {-1, 1, 0, 0};
-        int[] dy = {0, 0, -1, 1};
-
-        // Perform BFS to mark all reachable cells
-        while (!queue.isEmpty()) {
-            int[] current = queue.poll();
-            int x = current[0];
-            int y = current[1];
-
-            for (int i = 0; i < 4; i++) {
-                int nx = x + dx[i];
-                int ny = y + dy[i];
-
-                if (nx >= 0 && nx < rows && ny >= 0 && ny < cols && !visited[nx][ny] && matrix[nx][ny] != 0) {
-                    queue.add(new int[]{nx, ny});
-                    visited[nx][ny] = true;
-                }
-            }
-        }
-        if (testing) {
-            printMap(matrix);
-        }
-        // Set all unreachable cells to 0
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < cols; j++) {
-                if (!visited[i][j]) {
-                    matrix[i][j] = 0;
-                }
-            }
-        }
-        if (testing) {
-            printMap(matrix);
-        }
-        return matrix;
-    }
-
-    public static int[][] generateAndReturnMatrix(int size) {
-        start(size);
-        return matrix;
-    }
-
-    public static int[] getDirections(int[][] matrix, int x, int y) {
-        List<Integer> directions = new ArrayList<>();
-        int[] dx = {-1, 1, 0, 0};
-        int[] dy = {0, 0, -1, 1};
-        for (int i = 0; i < 4; i++) {
-            int nx = x + dx[i];
-            int ny = y + dy[i];
-            if (nx >= 0 && nx < matrix.length && ny >= 0 && ny < matrix[0].length) {
-                directions.add(matrix[nx][ny]);
-            } else {
-                directions.add(0); // Add 0 if out of bounds
-            }
-        }
-        return directions.stream().mapToInt(i -> i).toArray();
-    }
-
-    public static int[][] createRoomsBeenTo(int size) {
-        int[][] temp = new int[size][size];
-        for (int i = 0; i < size; i++) {
-            for (int j = 0; j < size; j++) {
-                temp[i][j] = 0;
-            }
-        }
-        return temp;
-    }
-
-    public static int numberOfRooms(int[][] matrix, int find) {
-        int count = 0;
-        for (int[] ints : matrix) {
-            for (int j = 0; j < matrix.length; j++) {
-                if (ints[j] == find) {
-                    count++;
-                }
-            }
-        }
-        return count;
-    }
-
-    public static int numberOfAllRooms(int[][] matrix) {
-        int count = 0;
-        for (int[] ints : matrix) {
-            for (int j = 0; j < matrix.length; j++) {
-                if (ints[j] != 0) {
-                    count++;
-                }
-            }
-        }
-        return count;
     }
 
     public static void drawRoom(int[][] localDungeon, int[][] visitedRoom, int x, int y, int numberofEnemies, boolean revealed) {
