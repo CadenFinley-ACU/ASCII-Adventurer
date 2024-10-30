@@ -1022,7 +1022,7 @@ public class Dungeon extends Room {
             return;
         }
         if (numberOfEnemies > 1) {
-            TextEngine.printWithDelays("You have entered a room with " + numberOfEnemies + " " + redColor + enemyType + resetColor + "s in this room!\nYou were ambushed!", false);
+            TextEngine.printWithDelays("You have entered a room with " + numberOfEnemies + " " + redColor + enemyType + "s" + resetColor + " in this room!\nYou were ambushed!", false);
         } else {
             TextEngine.printWithDelays("You have entered a room with a " + redColor + enemyType + resetColor + " and were ambushed!", false);
         }
