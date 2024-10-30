@@ -167,7 +167,7 @@ public abstract class TextEngine {
         }
     }
 
-    public static void enterToNext() throws InterruptedException { //adds a pause and waits for enter
+    public static void enterToNext() { //adds a pause and waits for enter
         printNoDelay(yellowColor + "Press Enter to continue" + resetColor, false);
         console.readLine();
     }
