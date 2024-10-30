@@ -70,7 +70,7 @@ public abstract class TextEngine {
                 }
             }
             for (char ch : word.toCharArray()) {
-                if (String.valueOf(ch).matches("^[a-zA-Z0-9]+$")) {
+                if (String.valueOf(ch).matches("^[a-zA-Z0-9]+$") && !String.valueOf(ch).matches(" ")) {
                     switch (speedSetting) {
                         case "Slow" ->
                             TimeUnit.MILLISECONDS.sleep(30);
