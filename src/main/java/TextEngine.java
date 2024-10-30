@@ -51,6 +51,10 @@ public abstract class TextEngine {
     }
 
     public static void printWithDelays(String data, boolean buffer) throws InterruptedException { //use buffer is you are accepting input after the text is printed
+        if (speedSetting.equals("NoDelay")) {
+            printNoDelay(data, buffer);
+            return;
+        }
         setWidth();
         if (buffer) {
             data = data + yellowColor + " (press enter to type)" + resetColor;
