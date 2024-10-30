@@ -176,7 +176,7 @@ public class Main {
         System.out.println("  / _ \\ / _` \\ \\ / / _ \\ '_ \\| __| | | | '__/ _ \\ '__|");
         System.out.println(" / ___ \\ (_| |\\ V /  __/ | | | |_| |_| | | |  __/ |   ");
         System.out.println("/_/   \\_\\__,_| \\_/ \\___|_| |_|\\__|\\__,_|_|  \\___|_|   ");
-        System.out.println(brightBoldEnd);
+        System.out.print(brightBoldEnd);
 
     }
 
