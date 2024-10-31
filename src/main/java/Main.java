@@ -18,7 +18,6 @@ public class Main {
     static String yellowColor = "\033[1;33m"; // yellow color
     private final static Console console = System.console();
     private static String command;
-    private static String ignore;
     public static boolean playerCreated = false;
     public static String savedPlace = null;
     private static final String OS_NAME = System.getProperty("os.name");
@@ -132,7 +131,6 @@ public class Main {
     private static void handleMenuCommands() throws InterruptedException { //main menu command handling
         while (true) {
             COMMANDS = new String[]{"start", "settings", "exit"};
-            ignore = console.readLine();
             command = console.readLine();
             switch (command.toLowerCase().trim()) {
                 case "start" ->
@@ -388,7 +386,6 @@ public class Main {
 
     private static void promptLoadSavedGame() throws InterruptedException { //prompt to load saved game
         TextEngine.printWithDelays("Would you like to load your saved game? (" + yellowColor + "yes" + resetColor + " or " + yellowColor + "no" + resetColor + ") ", true);
-        ignore = console.readLine();
         command = console.readLine();
         if (command.toLowerCase().equals("no")) {
             confirmWipeSave();
@@ -402,7 +399,6 @@ public class Main {
         TextEngine.speedSetting = "Slow";
         TextEngine.printWithDelays("All data will be wiped if you proceed. (" + yellowColor + "yes" + resetColor + " or " + yellowColor + "no" + resetColor + ") ", false);
         TextEngine.printWithDelays("Are you sure?", true);
-        ignore = console.readLine();
         command = console.readLine();
         if (command.toLowerCase().trim().equals("yes")) {
             TextEngine.clearScreen();

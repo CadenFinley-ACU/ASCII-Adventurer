@@ -137,7 +137,12 @@ public class PromptEngine {
             return extractContentFromResponse(response.toString());
 
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            TextEngine.printNoDelay("OpenAI API connection failed. Please check your API key and internet connection. Please try again later.", false);
+            TextEngine.printNoDelay("AI generation has been disabled. You can renable it in settings.", false);
+            TextEngine.enterToNext();
+            aiGenerationEnabled = false;
+            return " ";
+            //throw new RuntimeException(e);
         }
     }
 

@@ -250,7 +250,7 @@ public class Dungeon extends Room {
                     TextEngine.printWithDelays("This command will reset" + yellowColor + " ALL " + resetColor + "Dungeons!", false);
                     TextEngine.printWithDelays("Are you sure you want to do this? " + redColor + "yes" + resetColor + " or " + yellowColor + "no" + resetColor, true);
                     while (true) {
-                        ignore = Room.console.readLine();
+
                         command = Room.console.readLine();
                         switch (command.toLowerCase().trim()) {
                             case "yes" -> {
@@ -418,7 +418,7 @@ public class Dungeon extends Room {
         if (Player.inventory.containsKey("key")) {
             TextEngine.printWithDelays("Would you like to unlock the door to the boss room? " + yellowColor + "yes" + resetColor + " or " + yellowColor + "no" + resetColor, true);
             while (true) {
-                ignore = Room.console.readLine();
+
                 command = Room.console.readLine();
                 switch (command.toLowerCase().trim()) {
                     case "yes" -> {
@@ -458,7 +458,7 @@ public class Dungeon extends Room {
             case "Meadow", "Dark Forest", "Mountain Cave", "Mountain Top" -> {
                 TextEngine.printNoDelay(yellowColor + "health potion" + resetColor + " ~20 gold\n" + yellowColor + "magic map" + resetColor + " ~50\n" + yellowColor + "K.O. Cannon" + resetColor + " ~3000 gold\nor " + yellowColor + " leave" + resetColor, true);
                 while (true) {
-                    ignore = Room.console.readLine();
+
                     command = Room.console.readLine();
                     switch (command.toLowerCase().trim()) {
                         case "health potion" -> {
@@ -507,7 +507,7 @@ public class Dungeon extends Room {
             case "Desert Oasis", "Desert Plains", "Desert Pyramid" -> {
                 TextEngine.printNoDelay(yellowColor + "greater health potion" + resetColor + " ~50 gold\n" + yellowColor + "magic map" + resetColor + " ~150\n" + yellowColor + "K.O. Cannon" + resetColor + " ~3000 gold\nor " + yellowColor + " leave" + resetColor, true);
                 while (true) {
-                    ignore = Room.console.readLine();
+
                     command = Room.console.readLine();
                     switch (command.toLowerCase().trim()) {
                         case "greater health potion" -> {
@@ -556,7 +556,7 @@ public class Dungeon extends Room {
             case "Ocean Kingdom" -> {
                 TextEngine.printNoDelay(yellowColor + "super health potion" + resetColor + " ~75 gold\n" + yellowColor + "magic map" + resetColor + " ~250\n" + yellowColor + "K.O. Cannon" + resetColor + " ~3000 gold\nor " + yellowColor + " leave" + resetColor, true);
                 while (true) {
-                    ignore = Room.console.readLine();
+
                     command = Room.console.readLine();
                     switch (command.toLowerCase().trim()) {
                         case "super health potion" -> {
@@ -608,7 +608,6 @@ public class Dungeon extends Room {
     private static void buyMultiple(String type, int cost) throws InterruptedException { //buy multiple clause for certain items in village shop
         TextEngine.printWithDelays("How many would you like to buy?", true);
         while (true) {
-            ignore = console.readLine();
             command = console.readLine();
             if (TextEngine.checkValidInput(command)) {
                 try {
@@ -658,7 +657,6 @@ public class Dungeon extends Room {
     private static void keepShopping() throws InterruptedException { //keep shopping
         TextEngine.printWithDelays("Would you like to keep shopping? " + yellowColor + "yes" + resetColor + " or " + yellowColor + "no" + resetColor, true);
         while (true) {
-            ignore = console.readLine();
             command = console.readLine();
             switch (command.toLowerCase().trim()) {
                 case "yes" -> {
@@ -941,7 +939,6 @@ public class Dungeon extends Room {
         }
         TextEngine.printWithDelays("What is your command? " + yellowColor + "fight" + resetColor + " or " + yellowColor + "run" + resetColor, true);
         while (true) {
-            ignore = Room.console.readLine();
             command = Room.console.readLine();
             switch (command) {
                 case "fight" -> {
@@ -1028,7 +1025,6 @@ public class Dungeon extends Room {
         }
         TextEngine.printWithDelays("What is your command? " + yellowColor + "fight" + resetColor + " or " + yellowColor + "run" + resetColor, true);
         while (true) {
-            ignore = Room.console.readLine();
             command = Room.console.readLine();
             switch (command) {
                 case "fight" -> {
@@ -1153,7 +1149,6 @@ public class Dungeon extends Room {
         TextEngine.printWithDelays("The fairy has granted you a wish of healing?", false);
         TextEngine.printWithDelays("Do you want to take it? " + yellowColor + "yes" + resetColor + " or " + yellowColor + "no" + resetColor, true);
         while (true) {
-            ignore = Room.console.readLine();
             command = Room.console.readLine();
             switch (command) {
                 case "yes" -> {

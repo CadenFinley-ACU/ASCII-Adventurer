@@ -112,6 +112,9 @@ public abstract class TextEngine {
         if (data.charAt(data.length() - 1) != '\n' && !buffer) {
             System.out.print('\n');
         }
+        if (buffer) {
+            console.readLine();
+        }
     }
 
     public static void printNoDelay(String data, boolean buffer) { //use buffer is you are accepting input after the text is printed
@@ -148,6 +151,9 @@ public abstract class TextEngine {
         }
         if (data.charAt(data.length() - 1) != '\n' && !buffer) {
             System.out.print('\n');
+        }
+        if (buffer) {
+            console.readLine();
         }
     }
 

@@ -12,7 +12,6 @@ public class Enemy {
 
     public final static Console console = System.console();
     public static String command;
-    public static String ignore;
     private static Map<String, Integer> enemyDamageValues;
 
     public static void createEnemies() {

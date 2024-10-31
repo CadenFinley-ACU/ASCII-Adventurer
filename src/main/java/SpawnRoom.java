@@ -46,7 +46,6 @@ public class SpawnRoom extends Room {
 
         // Command handling loop
         while (true) {
-            ignore = console.readLine();
             command = console.readLine();
             switch (command.toLowerCase().trim()) {
                 case "north" -> {
@@ -84,7 +83,6 @@ public class SpawnRoom extends Room {
         TextEngine.printWithDelays("Where to?\n Deeper in the Cave or Back out in the Wilderness?", false);
         TextEngine.printWithDelays("What is your command: " + yellowColor + "cave" + resetColor + " or " + yellowColor + "wilderness" + resetColor, true);
         while (true) {
-            ignore = console.readLine();
             command = console.readLine();
             switch (command.toLowerCase().trim()) {
                 case "cave" -> {

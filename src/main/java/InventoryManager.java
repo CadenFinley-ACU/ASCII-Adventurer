@@ -110,7 +110,6 @@ public class InventoryManager extends Player {
         TextEngine.printWithDelays("Use item, drop item, or exit ", false);
         TextEngine.printWithDelays(yellowColor + "use" + resetColor + ", " + yellowColor + "drop" + resetColor + ", " + yellowColor + "exit" + resetColor, true);
         while (true) {
-            console.readLine();
             command = console.readLine();
             switch (command) {
                 case "use" -> {
@@ -155,7 +154,6 @@ public class InventoryManager extends Player {
             if (inventory.get(item) != null) {
                 if (inventory.get(item) > 1) {
                     TextEngine.printWithDelays("How many would you like to toss?\n" + getIndividualItemString(item), true);
-                    console.readLine();
                     command = console.readLine();
                     try {
                         Integer.valueOf(command);
