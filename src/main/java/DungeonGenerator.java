@@ -28,111 +28,117 @@ public class DungeonGenerator {
     }
 
     public static void start(int pass) {
-        runs++;
-        if (pass < 5) {
-            System.out.println("-------------------------------");
-            System.out.println("Matrix size too small, retrying...");
-            start(5);
-            return;
-        }
-        int size = pass;
-        if (size % 2 == 0) {
-            size++;
-        }
-        if (size > 15) {
-            size = 15;
-        }
+        try {
+            runs++;
+            if (pass < 5) {
+                System.out.println("-------------------------------");
+                System.out.println("Matrix size too small, retrying...");
+                start(5);
+                return;
+            }
+            int size = pass;
+            if (size % 2 == 0) {
+                size++;
+            }
+            if (size > 15) {
+                size = 15;
+            }
 
-        float changeRatio = 1 + (((size * size) / 1) / 12.5f);
+            float changeRatio = 1 + (((size * size) / 1) / 12.5f);
 
-        if (3 + size < changeRatio) {
-            changeRatio = size;
-        }
+            if (3 + size < changeRatio) {
+                changeRatio = size;
+            }
 
-        matrix = new int[size][size];
-        Random rand = new Random();
+            matrix = new int[size][size];
+            Random rand = new Random();
 
-        // Place 9 at a random position on the bottom row
-        int x1 = size - 1;
-        int y1 = rand.nextInt(size);
-        matrix[x1][y1] = 9;
+            // Place 9 at a random position on the bottom row
+            int x1 = size - 1;
+            int y1 = rand.nextInt(size);
+            matrix[x1][y1] = 9;
 
-        // Place 8 at a random position at least size steps away from (x1, y1)
-        int x2, y2;
-        do {
-            x2 = rand.nextInt(size);
-            y2 = rand.nextInt(size);
-        } while (Math.abs(x1 - x2) + Math.abs(y1 - y2) < size);
-        matrix[x2][y2] = 8;
+            // Place 8 at a random position at least size steps away from (x1, y1)
+            int x2, y2;
+            do {
+                x2 = rand.nextInt(size);
+                y2 = rand.nextInt(size);
+            } while (Math.abs(x1 - x2) + Math.abs(y1 - y2) < size);
+            matrix[x2][y2] = 8;
 
-        // Draw path of 1's to connect 9 and 8
-        drawPath(matrix, x1, y1, x2, y2, rand);
+            // Draw path of 1's to connect 9 and 8
+            drawPath(matrix, x1, y1, x2, y2, rand);
 
-        // Save coordinates of 8 and 9
-        coord9 = new int[]{x1, y1};
-        coord8 = new int[]{x2, y2};
+            // Save coordinates of 8 and 9
+            coord9 = new int[]{x1, y1};
+            coord8 = new int[]{x2, y2};
 
-        // Remove 8 and 9 temporarily
-        matrix[coord9[0]][coord9[1]] = 0;
-        matrix[coord8[0]][coord8[1]] = 0;
+            // Remove 8 and 9 temporarily
+            matrix[coord9[0]][coord9[1]] = 0;
+            matrix[coord8[0]][coord8[1]] = 0;
 
-        //determines how many random rooms are added
-        // Randomly add at least size+size/2 more 1's ensuring they are connected to the main path
-        addRandom(matrix, rand, size + (int) changeRatio, 1, size);
+            //determines how many random rooms are added
+            // Randomly add at least size+size/2 more 1's ensuring they are connected to the main path
+            addRandom(matrix, rand, size + (int) changeRatio, 1, size);
 
-        float itemRoomRatio = ((2 * size) - 5.5f) - (size / 2);
+            float itemRoomRatio = ((2 * size) - 5.5f) - (size / 2);
 
-        if (itemRoomRatio >= size - 5) {
-            itemRoomRatio = size / 2;
-        }
-        if (itemRoomRatio < 2) {
-            itemRoomRatio = 2;
-        }
+            if (itemRoomRatio >= size - 5) {
+                itemRoomRatio = size / 2;
+            }
+            if (itemRoomRatio < 2) {
+                itemRoomRatio = 2;
+            }
 
-        // Randomly add item rooms (2-5) ensuring they are connected to the main path 2-5 are item rooms
-        if (size < 7) {
-            addRandom(matrix, rand, 2, 2, size);
-        } else {
-            addRandom(matrix, rand, (int) itemRoomRatio, 2, size);
-        }
+            // Randomly add item rooms (2-5) ensuring they are connected to the main path 2-5 are item rooms
+            if (size < 7) {
+                addRandom(matrix, rand, 2, 2, size);
+            } else {
+                addRandom(matrix, rand, (int) itemRoomRatio, 2, size);
+            }
 
-        // Randomly add 1 rare item (3) ensuring it is connected to the main path
-        addRandom(matrix, rand, 1, 3, size);
+            // Randomly add 1 rare item (3) ensuring it is connected to the main path
+            addRandom(matrix, rand, 1, 3, size);
 
-        // Randomly add 1 shop room (6) ensuring it is connected to the main path
-        addRandom(matrix, rand, 1, 6, size);
+            // Randomly add 1 shop room (6) ensuring it is connected to the main path
+            addRandom(matrix, rand, 1, 6, size);
 
-        // Randomly add mini boss rooms (4) ensuring it is connected to the main path
-        addRandom(matrix, rand, 1, 4, size);
+            // Randomly add mini boss rooms (4) ensuring it is connected to the main path
+            addRandom(matrix, rand, 1, 4, size);
 
-        // Randomly add shop rooms (4) ensuring it is connected to the main path
-        //addRandom(matrix, rand, 1, 7);
-        // Ensure only one 1 value is adjacent to the 8
-        ensureSingleAdjacent(matrix, coord8[0], coord8[1]);
+            // Randomly add shop rooms (4) ensuring it is connected to the main path
+            //addRandom(matrix, rand, 1, 7);
+            // Ensure only one 1 value is adjacent to the 8
+            ensureSingleAdjacent(matrix, coord8[0], coord8[1]);
 
-        // Place 8 and 9 back in their original positions
-        matrix[coord9[0]][coord9[1]] = 9;
-        matrix[coord8[0]][coord8[1]] = 8;
-        matrix = trimUnreachableParts(matrix, findValue(matrix, 9));
-        if (testArrays(matrix)) {
+            // Place 8 and 9 back in their original positions
+            matrix[coord9[0]][coord9[1]] = 9;
+            matrix[coord8[0]][coord8[1]] = 8;
+            matrix = trimUnreachableParts(matrix, findValue(matrix, 9));
+            if (testArrays(matrix)) {
+                if (testing) {
+                    printMap(matrix);
+                    System.out.println("^^^^^^^^^^^^" + size + "^^^^^^^^^^^^");
+                    System.out.println("Matrix connected successfully!");
+                    System.out.println("Item Rooms: " + numberOfRooms(matrix, 2) + " Total Rooms: " + (numberOfRooms(matrix, 1) + numberOfRooms(matrix, 2) + numberOfRooms(matrix, 3) + numberOfRooms(matrix, 8) + numberOfRooms(matrix, 9) + numberOfRooms(matrix, 4)));
+                    System.out.println("-------------------------------");
+                }
+                return;
+            }
             if (testing) {
                 printMap(matrix);
                 System.out.println("^^^^^^^^^^^^" + size + "^^^^^^^^^^^^");
-                System.out.println("Matrix connected successfully!");
-                System.out.println("Item Rooms: " + numberOfRooms(matrix, 2) + " Total Rooms: " + (numberOfRooms(matrix, 1) + numberOfRooms(matrix, 2) + numberOfRooms(matrix, 3) + numberOfRooms(matrix, 8) + numberOfRooms(matrix, 9) + numberOfRooms(matrix, 4)));
+                System.out.println("Matrix not connected, retrying...");
                 System.out.println("-------------------------------");
             }
-            return;
+            fails++;
+            wipe();
+            start(size);
+        } catch (Exception e) {
+            System.out.println("Error: " + e);
+            wipe();
+            start(pass);
         }
-        if (testing) {
-            printMap(matrix);
-            System.out.println("^^^^^^^^^^^^" + size + "^^^^^^^^^^^^");
-            System.out.println("Matrix not connected, retrying...");
-            System.out.println("-------------------------------");
-        }
-        fails++;
-        wipe();
-        start(size);
     }
 
     private static void drawPath(int[][] matrix, int x1, int y1, int x2, int y2, Random rand) {

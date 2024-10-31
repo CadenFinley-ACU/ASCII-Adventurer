@@ -20,7 +20,7 @@ public class Dungeon extends Room {
     public static String enemyType;
     public static boolean resetedAfterWin = false;
 
-    private static Random rand;
+    private static final Random rand = new Random();
 
     public static int[][] meadowDungeon;
     public static int[][] darkForestDungeon;
