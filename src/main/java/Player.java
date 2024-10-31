@@ -17,7 +17,6 @@ public class Player {
     public final static Console console = System.console();
     public static String command;
     public static String holdCommand;
-    public static String ignore;
     public static int inventorySize;
     private static int gold;
     private static int damage;
@@ -67,7 +66,6 @@ public class Player {
         TextEngine.printNoDelay(" 3:Dungeon", false);
         TextEngine.printNoDelay(" 4:Village", false);
         TextEngine.printNoDelay("debug spawn: ", true);
-        ignore = console.readLine();
         command = console.readLine();
         switch (command) {
             case "1" -> {
@@ -81,7 +79,6 @@ public class Player {
             case "3" -> {
                 TextEngine.printNoDelay(" 1:Meadow\n 2:Dark Forest\n 3:Mountain Cave\n 4:Mountain Top\n 5:Desert Oasis\n 6:Desert Plains\n 7 Desert Pyramid\n 8:Ocean Kingdom", false);
                 TextEngine.printNoDelay("debug dungeon: ", true);
-                ignore = console.readLine();
                 command = console.readLine();
                 switch (command) {
                     case "1" -> {
@@ -284,7 +281,6 @@ public class Player {
 
         TextEngine.printWithDelays("Welcome to the game! What is your name hero?", true);
         while (true) {
-            ignore = console.readLine();
             command = console.readLine();
             if (command != null && !command.isEmpty() && command.length() < 13) {
                 if ("exit".equals(command)) {
@@ -565,7 +561,6 @@ public class Player {
         String space = "     ";
         TextEngine.printWithDelays(space + "What is your new name hero?", true);
         while (true) {
-            ignore = console.readLine();
             command = console.readLine();
             if (command != null && !command.isEmpty() && command.length() < 13) {
                 if ("exit".equals(command)) {

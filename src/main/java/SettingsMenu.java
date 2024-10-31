@@ -14,8 +14,6 @@ public abstract class SettingsMenu {
 
     private final static Console console = System.console();
     private static String command;
-    @SuppressWarnings("unused")
-    private static String ignore;
 
     public static void start() throws InterruptedException {  //start the settings menu
         String lastSavedState = TextEngine.speedSetting;
@@ -29,7 +27,6 @@ public abstract class SettingsMenu {
         TextEngine.printWithDelays("You can also type: " + yellowColor + "change name " + resetColor + "to change your name", false);
         TextEngine.printWithDelays("Type " + yellowColor + "exit" + resetColor + " to leave this menu", true);
         while (true) {
-            ignore = console.readLine();
             command = console.readLine();
             switch (command.toLowerCase().trim()) {
                 case "slow" -> {
@@ -37,7 +34,6 @@ public abstract class SettingsMenu {
                     TextEngine.printNoDelay("Slow", false);
                     TextEngine.printWithDelays("This is what SLOW text looks like", false);
                     TextEngine.printNoDelay("Confirm? (" + yellowColor + "yes" + resetColor + " or " + yellowColor + "no" + resetColor + ")", true);
-                    ignore = console.readLine();
                     command = console.readLine();
                     if (command.toLowerCase().trim().equals("yes")) {
                         TextEngine.printWithDelays("Settings saved.", false);
@@ -57,7 +53,6 @@ public abstract class SettingsMenu {
                     TextEngine.printNoDelay("Normal", false);
                     TextEngine.printWithDelays("This is what NORMAL text looks like. It is like this by default.", false);
                     TextEngine.printNoDelay("Confirm? (" + yellowColor + "yes" + resetColor + " or " + yellowColor + "no" + resetColor + ")", true);
-                    ignore = console.readLine();
                     command = console.readLine();
                     if (command.toLowerCase().trim().equals("yes")) {
                         TextEngine.printWithDelays("Settings saved.", false);
@@ -77,7 +72,6 @@ public abstract class SettingsMenu {
                     TextEngine.printNoDelay("Fast", false);
                     TextEngine.printWithDelays("This is what FAST text looks like", false);
                     TextEngine.printNoDelay("Confirm? (" + yellowColor + "yes" + resetColor + " or " + yellowColor + "no" + resetColor + ")", true);
-                    ignore = console.readLine();
                     command = console.readLine();
                     if (command.toLowerCase().trim().equals("yes")) {
                         TextEngine.printWithDelays("Settings saved.", false);
@@ -97,7 +91,6 @@ public abstract class SettingsMenu {
                     TextEngine.printNoDelay("NoDelay", false);
                     TextEngine.printNoDelay("You in a rush or somethin?", false);
                     TextEngine.printNoDelay("Confirm? (" + yellowColor + "yes" + resetColor + " or " + yellowColor + "no" + resetColor + ")", true);
-                    ignore = console.readLine();
                     command = console.readLine();
                     if (command.toLowerCase().trim().equals("yes")) {
                         TextEngine.printWithDelays("Settings saved.", false);
@@ -118,7 +111,6 @@ public abstract class SettingsMenu {
                 case "ai" -> {
                     if (PromptEngine.aiGenerationEnabled) {
                         TextEngine.printNoDelay("AI generation is already enabled. Would you like to disable it? (yes or no)", true);
-                        ignore = console.readLine();
                         command = console.readLine();
                         switch (command) {
                             case "yes" -> {
@@ -139,7 +131,6 @@ public abstract class SettingsMenu {
                     } else {
                         TextEngine.printNoDelay("(This feature is still experimental)", false);
                         TextEngine.printNoDelay("Please enter your OpenAI API key:", true);
-                        ignore = console.readLine();
                         command = console.readLine();
                         if (PromptEngine.testAPIKey(command)) {
                             PromptEngine.userAPIKey = command;
@@ -177,7 +168,6 @@ public abstract class SettingsMenu {
         TextEngine.printWithDelays("You can also type: " + yellowColor + "change name " + resetColor + "to change your name", false);
         TextEngine.printWithDelays("Type " + yellowColor + "exit" + resetColor + " to leave this menu", true);
         while (true) {
-            ignore = console.readLine();
             command = console.readLine();
             switch (command.toLowerCase().trim()) {
                 case "slow" -> {
@@ -185,7 +175,6 @@ public abstract class SettingsMenu {
                     TextEngine.printNoDelay("Slow", false);
                     TextEngine.printWithDelays("This is what SLOW text looks like", false);
                     TextEngine.printNoDelay("Confirm? (" + yellowColor + "yes" + resetColor + " or " + yellowColor + "no" + resetColor + ")", true);
-                    ignore = console.readLine();
                     command = console.readLine();
                     if (command.toLowerCase().trim().equals("yes")) {
                         TextEngine.printWithDelays("Settings saved.", false);
@@ -205,7 +194,6 @@ public abstract class SettingsMenu {
                     TextEngine.printNoDelay("Normal", false);
                     TextEngine.printWithDelays("This is what NORMAL text looks like. It is like this by default.", false);
                     TextEngine.printNoDelay("Confirm? (" + yellowColor + "yes" + resetColor + " or " + yellowColor + "no" + resetColor + ")", true);
-                    ignore = console.readLine();
                     command = console.readLine();
                     if (command.toLowerCase().trim().equals("yes")) {
                         TextEngine.printWithDelays("Settings saved.", false);
@@ -225,7 +213,6 @@ public abstract class SettingsMenu {
                     TextEngine.printNoDelay("Fast", false);
                     TextEngine.printWithDelays("This is what FAST text looks like", false);
                     TextEngine.printNoDelay("Confirm? (" + yellowColor + "yes" + resetColor + " or " + yellowColor + "no" + resetColor + ")", true);
-                    ignore = console.readLine();
                     command = console.readLine();
                     if (command.toLowerCase().trim().equals("yes")) {
                         TextEngine.printWithDelays("Settings saved.", false);
@@ -245,7 +232,6 @@ public abstract class SettingsMenu {
                     TextEngine.printNoDelay("NoDelay", false);
                     TextEngine.printNoDelay("You in a rush or somethin?", false);
                     TextEngine.printNoDelay("Confirm? (" + yellowColor + "yes" + resetColor + " or " + yellowColor + "no" + resetColor + ")", true);
-                    ignore = console.readLine();
                     command = console.readLine();
                     if (command.toLowerCase().trim().equals("yes")) {
                         TextEngine.printWithDelays("Settings saved.", false);
@@ -266,7 +252,7 @@ public abstract class SettingsMenu {
                 case "ai" -> {
                     if (PromptEngine.aiGenerationEnabled) {
                         TextEngine.printNoDelay("AI generation is already enabled. Would you like to disable it? (yes or no)", true);
-                        ignore = console.readLine();
+
                         command = console.readLine();
                         switch (command) {
                             case "yes" -> {
@@ -287,7 +273,7 @@ public abstract class SettingsMenu {
                     } else {
                         TextEngine.printNoDelay("(This feature is still experimental)", false);
                         TextEngine.printNoDelay("Please enter your OpenAI API key:", true);
-                        ignore = console.readLine();
+
                         command = console.readLine();
                         if (PromptEngine.testAPIKey(command)) {
                             PromptEngine.userAPIKey = command;

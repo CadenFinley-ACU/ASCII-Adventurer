@@ -139,7 +139,6 @@ public class OceanKingdomDungeon extends Dungeon {
         }
         TextEngine.printNoDelay(directionsInString(directionsString), true);
         while (true) {
-            ignore = Room.console.readLine();
             direction = Room.console.readLine();
             switch (direction.toLowerCase().trim()) {
                 case "north", "1" -> {

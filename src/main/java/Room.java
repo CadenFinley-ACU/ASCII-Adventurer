@@ -12,7 +12,6 @@ public class Room {
 
     public final static Console console = System.console();
     public static String command;
-    public static String ignore;
     public static String room = null;
     public static String redColor = "\033[0;31m"; // red color
     public static String resetColor = "\033[0m"; // reset to default color
@@ -32,7 +31,6 @@ public class Room {
         TextEngine.printWithDelays("Hey! There is a chest in this room! ", false);
         TextEngine.printWithDelays("What is your command" + yellowColor + " open it " + resetColor + "or " + yellowColor + "leave it" + resetColor, true);
         while (true) {
-            ignore = console.readLine();
             command = console.readLine();
             switch (command.toLowerCase().trim()) {
                 case "open it" -> {
@@ -58,11 +56,10 @@ public class Room {
         }
 
         // Highlight 'take it' and 'leave it' in yellow
-        TextEngine.printWithDelays("What will you do? Type " + yellowColor + "take it" + resetColor + " to pick up the "+itemName+" or " + yellowColor + "leave it" + resetColor, true);
+        TextEngine.printWithDelays("What will you do? Type " + yellowColor + "take it" + resetColor + " to pick up the " + itemName + " or " + yellowColor + "leave it" + resetColor, true);
 
         // Command handling loop
         while (true) {
-            ignore = console.readLine();
             command = console.readLine();
             switch (command.toLowerCase().trim()) {
                 case "take it" -> {
