@@ -20,7 +20,6 @@ public class Village extends Room {
         }
         TextEngine.printNoDelay("What will you do? Type " + yellowColor + "church" + resetColor + ", " + yellowColor + "hotel" + resetColor + ", " + yellowColor + "shop" + resetColor + ", or " + yellowColor + "leave village" + resetColor + " to decide", true);
         while (true) {
-            ignore = console.readLine();
             command = console.readLine();
             switch (command.toLowerCase().trim()) {
                 case "church" -> {
@@ -44,7 +43,7 @@ public class Village extends Room {
                             TextEngine.printWithDelays("Witch way would you like to leave the village\n you can go west to go to the desert\n or north to the forest", false);
                             TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "north" + resetColor + " or " + yellowColor + "west" + resetColor + " to decide", true);
                             while (true) {
-                                ignore = console.readLine();
+
                                 command = console.readLine();
                                 if ("north".equals(command) || "east".equals(command) || "south".equals(command) || "west".equals(command)) {
                                     OpenWorld.holdCommand = command;
@@ -53,10 +52,12 @@ public class Village extends Room {
                                     case "north" -> {
                                         OpenWorld.roomSave = 67;
                                         leave();
-                                    }case "west" -> {
+                                    }
+                                    case "west" -> {
                                         OpenWorld.roomSave = 74;
                                         leave();
-                                    }default ->
+                                    }
+                                    default ->
                                         Main.inGameDefaultTextHandling(command);
                                 }
                             }
@@ -65,7 +66,7 @@ public class Village extends Room {
                             TextEngine.printWithDelays("Witch way would you like to leave the village\nyou can go north to the ocean kingdom\nor east to the grass plains", false);
                             TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "north" + resetColor + " or " + yellowColor + "east" + resetColor + " to decide", true);
                             while (true) {
-                                ignore = console.readLine();
+
                                 command = console.readLine();
                                 if ("north".equals(command) || "east".equals(command) || "south".equals(command) || "west".equals(command)) {
                                     OpenWorld.holdCommand = command;
@@ -74,10 +75,12 @@ public class Village extends Room {
                                     case "north" -> {
                                         OpenWorld.roomSave = 37;
                                         leave();
-                                    }case "east" -> {
+                                    }
+                                    case "east" -> {
                                         OpenWorld.roomSave = 47;
                                         leave();
-                                    }default ->
+                                    }
+                                    default ->
                                         Main.inGameDefaultTextHandling(command);
                                 }
                             }
@@ -86,7 +89,7 @@ public class Village extends Room {
                             TextEngine.printWithDelays("Witch way would you like to leave the village\n you can go west to stay in the mountain\n or north to the grass plains", false);
                             TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "south" + resetColor + " or " + yellowColor + "west" + resetColor + " to decide", true);
                             while (true) {
-                                ignore = console.readLine();
+
                                 command = console.readLine();
                                 if ("north".equals(command) || "east".equals(command) || "south".equals(command) || "west".equals(command)) {
                                     OpenWorld.holdCommand = command;
@@ -95,10 +98,12 @@ public class Village extends Room {
                                     case "south" -> {
                                         OpenWorld.roomSave = 29;
                                         leave();
-                                    }case "west" -> {
+                                    }
+                                    case "west" -> {
                                         OpenWorld.roomSave = 19;
                                         leave();
-                                    }default ->
+                                    }
+                                    default ->
                                         Main.inGameDefaultTextHandling(command);
                                 }
                             }
@@ -109,22 +114,26 @@ public class Village extends Room {
                     if (Dungeon.completedDungeons > 5) {
                         TextEngine.printWithDelays("Which area would you like to warp to?", false);
                         TextEngine.printWithDelays("Forest, Mountain, Desert, Ocean?", true);
-                        ignore = console.readLine();
+
                         command = console.readLine();
                         switch (command.toLowerCase()) {
                             case "forest" -> {
                                 OpenWorld.roomSave = 51;
                                 OpenWorld.startRoom();
-                            }case "mountain" -> {
+                            }
+                            case "mountain" -> {
                                 OpenWorld.roomSave = 5;
                                 OpenWorld.startRoom();
-                            }case "desert" -> {
+                            }
+                            case "desert" -> {
                                 OpenWorld.roomSave = 40;
                                 OpenWorld.startRoom();
-                            }case "ocean" -> {
+                            }
+                            case "ocean" -> {
                                 OpenWorld.roomSave = 3;
                                 OpenWorld.startRoom();
-                            }default ->
+                            }
+                            default ->
                                 Main.inGameDefaultTextHandling(command);
                         }
                     } else {
@@ -146,7 +155,7 @@ public class Village extends Room {
             TextEngine.printWithDelays("A priest stands before you,\noffering blessings to those in need. You approach him, holding out your heart container.\n", false);
             TextEngine.printWithDelays("would you like to " + yellowColor + "give it" + resetColor + " or " + yellowColor + "leave it" + resetColor, true);
             while (true) {
-                ignore = console.readLine();
+
                 command = console.readLine();
                 switch (command.toLowerCase().trim()) {
                     case "give it" -> {
@@ -157,9 +166,11 @@ public class Village extends Room {
                         Player.putItem("heart container", -amountofHeartContainers);
                         TextEngine.enterToNext();
                         Main.loadSave();
-                    }case "leave it" -> {
+                    }
+                    case "leave it" -> {
                         Main.loadSave();
-                    }default ->
+                    }
+                    default ->
                         Main.inGameDefaultTextHandling(command);
                 }
             }
@@ -167,22 +178,25 @@ public class Village extends Room {
             TextEngine.printWithDelays("A priest stands before you,\nready to offer blessings that can enhance your heart containers and grant you more strength.\n\nHowever, you realize you don't have a heart container to give to him.", false);
             TextEngine.printWithDelays("Would you like to leave this sacred space? Type " + yellowColor + "yes" + resetColor + " to exit or " + yellowColor + "no" + resetColor + " to stay", true);
             while (true) {
-                ignore = console.readLine();
+
                 command = console.readLine();
                 switch (command.toLowerCase().trim()) {
                     case "yes" -> {
                         Main.loadSave();
-                    }case "no" -> {
+                    }
+                    case "no" -> {
                         TextEngine.printWithDelays("There isn't anyhting here for you, try going to a dungeon.", false);
                         TextEngine.printWithDelays("Would you like to leave " + yellowColor + "yes" + resetColor + " or " + yellowColor + "no" + resetColor, true);
-                        ignore = console.readLine();
+
                         command = console.readLine();
                         switch (command.toLowerCase()) {
                             case "yes" -> {
                                 Main.loadSave();
-                            }case "no" -> {
+                            }
+                            case "no" -> {
                                 church();
-                            }default ->
+                            }
+                            default ->
                                 Main.inGameDefaultTextHandling(command);
                         }
                     }
@@ -212,7 +226,6 @@ public class Village extends Room {
         }
         TextEngine.printWithDelays("What will you do? Type " + yellowColor + "rest" + resetColor + " to restore your health (cost:" + cost + " gold) or " + yellowColor + "leave" + resetColor + " to exit the hotel", true);
         while (true) {
-            ignore = console.readLine();
             command = console.readLine();
             switch (command.toLowerCase().trim()) {
                 case "rest" -> {
@@ -226,9 +239,11 @@ public class Village extends Room {
                         Player.changeHealth(Player.getMaxHealth() - Player.getHealth());
                         Main.loadSave();
                     }
-                }case "leave" -> {
+                }
+                case "leave" -> {
                     Main.loadSave();
-                }default ->
+                }
+                default ->
                     Main.inGameDefaultTextHandling(command);
             }
         }
@@ -257,13 +272,13 @@ public class Village extends Room {
         TextEngine.printNoDelay(shopMessage, true);
 
         while (true) {
-            ignore = console.readLine();
             command = console.readLine();
 
             switch (command.toLowerCase().trim()) {
                 case "health potion" -> {
                     buyMultiple("health potion", 15);
-                }case "shield" -> {
+                }
+                case "shield" -> {
                     if (Player.getGold() >= 20) {
                         if (Player.hasRoomInInventory(1)) {
                             Player.changeGold(-20);
@@ -279,11 +294,14 @@ public class Village extends Room {
                         TextEngine.enterToNext();
                         keepShopping();
                     }
-                }case "heart container" -> {
+                }
+                case "heart container" -> {
                     buyMultiple("heart container", 50);
-                }case "leave" -> {
+                }
+                case "leave" -> {
                     Main.loadSave();
-                }default ->
+                }
+                default ->
                     Main.inGameDefaultTextHandling(command);
             }
         }
@@ -312,13 +330,13 @@ public class Village extends Room {
         TextEngine.printNoDelay(shopMessage, true);
 
         while (true) {
-            ignore = console.readLine();
             command = console.readLine();
 
             switch (command.toLowerCase().trim()) {
                 case "greater health potion" -> {
                     buyMultiple("greater health potion", 30);
-                }case "ninja armor" -> {
+                }
+                case "ninja armor" -> {
                     if (Player.getGold() >= 100) {
                         if (Player.hasRoomInInventory(1)) {
                             Player.changeGold(-100);
@@ -334,9 +352,11 @@ public class Village extends Room {
                         TextEngine.enterToNext();
                         keepShopping();
                     }
-                }case "leave" -> {
+                }
+                case "leave" -> {
                     Main.loadSave();
-                }default ->
+                }
+                default ->
                     Main.inGameDefaultTextHandling(command);
             }
         }
@@ -365,13 +385,13 @@ public class Village extends Room {
         TextEngine.printNoDelay(shopMessage, true);
 
         while (true) {
-            ignore = console.readLine();
             command = console.readLine();
 
             switch (command.toLowerCase().trim()) {
                 case "super health potion" -> {
                     buyMultiple("super health potion", 50);
-                }case "demon armor" -> {
+                }
+                case "demon armor" -> {
                     if (Player.getGold() >= 200) {
                         if (Player.hasRoomInInventory(1)) {
                             Player.changeGold(-200);
@@ -387,9 +407,11 @@ public class Village extends Room {
                         TextEngine.enterToNext();
                         keepShopping();
                     }
-                }case "leave" -> {
+                }
+                case "leave" -> {
                     Main.loadSave();
-                }default ->
+                }
+                default ->
                     Main.inGameDefaultTextHandling(command);
             }
         }
@@ -398,7 +420,6 @@ public class Village extends Room {
     private static void buyMultiple(String type, int cost) throws InterruptedException { //buy multiple clause for certain items in village shop
         TextEngine.printWithDelays("How many would you like to buy?", true);
         while (true) {
-            ignore = console.readLine();
             command = console.readLine();
             if (TextEngine.checkValidInput(command)) {
                 try {
@@ -425,11 +446,13 @@ public class Village extends Room {
                             TextEngine.printWithDelays("You did not buy any " + type + "s.", false);
                             TextEngine.enterToNext();
                             keepShopping();
-                        }case "1" -> {
+                        }
+                        case "1" -> {
                             TextEngine.printWithDelays("You do not have enough gold to buy a " + command, false);
                             TextEngine.enterToNext();
                             keepShopping();
-                        }default -> {
+                        }
+                        default -> {
                             TextEngine.printWithDelays("You do not have enough gold to buy " + command + " potions", false);
                             TextEngine.enterToNext();
                             keepShopping();
@@ -446,7 +469,6 @@ public class Village extends Room {
     private static void keepShopping() throws InterruptedException { //keep shopping
         TextEngine.printWithDelays("Would you like to keep shopping? " + yellowColor + "yes" + resetColor + " or " + yellowColor + "no" + resetColor, true);
         while (true) {
-            ignore = console.readLine();
             command = console.readLine();
             switch (command.toLowerCase().trim()) {
                 case "yes" -> {
@@ -457,9 +479,11 @@ public class Village extends Room {
                     } else { //6,7,8
                         shop3();
                     }
-                }case "no" -> {
+                }
+                case "no" -> {
                     Main.loadSave();
-                }default ->
+                }
+                default ->
                     Main.inGameDefaultTextHandling(command);
             }
         }
