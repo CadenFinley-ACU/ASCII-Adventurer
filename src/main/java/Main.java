@@ -437,7 +437,7 @@ public class Main {
 
     public static void showQrCode() throws InterruptedException {
         TextEngine.clearScreen();
-        System.out.println("Scan this QR code to view the source code of this project:");
+        System.out.println("Scan this QR code to view the source code of this project:   ( https://github.com/CadenFinley-ACU/ASCII-Adventurer )");
         System.out.println("██████████████████████████████████████████████████████████████████████");
         System.out.println("██              ██████████  ██  ██  ██        ██  ████              ██");
         System.out.println("██  ██████████  ██████  ██  ████    ██  ██      ██████  ██████████  ██");
