@@ -153,6 +153,8 @@ public class Main {
                     debugInfo();
                 case "change name" ->
                     Player.changeName();
+                case "source code" ->
+                    showQrCode();
                 default ->
                     TextEngine.printWithDelays("I'm sorry, I don't understand that command.", true);
             }
@@ -166,15 +168,15 @@ public class Main {
         if (getOS_NAME().contains("Mac")) {
             darkPurpleStart = "\033[1;33m";
         }
-        System.out.println(darkPurpleStart + "    _    ____   ____ ___ ___ ");
-        System.out.println("   / \\  / ___| / ___|_ _|_ _| ");
-        System.out.println("  / _ \\ \\___ \\| |    | | | |  ");
-        System.out.println(" / ___ \\ ___) | |___ | | | |  ");
-        System.out.println("/_/ _ \\_\\____/ \\____|___|___| _ ");
-        System.out.println("   / \\   __| |_   _____ _ __ | |_ _   _ _ __ ___ _ __ ");
-        System.out.println("  / _ \\ / _` \\ \\ / / _ \\ '_ \\| __| | | | '__/ _ \\ '__|");
-        System.out.println(" / ___ \\ (_| |\\ V /  __/ | | | |_| |_| | | |  __/ |   ");
-        System.out.println("/_/   \\_\\__,_| \\_/ \\___|_| |_|\\__|\\__,_|_|  \\___|_|   ");
+        System.out.println(darkPurpleStart + "    _    ____   ____ ___ ___                       ");
+        System.out.println("   / \\  / ___| / ___|_ _|_ _|                                       ");
+        System.out.println("  / _ \\ \\___ \\| |    | | | |                                      ");
+        System.out.println(" / ___ \\ ___) | |___ | | | |                                        ");
+        System.out.println("/_/ _ \\_\\____/ \\____|___|___| _                                   ");
+        System.out.println("   / \\   __| |_   _____ _ __ | |_ _   _ _ __ ___ _ __               ");
+        System.out.println("  / _ \\ / _` \\ \\ / / _ \\ '_ \\| __| | | | '__/ _ \\ '__|         ");
+        System.out.println(" / ___ \\ (_| |\\ V /  __/ | | | |_| |_| | | |  __/ |                ");
+        System.out.println("/_/   \\_\\__,_| \\_/ \\___|_| |_|\\__|\\__,_|_|  \\___|_|           ");
         System.out.print(brightBoldEnd);
 
     }
@@ -431,5 +433,49 @@ public class Main {
 
     public static String getOS_NAME() { //get the os name
         return OS_NAME;
+    }
+
+    public static void showQrCode() throws InterruptedException {
+        TextEngine.clearScreen();
+        System.out.println("Scan this QR code to view the source code of this project:");
+        System.out.println("██████████████████████████████████████████████████████████████████████");
+        System.out.println("██              ██████████  ██  ██  ██        ██  ████              ██");
+        System.out.println("██  ██████████  ██████  ██  ████    ██  ██      ██████  ██████████  ██");
+        System.out.println("██  ██      ██  ██      ██████      ████████    ██████  ██      ██  ██");
+        System.out.println("██  ██      ██  ██    ██████████  ████  ██████  ██  ██  ██      ██  ██");
+        System.out.println("██  ██      ██  ██  ██████          ██████    ██  ████  ██      ██  ██");
+        System.out.println("██  ██████████  ██  ██  ██  ████████████  ████████  ██  ██████████  ██");
+        System.out.println("██              ██  ██  ██  ██  ██  ██  ██  ██  ██  ██              ██");
+        System.out.println("██████████████████  ████    ██  ██  ██        ██  ████████████████████");
+        System.out.println("██  ██          ██████  ██    ██████  ██  ████████████          ██████");
+        System.out.println("██████  ██  ████  ████  ████  ████          ████  ████    ██      ████");
+        System.out.println("██    ██    ██    ██      ██      ██  ████  ██  ██  ██  ██  ██    ████");
+        System.out.println("████      ██  ████        ██  ██          ██  ████    ████          ██");
+        System.out.println("████████        ████  ████  ██  ██  ██████████    ██  ██  ██  ████████");
+        System.out.println("██████      ████    ██████    ██  ████  ██████    ██████████        ██");
+        System.out.println("██  ██      ██          ██  ██      ██████████  ██      ██        ████");
+        System.out.println("████████████████    ██████        ██████  ██  ██████      ████  ██████");
+        System.out.println("██  ██████████      ██████        ██  ████████  ██    ██    ██████  ██");
+        System.out.println("████          ██  ████  ██████████  ██  ██    ██  ████    ██    ██████");
+        System.out.println("██    ████  ██  ██  ██████  ████  ████  ██      ██  ██      ██    ████");
+        System.out.println("██  ██  ████  ████████████      ██  ████      ██████  ██          ████");
+        System.out.println("██        ██    ██        ██    ██████      ██  ██  ████  ██  ████████");
+        System.out.println("██  ██        ██    ████  ██  ██      ██          ████  ████  ████  ██");
+        System.out.println("██  ██████  ██  ██      ██  ██  ████  ████  ████████  ████    ██  ████");
+        System.out.println("██  ████    ████    ██████  ██████  ██  ██      ██        ██        ██");
+        System.out.println("██  ██  ██  ██  ██  ████    ██  ██████████████  ██          ██  ██████");
+        System.out.println("██████████████████      ██████████        ██  ██    ██████  ██  ██████");
+        System.out.println("██              ██████  ████          ████          ██  ██  ██    ████");
+        System.out.println("██  ██████████  ██  ██  ██  ██    ██    ██          ██████        ████");
+        System.out.println("██  ██      ██  ██  ██    ████████  ████  ████  ██            ██    ██");
+        System.out.println("██  ██      ██  ██  ████████      ████      ██        ████  ██      ██");
+        System.out.println("██  ██      ██  ██  ██  ██████        ████████  ██████    ██    ██████");
+        System.out.println("██  ██████████  ████████      ██  ████    ██    ██      ██      ██████");
+        System.out.println("██              ██      ██        ██  ████████        ██  ██      ████");
+        System.out.println("██████████████████████████████████████████████████████████████████████");
+        System.out.println();
+        TextEngine.enterToNext();
+        TextEngine.clearScreen();
+        startMenu();
     }
 }

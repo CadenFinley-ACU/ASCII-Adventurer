@@ -42,7 +42,6 @@ public class PromptEngine {
             String villagePrompt;
             String dungeonPrompt;
             TextEngine.printNoDelay("Loading...", false);
-
             if (villageDirection == null || villageDirection.isEmpty() || villageDirection.equals("No village found")) {
                 villageDirection = "There is no village nearby";
             }
