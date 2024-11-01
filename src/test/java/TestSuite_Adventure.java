@@ -293,7 +293,7 @@ public class TestSuite_Adventure {
     @Test
     public void stupidStress() {
         for (int i = 0; i < 1000; i++) {
-            int randNum = new Random().nextInt(11) + 7;
+            int randNum = new Random().nextInt(11) + 5;
             testsrun++;
             int[][] testMatrix = DungeonGenerator.generateAndReturnMatrix(randNum);
             boolean connected = DungeonGenerator.testArrays(testMatrix);
