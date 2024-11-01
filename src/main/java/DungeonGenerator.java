@@ -77,7 +77,7 @@ public class DungeonGenerator {
             matrix[coord8[0]][coord8[1]] = 0;
             //determines how many random rooms are added
             // Randomly add at least size+size/2 more 1's ensuring they are connected to the main path
-            addRandom(matrix, rand, size + (int) changeRatio, 1, size);
+            addRandom(matrix, rand, size + (int) changeRatio + 2, 1, size);
             float itemRoomRatio = ((2 * size) - 5.5f) - (size / 2);
             if (itemRoomRatio >= size - 5) {
                 itemRoomRatio = size / 2;
@@ -125,6 +125,7 @@ public class DungeonGenerator {
             wipe();
             start(size);
         } catch (Exception e) {
+            fails++;
             System.out.println("Error: " + e);
             wipe();
             start(pass);
@@ -160,9 +161,9 @@ public class DungeonGenerator {
 
     private static void addRandom(int[][] matrix, Random rand, int minOnes, int num, int matrixSize) {
         try {
-            if (hasValue(matrix, num)) {
+            if (hasValue(matrix, num) && num != 1) {
+                fails++;
                 System.err.println("Error: " + num + " already exists, retrying...");
-                
                 start(matrixSize);
             }
             if (testing) {
@@ -179,8 +180,8 @@ public class DungeonGenerator {
                 addedOnes++;
             }
             if (testing) {
-                System.out.println("Added " + num);
                 printMap(matrix);
+                System.out.println("Added " + num);
             }
             if (numberOfAllRooms(matrix) < matrixSize + 2) {
                 if (testing) {
@@ -190,10 +191,11 @@ public class DungeonGenerator {
                 start(matrixSize);
             }
         } catch (Exception e) {
+            fails++;
             System.out.println("Error: " + e);
             wipe();
             start(matrixSize);
-        
+        }
     }
 
     private static boolean isConnected(int[][] matrix, int x, int y) {

@@ -24,6 +24,8 @@ public class TestSuite_Adventure {
         System.out.println(((float) DungeonGenerator.fails / DungeonGenerator.runs) * 100 + "% failure rate");
         System.out.println("For every test run, " + (float) DungeonGenerator.runs / testsrun + " dungeons were generated");
         System.out.println("-----------------------------");
+        DungeonGenerator.wipe();
+        DungeonGenerator.testing = false;
     }
 
     @Test
@@ -293,7 +295,7 @@ public class TestSuite_Adventure {
     @Test
     public void stupidStress() {
         for (int i = 0; i < 1000; i++) {
-            int randNum = new Random().nextInt(11) + 5;
+            int randNum = new Random().nextInt(11) + 7;
             testsrun++;
             int[][] testMatrix = DungeonGenerator.generateAndReturnMatrix(randNum);
             boolean connected = DungeonGenerator.testArrays(testMatrix);
