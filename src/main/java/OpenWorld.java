@@ -647,6 +647,7 @@ public class OpenWorld extends Room {
                 Player.playerX = 4;
                 Player.playerY = 10;
                 roomNumber = 74;
+                numberOfEnemies = 0;
                 PromptEngine.buildPrompt();
                 reRenderSameRoom();
                 room74();

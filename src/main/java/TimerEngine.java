@@ -18,6 +18,7 @@ public class TimerEngine {
     private long savedTime;
 
     public void startClock() {
+        //System.out.println("Timer started");
         startTime = System.currentTimeMillis();
         running = true;
         // Start a new thread to display the clock
@@ -38,17 +39,14 @@ public class TimerEngine {
     }
 
     public void stopClock() {
-        //System.out.printf("Time elapsed: %02d:%02d:%02d%n", hours, minutes, seconds);
+        //System.out.println("Timer stopped");
         savedTime += elapsedTime;
         running = false;
         elapsedTime = 0;
     }
 
     public String returnTime() {
-        if (elapsedTime != 0) {
-            //not sure if this is the best way to do this
-            savedTime += elapsedTime;
-        }
+        savedTime += elapsedTime;
         hours = ((savedTime) / (1000 * 60 * 60)) % 24;
         minutes = ((savedTime) / (1000 * 60)) % 60;
         seconds = ((savedTime) / 1000) % 60;
