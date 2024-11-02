@@ -26,8 +26,8 @@ public class TimerEngine {
             while (running) {
                 elapsedTime = System.currentTimeMillis() - startTime;
                 seconds = (elapsedTime / 1000) % 60;
-                minutes = (elapsedTime / (1000 * 60)) % 60;
-                hours = (elapsedTime / (1000 * 60 * 60)) % 24;
+                minutes = (elapsedTime / 60000) % 60;
+                hours = (elapsedTime / 360000) % 24;
                 // Pause for 1 second
                 try {
                     Thread.sleep(1000);
@@ -46,9 +46,9 @@ public class TimerEngine {
     }
 
     public String returnTime() {
-        savedTime += elapsedTime;
-        hours = ((savedTime) / (1000 * 60 * 60)) % 24;
-        minutes = ((savedTime) / (1000 * 60)) % 60;
+        savedTime += getElapsedTime();
+        hours = ((savedTime) / 360000) % 24;
+        minutes = ((savedTime) / 60000) % 60;
         seconds = ((savedTime) / 1000) % 60;
         return String.format("%02d:%02d:%02d", hours, minutes, seconds);
     }
