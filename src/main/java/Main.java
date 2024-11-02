@@ -248,21 +248,21 @@ public class Main {
 
     public static void inGameDefaultTextHandling(String data) throws InterruptedException { //default in game commands
         boolean menuCommandsCheck = switch (Dungeon.currentDungeon) {
-            case "Meadow Dungeon" ->
+            case "Meadow" ->
                 MeadowDungeon.ableToUseMenuCommands();
-            case "Dark Forest Dungeon" ->
+            case "Dark Forest" ->
                 DarkForestDungeon.ableToUseMenuCommands();
-            case "Mountain Cave Dungeon" ->
+            case "Mountain Cave" ->
                 MountainCaveDungeon.ableToUseMenuCommands();
-            case "Mountain Top Dungeon" ->
+            case "Mountain Top" ->
                 MountainTopDungeon.ableToUseMenuCommands();
-            case "Desert Oasis Dungeon" ->
+            case "Desert Oasis" ->
                 DesertOasisDungeon.ableToUseMenuCommands();
-            case "Desert Plains Dungeon" ->
+            case "Desert Plains" ->
                 DesertPlainsDungeon.ableToUseMenuCommands();
-            case "Desert Pyramid Dungeon" ->
+            case "Desert Pyramid" ->
                 DesertPyramidDungeon.ableToUseMenuCommands();
-            case "Ocean Kingdom Dungeon" ->
+            case "Ocean Kingdom" ->
                 OceanKingdomDungeon.ableToUseMenuCommands();
             default ->
                 true;
