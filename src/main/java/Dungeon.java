@@ -31,8 +31,8 @@ public class Dungeon extends Room {
 
     public static List<String> missedItems = new ArrayList<>();
 
-    public String currentMiniBoss;
-    public String currentBoss;
+    private String currentMiniBoss;
+    private String currentBoss;
 
     private int[] spawnPosition;
     private int[] bossRoom;
@@ -41,22 +41,22 @@ public class Dungeon extends Room {
     private ArrayList<String> directionsString;
     private List<String> enemies;
 
-    public int[][] roomsBeenTo;
-    public List<String> items;
-    public List<String> itemsOrigin;
-    public boolean completed = false;
-    public boolean visited = false;
-    public boolean mapRevealed;
-    public int enemiesCount;
+    private int[][] roomsBeenTo;
+    private List<String> items;
+    private List<String> itemsOrigin;
+    private boolean completed = false;
+    private boolean visited = false;
+    private boolean mapRevealed;
+    private int enemiesCount;
 
-    public int[][] map;
+    private int[][] map;
 
     public Dungeon(int size, ArrayList<String> enemies, List<String> items, String miniBoss, String boss, int enemiesCount) {
         this.map = DungeonGenerator.generateAndReturnMatrix(size);
         spawnPosition = DungeonGenerator.findValue(this.map, 9);
         bossRoom = DungeonGenerator.findValue(this.map, 8);
         this.enemies = enemies;
-        this.roomsBeenTo = DungeonGenerator.createRoomsBeenTo(size);
+        this.roomsBeenTo = DungeonGenerator.createRoomsBeenTo(this.map.length);
         this.items = items;
         this.itemsOrigin = items;
         this.currentMiniBoss = miniBoss;
@@ -78,7 +78,7 @@ public class Dungeon extends Room {
         room = roomSave;  //make this dynamic
         Main.checkSave(room);
         Main.screenRefresh();
-        Dungeon.currentDungeon = current; //make this dynamic
+        currentDungeon = current; //make this dynamic
         GameSaveSerialization.saveGame();
         this.startRooms();
     }
@@ -89,9 +89,9 @@ public class Dungeon extends Room {
         this.completed = false;
         this.spawnPosition = DungeonGenerator.findValue(this.map, 9);
         this.bossRoom = DungeonGenerator.findValue(this.map, 8);
-        Dungeon.currentPlayerPosition = spawnPosition;
+        currentPlayerPosition = spawnPosition;
         this.roomsBeenTo = DungeonGenerator.createRoomsBeenTo(this.map.length);
-        Dungeon.lastPosition = spawnPosition.clone();
+        lastPosition = spawnPosition.clone();
     }
 
     public void startRooms() throws InterruptedException {
@@ -1374,6 +1374,7 @@ public class Dungeon extends Room {
         }
         System.out.println();
     }
+
     /*
  * key
  * 1 = enemy rooms
@@ -1388,4 +1389,51 @@ public class Dungeon extends Room {
  * 10 - fairy rooms
  * 15 - last position
      */
+    public boolean getCompleted() {
+        return this.completed;
+    }
+
+    public boolean getVisited() {
+        return this.visited;
+    }
+
+    public int[][] getMap() {
+        return this.map;
+    }
+
+    public int[][] getRoomsBeenTo() {
+        return this.roomsBeenTo;
+    }
+
+    public List<String> getItems() {
+        return this.items;
+    }
+
+    public boolean getMapRevealed() {
+        return this.mapRevealed;
+    }
+
+    public void setCompleted(boolean localCompleted) {
+        this.completed = localCompleted;
+    }
+
+    public void setVisited(boolean localVisited) {
+        this.visited = localVisited;
+    }
+
+    public void setMap(int[][] matrix) {
+        this.map = matrix;
+    }
+
+    public void setRoomsBeenTo(int[][] localRoomsBeenTo) {
+        this.roomsBeenTo = localRoomsBeenTo;
+    }
+
+    public void setItems(List<String> localItems) {
+        this.items = localItems;
+    }
+
+    public void setMapRevealed(boolean localMapRevealed) {
+        this.mapRevealed = localMapRevealed;
+    }
 }
