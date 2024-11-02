@@ -336,6 +336,7 @@ public class Player {
             gold = 20000000;
             inventorySize = 200;
             putItem("k.o. cannon", 10);
+            putItem("key", 10);
             Main.loadSave();
         } else if ("complete".equals(command) && name.equals("Debug!")) {
             maxHealth = 10000;

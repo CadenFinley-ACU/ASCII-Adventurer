@@ -17,6 +17,7 @@ public class Dungeon extends Room {
     static String greenColor = "\033[0;32m"; // green color
     static String blueColor = "\033[0;34m"; // blue color
     static String pinkColor = "\033[0;35m"; // pink color
+
     public static String currentDungeon;
     public static int completedDungeons = 0;
     public static int numberOfEnemies;
@@ -38,7 +39,7 @@ public class Dungeon extends Room {
     private String direction;
     private int[] availableMove;
     private ArrayList<String> directionsString;
-    private final List<String> enemies;
+    private List<String> enemies;
 
     public int[][] roomsBeenTo;
     public List<String> items;
@@ -51,12 +52,11 @@ public class Dungeon extends Room {
     public int[][] map;
 
     public Dungeon(int size, ArrayList<String> enemies, List<String> items, String miniBoss, String boss, int enemiesCount) {
-        super();
-        map = DungeonGenerator.generateAndReturnMatrix(size);
+        this.map = DungeonGenerator.generateAndReturnMatrix(size);
         spawnPosition = DungeonGenerator.findValue(this.map, 9);
         bossRoom = DungeonGenerator.findValue(this.map, 8);
         this.enemies = enemies;
-        roomsBeenTo = DungeonGenerator.createRoomsBeenTo(this.map.length);
+        this.roomsBeenTo = DungeonGenerator.createRoomsBeenTo(size);
         this.items = items;
         this.itemsOrigin = items;
         this.currentMiniBoss = miniBoss;
@@ -69,10 +69,12 @@ public class Dungeon extends Room {
             this.fresh();
             this.items = this.itemsOrigin;
             this.visited = true;
+            currentPlayerPosition = DungeonGenerator.findValue(this.map, 9);
         }
         if (!roomSave.equals(Main.getSavedPlace())) {  //make this dynamic
             currentPlayerPosition = DungeonGenerator.findValue(this.map, 9);
         }
+        spawnPosition = DungeonGenerator.findValue(this.map, 9);
         room = roomSave;  //make this dynamic
         Main.checkSave(room);
         Main.screenRefresh();
@@ -97,136 +99,136 @@ public class Dungeon extends Room {
         enemyType = enemies.get(rand.nextInt(enemies.size()));
         availableMove = null;
         Main.screenRefresh();
-        drawRoom(this.map, roomsBeenTo, currentPlayerPosition[0], currentPlayerPosition[1], numberOfEnemies, mapRevealed);
+        drawRoom(this.map, this.roomsBeenTo, currentPlayerPosition[0], currentPlayerPosition[1], numberOfEnemies, this.mapRevealed);
         directionsString = new ArrayList<>();
-        if (this.map[currentPlayerPosition[0]][currentPlayerPosition[1]] == 9 && roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] == 0) {
-            dungeonIntroText();
+        if (this.map[currentPlayerPosition[0]][currentPlayerPosition[1]] == 9 && this.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] == 0) {
+            this.dungeonIntroText();
         }
-        if (this.map[currentPlayerPosition[0]][currentPlayerPosition[1]] == 2 && roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] == 0) {
-            itemRoom(items);
+        if (this.map[currentPlayerPosition[0]][currentPlayerPosition[1]] == 2 && this.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] == 0) {
+            this.itemRoom(items);
         }
-        if (this.map[currentPlayerPosition[0]][currentPlayerPosition[1]] == 10 && roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] == 0) {
-            fairyRoom();
+        if (this.map[currentPlayerPosition[0]][currentPlayerPosition[1]] == 10 && this.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] == 0) {
+            this.fairyRoom();
         }
-        if (this.map[currentPlayerPosition[0]][currentPlayerPosition[1]] == 3 && roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] == 0) {
-            keyRoomSequence();
+        if (this.map[currentPlayerPosition[0]][currentPlayerPosition[1]] == 3 && this.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] == 0) {
+            this.keyRoomSequence();
         }
-        if (this.map[currentPlayerPosition[0]][currentPlayerPosition[1]] == 5 && roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] == 0) {
-            keyRoom();
+        if (this.map[currentPlayerPosition[0]][currentPlayerPosition[1]] == 5 && this.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] == 0) {
+            this.keyRoom();
         }
-        if (this.map[currentPlayerPosition[0]][currentPlayerPosition[1]] == 7 && roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] == 0) {
-            heartContainerRoom();
+        if (this.map[currentPlayerPosition[0]][currentPlayerPosition[1]] == 7 && this.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] == 0) {
+            this.heartContainerRoom();
         }
-        if (this.map[currentPlayerPosition[0]][currentPlayerPosition[1]] == 1 && roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] == 0) {
-            fightRandomEnemies();
+        if (this.map[currentPlayerPosition[0]][currentPlayerPosition[1]] == 1 && this.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] == 0) {
+            this.fightRandomEnemies();
         }
         if (this.map[currentPlayerPosition[0]][currentPlayerPosition[1]] == 6) {
-            roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = this.map[currentPlayerPosition[0]][currentPlayerPosition[1]];
-            dungeonShop();
+            this.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = this.map[currentPlayerPosition[0]][currentPlayerPosition[1]];
+            this.dungeonShop();
         }
-        if (this.map[currentPlayerPosition[0]][currentPlayerPosition[1]] == 4 && roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] == 0) {
-            miniBossSequence();
+        if (this.map[currentPlayerPosition[0]][currentPlayerPosition[1]] == 4 && this.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] == 0) {
+            this.miniBossSequence();
         }
-        if (this.map[currentPlayerPosition[0]][currentPlayerPosition[1]] == 8 && roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] == 0) {
-            bossRoom();
+        if (this.map[currentPlayerPosition[0]][currentPlayerPosition[1]] == 8 && this.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] == 0) {
+            this.bossRoom();
         }
         handleDirectionsAndCommands();
     }
 
     public void handleDirectionsAndCommands() throws InterruptedException {
         Main.screenRefresh();
-        drawRoom(this.map, roomsBeenTo, currentPlayerPosition[0], currentPlayerPosition[1], 0, mapRevealed);
-        availableMove = DungeonGenerator.getDirections(this.map, currentPlayerPosition[0], currentPlayerPosition[1]);
-        if (completed) {
+        drawRoom(this.map, this.roomsBeenTo, currentPlayerPosition[0], currentPlayerPosition[1], 0, this.mapRevealed);
+        this.availableMove = DungeonGenerator.getDirections(this.map, currentPlayerPosition[0], currentPlayerPosition[1]);
+        if (this.completed) {
             TextEngine.printWithDelays("You have completed this dungeon. You can now type " + yellowColor + "leave" + resetColor + " to exit this dungeon.", false);
         }
         System.out.println("Type " + yellowColor + "map" + resetColor + " to see the map.");
         System.out.println();
         TextEngine.printWithDelays("You can move in the following directions: ", false);
-        if (availableMove[0] > 0) {
-            if (testIfBossRoom(availableMove[0])) {
-                directionsString.add("boss room");
+        if (this.availableMove[0] > 0) {
+            if (this.testIfBossRoom(this.availableMove[0])) {
+                this.directionsString.add("boss room");
             } else {
-                directionsString.add("north");
+                this.directionsString.add("north");
             }
         }
-        if (availableMove[1] > 0) {
-            if (testIfBossRoom(availableMove[1])) {
-                directionsString.add("boss room");
+        if (this.availableMove[1] > 0) {
+            if (this.testIfBossRoom(this.availableMove[1])) {
+                this.directionsString.add("boss room");
             } else {
-                directionsString.add("south");
+                this.directionsString.add("south");
             }
         }
-        if (availableMove[2] > 0) {
-            if (testIfBossRoom(availableMove[2])) {
-                directionsString.add("boss room");
+        if (this.availableMove[2] > 0) {
+            if (this.testIfBossRoom(this.availableMove[2])) {
+                this.directionsString.add("boss room");
             } else {
-                directionsString.add("west");
+                this.directionsString.add("west");
             }
         }
-        if (availableMove[3] > 0) {
-            if (testIfBossRoom(availableMove[3])) {
-                directionsString.add("boss room");
+        if (this.availableMove[3] > 0) {
+            if (this.testIfBossRoom(this.availableMove[3])) {
+                this.directionsString.add("boss room");
             } else {
-                directionsString.add("east");
+                this.directionsString.add("east");
             }
         }
         TextEngine.printNoDelay(directionsInString(directionsString), true);
         while (true) {
-            direction = Room.console.readLine();
-            switch (direction.toLowerCase().trim()) {
+            this.direction = Room.console.readLine();
+            switch (this.direction.toLowerCase().trim()) {
                 case "north", "1" -> {
-                    if (directionsString.contains(direction.toLowerCase())) {
+                    if (this.directionsString.contains(this.direction.toLowerCase())) {
                         lastPosition = currentPlayerPosition.clone(); // Save the current position before moving
-                        roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = this.map[currentPlayerPosition[0]][currentPlayerPosition[1]];
+                        this.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = this.map[currentPlayerPosition[0]][currentPlayerPosition[1]];
                         currentPlayerPosition[0] -= 1;
                         Main.loadSave();
                     } else {
-                        defaultDungeonArgs(direction.toLowerCase());
+                        this.defaultDungeonArgs(this.direction.toLowerCase());
                     }
                 }
                 case "east", "2" -> {
-                    if (directionsString.contains(direction.toLowerCase())) {
+                    if (this.directionsString.contains(this.direction.toLowerCase())) {
                         lastPosition = currentPlayerPosition.clone(); // Save the current position before moving
-                        roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = this.map[currentPlayerPosition[0]][currentPlayerPosition[1]];
+                        this.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = this.map[currentPlayerPosition[0]][currentPlayerPosition[1]];
                         currentPlayerPosition[1] += 1;
                         Main.loadSave();
                     } else {
-                        defaultDungeonArgs(direction.toLowerCase());
+                        this.defaultDungeonArgs(this.direction.toLowerCase());
                     }
                 }
                 case "south", "3" -> {
-                    if (directionsString.contains(direction.toLowerCase())) {
+                    if (this.directionsString.contains(this.direction.toLowerCase())) {
                         lastPosition = currentPlayerPosition.clone(); // Save the current position before moving
-                        roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = this.map[currentPlayerPosition[0]][currentPlayerPosition[1]];
+                        this.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = this.map[currentPlayerPosition[0]][currentPlayerPosition[1]];
                         currentPlayerPosition[0] += 1;
                         Main.loadSave();
                     } else {
-                        defaultDungeonArgs(direction.toLowerCase());
+                        this.defaultDungeonArgs(this.direction.toLowerCase());
                     }
                 }
                 case "west", "4" -> {
-                    if (directionsString.contains(direction.toLowerCase())) {
+                    if (this.directionsString.contains(this.direction.toLowerCase())) {
                         lastPosition = currentPlayerPosition.clone(); // Save the current position before moving
-                        roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = this.map[currentPlayerPosition[0]][currentPlayerPosition[1]];
+                        this.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = this.map[currentPlayerPosition[0]][currentPlayerPosition[1]];
                         currentPlayerPosition[1] -= 1;
                         Main.loadSave();
                     } else {
-                        defaultDungeonArgs(direction.toLowerCase());
+                        this.defaultDungeonArgs(this.direction.toLowerCase());
                     }
                 }
                 case "boss room", "5" -> {
-                    if (directionsString.contains(direction.toLowerCase()) && confirmBossContinue()) {
+                    if (this.directionsString.contains(this.direction.toLowerCase()) && this.confirmBossContinue()) {
                         lastPosition = currentPlayerPosition.clone(); // Save the current position before moving
-                        roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = this.map[currentPlayerPosition[0]][currentPlayerPosition[1]];
-                        currentPlayerPosition = bossRoom;
+                        this.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = this.map[currentPlayerPosition[0]][currentPlayerPosition[1]];
+                        currentPlayerPosition = DungeonGenerator.findValue(this.map, 8);
                         Main.loadSave();
                     } else {
-                        defaultDungeonArgs(direction.toLowerCase());
+                        this.defaultDungeonArgs(this.direction.toLowerCase());
                     }
                 }
                 default -> {
-                    defaultDungeonArgs(direction.toLowerCase());
+                    this.defaultDungeonArgs(this.direction.toLowerCase());
                 }
             }
         }
@@ -687,18 +689,46 @@ public class Dungeon extends Room {
     private void leave() throws InterruptedException {
         TextEngine.printWithDelays("You leave the shop and return to the Dungeon.", false);
         TextEngine.enterToNext();
-        handleDirectionsAndCommands();
+        this.handleDirectionsAndCommands();
     }
 
     private boolean checkIfCurrentDungeonIsRevealed() {
         return this.mapRevealed;
     }
 
-    public boolean ableToUseMenuCommands() {
+    public static boolean ableToUseMenuCommands() {
         if ("OpenWorld".equals(Main.getSavedPlace()) || "Village".equals(Main.getSavedPlace()) || "SpawnRoom".equals(Main.getSavedPlace())) {
             return true;
         }
-        return (!(this.map[currentPlayerPosition[0]][currentPlayerPosition[1]] == 3 || this.map[currentPlayerPosition[0]][currentPlayerPosition[1]] == 4 || (this.map[currentPlayerPosition[0]][currentPlayerPosition[1]] == 1 && this.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] == 0)));
+        switch (currentDungeon) {
+            case "Meadow" -> {
+                return (!(Main.MeadowDungeon.map[currentPlayerPosition[0]][currentPlayerPosition[1]] == 3 || Main.MeadowDungeon.map[currentPlayerPosition[0]][currentPlayerPosition[1]] == 4 || (Main.MeadowDungeon.map[currentPlayerPosition[0]][currentPlayerPosition[1]] == 1 && Main.MeadowDungeon.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] == 0)));
+            }
+            case "Dark Forest" -> {
+                return (!(Main.DarkForestDungeon.map[currentPlayerPosition[0]][currentPlayerPosition[1]] == 3 || Main.DarkForestDungeon.map[currentPlayerPosition[0]][currentPlayerPosition[1]] == 4 || (Main.DarkForestDungeon.map[currentPlayerPosition[0]][currentPlayerPosition[1]] == 1 && Main.DarkForestDungeon.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] == 0)));
+            }
+            case "Mountain Cave" -> {
+                return (!(Main.MountainCaveDungeon.map[currentPlayerPosition[0]][currentPlayerPosition[1]] == 3 || Main.MountainCaveDungeon.map[currentPlayerPosition[0]][currentPlayerPosition[1]] == 4 || (Main.MountainCaveDungeon.map[currentPlayerPosition[0]][currentPlayerPosition[1]] == 1 && Main.MountainCaveDungeon.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] == 0)));
+            }
+            case "Mountain Top" -> {
+                return (!(Main.MountainTopDungeon.map[currentPlayerPosition[0]][currentPlayerPosition[1]] == 3 || Main.MountainTopDungeon.map[currentPlayerPosition[0]][currentPlayerPosition[1]] == 4 || (Main.MountainTopDungeon.map[currentPlayerPosition[0]][currentPlayerPosition[1]] == 1 && Main.MountainTopDungeon.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] == 0)));
+            }
+            case "Desert Oasis" -> {
+                return (!(Main.DesertOasisDungeon.map[currentPlayerPosition[0]][currentPlayerPosition[1]] == 3 || Main.DesertOasisDungeon.map[currentPlayerPosition[0]][currentPlayerPosition[1]] == 4 || (Main.DesertOasisDungeon.map[currentPlayerPosition[0]][currentPlayerPosition[1]] == 1 && Main.DesertOasisDungeon.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] == 0)));
+            }
+            case "Desert Plains" -> {
+                return (!(Main.DesertPlainsDungeon.map[currentPlayerPosition[0]][currentPlayerPosition[1]] == 3 || Main.DesertPlainsDungeon.map[currentPlayerPosition[0]][currentPlayerPosition[1]] == 4 || (Main.DesertPlainsDungeon.map[currentPlayerPosition[0]][currentPlayerPosition[1]] == 1 && Main.DesertPlainsDungeon.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] == 0)));
+            }
+            case "Desert Pyramid" -> {
+                return (!(Main.DesertPyramidDungeon.map[currentPlayerPosition[0]][currentPlayerPosition[1]] == 3 || Main.DesertPyramidDungeon.map[currentPlayerPosition[0]][currentPlayerPosition[1]] == 4 || (Main.DesertPyramidDungeon.map[currentPlayerPosition[0]][currentPlayerPosition[1]] == 1 && Main.DesertPyramidDungeon.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] == 0)));
+            }
+            case "Ocean Kingdom" -> {
+                return (!(Main.OceanKingdomDungeon.map[currentPlayerPosition[0]][currentPlayerPosition[1]] == 3 || Main.OceanKingdomDungeon.map[currentPlayerPosition[0]][currentPlayerPosition[1]] == 4 || (Main.OceanKingdomDungeon.map[currentPlayerPosition[0]][currentPlayerPosition[1]] == 1 && Main.OceanKingdomDungeon.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] == 0)));
+            }
+            default -> {
+                return true;
+            }
+        }
     }
 
     public void dungeonIntroText() throws InterruptedException {
@@ -725,7 +755,7 @@ public class Dungeon extends Room {
         if (numberOfEnemies < 2) {
             numberOfEnemies = 2;
         }
-        TextEngine.printWithDelays("You have entered a room with " + numberOfEnemies + " " + redColor + enemyType + resetColor + "s in this room!\nYou were ambushed!", false);
+        TextEngine.printWithDelays("You have entered a room with " + numberOfEnemies + " " + redColor + enemyType + "s " + resetColor + "in this room!\nYou were ambushed!", false);
         TextEngine.printWithDelays("They seem to be trying to protect something...", false);
         TextEngine.printWithDelays("What is your command? " + yellowColor + "fight" + resetColor + " or " + yellowColor + "run" + resetColor, true);
         while (true) {
@@ -874,7 +904,7 @@ public class Dungeon extends Room {
         OpenWorld.startRoom();
     }
 
-    public static String directionsInString(ArrayList<String> list) {
+    public String directionsInString(ArrayList<String> list) {
         StringBuilder sb = new StringBuilder();
         for (Object item : list) {
             sb.append(yellowColor).append(item.toString()).append(resetColor);
