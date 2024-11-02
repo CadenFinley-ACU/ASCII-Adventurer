@@ -79,7 +79,7 @@ public class Dungeon extends Room {
         currentDungeon = current;
         GameSaveSerialization.saveGame();
         Main.screenRefresh();
-        this.startRooms();
+        this.runRoom();
     }
 
     public void fresh() { //fresh
@@ -92,7 +92,7 @@ public class Dungeon extends Room {
         this.lastPosition = this.spawnPosition.clone();
     }
 
-    public void startRooms() throws InterruptedException {
+    public void runRoom() throws InterruptedException {
         numberOfEnemies = rand.nextInt(enemiesCount);
         enemyType = enemies.get(rand.nextInt(enemies.size()));
         availableMove = null;
