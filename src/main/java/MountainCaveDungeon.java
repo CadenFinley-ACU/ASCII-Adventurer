@@ -179,13 +179,13 @@ public class MountainCaveDungeon extends Dungeon {
                     }
                 }
                 case "boss room", "5" -> {
-                    if (confirmBossContinue()) {
+                    if (directionsString.contains(direction.toLowerCase()) && confirmBossContinue()) {
                         lastPosition = currentPlayerPosition.clone(); // Save the current position before moving
                         roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = mountainCaveDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
                         currentPlayerPosition = bossRoom;
                         Main.loadSave();
                     } else {
-                        Main.loadSave();
+                        Dungeon.defaultDungeonArgs(direction.toLowerCase());
                     }
                 }
                 default -> {
