@@ -732,7 +732,7 @@ public class OpenWorld extends Room {
                 case "the ocean kingdom" -> {
                     if (Dungeon.completedDungeons > 6) {
                         previousRoomSave = roomSave;
-                        DesertOasisDungeon.startRoom();
+                        Main.OceanKingdomDungeon.startRoom("Ocean Kingdom Dungeon", "Ocean Kingdom");
                     } else {
                         TextEngine.printWithDelays("You must complete The Desert Pyramid dungeon first.\n Try going to the south", true);
                     }
@@ -875,7 +875,7 @@ public class OpenWorld extends Room {
                 case "the mountain top" -> {
                     if (Dungeon.completedDungeons > 2) {
                         previousRoomSave = roomSave;
-                        MountainTopDungeon.startRoom();
+                        Main.MountainTopDungeon.startRoom("Mountain Top Dungeon", "Mountain Top");
                     } else {
                         TextEngine.printWithDelays("You must complete The Mountain Cave dungeons first, try going west.", true);
                     }
@@ -907,7 +907,7 @@ public class OpenWorld extends Room {
                 case "the ocean kingdom" -> {
                     if (Dungeon.completedDungeons > 6) {
                         previousRoomSave = roomSave;
-                        OceanKingdomDungeon.startRoom();
+                        Main.OceanKingdomDungeon.startRoom("Ocean Kingdom Dungeon", "Ocean Kingdom");
                     } else {
                         TextEngine.printWithDelays("You must complete The Desert Pyramid dungeon first.\n Try going to the south", true);
                     }
@@ -1023,7 +1023,7 @@ public class OpenWorld extends Room {
                 case "the mountain top" -> {
                     if (Dungeon.completedDungeons > 2) {
                         previousRoomSave = roomSave;
-                        MountainTopDungeon.startRoom();
+                        Main.MountainTopDungeon.startRoom("Mountain Top Dungeon", "Mountain Top");
                     } else {
                         TextEngine.printWithDelays("You must complete The Mountain Cave dungeons first, try going south west.", true);
                     }
@@ -1437,7 +1437,7 @@ public class OpenWorld extends Room {
                 case "the mountain cave" -> {
                     if (Dungeon.completedDungeons > 1) {
                         previousRoomSave = roomSave;
-                        MountainCaveDungeon.startRoom();
+                        Main.MountainCaveDungeon.startRoom("Mountain Cave Dungeon", "Mountain Cave");
                     } else {
                         TextEngine.printWithDelays("You must complete The Dark Forest first.\nTry going south east", true);
                     }
@@ -2250,7 +2250,7 @@ public class OpenWorld extends Room {
                 case "the desert pyramid" -> {
                     if (Dungeon.completedDungeons > 5) {
                         previousRoomSave = roomSave;
-                        DesertPyramidDungeon.startRoom();
+                        Main.DesertPyramidDungeon.startRoom("Desert Pyramid Dungeon", "Desert Pyramid");
                     } else {
                         TextEngine.printWithDelays("You must complete The Desert Plains dungeon first.\nTry going south", true);
                     }
@@ -2538,7 +2538,7 @@ public class OpenWorld extends Room {
                 case "the dark forest" -> {
                     if (Dungeon.completedDungeons > 0) {
                         previousRoomSave = roomSave;
-                        DarkForestDungeon.startRoom();
+                        Main.DarkForestDungeon.startRoom("Dark Forest Dungeon", "Dark Forest");
                     } else {
                         TextEngine.printWithDelays("You must complete The Meadow dungeon first.\nTry going south", true);
                     }
@@ -2590,7 +2590,7 @@ public class OpenWorld extends Room {
                 case "the desert pyramid" -> {
                     if (Dungeon.completedDungeons > 5) {
                         previousRoomSave = roomSave;
-                        DesertPyramidDungeon.startRoom();
+                        Main.DesertPyramidDungeon.startRoom("Desert Pyramid Dungeon", "Desert Pyramid");
                     } else {
                         TextEngine.printWithDelays("You must complete The Desert Plains dungeon first.\nTry going south", true);
                     }
@@ -2748,7 +2748,7 @@ public class OpenWorld extends Room {
                 case "the dark forest" -> {
                     if (Dungeon.completedDungeons > 0) {
                         previousRoomSave = roomSave;
-                        DarkForestDungeon.startRoom();
+                        Main.DarkForestDungeon.startRoom("Dark Forest Dungeon", "Dark Forest");
                     } else {
                         TextEngine.printWithDelays("You must complete The Meadow dungeon first.\nTry going south", true);
                     }
@@ -2801,7 +2801,7 @@ public class OpenWorld extends Room {
                 case "the mountain cave" -> {
                     if (Dungeon.completedDungeons > 1) {
                         previousRoomSave = roomSave;
-                        MountainCaveDungeon.startRoom();
+                        Main.MountainCaveDungeon.startRoom("Mountain Cave Dungeon", "Mountain Cave");
                     } else {
                         TextEngine.printWithDelays("You must complete The Dark Forest first.\nTry going south east", true);
                     }
@@ -2848,7 +2848,7 @@ public class OpenWorld extends Room {
                 case "the desert plains" -> {
                     if (Dungeon.completedDungeons > 4) {
                         previousRoomSave = roomSave;
-                        DesertPlainsDungeon.startRoom();
+                        Main.DesertPlainsDungeon.startRoom("Desert Plains Dungeon", "Desert Plains");
                     } else {
                         TextEngine.printWithDelays("You must complete The Desert Oasis dungeons first.\nTry going to the south south", true);
                     }
@@ -3043,7 +3043,7 @@ public class OpenWorld extends Room {
                 }
                 case "the meadow" -> {
                     previousRoomSave = roomSave;
-                    MeadowDungeon.startRoom();
+                    Main.MeadowDungeon.startRoom("Meadow Dungeon", "Meadow");
                 }
                 case "west" -> {
                     previousRoomSave = roomSave;
@@ -3087,7 +3087,7 @@ public class OpenWorld extends Room {
                 case "the desert oasis" -> {
                     if (Dungeon.completedDungeons > 3) {
                         previousRoomSave = roomSave;
-                        DesertOasisDungeon.startRoom();
+                        Main.DesertOasisDungeon.startRoom("Desert Oasis Dungeon", "Desert Oasis");
                     } else {
                         TextEngine.printWithDelays("You must complete The Mountain Top dungeon first.\n Try going to the north, east", true);
                     }
