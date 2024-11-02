@@ -127,14 +127,14 @@ public class Main {
     }
 
     public static void buildDungeons() {
-        MeadowDungeon = new Dungeon(5, new ArrayList<>(List.of("Goblin", "Skeleton", "Slime", "Mimic")), List.of("axe", "chainmail set"), "Golem", "Forest Giant", 3);
-        DarkForestDungeon = new Dungeon(6, new ArrayList<>(List.of("Goblin", "Skeleton", "Orc", "Mimic", "Zombie")), List.of("broad sword", "full armor kit"), "Forest Guardian", "Forest Spirit", 4);
-        MountainCaveDungeon = new Dungeon(7, new ArrayList<>(List.of("Troll", "Skeleton", "Orc", "Ghost", "Demon", "Zombie")), List.of("better sword", "ninja armor"), "Elemental", "Wyvern", 5);
-        MountainTopDungeon = new Dungeon(7, new ArrayList<>(List.of("Ghost", "Gargoyle", "Orc", "Vampire", "Demon")), List.of("great sword", "knight armor"), "Minotaur", "Ice Dragon", 7);
-        DesertOasisDungeon = new Dungeon(8, new ArrayList<>(List.of("Werewolf", "Witch", "Giant", "Mummy", "Minotaur")), List.of("master sword", "royal armor"), "Sphinx", "Pheonix", 3);
-        DesertPlainsDungeon = new Dungeon(8, new ArrayList<>(List.of("Orc", "Troll", "Mummy", "Demon")), List.of("legendary sword", "demon armor"), "Cyclops", "Giant Scorpion", 4);
-        DesertPyramidDungeon = new Dungeon(9, new ArrayList<>(List.of("Werewolf", "Witch", "Giant", "Mummy", "Minotaur")), List.of("excalibur", "angel armor"), "Medusa", "Giant Sand Worm", 4);
-        OceanKingdomDungeon = new Dungeon(11, new ArrayList<>(List.of("Sea Serpent", "Sea Monster", "Sea Witch", "Sea Dragon", "Sea Dragon")), List.of("god slayer hammer", "god slayer armor"), "Leviathan", "Kraken", 5);
+        MeadowDungeon = new Dungeon(DungeonGenerator.generateAndReturnMatrix(5), new ArrayList<>(List.of("Goblin", "Skeleton", "Slime", "Mimic")), List.of("axe", "chainmail set"), "Golem", "Forest Giant", 3);
+        DarkForestDungeon = new Dungeon(DungeonGenerator.generateAndReturnMatrix(6), new ArrayList<>(List.of("Goblin", "Skeleton", "Orc", "Mimic", "Zombie")), List.of("broad sword", "full armor kit"), "Forest Guardian", "Forest Spirit", 4);
+        MountainCaveDungeon = new Dungeon(DungeonGenerator.generateAndReturnMatrix(7), new ArrayList<>(List.of("Troll", "Skeleton", "Orc", "Ghost", "Demon", "Zombie")), List.of("better sword", "ninja armor"), "Elemental", "Wyvern", 5);
+        MountainTopDungeon = new Dungeon(DungeonGenerator.generateAndReturnMatrix(7), new ArrayList<>(List.of("Ghost", "Gargoyle", "Orc", "Vampire", "Demon")), List.of("great sword", "knight armor"), "Minotaur", "Ice Dragon", 7);
+        DesertOasisDungeon = new Dungeon(DungeonGenerator.generateAndReturnMatrix(8), new ArrayList<>(List.of("Werewolf", "Witch", "Giant", "Mummy", "Minotaur")), List.of("master sword", "royal armor"), "Sphinx", "Pheonix", 3);
+        DesertPlainsDungeon = new Dungeon(DungeonGenerator.generateAndReturnMatrix(8), new ArrayList<>(List.of("Orc", "Troll", "Mummy", "Demon")), List.of("legendary sword", "demon armor"), "Cyclops", "Giant Scorpion", 4);
+        DesertPyramidDungeon = new Dungeon(DungeonGenerator.generateAndReturnMatrix(9), new ArrayList<>(List.of("Werewolf", "Witch", "Giant", "Mummy", "Minotaur")), List.of("excalibur", "angel armor"), "Medusa", "Giant Sand Worm", 4);
+        OceanKingdomDungeon = new Dungeon(DungeonGenerator.generateAndReturnMatrix(11), new ArrayList<>(List.of("Sea Serpent", "Sea Monster", "Sea Witch", "Sea Dragon", "Sea Dragon")), List.of("god slayer hammer", "god slayer armor"), "Leviathan", "Kraken", 5);
     }
 
     public static void startMenu() throws InterruptedException { //main menu and sstart menu text
@@ -316,7 +316,6 @@ public class Main {
     public static void saveSpace(String place) throws InterruptedException { //save game command
         if (savedPlace != null) {
             GameSaveSerialization.saveGame();
-            displaySaveInfo();
             TextEngine.printWithDelays("Game saved!", false);
         }
         savedPlace = place;
@@ -337,22 +336,38 @@ public class Main {
                     OpenWorld.startRoom();
                 case "Village" ->
                     Village.startRoom();
-                case "Meadow Dungeon" ->
+                case "Meadow Dungeon" -> {
                     MeadowDungeon.startRoom("Meadow Dungeon", "Meadow");
-                case "Dark Forest Dungeon" ->
+                    return;
+                }
+                case "Dark Forest Dungeon" -> {
                     DarkForestDungeon.startRoom("Dark Forest Dungeon", "Dark Forest");
-                case "Mountain Cave Dungeon" ->
+                    return;
+                }
+                case "Mountain Cave Dungeon" -> {
                     MountainCaveDungeon.startRoom("Mountain Cave Dungeon", "Mountain Cave");
-                case "Mountain Top Dungeon" ->
+                    return;
+                }
+                case "Mountain Top Dungeon" -> {
                     MountainTopDungeon.startRoom("Mountain Top Dungeon", "Mountain Top");
-                case "Desert Oasis Dungeon" ->
+                    return;
+                }
+                case "Desert Oasis Dungeon" -> {
                     DesertOasisDungeon.startRoom("Desert Oasis Dungeon", "Desert Oasis");
-                case "Desert Plains Dungeon" ->
+                    return;
+                }
+                case "Desert Plains Dungeon" -> {
                     DesertPlainsDungeon.startRoom("Desert Plains Dungeon", "Desert Plains");
-                case "Desert Pyramid Dungeon" ->
+                    return;
+                }
+                case "Desert Pyramid Dungeon" -> {
                     DesertPyramidDungeon.startRoom("Desert Pyramid Dungeon", "Desert Pyramid");
-                case "Ocean Kingdom Dungeon" ->
+                    return;
+                }
+                case "Ocean Kingdom Dungeon" -> {
                     OceanKingdomDungeon.startRoom("Ocean Kingdom Dungeon", "Ocean Kingdom");
+                    return;
+                }
                 default ->
                     startMenu();
             }

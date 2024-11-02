@@ -117,7 +117,7 @@ public abstract class TextEngine {
         }
     }
 
-    public static void printNoDelay(String data, boolean buffer) { //use buffer is you are accepting input after the text is printed
+    public static void printNoDelay(String data, boolean buffer) {
         setWidth();
         if (buffer) {
             data = data + yellowColor + " (press enter to type)" + resetColor;
@@ -136,18 +136,11 @@ public abstract class TextEngine {
                     currentLineWidth = 0;
                 }
             }
+            System.out.print(word + " "); // Print the word followed by a space
+            currentLineWidth += word.length() + 1; // Update the current line width
             if (word.contains("\n")) {
                 currentLineWidth = 0;
             }
-            for (char ch : word.toCharArray()) {
-                System.out.print(ch);
-                currentLineWidth++;
-                if (ch == '\n') {
-                    currentLineWidth = 0;
-                }
-            }
-            System.out.print(' '); // Print the space after the word
-            currentLineWidth++;
         }
         if (data.charAt(data.length() - 1) != '\n' && !buffer) {
             System.out.print('\n');
