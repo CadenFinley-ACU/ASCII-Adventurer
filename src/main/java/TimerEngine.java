@@ -45,6 +45,10 @@ public class TimerEngine {
     }
 
     public String returnTime() {
+        if (elapsedTime != 0) {
+            //not sure if this is the best way to do this
+            savedTime += elapsedTime;
+        }
         hours = ((savedTime) / (1000 * 60 * 60)) % 24;
         minutes = ((savedTime) / (1000 * 60)) % 60;
         seconds = ((savedTime) / 1000) % 60;
