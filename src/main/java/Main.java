@@ -247,26 +247,31 @@ public class Main {
     }
 
     public static void inGameDefaultTextHandling(String data) throws InterruptedException { //default in game commands
-        boolean menuCommandsCheck = switch (Dungeon.currentDungeon) {
-            case "Meadow" ->
-                MeadowDungeon.ableToUseMenuCommands();
-            case "Dark Forest" ->
-                DarkForestDungeon.ableToUseMenuCommands();
-            case "Mountain Cave" ->
-                MountainCaveDungeon.ableToUseMenuCommands();
-            case "Mountain Top" ->
-                MountainTopDungeon.ableToUseMenuCommands();
-            case "Desert Oasis" ->
-                DesertOasisDungeon.ableToUseMenuCommands();
-            case "Desert Plains" ->
-                DesertPlainsDungeon.ableToUseMenuCommands();
-            case "Desert Pyramid" ->
-                DesertPyramidDungeon.ableToUseMenuCommands();
-            case "Ocean Kingdom" ->
-                OceanKingdomDungeon.ableToUseMenuCommands();
-            default ->
-                true;
-        };
+        boolean menuCommandsCheck;
+        if (Dungeon.currentDungeon != null) {
+            menuCommandsCheck = switch (Dungeon.currentDungeon) {
+                case "Meadow" ->
+                    MeadowDungeon.ableToUseMenuCommands();
+                case "Dark Forest" ->
+                    DarkForestDungeon.ableToUseMenuCommands();
+                case "Mountain Cave" ->
+                    MountainCaveDungeon.ableToUseMenuCommands();
+                case "Mountain Top" ->
+                    MountainTopDungeon.ableToUseMenuCommands();
+                case "Desert Oasis" ->
+                    DesertOasisDungeon.ableToUseMenuCommands();
+                case "Desert Plains" ->
+                    DesertPlainsDungeon.ableToUseMenuCommands();
+                case "Desert Pyramid" ->
+                    DesertPyramidDungeon.ableToUseMenuCommands();
+                case "Ocean Kingdom" ->
+                    OceanKingdomDungeon.ableToUseMenuCommands();
+                default ->
+                    true;
+            };
+        } else {
+            menuCommandsCheck = true;
+        }
         if (!menuCommandsCheck) {
             COMMANDS = new String[]{"help", "save", "exit"};
             switch (data.toLowerCase().trim()) {
