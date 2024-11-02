@@ -278,9 +278,8 @@ public class Player {
     private static void playerCreate() throws InterruptedException { //create the player
         String brightBoldEnd = "\033[0m";
         String brightYellowStart = "\033[1;33m";
-
-        TextEngine.printWithDelays("Welcome to the game! What is your name hero?", true);
         while (true) {
+            TextEngine.printWithDelays("Welcome to the game! What is your name hero?", true);
             command = console.readLine();
             if (command != null && !command.isEmpty() && command.length() < 13) {
                 if ("exit".equals(command)) {
@@ -291,7 +290,9 @@ public class Player {
                     break;
                 }
             } else {
-                TextEngine.printWithDelays("Please enter a name.", true);
+                TextEngine.printNoDelay("Invalid Input! Name must be 12 characters or less!", false);
+                TextEngine.enterToNext();
+                TextEngine.clearScreen();
             }
 
         }

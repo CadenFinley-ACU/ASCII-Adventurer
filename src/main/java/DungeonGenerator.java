@@ -600,8 +600,8 @@ public class DungeonGenerator {
                     }
                     // Place enemies at random empty spots
                     if (localDungeon[x][y] == 3) {
-                        if (numberofEnemies < 1) {
-                            numberofEnemies = 1;
+                        if (numberofEnemies < 2) {
+                            numberofEnemies = 2;
                         }
                     }
                     for (int i = 0; i < numberofEnemies && !emptySpots.isEmpty(); i++) {

@@ -924,19 +924,11 @@ public class Dungeon extends Room {
     }
 
     public static void keyRoomSequence() throws InterruptedException {
-        if (numberOfEnemies == 1) {
-            numberOfEnemies = 1;
+        if (numberOfEnemies < 2) {
+            numberOfEnemies = 2;
         }
-        if (numberOfEnemies > 1) {
-            TextEngine.printWithDelays("You have entered a room with " + numberOfEnemies + " " + redColor + enemyType + resetColor + "s in this room!\nYou were ambushed!", false);
-        } else {
-            TextEngine.printWithDelays("You have entered a room with a " + redColor + enemyType + resetColor + " and were ambushed!", false);
-        }
-        if (numberOfEnemies > 1) {
-            TextEngine.printWithDelays("They seem to be trying to protect something...", false);
-        } else {
-            TextEngine.printWithDelays("It seems to be trying to protect something...", false);
-        }
+        TextEngine.printWithDelays("You have entered a room with " + numberOfEnemies + " " + redColor + enemyType + resetColor + "s in this room!\nYou were ambushed!", false);
+        TextEngine.printWithDelays("They seem to be trying to protect something...", false);
         TextEngine.printWithDelays("What is your command? " + yellowColor + "fight" + resetColor + " or " + yellowColor + "run" + resetColor, true);
         while (true) {
             command = Room.console.readLine();
@@ -987,8 +979,6 @@ public class Dungeon extends Room {
 
     public static void fightRandomEnemies() throws InterruptedException {
         if (numberOfEnemies == 0) {
-            TextEngine.printWithDelays("There were no enemies in this room", false);
-            TextEngine.enterToNext();
             switch (currentDungeon) {
                 case "Meadow" -> {
                     MeadowDungeon.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = meadowDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];

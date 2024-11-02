@@ -24,9 +24,11 @@ public class Main {
     public static Map<String, Integer> savedInventory = new HashMap<>();
     public static boolean gameComplete = false;
     public static String[] COMMANDS;
+    public static TimerEngine playTime;
 
     public static void main(String[] args) throws InterruptedException, IOException { //main game start
         TextEngine.clearScreen();
+        playTime = new TimerEngine();
         TextEngine.printNoDelay("Loading...", false);
         if (!hasSave()) {
             TextEngine.printNoDelay("Generating Dungeons...", false);
@@ -115,6 +117,7 @@ public class Main {
     }
 
     public static void startMenu() throws InterruptedException { //main menu and sstart menu text
+        playTime.stopClock();
         TextEngine.clearScreen();
         splashScreen();
         TextEngine.printNoDelay("               by: Albert Tucker, Caden Finley, and Grijesh Shrestha", false);
@@ -292,6 +295,7 @@ public class Main {
     public static void saveSpace(String place) throws InterruptedException { //save game command
         if (savedPlace != null) {
             GameSaveSerialization.saveGame();
+            displaySaveInfo();
             TextEngine.printWithDelays("Game saved!", false);
         }
         savedPlace = place;
@@ -375,6 +379,7 @@ public class Main {
     }
 
     public static void start() throws InterruptedException { //start the game
+        playTime.startClock();
         TextEngine.clearScreen();
         if (hasSave() && Player.getName() != null && !"null".equals(Player.getName())) {
             promptLoadSavedGame();
@@ -387,6 +392,7 @@ public class Main {
     }
 
     private static void promptLoadSavedGame() throws InterruptedException { //prompt to load saved game
+        displaySaveInfo();
         TextEngine.printWithDelays("Would you like to load your saved game? (" + yellowColor + "yes" + resetColor + " or " + yellowColor + "no" + resetColor + ") ", true);
         command = console.readLine();
         if (command.toLowerCase().equals("no")) {
@@ -477,5 +483,14 @@ public class Main {
         TextEngine.enterToNext();
         TextEngine.clearScreen();
         startMenu();
+    }
+
+    private static void displaySaveInfo() {
+        TextEngine.printNoDelay("Name: " + Player.getName(), false);
+        TextEngine.printNoDelay("Play time: " + playTime.returnTime(), false);
+        TextEngine.printNoDelay("Location: " + getSavedPlace(), false);
+        TextEngine.printNoDelay("Health: " + Player.getHealth() + "/" + Player.getMaxHealth(), false);
+        TextEngine.printNoDelay("Gold: " + Player.getGold(), false);
+        TextEngine.printNoDelay("Completed Dungeons: " + Dungeon.completedDungeons, false);
     }
 }

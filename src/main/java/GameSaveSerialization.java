@@ -179,7 +179,8 @@ public class GameSaveSerialization {
         writeSeparator(filePath);
         writeValue(String.valueOf(PromptEngine.promptLength), filePath);
         writeSeparator(filePath);
-
+        writeValue(String.valueOf(Main.playTime.getElapsedTime() + Main.playTime.getSavedTime()), filePath);
+        writeSeparator(filePath);
         //do this after all other data is saved
         serializeAllLines(filePath, filePath);
     }
@@ -338,6 +339,9 @@ public class GameSaveSerialization {
                 PromptEngine.aiGenerationEnabled = Boolean.parseBoolean(reader.readLine());
                 buffer = reader.readLine();
                 PromptEngine.promptLength = Integer.parseInt(reader.readLine());
+                buffer = reader.readLine();
+                Main.playTime.setSavedTime(Long.parseLong(reader.readLine()));
+                buffer = reader.readLine();
 
             } catch (IOException | NumberFormatException e) {
                 System.out.println("Save File Corrupt or Invalid... ");
@@ -346,7 +350,6 @@ public class GameSaveSerialization {
                 TextEngine.clearScreen();
                 Main.wipeSave();
                 Main.startMenu();
-
             }
         } catch (Exception e) {
             System.out.println("Save File Not Found... ");
