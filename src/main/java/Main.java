@@ -247,7 +247,27 @@ public class Main {
     }
 
     public static void inGameDefaultTextHandling(String data) throws InterruptedException { //default in game commands
-        if (!MeadowDungeon.ableToUseMenuCommands() && !DarkForestDungeon.ableToUseMenuCommands() && !MountainCaveDungeon.ableToUseMenuCommands() && !MountainTopDungeon.ableToUseMenuCommands() && !DesertOasisDungeon.ableToUseMenuCommands() && !DesertPlainsDungeon.ableToUseMenuCommands() && !DesertPyramidDungeon.ableToUseMenuCommands() && !OceanKingdomDungeon.ableToUseMenuCommands()) {
+        boolean menuCommandsCheck = switch (Dungeon.currentDungeon) {
+            case "Meadow Dungeon" ->
+                MeadowDungeon.ableToUseMenuCommands();
+            case "Dark Forest Dungeon" ->
+                DarkForestDungeon.ableToUseMenuCommands();
+            case "Mountain Cave Dungeon" ->
+                MountainCaveDungeon.ableToUseMenuCommands();
+            case "Mountain Top Dungeon" ->
+                MountainTopDungeon.ableToUseMenuCommands();
+            case "Desert Oasis Dungeon" ->
+                DesertOasisDungeon.ableToUseMenuCommands();
+            case "Desert Plains Dungeon" ->
+                DesertPlainsDungeon.ableToUseMenuCommands();
+            case "Desert Pyramid Dungeon" ->
+                DesertPyramidDungeon.ableToUseMenuCommands();
+            case "Ocean Kingdom Dungeon" ->
+                OceanKingdomDungeon.ableToUseMenuCommands();
+            default ->
+                true;
+        };
+        if (!menuCommandsCheck) {
             COMMANDS = new String[]{"help", "save", "exit"};
             switch (data.toLowerCase().trim()) {
                 case "help" ->

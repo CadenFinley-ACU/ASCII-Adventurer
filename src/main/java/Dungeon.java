@@ -698,9 +698,7 @@ public class Dungeon extends Room {
         if ("OpenWorld".equals(Main.getSavedPlace()) || "Village".equals(Main.getSavedPlace()) || "SpawnRoom".equals(Main.getSavedPlace())) {
             return true;
         }
-        boolean enemyRoomCheck = this.roomsBeenTo[this.currentPostion[0]][this.currentPostion[1]] == 0 && this.map[this.currentPostion[0]][this.currentPostion[1]] == 1;
-        boolean inShopRoom = this.map[this.currentPostion[0]][this.currentPostion[1]] == 6;
-        return !enemyRoomCheck && !inShopRoom;
+        return !(this.map[currentPostion[0]][currentPostion[1]] == 1 && this.roomsBeenTo[currentPostion[0]][currentPostion[1]] == 0) && this.map[currentPostion[0]][currentPostion[1]] != 6;
     }
 
     public void dungeonIntroText() throws InterruptedException {
