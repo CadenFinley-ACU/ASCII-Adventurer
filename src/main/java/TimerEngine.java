@@ -50,7 +50,7 @@ public class TimerEngine {
         hours = ((savedTime) / (1000 * 60 * 60)) % 24;
         minutes = ((savedTime) / (1000 * 60)) % 60;
         seconds = ((savedTime) / 1000) % 60;
-        return String.format("%02d:%02d", hours, minutes);
+        return String.format("%02d:%02d:%02d", hours, minutes, seconds);
     }
 
     public long getElapsedTime() {
