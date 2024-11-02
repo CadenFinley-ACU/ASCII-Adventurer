@@ -267,7 +267,7 @@ public class Main {
             default ->
                 true;
         };
-        if (!menuCommandsCheck) {
+        if (menuCommandsCheck) {
             COMMANDS = new String[]{"help", "save", "exit"};
             switch (data.toLowerCase().trim()) {
                 case "help" ->

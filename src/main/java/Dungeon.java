@@ -28,7 +28,7 @@ public class Dungeon extends Room {
 
     public static List<String> missedItems = new ArrayList<>();
 
-    private int[] currentPostion;
+    private int[] currentPosition;
     private int[] lastPosition; // Variable to store the last position
 
     private final String currentMiniBoss;
@@ -67,11 +67,11 @@ public class Dungeon extends Room {
             this.fresh();
             this.items = this.itemsOrigin;
             this.visited = true;
-            this.currentPostion = DungeonGenerator.findValue(this.map, 9);
+            this.currentPosition = DungeonGenerator.findValue(this.map, 9);
             this.roomsBeenTo = DungeonGenerator.createRoomsBeenTo(this.map.length);
         }
         if (!roomSave.equals(Main.getSavedPlace())) {
-            this.currentPostion = DungeonGenerator.findValue(this.map, 9);
+            this.currentPosition = DungeonGenerator.findValue(this.map, 9);
         }
         this.spawnPosition = DungeonGenerator.findValue(this.map, 9);
         room = roomSave;
@@ -87,7 +87,7 @@ public class Dungeon extends Room {
         this.visited = false;
         this.completed = false;
         this.spawnPosition = DungeonGenerator.findValue(this.map, 9);
-        this.currentPostion = this.spawnPosition;
+        this.currentPosition = this.spawnPosition;
         this.roomsBeenTo = DungeonGenerator.createRoomsBeenTo(this.map.length);
         this.lastPosition = this.spawnPosition.clone();
     }
@@ -97,37 +97,37 @@ public class Dungeon extends Room {
         enemyType = enemies.get(rand.nextInt(enemies.size()));
         availableMove = null;
         Main.screenRefresh();
-        DungeonGenerator.drawRoom(this.map, this.roomsBeenTo, this.currentPostion[0], this.currentPostion[1], numberOfEnemies, this.mapRevealed, this.currentMiniBoss, this.currentBoss, this.lastPosition);
+        DungeonGenerator.drawRoom(this.map, this.roomsBeenTo, this.currentPosition[0], this.currentPosition[1], numberOfEnemies, this.mapRevealed, this.currentMiniBoss, this.currentBoss, this.lastPosition);
         directionsString = new ArrayList<>();
-        if (this.map[this.currentPostion[0]][this.currentPostion[1]] == 9 && this.roomsBeenTo[this.currentPostion[0]][this.currentPostion[1]] == 0) {
+        if (this.map[this.currentPosition[0]][this.currentPosition[1]] == 9 && this.roomsBeenTo[this.currentPosition[0]][this.currentPosition[1]] == 0) {
             this.dungeonIntroText();
         }
-        if (this.map[this.currentPostion[0]][this.currentPostion[1]] == 2 && this.roomsBeenTo[this.currentPostion[0]][this.currentPostion[1]] == 0) {
+        if (this.map[this.currentPosition[0]][this.currentPosition[1]] == 2 && this.roomsBeenTo[this.currentPosition[0]][this.currentPosition[1]] == 0) {
             this.itemRoom(items);
         }
-        if (this.map[this.currentPostion[0]][this.currentPostion[1]] == 10 && this.roomsBeenTo[this.currentPostion[0]][this.currentPostion[1]] == 0) {
+        if (this.map[this.currentPosition[0]][this.currentPosition[1]] == 10 && this.roomsBeenTo[this.currentPosition[0]][this.currentPosition[1]] == 0) {
             this.fairyRoom();
         }
-        if (this.map[this.currentPostion[0]][this.currentPostion[1]] == 3 && this.roomsBeenTo[this.currentPostion[0]][this.currentPostion[1]] == 0) {
+        if (this.map[this.currentPosition[0]][this.currentPosition[1]] == 3 && this.roomsBeenTo[this.currentPosition[0]][this.currentPosition[1]] == 0) {
             this.keyRoomSequence();
         }
-        if (this.map[this.currentPostion[0]][this.currentPostion[1]] == 5 && this.roomsBeenTo[this.currentPostion[0]][this.currentPostion[1]] == 0) {
+        if (this.map[this.currentPosition[0]][this.currentPosition[1]] == 5 && this.roomsBeenTo[this.currentPosition[0]][this.currentPosition[1]] == 0) {
             this.keyRoom();
         }
-        if (this.map[this.currentPostion[0]][this.currentPostion[1]] == 7 && this.roomsBeenTo[this.currentPostion[0]][this.currentPostion[1]] == 0) {
+        if (this.map[this.currentPosition[0]][this.currentPosition[1]] == 7 && this.roomsBeenTo[this.currentPosition[0]][this.currentPosition[1]] == 0) {
             this.heartContainerRoom();
         }
-        if (this.map[this.currentPostion[0]][this.currentPostion[1]] == 1 && this.roomsBeenTo[this.currentPostion[0]][this.currentPostion[1]] == 0) {
+        if (this.map[this.currentPosition[0]][this.currentPosition[1]] == 1 && this.roomsBeenTo[this.currentPosition[0]][this.currentPosition[1]] == 0) {
             this.fightRandomEnemies();
         }
-        if (this.map[this.currentPostion[0]][this.currentPostion[1]] == 6) {
-            this.roomsBeenTo[this.currentPostion[0]][this.currentPostion[1]] = this.map[this.currentPostion[0]][this.currentPostion[1]];
+        if (this.map[this.currentPosition[0]][this.currentPosition[1]] == 6) {
+            this.roomsBeenTo[this.currentPosition[0]][this.currentPosition[1]] = this.map[this.currentPosition[0]][this.currentPosition[1]];
             this.dungeonShop();
         }
-        if (this.map[this.currentPostion[0]][this.currentPostion[1]] == 4 && this.roomsBeenTo[this.currentPostion[0]][this.currentPostion[1]] == 0) {
+        if (this.map[this.currentPosition[0]][this.currentPosition[1]] == 4 && this.roomsBeenTo[this.currentPosition[0]][this.currentPosition[1]] == 0) {
             this.miniBossSequence();
         }
-        if (this.map[this.currentPostion[0]][this.currentPostion[1]] == 8 && this.roomsBeenTo[this.currentPostion[0]][this.currentPostion[1]] == 0) {
+        if (this.map[this.currentPosition[0]][this.currentPosition[1]] == 8 && this.roomsBeenTo[this.currentPosition[0]][this.currentPosition[1]] == 0) {
             this.bossRoom();
         }
         handleDirectionsAndCommands();
@@ -135,8 +135,8 @@ public class Dungeon extends Room {
 
     public void handleDirectionsAndCommands() throws InterruptedException {
         Main.screenRefresh();
-        DungeonGenerator.drawRoom(this.map, this.roomsBeenTo, this.currentPostion[0], this.currentPostion[1], 0, this.mapRevealed, this.currentMiniBoss, this.currentBoss, this.lastPosition);
-        this.availableMove = DungeonGenerator.getDirections(this.map, this.currentPostion[0], this.currentPostion[1]);
+        DungeonGenerator.drawRoom(this.map, this.roomsBeenTo, this.currentPosition[0], this.currentPosition[1], 0, this.mapRevealed, this.currentMiniBoss, this.currentBoss, this.lastPosition);
+        this.availableMove = DungeonGenerator.getDirections(this.map, this.currentPosition[0], this.currentPosition[1]);
         if (this.completed) {
             TextEngine.printWithDelays("You have completed this dungeon. You can now type " + yellowColor + "leave" + resetColor + " to exit this dungeon.", false);
         }
@@ -177,9 +177,9 @@ public class Dungeon extends Room {
             switch (this.direction.toLowerCase().trim()) {
                 case "north", "1" -> {
                     if (this.directionsString.contains(this.direction.toLowerCase())) {
-                        this.lastPosition = this.currentPostion.clone(); // Save the current position before moving
-                        this.roomsBeenTo[this.currentPostion[0]][this.currentPostion[1]] = this.map[this.currentPostion[0]][this.currentPostion[1]];
-                        this.currentPostion[0] -= 1;
+                        this.lastPosition = this.currentPosition.clone(); // Save the current position before moving
+                        this.roomsBeenTo[this.currentPosition[0]][this.currentPosition[1]] = this.map[this.currentPosition[0]][this.currentPosition[1]];
+                        this.currentPosition[0] -= 1;
                         Main.loadSave();
                     } else {
                         this.defaultDungeonArgs(this.direction.toLowerCase());
@@ -187,9 +187,9 @@ public class Dungeon extends Room {
                 }
                 case "east", "2" -> {
                     if (this.directionsString.contains(this.direction.toLowerCase())) {
-                        this.lastPosition = this.currentPostion.clone(); // Save the current position before moving
-                        this.roomsBeenTo[this.currentPostion[0]][this.currentPostion[1]] = this.map[this.currentPostion[0]][this.currentPostion[1]];
-                        this.currentPostion[1] += 1;
+                        this.lastPosition = this.currentPosition.clone(); // Save the current position before moving
+                        this.roomsBeenTo[this.currentPosition[0]][this.currentPosition[1]] = this.map[this.currentPosition[0]][this.currentPosition[1]];
+                        this.currentPosition[1] += 1;
                         Main.loadSave();
                     } else {
                         this.defaultDungeonArgs(this.direction.toLowerCase());
@@ -197,9 +197,9 @@ public class Dungeon extends Room {
                 }
                 case "south", "3" -> {
                     if (this.directionsString.contains(this.direction.toLowerCase())) {
-                        this.lastPosition = this.currentPostion.clone(); // Save the current position before moving
-                        this.roomsBeenTo[this.currentPostion[0]][this.currentPostion[1]] = this.map[this.currentPostion[0]][this.currentPostion[1]];
-                        this.currentPostion[0] += 1;
+                        this.lastPosition = this.currentPosition.clone(); // Save the current position before moving
+                        this.roomsBeenTo[this.currentPosition[0]][this.currentPosition[1]] = this.map[this.currentPosition[0]][this.currentPosition[1]];
+                        this.currentPosition[0] += 1;
                         Main.loadSave();
                     } else {
                         this.defaultDungeonArgs(this.direction.toLowerCase());
@@ -207,9 +207,9 @@ public class Dungeon extends Room {
                 }
                 case "west", "4" -> {
                     if (this.directionsString.contains(this.direction.toLowerCase())) {
-                        this.lastPosition = this.currentPostion.clone(); // Save the current position before moving
-                        this.roomsBeenTo[this.currentPostion[0]][this.currentPostion[1]] = this.map[this.currentPostion[0]][this.currentPostion[1]];
-                        this.currentPostion[1] -= 1;
+                        this.lastPosition = this.currentPosition.clone(); // Save the current position before moving
+                        this.roomsBeenTo[this.currentPosition[0]][this.currentPosition[1]] = this.map[this.currentPosition[0]][this.currentPosition[1]];
+                        this.currentPosition[1] -= 1;
                         Main.loadSave();
                     } else {
                         this.defaultDungeonArgs(this.direction.toLowerCase());
@@ -217,9 +217,9 @@ public class Dungeon extends Room {
                 }
                 case "boss room", "5" -> {
                     if (this.directionsString.contains(this.direction.toLowerCase()) && this.confirmBossContinue()) {
-                        this.lastPosition = this.currentPostion.clone(); // Save the current position before moving
-                        this.roomsBeenTo[this.currentPostion[0]][this.currentPostion[1]] = this.map[this.currentPostion[0]][this.currentPostion[1]];
-                        this.currentPostion = DungeonGenerator.findValue(this.map, 8);
+                        this.lastPosition = this.currentPosition.clone(); // Save the current position before moving
+                        this.roomsBeenTo[this.currentPosition[0]][this.currentPosition[1]] = this.map[this.currentPosition[0]][this.currentPosition[1]];
+                        this.currentPosition = DungeonGenerator.findValue(this.map, 8);
                         Main.loadSave();
                     } else {
                         this.defaultDungeonArgs(this.direction.toLowerCase());
@@ -249,7 +249,7 @@ public class Dungeon extends Room {
                     Main.screenRefresh();
                     TextEngine.printWithDelays("You open your map and see the following:\n", false);
                     System.out.println();
-                    DungeonGenerator.printAdjacentRoomsAndCurrentRoomAndUnlockedRooms(this.map, this.roomsBeenTo, this.currentPostion, this.mapRevealed);
+                    DungeonGenerator.printAdjacentRoomsAndCurrentRoomAndUnlockedRooms(this.map, this.roomsBeenTo, this.currentPosition, this.mapRevealed);
                     System.out.println();
                     TextEngine.enterToNext();
                     Main.loadSave();
@@ -698,26 +698,26 @@ public class Dungeon extends Room {
         if ("OpenWorld".equals(Main.getSavedPlace()) || "Village".equals(Main.getSavedPlace()) || "SpawnRoom".equals(Main.getSavedPlace())) {
             return true;
         }
-        return !(this.map[currentPostion[0]][currentPostion[1]] == 1 && this.roomsBeenTo[currentPostion[0]][currentPostion[1]] == 0) && this.map[currentPostion[0]][currentPostion[1]] != 6;
+        return (!(this.map[this.currentPosition[0]][this.currentPosition[1]] == 3 || this.map[this.currentPosition[0]][this.currentPosition[1]] == 4 || (this.map[this.currentPosition[0]][this.currentPosition[1]] == 1 && this.roomsBeenTo[this.currentPosition[0]][this.currentPosition[1]] == 0)));
     }
 
     public void dungeonIntroText() throws InterruptedException {
         TextEngine.printWithDelays("You have entered " + redColor + "The " + currentDungeon + resetColor + "!", false);
         TextEngine.printWithDelays("To beat the dungeon you must beat the " + redColor + currentBoss + resetColor + "!\nBe on the look out for treasure rooms! They hold some powerful loot.\nYou can always type help to see what commands you have available!\nGood Luck!", false);
         TextEngine.enterToNext();
-        this.roomsBeenTo[this.currentPostion[0]][this.currentPostion[1]] = this.map[this.currentPostion[0]][this.currentPostion[1]];
+        this.roomsBeenTo[this.currentPosition[0]][this.currentPosition[1]] = this.map[this.currentPosition[0]][this.currentPosition[1]];
         Main.loadSave();
     }
 
     public void miniBossSequence() throws InterruptedException {
         TextEngine.printWithDelays("You have entered a room with a mini boss", false);
         Player.changeHealth(Enemy.spawnEnemy(currentMiniBoss, 1));
-        this.map[this.currentPostion[0]][this.currentPostion[1]] = 7;
+        this.map[this.currentPosition[0]][this.currentPosition[1]] = 7;
         Main.loadSave();
     }
 
     public void fairySequence() throws InterruptedException {
-        this.map[this.currentPostion[0]][this.currentPostion[1]] = 10;
+        this.map[this.currentPosition[0]][this.currentPosition[1]] = 10;
         Main.loadSave();
     }
 
@@ -733,13 +733,13 @@ public class Dungeon extends Room {
             switch (command) {
                 case "fight" -> {
                     Player.changeHealth(Enemy.spawnEnemy(enemyType, numberOfEnemies));
-                    this.map[this.currentPostion[0]][this.currentPostion[1]] = 5;
+                    this.map[this.currentPosition[0]][this.currentPosition[1]] = 5;
                     Main.loadSave();
                 }
                 case "run" -> {
                     Player.changeHealth(Enemy.runSpawnEnemy(enemyType, numberOfEnemies));
-                    int[] buffer = this.currentPostion.clone();
-                    this.currentPostion = this.lastPosition.clone(); // Save the current position before moving
+                    int[] buffer = this.currentPosition.clone();
+                    this.currentPosition = this.lastPosition.clone(); // Save the current position before moving
                     this.lastPosition = buffer.clone();
                     Main.loadSave();
                 }
@@ -752,7 +752,7 @@ public class Dungeon extends Room {
 
     public void fightRandomEnemies() throws InterruptedException {
         if (numberOfEnemies == 0) {
-            this.roomsBeenTo[this.currentPostion[0]][this.currentPostion[1]] = this.map[this.currentPostion[0]][this.currentPostion[1]];
+            this.roomsBeenTo[this.currentPosition[0]][this.currentPosition[1]] = this.map[this.currentPosition[0]][this.currentPosition[1]];
             Main.loadSave();
             return;
         }
@@ -767,14 +767,14 @@ public class Dungeon extends Room {
             switch (command) {
                 case "fight" -> {
                     Player.changeHealth(Enemy.spawnEnemy(enemyType, numberOfEnemies));
-                    this.roomsBeenTo[this.currentPostion[0]][this.currentPostion[1]] = this.map[this.currentPostion[0]][this.currentPostion[1]];
+                    this.roomsBeenTo[this.currentPosition[0]][this.currentPosition[1]] = this.map[this.currentPosition[0]][this.currentPosition[1]];
                     Main.loadSave();
                     return;
                 }
                 case "run" -> {
                     Player.changeHealth(Enemy.runSpawnEnemy(enemyType, numberOfEnemies));
-                    int[] buffer = this.currentPostion.clone();
-                    this.currentPostion = this.lastPosition.clone(); // Save the current position before moving
+                    int[] buffer = this.currentPosition.clone();
+                    this.currentPosition = this.lastPosition.clone(); // Save the current position before moving
                     this.lastPosition = buffer.clone();
                     Main.loadSave();
                 }
@@ -787,10 +787,10 @@ public class Dungeon extends Room {
 
     public void heartContainerRoom() throws InterruptedException {
         if (hasItemInRoom("heart container", 1)) {
-            this.roomsBeenTo[this.currentPostion[0]][this.currentPostion[1]] = this.map[this.currentPostion[0]][this.currentPostion[1]];
+            this.roomsBeenTo[this.currentPosition[0]][this.currentPosition[1]] = this.map[this.currentPosition[0]][this.currentPosition[1]];
         } else {
-            int[] buffer = this.currentPostion.clone();
-            this.currentPostion = this.lastPosition.clone(); // Save the current position before moving
+            int[] buffer = this.currentPosition.clone();
+            this.currentPosition = this.lastPosition.clone(); // Save the current position before moving
             this.lastPosition = buffer.clone();
             Main.loadSave();
         }
@@ -798,10 +798,10 @@ public class Dungeon extends Room {
 
     public void keyRoom() throws InterruptedException {
         if (hasItemInRoom("key", 1)) {
-            this.roomsBeenTo[this.currentPostion[0]][this.currentPostion[1]] = this.map[this.currentPostion[0]][this.currentPostion[1]];
+            this.roomsBeenTo[this.currentPosition[0]][this.currentPosition[1]] = this.map[this.currentPosition[0]][this.currentPosition[1]];
         } else {
-            int[] buffer = this.currentPostion.clone();
-            this.currentPostion = this.lastPosition.clone(); // Save the current position before moving
+            int[] buffer = this.currentPosition.clone();
+            this.currentPosition = this.lastPosition.clone(); // Save the current position before moving
             this.lastPosition = buffer.clone();
             Main.loadSave();
         }
@@ -816,12 +816,12 @@ public class Dungeon extends Room {
             switch (command) {
                 case "yes" -> {
                     Player.fairyHeal();
-                    this.roomsBeenTo[this.currentPostion[0]][this.currentPostion[1]] = this.map[this.currentPostion[0]][this.currentPostion[1]];
+                    this.roomsBeenTo[this.currentPosition[0]][this.currentPosition[1]] = this.map[this.currentPosition[0]][this.currentPosition[1]];
                     Main.loadSave();
                 }
                 case "no" -> {
-                    int[] buffer = this.currentPostion.clone();
-                    this.currentPostion = this.lastPosition.clone(); // Save the current position before moving
+                    int[] buffer = this.currentPosition.clone();
+                    this.currentPosition = this.lastPosition.clone(); // Save the current position before moving
                     this.lastPosition = buffer.clone();
                     Main.loadSave();
                 }
@@ -843,15 +843,15 @@ public class Dungeon extends Room {
         if (localItems != null && !localItems.isEmpty()) {
             String randomItem = localItems.get(rand.nextInt(localItems.size()));
             if (hasChestInRoom(randomItem, 1)) {
-                this.roomsBeenTo[this.currentPostion[0]][this.currentPostion[1]] = this.map[this.currentPostion[0]][this.currentPostion[1]];
+                this.roomsBeenTo[this.currentPosition[0]][this.currentPosition[1]] = this.map[this.currentPosition[0]][this.currentPosition[1]];
                 // Ensure items is a mutable collection
                 List<String> mutableItems = new ArrayList<>(this.items);
                 mutableItems.remove(randomItem);
                 this.items = mutableItems;
                 Main.loadSave();
             } else {
-                int[] buffer = this.currentPostion.clone();
-                this.currentPostion = this.lastPosition.clone(); // Save the current position before moving
+                int[] buffer = this.currentPosition.clone();
+                this.currentPosition = this.lastPosition.clone(); // Save the current position before moving
                 this.lastPosition = buffer.clone();
                 Main.loadSave();
             }
@@ -865,7 +865,7 @@ public class Dungeon extends Room {
         Player.changeHealth(Enemy.spawnEnemy(currentBoss, 1));
         TextEngine.printWithDelays("You have defeated the boss and completed the dungeon!", false);
         TextEngine.enterToNext();
-        this.roomsBeenTo[this.currentPostion[0]][this.currentPostion[1]] = this.map[this.currentPostion[0]][this.currentPostion[1]];
+        this.roomsBeenTo[this.currentPosition[0]][this.currentPosition[1]] = this.map[this.currentPosition[0]][this.currentPosition[1]];
         if (!this.completed) {
             completedDungeons++;
             this.completed = true;
@@ -915,7 +915,7 @@ public class Dungeon extends Room {
     }
 
     public int[] getCurrentPosition() {
-        return this.currentPostion;
+        return this.currentPosition;
     }
 
     public int[] getLastPosition() {
@@ -947,7 +947,7 @@ public class Dungeon extends Room {
     }
 
     public void setCurrentPosition(int[] localCurrentPosition) {
-        this.currentPostion = localCurrentPosition;
+        this.currentPosition = localCurrentPosition;
     }
 
     public void setLastPosition(int[] localLastPosition) {
