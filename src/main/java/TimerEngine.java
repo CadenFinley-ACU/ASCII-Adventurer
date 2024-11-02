@@ -39,13 +39,15 @@ public class TimerEngine {
 
     public void stopClock() {
         //System.out.printf("Time elapsed: %02d:%02d:%02d%n", hours, minutes, seconds);
+        savedTime += elapsedTime;
         running = false;
+        elapsedTime = 0;
     }
 
     public String returnTime() {
-        hours = (savedTime / (1000 * 60 * 60)) % 24;
-        minutes = (savedTime / (1000 * 60)) % 60;
-        seconds = (savedTime / 1000) % 60;
+        hours = ((savedTime) / (1000 * 60 * 60)) % 24;
+        minutes = ((savedTime) / (1000 * 60)) % 60;
+        seconds = ((savedTime) / 1000) % 60;
         return String.format("%02d:%02d", hours, minutes);
     }
 

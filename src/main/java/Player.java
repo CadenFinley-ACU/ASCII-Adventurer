@@ -60,6 +60,7 @@ public class Player {
         name = "Debug!";
         Main.playerCreated = true;
         DungeonGenerator.testing = false;
+        Main.playTime.startClock();
         TextEngine.printNoDelay("Where do you want to spawn", false);
         TextEngine.printNoDelay(" 1:SpawnRoom", false);
         TextEngine.printNoDelay(" 2:OpenWorld", false);
@@ -311,6 +312,7 @@ public class Player {
         TextEngine.enterToNext();
         TextEngine.clearScreen();
         Main.playerCreated = true;
+        Main.playTime.startClock();
         Main.saveSpace("SpawnRoom");
         Main.loadSave();
     }
@@ -320,6 +322,7 @@ public class Player {
         TextEngine.clearScreen();
         TextEngine.printNoDelay("Player Stats:", false);
         TextEngine.printNoDelay("Name: " + name, false);
+        TextEngine.printNoDelay("Play Time: " + Main.playTime.returnTime(), false);
         drawHealthBar();
         TextEngine.printNoDelay("Gold: " + gold, false);
         TextEngine.printNoDelay("Damage: " + damage, false);

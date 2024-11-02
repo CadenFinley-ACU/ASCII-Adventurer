@@ -306,6 +306,7 @@ public class Main {
             playerCreated = false;
             Player.playerStart();
         } else {
+            playTime.startClock();
             GameSaveSerialization.saveGame();
             InventoryManager.setStatsToHighestInInventory();
             switch (getSavedPlace()) {
@@ -347,6 +348,7 @@ public class Main {
         Dungeon.generateDungeons();
         PromptEngine.aiGenerationEnabled = false;
         PromptEngine.userAPIKey = null;
+        Main.playTime.setSavedTime(0);
         try {
             FileWriter fwOb = new FileWriter(".runtime.txt", false);
             PrintWriter pwOb = new PrintWriter(fwOb, false);
@@ -379,12 +381,12 @@ public class Main {
     }
 
     public static void start() throws InterruptedException { //start the game
-        playTime.startClock();
         TextEngine.clearScreen();
         if (hasSave() && Player.getName() != null && !"null".equals(Player.getName())) {
             promptLoadSavedGame();
         } else if (playerCreated && Player.getName() != null && !"null".equals(Player.getName())) {
             saveSpace("SpawnRoom");
+            playTime.startClock();
             loadSave();
         } else {
             Player.playerStart();

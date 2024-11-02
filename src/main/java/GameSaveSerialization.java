@@ -186,6 +186,7 @@ public class GameSaveSerialization {
     }
 
     public static void loadGameSave() throws InterruptedException {
+        Main.playTime.setSavedTime(Main.playTime.getSavedTime() + Main.playTime.getElapsedTime());
         String buffer = "";
         deserializeToFile(filePath);
         try (BufferedReader reader = new BufferedReader(new FileReader(runtimePath))) {
