@@ -66,6 +66,10 @@ public class DungeonInstance extends Dungeon {
         startRooms();
     }
 
+    public void setShownMap(){
+        this.roomsBeenTo = DungeonGenerator.createRoomsBeenTo(map.length);
+    }
+
     public void fresh() { //fresh
         mapRevealed = false;
         visited = false;
