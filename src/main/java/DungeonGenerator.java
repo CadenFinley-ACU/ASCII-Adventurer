@@ -571,8 +571,8 @@ public class DungeonGenerator {
         }
     }
 
-    public static void drawRoom(int[][] localDungeon, int[][] visitedRoom, int x, int y, int numberofEnemies, boolean revealed, String currentMiniBoss, String currentBoss, int[] lastPosition) {
-        int[] moves = DungeonGenerator.getDirections(localDungeon, x, y);
+    public static void drawRoom(int[][] localDungeon, int[][] visitedRoom, int x, int y, int numberofEnemies, boolean revealed) {
+        int[] moves = getDirections(localDungeon, x, y);
         //default room layout
         String[][] room = {
             {"┌", "─", "─", "─", "─", "─", "─", "─", "─", "─", "─", "─", "─", "─", "┐"},
@@ -692,7 +692,7 @@ public class DungeonGenerator {
                 case 4 -> {
                     room[2][5] = "P"; // Mini Boss Room
                     String miniBossRender;
-                    switch (currentMiniBoss) {
+                    switch (Dungeon.currentMiniBoss) {
                         case "Golem" ->
                             miniBossRender = "G";
                         case "Forest Guardian" ->
@@ -717,7 +717,7 @@ public class DungeonGenerator {
                 case 8 -> {
                     room[2][5] = "P"; // Boss Room
                     String bossRender;
-                    switch (currentBoss) {
+                    switch (Dungeon.currentBoss) {
                         case "Forest Giant" ->
                             bossRender = "F";
                         case "Forest Spirit" ->
@@ -749,14 +749,14 @@ public class DungeonGenerator {
             }
         }
         //get the last postinon to render the last position icon
-        if (lastPosition != null) {
-            if (x - 1 == lastPosition[0] && y == lastPosition[1]) {
+        if (Dungeon.lastPosition != null) {
+            if (x - 1 == Dungeon.lastPosition[0] && y == Dungeon.lastPosition[1]) {
                 moves[0] = 15;
-            } else if (x + 1 == lastPosition[0] && y == lastPosition[1]) {
+            } else if (x + 1 == Dungeon.lastPosition[0] && y == Dungeon.lastPosition[1]) {
                 moves[1] = 15;
-            } else if (x == lastPosition[0] && y - 1 == lastPosition[1]) {
+            } else if (x == Dungeon.lastPosition[0] && y - 1 == Dungeon.lastPosition[1]) {
                 moves[2] = 15;
-            } else if (x == lastPosition[0] && y + 1 == lastPosition[1]) {
+            } else if (x == Dungeon.lastPosition[0] && y + 1 == Dungeon.lastPosition[1]) {
                 moves[3] = 15;
             }
         }
@@ -1028,8 +1028,9 @@ public class DungeonGenerator {
         }
         System.out.println();
     }
+}
 
-    /*
+/*
  * key
  * 1 = enemy rooms
  * 2 - item rooms
@@ -1042,5 +1043,4 @@ public class DungeonGenerator {
  * 9 - spawn room
  * 10 - fairy rooms
  * 15 - last position
-     */
-}
+ */

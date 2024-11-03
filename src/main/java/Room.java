@@ -39,9 +39,8 @@ public class Room {
                 case "leave it" -> {
                     return false;
                 }
-                default -> {
+                default ->
                     Main.inGameDefaultTextHandling(command);
-                }
             }
         }
     }

@@ -4,9 +4,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -28,24 +26,16 @@ public class Main {
     public static String[] COMMANDS;
     public static TimerEngine playTime;
 
-    public static Dungeon MeadowDungeon;
-    public static Dungeon DarkForestDungeon;
-    public static Dungeon MountainCaveDungeon;
-    public static Dungeon MountainTopDungeon;
-    public static Dungeon DesertOasisDungeon;
-    public static Dungeon DesertPlainsDungeon;
-    public static Dungeon DesertPyramidDungeon;
-    public static Dungeon OceanKingdomDungeon;
-
     public static void main(String[] args) throws InterruptedException, IOException { //main game start
         TextEngine.clearScreen();
         playTime = new TimerEngine();
         TextEngine.printNoDelay("Loading...", false);
-        TextEngine.printNoDelay("Generating Dungeons...", false);
-        TextEngine.printNoDelay("(P.S. if this takes more than ~10 seconds, restart the game.)", false);
-        buildDungeons();
-        TextEngine.printNoDelay("Generated Dungeons!", false);
-        if (hasSave()) {
+        if (!hasSave()) {
+            TextEngine.printNoDelay("Generating Dungeons...", false);
+            TextEngine.printNoDelay("(P.S. if this takes more than ~10 seconds, restart the game.)", false);
+            Dungeon.generateDungeons();
+            TextEngine.printNoDelay("Generated Dungeons!", false);
+        } else {
             TextEngine.printNoDelay("Locating Save File...", false);
             GameSaveSerialization.loadGameSave();
             TextEngine.printNoDelay("Save File Located!", false);
@@ -124,17 +114,6 @@ public class Main {
         InventoryManager.createItem("potion", "heart container", 20);
 
         InventoryManager.createItem("key", "key", 0);
-    }
-
-    public static void buildDungeons() {
-        MeadowDungeon = new Dungeon(DungeonGenerator.generateAndReturnMatrix(5), new ArrayList<>(List.of("Goblin", "Skeleton", "Slime", "Mimic")), List.of("axe", "chainmail set"), "Golem", "Forest Giant", 3);
-        DarkForestDungeon = new Dungeon(DungeonGenerator.generateAndReturnMatrix(6), new ArrayList<>(List.of("Goblin", "Skeleton", "Orc", "Mimic", "Zombie")), List.of("broad sword", "full armor kit"), "Forest Guardian", "Forest Spirit", 4);
-        MountainCaveDungeon = new Dungeon(DungeonGenerator.generateAndReturnMatrix(7), new ArrayList<>(List.of("Troll", "Skeleton", "Orc", "Ghost", "Demon", "Zombie")), List.of("better sword", "ninja armor"), "Elemental", "Wyvern", 5);
-        MountainTopDungeon = new Dungeon(DungeonGenerator.generateAndReturnMatrix(7), new ArrayList<>(List.of("Ghost", "Gargoyle", "Orc", "Vampire", "Demon")), List.of("great sword", "knight armor"), "Minotaur", "Ice Dragon", 7);
-        DesertOasisDungeon = new Dungeon(DungeonGenerator.generateAndReturnMatrix(8), new ArrayList<>(List.of("Werewolf", "Witch", "Giant", "Mummy", "Minotaur")), List.of("master sword", "royal armor"), "Sphinx", "Pheonix", 3);
-        DesertPlainsDungeon = new Dungeon(DungeonGenerator.generateAndReturnMatrix(8), new ArrayList<>(List.of("Orc", "Troll", "Mummy", "Demon")), List.of("legendary sword", "demon armor"), "Cyclops", "Giant Scorpion", 4);
-        DesertPyramidDungeon = new Dungeon(DungeonGenerator.generateAndReturnMatrix(9), new ArrayList<>(List.of("Werewolf", "Witch", "Giant", "Mummy", "Minotaur")), List.of("excalibur", "angel armor"), "Medusa", "Giant Sand Worm", 4);
-        OceanKingdomDungeon = new Dungeon(DungeonGenerator.generateAndReturnMatrix(11), new ArrayList<>(List.of("Sea Serpent", "Sea Monster", "Sea Witch", "Sea Dragon", "Sea Dragon")), List.of("god slayer hammer", "god slayer armor"), "Leviathan", "Kraken", 5);
     }
 
     public static void startMenu() throws InterruptedException { //main menu and sstart menu text
@@ -247,27 +226,7 @@ public class Main {
     }
 
     public static void inGameDefaultTextHandling(String data) throws InterruptedException { //default in game commands
-        boolean menuCommandsCheck = switch (Dungeon.currentDungeon) {
-            case "Meadow" ->
-                MeadowDungeon.ableToUseMenuCommands();
-            case "Dark Forest" ->
-                DarkForestDungeon.ableToUseMenuCommands();
-            case "Mountain Cave" ->
-                MountainCaveDungeon.ableToUseMenuCommands();
-            case "Mountain Top" ->
-                MountainTopDungeon.ableToUseMenuCommands();
-            case "Desert Oasis" ->
-                DesertOasisDungeon.ableToUseMenuCommands();
-            case "Desert Plains" ->
-                DesertPlainsDungeon.ableToUseMenuCommands();
-            case "Desert Pyramid" ->
-                DesertPyramidDungeon.ableToUseMenuCommands();
-            case "Ocean Kingdom" ->
-                OceanKingdomDungeon.ableToUseMenuCommands();
-            default ->
-                true;
-        };
-        if (!menuCommandsCheck) {
+        if (!Dungeon.ableToUseMenuCommands()) {
             COMMANDS = new String[]{"help", "save", "exit"};
             switch (data.toLowerCase().trim()) {
                 case "help" ->
@@ -336,6 +295,7 @@ public class Main {
     public static void saveSpace(String place) throws InterruptedException { //save game command
         if (savedPlace != null) {
             GameSaveSerialization.saveGame();
+            displaySaveInfo();
             TextEngine.printWithDelays("Game saved!", false);
         }
         savedPlace = place;
@@ -356,38 +316,22 @@ public class Main {
                     OpenWorld.startRoom();
                 case "Village" ->
                     Village.startRoom();
-                case "Meadow Dungeon" -> {
-                    MeadowDungeon.startRoom("Meadow Dungeon", "Meadow");
-                    return;
-                }
-                case "Dark Forest Dungeon" -> {
-                    DarkForestDungeon.startRoom("Dark Forest Dungeon", "Dark Forest");
-                    return;
-                }
-                case "Mountain Cave Dungeon" -> {
-                    MountainCaveDungeon.startRoom("Mountain Cave Dungeon", "Mountain Cave");
-                    return;
-                }
-                case "Mountain Top Dungeon" -> {
-                    MountainTopDungeon.startRoom("Mountain Top Dungeon", "Mountain Top");
-                    return;
-                }
-                case "Desert Oasis Dungeon" -> {
-                    DesertOasisDungeon.startRoom("Desert Oasis Dungeon", "Desert Oasis");
-                    return;
-                }
-                case "Desert Plains Dungeon" -> {
-                    DesertPlainsDungeon.startRoom("Desert Plains Dungeon", "Desert Plains");
-                    return;
-                }
-                case "Desert Pyramid Dungeon" -> {
-                    DesertPyramidDungeon.startRoom("Desert Pyramid Dungeon", "Desert Pyramid");
-                    return;
-                }
-                case "Ocean Kingdom Dungeon" -> {
-                    OceanKingdomDungeon.startRoom("Ocean Kingdom Dungeon", "Ocean Kingdom");
-                    return;
-                }
+                case "Meadow Dungeon" ->
+                    MeadowDungeon.startRoom();
+                case "Dark Forest Dungeon" ->
+                    DarkForestDungeon.startRoom();
+                case "Mountain Cave Dungeon" ->
+                    MountainCaveDungeon.startRoom();
+                case "Mountain Top Dungeon" ->
+                    MountainTopDungeon.startRoom();
+                case "Desert Oasis Dungeon" ->
+                    DesertOasisDungeon.startRoom();
+                case "Desert Plains Dungeon" ->
+                    DesertPlainsDungeon.startRoom();
+                case "Desert Pyramid Dungeon" ->
+                    DesertPyramidDungeon.startRoom();
+                case "Ocean Kingdom Dungeon" ->
+                    OceanKingdomDungeon.startRoom();
                 default ->
                     startMenu();
             }
@@ -401,7 +345,7 @@ public class Main {
         Dungeon.resetedAfterWin = false;
         Room.reset("all");
         Player.setName(null);
-        buildDungeons();
+        Dungeon.generateDungeons();
         PromptEngine.aiGenerationEnabled = false;
         PromptEngine.userAPIKey = null;
         Main.playTime.setSavedTime(0);
@@ -426,7 +370,7 @@ public class Main {
         // Check if getSavedPlace() is not null
         // Check if the file game_save.txt exists
         File saveFile = new File(GameSaveSerialization.filePath);
-        return saveFile.exists() || getSavedPlace() != null || Player.getName() != null;
+        return getSavedPlace() != null || saveFile.exists() || Player.getName() != null;
     }
 
     public static void checkSave(String place) throws InterruptedException { //check if there is a save and if that save is where you currently are

@@ -20,8 +20,6 @@ public class PromptEngine {
     public static boolean aiGenerationEnabled = false;
     public static int promptLength = 30;
     private static String prompt = null;
-    public static String lastGeneratedPrompt;
-
     private static final List<String> keywords = Arrays.asList(
             "village", "meadow", "dungeon", "dark forest", "mountain cave", "mountain top",
             "desert pyramid", "desert oasis", "desert plains", "ocean kingdom", "next dungeon",
@@ -32,7 +30,7 @@ public class PromptEngine {
     );
 
     public static void buildPrompt() throws InterruptedException {
-        if ((aiGenerationEnabled && OpenWorld.roomChange()) || prompt == null || prompt.isEmpty()) {
+        if (aiGenerationEnabled) {
             String villageDirection = Player.getCompassDirectionToClosestVillage();
             String nextDungeon = Player.getNextDungeon();
             String dungeonNextDirection = Player.getCompassDirectionToClosestDungeon();
@@ -85,10 +83,7 @@ public class PromptEngine {
                 dungeonPrompt = "The " + nextDungeon + " is to the " + dungeonNextDirection + " and is " + dungeonDistanceGauge + ".";
             }
             prompt = chatGPT("Generate a me a prompt for a text adventure game designed for highschoolers. Always state the direction of the structure if it is given and the distance if it is given. When giving direction do not abbreviate the direction. Do this in around " + promptLength + " words or less using this info: The player is in a " + setting + villagePrompt + dungeonPrompt + ".") + "\n";
-            lastGeneratedPrompt = prompt;
             Main.screenRefresh();
-        } else {
-            prompt = lastGeneratedPrompt;
         }
     }
 
