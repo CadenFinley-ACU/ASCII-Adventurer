@@ -93,6 +93,17 @@ public class Dungeon extends Room {
         OceanKingdomDungeon.setValues();
     }
 
+    public static void setRoomsBeenTo() {
+        MeadowDungeon.setShownMap();
+        DarkForestDungeon.setShownMap();
+        MountainCaveDungeon.setShownMap();
+        MountainTopDungeon.setShownMap();
+        DesertOasisDungeon.setShownMap();
+        DesertPlainsDungeon.setShownMap();
+        DesertPyramidDungeon.setShownMap();
+        OceanKingdomDungeon.setShownMap();
+    }
+
     public static void defaultDungeonArgs(String data) throws InterruptedException { //default dungeon arguments
         switch (data) {
             case "leave" -> {

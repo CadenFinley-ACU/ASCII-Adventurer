@@ -38,6 +38,7 @@ public class Main {
             TextEngine.printNoDelay("(P.S. if this takes more than ~10 seconds, restart the game.)", false);
             Dungeon.generateDungeons();
             Dungeon.setMaps();
+            Dungeon.setRoomsBeenTo();
             TextEngine.printNoDelay("Generated Dungeons!", false);
         } else {
             TextEngine.printNoDelay("Locating Save File...", false);
