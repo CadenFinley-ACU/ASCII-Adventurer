@@ -13,9 +13,6 @@ public class DesertOasisDungeon extends Dungeon {
 
     private static int[] spawnPosition = DungeonGenerator.findValue(Dungeon.desertOasisDungeon, 9);
     private static int[] bossRoom = DungeonGenerator.findValue(Dungeon.desertOasisDungeon, 8);
-    private static String direction;
-    private static int[] availableMove;
-    private static ArrayList<String> directionsString;
     private static final List<String> enemies = new ArrayList<>(List.of("Werewolf", "Witch", "Giant", "Mummy", "Minotaur"));
     private static final Random rand = new Random();
 
@@ -58,10 +55,9 @@ public class DesertOasisDungeon extends Dungeon {
         currentBoss = "Phoenix";
         numberOfEnemies = rand.nextInt(3);
         enemyType = enemies.get(rand.nextInt(enemies.size()));
-        availableMove = null;
+
         Main.screenRefresh();
         DungeonGenerator.drawRoom(desertOasisDungeon, roomsBeenTo, currentPlayerPosition[0], currentPlayerPosition[1], numberOfEnemies, mapRevealed);
-        directionsString = new ArrayList<>();
         if (desertOasisDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] == 2 && roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] == 0) {
             itemRoom(items);
         }
@@ -94,104 +90,5 @@ public class DesertOasisDungeon extends Dungeon {
             bossRoom();
         }
         handleDirectionsAndCommands();
-    }
-
-    public static void handleDirectionsAndCommands() throws InterruptedException {
-        Main.screenRefresh();
-        DungeonGenerator.drawRoom(desertOasisDungeon, roomsBeenTo, currentPlayerPosition[0], currentPlayerPosition[1], 0, mapRevealed);
-        availableMove = DungeonGenerator.getDirections(desertOasisDungeon, currentPlayerPosition[0], currentPlayerPosition[1]);
-        if (completed) {
-            TextEngine.printWithDelays("You have completed this dungeon. You can now type " + yellowColor + "leave" + resetColor + " to exit this dungeon.", false);
-        }
-        System.out.println("Type " + yellowColor + "map" + resetColor + " to see the map.");
-        System.out.println();
-        TextEngine.printWithDelays("You can move in the following directions: ", false);
-        if (availableMove[0] > 0) {
-            if (testIfBossRoom(availableMove[0])) {
-                directionsString.add("boss room");
-            } else {
-                directionsString.add("north");
-            }
-        }
-        if (availableMove[1] > 0) {
-            if (testIfBossRoom(availableMove[1])) {
-                directionsString.add("boss room");
-            } else {
-                directionsString.add("south");
-            }
-        }
-        if (availableMove[2] > 0) {
-            if (testIfBossRoom(availableMove[2])) {
-                directionsString.add("boss room");
-            } else {
-                directionsString.add("west");
-            }
-        }
-        if (availableMove[3] > 0) {
-            if (testIfBossRoom(availableMove[3])) {
-                directionsString.add("boss room");
-            } else {
-                directionsString.add("east");
-            }
-        }
-        TextEngine.printNoDelay(directionsInString(directionsString), true);
-        while (true) {
-            direction = Room.console.readLine();
-            switch (direction.toLowerCase().trim()) {
-                case "north", "1" -> {
-                    if (directionsString.contains(direction.toLowerCase())) {
-                        lastPosition = currentPlayerPosition.clone(); // Save the current position before moving
-                        roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = desertOasisDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
-                        currentPlayerPosition[0] -= 1;
-                        Main.loadSave();
-                    } else {
-                        Dungeon.defaultDungeonArgs(direction.toLowerCase());
-                    }
-                }
-                case "east", "2" -> {
-                    if (directionsString.contains(direction.toLowerCase())) {
-                        lastPosition = currentPlayerPosition.clone(); // Save the current position before moving
-                        roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = desertOasisDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
-                        currentPlayerPosition[1] += 1;
-                        Main.loadSave();
-                    } else {
-                        Dungeon.defaultDungeonArgs(direction.toLowerCase());
-                    }
-                }
-                case "south", "3" -> {
-                    if (directionsString.contains(direction.toLowerCase())) {
-                        lastPosition = currentPlayerPosition.clone(); // Save the current position before moving
-                        roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = desertOasisDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
-                        currentPlayerPosition[0] += 1;
-                        Main.loadSave();
-                    } else {
-                        Dungeon.defaultDungeonArgs(direction.toLowerCase());
-                    }
-                }
-                case "west", "4" -> {
-                    if (directionsString.contains(direction.toLowerCase())) {
-                        lastPosition = currentPlayerPosition.clone(); // Save the current position before moving
-                        roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = desertOasisDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
-                        currentPlayerPosition[1] -= 1;
-                        Main.loadSave();
-                    } else {
-                        Dungeon.defaultDungeonArgs(direction.toLowerCase());
-                    }
-                }
-                case "boss room", "5" -> {
-                    if (confirmBossContinue()) {
-                        lastPosition = currentPlayerPosition.clone(); // Save the current position before moving
-                        roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = desertOasisDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
-                        currentPlayerPosition = bossRoom;
-                        Main.loadSave();
-                    } else {
-                        Main.loadSave();
-                    }
-                }
-                default -> {
-                    Dungeon.defaultDungeonArgs(direction.toLowerCase());
-                }
-            }
-        }
     }
 }

@@ -40,7 +40,7 @@ public class Village extends Room {
                 case "leave village" -> {
                     switch (OpenWorld.saveRoomNumber) {
                         case 74, 67 -> {
-                            TextEngine.printWithDelays("Witch way would you like to leave the village\n you can go west to go to the desert\n or north to the forest", false);
+                            TextEngine.printWithDelays("Which way would you like to leave the village\n you can go west to go to the desert\n or north to the forest", false);
                             TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "north" + resetColor + " or " + yellowColor + "west" + resetColor + " to decide", true);
                             while (true) {
 
@@ -63,7 +63,7 @@ public class Village extends Room {
                             }
                         }
                         case 47, 37 -> {
-                            TextEngine.printWithDelays("Witch way would you like to leave the village\nyou can go north to the ocean kingdom\nor east to the grass plains", false);
+                            TextEngine.printWithDelays("Which way would you like to leave the village\nyou can go north to the ocean kingdom\nor east to the grass plains", false);
                             TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "north" + resetColor + " or " + yellowColor + "east" + resetColor + " to decide", true);
                             while (true) {
 
@@ -86,7 +86,7 @@ public class Village extends Room {
                             }
                         }
                         default -> {
-                            TextEngine.printWithDelays("Witch way would you like to leave the village\n you can go west to stay in the mountain\n or north to the grass plains", false);
+                            TextEngine.printWithDelays("Which way would you like to leave the village\n you can go west to stay in the mountain\n or north to the grass plains", false);
                             TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "south" + resetColor + " or " + yellowColor + "west" + resetColor + " to decide", true);
                             while (true) {
 

@@ -83,36 +83,28 @@ public class Player {
                 command = console.readLine();
                 switch (command) {
                     case "1" -> {
-                        Main.saveSpace("Meadow Dungeon");
-                        Main.loadSave();
+                        MeadowDungeon.startRoom();
                     }
                     case "2" -> {
-                        Main.saveSpace("Dark Forest Dungeon");
-                        Main.loadSave();
+                        DarkForestDungeon.startRoom();
                     }
                     case "3" -> {
-                        Main.saveSpace("Mountain Cave Dungeon");
-                        Main.loadSave();
+                        MountainCaveDungeon.startRoom();
                     }
                     case "4" -> {
-                        Main.saveSpace("Mountain Top Dungeon");
-                        Main.loadSave();
+                        MountainTopDungeon.startRoom();
                     }
                     case "5" -> {
-                        Main.saveSpace("Desert Oasis Dungeon");
-                        Main.loadSave();
+                        DesertOasisDungeon.startRoom();
                     }
                     case "6" -> {
-                        Main.saveSpace("Desert Plains Dungeon");
-                        Main.loadSave();
+                        DesertPlainsDungeon.startRoom();
                     }
                     case "7" -> {
-                        Main.saveSpace("Desert Pyramid Dungeon");
-                        Main.loadSave();
+                        DesertPyramidDungeon.startRoom();
                     }
                     case "8" -> {
-                        Main.saveSpace("Ocean Kingdom Dungeon");
-                        Main.loadSave();
+                        OceanKingdomDungeon.startRoom();
                     }
                     default -> {
                         Main.saveSpace("SpawnRoom");
