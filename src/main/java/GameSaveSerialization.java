@@ -344,15 +344,6 @@ public class GameSaveSerialization {
                 Main.playTime.setSavedTime(Long.parseLong(reader.readLine()));
                 buffer = reader.readLine();
 
-                Dungeon.MeadowDungeon.map = Dungeon.meadowDungeon;
-                Dungeon.DarkForestDungeon.map = Dungeon.darkForestDungeon;
-                Dungeon.MountainCaveDungeon.map = Dungeon.mountainCaveDungeon;
-                Dungeon.MountainTopDungeon.map = Dungeon.mountainTopDungeon;
-                Dungeon.DesertOasisDungeon.map = Dungeon.desertOasisDungeon;
-                Dungeon.DesertPlainsDungeon.map = Dungeon.desertPlainsDungeon;
-                Dungeon.DesertPyramidDungeon.map = Dungeon.desertPyramidDungeon;
-                Dungeon.OceanKingdomDungeon.map = Dungeon.oceanKingdomDungeon;
-
             } catch (IOException | NumberFormatException e) {
                 System.out.println("Save File Corrupt or Invalid... ");
                 TextEngine.printWithDelays("Erasing Save File and Restarting...", false);
