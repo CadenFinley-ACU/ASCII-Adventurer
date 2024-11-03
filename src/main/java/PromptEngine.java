@@ -32,7 +32,7 @@ public class PromptEngine {
     );
 
     public static void buildPrompt() throws InterruptedException {
-        if (aiGenerationEnabled && (OpenWorld.roomChange() || prompt == null || prompt.isEmpty())) {
+        if ((aiGenerationEnabled && OpenWorld.roomChange()) || prompt == null || prompt.isEmpty()) {
             String villageDirection = Player.getCompassDirectionToClosestVillage();
             String nextDungeon = Player.getNextDungeon();
             String dungeonNextDirection = Player.getCompassDirectionToClosestDungeon();
