@@ -253,7 +253,6 @@ public class Dungeon extends Room {
                     TextEngine.printWithDelays("This command will reset" + yellowColor + " ALL " + resetColor + "Dungeons!", false);
                     TextEngine.printWithDelays("Are you sure you want to do this? " + redColor + "yes" + resetColor + " or " + yellowColor + "no" + resetColor, true);
                     while (true) {
-
                         command = Room.console.readLine();
                         switch (command.toLowerCase().trim()) {
                             case "yes" -> {
@@ -342,7 +341,6 @@ public class Dungeon extends Room {
                         TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", feeling a sense of adventure as you leave the open paths behind.\n Ahead, you notice the entrance to the next dungeon lying just to the south, east.\n\n", false);
                     default ->
                         TextEngine.printWithDelays("The Mountain cave is not working Doungeon.java\n\n", false);
-
                 }
             }
             case 3 -> {// The Mountain Top Dungeon
@@ -421,7 +419,6 @@ public class Dungeon extends Room {
         if (Player.inventory.containsKey("key")) {
             TextEngine.printWithDelays("Would you like to unlock the door to the boss room? " + yellowColor + "yes" + resetColor + " or " + yellowColor + "no" + resetColor, true);
             while (true) {
-
                 command = Room.console.readLine();
                 switch (command.toLowerCase().trim()) {
                     case "yes" -> {
@@ -461,7 +458,6 @@ public class Dungeon extends Room {
             case "Meadow", "Dark Forest", "Mountain Cave", "Mountain Top" -> {
                 TextEngine.printNoDelay(yellowColor + "health potion" + resetColor + " ~20 gold\n" + yellowColor + "magic map" + resetColor + " ~50\n" + yellowColor + "K.O. Cannon" + resetColor + " ~3000 gold\nor " + yellowColor + " leave" + resetColor, true);
                 while (true) {
-
                     command = Room.console.readLine();
                     switch (command.toLowerCase().trim()) {
                         case "health potion" -> {
@@ -510,7 +506,6 @@ public class Dungeon extends Room {
             case "Desert Oasis", "Desert Plains", "Desert Pyramid" -> {
                 TextEngine.printNoDelay(yellowColor + "greater health potion" + resetColor + " ~50 gold\n" + yellowColor + "magic map" + resetColor + " ~150\n" + yellowColor + "K.O. Cannon" + resetColor + " ~3000 gold\nor " + yellowColor + " leave" + resetColor, true);
                 while (true) {
-
                     command = Room.console.readLine();
                     switch (command.toLowerCase().trim()) {
                         case "greater health potion" -> {
@@ -559,7 +554,6 @@ public class Dungeon extends Room {
             case "Ocean Kingdom" -> {
                 TextEngine.printNoDelay(yellowColor + "super health potion" + resetColor + " ~75 gold\n" + yellowColor + "magic map" + resetColor + " ~250\n" + yellowColor + "K.O. Cannon" + resetColor + " ~3000 gold\nor " + yellowColor + " leave" + resetColor, true);
                 while (true) {
-
                     command = Room.console.readLine();
                     switch (command.toLowerCase().trim()) {
                         case "super health potion" -> {
@@ -1391,98 +1385,63 @@ public class Dungeon extends Room {
         System.out.println("Type " + yellowColor + "map" + resetColor + " to see the map.");
         System.out.println();
         TextEngine.printWithDelays("You can move in the following directions: ", false);
-        if (availableMove[0] > 0) {
-            if (testIfBossRoom(availableMove[0])) {
-                directionsString.add("boss room");
-            } else {
-                directionsString.add("north");
-            }
-        }
-        if (availableMove[1] > 0) {
-            if (testIfBossRoom(availableMove[1])) {
-                directionsString.add("boss room");
-            } else {
-                directionsString.add("south");
-            }
-        }
-        if (availableMove[2] > 0) {
-            if (testIfBossRoom(availableMove[2])) {
-                directionsString.add("boss room");
-            } else {
-                directionsString.add("west");
-            }
-        }
-        if (availableMove[3] > 0) {
-            if (testIfBossRoom(availableMove[3])) {
-                directionsString.add("boss room");
-            } else {
-                directionsString.add("east");
-            }
-        }
+        addDirections(availableMove);
         TextEngine.printNoDelay(directionsInString(directionsString), true);
         while (true) {
             command = Room.console.readLine();
             switch (command.toLowerCase().trim()) {
-                case "north", "1" -> {
-                    if (directionsString.contains(command.toLowerCase())) {
-                        lastPosition = currentPlayerPosition.clone(); // Save the current position before moving
-                        roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = localDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
-                        currentPlayerPosition[0] -= 1;
-                        break;
-                    } else {
-                        Dungeon.defaultDungeonArgs(command.toLowerCase());
-                    }
-                }
-                case "east", "2" -> {
-                    if (directionsString.contains(command.toLowerCase())) {
-                        lastPosition = currentPlayerPosition.clone(); // Save the current position before moving
-                        roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = localDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
-                        currentPlayerPosition[1] += 1;
-                        break;
-                    } else {
-                        Dungeon.defaultDungeonArgs(command.toLowerCase());
-                    }
-                }
-                case "south", "3" -> {
-                    if (directionsString.contains(command.toLowerCase())) {
-                        lastPosition = currentPlayerPosition.clone(); // Save the current position before moving
-                        roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = localDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
-                        currentPlayerPosition[0] += 1;
-                        break;
-                    } else {
-                        Dungeon.defaultDungeonArgs(command.toLowerCase());
-                    }
-                }
-                case "west", "4" -> {
-                    if (directionsString.contains(command.toLowerCase())) {
-                        lastPosition = currentPlayerPosition.clone(); // Save the current position before moving
-                        roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = localDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
-                        currentPlayerPosition[1] -= 1;
-                        break;
-                    } else {
-                        Dungeon.defaultDungeonArgs(command.toLowerCase());
-                    }
-                }
+                case "north", "1" ->
+                    movePlayer(command.toLowerCase(), new int[]{-1, 0}, roomsBeenTo, localDungeon);
+                case "east", "2" ->
+                    movePlayer(command.toLowerCase(), new int[]{0, 1}, roomsBeenTo, localDungeon);
+                case "south", "3" ->
+                    movePlayer(command.toLowerCase(), new int[]{1, 0}, roomsBeenTo, localDungeon);
+                case "west", "4" ->
+                    movePlayer(command.toLowerCase(), new int[]{0, -1}, roomsBeenTo, localDungeon);
                 case "boss room", "5" -> {
                     if (confirmBossContinue()) {
                         lastPosition = currentPlayerPosition.clone(); // Save the current position before moving
                         roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = localDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
                         currentPlayerPosition = DungeonGenerator.findValue(localDungeon, 8);
-                        break;
+                        changeDungeonRoomsBeenTo(roomsBeenTo);
+                        Main.loadSave();
                     } else {
-                        Dungeon.defaultDungeonArgs(command.toLowerCase());
+                        Main.loadSave();
                     }
                 }
-                default -> {
+                default ->
                     Dungeon.defaultDungeonArgs(command.toLowerCase());
-                }
             }
-            changeDungeonRoomsBeenTo(roomsBeenTo);
-            Main.loadSave();
         }
     }
 
-    private static void changeDungeonRoomsBeenTo(int[][] changedRoomsBeenTo) throws InterruptedException {
+    private static void addDirections(int[] availableMove) {
+        String[] directions = {"north", "south", "west", "east"};
+        for (int i = 0; i < availableMove.length; i++) {
+            if (availableMove[i] > 0) {
+                if (testIfBossRoom(availableMove[i])) {
+                    directionsString.add("boss room");
+                } else {
+                    directionsString.add(directions[i]);
+                }
+            }
+        }
+    }
+
+    private static void movePlayer(String direction, int[] positionChange, int[][] roomsBeenTo, int[][] localDungeon) throws InterruptedException {
+        if (directionsString.contains(direction)) {
+            lastPosition = currentPlayerPosition.clone(); // Save the current position before moving
+            roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = localDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
+            currentPlayerPosition[0] += positionChange[0];
+            currentPlayerPosition[1] += positionChange[1];
+            changeDungeonRoomsBeenTo(roomsBeenTo);
+            Main.loadSave();
+        } else {
+            Dungeon.defaultDungeonArgs(direction);
+        }
+    }
+
+    private static void changeDungeonRoomsBeenTo(int[][] changedRoomsBeenTo) {
         switch (currentDungeon) {
             case "Meadow" -> {
                 MeadowDungeon.roomsBeenTo = changedRoomsBeenTo;
