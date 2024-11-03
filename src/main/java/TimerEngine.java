@@ -28,6 +28,12 @@ public class TimerEngine {
                 seconds = (elapsedTime / 1000) % 60;
                 minutes = (elapsedTime / 60000) % 60;
                 hours = (elapsedTime / 360000) % 24;
+                // Pause for 1 second
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    System.out.println("Timer interrupted");
+                }
             }
         }).start();
     }
