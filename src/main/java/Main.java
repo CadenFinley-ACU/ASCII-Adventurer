@@ -35,10 +35,16 @@ public class Main {
             TextEngine.printNoDelay("(P.S. if this takes more than ~10 seconds, restart the game.)", false);
             Dungeon.generateDungeons();
             TextEngine.printNoDelay("Generated Dungeons!", false);
+            TextEngine.printNoDelay("Initalizing Dungeons...", false);
+            Dungeon.initalizeDungeons();
+            TextEngine.printNoDelay("Dungeons Initalized!", false);
         } else {
             TextEngine.printNoDelay("Locating Save File...", false);
             GameSaveSerialization.loadGameSave();
             TextEngine.printNoDelay("Save File Located!", false);
+            TextEngine.printNoDelay("Initalizing Dungeons...", false);
+            Dungeon.initalizeDungeons();
+            TextEngine.printNoDelay("Dungeons Initalized!", false);
             if (PromptEngine.aiGenerationEnabled) {
                 TextEngine.printNoDelay("Testing OpenAI API Connection...", false);
                 if (PromptEngine.testAPIKey(PromptEngine.userAPIKey)) {
@@ -195,7 +201,6 @@ public class Main {
 
     private static void exitGame() throws InterruptedException {   //exit game command
         GameSaveSerialization.saveGame();
-        TextEngine.printWithDelays("See ya next time!", false);
         try {
             FileWriter fwOb = new FileWriter(".runtime.txt", false);
             PrintWriter pwOb = new PrintWriter(fwOb, false);
@@ -205,6 +210,7 @@ public class Main {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        TextEngine.printWithDelays("See ya next time!", false);
         TextEngine.enterToNext();
         TextEngine.clearScreen();
         System.exit(0);
@@ -238,7 +244,7 @@ public class Main {
                 case "exit" -> {
                     TextEngine.printWithDelays("Returning to main menu.", false);
                     TextEngine.clearScreen();
-                    GameSaveSerialization.saveGame();
+                    saveSpace(savedPlace);
                     startMenu();
                 }
                 default ->
@@ -262,7 +268,7 @@ public class Main {
                 case "exit" -> {
                     TextEngine.printWithDelays("Returning to main menu.", false);
                     TextEngine.clearScreen();
-                    GameSaveSerialization.saveGame();
+                    saveSpace(savedPlace);
                     startMenu();
                 }
                 case "heal" ->
@@ -317,21 +323,21 @@ public class Main {
                 case "Village" ->
                     Village.startRoom();
                 case "Meadow Dungeon" ->
-                    MeadowDungeon.startRoom();
+                    Dungeon.MeadowDungeon.startRoom();
                 case "Dark Forest Dungeon" ->
-                    DarkForestDungeon.startRoom();
+                    Dungeon.DarkForestDungeon.startRoom();
                 case "Mountain Cave Dungeon" ->
-                    MountainCaveDungeon.startRoom();
+                    Dungeon.MountainCaveDungeon.startRoom();
                 case "Mountain Top Dungeon" ->
-                    MountainTopDungeon.startRoom();
+                    Dungeon.MountainTopDungeon.startRoom();
                 case "Desert Oasis Dungeon" ->
-                    DesertOasisDungeon.startRoom();
+                    Dungeon.DesertOasisDungeon.startRoom();
                 case "Desert Plains Dungeon" ->
-                    DesertPlainsDungeon.startRoom();
+                    Dungeon.DesertPlainsDungeon.startRoom();
                 case "Desert Pyramid Dungeon" ->
-                    DesertPyramidDungeon.startRoom();
+                    Dungeon.DesertPyramidDungeon.startRoom();
                 case "Ocean Kingdom Dungeon" ->
-                    OceanKingdomDungeon.startRoom();
+                    Dungeon.OceanKingdomDungeon.startRoom();
                 default ->
                     startMenu();
             }
@@ -373,7 +379,7 @@ public class Main {
         // Check if getSavedPlace() is not null
         // Check if the file game_save.txt exists
         File saveFile = new File(GameSaveSerialization.filePath);
-        return getSavedPlace() != null && saveFile.exists() && Player.getName() != null;
+        return (getSavedPlace() != null && saveFile.exists()) || Player.getName() != null;
     }
 
     public static void checkSave(String place) throws InterruptedException { //check if there is a save and if that save is where you currently are
