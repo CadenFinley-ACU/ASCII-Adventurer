@@ -765,48 +765,9 @@ public class Dungeon extends Room {
     }
 
     private static void leave() throws InterruptedException {
-        switch (currentDungeon) {
-            case "Meadow" -> {
-                TextEngine.printWithDelays("You leave the shop and return to the Meadow Dungeon.", false);
-                TextEngine.enterToNext();
-                MeadowDungeon.handleDirectionsAndCommands();
-            }
-            case "Dark Forest" -> {
-                TextEngine.printWithDelays("You leave the shop and return to the Dark Forest Dungeon.", false);
-                TextEngine.enterToNext();
-                DarkForestDungeon.handleDirectionsAndCommands();
-            }
-            case "Mountain Cave" -> {
-                TextEngine.printWithDelays("You leave the shop and return to the Mountain Cave Dungeon.", false);
-                TextEngine.enterToNext();
-                MountainCaveDungeon.handleDirectionsAndCommands();
-            }
-            case "Mountain Top" -> {
-                TextEngine.printWithDelays("You leave the shop and return to the Mountain Top Dungeon.", false);
-                TextEngine.enterToNext();
-                MountainTopDungeon.handleDirectionsAndCommands();
-            }
-            case "Desert Oasis" -> {
-                TextEngine.printWithDelays("You leave the shop and return to the Desert Oasis Dungeon.", false);
-                TextEngine.enterToNext();
-                DesertOasisDungeon.handleDirectionsAndCommands();
-            }
-            case "Desert Plains" -> {
-                TextEngine.printWithDelays("You leave the shop and return to the Desert Plains Dungeon.", false);
-                TextEngine.enterToNext();
-                DesertPlainsDungeon.handleDirectionsAndCommands();
-            }
-            case "Desert Pyramid" -> {
-                TextEngine.printWithDelays("You leave the shop and return to the Desert Pyramid Dungeon.", false);
-                TextEngine.enterToNext();
-                DesertPyramidDungeon.handleDirectionsAndCommands();
-            }
-            case "Ocean Kingdom" -> {
-                TextEngine.printWithDelays("You leave the shop and return to the Ocean Kingdom Dungeon.", false);
-                TextEngine.enterToNext();
-                OceanKingdomDungeon.handleDirectionsAndCommands();
-            }
-        }
+        TextEngine.printWithDelays("You leave the shop and return to the " + currentDungeon + " Dungeon.", false);
+        TextEngine.enterToNext();
+        handleDirectionsAndCommands();
     }
 
     private static boolean checkIfCurrentDungeonIsRevealed() {
@@ -1285,8 +1246,46 @@ public class Dungeon extends Room {
                 Main.loadSave();
             }
         } else {
-            fairySequence();
+            switch (currentDungeon) {
+                case "Meadow" -> {
+                    if (DungeonGenerator.numberOfRooms(MeadowDungeon.map, 10) == 0) {
+                        fairySequence();
+                    } else {
+                        trappedRoomSequence();
+                    }
+                }
+            }
         }
+    }
+
+    public static void trappedRoomSequence() throws InterruptedException {
+        switch (currentDungeon) {
+            case "Meadow" -> {
+                meadowDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] = 10;
+            }
+            case "Dark Forest" -> {
+                darkForestDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] = 10;
+            }
+            case "Mountain Cave" -> {
+                mountainCaveDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] = 10;
+            }
+            case "Mountain Top" -> {
+                mountainTopDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] = 10;
+            }
+            case "Desert Oasis" -> {
+                desertOasisDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] = 10;
+            }
+            case "Desert Plains" -> {
+                desertPlainsDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] = 10;
+            }
+            case "Desert Pyramid" -> {
+                desertPyramidDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] = 10;
+            }
+            case "Ocean Kingdom" -> {
+                oceanKingdomDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] = 10;
+            }
+        }
+        Main.loadSave();
     }
 
     public static void bossRoom() throws InterruptedException {
