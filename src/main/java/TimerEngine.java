@@ -21,7 +21,7 @@ public class TimerEngine {
         //System.out.println("Timer started");
         startTime = System.currentTimeMillis();
         running = true;
-        //Start a new thread to display the clock
+        // Start a new thread to display the clock
         new Thread(() -> {
             while (running) {
                 elapsedTime = System.currentTimeMillis() - startTime;
@@ -35,7 +35,6 @@ public class TimerEngine {
                 e.printStackTrace();
             }
         }).start();
-        //elapsedTime = 0;
     }
 
     public void stopClock() {

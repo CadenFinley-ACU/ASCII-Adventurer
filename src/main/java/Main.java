@@ -16,11 +16,8 @@ import java.util.Map;
  */
 public class Main {
 
-    public static final boolean TESTING = true;
-
     static String resetColor = "\033[0m"; // reset to default color
     static String yellowColor = "\033[1;33m"; // yellow color
-    static String redColor = "\033[0;31m"; // red color
     private final static Console console = System.console();
     private static String command;
     public static boolean playerCreated = false;
@@ -41,13 +38,9 @@ public class Main {
     public static Dungeon OceanKingdomDungeon;
 
     public static void main(String[] args) throws InterruptedException, IOException { //main game start
-        if (TESTING) {
-            System.out.println("Running function: main");
-        }
         TextEngine.clearScreen();
-        TextEngine.printNoDelay("Loading...", false);
         playTime = new TimerEngine();
-        TextEngine.setWidth();
+        TextEngine.printNoDelay("Loading...", false);
         TextEngine.printNoDelay("Generating Dungeons...", false);
         TextEngine.printNoDelay("(P.S. if this takes more than ~10 seconds, restart the game.)", false);
         buildDungeons();
@@ -75,9 +68,7 @@ public class Main {
         TextEngine.printNoDelay("Enemies Created!", false);
         TextEngine.printWithDelays("Starting Game!", false);
         startMenu();
-        if (TESTING) {
-            System.out.println(redColor + "Function Complete: main" + resetColor);
-        }
+
     }
 
     private static void createGameItems() { //initalize all the items in the game
@@ -136,9 +127,6 @@ public class Main {
     }
 
     public static void buildDungeons() {
-        if (TESTING) {
-            System.out.println("Running function: buildDungeons");
-        }
         MeadowDungeon = new Dungeon(DungeonGenerator.generateAndReturnMatrix(5), new ArrayList<>(List.of("Goblin", "Skeleton", "Slime", "Mimic")), List.of("axe", "chainmail set"), "Golem", "Forest Giant", 3);
         DarkForestDungeon = new Dungeon(DungeonGenerator.generateAndReturnMatrix(6), new ArrayList<>(List.of("Goblin", "Skeleton", "Orc", "Mimic", "Zombie")), List.of("broad sword", "full armor kit"), "Forest Guardian", "Forest Spirit", 4);
         MountainCaveDungeon = new Dungeon(DungeonGenerator.generateAndReturnMatrix(7), new ArrayList<>(List.of("Troll", "Skeleton", "Orc", "Ghost", "Demon", "Zombie")), List.of("better sword", "ninja armor"), "Elemental", "Wyvern", 5);
@@ -147,15 +135,9 @@ public class Main {
         DesertPlainsDungeon = new Dungeon(DungeonGenerator.generateAndReturnMatrix(8), new ArrayList<>(List.of("Orc", "Troll", "Mummy", "Demon")), List.of("legendary sword", "demon armor"), "Cyclops", "Giant Scorpion", 4);
         DesertPyramidDungeon = new Dungeon(DungeonGenerator.generateAndReturnMatrix(9), new ArrayList<>(List.of("Werewolf", "Witch", "Giant", "Mummy", "Minotaur")), List.of("excalibur", "angel armor"), "Medusa", "Giant Sand Worm", 4);
         OceanKingdomDungeon = new Dungeon(DungeonGenerator.generateAndReturnMatrix(11), new ArrayList<>(List.of("Sea Serpent", "Sea Monster", "Sea Witch", "Sea Dragon", "Sea Dragon")), List.of("god slayer hammer", "god slayer armor"), "Leviathan", "Kraken", 5);
-        if (TESTING) {
-            System.out.println(redColor + "Function Complete: buildDungeons" + resetColor);
-        }
     }
 
     public static void startMenu() throws InterruptedException { //main menu and sstart menu text
-        if (TESTING) {
-            System.out.println("Running function: startMenu");
-        }
         playTime.stopClock();
         TextEngine.clearScreen();
         splashScreen();
@@ -168,68 +150,43 @@ public class Main {
         }
         TextEngine.printWithDelays("What is your command: " + yellowColor + "Start" + resetColor + ", " + yellowColor + "Settings" + resetColor + ", " + yellowColor + "Exit" + resetColor, true);
         handleMenuCommands();
-        if (TESTING) {
-            System.out.println(redColor + "Function Complete: startMenu" + resetColor);
-        }
     }
 
     private static void handleMenuCommands() throws InterruptedException { //main menu command handling
-        if (TESTING) {
-            System.out.println("Running function: handleMenuCommands");
-        }
         while (true) {
             COMMANDS = new String[]{"start", "settings", "exit"};
             command = console.readLine();
             switch (command.toLowerCase().trim()) {
-                case "start":
+                case "start" ->
                     start();
-                    break;
-                case "settings":
+                case "settings" ->
                     SettingsMenu.startFromStartMenu();
-                    break;
-                case "help":
+                case "help" ->
                     displayHelp();
-                    break;
-                case "exit":
+                case "exit" ->
                     exitGame();
-                    break;
-                case "fast":
+                case "fast" ->
                     setTextSpeed("Fast");
-                    break;
-                case "slow":
+                case "slow" ->
                     setTextSpeed("Slow");
-                    break;
-                case "normal":
+                case "normal" ->
                     setTextSpeed("Normal");
-                    break;
-                case "nodelay":
+                case "nodelay" ->
                     setTextSpeed("NoDelay");
-                    break;
-                case "debug":
+                case "debug" ->
                     debugInfo();
-                    break;
-                case "change name":
+                case "change name" ->
                     Player.changeName();
-                    break;
-                case "source code":
+                case "source code" ->
                     showQrCode();
-                    break;
-                default:
+                default ->
                     TextEngine.printWithDelays("I'm sorry, I don't understand that command.", true);
-                    continue;
             }
             COMMANDS = null;
-            break;
-        }
-        if (TESTING) {
-            System.out.println(redColor + "Function Complete: handleMenuCommands" + resetColor);
         }
     }
 
     private static void splashScreen() {
-        if (TESTING) {
-            System.out.println("Running function: slashScreen");
-        }
         String brightBoldEnd = "\033[0m"; // end color
         String darkPurpleStart = "\033[38;2;255;165;0m"; // ACU Purple
         if (getOS_NAME().contains("Mac")) {
@@ -245,30 +202,19 @@ public class Main {
         System.out.println(" / ___ \\ (_| |\\ V /  __/ | | | |_| |_| | | |  __/ |                ");
         System.out.println("/_/   \\_\\__,_| \\_/ \\___|_| |_|\\__|\\__,_|_|  \\___|_|           ");
         System.out.print(brightBoldEnd);
-        if (TESTING) {
-            System.out.println(redColor + "Function Complete: splashScreen" + resetColor);
-        }
+
     }
 
     private static void displayHelp() throws InterruptedException { //main menu help command
-        if (TESTING) {
-            System.out.println("Running function: displayHelp");
-        }
         if (PromptEngine.aiGenerationEnabled && false) {
             PromptEngine.buildHelpPrompt(COMMANDS);
             TextEngine.printWithDelays(PromptEngine.returnPrompt(), false);
         } else {
             TextEngine.printWithDelays("Things you could say:\n" + yellowColor + "stats" + resetColor + " to see your stats\n" + yellowColor + "inventory" + resetColor + " to see your inventory\n" + yellowColor + "heal" + resetColor + " to heal you health using any available healing potions\n" + yellowColor + "settings" + resetColor + " or type " + yellowColor + "save" + resetColor + " to save\n" + yellowColor + "map" + resetColor + " to see the map\n" + yellowColor + "exit" + resetColor + " to return to the main menu.", true);
         }
-        if (TESTING) {
-            System.out.println(redColor + "Function Complete: displayHelp" + resetColor);
-        }
     }
 
     private static void exitGame() throws InterruptedException {   //exit game command
-        if (TESTING) {
-            System.out.println("Running function: exitGame");
-        }
         GameSaveSerialization.saveGame();
         TextEngine.printWithDelays("See ya next time!", false);
         try {
@@ -286,20 +232,11 @@ public class Main {
     }
 
     private static void setTextSpeed(String speed) throws InterruptedException { //set text speed command
-        if (TESTING) {
-            System.out.println("Running function: setTextSpeed");
-        }
         TextEngine.speedSetting = speed;
         TextEngine.printWithDelays("Text speed set to " + speed, true);
-        if (TESTING) {
-            System.out.println(redColor + "Function Complete: setTextSpeed" + resetColor);
-        }
     }
 
     private static void debugInfo() throws InterruptedException { //debug command
-        if (TESTING) {
-            System.out.println("Running function: debugInfo");
-        }
         TextEngine.speedSetting = "NoDelay";
         TextEngine.clearScreen();
         TextEngine.printWithDelays("Using System Property: " + getOS_NAME(), false);
@@ -307,15 +244,9 @@ public class Main {
         TextEngine.printWithDelays("Text Speed: " + TextEngine.speedSetting, false);
         TextEngine.enterToNext();
         Player.debugStart();
-        if (TESTING) {
-            System.out.println(redColor + "Function Complete: debugInfo" + resetColor);
-        }
     }
 
     public static void inGameDefaultTextHandling(String data) throws InterruptedException { //default in game commands
-        if (TESTING) {
-            System.out.println("Running function: inGameDefaultTextHandling");
-        }
         boolean menuCommandsCheck;
         if (Dungeon.currentDungeon != null) {
             menuCommandsCheck = switch (Dungeon.currentDungeon) {
@@ -397,49 +328,25 @@ public class Main {
             }
             COMMANDS = null;
         }
-        if (TESTING) {
-            System.out.println(redColor + "Function Complete: inGameDefaultTextHandling" + resetColor);
-        }
     }
 
     public static void invalidCommandWithBuffer() throws InterruptedException {
-        if (TESTING) {
-            System.out.println("Running function: invalidCommandWithBuffer");
-        }
         TextEngine.printWithDelays("I'm sorry, I don't understand that command.", true);
-        if (TESTING) {
-            System.out.println(redColor + "Function Complete: invalidCommandWithBuffer" + resetColor);
-        }
     }
 
     public static void invalidCommand() throws InterruptedException {
-        if (TESTING) {
-            System.out.println("Running function: invalidCommand");
-        }
         TextEngine.printWithDelays("I'm sorry, I don't understand that command.", false);
-        if (TESTING) {
-            System.out.println(redColor + "Function Complete: invalidCommand" + resetColor);
-        }
     }
 
     public static void saveSpace(String place) throws InterruptedException { //save game command
-        if (TESTING) {
-            System.out.println("Running function: saveSpace");
-        }
         if (savedPlace != null) {
             GameSaveSerialization.saveGame();
             TextEngine.printWithDelays("Game saved!", false);
         }
         savedPlace = place;
-        if (TESTING) {
-            System.out.println(redColor + "Function Complete: saveSpace" + resetColor);
-        }
     }
 
     public static void loadSave() throws InterruptedException { //load saved game command
-        if (TESTING) {
-            System.out.println("Running function: loadSave");
-        }
         if (getSavedPlace() == null) {
             playerCreated = false;
             Player.playerStart();
@@ -490,15 +397,9 @@ public class Main {
                     startMenu();
             }
         }
-        if (TESTING) {
-            System.out.println(redColor + "Function Complete: loadSave" + resetColor);
-        }
     }
 
     public static void wipeSave() throws InterruptedException { //wipe save command
-        if (TESTING) {
-            System.out.println("Running function: wipeSave");
-        }
         playerCreated = false;
         savedPlace = null;
         gameComplete = false;
@@ -520,9 +421,6 @@ public class Main {
         }
         GameSaveSerialization.saveGame();
         Enemy.resetEnemies();
-        if (TESTING) {
-            System.out.println(redColor + "Function Complete: wipeSave" + resetColor);
-        }
     }
 
     public static String getSavedPlace() { //get the saved place
@@ -537,22 +435,13 @@ public class Main {
     }
 
     public static void checkSave(String place) throws InterruptedException { //check if there is a save and if that save is where you currently are
-        if (TESTING) {
-            System.out.println("Running function: checkSave");
-        }
         if (!hasSave() || !getSavedPlace().equals(place)) {
             saveSpace(place);
             GameSaveSerialization.saveGame();
         }
-        if (TESTING) {
-            System.out.println(redColor + "Function Complete: checkSave" + resetColor);
-        }
     }
 
     public static void start() throws InterruptedException { //start the game
-        if (TESTING) {
-            System.out.println("Running function: start");
-        }
         TextEngine.clearScreen();
         if (hasSave() && Player.getName() != null && !"null".equals(Player.getName())) {
             promptLoadSavedGame();
@@ -563,15 +452,9 @@ public class Main {
         } else {
             Player.playerStart();
         }
-        if (TESTING) {
-            System.out.println(redColor + "Function Complete: start" + resetColor);
-        }
     }
 
     private static void promptLoadSavedGame() throws InterruptedException { //prompt to load saved game
-        if (TESTING) {
-            System.out.println("Running function: promptLoadSavedGame");
-        }
         displaySaveInfo();
         TextEngine.printWithDelays("Would you like to load your saved game? (" + yellowColor + "yes" + resetColor + " or " + yellowColor + "no" + resetColor + ") ", true);
         command = console.readLine();
@@ -580,15 +463,9 @@ public class Main {
         } else {
             loadSave();
         }
-        if (TESTING) {
-            System.out.println(redColor + "Function Complete: promptLoadSavedGame" + resetColor);
-        }
     }
 
     private static void confirmWipeSave() throws InterruptedException { //confirm to wipe save
-        if (TESTING) {
-            System.out.println("Running function: confirmWipeSave");
-        }
         String textState = TextEngine.speedSetting;
         TextEngine.speedSetting = "Slow";
         TextEngine.printWithDelays("All data will be wiped if you proceed. (" + yellowColor + "yes" + resetColor + " or " + yellowColor + "no" + resetColor + ") ", false);
@@ -604,15 +481,9 @@ public class Main {
             TextEngine.speedSetting = textState;
             loadSave();
         }
-        if (TESTING) {
-            System.out.println(redColor + "Function Complete: confirmWipeSave" + resetColor);
-        }
     }
 
     public static void printStatus() { //print the status of the player
-        if (TESTING) {
-            System.out.println("Running function: printStatus");
-        }
         if (getSavedPlace() != null) {
             TextEngine.printNoDelay(Player.getName() + "'s adventure through the " + getSavedPlace(), false);
         } else {
@@ -622,28 +493,15 @@ public class Main {
         Player.drawHealthBar();
         //TextEngine.printNoDelay("Gold: " + Player.getGold(), false);
         System.out.println();
-        if (TESTING) {
-            System.out.println(redColor + "Function Complete: printStatus" + resetColor);
-        }
     }
 
     public static void screenRefresh() throws InterruptedException { //refresh the screen
-        if (TESTING) {
-            System.out.println("Running function: screenRefresh");
-        }
         TextEngine.clearScreen();
         printStatus();
-        if (TESTING) {
-            System.out.println(redColor + "Function Complete: screenRefresh" + resetColor);
-        }
     }
 
     public static String getOS_NAME() { //get the os name
-        if (TESTING) {
-            System.out.println("Running function: getOS_NAME");
-        }
         return OS_NAME;
-
     }
 
     public static void showQrCode() throws InterruptedException {
@@ -691,17 +549,11 @@ public class Main {
     }
 
     private static void displaySaveInfo() {
-        if (TESTING) {
-            System.out.println("Running function: displaySaveInfo");
-        }
         TextEngine.printNoDelay("Name: " + Player.getName(), false);
         TextEngine.printNoDelay("Play time: " + playTime.returnTime(), false);
         TextEngine.printNoDelay("Location: " + getSavedPlace(), false);
         TextEngine.printNoDelay("Health: " + Player.getHealth() + "/" + Player.getMaxHealth(), false);
         TextEngine.printNoDelay("Gold: " + Player.getGold(), false);
         TextEngine.printNoDelay("Completed Dungeons: " + Dungeon.completedDungeons, false);
-        if (TESTING) {
-            System.out.println(redColor + "Function Complete: displaySaveInfo" + resetColor);
-        }
     }
 }

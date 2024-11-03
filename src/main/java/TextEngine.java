@@ -24,9 +24,6 @@ public abstract class TextEngine {
     public static int MAX_LINE_WIDTH = 30; // Define the maximum line width
 
     public static int getTerminalWidth() {
-        // if (Main.TESTING) {
-        //     System.out.println("Running function: getTerminalWidth");
-        // }
         ProcessBuilder processBuilder = new ProcessBuilder("sh", "-c", "stty size < /dev/tty");
         processBuilder.redirectErrorStream(true);
         Process process;
@@ -53,9 +50,6 @@ public abstract class TextEngine {
     }
 
     public static void setWidth() {
-        if (Main.TESTING) {
-            System.out.println("Running function: setWidth");
-        }
         int width = getTerminalWidth();
         if (width != -1) {
             MAX_LINE_WIDTH = width;
@@ -65,14 +59,11 @@ public abstract class TextEngine {
     }
 
     public static void printWithDelays(String data, boolean buffer) throws InterruptedException { //use buffer is you are accepting input after the text is printed
-        // if (Main.TESTING) {
-        //     System.out.println("Running function: printWithDelays");
-        // }
-        // if (speedSetting.equals("NoDelay")) {
-        //     printNoDelay(data, buffer);
-        //     return;
-        // }
-        //setWidth();
+        if (speedSetting.equals("NoDelay")) {
+            printNoDelay(data, buffer);
+            return;
+        }
+        setWidth();
         if (buffer) {
             data = data + yellowColor + " (press enter to type)" + resetColor;
         }
@@ -127,10 +118,7 @@ public abstract class TextEngine {
     }
 
     public static void printNoDelay(String data, boolean buffer) {
-        // if (Main.TESTING) {
-        //     System.out.println("Running function: printNoDelay");
-        // }
-        //setWidth();
+        setWidth();
         if (buffer) {
             data = data + yellowColor + " (press enter to type)" + resetColor;
         }
@@ -163,9 +151,6 @@ public abstract class TextEngine {
     }
 
     public static void clearScreen() throws InterruptedException { //clears the screen
-        // if (Main.TESTING) {
-        //     System.out.println("Running function: clearScreen");
-        // }
         String OS_Name = Main.getOS_NAME();
         try {
             if (OS_Name.contains("Windows")) {
@@ -182,17 +167,11 @@ public abstract class TextEngine {
     }
 
     public static void enterToNext() { //adds a pause and waits for enter
-        // if (Main.TESTING) {
-        //     System.out.println("Running function: enterToNext");
-        // }
         printNoDelay(yellowColor + "Press Enter to continue" + resetColor, false);
         console.readLine();
     }
 
     public static Boolean checkValidInput(String command) { //checks for valid input command
-        // if (Main.TESTING) {
-        //     System.out.println("Running function: checkValidInput");
-        // }
         return command != null && !command.isEmpty() && !"".equals(command);
     }
 }
