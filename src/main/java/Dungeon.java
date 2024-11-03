@@ -51,6 +51,9 @@ public class Dungeon extends Room {
     private int[][] map;
 
     public Dungeon(int[][] map, ArrayList<String> enemies, List<String> items, String miniBoss, String boss, int enemiesCount) {
+        if (Main.TESTING) {
+            System.out.println("Running function: Dungeon Constructor on dungeon: " + boss);
+        }
         this.map = map;
         this.spawnPosition = DungeonGenerator.findValue(this.map, 9);
         this.enemies = enemies;
@@ -60,29 +63,40 @@ public class Dungeon extends Room {
         this.currentMiniBoss = miniBoss;
         this.currentBoss = boss;
         this.enemiesCount = enemiesCount;
+        if (Main.TESTING) {
+            System.out.println(redColor + "Function Complete: Dungeon Constructor on dungeon: " + boss + resetColor);
+        }
     }
 
     public void startRoom(String roomSave, String current) throws InterruptedException { //start room
+        if (Main.TESTING) {
+            System.out.println(this.currentBoss + "Running function: startRoom");
+        }
         if (!this.visited) {
             this.fresh();
             this.items = this.itemsOrigin;
             this.visited = true;
             this.currentPosition = DungeonGenerator.findValue(this.map, 9);
             this.roomsBeenTo = DungeonGenerator.createRoomsBeenTo(this.map.length);
+            this.spawnPosition = DungeonGenerator.findValue(this.map, 9);
         }
         if (!roomSave.equals(Main.getSavedPlace())) {
             this.currentPosition = DungeonGenerator.findValue(this.map, 9);
         }
-        this.spawnPosition = DungeonGenerator.findValue(this.map, 9);
         room = roomSave;
         Main.checkSave(room);
         currentDungeon = current;
         GameSaveSerialization.saveGame();
-        Main.screenRefresh();
         this.runRoom();
+        if (Main.TESTING) {
+            System.out.println(redColor + this.currentBoss + "Function Complete: startRoom" + resetColor);
+        }
     }
 
     public void fresh() { //fresh
+        if (Main.TESTING) {
+            System.out.println(this.currentBoss + "Running function: fresh");
+        }
         this.mapRevealed = false;
         this.visited = false;
         this.completed = false;
@@ -90,6 +104,9 @@ public class Dungeon extends Room {
         this.currentPosition = this.spawnPosition;
         this.roomsBeenTo = DungeonGenerator.createRoomsBeenTo(this.map.length);
         this.lastPosition = this.spawnPosition.clone();
+        if (Main.TESTING) {
+            System.out.println(redColor + this.currentBoss + "Function Complete: fresh" + resetColor);
+        }
     }
 
     public void runRoom() throws InterruptedException {
@@ -98,44 +115,46 @@ public class Dungeon extends Room {
         availableMove = null;
         Main.screenRefresh();
         DungeonGenerator.drawRoom(this.map, this.roomsBeenTo, this.currentPosition[0], this.currentPosition[1], numberOfEnemies, this.mapRevealed, this.currentMiniBoss, this.currentBoss, this.lastPosition);
-        directionsString = new ArrayList<>();
-        if (this.map[this.currentPosition[0]][this.currentPosition[1]] == 9 && this.roomsBeenTo[this.currentPosition[0]][this.currentPosition[1]] == 0) {
+        int localCurrentRoom = this.map[this.currentPosition[0]][this.currentPosition[1]];
+        boolean roomNotVisited = this.roomsBeenTo[this.currentPosition[0]][this.currentPosition[1]] == 0;
+        if (localCurrentRoom == 9 && roomNotVisited) {
             this.dungeonIntroText();
-        }
-        if (this.map[this.currentPosition[0]][this.currentPosition[1]] == 2 && this.roomsBeenTo[this.currentPosition[0]][this.currentPosition[1]] == 0) {
+        } else if (localCurrentRoom == 2 && roomNotVisited) {
             this.itemRoom(items);
-        }
-        if (this.map[this.currentPosition[0]][this.currentPosition[1]] == 10 && this.roomsBeenTo[this.currentPosition[0]][this.currentPosition[1]] == 0) {
+        } else if (localCurrentRoom == 10 && roomNotVisited) {
             this.fairyRoom();
-        }
-        if (this.map[this.currentPosition[0]][this.currentPosition[1]] == 3 && this.roomsBeenTo[this.currentPosition[0]][this.currentPosition[1]] == 0) {
+        } else if (localCurrentRoom == 3 && roomNotVisited) {
             this.keyRoomSequence();
-        }
-        if (this.map[this.currentPosition[0]][this.currentPosition[1]] == 5 && this.roomsBeenTo[this.currentPosition[0]][this.currentPosition[1]] == 0) {
+        } else if (localCurrentRoom == 5 && roomNotVisited) {
             this.keyRoom();
-        }
-        if (this.map[this.currentPosition[0]][this.currentPosition[1]] == 7 && this.roomsBeenTo[this.currentPosition[0]][this.currentPosition[1]] == 0) {
+        } else if (localCurrentRoom == 7 && roomNotVisited) {
             this.heartContainerRoom();
-        }
-        if (this.map[this.currentPosition[0]][this.currentPosition[1]] == 1 && this.roomsBeenTo[this.currentPosition[0]][this.currentPosition[1]] == 0) {
+        } else if (localCurrentRoom == 1 && roomNotVisited) {
             this.fightRandomEnemies();
-        }
-        if (this.map[this.currentPosition[0]][this.currentPosition[1]] == 6) {
-            this.roomsBeenTo[this.currentPosition[0]][this.currentPosition[1]] = this.map[this.currentPosition[0]][this.currentPosition[1]];
+        } else if (localCurrentRoom == 6) {
+            this.roomsBeenTo[this.currentPosition[0]][this.currentPosition[1]] = localCurrentRoom;
             this.dungeonShop();
-        }
-        if (this.map[this.currentPosition[0]][this.currentPosition[1]] == 4 && this.roomsBeenTo[this.currentPosition[0]][this.currentPosition[1]] == 0) {
+        } else if (localCurrentRoom == 4 && roomNotVisited) {
             this.miniBossSequence();
-        }
-        if (this.map[this.currentPosition[0]][this.currentPosition[1]] == 8 && this.roomsBeenTo[this.currentPosition[0]][this.currentPosition[1]] == 0) {
+        } else if (localCurrentRoom == 8 && roomNotVisited) {
             this.bossRoom();
         }
         handleDirectionsAndCommands();
+        if (Main.TESTING) {
+            System.out.println(redColor + this.currentBoss + "Function Complete: runRoom" + resetColor);
+        }
     }
 
     public void handleDirectionsAndCommands() throws InterruptedException {
-        Main.screenRefresh();
-        DungeonGenerator.drawRoom(this.map, this.roomsBeenTo, this.currentPosition[0], this.currentPosition[1], 0, this.mapRevealed, this.currentMiniBoss, this.currentBoss, this.lastPosition);
+        if (Main.TESTING) {
+            System.out.println(this.currentBoss + "Running function: handleDirectionsAndCommands");
+        }
+        directionsString = new ArrayList<>();
+        int localCurrentRoom = this.map[this.currentPosition[0]][this.currentPosition[1]];
+        if (localCurrentRoom == 6) {
+            Main.screenRefresh();
+            DungeonGenerator.drawRoom(this.map, this.roomsBeenTo, this.currentPosition[0], this.currentPosition[1], numberOfEnemies, this.mapRevealed, this.currentMiniBoss, this.currentBoss, this.lastPosition);
+        }
         this.availableMove = DungeonGenerator.getDirections(this.map, this.currentPosition[0], this.currentPosition[1]);
         if (this.completed) {
             TextEngine.printWithDelays("You have completed this dungeon. You can now type " + yellowColor + "leave" + resetColor + " to exit this dungeon.", false);
@@ -143,96 +162,61 @@ public class Dungeon extends Room {
         System.out.println("Type " + yellowColor + "map" + resetColor + " to see the map.");
         System.out.println();
         TextEngine.printWithDelays("You can move in the following directions: ", false);
-        if (this.availableMove[0] > 0) {
-            if (this.testIfBossRoom(this.availableMove[0])) {
-                this.directionsString.add("boss room");
-            } else {
-                this.directionsString.add("north");
-            }
-        }
-        if (this.availableMove[1] > 0) {
-            if (this.testIfBossRoom(this.availableMove[1])) {
-                this.directionsString.add("boss room");
-            } else {
-                this.directionsString.add("south");
-            }
-        }
-        if (this.availableMove[2] > 0) {
-            if (this.testIfBossRoom(this.availableMove[2])) {
-                this.directionsString.add("boss room");
-            } else {
-                this.directionsString.add("west");
-            }
-        }
-        if (this.availableMove[3] > 0) {
-            if (this.testIfBossRoom(this.availableMove[3])) {
-                this.directionsString.add("boss room");
-            } else {
-                this.directionsString.add("east");
+        String[] directions = {"north", "south", "west", "east"};
+        for (int i = 0; i < this.availableMove.length; i++) {
+            if (this.availableMove[i] > 0) {
+                if (this.testIfBossRoom(this.availableMove[i])) {
+                    this.directionsString.add("boss room");
+                } else {
+                    this.directionsString.add(directions[i]);
+                }
             }
         }
         TextEngine.printNoDelay(directionsInString(directionsString), true);
         while (true) {
             this.direction = Room.console.readLine();
-            switch (this.direction.toLowerCase().trim()) {
-                case "north", "1" -> {
-                    if (this.directionsString.contains(this.direction.toLowerCase())) {
-                        this.lastPosition = this.currentPosition.clone(); // Save the current position before moving
-                        this.roomsBeenTo[this.currentPosition[0]][this.currentPosition[1]] = this.map[this.currentPosition[0]][this.currentPosition[1]];
-                        this.currentPosition[0] -= 1;
-                        Main.loadSave();
-                    } else {
-                        this.defaultDungeonArgs(this.direction.toLowerCase());
-                    }
-                }
-                case "east", "2" -> {
-                    if (this.directionsString.contains(this.direction.toLowerCase())) {
-                        this.lastPosition = this.currentPosition.clone(); // Save the current position before moving
-                        this.roomsBeenTo[this.currentPosition[0]][this.currentPosition[1]] = this.map[this.currentPosition[0]][this.currentPosition[1]];
-                        this.currentPosition[1] += 1;
-                        Main.loadSave();
-                    } else {
-                        this.defaultDungeonArgs(this.direction.toLowerCase());
-                    }
-                }
-                case "south", "3" -> {
-                    if (this.directionsString.contains(this.direction.toLowerCase())) {
-                        this.lastPosition = this.currentPosition.clone(); // Save the current position before moving
-                        this.roomsBeenTo[this.currentPosition[0]][this.currentPosition[1]] = this.map[this.currentPosition[0]][this.currentPosition[1]];
-                        this.currentPosition[0] += 1;
-                        Main.loadSave();
-                    } else {
-                        this.defaultDungeonArgs(this.direction.toLowerCase());
-                    }
-                }
-                case "west", "4" -> {
-                    if (this.directionsString.contains(this.direction.toLowerCase())) {
-                        this.lastPosition = this.currentPosition.clone(); // Save the current position before moving
-                        this.roomsBeenTo[this.currentPosition[0]][this.currentPosition[1]] = this.map[this.currentPosition[0]][this.currentPosition[1]];
-                        this.currentPosition[1] -= 1;
-                        Main.loadSave();
-                    } else {
-                        this.defaultDungeonArgs(this.direction.toLowerCase());
-                    }
-                }
+            String directionLower = this.direction.toLowerCase().trim();
+            if (!this.directionsString.contains(directionLower)) {
+                this.defaultDungeonArgs(directionLower);
+                continue;
+            }
+            this.lastPosition = this.currentPosition.clone(); // Save the current position before moving
+            this.roomsBeenTo[this.currentPosition[0]][this.currentPosition[1]] = this.map[this.currentPosition[0]][this.currentPosition[1]];
+            directionsString.clear();
+            switch (directionLower) {
+                case "north", "1" ->
+                    this.currentPosition[0] -= 1;
+                case "east", "2" ->
+                    this.currentPosition[1] += 1;
+                case "south", "3" ->
+                    this.currentPosition[0] += 1;
+                case "west", "4" ->
+                    this.currentPosition[1] -= 1;
                 case "boss room", "5" -> {
-                    if (this.directionsString.contains(this.direction.toLowerCase()) && this.confirmBossContinue()) {
-                        this.lastPosition = this.currentPosition.clone(); // Save the current position before moving
-                        this.roomsBeenTo[this.currentPosition[0]][this.currentPosition[1]] = this.map[this.currentPosition[0]][this.currentPosition[1]];
+                    if (this.confirmBossContinue()) {
                         this.currentPosition = DungeonGenerator.findValue(this.map, 8);
-                        Main.loadSave();
                     } else {
-                        this.defaultDungeonArgs(this.direction.toLowerCase());
+                        this.defaultDungeonArgs(directionLower);
+                        continue;
                     }
                 }
                 default -> {
-                    this.defaultDungeonArgs(this.direction.toLowerCase());
+                    this.defaultDungeonArgs(directionLower);
+                    continue;
                 }
             }
+            break;
+        }
+        Main.loadSave();
+        if (Main.TESTING) {
+            System.out.println(redColor + this.currentBoss + "Function Complete: handleDirectionsAndCommands" + resetColor);
         }
     }
 
     public void defaultDungeonArgs(String data) throws InterruptedException { //default dungeon arguments
+        if (Main.TESTING) {
+            System.out.println(this.currentBoss + "Running function: defaultDungeonArgs");
+        }
         switch (data) {
             case "leave" -> {
                 if (this.completed) {
@@ -276,6 +260,7 @@ public class Dungeon extends Room {
                                 Main.checkSave(room);
                                 GameSaveSerialization.saveGame();
                                 Main.loadSave();
+                                break;
                             }
                             default -> {
                                 Main.inGameDefaultTextHandling(data);
@@ -290,9 +275,15 @@ public class Dungeon extends Room {
                 Main.inGameDefaultTextHandling(data);
             }
         }
+        if (Main.TESTING) {
+            System.out.println(redColor + this.currentBoss + "Function Complete: defaultDungeonArgs" + resetColor);
+        }
     }
 
     public static void resetAll() { //reset all dungeons
+        if (Main.TESTING) {
+            System.out.println("Running function: resetAll");
+        }
         Main.MeadowDungeon.fresh();
         Main.DarkForestDungeon.fresh();
         Main.MountainCaveDungeon.fresh();
@@ -305,127 +296,10 @@ public class Dungeon extends Room {
         Main.buildDungeons();
     }
 
-    public static void dungeonCheck() throws InterruptedException {
-        if (OpenWorld.holdCommand == null || OpenWorld.holdCommand.equals("onward") || OpenWorld.holdCommand.equals("null") || OpenWorld.holdCommand.isBlank() || OpenWorld.holdCommand.isEmpty()) {
-            OpenWorld.holdCommand = "onward";
-            TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ".", resetedAfterWin);
-            return;
-        }
-        switch (completedDungeons) {
-            case 0 -> {// the meadow dungeon
-                switch (OpenWorld.roomNumber) {
-                    case 72, 73, 74 ->
-                        TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", feeling a sense of adventure as you leave the open paths behind.\n Ahead, you notice the entrance to the next dungeon lying just to the north, east.\n\n ", false);
-                    case 64, 65, 66, 67, 68, 69 ->
-                        TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", feeling a sense of adventure as you leave the open paths behind.\n Ahead, you notice the entrance to the next dungeon lying just to the east.\n\n", false);
-                    default ->
-                        TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", feeling a sense of adventure as you leave the open paths behind.\n Ahead, you notice the entrance to the next dungeon lying just to the south, east.\n\n", false);
-                }
-            }
-            case 1 -> {// the dark forest dungeon
-                switch (OpenWorld.roomNumber) {
-                    case 72, 73, 74, 64, 65, 66, 67, 68, 69 ->
-                        TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", feeling a sense of adventure as you leave the open paths behind.\n Ahead, you notice the entrance to the next dungeon lying just to the north, east.\n\n", false);
-                    case 55, 27, 57, 58, 59, 60 ->
-                        TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", feeling a sense of adventure as you leave the open paths behind.\n Ahead, you notice the entrance to the next dungeon lying just to the east.\n\n", false);
-                    default ->
-                        TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", feeling a sense of adventure as you leave the open paths behind.\n Ahead, you notice the entrance to the next dungeon lying just to the south, east.\n\n", false);
-                }
-            }
-            case 2 -> {// The Mountain Cave Dungeon
-                switch (OpenWorld.roomNumber) {
-                    case 74, 66, 57, 50, 41, 62 ->
-                        TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", feeling a sense of adventure as you leave the open paths behind.\n Ahead, you notice the entrance to the next dungeon lying just to the north.\n\n", false);
-                    case 33, 34, 35, 36, 42, 43, 44, 45, 51, 52, 53, 54, 58, 59, 60, 67, 68, 69 ->
-                        TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", feeling a sense of adventure as you leave the open paths behind.\n Ahead, you notice the entrance to the next dungeon lying just to the north, west.\n\n", false);
-                    case 21, 22 ->
-                        TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", feeling a sense of adventure as you leave the open paths behind.\n Ahead, you notice the entrance to the next dungeon lying just to the east.\n\n", false);
-                    case 30, 31, 32, 37, 38, 39, 40, 47, 48, 49, 27, 55, 64, 65, 72, 73 ->
-                        TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", feeling a sense of adventure as you leave the open paths behind.\n Ahead, you notice the entrance to the next dungeon lying just to the north, east\n\n", false);
-                    case 17, 18, 19, 13, 14, 15, 9, 10, 11, 5, 6 ->
-                        TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", feeling a sense of adventure as you leave the open paths behind.\n Ahead, you notice the entrance to the next dungeon lying just to the south, west.\n\n", false);
-                    case 4 ->
-                        TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", feeling a sense of adventure as you leave the open paths behind.\n Ahead, you notice the entrance to the next dungeon lying just to the south.\n\n", false);
-                    case 3, 2, 16, 12, 8 ->
-                        TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", feeling a sense of adventure as you leave the open paths behind.\n Ahead, you notice the entrance to the next dungeon lying just to the south, east.\n\n", false);
-                    default ->
-                        TextEngine.printWithDelays("The Mountain cave is not working Doungeon.java\n\n", false);
-
-                }
-            }
-            case 3 -> {// The Mountain Top Dungeon
-                switch (OpenWorld.roomNumber) {
-                    case 2, 3, 4, 5, 6 ->
-                        TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", feeling a sense of adventure as you leave the open paths behind.\n Ahead, you notice the entrance to the next dungeon lying just to the east.\n\n", false);
-                    case 11, 15, 19, 28, 35, 44, 53, 60, 69 ->
-                        TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", feeling a sense of adventure as you leave the open paths behind.\n Ahead, you notice the entrance to the next dungeon lying just to the north.\n\n", false);
-                    case 29, 36, 45, 54 ->
-                        TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", feeling a sense of adventure as you leave the open paths behind.\n Ahead, you notice the entrance to the next dungeon lying just to the north, west.\n\n", false);
-                    default ->
-                        TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", feeling a sense of adventure as you leave the open paths behind.\n Ahead, you notice the entrance to the next dungeon lying just to the north, east.\n\n", false);
-                }
-            }
-            case 4 -> {// The Desert Oasis Dungeon
-                switch (OpenWorld.roomNumber) {
-                    case 72, 73, 74 ->
-                        TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", feeling a sense of adventure as you leave the open paths behind.\n Ahead, you notice the entrance to the next dungeon lying just to the west.\n\n", false);
-                    case 32, 39, 48, 55, 64 ->
-                        TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", feeling a sense of adventure as you leave the open paths behind.\n Ahead, you notice the entrance to the next dungeon lying just to the south.\n\n", false);
-                    case 8, 12, 16, 22, 21, 30, 31, 37, 38, 47 ->
-                        TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", feeling a sense of adventure as you leave the open paths behind.\n Ahead, you notice the entrance to the next dungeon lying just to the south east.\n\n", false);
-                    default ->
-                        TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", feeling a sense of adventure as you leave the open paths behind.\n Ahead, you notice the entrance to the next dungeon lying just to the south, west.\n\n", false);
-                }
-            }
-            case 5 -> {// The Desert Plains Dungeon
-                switch (OpenWorld.roomNumber) {
-                    case 64, 65, 66, 67, 68, 69 ->
-                        TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", feeling a sense of adventure as you leave the open paths behind.\n Ahead, you notice the entrance to the next dungeon lying just to the west.\n\n", false);
-                    case 72, 73, 74 ->
-                        TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", feeling a sense of adventure as you leave the open paths behind.\n Ahead, you notice the entrance to the next dungeon lying just to the north, west.\n\n", false);
-                    case 55, 48, 39, 32 ->
-                        TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", feeling a sense of adventure as you leave the open paths behind.\n Ahead, you notice the entrance to the next dungeon lying just to the south.\n\n", false);
-                    case 8, 12, 16, 22, 31, 38, 47, 21, 30, 37 ->
-                        TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", feeling a sense of adventure as you leave the open paths behind.\n Ahead, you notice the entrance to the next dungeon lying just to the south east.\n\n", false);
-                    default ->
-                        TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", feeling a sense of adventure as you leave the open paths behind.\n Ahead, you notice the entrance to the next dungeon lying just to the south west.\n\n", false);
-                }
-            }
-            case 6 -> {// The Desert Pyramid Dungeon
-                switch (OpenWorld.roomNumber) {
-                    case 55, 27, 57, 58, 59, 60 ->
-                        TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", feeling a sense of adventure as you leave the open paths behind.\n Ahead, you notice the entrance to the next dungeon lying just to the west.\n\n", false);
-                    case 64, 65, 66, 67, 68, 69, 72, 73, 74 ->
-                        TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", feeling a sense of adventure as you leave the open paths behind.\n Ahead, you notice the entrance to the next dungeon lying just to the north, west.\n\n", false);
-                    case 48, 39, 32 ->
-                        TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", feeling a sense of adventure as you leave the open paths behind.\n Ahead, you notice the entrance to the next dungeon lying just to the south.\n\n", false);
-                    case 8, 12, 16, 22, 31, 38, 47, 21, 30, 37 ->
-                        TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", feeling a sense of adventure as you leave the open paths behind.\n Ahead, you notice the entrance to the next dungeon lying just to the south east.\n\n", false);
-                    default ->
-                        TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", feeling a sense of adventure as you leave the open paths behind.\n Ahead, you notice the entrance to the next dungeon lying just to the south west.\n\n", false);
-                }
-            }
-            case 7 -> { // The Ocean Kingdom Dungeon
-                switch (OpenWorld.roomNumber) {
-                    case 8, 12, 16, 22, 31, 38, 47 ->
-                        TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", feeling a sense of adventure as you leave the open paths behind.\n Ahead, you notice the entrance to the next dungeon lying just to the north.\n\n", false);
-                    case 21, 30, 37 ->
-                        TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", feeling a sense of adventure as you leave the open paths behind.\n Ahead, you notice the entrance to the next dungeon lying just to the north, east.\n\n", false);
-                    case 2, 3, 4, 5, 6 ->
-                        TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", feeling a sense of adventure as you leave the open paths behind.\n Ahead, you notice the entrance to the next dungeon lying just to the south.\n\n", false);
-                    default ->
-                        TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", feeling a sense of adventure as you leave the open paths behind.\n Ahead, you notice the entrance to the next dungeon lying just to the north, west.\n\n", false);
-                }
-            }
-            case 8 -> {
-                TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + "\n Congratulations! You have ridded the world of these evil dungeons!\n You have now unlocked the ability to go and rechallenge the old dungeons! ", false);
-            }
-            default ->
-                TextEngine.printWithDelays("this function isnt working right", false);
-        }
-    }
-
     public boolean confirmBossContinue() throws InterruptedException {
+        if (Main.TESTING) {
+            System.out.println(this.currentBoss + "Running function: confirmBossContinue");
+        }
         if (Player.inventory.containsKey("key")) {
             TextEngine.printWithDelays("Would you like to unlock the door to the boss room? " + yellowColor + "yes" + resetColor + " or " + yellowColor + "no" + resetColor, true);
             while (true) {
@@ -458,6 +332,9 @@ public class Dungeon extends Room {
     }
 
     public void dungeonShop() throws InterruptedException {
+        if (Main.TESTING) {
+            System.out.println(this.currentBoss + "Running function: dungeonShop");
+        }
         Main.screenRefresh();
         String localDungeon = currentDungeon;
         TextEngine.printNoDelay("Gold: " + Player.getGold(), false);
@@ -472,6 +349,7 @@ public class Dungeon extends Room {
                     switch (command.toLowerCase().trim()) {
                         case "health potion" -> {
                             buyMultiple("health potion", 20);
+                            break;
                         }
                         case "magic map" -> {
                             if (Player.getGold() >= 50 && !checkIfCurrentDungeonIsRevealed()) {
@@ -610,9 +488,15 @@ public class Dungeon extends Room {
                 }
             }
         }
+        if (Main.TESTING) {
+            System.out.println(redColor + this.currentBoss + "Function Complete: dungeonShop" + resetColor);
+        }
     }
 
     private void buyMultiple(String type, int cost) throws InterruptedException { //buy multiple clause for certain items in village shop
+        if (Main.TESTING) {
+            System.out.println(this.currentBoss + "Running function: buyMultiple");
+        }
         TextEngine.printWithDelays("How many would you like to buy?", true);
         while (true) {
             command = console.readLine();
@@ -630,10 +514,12 @@ public class Dungeon extends Room {
                         Player.changeGold(-totalCost);
                         Player.putItem(type, Integer.parseInt(command));
                         keepShopping();
+                        break;
                     } else {
                         TextEngine.printWithDelays("You do not have enough space in your inventory to buy " + command + " " + type + "s", false);
                         TextEngine.enterToNext();
                         keepShopping();
+                        break;
                     }
                 } else {
                     switch (command) {
@@ -641,36 +527,48 @@ public class Dungeon extends Room {
                             TextEngine.printWithDelays("You did not buy any " + type + "s.", false);
                             TextEngine.enterToNext();
                             keepShopping();
+                            break;
                         }
                         case "1" -> {
                             TextEngine.printWithDelays("You do not have enough gold to buy a " + command, false);
                             TextEngine.enterToNext();
                             keepShopping();
+                            break;
                         }
                         default -> {
                             TextEngine.printWithDelays("You do not have enough gold to buy " + command + " potions", false);
                             TextEngine.enterToNext();
                             keepShopping();
+                            break;
                         }
                     }
                 }
             } else {
                 Main.invalidCommand();
                 keepShopping();
+                break;
             }
+        }
+        if (Main.TESTING) {
+            System.out.println(redColor + this.currentBoss + "Function Complete: buyMultiple" + resetColor);
         }
     }
 
     private void keepShopping() throws InterruptedException { //keep shopping
+        if (Main.TESTING) {
+            System.out.println(this.currentBoss + "Running function: keepShopping");
+        }
         TextEngine.printWithDelays("Would you like to keep shopping? " + yellowColor + "yes" + resetColor + " or " + yellowColor + "no" + resetColor, true);
         while (true) {
             command = console.readLine();
             switch (command.toLowerCase().trim()) {
                 case "yes" -> {
                     dungeonShop();
+                    break;
                 }
                 case "no" -> {
                     leave();
+                    break;
                 }
                 default ->
                     defaultDungeonArgs(command.toLowerCase());
@@ -679,15 +577,27 @@ public class Dungeon extends Room {
     }
 
     private void useMagicMap() throws InterruptedException {
+        if (Main.TESTING) {
+            System.out.println(this.currentBoss + "Running function: useMagicMap");
+        }
         TextEngine.printWithDelays("You use the magic map...\nIt revealed the layout of the Dungeon!", false);
         TextEngine.enterToNext();
         this.mapRevealed = true;
+        if (Main.TESTING) {
+            System.out.println(redColor + this.currentBoss + "Function Complete: useMagicMap" + resetColor);
+        }
     }
 
     private void leave() throws InterruptedException {
+        if (Main.TESTING) {
+            System.out.println(this.currentBoss + "Running function: leave");
+        }
         TextEngine.printWithDelays("You leave the shop and return to the Dungeon.", false);
         TextEngine.enterToNext();
         this.handleDirectionsAndCommands();
+        if (Main.TESTING) {
+            System.out.println(redColor + this.currentBoss + "Function Complete: leave" + resetColor);
+        }
     }
 
     private boolean checkIfCurrentDungeonIsRevealed() {
@@ -695,6 +605,9 @@ public class Dungeon extends Room {
     }
 
     public boolean ableToUseMenuCommands() {
+        if (Main.TESTING) {
+            System.out.println(this.currentBoss + "Running function: ableToUseMenuCommands");
+        }
         if ("OpenWorld".equals(Main.getSavedPlace()) || "Village".equals(Main.getSavedPlace()) || "SpawnRoom".equals(Main.getSavedPlace())) {
             return true;
         }
@@ -704,26 +617,47 @@ public class Dungeon extends Room {
     }
 
     public void dungeonIntroText() throws InterruptedException {
+        if (Main.TESTING) {
+            System.out.println(this.currentBoss + "Running function: dungeonIntroText");
+        }
         TextEngine.printWithDelays("You have entered " + redColor + "The " + currentDungeon + resetColor + "!", false);
         TextEngine.printWithDelays("To beat the dungeon you must beat the " + redColor + currentBoss + resetColor + "!\nBe on the look out for treasure rooms! They hold some powerful loot.\nYou can always type help to see what commands you have available!\nGood Luck!", false);
         TextEngine.enterToNext();
         this.roomsBeenTo[this.currentPosition[0]][this.currentPosition[1]] = this.map[this.currentPosition[0]][this.currentPosition[1]];
         Main.loadSave();
+        if (Main.TESTING) {
+            System.out.println(redColor + this.currentBoss + "Function Complete: dungeonIntroText" + resetColor);
+        }
     }
 
     public void miniBossSequence() throws InterruptedException {
+        if (Main.TESTING) {
+            System.out.println(this.currentBoss + "Running function: miniBossSequence");
+        }
         TextEngine.printWithDelays("You have entered a room with a mini boss", false);
         Player.changeHealth(Enemy.spawnEnemy(currentMiniBoss, 1));
         this.map[this.currentPosition[0]][this.currentPosition[1]] = 7;
         Main.loadSave();
+        if (Main.TESTING) {
+            System.out.println(redColor + this.currentBoss + "Function Complete: miniBossSequence" + resetColor);
+        }
     }
 
     public void fairySequence() throws InterruptedException {
+        if (Main.TESTING) {
+            System.out.println(this.currentBoss + "Running function: fairySequence");
+        }
         this.map[this.currentPosition[0]][this.currentPosition[1]] = 10;
         Main.loadSave();
+        if (Main.TESTING) {
+            System.out.println(redColor + this.currentBoss + "Function Complete: fairySequence" + resetColor);
+        }
     }
 
     public void keyRoomSequence() throws InterruptedException {
+        if (Main.TESTING) {
+            System.out.println(this.currentBoss + "Running function: keyRoomSequence");
+        }
         if (numberOfEnemies < 2) {
             numberOfEnemies = 2;
         }
@@ -737,6 +671,7 @@ public class Dungeon extends Room {
                     Player.changeHealth(Enemy.spawnEnemy(enemyType, numberOfEnemies));
                     this.map[this.currentPosition[0]][this.currentPosition[1]] = 5;
                     Main.loadSave();
+                    break;
                 }
                 case "run" -> {
                     Player.changeHealth(Enemy.runSpawnEnemy(enemyType, numberOfEnemies));
@@ -744,6 +679,7 @@ public class Dungeon extends Room {
                     this.currentPosition = this.lastPosition.clone(); // Save the current position before moving
                     this.lastPosition = buffer.clone();
                     Main.loadSave();
+                    break;
                 }
                 default -> {
                     defaultDungeonArgs(command);
@@ -753,6 +689,9 @@ public class Dungeon extends Room {
     }
 
     public void fightRandomEnemies() throws InterruptedException {
+        if (Main.TESTING) {
+            System.out.println(this.currentBoss + "Running function: fightRandomEnemies");
+        }
         if (numberOfEnemies == 0) {
             this.roomsBeenTo[this.currentPosition[0]][this.currentPosition[1]] = this.map[this.currentPosition[0]][this.currentPosition[1]];
             Main.loadSave();
@@ -771,7 +710,7 @@ public class Dungeon extends Room {
                     Player.changeHealth(Enemy.spawnEnemy(enemyType, numberOfEnemies));
                     this.roomsBeenTo[this.currentPosition[0]][this.currentPosition[1]] = this.map[this.currentPosition[0]][this.currentPosition[1]];
                     Main.loadSave();
-                    return;
+                    break;
                 }
                 case "run" -> {
                     Player.changeHealth(Enemy.runSpawnEnemy(enemyType, numberOfEnemies));
@@ -779,15 +718,20 @@ public class Dungeon extends Room {
                     this.currentPosition = this.lastPosition.clone(); // Save the current position before moving
                     this.lastPosition = buffer.clone();
                     Main.loadSave();
+                    break;
                 }
                 default -> {
                     defaultDungeonArgs(command);
                 }
             }
         }
+
     }
 
     public void heartContainerRoom() throws InterruptedException {
+        if (Main.TESTING) {
+            System.out.println(this.currentBoss + "Running function: heartContainerRoom");
+        }
         if (hasItemInRoom("heart container", 1)) {
             this.roomsBeenTo[this.currentPosition[0]][this.currentPosition[1]] = this.map[this.currentPosition[0]][this.currentPosition[1]];
         } else {
@@ -799,6 +743,9 @@ public class Dungeon extends Room {
     }
 
     public void keyRoom() throws InterruptedException {
+        if (Main.TESTING) {
+            System.out.println(this.currentBoss + "Running function: keyRoom");
+        }
         if (hasItemInRoom("key", 1)) {
             this.roomsBeenTo[this.currentPosition[0]][this.currentPosition[1]] = this.map[this.currentPosition[0]][this.currentPosition[1]];
         } else {
@@ -810,6 +757,9 @@ public class Dungeon extends Room {
     }
 
     public void fairyRoom() throws InterruptedException {
+        if (Main.TESTING) {
+            System.out.println(this.currentBoss + "Running function: fairyRoom");
+        }
         TextEngine.printWithDelays("You have entered a room with a mystical fairy", false);
         TextEngine.printWithDelays("The fairy has granted you a wish of healing?", false);
         TextEngine.printWithDelays("Do you want to take it? " + yellowColor + "yes" + resetColor + " or " + yellowColor + "no" + resetColor, true);
@@ -820,12 +770,14 @@ public class Dungeon extends Room {
                     Player.fairyHeal();
                     this.roomsBeenTo[this.currentPosition[0]][this.currentPosition[1]] = this.map[this.currentPosition[0]][this.currentPosition[1]];
                     Main.loadSave();
+                    break;
                 }
                 case "no" -> {
                     int[] buffer = this.currentPosition.clone();
                     this.currentPosition = this.lastPosition.clone(); // Save the current position before moving
                     this.lastPosition = buffer.clone();
                     Main.loadSave();
+                    break;
                 }
                 default -> {
                     defaultDungeonArgs(command);
@@ -835,6 +787,9 @@ public class Dungeon extends Room {
     }
 
     public boolean testIfBossRoom(int check) {
+        if (Main.TESTING) {
+            System.out.println(this.currentBoss + "Running function: testIfBossRoom");
+        }
         if (check != 0) {
             return check == 8;
         }
@@ -842,6 +797,9 @@ public class Dungeon extends Room {
     }
 
     public void itemRoom(List<String> localItems) throws InterruptedException {
+        if (Main.TESTING) {
+            System.out.println(this.currentBoss + "Running function: itemRoom");
+        }
         if (localItems != null && !localItems.isEmpty()) {
             String randomItem = localItems.get(rand.nextInt(localItems.size()));
             if (hasChestInRoom(randomItem, 1)) {
@@ -860,9 +818,15 @@ public class Dungeon extends Room {
         } else {
             fairySequence();
         }
+        if (Main.TESTING) {
+            System.out.println(redColor + this.currentBoss + "Function Complete: itemRoom" + resetColor);
+        }
     }
 
     public void bossRoom() throws InterruptedException {
+        if (Main.TESTING) {
+            System.out.println(this.currentBoss + "Running function: bossRoom");
+        }
         TextEngine.printWithDelays("You have entered the boss room", false);
         Player.changeHealth(Enemy.spawnEnemy(currentBoss, 1));
         TextEngine.printWithDelays("You have defeated the boss and completed the dungeon!", false);
@@ -877,9 +841,15 @@ public class Dungeon extends Room {
         }
         this.lastPosition = null;
         OpenWorld.startRoom();
+        if (Main.TESTING) {
+            System.out.println(redColor + this.currentBoss + "Function Complete: bossRoom" + resetColor);
+        }
     }
 
     public String directionsInString(ArrayList<String> list) {
+        if (Main.TESTING) {
+            System.out.println(this.currentBoss + "Running function: directionsInString");
+        }
         StringBuilder sb = new StringBuilder();
         for (Object item : list) {
             sb.append(yellowColor).append(item.toString()).append(resetColor);
