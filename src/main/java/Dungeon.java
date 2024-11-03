@@ -22,14 +22,14 @@ public class Dungeon extends Room {
 
     private static final Random rand = new Random();
 
-    public static int[][] meadowDungeon;
-    public static int[][] darkForestDungeon;
-    public static int[][] mountainCaveDungeon;
-    public static int[][] mountainTopDungeon;
-    public static int[][] desertOasisDungeon;
-    public static int[][] desertPlainsDungeon;
-    public static int[][] desertPyramidDungeon;
-    public static int[][] oceanKingdomDungeon;
+    public static int[][] meadowDungeon = null;
+    public static int[][] darkForestDungeon = null;
+    public static int[][] mountainCaveDungeon = null;
+    public static int[][] mountainTopDungeon = null;
+    public static int[][] desertOasisDungeon = null;
+    public static int[][] desertPlainsDungeon = null;
+    public static int[][] desertPyramidDungeon = null;
+    public static int[][] oceanKingdomDungeon = null;
 
     public static int[] currentPlayerPosition = null;
     public static int[] lastPosition = null; // Variable to store the last position
@@ -64,14 +64,33 @@ public class Dungeon extends Room {
     }
 
     public static void initalizeDungeons() {
-        MeadowDungeon = new DungeonInstance(new ArrayList<>(List.of("Goblin", "Skeleton", "Slime", "Mimic")), new ArrayList<>(List.of("axe", "chainmail set")), false, false, false, meadowDungeon, "Meadow", "Meadow Dungeon", "Golem", "Forest Giant", 3);
-        DarkForestDungeon = new DungeonInstance(new ArrayList<>(List.of("Goblin", "Skeleton", "Orc", "Mimic", "Zombie")), new ArrayList<>(List.of("broad sword", "full armor kit")), false, false, false, darkForestDungeon, "Dark Forest", "Dark Forest Dungeon", "Forest Guardian", "Forest Spirit", 4);
-        MountainCaveDungeon = new DungeonInstance(new ArrayList<>(List.of("Troll", "Skeleton", "Orc", "Ghost", "Demon", "Zombie")), new ArrayList<>(List.of("better sword", "ninja armor")), false, false, false, mountainCaveDungeon, "Mountain Cave", "Mountain Cave Dungeon", "Elemental", "Wyvern", 5);
-        MountainTopDungeon = new DungeonInstance(new ArrayList<>(List.of("Ghost", "Gargoyle", "Orc", "Vampire", "Demon")), new ArrayList<>(List.of("great sword", "knight armor")), false, false, false, mountainTopDungeon, "Mountain Top", "Mountain Top Dungeon", "Minotaur", "Ice Dragon", 7);
-        DesertOasisDungeon = new DungeonInstance(new ArrayList<>(List.of("Werewolf", "Witch", "Giant", "Mummy", "Minotaur")), new ArrayList<>(List.of("master sword", "royal armor")), false, false, false, desertOasisDungeon, "Desert Oasis", "Desert Oasis Dungeon", "Sphinx", "Phoenix", 3);
-        DesertPlainsDungeon = new DungeonInstance(new ArrayList<>(List.of("Orc", "Troll", "Mummy", "Demon")), new ArrayList<>(List.of("legendary sword", "demon armor")), false, false, false, desertPlainsDungeon, "Desert Plains", "Desert Plains Dungeon", "Cyclops", "Giant Scorpion", 5);
-        DesertPyramidDungeon = new DungeonInstance(new ArrayList<>(List.of("Werewolf", "Witch", "Giant", "Mummy", "Minotaur")), new ArrayList<>(List.of("excalibur", "angel armor")), false, false, false, desertPyramidDungeon, "Desert Pyramid", "Desert Pyramid Dungeon", "Medusa", "Giant Sand Worm", 6);
-        OceanKingdomDungeon = new DungeonInstance(new ArrayList<>(List.of("Sea Serpent", "Sea Monster", "Sea Witch", "Sea Dragon", "Sea Dragon")), new ArrayList<>(List.of("god slayer hammer", "god slayer armor")), false, false, false, oceanKingdomDungeon, "Ocean Kingdom", "Ocean Kingdom Dungeon", "Leviathan", "Kraken", 4);
+        MeadowDungeon = new DungeonInstance(new ArrayList<>(List.of("Goblin", "Skeleton", "Slime", "Mimic")), new ArrayList<>(List.of("axe", "chainmail set")), false, false, false, "Meadow", "Meadow Dungeon", "Golem", "Forest Giant", 3);
+        DarkForestDungeon = new DungeonInstance(new ArrayList<>(List.of("Goblin", "Skeleton", "Orc", "Mimic", "Zombie")), new ArrayList<>(List.of("broad sword", "full armor kit")), false, false, false, "Dark Forest", "Dark Forest Dungeon", "Forest Guardian", "Forest Spirit", 4);
+        MountainCaveDungeon = new DungeonInstance(new ArrayList<>(List.of("Troll", "Skeleton", "Orc", "Ghost", "Demon", "Zombie")), new ArrayList<>(List.of("better sword", "ninja armor")), false, false, false, "Mountain Cave", "Mountain Cave Dungeon", "Elemental", "Wyvern", 5);
+        MountainTopDungeon = new DungeonInstance(new ArrayList<>(List.of("Ghost", "Gargoyle", "Orc", "Vampire", "Demon")), new ArrayList<>(List.of("great sword", "knight armor")), false, false, false, "Mountain Top", "Mountain Top Dungeon", "Minotaur", "Ice Dragon", 7);
+        DesertOasisDungeon = new DungeonInstance(new ArrayList<>(List.of("Werewolf", "Witch", "Giant", "Mummy", "Minotaur")), new ArrayList<>(List.of("master sword", "royal armor")), false, false, false, "Desert Oasis", "Desert Oasis Dungeon", "Sphinx", "Phoenix", 3);
+        DesertPlainsDungeon = new DungeonInstance(new ArrayList<>(List.of("Orc", "Troll", "Mummy", "Demon")), new ArrayList<>(List.of("legendary sword", "demon armor")), false, false, false, "Desert Plains", "Desert Plains Dungeon", "Cyclops", "Giant Scorpion", 5);
+        DesertPyramidDungeon = new DungeonInstance(new ArrayList<>(List.of("Werewolf", "Witch", "Giant", "Mummy", "Minotaur")), new ArrayList<>(List.of("excalibur", "angel armor")), false, false, false, "Desert Pyramid", "Desert Pyramid Dungeon", "Medusa", "Giant Sand Worm", 6);
+        OceanKingdomDungeon = new DungeonInstance(new ArrayList<>(List.of("Sea Serpent", "Sea Monster", "Sea Witch", "Sea Dragon", "Sea Dragon")), new ArrayList<>(List.of("god slayer hammer", "god slayer armor")), false, false, false, "Ocean Kingdom", "Ocean Kingdom Dungeon", "Leviathan", "Kraken", 4);
+    }
+
+    public static void setMaps() {
+        MeadowDungeon.map = meadowDungeon;
+        DarkForestDungeon.map = darkForestDungeon;
+        MountainCaveDungeon.map = mountainCaveDungeon;
+        MountainTopDungeon.map = mountainTopDungeon;
+        DesertOasisDungeon.map = desertOasisDungeon;
+        DesertPlainsDungeon.map = desertPlainsDungeon;
+        DesertPyramidDungeon.map = desertPyramidDungeon;
+        OceanKingdomDungeon.map = oceanKingdomDungeon;
+        MeadowDungeon.setValues();
+        DarkForestDungeon.setValues();
+        MountainCaveDungeon.setValues();
+        MountainTopDungeon.setValues();
+        DesertOasisDungeon.setValues();
+        DesertPlainsDungeon.setValues();
+        DesertPyramidDungeon.setValues();
+        OceanKingdomDungeon.setValues();
     }
 
     public static void defaultDungeonArgs(String data) throws InterruptedException { //default dungeon arguments

@@ -33,9 +33,8 @@ public class GameSaveSerialization {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        writeValue(String.valueOf(versionID), filePath);
-        writeSeparator(filePath);
         writeValue(Player.getName(), filePath);
+        System.err.println(Player.getName());
         writeSeparator(filePath);
         writeValue(String.valueOf(Player.getHealth()), filePath);
         writeSeparator(filePath);
@@ -180,7 +179,6 @@ public class GameSaveSerialization {
         writeValue(String.valueOf(PromptEngine.promptLength), filePath);
         writeSeparator(filePath);
         writeValue(String.valueOf(Main.playTime.getElapsedTime() + Main.playTime.getSavedTime()), filePath);
-        writeSeparator(filePath);
         //do this after all other data is saved
         serializeAllLines(filePath, filePath);
     }
@@ -191,9 +189,6 @@ public class GameSaveSerialization {
         deserializeToFile(filePath);
         try (BufferedReader reader = new BufferedReader(new FileReader(runtimePath))) {
             try {
-                int version = Integer.parseInt(reader.readLine());
-                //read decrypted data
-                buffer = reader.readLine();
                 String name = String.valueOf(reader.readLine());
                 buffer = reader.readLine();
                 int health = Integer.parseInt(reader.readLine());
@@ -202,10 +197,8 @@ public class GameSaveSerialization {
                 buffer = reader.readLine();
                 int gold = Integer.parseInt(reader.readLine());
                 buffer = reader.readLine();
-
                 Map<String, Integer> inventory = readInventory(reader.readLine());
                 buffer = reader.readLine();
-
                 int inventorySize = Integer.parseInt(reader.readLine());
                 buffer = reader.readLine();
                 Player.playerSetSave(name, health, maxHealth, gold, inventory, inventorySize);
@@ -217,6 +210,7 @@ public class GameSaveSerialization {
                 buffer = reader.readLine();
                 Dungeon.currentDungeon = reader.readLine();
                 buffer = reader.readLine();
+
                 Dungeon.completedDungeons = Integer.parseInt(reader.readLine());
                 buffer = reader.readLine();
                 Dungeon.currentPlayerPosition = readArray(reader);
@@ -239,6 +233,7 @@ public class GameSaveSerialization {
                 buffer = reader.readLine();
                 Dungeon.oceanKingdomDungeon = readMatrix(reader);
                 buffer = reader.readLine();
+
                 SpawnRoom.roomSave = Integer.parseInt(reader.readLine());
                 buffer = reader.readLine();
                 OpenWorld.roomSave = Integer.parseInt(reader.readLine());
@@ -249,6 +244,7 @@ public class GameSaveSerialization {
                 buffer = reader.readLine();
                 Room.room = reader.readLine();
                 buffer = reader.readLine();
+
                 Dungeon.MeadowDungeon.completed = Boolean.parseBoolean(reader.readLine());
                 buffer = reader.readLine();
                 Dungeon.MeadowDungeon.visited = Boolean.parseBoolean(reader.readLine());
@@ -329,6 +325,7 @@ public class GameSaveSerialization {
                 buffer = reader.readLine();
                 Dungeon.OceanKingdomDungeon.mapRevealed = Boolean.parseBoolean(reader.readLine());
                 buffer = reader.readLine();
+
                 Main.gameComplete = Boolean.parseBoolean(reader.readLine());
                 buffer = reader.readLine();
                 Dungeon.resetedAfterWin = Boolean.parseBoolean(reader.readLine());
@@ -342,7 +339,6 @@ public class GameSaveSerialization {
                 PromptEngine.promptLength = Integer.parseInt(reader.readLine());
                 buffer = reader.readLine();
                 Main.playTime.setSavedTime(Long.parseLong(reader.readLine()));
-                buffer = reader.readLine();
 
             } catch (IOException | NumberFormatException e) {
                 System.out.println("Save File Corrupt or Invalid... ");
@@ -518,7 +514,7 @@ public class GameSaveSerialization {
         File outputFilePath = new File(runtimePath);
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(serializedFilePath)); BufferedWriter bw = new BufferedWriter(new FileWriter(outputFilePath))) {
 
-            // Deserialize the list of lines
+            // Deserialize the list of lines 
             List<String> lines = (List<String>) ois.readObject();
 
             // Write each line to the output file

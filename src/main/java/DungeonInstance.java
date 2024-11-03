@@ -30,22 +30,23 @@ public class DungeonInstance extends Dungeon {
     public String bossType;
     public String miniBossType;
 
-    public DungeonInstance(List<String> enemies, List<String> items, boolean completed, boolean visited, boolean mapRevealed, int[][] map, String dungeonName, String dungeonSaveName, String currentMiniBoss, String currentBoss, int numberOfEnemies) {
+    public DungeonInstance(List<String> enemies, List<String> items, boolean completed, boolean visited, boolean mapRevealed, String dungeonName, String dungeonSaveName, String currentMiniBoss, String currentBoss, int numberOfEnemies) {
         super();
         this.enemies = enemies;
         this.items = items;
         this.completed = completed;
         this.visited = visited;
         this.mapRevealed = mapRevealed;
-        this.map = map;
-        this.spawnPosition = DungeonGenerator.findValue(map, 9);
-        this.bossRoom = DungeonGenerator.findValue(map, 8);
-        this.roomsBeenTo = DungeonGenerator.createRoomsBeenTo(map.length);
         this.dungeonName = dungeonName;
         this.dungeonSaveName = dungeonSaveName;
         this.miniBossType = currentMiniBoss;
         this.bossType = currentBoss;
         this.potentialEnemies = numberOfEnemies;
+    }
+
+    public void setValues() {
+        this.spawnPosition = DungeonGenerator.findValue(map, 9);
+        this.bossRoom = DungeonGenerator.findValue(map, 8);
     }
 
     public void startRoom() throws InterruptedException { //start room

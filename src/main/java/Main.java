@@ -30,21 +30,20 @@ public class Main {
         TextEngine.clearScreen();
         playTime = new TimerEngine();
         TextEngine.printNoDelay("Loading...", false);
+        TextEngine.printNoDelay("Initalizing Dungeons...", false);
+        Dungeon.initalizeDungeons();
+        TextEngine.printNoDelay("Dungeons Initalized!", false);
         if (!hasSave()) {
             TextEngine.printNoDelay("Generating Dungeons...", false);
             TextEngine.printNoDelay("(P.S. if this takes more than ~10 seconds, restart the game.)", false);
             Dungeon.generateDungeons();
+            Dungeon.setMaps();
             TextEngine.printNoDelay("Generated Dungeons!", false);
-            TextEngine.printNoDelay("Initalizing Dungeons...", false);
-            Dungeon.initalizeDungeons();
-            TextEngine.printNoDelay("Dungeons Initalized!", false);
         } else {
             TextEngine.printNoDelay("Locating Save File...", false);
             GameSaveSerialization.loadGameSave();
+            Dungeon.setMaps();
             TextEngine.printNoDelay("Save File Located!", false);
-            TextEngine.printNoDelay("Initalizing Dungeons...", false);
-            Dungeon.initalizeDungeons();
-            TextEngine.printNoDelay("Dungeons Initalized!", false);
             if (PromptEngine.aiGenerationEnabled) {
                 TextEngine.printNoDelay("Testing OpenAI API Connection...", false);
                 if (PromptEngine.testAPIKey(PromptEngine.userAPIKey)) {
@@ -379,7 +378,7 @@ public class Main {
         // Check if getSavedPlace() is not null
         // Check if the file game_save.txt exists
         File saveFile = new File(GameSaveSerialization.filePath);
-        return saveFile.exists() || (getSavedPlace() != null || Player.getName() != null);
+        return saveFile.exists() && (getSavedPlace() != null || Player.getName() != null);
     }
 
     public static void checkSave(String place) throws InterruptedException { //check if there is a save and if that save is where you currently are
