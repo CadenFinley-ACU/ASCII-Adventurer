@@ -27,6 +27,10 @@ public class OpenWorld extends Room {
     public static boolean inFight = false;
     public static boolean wasInFight = false;
 
+    public static boolean roomChange() {
+        return roomSave != previousRoomSave;
+    }
+
     public static void startRoom() throws InterruptedException { //start room
         room = "OpenWorld";
         Main.checkSave(room);

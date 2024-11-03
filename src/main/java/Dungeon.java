@@ -306,7 +306,7 @@ public class Dungeon extends Room {
     }
 
     public static void dungeonCheck() throws InterruptedException {
-        if (OpenWorld.holdCommand == null) {
+        if (OpenWorld.holdCommand == null || OpenWorld.holdCommand.equals("onward") || OpenWorld.holdCommand.equals("null") || OpenWorld.holdCommand.isBlank() || OpenWorld.holdCommand.isEmpty()) {
             OpenWorld.holdCommand = "onward";
             TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ".", resetedAfterWin);
             return;
