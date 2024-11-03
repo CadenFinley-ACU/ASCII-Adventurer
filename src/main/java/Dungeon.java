@@ -938,7 +938,7 @@ public class Dungeon extends Room {
         if (numberOfEnemies < 2) {
             numberOfEnemies = 2;
         }
-        TextEngine.printWithDelays("You have entered a room with " + numberOfEnemies + " " + redColor + enemyType + resetColor + "s in this room!\nYou were ambushed!", false);
+        TextEngine.printWithDelays("You have entered a room with " + numberOfEnemies + " " + redColor + enemyType + "s" + resetColor + " in this room!\nYou were ambushed!", false);
         TextEngine.printWithDelays("They seem to be trying to protect something...", false);
         TextEngine.printWithDelays("What is your command? " + yellowColor + "fight" + resetColor + " or " + yellowColor + "run" + resetColor, true);
         while (true) {

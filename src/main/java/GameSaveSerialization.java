@@ -34,7 +34,6 @@ public class GameSaveSerialization {
             e.printStackTrace();
         }
         writeValue(Player.getName(), filePath);
-        System.err.println(Player.getName());
         writeSeparator(filePath);
         writeValue(String.valueOf(Player.getHealth()), filePath);
         writeSeparator(filePath);
