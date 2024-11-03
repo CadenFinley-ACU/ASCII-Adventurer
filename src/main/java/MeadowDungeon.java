@@ -15,7 +15,6 @@ public class MeadowDungeon extends Dungeon {
     private static int[] bossRoom = DungeonGenerator.findValue(Dungeon.meadowDungeon, 8);
     private static final List<String> enemies = new ArrayList<>(List.of("Goblin", "Skeleton", "Slime", "Mimic"));
     private static final Random rand = new Random();
-
     public static int[][] roomsBeenTo = DungeonGenerator.createRoomsBeenTo(Dungeon.meadowDungeon.length);
     public static List<String> items;
     public static boolean completed = false;
@@ -27,6 +26,7 @@ public class MeadowDungeon extends Dungeon {
             fresh();
             items = new ArrayList<>(List.of("axe", "chainmail set"));
             visited = true;
+            currentPlayerPosition = DungeonGenerator.findValue(Dungeon.meadowDungeon, 9);
         }
         if (!"Meadow Dungeon".equals(Main.getSavedPlace())) {
             currentPlayerPosition = DungeonGenerator.findValue(Dungeon.meadowDungeon, 9);

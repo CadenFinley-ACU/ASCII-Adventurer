@@ -356,11 +356,6 @@ public class DungeonGenerator {
 
     public static int[][] createRoomsBeenTo(int size) {
         int[][] temp = new int[size][size];
-        for (int i = 0; i < size; i++) {
-            for (int j = 0; j < size; j++) {
-                temp[i][j] = 0;
-            }
-        }
         return temp;
     }
 

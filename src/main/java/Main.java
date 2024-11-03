@@ -363,6 +363,9 @@ public class Main {
     }
 
     public static String getSavedPlace() { //get the saved place
+        if (savedPlace == null) {
+            return "SpawnRoom";
+        }
         return savedPlace;
     }
 
@@ -370,7 +373,7 @@ public class Main {
         // Check if getSavedPlace() is not null
         // Check if the file game_save.txt exists
         File saveFile = new File(GameSaveSerialization.filePath);
-        return getSavedPlace() != null || saveFile.exists() || Player.getName() != null;
+        return getSavedPlace() != null && saveFile.exists() && Player.getName() != null;
     }
 
     public static void checkSave(String place) throws InterruptedException { //check if there is a save and if that save is where you currently are
