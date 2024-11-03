@@ -29,11 +29,6 @@ public class TimerEngine {
                 minutes = (elapsedTime / 60000) % 60;
                 hours = (elapsedTime / 360000) % 24;
             }
-            try {
-                Thread.sleep(1000);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
         }).start();
     }
 

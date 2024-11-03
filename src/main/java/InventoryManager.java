@@ -95,11 +95,11 @@ public class InventoryManager extends Player {
             }
             setStatsToHighestInInventory();
             if (amount > 1) {
-                TextEngine.printWithDelays("You have picked up " + amount + " " + yellowColor + item + "s" + resetColor + "!", false);
+                TextEngine.printWithDelays("You have picked up " + amount + " " + item + "s", false);
             } else if (amount < 0) {
                 return;
             } else {
-                TextEngine.printWithDelays("You have picked up " + amount + " " + yellowColor + item + resetColor + "!", false);
+                TextEngine.printWithDelays("You have picked up " + amount + " " + item, false);
             }
             TextEngine.enterToNext();
         }
