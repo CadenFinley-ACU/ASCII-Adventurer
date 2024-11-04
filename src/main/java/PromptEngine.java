@@ -30,7 +30,7 @@ public class PromptEngine {
     );
 
     public static void buildPrompt() throws InterruptedException {
-        if (aiGenerationEnabled) {
+        if (aiGenerationEnabled && (OpenWorld.checkChangeInRoom() || prompt == null || prompt.isEmpty())) {
             String villageDirection = Player.getCompassDirectionToClosestVillage();
             String nextDungeon = Player.getNextDungeon();
             String dungeonNextDirection = Player.getCompassDirectionToClosestDungeon();
@@ -94,7 +94,7 @@ public class PromptEngine {
     }
 
     public static String returnPrompt() throws InterruptedException {
-        if (prompt == null || prompt.isEmpty() || OpenWorld.checkChangeInRoom()) {
+        if (prompt == null || prompt.isEmpty()) {
             buildPrompt();
         }
         // Highlight keywords
