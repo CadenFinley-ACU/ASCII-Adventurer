@@ -94,14 +94,18 @@ public class PromptEngine {
     }
 
     public static String returnPrompt() throws InterruptedException {
-        if (prompt == null || prompt.isEmpty()) {
+        if (aiGenerationEnabled) {
             buildPrompt();
+            if (prompt == null || prompt.isEmpty()) {
+                buildPrompt();
+            }
+            // Highlight keywords
+            for (String keyword : keywords) {
+                prompt = prompt.replaceAll("\\b" + keyword + "\\b", yellowColor + keyword + resetColor);
+            }
+            return prompt;
         }
-        // Highlight keywords
-        for (String keyword : keywords) {
-            prompt = prompt.replaceAll("\\b" + keyword + "\\b", yellowColor + keyword + resetColor);
-        }
-        return prompt;
+        return "AI generation is disabled. Please enable it in settings.";
     }
 
     private static String chatGPT(String message) {
