@@ -95,7 +95,6 @@ public class PromptEngine {
 
     public static String returnPrompt() throws InterruptedException {
         if (aiGenerationEnabled) {
-            buildPrompt();
             if (prompt == null || prompt.isEmpty()) {
                 buildPrompt();
             }
