@@ -2,6 +2,7 @@
 import java.io.Console;
 import java.io.File;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
@@ -17,24 +18,33 @@ public class Main {
     static String yellowColor = "\033[1;33m"; // yellow color
     private final static Console console = System.console();
     private static String command;
-    private static String ignore;
     public static boolean playerCreated = false;
     public static String savedPlace = null;
     private static final String OS_NAME = System.getProperty("os.name");
     public static Map<String, Integer> savedInventory = new HashMap<>();
     public static boolean gameComplete = false;
+    public static String[] COMMANDS;
+    public static TimerEngine playTime;
 
-    public static void main(String[] args) throws InterruptedException { //main game start
+    public static void main(String[] args) throws InterruptedException, IOException { //main game start
+        TextEngine.setWidth();
         TextEngine.clearScreen();
+        playTime = new TimerEngine();
         TextEngine.printNoDelay("Loading...", false);
+        TextEngine.printNoDelay("Initalizing Dungeons...", false);
+        Dungeon.initalizeDungeons();
+        TextEngine.printNoDelay("Dungeons Initalized!", false);
         if (!hasSave()) {
             TextEngine.printNoDelay("Generating Dungeons...", false);
             TextEngine.printNoDelay("(P.S. if this takes more than ~10 seconds, restart the game.)", false);
             Dungeon.generateDungeons();
+            Dungeon.setMaps();
+            Dungeon.setRoomsBeenTo();
             TextEngine.printNoDelay("Generated Dungeons!", false);
         } else {
             TextEngine.printNoDelay("Locating Save File...", false);
             GameSaveSerialization.loadGameSave();
+            Dungeon.setMaps();
             TextEngine.printNoDelay("Save File Located!", false);
             if (PromptEngine.aiGenerationEnabled) {
                 TextEngine.printNoDelay("Testing OpenAI API Connection...", false);
@@ -114,6 +124,7 @@ public class Main {
     }
 
     public static void startMenu() throws InterruptedException { //main menu and sstart menu text
+        playTime.stopClock();
         TextEngine.clearScreen();
         splashScreen();
         TextEngine.printNoDelay("               by: Albert Tucker, Caden Finley, and Grijesh Shrestha", false);
@@ -129,7 +140,7 @@ public class Main {
 
     private static void handleMenuCommands() throws InterruptedException { //main menu command handling
         while (true) {
-            ignore = console.readLine();
+            COMMANDS = new String[]{"start", "settings", "exit"};
             command = console.readLine();
             switch (command.toLowerCase().trim()) {
                 case "start" ->
@@ -152,9 +163,12 @@ public class Main {
                     debugInfo();
                 case "change name" ->
                     Player.changeName();
+                case "link" ->
+                    showQrCode();
                 default ->
                     TextEngine.printWithDelays("I'm sorry, I don't understand that command.", true);
             }
+            COMMANDS = null;
         }
     }
 
@@ -164,39 +178,40 @@ public class Main {
         if (getOS_NAME().contains("Mac")) {
             darkPurpleStart = "\033[1;33m";
         }
-        System.out.println(
-                darkPurpleStart
-                + 
+        System.out.println(darkPurpleStart + "    _    ____   ____ ___ ___         Now With AI!");
+        System.out.println("   / \\  / ___| / ___|_ _|_ _|        Type 'link' To see the git repo");
+        System.out.println("  / _ \\ \\___ \\| |    | | | |         of this project!");
+        System.out.println(" / ___ \\ ___) | |___ | | | |                                        ");
+        System.out.println("/_/ _ \\_\\____/ \\____|___|___| _                                   ");
+        System.out.println("   / \\   __| |_   _____ _ __ | |_ _   _ _ __ ___ _ __               ");
+        System.out.println("  / _ \\ / _` \\ \\ / / _ \\ '_ \\| __| | | | '__/ _ \\ '__|         ");
+        System.out.println(" / ___ \\ (_| |\\ V /  __/ | | | |_| |_| | | |  __/ |                ");
+        System.out.println("/_/   \\_\\__,_| \\_/ \\___|_| |_|\\__|\\__,_|_|  \\___|_|           ");
+        System.out.print(brightBoldEnd);
 
-      """
-                                   _     ____     ____ ___ ___                                     
-                                  / \\  / ___|   / ___|_ _|_ _|           Now with AI!                         
-                                 / _ \\ \\___ \\| |    | | | |                                     
-                                / ___ \\ ___) | |___ | | | | |                                   
-                               /_/ _ \\_\\____/ \\____|___|___|    _ _____ _   _ ____  _____ ____  
-                                  / \\  |  _ \\ \\   / / ____| \\ | |_   _| | | |  _ \\| ____|  _ \\ 
-                                 / _ \\ | | | \\ \\ / /|  _| |  \\| | | | | | | | |_) |  _|  | |_) |
-                                / ___ \\| |_| |\\ V /  | |___| |\\  | | | | |_| |  _ <| |___ |  _ < 
-                               /_/   \\_\\____/  \\_/  |_____|_| \\_| |_|  \\___/|_| \\_\\___ __|_| \\_\\""" + brightBoldEnd);
     }
-    
 
     private static void displayHelp() throws InterruptedException { //main menu help command
-            TextEngine.printWithDelays("Things you could say:\n" +yellowColor+ "stats" +resetColor+" to see your stats\n" +yellowColor+ "inventory" +resetColor+ " to see your inventory\n" +yellowColor+ "heal" +resetColor+ " to heal you health using any available healing potions\n" +yellowColor+ "settings" +resetColor+ " or type " +yellowColor+ "save" +resetColor+ " to save\n" +yellowColor+ "map" +resetColor+ " to see the map\n" +yellowColor+ "exit" +resetColor+ " to return to the main menu.", true);
+        if (PromptEngine.aiGenerationEnabled && false) {
+            PromptEngine.buildHelpPrompt(COMMANDS);
+            TextEngine.printWithDelays(PromptEngine.returnPrompt(), false);
+        } else {
+            TextEngine.printWithDelays("Things you could say:\n" + yellowColor + "stats" + resetColor + " to see your stats\n" + yellowColor + "inventory" + resetColor + " to see your inventory\n" + yellowColor + "heal" + resetColor + " to heal you health using any available healing potions\n" + yellowColor + "settings" + resetColor + " or type " + yellowColor + "save" + resetColor + " to save\n" + yellowColor + "map" + resetColor + " to see the map\n" + yellowColor + "exit" + resetColor + " to return to the main menu.", true);
+        }
     }
 
     private static void exitGame() throws InterruptedException {   //exit game command
         GameSaveSerialization.saveGame();
-        TextEngine.printWithDelays("See ya next time!", false);
         try {
-            FileWriter fwOb = new FileWriter(".runtime.txt", false); 
+            FileWriter fwOb = new FileWriter(".runtime.txt", false);
             PrintWriter pwOb = new PrintWriter(fwOb, false);
             pwOb.flush();
             pwOb.close();
             fwOb.close();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        TextEngine.printWithDelays("See ya next time!", false);
         TextEngine.enterToNext();
         TextEngine.clearScreen();
         System.exit(0);
@@ -218,25 +233,27 @@ public class Main {
     }
 
     public static void inGameDefaultTextHandling(String data) throws InterruptedException { //default in game commands
-        if (!Dungeon.ableToUseMenuCommands()){
+        if (!Dungeon.ableToUseMenuCommands()) {
+            COMMANDS = new String[]{"help", "save", "exit"};
             switch (data.toLowerCase().trim()) {
                 case "help" ->
                     displayHelp();
-                case "save" ->  {
+                case "save" -> {
                     checkSave(getSavedPlace());
                     TextEngine.printWithDelays("Game saved!", true);
                 }
                 case "exit" -> {
                     TextEngine.printWithDelays("Returning to main menu.", false);
                     TextEngine.clearScreen();
-                    GameSaveSerialization.saveGame();
+                    saveSpace(savedPlace);
                     startMenu();
                 }
                 default ->
                     invalidCommandWithBuffer();
             }
-        }
-        else { 
+            COMMANDS = null;
+        } else {
+            COMMANDS = new String[]{"help", "inventory", "settings", "save", "exit", "heal", "stats", "map"};
             switch (data.toLowerCase().trim()) {
                 case "help" ->
                     displayHelp();
@@ -244,7 +261,7 @@ public class Main {
                     Player.openInventory();
                 case "settings" ->
                     SettingsMenu.start();
-                case "save" ->  {
+                case "save" -> {
                     checkSave(getSavedPlace());
                     TextEngine.printWithDelays("Game saved!", false);
                     TextEngine.enterToNext();
@@ -252,7 +269,7 @@ public class Main {
                 case "exit" -> {
                     TextEngine.printWithDelays("Returning to main menu.", false);
                     TextEngine.clearScreen();
-                    GameSaveSerialization.saveGame();
+                    saveSpace(savedPlace);
                     startMenu();
                 }
                 case "heal" ->
@@ -270,7 +287,8 @@ public class Main {
                 default ->
                     invalidCommandWithBuffer();
             }
-        }  
+            COMMANDS = null;
+        }
     }
 
     public static void invalidCommandWithBuffer() throws InterruptedException {
@@ -284,6 +302,7 @@ public class Main {
     public static void saveSpace(String place) throws InterruptedException { //save game command
         if (savedPlace != null) {
             GameSaveSerialization.saveGame();
+            displaySaveInfo();
             TextEngine.printWithDelays("Game saved!", false);
         }
         savedPlace = place;
@@ -291,9 +310,10 @@ public class Main {
 
     public static void loadSave() throws InterruptedException { //load saved game command
         if (getSavedPlace() == null) {
-            playerCreated = false;  
+            playerCreated = false;
             Player.playerStart();
         } else {
+            playTime.startClock();
             GameSaveSerialization.saveGame();
             InventoryManager.setStatsToHighestInInventory();
             switch (getSavedPlace()) {
@@ -304,21 +324,21 @@ public class Main {
                 case "Village" ->
                     Village.startRoom();
                 case "Meadow Dungeon" ->
-                    MeadowDungeon.startRoom();
+                    Dungeon.MeadowDungeon.startRoom();
                 case "Dark Forest Dungeon" ->
-                    DarkForestDungeon.startRoom();
+                    Dungeon.DarkForestDungeon.startRoom();
                 case "Mountain Cave Dungeon" ->
-                    MountainCaveDungeon.startRoom();
+                    Dungeon.MountainCaveDungeon.startRoom();
                 case "Mountain Top Dungeon" ->
-                    MountainTopDungeon.startRoom();
+                    Dungeon.MountainTopDungeon.startRoom();
                 case "Desert Oasis Dungeon" ->
-                    DesertOasisDungeon.startRoom();
+                    Dungeon.DesertOasisDungeon.startRoom();
                 case "Desert Plains Dungeon" ->
-                    DesertPlainsDungeon.startRoom();
+                    Dungeon.DesertPlainsDungeon.startRoom();
                 case "Desert Pyramid Dungeon" ->
-                    DesertPyramidDungeon.startRoom();
+                    Dungeon.DesertPyramidDungeon.startRoom();
                 case "Ocean Kingdom Dungeon" ->
-                    OceanKingdomDungeon.startRoom();
+                    Dungeon.OceanKingdomDungeon.startRoom();
                 default ->
                     startMenu();
             }
@@ -335,20 +355,24 @@ public class Main {
         Dungeon.generateDungeons();
         PromptEngine.aiGenerationEnabled = false;
         PromptEngine.userAPIKey = null;
+        Main.playTime.setSavedTime(0);
         try {
-            FileWriter fwOb = new FileWriter(".runtime.txt", false); 
+            FileWriter fwOb = new FileWriter(".runtime.txt", false);
             PrintWriter pwOb = new PrintWriter(fwOb, false);
             pwOb.flush();
             pwOb.close();
             fwOb.close();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         GameSaveSerialization.saveGame();
         Enemy.resetEnemies();
     }
 
     public static String getSavedPlace() { //get the saved place
+        if (savedPlace == null) {
+            return "SpawnRoom";
+        }
         return savedPlace;
     }
 
@@ -356,7 +380,7 @@ public class Main {
         // Check if getSavedPlace() is not null
         // Check if the file game_save.txt exists
         File saveFile = new File(GameSaveSerialization.filePath);
-        return getSavedPlace() != null || saveFile.exists() || Player.getName() != null;
+        return saveFile.exists() && (getSavedPlace() != null || Player.getName() != null);
     }
 
     public static void checkSave(String place) throws InterruptedException { //check if there is a save and if that save is where you currently are
@@ -372,6 +396,7 @@ public class Main {
             promptLoadSavedGame();
         } else if (playerCreated && Player.getName() != null && !"null".equals(Player.getName())) {
             saveSpace("SpawnRoom");
+            playTime.startClock();
             loadSave();
         } else {
             Player.playerStart();
@@ -379,8 +404,8 @@ public class Main {
     }
 
     private static void promptLoadSavedGame() throws InterruptedException { //prompt to load saved game
-        TextEngine.printWithDelays("Would you like to load your saved game? (" +yellowColor+ "yes" +resetColor+ " or " +yellowColor+ "no" +resetColor+ ") ", true);
-        ignore = console.readLine();
+        displaySaveInfo();
+        TextEngine.printWithDelays("Would you like to load your saved game? (" + yellowColor + "yes" + resetColor + " or " + yellowColor + "no" + resetColor + ") ", true);
         command = console.readLine();
         if (command.toLowerCase().equals("no")) {
             confirmWipeSave();
@@ -392,9 +417,8 @@ public class Main {
     private static void confirmWipeSave() throws InterruptedException { //confirm to wipe save
         String textState = TextEngine.speedSetting;
         TextEngine.speedSetting = "Slow";
-        TextEngine.printWithDelays("All data will be wiped if you proceed. (" +yellowColor+ "yes" +resetColor+ " or " +yellowColor+ "no" +resetColor+ ") ", false);
+        TextEngine.printWithDelays("All data will be wiped if you proceed. (" + yellowColor + "yes" + resetColor + " or " + yellowColor + "no" + resetColor + ") ", false);
         TextEngine.printWithDelays("Are you sure?", true);
-        ignore = console.readLine();
         command = console.readLine();
         if (command.toLowerCase().trim().equals("yes")) {
             TextEngine.clearScreen();
@@ -409,15 +433,15 @@ public class Main {
     }
 
     public static void printStatus() { //print the status of the player
-        if(getSavedPlace() != null) {
-            TextEngine.printNoDelay(Player.getName()+"'s adventure through the "+getSavedPlace(), false);
+        if (getSavedPlace() != null) {
+            TextEngine.printNoDelay(Player.getName() + "'s adventure through the " + getSavedPlace(), false);
         } else {
-            TextEngine.printNoDelay(Player.getName()+"'s adventure", false);
+            TextEngine.printNoDelay(Player.getName() + "'s adventure", false);
         }
         //TextEngine.printNoDelay("Health: " + healthColor+Player.getHealth()+resetColor, false);
         Player.drawHealthBar();
         //TextEngine.printNoDelay("Gold: " + Player.getGold(), false);
-        TextEngine.printNoDelay("\n", false);
+        System.out.println();
     }
 
     public static void screenRefresh() throws InterruptedException { //refresh the screen
@@ -427,5 +451,58 @@ public class Main {
 
     public static String getOS_NAME() { //get the os name
         return OS_NAME;
+    }
+
+    public static void showQrCode() throws InterruptedException {
+        TextEngine.clearScreen();
+        System.out.println("Scan this QR code to view the source code of this project:   ( https://github.com/CadenFinley-ACU/ASCII-Adventurer )");
+        System.out.println("██████████████████████████████████████████████████████████████████████");
+        System.out.println("██              ██████████  ██  ██  ██        ██  ████              ██");
+        System.out.println("██  ██████████  ██████  ██  ████    ██  ██      ██████  ██████████  ██");
+        System.out.println("██  ██      ██  ██      ██████      ████████    ██████  ██      ██  ██");
+        System.out.println("██  ██      ██  ██    ██████████  ████  ██████  ██  ██  ██      ██  ██");
+        System.out.println("██  ██      ██  ██  ██████          ██████    ██  ████  ██      ██  ██");
+        System.out.println("██  ██████████  ██  ██  ██  ████████████  ████████  ██  ██████████  ██");
+        System.out.println("██              ██  ██  ██  ██  ██  ██  ██  ██  ██  ██              ██");
+        System.out.println("██████████████████  ████    ██  ██  ██        ██  ████████████████████");
+        System.out.println("██  ██          ██████  ██    ██████  ██  ████████████          ██████");
+        System.out.println("██████  ██  ████  ████  ████  ████          ████  ████    ██      ████");
+        System.out.println("██    ██    ██    ██      ██      ██  ████  ██  ██  ██  ██  ██    ████");
+        System.out.println("████      ██  ████        ██  ██          ██  ████    ████          ██");
+        System.out.println("████████        ████  ████  ██  ██  ██████████    ██  ██  ██  ████████");
+        System.out.println("██████      ████    ██████    ██  ████  ██████    ██████████        ██");
+        System.out.println("██  ██      ██          ██  ██      ██████████  ██      ██        ████");
+        System.out.println("████████████████    ██████        ██████  ██  ██████      ████  ██████");
+        System.out.println("██  ██████████      ██████        ██  ████████  ██    ██    ██████  ██");
+        System.out.println("████          ██  ████  ██████████  ██  ██    ██  ████    ██    ██████");
+        System.out.println("██    ████  ██  ██  ██████  ████  ████  ██      ██  ██      ██    ████");
+        System.out.println("██  ██  ████  ████████████      ██  ████      ██████  ██          ████");
+        System.out.println("██        ██    ██        ██    ██████      ██  ██  ████  ██  ████████");
+        System.out.println("██  ██        ██    ████  ██  ██      ██          ████  ████  ████  ██");
+        System.out.println("██  ██████  ██  ██      ██  ██  ████  ████  ████████  ████    ██  ████");
+        System.out.println("██  ████    ████    ██████  ██████  ██  ██      ██        ██        ██");
+        System.out.println("██  ██  ██  ██  ██  ████    ██  ██████████████  ██          ██  ██████");
+        System.out.println("██████████████████      ██████████        ██  ██    ██████  ██  ██████");
+        System.out.println("██              ██████  ████          ████          ██  ██  ██    ████");
+        System.out.println("██  ██████████  ██  ██  ██  ██    ██    ██          ██████        ████");
+        System.out.println("██  ██      ██  ██  ██    ████████  ████  ████  ██            ██    ██");
+        System.out.println("██  ██      ██  ██  ████████      ████      ██        ████  ██      ██");
+        System.out.println("██  ██      ██  ██  ██  ██████        ████████  ██████    ██    ██████");
+        System.out.println("██  ██████████  ████████      ██  ████    ██    ██      ██      ██████");
+        System.out.println("██              ██      ██        ██  ████████        ██  ██      ████");
+        System.out.println("██████████████████████████████████████████████████████████████████████");
+        System.out.println();
+        TextEngine.enterToNext();
+        TextEngine.clearScreen();
+        startMenu();
+    }
+
+    private static void displaySaveInfo() {
+        TextEngine.printNoDelay("Name: " + Player.getName(), false);
+        TextEngine.printNoDelay("Play time: " + playTime.returnTime(), false);
+        TextEngine.printNoDelay("Location: " + getSavedPlace(), false);
+        TextEngine.printNoDelay("Health: " + Player.getHealth() + "/" + Player.getMaxHealth(), false);
+        TextEngine.printNoDelay("Gold: " + Player.getGold(), false);
+        TextEngine.printNoDelay("Completed Dungeons: " + Dungeon.completedDungeons, false);
     }
 }

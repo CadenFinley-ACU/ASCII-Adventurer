@@ -22,7 +22,6 @@ public class GameSaveSerialization {
     private static final String NULL_MARKER = "NULL";
     public static int versionID = 1;
     private static String command;
-    private static String ignore;
     private final static Console console = System.console();
     public static String filePath = ".game_save.txt";
     public static String runtimePath = ".runtime.txt";
@@ -34,8 +33,6 @@ public class GameSaveSerialization {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        writeValue(String.valueOf(versionID), filePath);
-        writeSeparator(filePath);
         writeValue(Player.getName(), filePath);
         writeSeparator(filePath);
         writeValue(String.valueOf(Player.getHealth()), filePath);
@@ -88,85 +85,85 @@ public class GameSaveSerialization {
         writeSeparator(filePath);
         writeValue(Room.room, filePath);
         writeSeparator(filePath);
-        writeValue(String.valueOf(MeadowDungeon.completed), filePath);
+        writeValue(String.valueOf(Dungeon.MeadowDungeon.completed), filePath);
         writeSeparator(filePath);
-        writeValue(String.valueOf(MeadowDungeon.visited), filePath);
+        writeValue(String.valueOf(Dungeon.MeadowDungeon.visited), filePath);
         writeSeparator(filePath);
-        writeValue(String.valueOf(DarkForestDungeon.completed), filePath);
+        writeValue(String.valueOf(Dungeon.DarkForestDungeon.completed), filePath);
         writeSeparator(filePath);
-        writeValue(String.valueOf(DarkForestDungeon.visited), filePath);
+        writeValue(String.valueOf(Dungeon.DarkForestDungeon.visited), filePath);
         writeSeparator(filePath);
-        writeValue(String.valueOf(MountainCaveDungeon.completed), filePath);
+        writeValue(String.valueOf(Dungeon.MountainCaveDungeon.completed), filePath);
         writeSeparator(filePath);
-        writeValue(String.valueOf(MountainCaveDungeon.visited), filePath);
+        writeValue(String.valueOf(Dungeon.MountainCaveDungeon.visited), filePath);
         writeSeparator(filePath);
-        writeValue(String.valueOf(MountainTopDungeon.completed), filePath);
+        writeValue(String.valueOf(Dungeon.MountainTopDungeon.completed), filePath);
         writeSeparator(filePath);
-        writeValue(String.valueOf(MountainTopDungeon.visited), filePath);
+        writeValue(String.valueOf(Dungeon.MountainTopDungeon.visited), filePath);
         writeSeparator(filePath);
-        writeValue(String.valueOf(DesertOasisDungeon.completed), filePath);
+        writeValue(String.valueOf(Dungeon.DesertOasisDungeon.completed), filePath);
         writeSeparator(filePath);
-        writeValue(String.valueOf(DesertOasisDungeon.visited), filePath);
+        writeValue(String.valueOf(Dungeon.DesertOasisDungeon.visited), filePath);
         writeSeparator(filePath);
-        writeValue(String.valueOf(DesertPlainsDungeon.completed), filePath);
+        writeValue(String.valueOf(Dungeon.DesertPlainsDungeon.completed), filePath);
         writeSeparator(filePath);
-        writeValue(String.valueOf(DesertPlainsDungeon.visited), filePath);
+        writeValue(String.valueOf(Dungeon.DesertPlainsDungeon.visited), filePath);
         writeSeparator(filePath);
-        writeValue(String.valueOf(DesertPyramidDungeon.completed), filePath);
+        writeValue(String.valueOf(Dungeon.DesertPyramidDungeon.completed), filePath);
         writeSeparator(filePath);
-        writeValue(String.valueOf(DesertPyramidDungeon.visited), filePath);
+        writeValue(String.valueOf(Dungeon.DesertPyramidDungeon.visited), filePath);
         writeSeparator(filePath);
-        writeValue(String.valueOf(OceanKingdomDungeon.completed), filePath);
+        writeValue(String.valueOf(Dungeon.OceanKingdomDungeon.completed), filePath);
         writeSeparator(filePath);
-        writeValue(String.valueOf(OceanKingdomDungeon.visited), filePath);
+        writeValue(String.valueOf(Dungeon.OceanKingdomDungeon.visited), filePath);
         writeSeparator(filePath);
-        writeMatrix(MeadowDungeon.roomsBeenTo, filePath);
+        writeMatrix(Dungeon.MeadowDungeon.roomsBeenTo, filePath);
         writeSeparator(filePath);
-        writeMatrix(DarkForestDungeon.roomsBeenTo, filePath);
+        writeMatrix(Dungeon.DarkForestDungeon.roomsBeenTo, filePath);
         writeSeparator(filePath);
-        writeMatrix(MountainCaveDungeon.roomsBeenTo, filePath);
+        writeMatrix(Dungeon.MountainCaveDungeon.roomsBeenTo, filePath);
         writeSeparator(filePath);
-        writeMatrix(MountainTopDungeon.roomsBeenTo, filePath);
+        writeMatrix(Dungeon.MountainTopDungeon.roomsBeenTo, filePath);
         writeSeparator(filePath);
-        writeMatrix(DesertOasisDungeon.roomsBeenTo, filePath);
+        writeMatrix(Dungeon.DesertOasisDungeon.roomsBeenTo, filePath);
         writeSeparator(filePath);
-        writeMatrix(DesertPlainsDungeon.roomsBeenTo, filePath);
+        writeMatrix(Dungeon.DesertPlainsDungeon.roomsBeenTo, filePath);
         writeSeparator(filePath);
-        writeMatrix(DesertPyramidDungeon.roomsBeenTo, filePath);
+        writeMatrix(Dungeon.DesertPyramidDungeon.roomsBeenTo, filePath);
         writeSeparator(filePath);
-        writeMatrix(OceanKingdomDungeon.roomsBeenTo, filePath);
+        writeMatrix(Dungeon.OceanKingdomDungeon.roomsBeenTo, filePath);
         writeSeparator(filePath);
-        writeList(MeadowDungeon.items, filePath);
+        writeList(Dungeon.MeadowDungeon.items, filePath);
         writeSeparator(filePath);
-        writeList(DarkForestDungeon.items, filePath);
+        writeList(Dungeon.DarkForestDungeon.items, filePath);
         writeSeparator(filePath);
-        writeList(MountainCaveDungeon.items, filePath);
+        writeList(Dungeon.MountainCaveDungeon.items, filePath);
         writeSeparator(filePath);
-        writeList(MountainTopDungeon.items, filePath);
+        writeList(Dungeon.MountainTopDungeon.items, filePath);
         writeSeparator(filePath);
-        writeList(DesertOasisDungeon.items, filePath);
+        writeList(Dungeon.DesertOasisDungeon.items, filePath);
         writeSeparator(filePath);
-        writeList(DesertPlainsDungeon.items, filePath);
+        writeList(Dungeon.DesertPlainsDungeon.items, filePath);
         writeSeparator(filePath);
-        writeList(DesertPyramidDungeon.items, filePath);
+        writeList(Dungeon.DesertPyramidDungeon.items, filePath);
         writeSeparator(filePath);
-        writeList(OceanKingdomDungeon.items, filePath);
+        writeList(Dungeon.OceanKingdomDungeon.items, filePath);
         writeSeparator(filePath);
-        writeValue(String.valueOf(MeadowDungeon.mapRevealed), filePath);
+        writeValue(String.valueOf(Dungeon.MeadowDungeon.mapRevealed), filePath);
         writeSeparator(filePath);
-        writeValue(String.valueOf(DarkForestDungeon.mapRevealed), filePath);
+        writeValue(String.valueOf(Dungeon.DarkForestDungeon.mapRevealed), filePath);
         writeSeparator(filePath);
-        writeValue(String.valueOf(MountainCaveDungeon.mapRevealed), filePath);
+        writeValue(String.valueOf(Dungeon.MountainCaveDungeon.mapRevealed), filePath);
         writeSeparator(filePath);
-        writeValue(String.valueOf(MountainTopDungeon.mapRevealed), filePath);
+        writeValue(String.valueOf(Dungeon.MountainTopDungeon.mapRevealed), filePath);
         writeSeparator(filePath);
-        writeValue(String.valueOf(DesertOasisDungeon.mapRevealed), filePath);
+        writeValue(String.valueOf(Dungeon.DesertOasisDungeon.mapRevealed), filePath);
         writeSeparator(filePath);
-        writeValue(String.valueOf(DesertPlainsDungeon.mapRevealed), filePath);
+        writeValue(String.valueOf(Dungeon.DesertPlainsDungeon.mapRevealed), filePath);
         writeSeparator(filePath);
-        writeValue(String.valueOf(DesertPyramidDungeon.mapRevealed), filePath);
+        writeValue(String.valueOf(Dungeon.DesertPyramidDungeon.mapRevealed), filePath);
         writeSeparator(filePath);
-        writeValue(String.valueOf(OceanKingdomDungeon.mapRevealed), filePath);
+        writeValue(String.valueOf(Dungeon.OceanKingdomDungeon.mapRevealed), filePath);
         writeSeparator(filePath);
         writeValue(String.valueOf(Main.gameComplete), filePath);
         writeSeparator(filePath);
@@ -180,19 +177,17 @@ public class GameSaveSerialization {
         writeSeparator(filePath);
         writeValue(String.valueOf(PromptEngine.promptLength), filePath);
         writeSeparator(filePath);
-
+        writeValue(String.valueOf(Main.playTime.getElapsedTime() + Main.playTime.getSavedTime()), filePath);
         //do this after all other data is saved
         serializeAllLines(filePath, filePath);
     }
 
     public static void loadGameSave() throws InterruptedException {
+        Main.playTime.setSavedTime(Main.playTime.getSavedTime() + Main.playTime.getElapsedTime());
         String buffer = "";
         deserializeToFile(filePath);
         try (BufferedReader reader = new BufferedReader(new FileReader(runtimePath))) {
             try {
-                int version = Integer.parseInt(reader.readLine());
-                //read decrypted data
-                buffer = reader.readLine();
                 String name = String.valueOf(reader.readLine());
                 buffer = reader.readLine();
                 int health = Integer.parseInt(reader.readLine());
@@ -201,10 +196,8 @@ public class GameSaveSerialization {
                 buffer = reader.readLine();
                 int gold = Integer.parseInt(reader.readLine());
                 buffer = reader.readLine();
-
                 Map<String, Integer> inventory = readInventory(reader.readLine());
                 buffer = reader.readLine();
-
                 int inventorySize = Integer.parseInt(reader.readLine());
                 buffer = reader.readLine();
                 Player.playerSetSave(name, health, maxHealth, gold, inventory, inventorySize);
@@ -216,6 +209,7 @@ public class GameSaveSerialization {
                 buffer = reader.readLine();
                 Dungeon.currentDungeon = reader.readLine();
                 buffer = reader.readLine();
+
                 Dungeon.completedDungeons = Integer.parseInt(reader.readLine());
                 buffer = reader.readLine();
                 Dungeon.currentPlayerPosition = readArray(reader);
@@ -238,6 +232,7 @@ public class GameSaveSerialization {
                 buffer = reader.readLine();
                 Dungeon.oceanKingdomDungeon = readMatrix(reader);
                 buffer = reader.readLine();
+
                 SpawnRoom.roomSave = Integer.parseInt(reader.readLine());
                 buffer = reader.readLine();
                 OpenWorld.roomSave = Integer.parseInt(reader.readLine());
@@ -248,86 +243,88 @@ public class GameSaveSerialization {
                 buffer = reader.readLine();
                 Room.room = reader.readLine();
                 buffer = reader.readLine();
-                MeadowDungeon.completed = Boolean.parseBoolean(reader.readLine());
+
+                Dungeon.MeadowDungeon.completed = Boolean.parseBoolean(reader.readLine());
                 buffer = reader.readLine();
-                MeadowDungeon.visited = Boolean.parseBoolean(reader.readLine());
+                Dungeon.MeadowDungeon.visited = Boolean.parseBoolean(reader.readLine());
                 buffer = reader.readLine();
-                DarkForestDungeon.completed = Boolean.parseBoolean(reader.readLine());
+                Dungeon.DarkForestDungeon.completed = Boolean.parseBoolean(reader.readLine());
                 buffer = reader.readLine();
-                DarkForestDungeon.visited = Boolean.parseBoolean(reader.readLine());
+                Dungeon.DarkForestDungeon.visited = Boolean.parseBoolean(reader.readLine());
                 buffer = reader.readLine();
-                MountainCaveDungeon.completed = Boolean.parseBoolean(reader.readLine());
+                Dungeon.MountainCaveDungeon.completed = Boolean.parseBoolean(reader.readLine());
                 buffer = reader.readLine();
-                MountainCaveDungeon.visited = Boolean.parseBoolean(reader.readLine());
+                Dungeon.MountainCaveDungeon.visited = Boolean.parseBoolean(reader.readLine());
                 buffer = reader.readLine();
-                MountainTopDungeon.completed = Boolean.parseBoolean(reader.readLine());
+                Dungeon.MountainTopDungeon.completed = Boolean.parseBoolean(reader.readLine());
                 buffer = reader.readLine();
-                MountainTopDungeon.visited = Boolean.parseBoolean(reader.readLine());
+                Dungeon.MountainTopDungeon.visited = Boolean.parseBoolean(reader.readLine());
                 buffer = reader.readLine();
-                DesertOasisDungeon.completed = Boolean.parseBoolean(reader.readLine());
+                Dungeon.DesertOasisDungeon.completed = Boolean.parseBoolean(reader.readLine());
                 buffer = reader.readLine();
-                DesertOasisDungeon.visited = Boolean.parseBoolean(reader.readLine());
+                Dungeon.DesertOasisDungeon.visited = Boolean.parseBoolean(reader.readLine());
                 buffer = reader.readLine();
-                DesertPlainsDungeon.completed = Boolean.parseBoolean(reader.readLine());
+                Dungeon.DesertPlainsDungeon.completed = Boolean.parseBoolean(reader.readLine());
                 buffer = reader.readLine();
-                DesertPlainsDungeon.visited = Boolean.parseBoolean(reader.readLine());
+                Dungeon.DesertPlainsDungeon.visited = Boolean.parseBoolean(reader.readLine());
                 buffer = reader.readLine();
-                DesertPyramidDungeon.completed = Boolean.parseBoolean(reader.readLine());
+                Dungeon.DesertPyramidDungeon.completed = Boolean.parseBoolean(reader.readLine());
                 buffer = reader.readLine();
-                DesertPyramidDungeon.visited = Boolean.parseBoolean(reader.readLine());
+                Dungeon.DesertPyramidDungeon.visited = Boolean.parseBoolean(reader.readLine());
                 buffer = reader.readLine();
-                OceanKingdomDungeon.completed = Boolean.parseBoolean(reader.readLine());
+                Dungeon.OceanKingdomDungeon.completed = Boolean.parseBoolean(reader.readLine());
                 buffer = reader.readLine();
-                OceanKingdomDungeon.visited = Boolean.parseBoolean(reader.readLine());
+                Dungeon.OceanKingdomDungeon.visited = Boolean.parseBoolean(reader.readLine());
                 buffer = reader.readLine();
-                MeadowDungeon.roomsBeenTo = readMatrix(reader);
+                Dungeon.MeadowDungeon.roomsBeenTo = readMatrix(reader);
                 buffer = reader.readLine();
-                DarkForestDungeon.roomsBeenTo = readMatrix(reader);
+                Dungeon.DarkForestDungeon.roomsBeenTo = readMatrix(reader);
                 buffer = reader.readLine();
-                MountainCaveDungeon.roomsBeenTo = readMatrix(reader);
+                Dungeon.MountainCaveDungeon.roomsBeenTo = readMatrix(reader);
                 buffer = reader.readLine();
-                MountainTopDungeon.roomsBeenTo = readMatrix(reader);
+                Dungeon.MountainTopDungeon.roomsBeenTo = readMatrix(reader);
                 buffer = reader.readLine();
-                DesertOasisDungeon.roomsBeenTo = readMatrix(reader);
+                Dungeon.DesertOasisDungeon.roomsBeenTo = readMatrix(reader);
                 buffer = reader.readLine();
-                DesertPlainsDungeon.roomsBeenTo = readMatrix(reader);
+                Dungeon.DesertPlainsDungeon.roomsBeenTo = readMatrix(reader);
                 buffer = reader.readLine();
-                DesertPyramidDungeon.roomsBeenTo = readMatrix(reader);
+                Dungeon.DesertPyramidDungeon.roomsBeenTo = readMatrix(reader);
                 buffer = reader.readLine();
-                OceanKingdomDungeon.roomsBeenTo = readMatrix(reader);
+                Dungeon.OceanKingdomDungeon.roomsBeenTo = readMatrix(reader);
                 buffer = reader.readLine();
-                MeadowDungeon.items = readList(reader);
+                Dungeon.MeadowDungeon.items = readList(reader);
                 buffer = reader.readLine();
-                DarkForestDungeon.items = readList(reader);
+                Dungeon.DarkForestDungeon.items = readList(reader);
                 buffer = reader.readLine();
-                MountainCaveDungeon.items = readList(reader);
+                Dungeon.MountainCaveDungeon.items = readList(reader);
                 buffer = reader.readLine();
-                MountainTopDungeon.items = readList(reader);
+                Dungeon.MountainTopDungeon.items = readList(reader);
                 buffer = reader.readLine();
-                DesertOasisDungeon.items = readList(reader);
+                Dungeon.DesertOasisDungeon.items = readList(reader);
                 buffer = reader.readLine();
-                DesertPlainsDungeon.items = readList(reader);
+                Dungeon.DesertPlainsDungeon.items = readList(reader);
                 buffer = reader.readLine();
-                DesertPyramidDungeon.items = readList(reader);
+                Dungeon.DesertPyramidDungeon.items = readList(reader);
                 buffer = reader.readLine();
-                OceanKingdomDungeon.items = readList(reader);
+                Dungeon.OceanKingdomDungeon.items = readList(reader);
                 buffer = reader.readLine();
-                MeadowDungeon.mapRevealed = Boolean.parseBoolean(reader.readLine());
+                Dungeon.MeadowDungeon.mapRevealed = Boolean.parseBoolean(reader.readLine());
                 buffer = reader.readLine();
-                DarkForestDungeon.mapRevealed = Boolean.parseBoolean(reader.readLine());
+                Dungeon.DarkForestDungeon.mapRevealed = Boolean.parseBoolean(reader.readLine());
                 buffer = reader.readLine();
-                MountainCaveDungeon.mapRevealed = Boolean.parseBoolean(reader.readLine());
+                Dungeon.MountainCaveDungeon.mapRevealed = Boolean.parseBoolean(reader.readLine());
                 buffer = reader.readLine();
-                MountainTopDungeon.mapRevealed = Boolean.parseBoolean(reader.readLine());
+                Dungeon.MountainTopDungeon.mapRevealed = Boolean.parseBoolean(reader.readLine());
                 buffer = reader.readLine();
-                DesertOasisDungeon.mapRevealed = Boolean.parseBoolean(reader.readLine());
+                Dungeon.DesertOasisDungeon.mapRevealed = Boolean.parseBoolean(reader.readLine());
                 buffer = reader.readLine();
-                DesertPlainsDungeon.mapRevealed = Boolean.parseBoolean(reader.readLine());
+                Dungeon.DesertPlainsDungeon.mapRevealed = Boolean.parseBoolean(reader.readLine());
                 buffer = reader.readLine();
-                DesertPyramidDungeon.mapRevealed = Boolean.parseBoolean(reader.readLine());
+                Dungeon.DesertPyramidDungeon.mapRevealed = Boolean.parseBoolean(reader.readLine());
                 buffer = reader.readLine();
-                OceanKingdomDungeon.mapRevealed = Boolean.parseBoolean(reader.readLine());
+                Dungeon.OceanKingdomDungeon.mapRevealed = Boolean.parseBoolean(reader.readLine());
                 buffer = reader.readLine();
+
                 Main.gameComplete = Boolean.parseBoolean(reader.readLine());
                 buffer = reader.readLine();
                 Dungeon.resetedAfterWin = Boolean.parseBoolean(reader.readLine());
@@ -339,6 +336,8 @@ public class GameSaveSerialization {
                 PromptEngine.aiGenerationEnabled = Boolean.parseBoolean(reader.readLine());
                 buffer = reader.readLine();
                 PromptEngine.promptLength = Integer.parseInt(reader.readLine());
+                buffer = reader.readLine();
+                Main.playTime.setSavedTime(Long.parseLong(reader.readLine()));
 
             } catch (IOException | NumberFormatException e) {
                 System.out.println("Save File Corrupt or Invalid... ");
@@ -347,7 +346,6 @@ public class GameSaveSerialization {
                 TextEngine.clearScreen();
                 Main.wipeSave();
                 Main.startMenu();
-
             }
         } catch (Exception e) {
             System.out.println("Save File Not Found... ");
@@ -515,7 +513,7 @@ public class GameSaveSerialization {
         File outputFilePath = new File(runtimePath);
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(serializedFilePath)); BufferedWriter bw = new BufferedWriter(new FileWriter(outputFilePath))) {
 
-            // Deserialize the list of lines
+            // Deserialize the list of lines 
             List<String> lines = (List<String>) ois.readObject();
 
             // Write each line to the output file

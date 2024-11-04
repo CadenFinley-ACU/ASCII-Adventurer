@@ -24,6 +24,8 @@ public class TestSuite_Adventure {
         System.out.println(((float) DungeonGenerator.fails / DungeonGenerator.runs) * 100 + "% failure rate");
         System.out.println("For every test run, " + (float) DungeonGenerator.runs / testsrun + " dungeons were generated");
         System.out.println("-----------------------------");
+        DungeonGenerator.wipe();
+        DungeonGenerator.testing = false;
     }
 
     @Test
@@ -293,8 +295,9 @@ public class TestSuite_Adventure {
     @Test
     public void stupidStress() {
         for (int i = 0; i < 1000; i++) {
+            int randNum = new Random().nextInt(11) + 7;
             testsrun++;
-            int[][] testMatrix = DungeonGenerator.generateAndReturnMatrix(11);
+            int[][] testMatrix = DungeonGenerator.generateAndReturnMatrix(randNum);
             boolean connected = DungeonGenerator.testArrays(testMatrix);
             assertTrue("There should be a path connecting 9 and 8 with values higher than 0", connected);
         }
@@ -319,6 +322,7 @@ public class TestSuite_Adventure {
             OpenWorldGenerator.printMatrix();
         }
     }
+
     @Test
     public void testOpenWorldGen10002() {
         for (int i = 0; i < 1000; i++) {
@@ -328,6 +332,7 @@ public class TestSuite_Adventure {
             OpenWorldGenerator.printMatrix();
         }
     }
+
     @Test
     public void testOpenWorldGen10003() {
         for (int i = 0; i < 1000; i++) {
@@ -337,6 +342,7 @@ public class TestSuite_Adventure {
             OpenWorldGenerator.printMatrix();
         }
     }
+
     @Test
     public void testOpenWorldGen10004() {
         for (int i = 0; i < 1000; i++) {
@@ -346,6 +352,7 @@ public class TestSuite_Adventure {
             OpenWorldGenerator.printMatrix();
         }
     }
+
     @Test
     public void testOpenWorldGen10005() {
         for (int i = 0; i < 1000; i++) {
@@ -355,6 +362,7 @@ public class TestSuite_Adventure {
             OpenWorldGenerator.printMatrix();
         }
     }
+
     @Test
     public void testOpenWorldGen10006() {
         for (int i = 0; i < 1000; i++) {
@@ -364,6 +372,7 @@ public class TestSuite_Adventure {
             OpenWorldGenerator.printMatrix();
         }
     }
+
     @Test
     public void testOpenWorldGen10007() {
         for (int i = 0; i < 1000; i++) {
@@ -373,6 +382,7 @@ public class TestSuite_Adventure {
             OpenWorldGenerator.printMatrix();
         }
     }
+
     @Test
     public void testOpenWorldGen10008() {
         for (int i = 0; i < 1000; i++) {
@@ -382,6 +392,7 @@ public class TestSuite_Adventure {
             OpenWorldGenerator.printMatrix();
         }
     }
+
     @Test
     public void testOpenWorldGen10009() {
         for (int i = 0; i < 1000; i++) {
@@ -391,6 +402,7 @@ public class TestSuite_Adventure {
             OpenWorldGenerator.printMatrix();
         }
     }
+
     @Test
     public void testOpenWorldGen10010() {
         for (int i = 0; i < 1000; i++) {

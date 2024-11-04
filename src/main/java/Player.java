@@ -17,7 +17,6 @@ public class Player {
     public final static Console console = System.console();
     public static String command;
     public static String holdCommand;
-    public static String ignore;
     public static int inventorySize;
     private static int gold;
     private static int damage;
@@ -61,13 +60,13 @@ public class Player {
         name = "Debug!";
         Main.playerCreated = true;
         DungeonGenerator.testing = false;
+        Main.playTime.startClock();
         TextEngine.printNoDelay("Where do you want to spawn", false);
         TextEngine.printNoDelay(" 1:SpawnRoom", false);
         TextEngine.printNoDelay(" 2:OpenWorld", false);
         TextEngine.printNoDelay(" 3:Dungeon", false);
         TextEngine.printNoDelay(" 4:Village", false);
         TextEngine.printNoDelay("debug spawn: ", true);
-        ignore = console.readLine();
         command = console.readLine();
         switch (command) {
             case "1" -> {
@@ -81,40 +80,31 @@ public class Player {
             case "3" -> {
                 TextEngine.printNoDelay(" 1:Meadow\n 2:Dark Forest\n 3:Mountain Cave\n 4:Mountain Top\n 5:Desert Oasis\n 6:Desert Plains\n 7 Desert Pyramid\n 8:Ocean Kingdom", false);
                 TextEngine.printNoDelay("debug dungeon: ", true);
-                ignore = console.readLine();
                 command = console.readLine();
                 switch (command) {
                     case "1" -> {
-                        Main.saveSpace("Meadow Dungeon");
-                        Main.loadSave();
+                        Dungeon.MeadowDungeon.startRoom();
                     }
                     case "2" -> {
-                        Main.saveSpace("Dark Forest Dungeon");
-                        Main.loadSave();
+                        Dungeon.DarkForestDungeon.startRoom();
                     }
                     case "3" -> {
-                        Main.saveSpace("Mountain Cave Dungeon");
-                        Main.loadSave();
+                        Dungeon.MountainCaveDungeon.startRoom();
                     }
                     case "4" -> {
-                        Main.saveSpace("Mountain Top Dungeon");
-                        Main.loadSave();
+                        Dungeon.MountainTopDungeon.startRoom();
                     }
                     case "5" -> {
-                        Main.saveSpace("Desert Oasis Dungeon");
-                        Main.loadSave();
+                        Dungeon.DesertOasisDungeon.startRoom();
                     }
                     case "6" -> {
-                        Main.saveSpace("Desert Plains Dungeon");
-                        Main.loadSave();
+                        Dungeon.DesertPlainsDungeon.startRoom();
                     }
                     case "7" -> {
-                        Main.saveSpace("Desert Pyramid Dungeon");
-                        Main.loadSave();
+                        Dungeon.DesertPyramidDungeon.startRoom();
                     }
                     case "8" -> {
-                        Main.saveSpace("Ocean Kingdom Dungeon");
-                        Main.loadSave();
+                        Dungeon.OceanKingdomDungeon.startRoom();
                     }
                     default -> {
                         Main.saveSpace("SpawnRoom");
@@ -281,12 +271,10 @@ public class Player {
     private static void playerCreate() throws InterruptedException { //create the player
         String brightBoldEnd = "\033[0m";
         String brightYellowStart = "\033[1;33m";
-
-        TextEngine.printWithDelays("Welcome to the game! What is your name hero?", true);
         while (true) {
-            ignore = console.readLine();
+            TextEngine.printWithDelays("Welcome to the game! What is your name hero?", true);
             command = console.readLine();
-            if (command != null && !command.isEmpty()) {
+            if (command != null && !command.isEmpty() && command.length() < 13) {
                 if ("exit".equals(command)) {
                     Main.startMenu();
                     TextEngine.clearScreen();
@@ -295,7 +283,9 @@ public class Player {
                     break;
                 }
             } else {
-                TextEngine.printWithDelays("Please enter a name.", true);
+                TextEngine.printNoDelay("Invalid Input! Name must be 12 characters or less!", false);
+                TextEngine.enterToNext();
+                TextEngine.clearScreen();
             }
 
         }
@@ -314,6 +304,7 @@ public class Player {
         TextEngine.enterToNext();
         TextEngine.clearScreen();
         Main.playerCreated = true;
+        Main.playTime.startClock();
         Main.saveSpace("SpawnRoom");
         Main.loadSave();
     }
@@ -323,6 +314,7 @@ public class Player {
         TextEngine.clearScreen();
         TextEngine.printNoDelay("Player Stats:", false);
         TextEngine.printNoDelay("Name: " + name, false);
+        TextEngine.printNoDelay("Play Time: " + Main.playTime.returnTime(), false);
         drawHealthBar();
         TextEngine.printNoDelay("Gold: " + gold, false);
         TextEngine.printNoDelay("Damage: " + damage, false);
@@ -330,7 +322,7 @@ public class Player {
         TextEngine.printNoDelay("Inventory: " + getTotalNumberOfItemsInInventory() + "/" + inventorySize, false);
         TextEngine.printNoDelay(yellowColor + "Press Enter to continue" + resetColor, false);
         command = console.readLine();
-        if ("[][][]3>CadenTesting".equals(command)) {
+        if ("[][][]CadenTesting".equals(command)) {
             maxHealth = 10000;
             health = maxHealth;
             gold = 20000000;
@@ -565,9 +557,8 @@ public class Player {
         String space = "     ";
         TextEngine.printWithDelays(space + "What is your new name hero?", true);
         while (true) {
-            ignore = console.readLine();
             command = console.readLine();
-            if (command != null && !command.isEmpty()) {
+            if (command != null && !command.isEmpty() && command.length() < 13) {
                 if ("exit".equals(command)) {
                     Main.startMenu();
                     TextEngine.clearScreen();
@@ -614,7 +605,7 @@ public class Player {
         }
         bar.append("|");
         String healthBar = bar.toString();
-        TextEngine.printNoDelay("Health: " + health + " / " + maxHealth, false);
+        System.out.println("Health: " + health + " / " + maxHealth);
         System.out.println(healthBar);
     }
 
@@ -1060,6 +1051,7 @@ public class Player {
                         minDistance = distance;
                         closestDungeonX = x;
                         closestDungeonY = y;
+                        break;
                     }
                 }
             }

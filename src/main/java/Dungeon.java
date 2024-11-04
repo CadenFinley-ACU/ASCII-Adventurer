@@ -1,6 +1,7 @@
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
  * Dungeon Class
@@ -19,23 +20,36 @@ public class Dungeon extends Room {
     public static String enemyType;
     public static boolean resetedAfterWin = false;
 
-    public static int[][] meadowDungeon;
-    public static int[][] darkForestDungeon;
-    public static int[][] mountainCaveDungeon;
-    public static int[][] mountainTopDungeon;
-    public static int[][] desertOasisDungeon;
-    public static int[][] desertPlainsDungeon;
-    public static int[][] desertPyramidDungeon;
-    public static int[][] oceanKingdomDungeon;
+    private static final Random rand = new Random();
+
+    public static int[][] meadowDungeon = null;
+    public static int[][] darkForestDungeon = null;
+    public static int[][] mountainCaveDungeon = null;
+    public static int[][] mountainTopDungeon = null;
+    public static int[][] desertOasisDungeon = null;
+    public static int[][] desertPlainsDungeon = null;
+    public static int[][] desertPyramidDungeon = null;
+    public static int[][] oceanKingdomDungeon = null;
 
     public static int[] currentPlayerPosition = null;
     public static int[] lastPosition = null; // Variable to store the last position
-    public static boolean previousAutoSettings;
 
     public static String currentMiniBoss;
     public static String currentBoss;
 
     public static List<String> missedItems = new ArrayList<>();
+
+    private static int[] availableMove;
+    private static ArrayList<String> directionsString;
+
+    public static DungeonInstance MeadowDungeon;
+    public static DungeonInstance DarkForestDungeon;
+    public static DungeonInstance MountainCaveDungeon;
+    public static DungeonInstance MountainTopDungeon;
+    public static DungeonInstance DesertOasisDungeon;
+    public static DungeonInstance DesertPlainsDungeon;
+    public static DungeonInstance DesertPyramidDungeon;
+    public static DungeonInstance OceanKingdomDungeon;
 
     public static void generateDungeons() { //generates all 8 dungeons and stores them in their respective variables
         meadowDungeon = DungeonGenerator.generateAndReturnMatrix(5);
@@ -46,6 +60,48 @@ public class Dungeon extends Room {
         desertPlainsDungeon = DungeonGenerator.generateAndReturnMatrix(8);
         desertPyramidDungeon = DungeonGenerator.generateAndReturnMatrix(9);
         oceanKingdomDungeon = DungeonGenerator.generateAndReturnMatrix(11);
+
+    }
+
+    public static void initalizeDungeons() {
+        MeadowDungeon = new DungeonInstance(new ArrayList<>(List.of("Goblin", "Skeleton", "Slime", "Mimic")), new ArrayList<>(List.of("axe", "chainmail set")), false, false, false, "Meadow", "Meadow Dungeon", "Golem", "Forest Giant", 3);
+        DarkForestDungeon = new DungeonInstance(new ArrayList<>(List.of("Goblin", "Skeleton", "Orc", "Mimic", "Zombie")), new ArrayList<>(List.of("broad sword", "full armor kit")), false, false, false, "Dark Forest", "Dark Forest Dungeon", "Forest Guardian", "Forest Spirit", 4);
+        MountainCaveDungeon = new DungeonInstance(new ArrayList<>(List.of("Troll", "Skeleton", "Orc", "Ghost", "Demon", "Zombie")), new ArrayList<>(List.of("better sword", "ninja armor")), false, false, false, "Mountain Cave", "Mountain Cave Dungeon", "Elemental", "Wyvern", 5);
+        MountainTopDungeon = new DungeonInstance(new ArrayList<>(List.of("Ghost", "Gargoyle", "Orc", "Vampire", "Demon")), new ArrayList<>(List.of("great sword", "knight armor")), false, false, false, "Mountain Top", "Mountain Top Dungeon", "Minotaur", "Ice Dragon", 7);
+        DesertOasisDungeon = new DungeonInstance(new ArrayList<>(List.of("Werewolf", "Witch", "Giant", "Mummy", "Minotaur")), new ArrayList<>(List.of("master sword", "royal armor")), false, false, false, "Desert Oasis", "Desert Oasis Dungeon", "Sphinx", "Phoenix", 3);
+        DesertPlainsDungeon = new DungeonInstance(new ArrayList<>(List.of("Orc", "Troll", "Mummy", "Demon")), new ArrayList<>(List.of("legendary sword", "demon armor")), false, false, false, "Desert Plains", "Desert Plains Dungeon", "Cyclops", "Giant Scorpion", 5);
+        DesertPyramidDungeon = new DungeonInstance(new ArrayList<>(List.of("Werewolf", "Witch", "Giant", "Mummy", "Minotaur")), new ArrayList<>(List.of("excalibur", "angel armor")), false, false, false, "Desert Pyramid", "Desert Pyramid Dungeon", "Medusa", "Giant Sand Worm", 6);
+        OceanKingdomDungeon = new DungeonInstance(new ArrayList<>(List.of("Sea Serpent", "Sea Monster", "Sea Witch", "Sea Dragon", "Sea Dragon")), new ArrayList<>(List.of("god slayer hammer", "god slayer armor")), false, false, false, "Ocean Kingdom", "Ocean Kingdom Dungeon", "Leviathan", "Kraken", 4);
+    }
+
+    public static void setMaps() {
+        MeadowDungeon.map = meadowDungeon;
+        DarkForestDungeon.map = darkForestDungeon;
+        MountainCaveDungeon.map = mountainCaveDungeon;
+        MountainTopDungeon.map = mountainTopDungeon;
+        DesertOasisDungeon.map = desertOasisDungeon;
+        DesertPlainsDungeon.map = desertPlainsDungeon;
+        DesertPyramidDungeon.map = desertPyramidDungeon;
+        OceanKingdomDungeon.map = oceanKingdomDungeon;
+        MeadowDungeon.setValues();
+        DarkForestDungeon.setValues();
+        MountainCaveDungeon.setValues();
+        MountainTopDungeon.setValues();
+        DesertOasisDungeon.setValues();
+        DesertPlainsDungeon.setValues();
+        DesertPyramidDungeon.setValues();
+        OceanKingdomDungeon.setValues();
+    }
+
+    public static void setRoomsBeenTo() {
+        MeadowDungeon.setShownMap();
+        DarkForestDungeon.setShownMap();
+        MountainCaveDungeon.setShownMap();
+        MountainTopDungeon.setShownMap();
+        DesertOasisDungeon.setShownMap();
+        DesertPlainsDungeon.setShownMap();
+        DesertPyramidDungeon.setShownMap();
+        OceanKingdomDungeon.setShownMap();
     }
 
     public static void defaultDungeonArgs(String data) throws InterruptedException { //default dungeon arguments
@@ -248,7 +304,6 @@ public class Dungeon extends Room {
                     TextEngine.printWithDelays("This command will reset" + yellowColor + " ALL " + resetColor + "Dungeons!", false);
                     TextEngine.printWithDelays("Are you sure you want to do this? " + redColor + "yes" + resetColor + " or " + yellowColor + "no" + resetColor, true);
                     while (true) {
-                        ignore = Room.console.readLine();
                         command = Room.console.readLine();
                         switch (command.toLowerCase().trim()) {
                             case "yes" -> {
@@ -293,9 +348,9 @@ public class Dungeon extends Room {
     }
 
     public static void dungeonCheck() throws InterruptedException {
-        if (OpenWorld.holdCommand == null) {
+        if (OpenWorld.holdCommand == null || OpenWorld.holdCommand.isEmpty() || OpenWorld.holdCommand.isBlank() || OpenWorld.holdCommand.equals(" ") || OpenWorld.holdCommand.equals("null")) {
             OpenWorld.holdCommand = "onward";
-            TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ".", resetedAfterWin);
+            TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ".", false);
             return;
         }
         switch (completedDungeons) {
@@ -311,9 +366,9 @@ public class Dungeon extends Room {
             }
             case 1 -> {// the dark forest dungeon
                 switch (OpenWorld.roomNumber) {
-                    case 72, 73,74, 64, 65, 66, 67, 68, 69->
+                    case 72, 73, 74, 64, 65, 66, 67, 68, 69 ->
                         TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", feeling a sense of adventure as you leave the open paths behind.\n Ahead, you notice the entrance to the next dungeon lying just to the north, east.\n\n", false);
-                    case 55, 27, 57, 58, 59, 60->
+                    case 55, 27, 57, 58, 59, 60 ->
                         TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", feeling a sense of adventure as you leave the open paths behind.\n Ahead, you notice the entrance to the next dungeon lying just to the east.\n\n", false);
                     default ->
                         TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", feeling a sense of adventure as you leave the open paths behind.\n Ahead, you notice the entrance to the next dungeon lying just to the south, east.\n\n", false);
@@ -323,7 +378,7 @@ public class Dungeon extends Room {
                 switch (OpenWorld.roomNumber) {
                     case 74, 66, 57, 50, 41, 62 ->
                         TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", feeling a sense of adventure as you leave the open paths behind.\n Ahead, you notice the entrance to the next dungeon lying just to the north.\n\n", false);
-                    case 33, 34, 35, 36, 42, 43, 44, 45, 51, 52, 53,54, 58, 59,60,67, 68, 69 ->
+                    case 33, 34, 35, 36, 42, 43, 44, 45, 51, 52, 53, 54, 58, 59, 60, 67, 68, 69 ->
                         TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", feeling a sense of adventure as you leave the open paths behind.\n Ahead, you notice the entrance to the next dungeon lying just to the north, west.\n\n", false);
                     case 21, 22 ->
                         TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", feeling a sense of adventure as you leave the open paths behind.\n Ahead, you notice the entrance to the next dungeon lying just to the east.\n\n", false);
@@ -337,7 +392,6 @@ public class Dungeon extends Room {
                         TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ", feeling a sense of adventure as you leave the open paths behind.\n Ahead, you notice the entrance to the next dungeon lying just to the south, east.\n\n", false);
                     default ->
                         TextEngine.printWithDelays("The Mountain cave is not working Doungeon.java\n\n", false);
-
                 }
             }
             case 3 -> {// The Mountain Top Dungeon
@@ -416,7 +470,6 @@ public class Dungeon extends Room {
         if (Player.inventory.containsKey("key")) {
             TextEngine.printWithDelays("Would you like to unlock the door to the boss room? " + yellowColor + "yes" + resetColor + " or " + yellowColor + "no" + resetColor, true);
             while (true) {
-                ignore = Room.console.readLine();
                 command = Room.console.readLine();
                 switch (command.toLowerCase().trim()) {
                     case "yes" -> {
@@ -456,7 +509,6 @@ public class Dungeon extends Room {
             case "Meadow", "Dark Forest", "Mountain Cave", "Mountain Top" -> {
                 TextEngine.printNoDelay(yellowColor + "health potion" + resetColor + " ~20 gold\n" + yellowColor + "magic map" + resetColor + " ~50\n" + yellowColor + "K.O. Cannon" + resetColor + " ~3000 gold\nor " + yellowColor + " leave" + resetColor, true);
                 while (true) {
-                    ignore = Room.console.readLine();
                     command = Room.console.readLine();
                     switch (command.toLowerCase().trim()) {
                         case "health potion" -> {
@@ -505,7 +557,6 @@ public class Dungeon extends Room {
             case "Desert Oasis", "Desert Plains", "Desert Pyramid" -> {
                 TextEngine.printNoDelay(yellowColor + "greater health potion" + resetColor + " ~50 gold\n" + yellowColor + "magic map" + resetColor + " ~150\n" + yellowColor + "K.O. Cannon" + resetColor + " ~3000 gold\nor " + yellowColor + " leave" + resetColor, true);
                 while (true) {
-                    ignore = Room.console.readLine();
                     command = Room.console.readLine();
                     switch (command.toLowerCase().trim()) {
                         case "greater health potion" -> {
@@ -554,7 +605,6 @@ public class Dungeon extends Room {
             case "Ocean Kingdom" -> {
                 TextEngine.printNoDelay(yellowColor + "super health potion" + resetColor + " ~75 gold\n" + yellowColor + "magic map" + resetColor + " ~250\n" + yellowColor + "K.O. Cannon" + resetColor + " ~3000 gold\nor " + yellowColor + " leave" + resetColor, true);
                 while (true) {
-                    ignore = Room.console.readLine();
                     command = Room.console.readLine();
                     switch (command.toLowerCase().trim()) {
                         case "super health potion" -> {
@@ -606,7 +656,6 @@ public class Dungeon extends Room {
     private static void buyMultiple(String type, int cost) throws InterruptedException { //buy multiple clause for certain items in village shop
         TextEngine.printWithDelays("How many would you like to buy?", true);
         while (true) {
-            ignore = console.readLine();
             command = console.readLine();
             if (TextEngine.checkValidInput(command)) {
                 try {
@@ -656,7 +705,6 @@ public class Dungeon extends Room {
     private static void keepShopping() throws InterruptedException { //keep shopping
         TextEngine.printWithDelays("Would you like to keep shopping? " + yellowColor + "yes" + resetColor + " or " + yellowColor + "no" + resetColor, true);
         while (true) {
-            ignore = console.readLine();
             command = console.readLine();
             switch (command.toLowerCase().trim()) {
                 case "yes" -> {
@@ -717,48 +765,9 @@ public class Dungeon extends Room {
     }
 
     private static void leave() throws InterruptedException {
-        switch (currentDungeon) {
-            case "Meadow" -> {
-                TextEngine.printWithDelays("You leave the shop and return to the Meadow Dungeon.", false);
-                TextEngine.enterToNext();
-                MeadowDungeon.handleDirectionsAndCommands();
-            }
-            case "Dark Forest" -> {
-                TextEngine.printWithDelays("You leave the shop and return to the Dark Forest Dungeon.", false);
-                TextEngine.enterToNext();
-                DarkForestDungeon.handleDirectionsAndCommands();
-            }
-            case "Mountain Cave" -> {
-                TextEngine.printWithDelays("You leave the shop and return to the Mountain Cave Dungeon.", false);
-                TextEngine.enterToNext();
-                MountainCaveDungeon.handleDirectionsAndCommands();
-            }
-            case "Mountain Top" -> {
-                TextEngine.printWithDelays("You leave the shop and return to the Mountain Top Dungeon.", false);
-                TextEngine.enterToNext();
-                MountainTopDungeon.handleDirectionsAndCommands();
-            }
-            case "Desert Oasis" -> {
-                TextEngine.printWithDelays("You leave the shop and return to the Desert Oasis Dungeon.", false);
-                TextEngine.enterToNext();
-                DesertOasisDungeon.handleDirectionsAndCommands();
-            }
-            case "Desert Plains" -> {
-                TextEngine.printWithDelays("You leave the shop and return to the Desert Plains Dungeon.", false);
-                TextEngine.enterToNext();
-                DesertPlainsDungeon.handleDirectionsAndCommands();
-            }
-            case "Desert Pyramid" -> {
-                TextEngine.printWithDelays("You leave the shop and return to the Desert Pyramid Dungeon.", false);
-                TextEngine.enterToNext();
-                DesertPyramidDungeon.handleDirectionsAndCommands();
-            }
-            case "Ocean Kingdom" -> {
-                TextEngine.printWithDelays("You leave the shop and return to the Ocean Kingdom Dungeon.", false);
-                TextEngine.enterToNext();
-                OceanKingdomDungeon.handleDirectionsAndCommands();
-            }
-        }
+        TextEngine.printWithDelays("You leave the shop and return to the " + currentDungeon + " Dungeon.", false);
+        TextEngine.enterToNext();
+        handleDirectionsAndCommands();
     }
 
     private static boolean checkIfCurrentDungeonIsRevealed() {
@@ -829,8 +838,815 @@ public class Dungeon extends Room {
     }
 
     public static void dungeonIntroText() throws InterruptedException {
-        TextEngine.printWithDelays("You have entered " + yellowColor + "The " + currentDungeon + resetColor + "!", false);
-        TextEngine.printWithDelays("To beat the dungeon you must beat the " + yellowColor + currentBoss + resetColor + "!\nBe on the look out for treasure rooms! They hold some powerful loot.\nYou can always type help to see what commands you have available!\nGood Luck!", false);
+        TextEngine.printWithDelays("You have entered " + redColor + "The " + currentDungeon + resetColor + "!", false);
+        TextEngine.printWithDelays("To beat the dungeon you must beat the " + redColor + currentBoss + resetColor + "!\nBe on the look out for treasure rooms! They hold some powerful loot.\nYou can always type help to see what commands you have available!\nGood Luck!", false);
         TextEngine.enterToNext();
+        switch (currentDungeon) {
+            case "Meadow" -> {
+                MeadowDungeon.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = meadowDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
+            }
+            case "Dark Forest" -> {
+                DarkForestDungeon.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = darkForestDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
+            }
+            case "Mountain Cave" -> {
+                MountainCaveDungeon.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = mountainCaveDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
+            }
+            case "Mountain Top" -> {
+                MountainTopDungeon.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = mountainTopDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
+            }
+            case "Desert Oasis" -> {
+                DesertOasisDungeon.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = desertOasisDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
+            }
+            case "Desert Plains" -> {
+                DesertPlainsDungeon.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = desertPlainsDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
+            }
+            case "Desert Pyramid" -> {
+                DesertPyramidDungeon.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = desertPyramidDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
+            }
+            case "Ocean Kingdom" -> {
+                OceanKingdomDungeon.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = oceanKingdomDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
+            }
+        }
+        Main.loadSave();
+    }
+
+    public static void miniBossSequence() throws InterruptedException {
+        TextEngine.printWithDelays("You have entered a room with a mini boss", false);
+        Player.changeHealth(Enemy.spawnEnemy(currentMiniBoss, 1));
+        switch (currentDungeon) {
+            case "Meadow" -> {
+                meadowDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] = 7;
+            }
+            case "Dark Forest" -> {
+                darkForestDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] = 7;
+            }
+            case "Mountain Cave" -> {
+                mountainCaveDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] = 7;
+            }
+            case "Mountain Top" -> {
+                mountainTopDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] = 7;
+            }
+            case "Desert Oasis" -> {
+                desertOasisDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] = 7;
+            }
+            case "Desert Plains" -> {
+                desertPlainsDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] = 7;
+            }
+            case "Desert Pyramid" -> {
+                desertPyramidDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] = 7;
+            }
+            case "Ocean Kingdom" -> {
+                oceanKingdomDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] = 7;
+            }
+        }
+        setMaps();
+        Main.loadSave();
+    }
+
+    public static void fairySequence() throws InterruptedException {
+        switch (currentDungeon) {
+            case "Meadow" -> {
+                meadowDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] = 10;
+            }
+            case "Dark Forest" -> {
+                darkForestDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] = 10;
+            }
+            case "Mountain Cave" -> {
+                mountainCaveDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] = 10;
+            }
+            case "Mountain Top" -> {
+                mountainTopDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] = 10;
+            }
+            case "Desert Oasis" -> {
+                desertOasisDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] = 10;
+            }
+            case "Desert Plains" -> {
+                desertPlainsDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] = 10;
+            }
+            case "Desert Pyramid" -> {
+                desertPyramidDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] = 10;
+            }
+            case "Ocean Kingdom" -> {
+                oceanKingdomDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] = 10;
+            }
+        }
+        setMaps();
+        Main.loadSave();
+    }
+
+    public static void keyRoomSequence() throws InterruptedException {
+        if (numberOfEnemies < 2) {
+            numberOfEnemies = 2;
+        }
+        TextEngine.printWithDelays("You have entered a room with " + numberOfEnemies + " " + redColor + enemyType + "s" + resetColor + " in this room!\nYou were ambushed!", false);
+        TextEngine.printWithDelays("They seem to be trying to protect something...", false);
+        TextEngine.printWithDelays("What is your command? " + yellowColor + "fight" + resetColor + " or " + yellowColor + "run" + resetColor, true);
+        while (true) {
+            command = Room.console.readLine();
+            switch (command) {
+                case "fight" -> {
+                    Player.changeHealth(Enemy.spawnEnemy(enemyType, numberOfEnemies));
+                    switch (currentDungeon) {
+                        case "Meadow" -> {
+                            meadowDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] = 5;
+                        }
+                        case "Dark Forest" -> {
+                            darkForestDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] = 5;
+                        }
+                        case "Mountain Cave" -> {
+                            mountainCaveDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] = 5;
+                        }
+                        case "Mountain Top" -> {
+                            mountainTopDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] = 5;
+                        }
+                        case "Desert Oasis" -> {
+                            desertOasisDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] = 5;
+                        }
+                        case "Desert Plains" -> {
+                            desertPlainsDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] = 5;
+                        }
+                        case "Desert Pyramid" -> {
+                            desertPyramidDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] = 5;
+                        }
+                        case "Ocean Kingdom" -> {
+                            oceanKingdomDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] = 5;
+                        }
+                    }
+                    setMaps();
+                    Main.loadSave();
+                }
+                case "run" -> {
+                    Player.changeHealth(Enemy.runSpawnEnemy(enemyType, numberOfEnemies));
+                    int[] buffer = currentPlayerPosition.clone();
+                    currentPlayerPosition = lastPosition.clone(); // Save the current position before moving
+                    lastPosition = buffer.clone();
+                    Main.loadSave();
+                }
+                default -> {
+                    defaultDungeonArgs(command);
+                }
+            }
+        }
+    }
+
+    public static void fightRandomEnemies() throws InterruptedException {
+        if (numberOfEnemies == 0) {
+            switch (currentDungeon) {
+                case "Meadow" -> {
+                    MeadowDungeon.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = meadowDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
+                }
+                case "Dark Forest" -> {
+                    DarkForestDungeon.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = darkForestDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
+                }
+                case "Mountain Cave" -> {
+                    MountainCaveDungeon.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = mountainCaveDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
+                }
+                case "Mountain Top" -> {
+                    MountainTopDungeon.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = mountainTopDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
+                }
+                case "Desert Oasis" -> {
+                    DesertOasisDungeon.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = desertOasisDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
+                }
+                case "Desert Plains" -> {
+                    DesertPlainsDungeon.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = desertPlainsDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
+                }
+                case "Desert Pyramid" -> {
+                    DesertPyramidDungeon.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = desertPyramidDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
+                }
+                case "Ocean Kingdom" -> {
+                    OceanKingdomDungeon.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = oceanKingdomDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
+                }
+            }
+            Main.loadSave();
+            return;
+        }
+        if (numberOfEnemies > 1) {
+            TextEngine.printWithDelays("You have entered a room with " + numberOfEnemies + " " + redColor + enemyType + "s" + resetColor + " in this room!\nYou were ambushed!", false);
+        } else {
+            TextEngine.printWithDelays("You have entered a room with a " + redColor + enemyType + resetColor + " and were ambushed!", false);
+        }
+        TextEngine.printWithDelays("What is your command? " + yellowColor + "fight" + resetColor + " or " + yellowColor + "run" + resetColor, true);
+        while (true) {
+            command = Room.console.readLine();
+            switch (command) {
+                case "fight" -> {
+                    Player.changeHealth(Enemy.spawnEnemy(enemyType, numberOfEnemies));
+                    switch (currentDungeon) {
+                        case "Meadow" -> {
+                            MeadowDungeon.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = meadowDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
+                        }
+                        case "Dark Forest" -> {
+                            DarkForestDungeon.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = darkForestDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
+                        }
+                        case "Mountain Cave" -> {
+                            MountainCaveDungeon.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = mountainCaveDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
+                        }
+                        case "Mountain Top" -> {
+                            MountainTopDungeon.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = mountainTopDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
+                        }
+                        case "Desert Oasis" -> {
+                            DesertOasisDungeon.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = desertOasisDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
+                        }
+                        case "Desert Plains" -> {
+                            DesertPlainsDungeon.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = desertPlainsDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
+                        }
+                        case "Desert Pyramid" -> {
+                            DesertPyramidDungeon.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = desertPyramidDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
+                        }
+                        case "Ocean Kingdom" -> {
+                            OceanKingdomDungeon.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = oceanKingdomDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
+                        }
+                    }
+                    Main.loadSave();
+                    return;
+                }
+                case "run" -> {
+                    Player.changeHealth(Enemy.runSpawnEnemy(enemyType, numberOfEnemies));
+                    int[] buffer = currentPlayerPosition.clone();
+                    currentPlayerPosition = lastPosition.clone(); // Save the current position before moving
+                    lastPosition = buffer.clone();
+                    Main.loadSave();
+                }
+                default -> {
+                    defaultDungeonArgs(command);
+                }
+            }
+        }
+    }
+
+    public static void heartContainerRoom() throws InterruptedException {
+        if (hasItemInRoom("heart container", 1)) {
+            switch (currentDungeon) {
+                case "Meadow" -> {
+                    MeadowDungeon.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = meadowDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
+                }
+                case "Dark Forest" -> {
+                    DarkForestDungeon.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = darkForestDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
+                }
+                case "Mountain Cave" -> {
+                    MountainCaveDungeon.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = mountainCaveDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
+                }
+                case "Mountain Top" -> {
+                    MountainTopDungeon.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = mountainTopDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
+                }
+                case "Desert Oasis" -> {
+                    DesertOasisDungeon.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = desertOasisDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
+                }
+                case "Desert Plains" -> {
+                    DesertPlainsDungeon.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = desertPlainsDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
+                }
+                case "Desert Pyramid" -> {
+                    DesertPyramidDungeon.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = desertPyramidDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
+                }
+                case "Ocean Kingdom" -> {
+                    OceanKingdomDungeon.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = oceanKingdomDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
+                }
+            }
+        } else {
+            int[] buffer = currentPlayerPosition.clone();
+            currentPlayerPosition = lastPosition.clone(); // Save the current position before moving
+            lastPosition = buffer.clone();
+            Main.loadSave();
+        }
+    }
+
+    public static void keyRoom() throws InterruptedException {
+        if (hasItemInRoom("key", 1)) {
+            switch (currentDungeon) {
+                case "Meadow" -> {
+                    MeadowDungeon.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = meadowDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
+                }
+                case "Dark Forest" -> {
+                    DarkForestDungeon.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = darkForestDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
+                }
+                case "Mountain Cave" -> {
+                    MountainCaveDungeon.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = mountainCaveDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
+                }
+                case "Mountain Top" -> {
+                    MountainTopDungeon.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = mountainTopDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
+                }
+                case "Desert Oasis" -> {
+                    DesertOasisDungeon.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = desertOasisDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
+                }
+                case "Desert Plains" -> {
+                    DesertPlainsDungeon.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = desertPlainsDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
+                }
+                case "Desert Pyramid" -> {
+                    DesertPyramidDungeon.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = desertPyramidDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
+                }
+                case "Ocean Kingdom" -> {
+                    OceanKingdomDungeon.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = oceanKingdomDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
+                }
+            }
+        } else {
+            int[] buffer = currentPlayerPosition.clone();
+            currentPlayerPosition = lastPosition.clone(); // Save the current position before moving
+            lastPosition = buffer.clone();
+            Main.loadSave();
+        }
+    }
+
+    public static void fairyRoom() throws InterruptedException {
+        TextEngine.printWithDelays("You have entered a room with a mystical fairy", false);
+        TextEngine.printWithDelays("The fairy has granted you a wish of healing?", false);
+        TextEngine.printWithDelays("Do you want to take it? " + yellowColor + "yes" + resetColor + " or " + yellowColor + "no" + resetColor, true);
+        while (true) {
+            command = Room.console.readLine();
+            switch (command) {
+                case "yes" -> {
+                    Player.fairyHeal();
+                    switch (currentDungeon) {
+                        case "Meadow" -> {
+                            MeadowDungeon.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = meadowDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
+                        }
+                        case "Dark Forest" -> {
+                            DarkForestDungeon.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = darkForestDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
+                        }
+                        case "Mountain Cave" -> {
+                            MountainCaveDungeon.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = mountainCaveDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
+                        }
+                        case "Mountain Top" -> {
+                            MountainTopDungeon.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = mountainTopDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
+                        }
+                        case "Desert Oasis" -> {
+                            DesertOasisDungeon.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = desertOasisDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
+                        }
+                        case "Desert Plains" -> {
+                            DesertPlainsDungeon.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = desertPlainsDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
+                        }
+                        case "Desert Pyramid" -> {
+                            DesertPyramidDungeon.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = desertPyramidDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
+                        }
+                        case "Ocean Kingdom" -> {
+                            OceanKingdomDungeon.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = oceanKingdomDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
+                        }
+                    }
+                    Main.loadSave();
+                }
+                case "no" -> {
+                    int[] buffer = currentPlayerPosition.clone();
+                    currentPlayerPosition = lastPosition.clone(); // Save the current position before moving
+                    lastPosition = buffer.clone();
+                    Main.loadSave();
+                }
+                default -> {
+                    defaultDungeonArgs(command);
+                }
+            }
+        }
+    }
+
+    public static boolean testIfBossRoom(int check) {
+        if (check != 0) {
+            return check == 8;
+        }
+        return false;
+    }
+
+    public static void itemRoom(List<String> localItems) throws InterruptedException {
+        if (!localItems.isEmpty()) {
+            String randomItem = localItems.get(rand.nextInt(localItems.size()));
+            if (hasChestInRoom(randomItem, 1)) {
+                switch (currentDungeon) {
+                    case "Meadow" -> {
+                        MeadowDungeon.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = meadowDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
+                        MeadowDungeon.items.remove(randomItem);
+                    }
+                    case "Dark Forest" -> {
+                        DarkForestDungeon.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = darkForestDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
+                        DarkForestDungeon.items.remove(randomItem);
+                    }
+                    case "Mountain Cave" -> {
+                        MountainCaveDungeon.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = mountainCaveDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
+                        MountainCaveDungeon.items.remove(randomItem);
+                    }
+                    case "Mountain Top" -> {
+                        MountainTopDungeon.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = mountainTopDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
+                        MountainTopDungeon.items.remove(randomItem);
+                    }
+                    case "Desert Oasis" -> {
+                        DesertOasisDungeon.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = desertOasisDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
+                        DesertOasisDungeon.items.remove(randomItem);
+                    }
+                    case "Desert Plains" -> {
+                        DesertPlainsDungeon.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = desertPlainsDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
+                        DesertPlainsDungeon.items.remove(randomItem);
+                    }
+                    case "Desert Pyramid" -> {
+                        DesertPyramidDungeon.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = desertPyramidDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
+                        DesertPyramidDungeon.items.remove(randomItem);
+                    }
+                    case "Ocean Kingdom" -> {
+                        OceanKingdomDungeon.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = oceanKingdomDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
+                        OceanKingdomDungeon.items.remove(randomItem);
+                    }
+                }
+                Main.loadSave();
+            } else {
+                int[] buffer = currentPlayerPosition.clone();
+                currentPlayerPosition = lastPosition.clone(); // Save the current position before moving
+                lastPosition = buffer.clone();
+                Main.loadSave();
+            }
+        } else {
+            switch (currentDungeon) {
+                case "Meadow" -> {
+                    if (DungeonGenerator.numberOfRooms(MeadowDungeon.map, 10) == 0) {
+                        fairySequence();
+                    } else {
+                        trappedRoomSequence();
+                    }
+                }
+                case "Dark Forest" -> {
+                    if (DungeonGenerator.numberOfRooms(DarkForestDungeon.map, 10) == 0) {
+                        fairySequence();
+                    } else {
+                        trappedRoomSequence();
+                    }
+                }
+                case "Mountain Cave" -> {
+                    if (DungeonGenerator.numberOfRooms(MountainCaveDungeon.map, 10) == 0) {
+                        fairySequence();
+                    } else {
+                        trappedRoomSequence();
+                    }
+                }
+                case "Mountain Top" -> {
+                    if (DungeonGenerator.numberOfRooms(MountainTopDungeon.map, 10) == 0) {
+                        fairySequence();
+                    } else {
+                        trappedRoomSequence();
+                    }
+                }
+                case "Desert Oasis" -> {
+                    if (DungeonGenerator.numberOfRooms(DesertOasisDungeon.map, 10) == 0) {
+                        fairySequence();
+                    } else {
+                        trappedRoomSequence();
+                    }
+                }
+                case "Desert Plains" -> {
+                    if (DungeonGenerator.numberOfRooms(DesertPlainsDungeon.map, 10) == 0) {
+                        fairySequence();
+                    } else {
+                        trappedRoomSequence();
+                    }
+                }
+                case "Desert Pyramid" -> {
+                    if (DungeonGenerator.numberOfRooms(DesertPyramidDungeon.map, 10) == 0) {
+                        fairySequence();
+                    } else {
+                        trappedRoomSequence();
+                    }
+                }
+                case "Ocean Kingdom" -> {
+                    if (DungeonGenerator.numberOfRooms(OceanKingdomDungeon.map, 10) == 0) {
+                        fairySequence();
+                    } else {
+                        trappedRoomSequence();
+                    }
+                }
+            }
+        }
+    }
+
+    public static void trappedRoomSequence() throws InterruptedException {
+        int hit = new Random().nextBoolean() ? 1 : 2;
+        if (hit == 1) {
+            switch (currentDungeon) {
+                case "Meadow" -> {
+                    meadowDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] = 20;
+                }
+                case "Dark Forest" -> {
+                    darkForestDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] = 20;
+                }
+                case "Mountain Cave" -> {
+                    mountainCaveDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] = 20;
+                }
+                case "Mountain Top" -> {
+                    mountainTopDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] = 20;
+                }
+                case "Desert Oasis" -> {
+                    desertOasisDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] = 20;
+                }
+                case "Desert Plains" -> {
+                    desertPlainsDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] = 20;
+                }
+                case "Desert Pyramid" -> {
+                    desertPyramidDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] = 20;
+                }
+                case "Ocean Kingdom" -> {
+                    oceanKingdomDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] = 20;
+                }
+            }
+        } else {
+            switch (currentDungeon) {
+                case "Meadow" -> {
+                    meadowDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] = 1;
+                    MeadowDungeon.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = meadowDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
+                }
+                case "Dark Forest" -> {
+                    darkForestDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] = 1;
+                    DarkForestDungeon.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = darkForestDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
+                }
+                case "Mountain Cave" -> {
+                    mountainCaveDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] = 1;
+                    MountainCaveDungeon.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = mountainCaveDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
+                }
+                case "Mountain Top" -> {
+                    mountainTopDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] = 1;
+                    MountainTopDungeon.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = mountainTopDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
+                }
+                case "Desert Oasis" -> {
+                    desertOasisDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] = 1;
+                    DesertOasisDungeon.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = desertOasisDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
+                }
+                case "Desert Plains" -> {
+                    desertPlainsDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] = 1;
+                    DesertPlainsDungeon.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = desertPlainsDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
+                }
+                case "Desert Pyramid" -> {
+                    desertPyramidDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] = 1;
+                    DesertPyramidDungeon.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = desertPyramidDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
+                }
+                case "Ocean Kingdom" -> {
+                    oceanKingdomDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] = 1;
+                    OceanKingdomDungeon.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = oceanKingdomDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
+                }
+            }
+        }
+        setMaps();
+        Main.loadSave();
+    }
+
+    public static void trappedRoom() throws InterruptedException {
+        TextEngine.printWithDelays("You have entered a trapped room! ", false);
+        int hit = new Random().nextBoolean() ? 1 : 2;
+        if (hit == 1) {
+            TextEngine.printWithDelays("You have been hit by a trap! ", false);
+            Player.changeHealth(-(Player.getHealth() / 4));
+        } else {
+            TextEngine.printWithDelays("You avoid the trap! ", false);
+            TextEngine.enterToNext();
+        }
+        switch (currentDungeon) {
+            case "Meadow" -> {
+                MeadowDungeon.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = meadowDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
+            }
+            case "Dark Forest" -> {
+                DarkForestDungeon.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = darkForestDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
+            }
+            case "Mountain Cave" -> {
+                MountainCaveDungeon.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = mountainCaveDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
+            }
+            case "Mountain Top" -> {
+                MountainTopDungeon.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = mountainTopDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
+            }
+            case "Desert Oasis" -> {
+                DesertOasisDungeon.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = desertOasisDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
+            }
+            case "Desert Plains" -> {
+                DesertPlainsDungeon.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = desertPlainsDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
+            }
+            case "Desert Pyramid" -> {
+                DesertPyramidDungeon.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = desertPyramidDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
+            }
+            case "Ocean Kingdom" -> {
+                OceanKingdomDungeon.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = oceanKingdomDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
+            }
+        }
+        Main.loadSave();
+    }
+
+    public static void bossRoom() throws InterruptedException {
+        TextEngine.printWithDelays("You have entered the boss room", false);
+        Player.changeHealth(Enemy.spawnEnemy(currentBoss, 1));
+        TextEngine.printWithDelays("You have defeated the boss and completed the dungeon!", false);
+        TextEngine.enterToNext();
+        switch (currentDungeon) {
+            case "Meadow" -> {
+                MeadowDungeon.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = meadowDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
+                if (!MeadowDungeon.completed) {
+                    completedDungeons++;
+                    MeadowDungeon.completed = true;
+                }
+            }
+            case "Dark Forest" -> {
+                DarkForestDungeon.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = darkForestDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
+                if (!DarkForestDungeon.completed) {
+                    completedDungeons++;
+                    DarkForestDungeon.completed = true;
+                }
+            }
+            case "Mountain Cave" -> {
+                MountainCaveDungeon.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = mountainCaveDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
+                if (!MountainCaveDungeon.completed) {
+                    completedDungeons++;
+                    MountainCaveDungeon.completed = true;
+                }
+            }
+            case "Mountain Top" -> {
+                MountainTopDungeon.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = mountainTopDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
+                if (!MountainTopDungeon.completed) {
+                    completedDungeons++;
+                    MountainTopDungeon.completed = true;
+                }
+            }
+            case "Desert Oasis" -> {
+                DesertOasisDungeon.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = desertOasisDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
+                if (!DesertOasisDungeon.completed) {
+                    completedDungeons++;
+                    DesertOasisDungeon.completed = true;
+                }
+            }
+            case "Desert Plains" -> {
+                DesertPlainsDungeon.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = desertPlainsDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
+                if (!DesertPlainsDungeon.completed) {
+                    completedDungeons++;
+                    DesertPlainsDungeon.completed = true;
+                }
+            }
+            case "Desert Pyramid" -> {
+                DesertPyramidDungeon.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = desertPyramidDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
+                if (!DesertPyramidDungeon.completed) {
+                    completedDungeons++;
+                    DesertPyramidDungeon.completed = true;
+                }
+            }
+            case "Ocean Kingdom" -> {
+                OceanKingdomDungeon.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = oceanKingdomDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
+                if (!OceanKingdomDungeon.completed) {
+                    completedDungeons++;
+                    OceanKingdomDungeon.completed = true;
+                    Main.gameComplete = true;
+                }
+            }
+        }
+        lastPosition = null;
+        OpenWorld.startRoom();
+    }
+
+    public static String directionsInString(ArrayList<String> list) {
+        StringBuilder sb = new StringBuilder();
+        for (Object item : list) {
+            sb.append(yellowColor).append(item.toString()).append(resetColor);
+            sb.append(", ");
+        }
+        // Remove the last comma and space
+        if (sb.length() > 0) {
+            sb.setLength(sb.length() - 2);
+        }
+        return sb.toString();
+    }
+
+    public static void handleDirectionsAndCommands() throws InterruptedException {
+        boolean completed = false;
+        int[][] roomsBeenTo = null;
+        int[][] localDungeon = null;
+        boolean mapRevealed = false;
+        switch (currentDungeon) {
+            case "Meadow" -> {
+                completed = MeadowDungeon.completed;
+                roomsBeenTo = MeadowDungeon.roomsBeenTo;
+                localDungeon = meadowDungeon;
+                mapRevealed = MeadowDungeon.mapRevealed;
+            }
+            case "Dark Forest" -> {
+                completed = DarkForestDungeon.completed;
+                roomsBeenTo = DarkForestDungeon.roomsBeenTo;
+                localDungeon = darkForestDungeon;
+                mapRevealed = DarkForestDungeon.mapRevealed;
+            }
+            case "Mountain Cave" -> {
+                completed = MountainCaveDungeon.completed;
+                roomsBeenTo = MountainCaveDungeon.roomsBeenTo;
+                localDungeon = mountainCaveDungeon;
+                mapRevealed = MountainCaveDungeon.mapRevealed;
+            }
+            case "Mountain Top" -> {
+                completed = MountainTopDungeon.completed;
+                roomsBeenTo = MountainTopDungeon.roomsBeenTo;
+                localDungeon = mountainTopDungeon;
+                mapRevealed = MountainTopDungeon.mapRevealed;
+            }
+            case "Desert Oasis" -> {
+                completed = DesertOasisDungeon.completed;
+                roomsBeenTo = DesertOasisDungeon.roomsBeenTo;
+                localDungeon = desertOasisDungeon;
+                mapRevealed = DesertOasisDungeon.mapRevealed;
+            }
+            case "Desert Plains" -> {
+                completed = DesertPlainsDungeon.completed;
+                roomsBeenTo = DesertPlainsDungeon.roomsBeenTo;
+                localDungeon = desertPlainsDungeon;
+                mapRevealed = DesertPlainsDungeon.mapRevealed;
+            }
+            case "Desert Pyramid" -> {
+                completed = DesertPyramidDungeon.completed;
+                roomsBeenTo = DesertPyramidDungeon.roomsBeenTo;
+                localDungeon = desertPyramidDungeon;
+                mapRevealed = DesertPyramidDungeon.mapRevealed;
+            }
+            case "Ocean Kingdom" -> {
+                completed = OceanKingdomDungeon.completed;
+                roomsBeenTo = OceanKingdomDungeon.roomsBeenTo;
+                localDungeon = oceanKingdomDungeon;
+                mapRevealed = OceanKingdomDungeon.mapRevealed;
+            }
+        }
+        availableMove = null;
+        directionsString = new ArrayList<>();
+        Main.screenRefresh();
+        DungeonGenerator.drawRoom(localDungeon, roomsBeenTo, currentPlayerPosition[0], currentPlayerPosition[1], 0, mapRevealed);
+        availableMove = DungeonGenerator.getDirections(localDungeon, currentPlayerPosition[0], currentPlayerPosition[1]);
+        if (completed) {
+            TextEngine.printWithDelays("You have completed this dungeon. You can now type " + yellowColor + "leave" + resetColor + " to exit this dungeon.", false);
+        }
+        System.out.println("Type " + yellowColor + "map" + resetColor + " to see the map.");
+        System.out.println();
+        TextEngine.printWithDelays("You can move in the following directions: ", false);
+        addDirections(availableMove);
+        TextEngine.printNoDelay(directionsInString(directionsString), true);
+        while (true) {
+            command = Room.console.readLine();
+            switch (command.toLowerCase().trim()) {
+                case "north", "1" ->
+                    movePlayer(command.toLowerCase(), new int[]{-1, 0}, roomsBeenTo, localDungeon);
+                case "east", "2" ->
+                    movePlayer(command.toLowerCase(), new int[]{0, 1}, roomsBeenTo, localDungeon);
+                case "south", "3" ->
+                    movePlayer(command.toLowerCase(), new int[]{1, 0}, roomsBeenTo, localDungeon);
+                case "west", "4" ->
+                    movePlayer(command.toLowerCase(), new int[]{0, -1}, roomsBeenTo, localDungeon);
+                case "boss room", "5" -> {
+                    if (confirmBossContinue()) {
+                        lastPosition = currentPlayerPosition.clone(); // Save the current position before moving
+                        roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = localDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
+                        currentPlayerPosition = DungeonGenerator.findValue(localDungeon, 8);
+                        changeDungeonRoomsBeenTo(roomsBeenTo);
+                        Main.loadSave();
+                    } else {
+                        Main.loadSave();
+                    }
+                }
+                default ->
+                    Dungeon.defaultDungeonArgs(command.toLowerCase());
+            }
+        }
+    }
+
+    private static void addDirections(int[] availableMove) {
+        String[] directions = {"north", "south", "west", "east"};
+        for (int i = 0; i < availableMove.length; i++) {
+            if (availableMove[i] > 0) {
+                if (testIfBossRoom(availableMove[i])) {
+                    directionsString.add("boss room");
+                } else {
+                    directionsString.add(directions[i]);
+                }
+            }
+        }
+    }
+
+    private static void movePlayer(String direction, int[] positionChange, int[][] roomsBeenTo, int[][] localDungeon) throws InterruptedException {
+        if (directionsString.contains(direction)) {
+            lastPosition = currentPlayerPosition.clone(); // Save the current position before moving
+            roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = localDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
+            currentPlayerPosition[0] += positionChange[0];
+            currentPlayerPosition[1] += positionChange[1];
+            changeDungeonRoomsBeenTo(roomsBeenTo);
+            Main.loadSave();
+        } else {
+            Dungeon.defaultDungeonArgs(direction);
+        }
+    }
+
+    private static void changeDungeonRoomsBeenTo(int[][] changedRoomsBeenTo) {
+        switch (currentDungeon) {
+            case "Meadow" -> {
+                MeadowDungeon.roomsBeenTo = changedRoomsBeenTo;
+            }
+            case "Dark Forest" -> {
+                DarkForestDungeon.roomsBeenTo = changedRoomsBeenTo;
+            }
+            case "Mountain Cave" -> {
+                MountainCaveDungeon.roomsBeenTo = changedRoomsBeenTo;
+            }
+            case "Mountain Top" -> {
+                MountainTopDungeon.roomsBeenTo = changedRoomsBeenTo;
+            }
+            case "Desert Oasis" -> {
+                DesertOasisDungeon.roomsBeenTo = changedRoomsBeenTo;
+            }
+            case "Desert Plains" -> {
+                DesertPlainsDungeon.roomsBeenTo = changedRoomsBeenTo;
+            }
+            case "Desert Pyramid" -> {
+                DesertPyramidDungeon.roomsBeenTo = changedRoomsBeenTo;
+            }
+            case "Ocean Kingdom" -> {
+                OceanKingdomDungeon.roomsBeenTo = changedRoomsBeenTo;
+            }
+        }
     }
 }

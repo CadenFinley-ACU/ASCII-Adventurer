@@ -76,7 +76,6 @@ public class OpenWorld extends Room {
             numberOfEnemies = 0;
         }
         enemyType = enemies.get(rand.nextInt(enemies.size()));
-
         switch (roomSave) {
             case 1 -> {
                 Player.playerX = 0;
@@ -647,6 +646,7 @@ public class OpenWorld extends Room {
                 Player.playerX = 4;
                 Player.playerY = 10;
                 roomNumber = 74;
+                numberOfEnemies = 0;
                 PromptEngine.buildPrompt();
                 reRenderSameRoom();
                 room74();
@@ -659,7 +659,7 @@ public class OpenWorld extends Room {
         roomNumber = 0;
     }
 
-    private static boolean checkChangeInRoom() {
+    public static boolean checkChangeInRoom() {
         return roomSave != previousRoomSave;
     }
 
@@ -675,7 +675,6 @@ public class OpenWorld extends Room {
             }
             TextEngine.printWithDelays("What is your command? " + yellowColor + "fight" + resetColor + " or " + yellowColor + "run" + resetColor, true);
             while (true) {
-                ignore = console.readLine();
                 command = console.readLine();
                 switch (command.toLowerCase().trim()) {
                     case "fight" -> {
@@ -719,7 +718,6 @@ public class OpenWorld extends Room {
         TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
         TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "east" + resetColor + " or " + yellowColor + "The Ocean Kingdom" + resetColor + " to decide", true);
         while (true) {
-            ignore = console.readLine();
             command = console.readLine();
             if ("north".equals(command) || "east".equals(command) || "south".equals(command) || "west".equals(command)) {
                 holdCommand = command;
@@ -733,7 +731,7 @@ public class OpenWorld extends Room {
                 case "the ocean kingdom" -> {
                     if (Dungeon.completedDungeons > 6) {
                         previousRoomSave = roomSave;
-                        DesertOasisDungeon.startRoom();
+                        Dungeon.DesertOasisDungeon.startRoom();
                     } else {
                         TextEngine.printWithDelays("You must complete The Desert Pyramid dungeon first.\n Try going to the south", true);
                     }
@@ -754,7 +752,6 @@ public class OpenWorld extends Room {
         // TextEngine.printWithDelays("    You have entered the deep sea", false);
         TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "east" + resetColor + ", or " + yellowColor + "west" + resetColor + " to make your choice", true);
         while (true) {
-            ignore = console.readLine();
             command = console.readLine();
             if ("north".equals(command) || "east".equals(command) || "south".equals(command) || "west".equals(command)) {
                 holdCommand = command;
@@ -785,7 +782,6 @@ public class OpenWorld extends Room {
         }
         TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "east" + resetColor + ", or " + yellowColor + "west" + resetColor + " to continue your journey ", true);
         while (true) {
-            ignore = console.readLine();
             command = console.readLine();
             if ("north".equals(command) || "east".equals(command) || "south".equals(command) || "west".equals(command)) {
                 holdCommand = command;
@@ -821,7 +817,6 @@ public class OpenWorld extends Room {
         //TextEngine.printWithDelays("    You have started to climb the mountain", false);
         TextEngine.printWithDelays("Which path will you choose? Type " + yellowColor + "east" + resetColor + ", " + yellowColor + "south" + resetColor + ", or " + yellowColor + "west" + resetColor + " to continue your journey", true);
         while (true) {
-            ignore = console.readLine();
             command = console.readLine();
             if ("north".equals(command) || "east".equals(command) || "south".equals(command) || "west".equals(command)) {
                 holdCommand = command;
@@ -861,7 +856,6 @@ public class OpenWorld extends Room {
         }
         TextEngine.printWithDelays("Which path will you choose? Type " + yellowColor + "The Mountain Top" + resetColor + ", " + yellowColor + "south" + resetColor + ", or " + yellowColor + "west" + resetColor + " to continue your journey", true);
         while (true) {
-            ignore = console.readLine();
             command = console.readLine();
             if ("north".equals(command) || "east".equals(command) || "south".equals(command) || "west".equals(command)) {
                 holdCommand = command;
@@ -880,7 +874,7 @@ public class OpenWorld extends Room {
                 case "the mountain top" -> {
                     if (Dungeon.completedDungeons > 2) {
                         previousRoomSave = roomSave;
-                        MountainTopDungeon.startRoom();
+                        Dungeon.MountainTopDungeon.startRoom();
                     } else {
                         TextEngine.printWithDelays("You must complete The Mountain Cave dungeons first, try going west.", true);
                     }
@@ -904,7 +898,6 @@ public class OpenWorld extends Room {
         }
         TextEngine.printWithDelays("Which path will you choose? Type " + yellowColor + "The Ocean Kingdom" + resetColor + ", or " + yellowColor + "south" + resetColor + " to continue your journey", true);
         while (true) {
-            ignore = console.readLine();
             command = console.readLine();
             if ("north".equals(command) || "east".equals(command) || "south".equals(command) || "west".equals(command)) {
                 holdCommand = command;
@@ -913,7 +906,7 @@ public class OpenWorld extends Room {
                 case "the ocean kingdom" -> {
                     if (Dungeon.completedDungeons > 6) {
                         previousRoomSave = roomSave;
-                        OceanKingdomDungeon.startRoom();
+                        Dungeon.OceanKingdomDungeon.startRoom();
                     } else {
                         TextEngine.printWithDelays("You must complete The Desert Pyramid dungeon first.\n Try going to the south", true);
                     }
@@ -938,7 +931,6 @@ public class OpenWorld extends Room {
         TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
         TextEngine.printWithDelays("Which path will you choose? Type " + yellowColor + "north" + resetColor + ", " + yellowColor + "east" + resetColor + ", or " + yellowColor + "south" + resetColor + " to continue your journey", true);
         while (true) {
-            ignore = console.readLine();
             command = console.readLine();
             if ("north".equals(command) || "east".equals(command) || "south".equals(command) || "west".equals(command)) {
                 holdCommand = command;
@@ -978,7 +970,6 @@ public class OpenWorld extends Room {
         }
         TextEngine.printWithDelays("Which path will you choose? Type " + yellowColor + "north" + resetColor + ", " + yellowColor + "east" + resetColor + ", " + yellowColor + "south" + resetColor + ", or " + yellowColor + "west" + resetColor + "  to continue your journey", true);
         while (true) {
-            ignore = console.readLine();
             command = console.readLine();
             if ("north".equals(command) || "east".equals(command) || "south".equals(command) || "west".equals(command)) {
                 holdCommand = command;
@@ -1023,7 +1014,6 @@ public class OpenWorld extends Room {
         }
         TextEngine.printWithDelays("Which path will you choose? Type " + yellowColor + "The Mountain Top" + resetColor + ", " + yellowColor + "south" + resetColor + ", or " + yellowColor + "west" + resetColor + " to continue your journey", true);
         while (true) {
-            ignore = console.readLine();
             command = console.readLine();
             if ("north".equals(command) || "east".equals(command) || "south".equals(command) || "west".equals(command)) {
                 holdCommand = command;
@@ -1032,7 +1022,7 @@ public class OpenWorld extends Room {
                 case "the mountain top" -> {
                     if (Dungeon.completedDungeons > 2) {
                         previousRoomSave = roomSave;
-                        MountainTopDungeon.startRoom();
+                        Dungeon.MountainTopDungeon.startRoom();
                     } else {
                         TextEngine.printWithDelays("You must complete The Mountain Cave dungeons first, try going south west.", true);
                     }
@@ -1062,7 +1052,6 @@ public class OpenWorld extends Room {
         TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
         TextEngine.printWithDelays("Which path will you choose? Type " + yellowColor + "north" + resetColor + ", or " + yellowColor + "south" + resetColor + " to continue your journey", true);
         while (true) {
-            ignore = console.readLine();
             command = console.readLine();
             if ("north".equals(command) || "east".equals(command) || "south".equals(command) || "west".equals(command)) {
                 holdCommand = command;
@@ -1093,7 +1082,6 @@ public class OpenWorld extends Room {
         TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
         TextEngine.printWithDelays("Which path will you choose? Type " + yellowColor + "north" + resetColor + ", " + yellowColor + "east" + resetColor + ", or " + yellowColor + "south" + resetColor + " to continue your journey", true);
         while (true) {
-            ignore = console.readLine();
             command = console.readLine();
             if ("north".equals(command) || "east".equals(command) || "south".equals(command) || "west".equals(command)) {
                 holdCommand = command;
@@ -1129,7 +1117,6 @@ public class OpenWorld extends Room {
         TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
         TextEngine.printWithDelays("Which path will you choose? Type " + yellowColor + "north" + resetColor + ", " + yellowColor + "east" + resetColor + ", " + yellowColor + "south" + resetColor + ", or " + yellowColor + "west" + resetColor + " to continue your journey", true);
         while (true) {
-            ignore = console.readLine();
             command = console.readLine();
             if ("north".equals(command) || "east".equals(command) || "south".equals(command) || "west".equals(command)) {
                 holdCommand = command;
@@ -1170,7 +1157,6 @@ public class OpenWorld extends Room {
         TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
         TextEngine.printWithDelays("Which path will you choose? Type " + yellowColor + "north" + resetColor + ", " + yellowColor + "south" + resetColor + ", or " + yellowColor + "west" + resetColor + " to continue your journey", true);
         while (true) {
-            ignore = console.readLine();
             command = console.readLine();
             if ("north".equals(command) || "east".equals(command) || "south".equals(command) || "west".equals(command)) {
                 holdCommand = command;
@@ -1206,7 +1192,6 @@ public class OpenWorld extends Room {
         TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
         TextEngine.printWithDelays("Which path will you choose? Type " + yellowColor + "north" + resetColor + ", or " + yellowColor + "south" + resetColor + " to continue your journey", true);
         while (true) {
-            ignore = console.readLine();
             command = console.readLine();
             if ("north".equals(command) || "east".equals(command) || "south".equals(command) || "west".equals(command)) {
                 holdCommand = command;
@@ -1237,7 +1222,6 @@ public class OpenWorld extends Room {
         TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
         TextEngine.printWithDelays("Which path will you choose? Type " + yellowColor + "north" + resetColor + ", " + yellowColor + "east" + resetColor + ", or " + yellowColor + "south" + resetColor + " to continue your journey", true);
         while (true) {
-            ignore = console.readLine();
             command = console.readLine();
             if ("north".equals(command) || "east".equals(command) || "south".equals(command) || "west".equals(command)) {
                 holdCommand = command;
@@ -1277,7 +1261,6 @@ public class OpenWorld extends Room {
         }
         TextEngine.printWithDelays("Which path will you choose? Type " + yellowColor + "north" + resetColor + ", " + yellowColor + "east" + resetColor + ", " + yellowColor + "south" + resetColor + " or " + yellowColor + "west" + resetColor + " to continue your journey", true);
         while (true) {
-            ignore = console.readLine();
             command = console.readLine();
             if ("north".equals(command) || "east".equals(command) || "south".equals(command) || "west".equals(command)) {
                 holdCommand = command;
@@ -1318,7 +1301,6 @@ public class OpenWorld extends Room {
         TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
         TextEngine.printWithDelays("Which path will you choose? Type " + yellowColor + "north" + resetColor + ", " + yellowColor + "The Village" + resetColor + ", " + yellowColor + "south" + resetColor + " or " + yellowColor + "west" + resetColor + " to continue your journey", true);
         while (true) {
-            ignore = console.readLine();
             command = console.readLine();
             if ("north".equals(command) || "east".equals(command) || "south".equals(command) || "west".equals(command)) {
                 holdCommand = command;
@@ -1361,7 +1343,6 @@ public class OpenWorld extends Room {
         TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
         TextEngine.printWithDelays("Which path will you choose? Type " + yellowColor + "east" + resetColor + ", or " + yellowColor + "south" + resetColor + " to continue your journey", true);
         while (true) {
-            ignore = console.readLine();
             command = console.readLine();
             if ("north".equals(command) || "east".equals(command) || "south".equals(command) || "west".equals(command)) {
                 holdCommand = command;
@@ -1393,7 +1374,6 @@ public class OpenWorld extends Room {
         TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
         TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "north" + resetColor + ", " + yellowColor + "south" + resetColor + ", or " + yellowColor + "west" + resetColor + " to continue your journey ", true);
         while (true) {
-            ignore = console.readLine();
             command = console.readLine();
             if ("north".equals(command) || "east".equals(command) || "south".equals(command) || "west".equals(command)) {
                 holdCommand = command;
@@ -1433,7 +1413,6 @@ public class OpenWorld extends Room {
         TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
         TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "north" + resetColor + ", " + yellowColor + "east" + resetColor + ", " + yellowColor + "south" + resetColor + ", or " + yellowColor + "The Mountain Cave" + resetColor + " to continue your journey ", true);
         while (true) {
-            ignore = console.readLine();
             command = console.readLine();
             if ("north".equals(command) || "east".equals(command) || "south".equals(command) || "west".equals(command)) {
                 holdCommand = command;
@@ -1457,7 +1436,7 @@ public class OpenWorld extends Room {
                 case "the mountain cave" -> {
                     if (Dungeon.completedDungeons > 1) {
                         previousRoomSave = roomSave;
-                        MountainCaveDungeon.startRoom();
+                        Dungeon.MountainCaveDungeon.startRoom();
                     } else {
                         TextEngine.printWithDelays("You must complete The Dark Forest first.\nTry going south east", true);
                     }
@@ -1477,7 +1456,6 @@ public class OpenWorld extends Room {
         TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
         TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "north" + resetColor + ", " + yellowColor + "east" + resetColor + ", " + yellowColor + "south" + resetColor + ", or " + yellowColor + "west" + resetColor + " to continue your journey ", true);
         while (true) {
-            ignore = console.readLine();
             command = console.readLine();
             if ("north".equals(command) || "east".equals(command) || "south".equals(command) || "west".equals(command)) {
                 holdCommand = command;
@@ -1519,7 +1497,6 @@ public class OpenWorld extends Room {
         TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
         TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "north" + resetColor + ", " + yellowColor + "east" + resetColor + ", " + yellowColor + "south" + resetColor + ", or " + yellowColor + "west" + resetColor + " to continue your journey ", true);
         while (true) {
-            ignore = console.readLine();
             command = console.readLine();
             if ("north".equals(command) || "east".equals(command) || "south".equals(command) || "west".equals(command)) {
                 holdCommand = command;
@@ -1560,7 +1537,6 @@ public class OpenWorld extends Room {
         TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
         TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "north" + resetColor + ", " + yellowColor + "east" + resetColor + ", " + yellowColor + "south" + resetColor + ", or " + yellowColor + "west" + resetColor + " to continue your journey ", true);
         while (true) {
-            ignore = console.readLine();
             command = console.readLine();
             if ("north".equals(command) || "east".equals(command) || "south".equals(command) || "west".equals(command)) {
                 holdCommand = command;
@@ -1601,7 +1577,6 @@ public class OpenWorld extends Room {
         TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
         TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "The Village" + resetColor + ", " + yellowColor + "south" + resetColor + ", or " + yellowColor + "west" + resetColor + " to continue your journey ", true);
         while (true) {
-            ignore = console.readLine();
             command = console.readLine();
             if ("north".equals(command) || "east".equals(command) || "south".equals(command) || "west".equals(command)) {
                 holdCommand = command;
@@ -1638,7 +1613,6 @@ public class OpenWorld extends Room {
         TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
         TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "north" + resetColor + ", " + yellowColor + "east" + resetColor + ", or " + yellowColor + "south" + resetColor + " to continue your journey ", true);
         while (true) {
-            ignore = console.readLine();
             command = console.readLine();
             if ("north".equals(command) || "east".equals(command) || "south".equals(command) || "west".equals(command)) {
                 holdCommand = command;
@@ -1674,7 +1648,6 @@ public class OpenWorld extends Room {
         TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
         TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "north" + resetColor + ", " + yellowColor + "east" + resetColor + ", " + yellowColor + "south" + resetColor + ", or " + yellowColor + "west" + resetColor + " to continue your journey ", true);
         while (true) {
-            ignore = console.readLine();
             command = console.readLine();
             if ("north".equals(command) || "east".equals(command) || "south".equals(command) || "west".equals(command)) {
                 holdCommand = command;
@@ -1715,7 +1688,6 @@ public class OpenWorld extends Room {
         TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
         TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "south" + resetColor + ", or " + yellowColor + "west" + resetColor + " to continue your journey ", true);
         while (true) {
-            ignore = console.readLine();
             command = console.readLine();
             if ("north".equals(command) || "east".equals(command) || "south".equals(command) || "west".equals(command)) {
                 holdCommand = command;
@@ -1747,7 +1719,6 @@ public class OpenWorld extends Room {
         TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
         TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "north" + resetColor + ", " + yellowColor + "east" + resetColor + ", " + yellowColor + "south" + resetColor + ", or " + yellowColor + "west" + resetColor + " to continue your journey ", true);
         while (true) {
-            ignore = console.readLine();
             command = console.readLine();
             if ("north".equals(command) || "east".equals(command) || "south".equals(command) || "west".equals(command)) {
                 holdCommand = command;
@@ -1789,7 +1760,6 @@ public class OpenWorld extends Room {
         TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
         TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "north" + resetColor + ", " + yellowColor + "east" + resetColor + ", " + yellowColor + "south" + resetColor + ", or " + yellowColor + "west" + resetColor + " to continue your journey ", true);
         while (true) {
-            ignore = console.readLine();
             command = console.readLine();
             if ("north".equals(command) || "east".equals(command) || "south".equals(command) || "west".equals(command)) {
                 holdCommand = command;
@@ -1831,7 +1801,6 @@ public class OpenWorld extends Room {
         TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
         TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "north" + resetColor + ", " + yellowColor + "east" + resetColor + ", " + yellowColor + "south" + resetColor + ", or " + yellowColor + "west" + resetColor + " to continue your journey ", true);
         while (true) {
-            ignore = console.readLine();
             command = console.readLine();
             if ("north".equals(command) || "east".equals(command) || "south".equals(command) || "west".equals(command)) {
                 holdCommand = command;
@@ -1873,7 +1842,6 @@ public class OpenWorld extends Room {
         TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
         TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "north" + resetColor + ", " + yellowColor + "south" + resetColor + ", or " + yellowColor + "west" + resetColor + " to continue your journey ", true);
         while (true) {
-            ignore = console.readLine();
             command = console.readLine();
             if ("north".equals(command) || "east".equals(command) || "south".equals(command) || "west".equals(command)) {
                 holdCommand = command;
@@ -1910,7 +1878,6 @@ public class OpenWorld extends Room {
         TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
         TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "north" + resetColor + ", " + yellowColor + "east" + resetColor + ", or " + yellowColor + "The Village" + resetColor + " to continue your journey ", true);
         while (true) {
-            ignore = console.readLine();
             command = console.readLine();
             if ("north".equals(command) || "east".equals(command) || "south".equals(command) || "west".equals(command)) {
                 holdCommand = command;
@@ -1948,7 +1915,6 @@ public class OpenWorld extends Room {
         TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
         TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "north" + resetColor + ", " + yellowColor + "east" + resetColor + ", " + yellowColor + "south" + resetColor + ", or " + yellowColor + "west" + resetColor + " to continue your journey ", true);
         while (true) {
-            ignore = console.readLine();
             command = console.readLine();
             if ("north".equals(command) || "east".equals(command) || "south".equals(command) || "west".equals(command)) {
                 holdCommand = command;
@@ -1990,7 +1956,6 @@ public class OpenWorld extends Room {
         TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
         TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "north" + resetColor + ", " + yellowColor + "east" + resetColor + ", " + yellowColor + "south" + resetColor + ", or " + yellowColor + "west" + resetColor + " to continue your journey ", true);
         while (true) {
-            ignore = console.readLine();
             command = console.readLine();
             if ("north".equals(command) || "east".equals(command) || "south".equals(command) || "west".equals(command)) {
                 holdCommand = command;
@@ -2032,7 +1997,6 @@ public class OpenWorld extends Room {
         TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
         TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "east" + resetColor + ", " + yellowColor + "south" + resetColor + ", or " + yellowColor + "west" + resetColor + " to continue your journey ", true);
         while (true) {
-            ignore = console.readLine();
             command = console.readLine();
             if ("north".equals(command) || "east".equals(command) || "south".equals(command) || "west".equals(command)) {
                 holdCommand = command;
@@ -2068,7 +2032,6 @@ public class OpenWorld extends Room {
         TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
         TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "north" + resetColor + ", " + yellowColor + "east" + resetColor + ", " + yellowColor + "south" + resetColor + ", or " + yellowColor + "west" + resetColor + " to continue your journey ", true);
         while (true) {
-            ignore = console.readLine();
             command = console.readLine();
             if ("north".equals(command) || "east".equals(command) || "south".equals(command) || "west".equals(command)) {
                 holdCommand = command;
@@ -2109,7 +2072,6 @@ public class OpenWorld extends Room {
         TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
         TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "north" + resetColor + ", " + yellowColor + "east" + resetColor + ", " + yellowColor + "south" + resetColor + ", or " + yellowColor + "west" + resetColor + " to continue your journey ", true);
         while (true) {
-            ignore = console.readLine();
             command = console.readLine();
             if ("north".equals(command) || "east".equals(command) || "south".equals(command) || "west".equals(command)) {
                 holdCommand = command;
@@ -2150,7 +2112,6 @@ public class OpenWorld extends Room {
         TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
         TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "north" + resetColor + ", " + yellowColor + "east" + resetColor + ", " + yellowColor + "south" + resetColor + ", or " + yellowColor + "west" + resetColor + " to continue your journey ", true);
         while (true) {
-            ignore = console.readLine();
             command = console.readLine();
             if ("north".equals(command) || "east".equals(command) || "south".equals(command) || "west".equals(command)) {
                 holdCommand = command;
@@ -2191,7 +2152,6 @@ public class OpenWorld extends Room {
         TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
         TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "north" + resetColor + ", " + yellowColor + "east" + resetColor + ", " + yellowColor + "south" + resetColor + ", or " + yellowColor + "west" + resetColor + " to continue your journey ", true);
         while (true) {
-            ignore = console.readLine();
             command = console.readLine();
             if ("north".equals(command) || "east".equals(command) || "south".equals(command) || "west".equals(command)) {
                 holdCommand = command;
@@ -2232,7 +2192,6 @@ public class OpenWorld extends Room {
         TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
         TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "north" + resetColor + ", " + yellowColor + "south" + resetColor + ", or " + yellowColor + "west" + resetColor + " to continue your journey ", true);
         while (true) {
-            ignore = console.readLine();
             command = console.readLine();
             if ("north".equals(command) || "east".equals(command) || "south".equals(command) || "west".equals(command)) {
                 holdCommand = command;
@@ -2272,7 +2231,6 @@ public class OpenWorld extends Room {
         TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
         TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "north" + resetColor + ", " + yellowColor + "east" + resetColor + ", " + yellowColor + "The Desert Pyramid" + resetColor + ", or " + yellowColor + "The Village" + resetColor + " to continue your journey ", true);
         while (true) {
-            ignore = console.readLine();
             command = console.readLine();
             if ("north".equals(command) || "east".equals(command) || "south".equals(command) || "west".equals(command)) {
                 holdCommand = command;
@@ -2291,7 +2249,7 @@ public class OpenWorld extends Room {
                 case "the desert pyramid" -> {
                     if (Dungeon.completedDungeons > 5) {
                         previousRoomSave = roomSave;
-                        DesertPyramidDungeon.startRoom();
+                        Dungeon.DesertPyramidDungeon.startRoom();
                     } else {
                         TextEngine.printWithDelays("You must complete The Desert Plains dungeon first.\nTry going south", true);
                     }
@@ -2317,7 +2275,6 @@ public class OpenWorld extends Room {
         TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
         TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "north" + resetColor + ", " + yellowColor + "east" + resetColor + ", " + yellowColor + "south" + resetColor + ", or " + yellowColor + "west" + resetColor + " to continue your journey ", true);
         while (true) {
-            ignore = console.readLine();
             command = console.readLine();
             if ("north".equals(command) || "east".equals(command) || "south".equals(command) || "west".equals(command)) {
                 holdCommand = command;
@@ -2359,7 +2316,6 @@ public class OpenWorld extends Room {
         TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
         TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "north" + resetColor + ", " + yellowColor + "east" + resetColor + ", " + yellowColor + "south" + resetColor + ", or " + yellowColor + "west" + resetColor + " to continue your journey ", true);
         while (true) {
-            ignore = console.readLine();
             command = console.readLine();
             if ("north".equals(command) || "east".equals(command) || "south".equals(command) || "west".equals(command)) {
                 holdCommand = command;
@@ -2400,7 +2356,6 @@ public class OpenWorld extends Room {
         TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
         TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "north" + resetColor + ", " + yellowColor + "east" + resetColor + ", " + yellowColor + "south" + resetColor + ", or " + yellowColor + "west" + resetColor + " to continue your journey ", true);
         while (true) {
-            ignore = console.readLine();
             command = console.readLine();
             if ("north".equals(command) || "east".equals(command) || "south".equals(command) || "west".equals(command)) {
                 holdCommand = command;
@@ -2442,7 +2397,6 @@ public class OpenWorld extends Room {
         TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
         TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "north" + resetColor + ", " + yellowColor + "east" + resetColor + ", " + yellowColor + "south" + resetColor + ", or " + yellowColor + "west" + resetColor + " to continue your journey ", true);
         while (true) {
-            ignore = console.readLine();
             command = console.readLine();
             if ("north".equals(command) || "east".equals(command) || "south".equals(command) || "west".equals(command)) {
                 holdCommand = command;
@@ -2484,7 +2438,6 @@ public class OpenWorld extends Room {
         TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
         TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "north" + resetColor + ", " + yellowColor + "east" + resetColor + ", " + yellowColor + "south" + resetColor + ", or " + yellowColor + "west" + resetColor + " to continue your journey ", true);
         while (true) {
-            ignore = console.readLine();
             command = console.readLine();
             if ("north".equals(command) || "east".equals(command) || "south".equals(command) || "west".equals(command)) {
                 holdCommand = command;
@@ -2526,7 +2479,6 @@ public class OpenWorld extends Room {
         TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
         TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "north" + resetColor + ", " + yellowColor + "east" + resetColor + ", " + yellowColor + "south" + resetColor + ", or " + yellowColor + "west" + resetColor + " to continue your journey ", true);
         while (true) {
-            ignore = console.readLine();
             command = console.readLine();
             if ("north".equals(command) || "east".equals(command) || "south".equals(command) || "west".equals(command)) {
                 holdCommand = command;
@@ -2551,7 +2503,8 @@ public class OpenWorld extends Room {
                     previousRoomSave = roomSave;
                     roomSave = 52;
                     Main.loadSave();
-                }default ->
+                }
+                default ->
                     Main.inGameDefaultTextHandling(command);
             }
         }
@@ -2571,7 +2524,6 @@ public class OpenWorld extends Room {
         TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
         TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "north" + resetColor + ", " + yellowColor + "west" + resetColor + ", or " + yellowColor + "The Dark Forest" + resetColor + " to continue your journey ", true);
         while (true) {
-            ignore = console.readLine();
             command = console.readLine();
             if ("north".equals(command) || "east".equals(command) || "south".equals(command) || "west".equals(command)) {
                 holdCommand = command;
@@ -2581,18 +2533,21 @@ public class OpenWorld extends Room {
                     previousRoomSave = roomSave;
                     roomSave = 45;
                     Main.loadSave();
-                }case "the dark forest" -> {
+                }
+                case "the dark forest" -> {
                     if (Dungeon.completedDungeons > 0) {
                         previousRoomSave = roomSave;
-                        DarkForestDungeon.startRoom();
+                        Dungeon.DarkForestDungeon.startRoom();
                     } else {
                         TextEngine.printWithDelays("You must complete The Meadow dungeon first.\nTry going south", true);
                     }
-                }case "west" -> {
+                }
+                case "west" -> {
                     previousRoomSave = roomSave;
                     roomSave = 53;
                     Main.loadSave();
-                }default ->
+                }
+                default ->
                     Main.inGameDefaultTextHandling(command);
             }
         }
@@ -2611,7 +2566,6 @@ public class OpenWorld extends Room {
         TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
         TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "north" + resetColor + ", " + yellowColor + "east" + resetColor + ", " + yellowColor + "south" + resetColor + ", or " + yellowColor + "The Desert Pyramid" + resetColor + " to continue your journey ", true);
         while (true) {
-            ignore = console.readLine();
             command = console.readLine();
             if ("north".equals(command) || "east".equals(command) || "south".equals(command) || "west".equals(command)) {
                 holdCommand = command;
@@ -2621,22 +2575,26 @@ public class OpenWorld extends Room {
                     previousRoomSave = roomSave;
                     roomSave = 48;
                     Main.loadSave();
-                }case "east" -> {
+                }
+                case "east" -> {
                     previousRoomSave = roomSave;
                     roomSave = 27;
                     Main.loadSave();
-                }case "south" -> {
+                }
+                case "south" -> {
                     previousRoomSave = roomSave;
                     roomSave = 64;
                     Main.loadSave();
-                }case "the desert pyramid" -> {
+                }
+                case "the desert pyramid" -> {
                     if (Dungeon.completedDungeons > 5) {
                         previousRoomSave = roomSave;
-                        DesertPyramidDungeon.startRoom();
+                        Dungeon.DesertPyramidDungeon.startRoom();
                     } else {
                         TextEngine.printWithDelays("You must complete The Desert Plains dungeon first.\nTry going south", true);
                     }
-                }default ->
+                }
+                default ->
                     Main.inGameDefaultTextHandling(command);
             }
         }
@@ -2651,7 +2609,6 @@ public class OpenWorld extends Room {
         TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
         TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "north" + resetColor + ", " + yellowColor + "east" + resetColor + ", " + yellowColor + "south" + resetColor + ", or " + yellowColor + "west" + resetColor + " to continue your journey ", true);
         while (true) {
-            ignore = console.readLine();
             command = console.readLine();
             if ("north".equals(command) || "east".equals(command) || "south".equals(command) || "west".equals(command)) {
                 holdCommand = command;
@@ -2661,19 +2618,23 @@ public class OpenWorld extends Room {
                     previousRoomSave = roomSave;
                     roomSave = 50;
                     Main.loadSave();
-                }case "east" -> {
+                }
+                case "east" -> {
                     previousRoomSave = roomSave;
                     roomSave = 58;
                     Main.loadSave();
-                }case "south" -> {
+                }
+                case "south" -> {
                     previousRoomSave = roomSave;
                     roomSave = 66;
                     Main.loadSave();
-                }case "west" -> {
+                }
+                case "west" -> {
                     previousRoomSave = roomSave;
                     roomSave = 27;
                     Main.loadSave();
-                }default ->
+                }
+                default ->
                     Main.inGameDefaultTextHandling(command);
             }
         }
@@ -2689,28 +2650,32 @@ public class OpenWorld extends Room {
         TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
         TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "north" + resetColor + ", " + yellowColor + "east" + resetColor + ", " + yellowColor + "south" + resetColor + ", or " + yellowColor + "west" + resetColor + " to continue your journey ", true);
         while (true) {
-            ignore = console.readLine();
             command = console.readLine();
             if ("north".equals(command) || "east".equals(command) || "south".equals(command) || "west".equals(command)) {
                 holdCommand = command;
-            }switch (command.toLowerCase().trim()) {
+            }
+            switch (command.toLowerCase().trim()) {
                 case "north" -> {
                     previousRoomSave = roomSave;
                     roomSave = 51;
                     Main.loadSave();
-                }case "east" -> {
+                }
+                case "east" -> {
                     previousRoomSave = roomSave;
                     roomSave = 59;
                     Main.loadSave();
-                }case "south" -> {
+                }
+                case "south" -> {
                     previousRoomSave = roomSave;
                     roomSave = 67;
                     Main.loadSave();
-                }case "west" -> {
+                }
+                case "west" -> {
                     previousRoomSave = roomSave;
                     roomSave = 57;
                     Main.loadSave();
-                }default ->
+                }
+                default ->
                     Main.inGameDefaultTextHandling(command);
             }
         }
@@ -2725,7 +2690,6 @@ public class OpenWorld extends Room {
         TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
         TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "north" + resetColor + ", " + yellowColor + "east" + resetColor + ", " + yellowColor + "south" + resetColor + ", or " + yellowColor + "west" + resetColor + " to continue your journey ", true);
         while (true) {
-            ignore = console.readLine();
             command = console.readLine();
             if ("north".equals(command) || "east".equals(command) || "south".equals(command) || "west".equals(command)) {
                 holdCommand = command;
@@ -2735,19 +2699,23 @@ public class OpenWorld extends Room {
                     previousRoomSave = roomSave;
                     roomSave = 52;
                     Main.loadSave();
-                }case "east" -> {
+                }
+                case "east" -> {
                     previousRoomSave = roomSave;
                     roomSave = 60;
                     Main.loadSave();
-                }case "south" -> {
+                }
+                case "south" -> {
                     previousRoomSave = roomSave;
                     roomSave = 68;
                     Main.loadSave();
-                }case "west" -> {
+                }
+                case "west" -> {
                     previousRoomSave = roomSave;
                     roomSave = 58;
                     Main.loadSave();
-                }default ->
+                }
+                default ->
                     Main.inGameDefaultTextHandling(command);
             }
         }
@@ -2766,7 +2734,6 @@ public class OpenWorld extends Room {
         TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
         TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "north" + resetColor + ", " + yellowColor + "south" + resetColor + ", " + yellowColor + "west" + resetColor + ", or " + yellowColor + "The Dark Forest" + resetColor + " to continue your journey ", true);
         while (true) {
-            ignore = console.readLine();
             command = console.readLine();
             if ("north".equals(command) || "east".equals(command) || "south".equals(command) || "west".equals(command)) {
                 holdCommand = command;
@@ -2776,22 +2743,26 @@ public class OpenWorld extends Room {
                     previousRoomSave = roomSave;
                     roomSave = 53;
                     Main.loadSave();
-                }case "the dark forest" -> {
+                }
+                case "the dark forest" -> {
                     if (Dungeon.completedDungeons > 0) {
                         previousRoomSave = roomSave;
-                        DarkForestDungeon.startRoom();
+                        Dungeon.DarkForestDungeon.startRoom();
                     } else {
                         TextEngine.printWithDelays("You must complete The Meadow dungeon first.\nTry going south", true);
                     }
-                }case "south" -> {
+                }
+                case "south" -> {
                     previousRoomSave = roomSave;
                     roomSave = 69;
                     Main.loadSave();
-                }case "west" -> {
+                }
+                case "west" -> {
                     previousRoomSave = roomSave;
                     roomSave = 59;
                     Main.loadSave();
-                }default ->
+                }
+                default ->
                     Main.inGameDefaultTextHandling(command);
             }
         }
@@ -2811,7 +2782,6 @@ public class OpenWorld extends Room {
         TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
         TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "east" + resetColor + ", " + yellowColor + "south" + resetColor + ", or " + yellowColor + "The Mountain Cave" + resetColor + " to continue your journey ", true);
         while (true) {
-            ignore = console.readLine();
             command = console.readLine();
             if ("north".equals(command) || "east".equals(command) || "south".equals(command) || "west".equals(command)) {
                 holdCommand = command;
@@ -2821,18 +2791,21 @@ public class OpenWorld extends Room {
                     previousRoomSave = roomSave;
                     roomSave = 33;
                     Main.loadSave();
-                }case "south" -> {
+                }
+                case "south" -> {
                     previousRoomSave = roomSave;
                     roomSave = 41;
                     Main.loadSave();
-                }case "the mountain cave" -> {
+                }
+                case "the mountain cave" -> {
                     if (Dungeon.completedDungeons > 1) {
                         previousRoomSave = roomSave;
-                        MountainCaveDungeon.startRoom();
+                        Dungeon.MountainCaveDungeon.startRoom();
                     } else {
                         TextEngine.printWithDelays("You must complete The Dark Forest first.\nTry going south east", true);
                     }
-                }default ->
+                }
+                default ->
                     Main.inGameDefaultTextHandling(command);
             }
         }
@@ -2851,7 +2824,6 @@ public class OpenWorld extends Room {
         TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
         TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "north" + resetColor + ", " + yellowColor + "east" + resetColor + ", " + yellowColor + "south" + resetColor + ", or " + yellowColor + "The Desert Plains" + resetColor + " to continue your journey ", true);
         while (true) {
-            ignore = console.readLine();
             command = console.readLine();
             if ("north".equals(command) || "east".equals(command) || "south".equals(command) || "west".equals(command)) {
                 holdCommand = command;
@@ -2861,22 +2833,26 @@ public class OpenWorld extends Room {
                     previousRoomSave = roomSave;
                     roomSave = 55;
                     Main.loadSave();
-                }case "east" -> {
+                }
+                case "east" -> {
                     previousRoomSave = roomSave;
                     roomSave = 65;
                     Main.loadSave();
-                }case "south" -> {
+                }
+                case "south" -> {
                     previousRoomSave = roomSave;
                     roomSave = 72;
                     Main.loadSave();
-                }case "the desert plains" -> {
+                }
+                case "the desert plains" -> {
                     if (Dungeon.completedDungeons > 4) {
                         previousRoomSave = roomSave;
-                        DesertPlainsDungeon.startRoom();
+                        Dungeon.DesertPlainsDungeon.startRoom();
                     } else {
                         TextEngine.printWithDelays("You must complete The Desert Oasis dungeons first.\nTry going to the south south", true);
                     }
-                }default ->
+                }
+                default ->
                     Main.inGameDefaultTextHandling(command);
             }
         }
@@ -2892,7 +2868,6 @@ public class OpenWorld extends Room {
         TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
         TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "north" + resetColor + ", " + yellowColor + "east" + resetColor + ", " + yellowColor + "south" + resetColor + ", or " + yellowColor + "west" + resetColor + " to continue your journey ", true);
         while (true) {
-            ignore = console.readLine();
             command = console.readLine();
             if ("north".equals(command) || "east".equals(command) || "south".equals(command) || "west".equals(command)) {
                 holdCommand = command;
@@ -2902,19 +2877,23 @@ public class OpenWorld extends Room {
                     previousRoomSave = roomSave;
                     roomSave = 27;
                     Main.loadSave();
-                }case "east" -> {
+                }
+                case "east" -> {
                     previousRoomSave = roomSave;
                     roomSave = 66;
                     Main.loadSave();
-                }case "south" -> {
+                }
+                case "south" -> {
                     previousRoomSave = roomSave;
                     roomSave = 73;
                     Main.loadSave();
-                }case "west" -> {
+                }
+                case "west" -> {
                     previousRoomSave = roomSave;
                     roomSave = 64;
                     Main.loadSave();
-                }default ->
+                }
+                default ->
                     Main.inGameDefaultTextHandling(command);
             }
         }
@@ -2929,7 +2908,6 @@ public class OpenWorld extends Room {
         TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
         TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "north" + resetColor + ", " + yellowColor + "east" + resetColor + ", " + yellowColor + "south" + resetColor + ", or " + yellowColor + "west" + resetColor + " to continue your journey ", true);
         while (true) {
-            ignore = console.readLine();
             command = console.readLine();
             if ("north".equals(command) || "east".equals(command) || "south".equals(command) || "west".equals(command)) {
                 holdCommand = command;
@@ -2939,19 +2917,23 @@ public class OpenWorld extends Room {
                     previousRoomSave = roomSave;
                     roomSave = 57;
                     Main.loadSave();
-                }case "east" -> {
+                }
+                case "east" -> {
                     previousRoomSave = roomSave;
                     roomSave = 67;
                     Main.loadSave();
-                }case "south" -> {
+                }
+                case "south" -> {
                     previousRoomSave = roomSave;
                     roomSave = 74;
                     Main.loadSave();
-                }case "west" -> {
+                }
+                case "west" -> {
                     previousRoomSave = roomSave;
                     roomSave = 65;
                     Main.loadSave();
-                }default ->
+                }
+                default ->
                     Main.inGameDefaultTextHandling(command);
             }
         }
@@ -2967,7 +2949,6 @@ public class OpenWorld extends Room {
         TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
         TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "north" + resetColor + ", " + yellowColor + "east" + resetColor + ", " + yellowColor + "west" + resetColor + ", or " + yellowColor + "The Village" + resetColor + " to continue your journey ", true);
         while (true) {
-            ignore = console.readLine();
             command = console.readLine();
             if ("north".equals(command) || "east".equals(command) || "south".equals(command) || "west".equals(command)) {
                 holdCommand = command;
@@ -2977,20 +2958,24 @@ public class OpenWorld extends Room {
                     previousRoomSave = roomSave;
                     roomSave = 58;
                     Main.loadSave();
-                }case "east" -> {
+                }
+                case "east" -> {
                     previousRoomSave = roomSave;
                     roomSave = 68;
                     Main.loadSave();
-                }case "the village" -> {
+                }
+                case "the village" -> {
                     previousRoomSave = roomSave;
                     saveRoomNumber = roomNumber;
                     roomSave = 1;
                     Main.loadSave();
-                }case "west" -> {
+                }
+                case "west" -> {
                     previousRoomSave = roomSave;
                     roomSave = 66;
                     Main.loadSave();
-                }default ->
+                }
+                default ->
                     Main.inGameDefaultTextHandling(command);
             }
         }
@@ -3006,7 +2991,6 @@ public class OpenWorld extends Room {
         TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
         TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "north" + resetColor + ", " + yellowColor + "east" + resetColor + ", or " + yellowColor + "west" + resetColor + " to continue your journey ", true);
         while (true) {
-            ignore = console.readLine();
             command = console.readLine();
             if ("north".equals(command) || "east".equals(command) || "south".equals(command) || "west".equals(command)) {
                 holdCommand = command;
@@ -3016,15 +3000,18 @@ public class OpenWorld extends Room {
                     previousRoomSave = roomSave;
                     roomSave = 59;
                     Main.loadSave();
-                }case "east" -> {
+                }
+                case "east" -> {
                     previousRoomSave = roomSave;
                     roomSave = 69;
                     Main.loadSave();
-                }case "west" -> {
+                }
+                case "west" -> {
                     previousRoomSave = roomSave;
                     roomSave = 67;
                     Main.loadSave();
-                }default ->
+                }
+                default ->
                     Main.inGameDefaultTextHandling(command);
             }
         }
@@ -3043,7 +3030,6 @@ public class OpenWorld extends Room {
         TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
         TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "north" + resetColor + ", " + yellowColor + "west" + resetColor + ", or " + yellowColor + "The Meadow" + resetColor + " to continue your journey ", true);
         while (true) {
-            ignore = console.readLine();
             command = console.readLine();
             if ("north".equals(command) || "east".equals(command) || "south".equals(command) || "west".equals(command)) {
                 holdCommand = command;
@@ -3053,14 +3039,17 @@ public class OpenWorld extends Room {
                     previousRoomSave = roomSave;
                     roomSave = 60;
                     Main.loadSave();
-                }case "the meadow" -> {
+                }
+                case "the meadow" -> {
                     previousRoomSave = roomSave;
-                    MeadowDungeon.startRoom();
-                }case "west" -> {
+                    Dungeon.MeadowDungeon.startRoom();
+                }
+                case "west" -> {
                     previousRoomSave = roomSave;
                     roomSave = 68;
                     Main.loadSave();
-                }default ->
+                }
+                default ->
                     Main.inGameDefaultTextHandling(command);
             }
         }
@@ -3079,7 +3068,6 @@ public class OpenWorld extends Room {
         TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
         TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "north" + resetColor + ", " + yellowColor + "east" + resetColor + ", or " + yellowColor + "The Desert Oasis" + resetColor + " to continue your journey ", true);
         while (true) {
-            ignore = console.readLine();
             command = console.readLine();
             if ("north".equals(command) || "east".equals(command) || "south".equals(command) || "west".equals(command)) {
                 holdCommand = command;
@@ -3089,18 +3077,21 @@ public class OpenWorld extends Room {
                     previousRoomSave = roomSave;
                     roomSave = 64;
                     Main.loadSave();
-                }case "east" -> {
+                }
+                case "east" -> {
                     previousRoomSave = roomSave;
                     roomSave = 73;
                     Main.loadSave();
-                }case "the desert oasis" -> {
+                }
+                case "the desert oasis" -> {
                     if (Dungeon.completedDungeons > 3) {
                         previousRoomSave = roomSave;
-                        DesertOasisDungeon.startRoom();
+                        Dungeon.DesertOasisDungeon.startRoom();
                     } else {
                         TextEngine.printWithDelays("You must complete The Mountain Top dungeon first.\n Try going to the north, east", true);
                     }
-                }default ->
+                }
+                default ->
                     Main.inGameDefaultTextHandling(command);
             }
         }
@@ -3116,7 +3107,6 @@ public class OpenWorld extends Room {
         TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
         TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "north" + resetColor + ", " + yellowColor + "east" + resetColor + ", or " + yellowColor + "west" + resetColor + " to continue your journey ", true);
         while (true) {
-            ignore = console.readLine();
             command = console.readLine();
             if ("north".equals(command) || "east".equals(command) || "south".equals(command) || "west".equals(command)) {
                 holdCommand = command;
@@ -3126,15 +3116,18 @@ public class OpenWorld extends Room {
                     previousRoomSave = roomSave;
                     roomSave = 65;
                     Main.loadSave();
-                }case "east" -> {
+                }
+                case "east" -> {
                     previousRoomSave = roomSave;
                     roomSave = 74;
                     Main.loadSave();
-                }case "west" -> {
+                }
+                case "west" -> {
                     previousRoomSave = roomSave;
                     roomSave = 72;
                     Main.loadSave();
-                }default ->
+                }
+                default ->
                     Main.inGameDefaultTextHandling(command);
             }
         }
@@ -3149,7 +3142,6 @@ public class OpenWorld extends Room {
         TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
         TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "north" + resetColor + ", " + yellowColor + "west" + resetColor + ", or " + yellowColor + "The Village" + resetColor + " to continue your journey ", true);
         while (true) {
-            ignore = console.readLine();
             command = console.readLine();
             if ("north".equals(command) || "east".equals(command) || "south".equals(command) || "west".equals(command)) {
                 holdCommand = command;
@@ -3159,16 +3151,19 @@ public class OpenWorld extends Room {
                     previousRoomSave = roomSave;
                     roomSave = 66;
                     Main.loadSave();
-                }case "the village" -> {
+                }
+                case "the village" -> {
                     previousRoomSave = roomSave;
                     saveRoomNumber = roomNumber;
                     roomSave = 1;
                     Main.loadSave();
-                }case "west" -> {
+                }
+                case "west" -> {
                     previousRoomSave = roomSave;
                     roomSave = 73;
                     Main.loadSave();
-                }default ->
+                }
+                default ->
                     Main.inGameDefaultTextHandling(command);
             }
         }

@@ -5,6 +5,7 @@ import java.util.Random;
 
 //Written by Caden Finley
 //This is unused in this program
+//add radius check to placing 8s and 5s to make sure they are within a certain distance of the 9 inside the circle
 public class OpenWorldGenerator {
 
     private static final int SIZE = 20;
@@ -250,7 +251,6 @@ public class OpenWorldGenerator {
                     matrix[i][j] = 0;
                 }
             }
-
             // Place the values
             placeNineAtCenter();
             placeEightsWithDistance();
@@ -284,8 +284,6 @@ public class OpenWorldGenerator {
     public static int[][] getMatrix() {
         OpenWorldGenerator modifier = new OpenWorldGenerator();
         modifier.generateMatrix();
-        System.out.println(countRooms());
         return matrix;
     }
-
 }
