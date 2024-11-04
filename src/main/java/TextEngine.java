@@ -23,38 +23,22 @@ public abstract class TextEngine {
 
     public static int MAX_LINE_WIDTH = 30; // Define the maximum line width
 
-    public static int getTerminalWidth() {
-        ProcessBuilder processBuilder = new ProcessBuilder("sh", "-c", "stty size < /dev/tty");
-        processBuilder.redirectErrorStream(true);
-        Process process;
+    public static void setWidth() {
         try {
-            process = processBuilder.start();
-        } catch (IOException e) {
-            return -1;
-        }
-        try (BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()))) {
+            ProcessBuilder processBuilder = new ProcessBuilder("sh", "-c", "tput cols");
+            Process process = processBuilder.start();
+            BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
             String line = reader.readLine();
             if (line != null && !line.isEmpty()) {
-                String[] dimensions = line.split(" ");
-                if (dimensions.length == 2) {
-                    int length = Integer.parseInt(dimensions[0]) + 10;
-                    if (length > 70) {
-                        return length;
-                    }
-                }
+                System.out.println("Terminal width: " + line);
+                MAX_LINE_WIDTH = Integer.parseInt(line);
+            } else {
+                System.out.println("Could not get the terminal width, using default value");
+                MAX_LINE_WIDTH = 80; // Default width if tput fails
             }
-        } catch (Exception e) {
-            return -1;
-        }
-        return -1; // Return -1 if there is an error
-    }
-
-    public static void setWidth() {
-        int width = getTerminalWidth();
-        if (width != -1) {
-            MAX_LINE_WIDTH = width;
-        } else {
-            MAX_LINE_WIDTH = 80;
+        } catch (IOException e) {
+            System.out.println("Could not get the terminal width, using default value");
+            MAX_LINE_WIDTH = 80; // Default width if an exception occurs
         }
     }
 
@@ -63,7 +47,6 @@ public abstract class TextEngine {
             printNoDelay(data, buffer);
             return;
         }
-        setWidth();
         if (buffer) {
             data = data + yellowColor + " (press enter to type)" + resetColor;
         }
@@ -118,7 +101,6 @@ public abstract class TextEngine {
     }
 
     public static void printNoDelay(String data, boolean buffer) { //use buffer is you are accepting input after the text is printed
-        setWidth();
         if (buffer) {
             data = data + yellowColor + " (press enter to type)" + resetColor;
         }

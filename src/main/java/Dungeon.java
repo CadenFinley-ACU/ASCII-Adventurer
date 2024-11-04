@@ -348,9 +348,9 @@ public class Dungeon extends Room {
     }
 
     public static void dungeonCheck() throws InterruptedException {
-        if (OpenWorld.holdCommand == null) {
+        if (OpenWorld.holdCommand == null || OpenWorld.holdCommand.isEmpty() || OpenWorld.holdCommand.isBlank() || OpenWorld.holdCommand.equals(" ") || OpenWorld.holdCommand.equals("null")) {
             OpenWorld.holdCommand = "onward";
-            TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ".", resetedAfterWin);
+            TextEngine.printWithDelays("You walk " + OpenWorld.holdCommand + ".", false);
             return;
         }
         switch (completedDungeons) {

@@ -94,7 +94,7 @@ public class PromptEngine {
     }
 
     public static String returnPrompt() throws InterruptedException {
-        if (prompt == null || prompt.isEmpty()) {
+        if (prompt == null || prompt.isEmpty() || OpenWorld.checkChangeInRoom()) {
             buildPrompt();
         }
         // Highlight keywords

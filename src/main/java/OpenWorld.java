@@ -660,7 +660,7 @@ public class OpenWorld extends Room {
         roomNumber = 0;
     }
 
-    private static boolean checkChangeInRoom() {
+    public static boolean checkChangeInRoom() {
         return roomSave != previousRoomSave;
     }
 

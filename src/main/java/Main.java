@@ -27,6 +27,7 @@ public class Main {
     public static TimerEngine playTime;
 
     public static void main(String[] args) throws InterruptedException, IOException { //main game start
+        TextEngine.setWidth();
         TextEngine.clearScreen();
         playTime = new TimerEngine();
         TextEngine.printNoDelay("Loading...", false);
