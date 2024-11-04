@@ -76,7 +76,6 @@ public class OpenWorld extends Room {
             numberOfEnemies = 0;
         }
         enemyType = enemies.get(rand.nextInt(enemies.size()));
-
         switch (roomSave) {
             case 1 -> {
                 Player.playerX = 0;
