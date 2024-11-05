@@ -30,7 +30,7 @@ public class PromptEngine {
     );
 
     public static void buildPrompt() throws InterruptedException {
-        if (aiGenerationEnabled) {
+        if (aiGenerationEnabled && (OpenWorld.checkChangeInRoom() || prompt == null || prompt.isEmpty())) {
             String villageDirection = Player.getCompassDirectionToClosestVillage();
             String nextDungeon = Player.getNextDungeon();
             String dungeonNextDirection = Player.getCompassDirectionToClosestDungeon();
@@ -94,35 +94,35 @@ public class PromptEngine {
     }
 
     public static String returnPrompt() throws InterruptedException {
-        if (prompt == null || prompt.isEmpty()) {
-            buildPrompt();
+        if (aiGenerationEnabled) {
+            if (prompt == null || prompt.isEmpty()) {
+                buildPrompt();
+            }
+            // Highlight keywords
+            for (String keyword : keywords) {
+                prompt = prompt.replaceAll("\\b" + keyword + "\\b", yellowColor + keyword + resetColor);
+            }
+            return prompt;
         }
-        // Highlight keywords
-        for (String keyword : keywords) {
-            prompt = prompt.replaceAll("\\b" + keyword + "\\b", yellowColor + keyword + resetColor);
-        }
-        return prompt;
+        return "AI generation is disabled. Please enable it in settings.";
     }
 
     private static String chatGPT(String message) {
         String url = "https://api.openai.com/v1/chat/completions";
         String apiKey = userAPIKey; // API key goes here
         String model = "gpt-3.5-turbo";
-
         try {
             URL obj = new URL(url);
             HttpURLConnection con = (HttpURLConnection) obj.openConnection();
             con.setRequestMethod("POST");
             con.setRequestProperty("Authorization", "Bearer " + apiKey);
             con.setRequestProperty("Content-Type", "application/json");
-
             String body = "{\"model\": \"" + model + "\", \"messages\": [{\"role\": \"user\", \"content\": \"" + message + "\"}]}";
             con.setDoOutput(true);
             try (OutputStreamWriter writer = new OutputStreamWriter(con.getOutputStream())) {
                 writer.write(body);
                 writer.flush();
             }
-
             StringBuilder response;
             try (BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()))) {
                 String inputLine;
@@ -131,10 +131,8 @@ public class PromptEngine {
                     response.append(inputLine);
                 }
             }
-
             // returns the extracted contents of the response.
             return extractContentFromResponse(response.toString());
-
         } catch (IOException e) {
             TextEngine.printNoDelay("OpenAI API connection failed. Please check your API key and internet connection. Please try again later.", false);
             TextEngine.printNoDelay("AI generation has been disabled. You can renable it in settings.", false);
@@ -160,7 +158,6 @@ public class PromptEngine {
         try {
             String url = "https://api.openai.com/v1/chat/completions";
             String model = "gpt-3.5-turbo";
-
             URL obj = new URL(url);
             HttpURLConnection con = (HttpURLConnection) obj.openConnection();
             con.setRequestMethod("POST");

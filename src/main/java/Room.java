@@ -79,18 +79,6 @@ public class Room {
         }
     }
 
-    public static void trappedRoom() throws InterruptedException {
-        TextEngine.printWithDelays("You have entered a trapped room! ", false);
-        int hit = new Random().nextBoolean() ? 1 : 2;
-        if (hit == 1) {
-            TextEngine.printWithDelays("You have been hit by a trap! ", false);
-            Player.changeHealth(-(Player.getHealth() / 4));
-        } else {
-            TextEngine.printWithDelays("You avoid the trap! ", false);
-            TextEngine.enterToNext();
-        }
-    }
-
     public static void reset(String area) { //reset the room
         room = null;
         switch (area) {

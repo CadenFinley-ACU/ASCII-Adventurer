@@ -27,6 +27,7 @@ public class Main {
     public static TimerEngine playTime;
 
     public static void main(String[] args) throws InterruptedException, IOException { //main game start
+        TextEngine.setWidth();
         TextEngine.clearScreen();
         playTime = new TimerEngine();
         TextEngine.printNoDelay("Loading...", false);
@@ -162,7 +163,7 @@ public class Main {
                     debugInfo();
                 case "change name" ->
                     Player.changeName();
-                case "source code" ->
+                case "link" ->
                     showQrCode();
                 default ->
                     TextEngine.printWithDelays("I'm sorry, I don't understand that command.", true);
@@ -177,9 +178,9 @@ public class Main {
         if (getOS_NAME().contains("Mac")) {
             darkPurpleStart = "\033[1;33m";
         }
-        System.out.println(darkPurpleStart + "    _    ____   ____ ___ ___                       ");
-        System.out.println("   / \\  / ___| / ___|_ _|_ _|                                       ");
-        System.out.println("  / _ \\ \\___ \\| |    | | | |                                      ");
+        System.out.println(darkPurpleStart + "    _    ____   ____ ___ ___         Now With AI!");
+        System.out.println("   / \\  / ___| / ___|_ _|_ _|        Type 'link' To see the git repo");
+        System.out.println("  / _ \\ \\___ \\| |    | | | |         of this project!");
         System.out.println(" / ___ \\ ___) | |___ | | | |                                        ");
         System.out.println("/_/ _ \\_\\____/ \\____|___|___| _                                   ");
         System.out.println("   / \\   __| |_   _____ _ __ | |_ _   _ _ __ ___ _ __               ");

@@ -738,6 +738,10 @@ public class DungeonGenerator {
                     room[2][5] = "P"; // fairy Room
                     room[2][7] = pinkColor + "F" + resetColor; // fairy
                 }
+                case 20 -> {
+                    room[2][5] = "P"; // Default
+                    room[2][7] = redColor + "T" + resetColor; // Default
+                }
                 default -> {
                     room[2][7] = "P"; // Default
                 }
@@ -770,7 +774,7 @@ public class DungeonGenerator {
                 room[0][6] = " ";
                 room[0][8] = " ";
             }
-            case 2, 5, 7 -> {
+            case 2, 5, 7, 20 -> {
                 if (visitedRoom[x - 1][y] > 0) {
                     room[0][7] = " ";
                 } else {
@@ -841,7 +845,7 @@ public class DungeonGenerator {
                 room[4][6] = " ";
                 room[4][8] = " ";
             }
-            case 2, 5, 7 -> {
+            case 2, 5, 7, 20 -> {
                 if (visitedRoom[x + 1][y] > 0) {
                     room[4][7] = " ";
                 } else {
@@ -910,7 +914,7 @@ public class DungeonGenerator {
                     room[2][0] = " ";
                 }
             }
-            case 2, 5, 7 -> {
+            case 2, 5, 7, 20 -> {
                 if (visitedRoom[x][y - 1] > 0) {
                     room[2][0] = " ";
                 } else {
@@ -967,7 +971,7 @@ public class DungeonGenerator {
                     room[2][14] = " ";
                 }
             }
-            case 2, 5, 7 -> {
+            case 2, 5, 7, 20 -> {
                 if (visitedRoom[x][y + 1] > 0) {
                     room[2][14] = " ";
                 } else {
@@ -1038,4 +1042,5 @@ public class DungeonGenerator {
  * 9 - spawn room
  * 10 - fairy rooms
  * 15 - last position
+ * 20 - Trapped room
  */

@@ -76,7 +76,6 @@ public class OpenWorld extends Room {
             numberOfEnemies = 0;
         }
         enemyType = enemies.get(rand.nextInt(enemies.size()));
-
         switch (roomSave) {
             case 1 -> {
                 Player.playerX = 0;
@@ -660,7 +659,7 @@ public class OpenWorld extends Room {
         roomNumber = 0;
     }
 
-    private static boolean checkChangeInRoom() {
+    public static boolean checkChangeInRoom() {
         return roomSave != previousRoomSave;
     }
 

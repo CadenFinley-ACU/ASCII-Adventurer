@@ -66,7 +66,7 @@ public class DungeonInstance extends Dungeon {
         startRooms();
     }
 
-    public void setShownMap(){
+    public void setShownMap() {
         this.roomsBeenTo = DungeonGenerator.createRoomsBeenTo(map.length);
     }
 
@@ -118,6 +118,9 @@ public class DungeonInstance extends Dungeon {
         }
         if (map[currentPlayerPosition[0]][currentPlayerPosition[1]] == 8 && roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] == 0) {
             bossRoom();
+        }
+        if (map[currentPlayerPosition[0]][currentPlayerPosition[1]] == 20 && roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] == 0) {
+            trappedRoom();
         }
         handleDirectionsAndCommands();
     }
