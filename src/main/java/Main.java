@@ -34,12 +34,7 @@ public class Main {
         Dungeon.initalizeDungeons();
         TextEngine.printNoDelay("Dungeons Initalized!", false);
         if (!hasSave()) {
-            TextEngine.printNoDelay("Generating Dungeons...", false);
-            TextEngine.printNoDelay("(P.S. if this takes more than ~10 seconds, restart the game.)", false);
-            Dungeon.generateDungeons();
-            Dungeon.setMaps();
-            Dungeon.setRoomsBeenTo();
-            TextEngine.printNoDelay("Generated Dungeons!", false);
+            gameStartGenDungeon();
         } else {
             TextEngine.printNoDelay("Locating Save File...", false);
             GameSaveSerialization.loadGameSave();
@@ -64,6 +59,15 @@ public class Main {
         TextEngine.printNoDelay("Enemies Created!", false);
         TextEngine.printWithDelays("Starting Game!", false);
         startMenu();
+    }
+
+    public static void gameStartGenDungeon() {
+        TextEngine.printNoDelay("Generating Dungeons...", false);
+        TextEngine.printNoDelay("(P.S. if this takes more than ~10 seconds, restart the game.)", false);
+        Dungeon.generateDungeons();
+        Dungeon.setMaps();
+        Dungeon.setRoomsBeenTo();
+        TextEngine.printNoDelay("Generated Dungeons!", false);
     }
 
     private static void createGameItems() { //initalize all the items in the game
