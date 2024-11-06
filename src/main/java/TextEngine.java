@@ -139,7 +139,7 @@ public abstract class TextEngine {
         }
     }
 
-    public static void clearScreen() throws InterruptedException { //clears the screen
+    public static void clearScreen() { //clears the screen
         String OS_Name = Main.getOS_NAME();
         try {
             if (OS_Name.contains("Windows")) {
