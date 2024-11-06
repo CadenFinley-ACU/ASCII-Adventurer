@@ -65,7 +65,6 @@ public class Main {
         TextEngine.printNoDelay("Enemies Created!", false);
         TextEngine.printWithDelays("Starting Game!", false);
         startMenu();
-
     }
 
     private static void createGameItems() { //initalize all the items in the game
@@ -196,6 +195,7 @@ public class Main {
             PromptEngine.buildHelpPrompt(COMMANDS);
             TextEngine.printWithDelays(PromptEngine.returnPrompt(), false);
         } else {
+            //above is supposed to be dead for now
             TextEngine.printWithDelays("Things you could say:\n" + yellowColor + "stats" + resetColor + " to see your stats\n" + yellowColor + "inventory" + resetColor + " to see your inventory\n" + yellowColor + "heal" + resetColor + " to heal you health using any available healing potions\n" + yellowColor + "settings" + resetColor + " or type " + yellowColor + "save" + resetColor + " to save\n" + yellowColor + "map" + resetColor + " to see the map\n" + yellowColor + "exit" + resetColor + " to return to the main menu.", true);
         }
     }
@@ -444,7 +444,7 @@ public class Main {
         System.out.println();
     }
 
-    public static void screenRefresh() throws InterruptedException { //refresh the screen
+    public static void screenRefresh() { //refresh the screen
         TextEngine.clearScreen();
         printStatus();
     }
