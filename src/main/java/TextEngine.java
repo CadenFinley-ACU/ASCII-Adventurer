@@ -163,4 +163,48 @@ public abstract class TextEngine {
     public static Boolean checkValidInput(String command) { //checks for valid input command
         return command != null && !command.isEmpty() && !"".equals(command);
     }
+
+    public static String parseCommand(String command, String possibleCommands[]) {
+        String[] illegalCommands = {"exit", "quit", "stats", "map", "inventory", "help", "save", "settings"};
+        String matchedCommand = "n/a";
+        int maxMatchLength = 0;
+        for (String illegalCommand : illegalCommands) {
+            if (command.equals(illegalCommand)) {
+                return command;
+            }
+        }
+        for (String possibleCommand : possibleCommands) {
+            int matchLength = getMatchLength(command, possibleCommand);
+            if (matchLength > maxMatchLength) {
+                maxMatchLength = matchLength;
+                matchedCommand = possibleCommand;
+            }
+        }
+        System.out.println("Matched command: " + matchedCommand);
+        return (maxMatchLength > 0 && has(possibleCommands, matchedCommand)) ? matchedCommand : command;
+    }
+
+    private static int getMatchLength(String command, String possibleCommand) {
+        int length = Math.min(command.length(), possibleCommand.length());
+        int matchLength = 0;
+
+        for (int i = 0; i < length; i++) {
+            if (command.charAt(i) == possibleCommand.charAt(i)) {
+                matchLength++;
+            } else {
+                break;
+            }
+        }
+
+        return matchLength;
+    }
+
+    private static boolean has(String[] possibleCommands, String matchedCommand) {
+        for (String possibleCommand : possibleCommands) {
+            if (possibleCommand.equals(matchedCommand)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
