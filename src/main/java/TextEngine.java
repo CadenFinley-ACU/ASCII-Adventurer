@@ -187,7 +187,6 @@ public abstract class TextEngine {
     private static int getMatchLength(String command, String possibleCommand) {
         int length = Math.min(command.length(), possibleCommand.length());
         int matchLength = 0;
-
         for (int i = 0; i < length; i++) {
             if (command.charAt(i) == possibleCommand.charAt(i)) {
                 matchLength++;
@@ -195,7 +194,6 @@ public abstract class TextEngine {
                 break;
             }
         }
-
         return matchLength;
     }
 

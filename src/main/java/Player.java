@@ -274,7 +274,7 @@ public class Player {
         while (true) {
             TextEngine.printWithDelays("Welcome to the game! What is your name hero?", true);
             command = console.readLine();
-            if (command != null && !command.isEmpty() && command.length() < 13) {
+            if (command != null && !command.isEmpty() && command.length() < 26) {
                 if ("exit".equals(command)) {
                     Main.startMenu();
                     TextEngine.clearScreen();
