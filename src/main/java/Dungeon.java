@@ -304,7 +304,7 @@ public class Dungeon extends Room {
                     TextEngine.printWithDelays("This command will reset" + yellowColor + " ALL " + resetColor + "Dungeons!", false);
                     TextEngine.printWithDelays("Are you sure you want to do this? " + redColor + "yes" + resetColor + " or " + yellowColor + "no" + resetColor, true);
                     while (true) {
-                        command = Room.console.readLine();
+                        command = TextEngine.parseCommand(console.readLine().toLowerCase().trim(), new String[]{"yes", "no"});
                         switch (command.toLowerCase().trim()) {
                             case "yes" -> {
                                 TextEngine.printWithDelays(redColor + "All dungeons have been reset and their difficulty has been increased! Good Luck!" + resetColor, false);
@@ -470,7 +470,7 @@ public class Dungeon extends Room {
         if (Player.inventory.containsKey("key")) {
             TextEngine.printWithDelays("Would you like to unlock the door to the boss room? " + yellowColor + "yes" + resetColor + " or " + yellowColor + "no" + resetColor, true);
             while (true) {
-                command = Room.console.readLine();
+                command = TextEngine.parseCommand(console.readLine().toLowerCase().trim(), new String[]{"yes", "no"});
                 switch (command.toLowerCase().trim()) {
                     case "yes" -> {
                         if (InventoryManager.useKey()) {
@@ -705,7 +705,7 @@ public class Dungeon extends Room {
     private static void keepShopping() throws InterruptedException { //keep shopping
         TextEngine.printWithDelays("Would you like to keep shopping? " + yellowColor + "yes" + resetColor + " or " + yellowColor + "no" + resetColor, true);
         while (true) {
-            command = console.readLine();
+            command = TextEngine.parseCommand(console.readLine().toLowerCase().trim(), new String[]{"yes", "no"});
             switch (command.toLowerCase().trim()) {
                 case "yes" -> {
                     dungeonShop();
@@ -942,7 +942,7 @@ public class Dungeon extends Room {
         TextEngine.printWithDelays("They seem to be trying to protect something...", false);
         TextEngine.printWithDelays("What is your command? " + yellowColor + "fight" + resetColor + " or " + yellowColor + "run" + resetColor, true);
         while (true) {
-            command = Room.console.readLine();
+            command = TextEngine.parseCommand(console.readLine().toLowerCase().trim(), new String[]{"fight", "run"});
             switch (command) {
                 case "fight" -> {
                     Player.changeHealth(Enemy.spawnEnemy(enemyType, numberOfEnemies));
@@ -1027,7 +1027,7 @@ public class Dungeon extends Room {
         }
         TextEngine.printWithDelays("What is your command? " + yellowColor + "fight" + resetColor + " or " + yellowColor + "run" + resetColor, true);
         while (true) {
-            command = Room.console.readLine();
+            command = TextEngine.parseCommand(console.readLine(), new String[]{"fight", "run"});
             switch (command) {
                 case "fight" -> {
                     Player.changeHealth(Enemy.spawnEnemy(enemyType, numberOfEnemies));
@@ -1151,7 +1151,7 @@ public class Dungeon extends Room {
         TextEngine.printWithDelays("The fairy has granted you a wish of healing?", false);
         TextEngine.printWithDelays("Do you want to take it? " + yellowColor + "yes" + resetColor + " or " + yellowColor + "no" + resetColor, true);
         while (true) {
-            command = Room.console.readLine();
+            command = TextEngine.parseCommand(console.readLine(), new String[]{"yes", "no"});
             switch (command) {
                 case "yes" -> {
                     Player.fairyHeal();
@@ -1568,16 +1568,16 @@ public class Dungeon extends Room {
         addDirections(availableMove);
         TextEngine.printNoDelay(directionsInString(directionsString), true);
         while (true) {
-            String parsedCommand = TextEngine.parseCommand(Room.console.readLine().toLowerCase().trim(), directionsString.toArray(String[]::new));
-            switch (parsedCommand) {
+            command = TextEngine.parseCommand(Room.console.readLine().toLowerCase().trim(), directionsString.toArray(String[]::new));
+            switch (command) {
                 case "north" ->
-                    movePlayer(parsedCommand, new int[]{-1, 0}, roomsBeenTo, localDungeon);
+                    movePlayer(command, new int[]{-1, 0}, roomsBeenTo, localDungeon);
                 case "east" ->
-                    movePlayer(parsedCommand, new int[]{0, 1}, roomsBeenTo, localDungeon);
+                    movePlayer(command, new int[]{0, 1}, roomsBeenTo, localDungeon);
                 case "south" ->
-                    movePlayer(parsedCommand, new int[]{1, 0}, roomsBeenTo, localDungeon);
+                    movePlayer(command, new int[]{1, 0}, roomsBeenTo, localDungeon);
                 case "west" ->
-                    movePlayer(parsedCommand, new int[]{0, -1}, roomsBeenTo, localDungeon);
+                    movePlayer(command, new int[]{0, -1}, roomsBeenTo, localDungeon);
                 case "boss room" -> {
                     if (confirmBossContinue()) {
                         lastPosition = currentPlayerPosition.clone(); // Save the current position before moving
@@ -1591,7 +1591,7 @@ public class Dungeon extends Room {
                 }
                 default ->
                     //return original command
-                    Dungeon.defaultDungeonArgs(parsedCommand);
+                    Dungeon.defaultDungeonArgs(command);
             }
         }
     }

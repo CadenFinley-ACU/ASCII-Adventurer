@@ -675,7 +675,7 @@ public class OpenWorld extends Room {
             }
             TextEngine.printWithDelays("What is your command? " + yellowColor + "fight" + resetColor + " or " + yellowColor + "run" + resetColor, true);
             while (true) {
-                command = console.readLine();
+                command = TextEngine.parseCommand(console.readLine(), new String[]{"fight", "run"});
                 switch (command.toLowerCase().trim()) {
                     case "fight" -> {
                         Player.changeHealth(Enemy.spawnEnemy(enemyType, numberOfEnemies));

@@ -165,7 +165,7 @@ public abstract class TextEngine {
     }
 
     public static String parseCommand(String command, String possibleCommands[]) {
-        String[] illegalCommands = {"exit", "quit", "stats", "map", "inventory", "help", "save", "settings"};
+        String[] illegalCommands = {"exit", "quit", "stats", "map", "inventory", "help", "save", "settings", "take it", "leave it", "open it", "leave"};
         String matchedCommand = "n/a";
         int maxMatchLength = 0;
         for (String illegalCommand : illegalCommands) {
