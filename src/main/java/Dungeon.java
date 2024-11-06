@@ -1486,15 +1486,17 @@ public class Dungeon extends Room {
         OpenWorld.startRoom();
     }
 
-    public static String directionsInString(ArrayList<String> list) {
+    private static String directionsInString(ArrayList<String> list) {
         StringBuilder sb = new StringBuilder();
-        for (Object item : list) {
-            sb.append(yellowColor).append(item.toString()).append(resetColor);
-            sb.append(", ");
-        }
-        // Remove the last comma and space
-        if (sb.length() > 0) {
-            sb.setLength(sb.length() - 2);
+        int size = list.size();
+        for (int i = 0; i < size; i++) {
+            if (i == size - 1 && size > 1) {
+                sb.append("or ");
+            }
+            sb.append(yellowColor).append(list.get(i)).append(resetColor);
+            if (i < size - 1) {
+                sb.append(", ");
+            }
         }
         return sb.toString();
     }
@@ -1566,7 +1568,7 @@ public class Dungeon extends Room {
         System.out.println();
         TextEngine.printWithDelays("You can move in the following directions: ", false);
         addDirections(availableMove);
-        TextEngine.printNoDelay(directionsInString(directionsString), true);
+        TextEngine.printWithDelays(directionsInString(directionsString), true);
         while (true) {
             command = TextEngine.parseCommand(Room.console.readLine().toLowerCase().trim(), directionsString.toArray(String[]::new));
             switch (command) {
