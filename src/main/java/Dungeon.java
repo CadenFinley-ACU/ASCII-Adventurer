@@ -1568,17 +1568,17 @@ public class Dungeon extends Room {
         addDirections(availableMove);
         TextEngine.printNoDelay(directionsInString(directionsString), true);
         while (true) {
-            command = Room.console.readLine();
-            switch (command.toLowerCase().trim()) {
-                case "north", "1" ->
-                    movePlayer(command.toLowerCase(), new int[]{-1, 0}, roomsBeenTo, localDungeon);
-                case "east", "2" ->
-                    movePlayer(command.toLowerCase(), new int[]{0, 1}, roomsBeenTo, localDungeon);
-                case "south", "3" ->
-                    movePlayer(command.toLowerCase(), new int[]{1, 0}, roomsBeenTo, localDungeon);
-                case "west", "4" ->
-                    movePlayer(command.toLowerCase(), new int[]{0, -1}, roomsBeenTo, localDungeon);
-                case "boss room", "5" -> {
+            String parsedCommand = TextEngine.parseCommand(Room.console.readLine().toLowerCase().trim(), directionsString.toArray(String[]::new));
+            switch (parsedCommand) {
+                case "north" ->
+                    movePlayer(parsedCommand, new int[]{-1, 0}, roomsBeenTo, localDungeon);
+                case "east" ->
+                    movePlayer(parsedCommand, new int[]{0, 1}, roomsBeenTo, localDungeon);
+                case "south" ->
+                    movePlayer(parsedCommand, new int[]{1, 0}, roomsBeenTo, localDungeon);
+                case "west" ->
+                    movePlayer(parsedCommand, new int[]{0, -1}, roomsBeenTo, localDungeon);
+                case "boss room" -> {
                     if (confirmBossContinue()) {
                         lastPosition = currentPlayerPosition.clone(); // Save the current position before moving
                         roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = localDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
@@ -1590,7 +1590,8 @@ public class Dungeon extends Room {
                     }
                 }
                 default ->
-                    Dungeon.defaultDungeonArgs(command.toLowerCase());
+                    //return original command
+                    Dungeon.defaultDungeonArgs(parsedCommand);
             }
         }
     }
