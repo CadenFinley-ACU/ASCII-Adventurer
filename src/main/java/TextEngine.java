@@ -42,7 +42,8 @@ public abstract class TextEngine {
         }
     }
 
-    public static void printWithDelays(String data, boolean buffer) throws InterruptedException { //use buffer is you are accepting input after the text is printed
+    public static void printWithDelays(String data, boolean buffer) throws InterruptedException {
+        // Use buffer if you are accepting input after the text is printed
         if (speedSetting.equals("NoDelay")) {
             printNoDelay(data, buffer);
             return;
@@ -52,6 +53,8 @@ public abstract class TextEngine {
         }
         int currentLineWidth = 0; // Initialize the current line width
         String[] words = data.split(" "); // Split the data into words
+        StringBuilder remainingChars = new StringBuilder(data); // Initialize remaining characters
+
         for (String word : words) {
             if (buffer) {
                 if ((currentLineWidth + word.length() >= MAX_LINE_WIDTH + 30) && currentLineWidth != 0) {
@@ -68,6 +71,10 @@ public abstract class TextEngine {
                 currentLineWidth = 0;
             }
             for (char ch : word.toCharArray()) {
+                if (isInputAvailable()) {
+                    printNoDelay(remainingChars.toString(), buffer);
+                    return;
+                }
                 if (String.valueOf(ch).matches("^[a-zA-Z0-9]+$") && !String.valueOf(ch).matches(" ")) {
                     switch (speedSetting) {
                         case "Slow" ->
@@ -83,6 +90,7 @@ public abstract class TextEngine {
                 }
                 System.out.print(ch);
                 currentLineWidth++;
+                remainingChars.deleteCharAt(0); // Remove the printed character from remainingChars
                 if (ch == '\n') {
                     currentLineWidth = 0;
                 }
@@ -90,6 +98,7 @@ public abstract class TextEngine {
             if (currentLineWidth > 0) {
                 System.out.print(' ');
                 currentLineWidth++;
+                //remainingChars.deleteCharAt(0); // Remove the printed space from remainingChars
             }
         }
         if (data.charAt(data.length() - 1) != '\n' && !buffer) {
@@ -202,6 +211,15 @@ public abstract class TextEngine {
             if (possibleCommand.equals(matchedCommand)) {
                 return true;
             }
+        }
+        return false;
+    }
+
+    private static boolean isInputAvailable() {
+        try {
+            return System.in.available() > 0;
+        } catch (IOException e) {
+            e.printStackTrace();
         }
         return false;
     }
