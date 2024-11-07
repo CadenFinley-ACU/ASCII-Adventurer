@@ -214,13 +214,4 @@ public abstract class TextEngine {
         }
         return false;
     }
-
-    private static boolean isInputAvailable() {
-        try {
-            return System.in.available() > 0;
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return false;
-    }
 }
