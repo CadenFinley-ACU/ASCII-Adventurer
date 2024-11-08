@@ -125,6 +125,9 @@ public class Player {
     }
 
     public static String getName() { //get the name
+        if (name == null || name.isEmpty()) {
+            return "null";
+        }
         return name;
     }
 
