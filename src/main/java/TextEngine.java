@@ -71,10 +71,6 @@ public abstract class TextEngine {
                 currentLineWidth = 0;
             }
             for (char ch : word.toCharArray()) {
-                if (isInputAvailable()) {
-                    printNoDelay(remainingChars.toString(), buffer);
-                    return;
-                }
                 if (String.valueOf(ch).matches("^[a-zA-Z0-9]+$") && !String.valueOf(ch).matches(" ")) {
                     switch (speedSetting) {
                         case "Slow" ->
