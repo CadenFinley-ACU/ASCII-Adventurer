@@ -42,8 +42,7 @@ public class InventoryManager extends Player {
         Main.printStatus();
         if (inventory.isEmpty()) {
             TextEngine.printWithDelays("You have nothing in your inventory.", false);
-            TextEngine.printWithDelays("Press Enter to continue", false);
-            console.readLine();
+            TextEngine.enterToNext();
             leave();
         } else {
             TextEngine.printNoDelay("Inventory: " + getTotalNumberOfItemsInInventory() + "/" + Player.inventorySize, false);
@@ -116,7 +115,6 @@ public class InventoryManager extends Player {
                     TextEngine.clearScreen();
                     printInventoryNoMenu();
                     TextEngine.printWithDelays("Which item would you like to use?", true);
-                    console.readLine();
                     command = console.readLine();
                     useItem(command);
                 }
@@ -124,7 +122,6 @@ public class InventoryManager extends Player {
                     TextEngine.clearScreen();
                     printInventoryNoMenu();
                     TextEngine.printWithDelays("Which item would you like to drop? (or " + yellowColor + "leave" + resetColor + ")", true);
-                    console.readLine();
                     command = console.readLine();
                     if (command.equals("leave")) {
                         Player.openInventory();
