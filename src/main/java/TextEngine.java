@@ -77,8 +77,9 @@ public abstract class TextEngine {
                             TimeUnit.MILLISECONDS.sleep(30);
                         case "Fast" ->
                             TimeUnit.MILLISECONDS.sleep(10);
-                        case "NoDelay" ->
-                            TimeUnit.MILLISECONDS.sleep(0);
+                        case "NoDelay" -> {
+                        }
+                        // Do nothing
                         default -> {
                             TimeUnit.MILLISECONDS.sleep(20);
                         }
@@ -171,7 +172,7 @@ public abstract class TextEngine {
 
     public static String parseCommand(String command, String possibleCommands[]) {
         String[] illegalCommands = {"exit", "quit", "stats", "map", "inventory", "help", "save", "settings", "take it", "leave it", "open it", "leave"};
-        String matchedCommand = "n/a";
+        String matchedCommand = command;
         int maxMatchLength = 0;
         for (String illegalCommand : illegalCommands) {
             if (command.equals(illegalCommand)) {
@@ -185,7 +186,9 @@ public abstract class TextEngine {
                 matchedCommand = possibleCommand;
             }
         }
-        System.out.println("Matched command: " + matchedCommand);
+        if (!matchedCommand.equals(command)) {
+            System.out.println("Matched command: " + matchedCommand);
+        }
         return (maxMatchLength > 0 && has(possibleCommands, matchedCommand)) ? matchedCommand : command;
     }
 

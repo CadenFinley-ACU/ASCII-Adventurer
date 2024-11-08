@@ -30,6 +30,12 @@ public class Main {
         TextEngine.clearScreen();
         playTime = new TimerEngine();
         TextEngine.printNoDelay("Loading...", false);
+        TextEngine.printNoDelay("Creating Game Items...", false);
+        createGameItems();
+        TextEngine.printNoDelay("Game Items Created!", false);
+        TextEngine.printNoDelay("Creating Enemies...", false);
+        Enemy.createEnemies();
+        TextEngine.printNoDelay("Enemies Created!", false);
         TextEngine.printNoDelay("Initalizing Dungeons...", false);
         Dungeon.initalizeDungeons();
         TextEngine.printNoDelay("Dungeons Initalized!", false);
@@ -51,12 +57,6 @@ public class Main {
                 }
             }
         }
-        TextEngine.printNoDelay("Creating Game Items...", false);
-        createGameItems();
-        TextEngine.printNoDelay("Game Items Created!", false);
-        TextEngine.printNoDelay("Creating Enemies...", false);
-        Enemy.createEnemies();
-        TextEngine.printNoDelay("Enemies Created!", false);
         TextEngine.printWithDelays("Starting Game!", false);
         startMenu();
     }
