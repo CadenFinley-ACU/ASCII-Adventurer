@@ -46,7 +46,7 @@ public class SpawnRoom extends Room {
 
         // Command handling loop
         while (true) {
-            command = console.readLine();
+            command = TextEngine.parseCommand(console.readLine().toLowerCase().trim(), new String[]{"north", "east", "south", "west"});
             switch (command.toLowerCase().trim()) {
                 case "north" -> {
                     roomSave = 1;
