@@ -136,6 +136,9 @@ public class Player {
     }
 
     public static int getHealth() { //get the health
+        if (health > maxHealth) {
+            health = maxHealth;
+        }
         return health;
     }
 
@@ -191,10 +194,16 @@ public class Player {
         TextEngine.enterToNext();
     }
 
-    public static void fairyHeal() throws InterruptedException {
+    public static boolean fairyHeal() {
+        if (health == maxHealth) {
+            TextEngine.printNoDelay("You are already at full health!", false);
+            TextEngine.enterToNext();
+            return false;
+        }
         health = maxHealth;
         TextEngine.printNoDelay("You have been fully healed by the fairy!", false);
         TextEngine.enterToNext();
+        return true;
     }
 
     public static int getDamageCalc() {

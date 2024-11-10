@@ -180,6 +180,9 @@ public abstract class TextEngine {
             }
         }
         for (String possibleCommand : possibleCommands) {
+            if (command.equals(possibleCommand)) {
+                return command;
+            }
             int matchLength = getMatchLength(command, possibleCommand);
             if (matchLength > maxMatchLength) {
                 maxMatchLength = matchLength;
