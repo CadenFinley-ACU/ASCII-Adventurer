@@ -11,9 +11,7 @@ import java.util.Random;
  */
 public class Dungeon extends Room {
 
-    static String resetColor = "\033[0m"; // reset to default color
     static String yellowColor = "\033[1;33m"; // yellow color
-    static String redColor = "\033[0;31m"; // red color
     public static String currentDungeon;
     public static int completedDungeons = 0;
     public static int numberOfEnemies;
@@ -1182,11 +1180,12 @@ public class Dungeon extends Room {
                             }
                         }
                         Main.loadSave();
+                    } else {
+                        int[] buffer = currentPlayerPosition.clone();
+                        currentPlayerPosition = lastPosition.clone(); // Save the current position before moving
+                        lastPosition = buffer.clone();
+                        Main.loadSave();
                     }
-                    int[] buffer = currentPlayerPosition.clone();
-                    currentPlayerPosition = lastPosition.clone(); // Save the current position before moving
-                    lastPosition = buffer.clone();
-                    Main.loadSave();
                 }
                 case "no" -> {
                     int[] buffer = currentPlayerPosition.clone();
