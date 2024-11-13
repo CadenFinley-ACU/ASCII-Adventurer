@@ -356,34 +356,20 @@ public class Player {
         }
     }
 
-    public static void heal() throws InterruptedException { //use available health potions in inventory to heal
-        if (inventory.containsKey("super health potion")) {
-            if (health < maxHealth) {
-                InventoryManager.useItemNoMenu("super health potion");
-            } else {
-                TextEngine.printWithDelays("You are already at full health!", false);
-                TextEngine.enterToNext();
-            }
+    public static void heal() throws InterruptedException {
+        if (!inventory.containsKey("super health potion") && !inventory.containsKey("greater health potion") && !inventory.containsKey("health potion")) {
+            TextEngine.printWithDelays("You have no health potions!", false);
+            TextEngine.enterToNext();
+        } else if (health >= maxHealth) {
+            TextEngine.printWithDelays("You are already at full health!", false);
+            TextEngine.enterToNext();
         } else {
-            if (inventory.containsKey("greater health potion")) {
-                if (health < maxHealth) {
-                    InventoryManager.useItemNoMenu("greater health potion");
-                } else {
-                    TextEngine.printWithDelays("You are already at full health!", false);
-                    TextEngine.enterToNext();
-                }
-            } else {
-                if (inventory.containsKey("health potion")) {
-                    if (health < maxHealth) {
-                        InventoryManager.useItemNoMenu("health potion");
-                    } else {
-                        TextEngine.printWithDelays("You are already at full health!", false);
-                        TextEngine.enterToNext();
-                    }
-                } else {
-                    TextEngine.printWithDelays("You have no health potions!", false);
-                    TextEngine.enterToNext();
-                }
+            if (inventory.containsKey("super health potion")) {
+                InventoryManager.useItemNoMenu("super health potion");
+            } else if (inventory.containsKey("greater health potion")) {
+                InventoryManager.useItemNoMenu("greater health potion");
+            } else if (inventory.containsKey("health potion")) {
+                InventoryManager.useItemNoMenu("health potion");
             }
         }
         Main.loadSave();

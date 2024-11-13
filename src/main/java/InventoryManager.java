@@ -147,52 +147,51 @@ public class InventoryManager extends Player {
 
     private static void tossItem(String item) throws InterruptedException { //toss an item
         int amount = 1;
-        if (!"key".equals(item)) {
-            if (inventory.get(item) != null) {
-                if (inventory.get(item) > 1) {
-                    TextEngine.printWithDelays("How many would you like to toss?\n" + getIndividualItemString(item), true);
-                    command = console.readLine();
-                    try {
-                        Integer.valueOf(command);
-                    } catch (NumberFormatException e) {
-                        Main.invalidCommand();
-                        TextEngine.enterToNext();
-                        Player.openInventory();
-                    }
-                    if (Integer.valueOf(command) > inventory.get(item)) {
-                        TextEngine.printWithDelays("You do not have that many items.", false);
-                        TextEngine.enterToNext();
-                        Player.openInventory();
-                    } else {
-                        amount = Integer.parseInt(command);
-                        inventory.put(item, inventory.get(item) - amount);
-                        setStatsToHighestInInventory();
-                    }
-                } else {
-                    inventory.put(item, inventory.get(item) - amount);
-                    setStatsToHighestInInventory();
-                }
-                if (inventory.get(item) <= 0) {
-                    inventory.remove(item);
-                    setStatsToHighestInInventory();
-                }
-                if (amount > 1) {
-                    TextEngine.printWithDelays("You have tossed " + amount + " x" + item + "s", false);
-                } else {
-                    TextEngine.printWithDelays("You have tossed " + amount + " x" + item, false);
-                }
-                TextEngine.enterToNext();
-                Player.openInventory();
-            } else {
-                TextEngine.printWithDelays("You do not have that item.", false);
-                TextEngine.enterToNext();
-                Player.openInventory();
-            }
-        } else {
+        if ("key".equals(item)) {
             TextEngine.printWithDelays("You cannot drop the key.", false);
             TextEngine.enterToNext();
             Player.openInventory();
+            return;
         }
+        if (inventory.get(item) == null) {
+            TextEngine.printWithDelays("You do not have that item.", false);
+            TextEngine.enterToNext();
+            Player.openInventory();
+            return;
+        }
+        if (inventory.get(item) > 1) {
+            TextEngine.printWithDelays("How many would you like to toss?\n" + getIndividualItemString(item), true);
+            command = console.readLine();
+            try {
+                Integer.valueOf(command);
+            } catch (NumberFormatException e) {
+                Main.invalidCommand();
+                TextEngine.enterToNext();
+                Player.openInventory();
+                return;
+            }
+            if (Integer.valueOf(command) > inventory.get(item)) {
+                TextEngine.printWithDelays("You do not have that many items.", false);
+                TextEngine.enterToNext();
+                Player.openInventory();
+                return;
+            } else {
+                amount = Integer.parseInt(command);
+            }
+        }
+        inventory.put(item, inventory.get(item) - amount);
+        setStatsToHighestInInventory();
+        if (inventory.get(item) <= 0) {
+            inventory.remove(item);
+            setStatsToHighestInInventory();
+        }
+        if (amount > 1) {
+            TextEngine.printWithDelays("You have tossed " + amount + " x" + item + "s", false);
+        } else {
+            TextEngine.printWithDelays("You have tossed " + amount + " x" + item, false);
+        }
+        TextEngine.enterToNext();
+        Player.openInventory();
     }
 
     public static void useItem(String item) throws InterruptedException { //this only shouls run with potions as those are the only items you can use from the inventory menu
