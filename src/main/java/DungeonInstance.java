@@ -14,8 +14,7 @@ public class DungeonInstance extends Dungeon {
     private static final Random rand = new Random();
 
     private int[] spawnPosition;
-    private int[] bossRoom;
-    private List<String> enemies;
+    private final List<String> enemies;
     public int[][] roomsBeenTo;
     public List<String> items;
     public boolean completed = false;
@@ -46,7 +45,6 @@ public class DungeonInstance extends Dungeon {
 
     public void setValues() {
         this.spawnPosition = DungeonGenerator.findValue(map, 9);
-        this.bossRoom = DungeonGenerator.findValue(map, 8);
     }
 
     public void startRoom() throws InterruptedException { //start room
@@ -75,7 +73,6 @@ public class DungeonInstance extends Dungeon {
         visited = false;
         completed = false;
         spawnPosition = DungeonGenerator.findValue(map, 9);
-        bossRoom = DungeonGenerator.findValue(map, 8);
         currentPlayerPosition = spawnPosition;
         roomsBeenTo = DungeonGenerator.createRoomsBeenTo(map.length);
         lastPosition = spawnPosition.clone();
