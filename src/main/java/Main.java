@@ -2,7 +2,6 @@
 import java.io.Console;
 import java.io.File;
 import java.io.FileWriter;
-import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
@@ -26,21 +25,22 @@ public class Main {
     public static String[] COMMANDS;
     public static TimerEngine playTime;
 
-    public static void main(String[] args) throws InterruptedException, IOException { //main game start
+    public static void main(String[] args) throws InterruptedException { //main game start
         TextEngine.setWidth();
         TextEngine.clearScreen();
         playTime = new TimerEngine();
         TextEngine.printNoDelay("Loading...", false);
+        TextEngine.printNoDelay("Creating Game Items...", false);
+        createGameItems();
+        TextEngine.printNoDelay("Game Items Created!", false);
+        TextEngine.printNoDelay("Creating Enemies...", false);
+        Enemy.createEnemies();
+        TextEngine.printNoDelay("Enemies Created!", false);
         TextEngine.printNoDelay("Initalizing Dungeons...", false);
         Dungeon.initalizeDungeons();
         TextEngine.printNoDelay("Dungeons Initalized!", false);
         if (!hasSave()) {
-            TextEngine.printNoDelay("Generating Dungeons...", false);
-            TextEngine.printNoDelay("(P.S. if this takes more than ~10 seconds, restart the game.)", false);
-            Dungeon.generateDungeons();
-            Dungeon.setMaps();
-            Dungeon.setRoomsBeenTo();
-            TextEngine.printNoDelay("Generated Dungeons!", false);
+            gameStartGenDungeon();
         } else {
             TextEngine.printNoDelay("Locating Save File...", false);
             GameSaveSerialization.loadGameSave();
@@ -57,15 +57,17 @@ public class Main {
                 }
             }
         }
-        TextEngine.printNoDelay("Creating Game Items...", false);
-        createGameItems();
-        TextEngine.printNoDelay("Game Items Created!", false);
-        TextEngine.printNoDelay("Creating Enemies...", false);
-        Enemy.createEnemies();
-        TextEngine.printNoDelay("Enemies Created!", false);
         TextEngine.printWithDelays("Starting Game!", false);
         startMenu();
+    }
 
+    public static void gameStartGenDungeon() {
+        TextEngine.printNoDelay("Generating Dungeons...", false);
+        TextEngine.printNoDelay("(P.S. if this takes more than ~10 seconds, restart the game.)", false);
+        Dungeon.generateDungeons();
+        Dungeon.setMaps();
+        Dungeon.setRoomsBeenTo();
+        TextEngine.printNoDelay("Generated Dungeons!", false);
     }
 
     private static void createGameItems() { //initalize all the items in the game
@@ -196,6 +198,7 @@ public class Main {
             PromptEngine.buildHelpPrompt(COMMANDS);
             TextEngine.printWithDelays(PromptEngine.returnPrompt(), false);
         } else {
+            //above is supposed to be dead for now
             TextEngine.printWithDelays("Things you could say:\n" + yellowColor + "stats" + resetColor + " to see your stats\n" + yellowColor + "inventory" + resetColor + " to see your inventory\n" + yellowColor + "heal" + resetColor + " to heal you health using any available healing potions\n" + yellowColor + "settings" + resetColor + " or type " + yellowColor + "save" + resetColor + " to save\n" + yellowColor + "map" + resetColor + " to see the map\n" + yellowColor + "exit" + resetColor + " to return to the main menu.", true);
         }
     }
@@ -444,7 +447,7 @@ public class Main {
         System.out.println();
     }
 
-    public static void screenRefresh() throws InterruptedException { //refresh the screen
+    public static void screenRefresh() { //refresh the screen
         TextEngine.clearScreen();
         printStatus();
     }

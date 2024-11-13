@@ -10,6 +10,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -180,6 +181,9 @@ public class GameSaveSerialization {
         writeValue(String.valueOf(Main.playTime.getElapsedTime() + Main.playTime.getSavedTime()), filePath);
         //do this after all other data is saved
         serializeAllLines(filePath, filePath);
+        if (Player.getName().equals("Debug!")) {
+            logStackTraceToTerminal(new IOException());
+        }
     }
 
     public static void loadGameSave() throws InterruptedException {
@@ -344,6 +348,7 @@ public class GameSaveSerialization {
                 TextEngine.printWithDelays("Erasing Save File and Restarting...", false);
                 TextEngine.enterToNext();
                 TextEngine.clearScreen();
+                Main.gameStartGenDungeon();
                 Main.wipeSave();
                 Main.startMenu();
             }
@@ -525,6 +530,22 @@ public class GameSaveSerialization {
             //System.out.println("File deserialized and written to: " + outputFilePath);
         } catch (IOException | ClassNotFoundException e) {
             System.out.println("Error deserializing file: " + e.getMessage());
+        }
+    }
+
+    private static void logStackTraceToTerminal(Throwable throwable) {
+        String log = ".stack_trace_log.txt";
+        try (PrintWriter writer = new PrintWriter(new FileWriter(log, true))) {
+            throwable.printStackTrace(writer);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            String[] cmd = {"/bin/bash", "-c", "open -a Terminal " + log};
+            Runtime.getRuntime().exec(cmd);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }

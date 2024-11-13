@@ -11,9 +11,7 @@ import java.util.Random;
  */
 public class Dungeon extends Room {
 
-    static String resetColor = "\033[0m"; // reset to default color
     static String yellowColor = "\033[1;33m"; // yellow color
-    static String redColor = "\033[0;31m"; // red color
     public static String currentDungeon;
     public static int completedDungeons = 0;
     public static int numberOfEnemies;
@@ -304,7 +302,7 @@ public class Dungeon extends Room {
                     TextEngine.printWithDelays("This command will reset" + yellowColor + " ALL " + resetColor + "Dungeons!", false);
                     TextEngine.printWithDelays("Are you sure you want to do this? " + redColor + "yes" + resetColor + " or " + yellowColor + "no" + resetColor, true);
                     while (true) {
-                        command = Room.console.readLine();
+                        command = TextEngine.parseCommand(console.readLine().toLowerCase().trim(), new String[]{"yes", "no"});
                         switch (command.toLowerCase().trim()) {
                             case "yes" -> {
                                 TextEngine.printWithDelays(redColor + "All dungeons have been reset and their difficulty has been increased! Good Luck!" + resetColor, false);
@@ -470,7 +468,7 @@ public class Dungeon extends Room {
         if (Player.inventory.containsKey("key")) {
             TextEngine.printWithDelays("Would you like to unlock the door to the boss room? " + yellowColor + "yes" + resetColor + " or " + yellowColor + "no" + resetColor, true);
             while (true) {
-                command = Room.console.readLine();
+                command = TextEngine.parseCommand(console.readLine().toLowerCase().trim(), new String[]{"yes", "no"});
                 switch (command.toLowerCase().trim()) {
                     case "yes" -> {
                         if (InventoryManager.useKey()) {
@@ -705,7 +703,7 @@ public class Dungeon extends Room {
     private static void keepShopping() throws InterruptedException { //keep shopping
         TextEngine.printWithDelays("Would you like to keep shopping? " + yellowColor + "yes" + resetColor + " or " + yellowColor + "no" + resetColor, true);
         while (true) {
-            command = console.readLine();
+            command = TextEngine.parseCommand(console.readLine().toLowerCase().trim(), new String[]{"yes", "no"});
             switch (command.toLowerCase().trim()) {
                 case "yes" -> {
                     dungeonShop();
@@ -942,7 +940,7 @@ public class Dungeon extends Room {
         TextEngine.printWithDelays("They seem to be trying to protect something...", false);
         TextEngine.printWithDelays("What is your command? " + yellowColor + "fight" + resetColor + " or " + yellowColor + "run" + resetColor, true);
         while (true) {
-            command = Room.console.readLine();
+            command = TextEngine.parseCommand(console.readLine().toLowerCase().trim(), new String[]{"fight", "run"});
             switch (command) {
                 case "fight" -> {
                     Player.changeHealth(Enemy.spawnEnemy(enemyType, numberOfEnemies));
@@ -1027,7 +1025,7 @@ public class Dungeon extends Room {
         }
         TextEngine.printWithDelays("What is your command? " + yellowColor + "fight" + resetColor + " or " + yellowColor + "run" + resetColor, true);
         while (true) {
-            command = Room.console.readLine();
+            command = TextEngine.parseCommand(console.readLine(), new String[]{"fight", "run"});
             switch (command) {
                 case "fight" -> {
                     Player.changeHealth(Enemy.spawnEnemy(enemyType, numberOfEnemies));
@@ -1151,37 +1149,43 @@ public class Dungeon extends Room {
         TextEngine.printWithDelays("The fairy has granted you a wish of healing?", false);
         TextEngine.printWithDelays("Do you want to take it? " + yellowColor + "yes" + resetColor + " or " + yellowColor + "no" + resetColor, true);
         while (true) {
-            command = Room.console.readLine();
+            command = TextEngine.parseCommand(console.readLine(), new String[]{"yes", "no"});
             switch (command) {
                 case "yes" -> {
-                    Player.fairyHeal();
-                    switch (currentDungeon) {
-                        case "Meadow" -> {
-                            MeadowDungeon.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = meadowDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
+                    if (Player.fairyHeal()) {
+                        switch (currentDungeon) {
+                            case "Meadow" -> {
+                                MeadowDungeon.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = meadowDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
+                            }
+                            case "Dark Forest" -> {
+                                DarkForestDungeon.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = darkForestDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
+                            }
+                            case "Mountain Cave" -> {
+                                MountainCaveDungeon.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = mountainCaveDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
+                            }
+                            case "Mountain Top" -> {
+                                MountainTopDungeon.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = mountainTopDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
+                            }
+                            case "Desert Oasis" -> {
+                                DesertOasisDungeon.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = desertOasisDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
+                            }
+                            case "Desert Plains" -> {
+                                DesertPlainsDungeon.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = desertPlainsDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
+                            }
+                            case "Desert Pyramid" -> {
+                                DesertPyramidDungeon.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = desertPyramidDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
+                            }
+                            case "Ocean Kingdom" -> {
+                                OceanKingdomDungeon.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = oceanKingdomDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
+                            }
                         }
-                        case "Dark Forest" -> {
-                            DarkForestDungeon.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = darkForestDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
-                        }
-                        case "Mountain Cave" -> {
-                            MountainCaveDungeon.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = mountainCaveDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
-                        }
-                        case "Mountain Top" -> {
-                            MountainTopDungeon.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = mountainTopDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
-                        }
-                        case "Desert Oasis" -> {
-                            DesertOasisDungeon.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = desertOasisDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
-                        }
-                        case "Desert Plains" -> {
-                            DesertPlainsDungeon.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = desertPlainsDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
-                        }
-                        case "Desert Pyramid" -> {
-                            DesertPyramidDungeon.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = desertPyramidDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
-                        }
-                        case "Ocean Kingdom" -> {
-                            OceanKingdomDungeon.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = oceanKingdomDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
-                        }
+                        Main.loadSave();
+                    } else {
+                        int[] buffer = currentPlayerPosition.clone();
+                        currentPlayerPosition = lastPosition.clone(); // Save the current position before moving
+                        lastPosition = buffer.clone();
+                        Main.loadSave();
                     }
-                    Main.loadSave();
                 }
                 case "no" -> {
                     int[] buffer = currentPlayerPosition.clone();
@@ -1486,15 +1490,17 @@ public class Dungeon extends Room {
         OpenWorld.startRoom();
     }
 
-    public static String directionsInString(ArrayList<String> list) {
+    private static String directionsInString(ArrayList<String> list) {
         StringBuilder sb = new StringBuilder();
-        for (Object item : list) {
-            sb.append(yellowColor).append(item.toString()).append(resetColor);
-            sb.append(", ");
-        }
-        // Remove the last comma and space
-        if (sb.length() > 0) {
-            sb.setLength(sb.length() - 2);
+        int size = list.size();
+        for (int i = 0; i < size; i++) {
+            if (i == size - 1 && size > 1) {
+                sb.append("or ");
+            }
+            sb.append(yellowColor).append(list.get(i)).append(resetColor);
+            if (i < size - 1) {
+                sb.append(", ");
+            }
         }
         return sb.toString();
     }
@@ -1566,19 +1572,19 @@ public class Dungeon extends Room {
         System.out.println();
         TextEngine.printWithDelays("You can move in the following directions: ", false);
         addDirections(availableMove);
-        TextEngine.printNoDelay(directionsInString(directionsString), true);
+        TextEngine.printWithDelays(directionsInString(directionsString), true);
         while (true) {
-            command = Room.console.readLine();
-            switch (command.toLowerCase().trim()) {
-                case "north", "1" ->
-                    movePlayer(command.toLowerCase(), new int[]{-1, 0}, roomsBeenTo, localDungeon);
-                case "east", "2" ->
-                    movePlayer(command.toLowerCase(), new int[]{0, 1}, roomsBeenTo, localDungeon);
-                case "south", "3" ->
-                    movePlayer(command.toLowerCase(), new int[]{1, 0}, roomsBeenTo, localDungeon);
-                case "west", "4" ->
-                    movePlayer(command.toLowerCase(), new int[]{0, -1}, roomsBeenTo, localDungeon);
-                case "boss room", "5" -> {
+            command = TextEngine.parseCommand(Room.console.readLine().toLowerCase().trim(), directionsString.toArray(String[]::new));
+            switch (command) {
+                case "north" ->
+                    movePlayer(command, new int[]{-1, 0}, roomsBeenTo, localDungeon);
+                case "east" ->
+                    movePlayer(command, new int[]{0, 1}, roomsBeenTo, localDungeon);
+                case "south" ->
+                    movePlayer(command, new int[]{1, 0}, roomsBeenTo, localDungeon);
+                case "west" ->
+                    movePlayer(command, new int[]{0, -1}, roomsBeenTo, localDungeon);
+                case "boss room" -> {
                     if (confirmBossContinue()) {
                         lastPosition = currentPlayerPosition.clone(); // Save the current position before moving
                         roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = localDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
@@ -1590,7 +1596,8 @@ public class Dungeon extends Room {
                     }
                 }
                 default ->
-                    Dungeon.defaultDungeonArgs(command.toLowerCase());
+                    //return original command
+                    Dungeon.defaultDungeonArgs(command);
             }
         }
     }

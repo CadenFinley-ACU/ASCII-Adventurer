@@ -82,12 +82,13 @@ public class PromptEngine {
             } else {
                 dungeonPrompt = "The " + nextDungeon + " is to the " + dungeonNextDirection + " and is " + dungeonDistanceGauge + ".";
             }
-            prompt = chatGPT("Generate a me a prompt for a text adventure game designed for highschoolers. Always state the direction of the structure if it is given and the distance if it is given. When giving direction do not abbreviate the direction. Do this in around " + promptLength + " words or less using this info: The player is in a " + setting + villagePrompt + dungeonPrompt + ".") + "\n";
+            // "add more" / "make more complex"
+            prompt = chatGPT("Generate a me a prompt for a text adventure game designed for highschoolers. Always state the direction of the structure if it is given and the distance if it is given. When giving direction do not abbreviate the direction. Do this in around " + promptLength + " words or less using this info: The player headed " + OpenWorld.holdCommand + " and is in a " + setting + villagePrompt + dungeonPrompt + ".") + "\n";
             Main.screenRefresh();
         }
     }
 
-    public static void buildHelpPrompt(String[] availableCommands) throws InterruptedException {
+    public static void buildHelpPrompt(String[] availableCommands) {
         if (aiGenerationEnabled) {
             prompt = chatGPT("Generate a help prompt for a text adventure game designed for highschoolers. The player can use the following commands: " + String.join(", ", availableCommands) + ".") + "\n";
         }

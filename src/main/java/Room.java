@@ -31,7 +31,7 @@ public class Room {
         TextEngine.printWithDelays("Hey! There is a chest in this room! ", false);
         TextEngine.printWithDelays("What is your command" + yellowColor + " open it " + resetColor + "or " + yellowColor + "leave it" + resetColor, true);
         while (true) {
-            command = console.readLine();
+            command = TextEngine.parseCommand(console.readLine(), new String[]{"open it", "leave it"});
             switch (command.toLowerCase().trim()) {
                 case "open it" -> {
                     return hasItemInRoom(itemName, quantity);
@@ -60,7 +60,7 @@ public class Room {
 
         // Command handling loop
         while (true) {
-            command = console.readLine();
+            command = TextEngine.parseCommand(console.readLine(), new String[]{"take it", "leave it"});
             switch (command.toLowerCase().trim()) {
                 case "take it" -> {
                     return Player.putItem(itemName, quantity);

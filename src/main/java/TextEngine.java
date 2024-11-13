@@ -42,7 +42,8 @@ public abstract class TextEngine {
         }
     }
 
-    public static void printWithDelays(String data, boolean buffer) throws InterruptedException { //use buffer is you are accepting input after the text is printed
+    public static void printWithDelays(String data, boolean buffer) throws InterruptedException {
+        // Use buffer if you are accepting input after the text is printed
         if (speedSetting.equals("NoDelay")) {
             printNoDelay(data, buffer);
             return;
@@ -52,6 +53,8 @@ public abstract class TextEngine {
         }
         int currentLineWidth = 0; // Initialize the current line width
         String[] words = data.split(" "); // Split the data into words
+        StringBuilder remainingChars = new StringBuilder(data); // Initialize remaining characters
+
         for (String word : words) {
             if (buffer) {
                 if ((currentLineWidth + word.length() >= MAX_LINE_WIDTH + 30) && currentLineWidth != 0) {
@@ -74,8 +77,9 @@ public abstract class TextEngine {
                             TimeUnit.MILLISECONDS.sleep(30);
                         case "Fast" ->
                             TimeUnit.MILLISECONDS.sleep(10);
-                        case "NoDelay" ->
-                            TimeUnit.MILLISECONDS.sleep(0);
+                        case "NoDelay" -> {
+                        }
+                        // Do nothing
                         default -> {
                             TimeUnit.MILLISECONDS.sleep(20);
                         }
@@ -83,6 +87,7 @@ public abstract class TextEngine {
                 }
                 System.out.print(ch);
                 currentLineWidth++;
+                remainingChars.deleteCharAt(0); // Remove the printed character from remainingChars
                 if (ch == '\n') {
                     currentLineWidth = 0;
                 }
@@ -90,6 +95,7 @@ public abstract class TextEngine {
             if (currentLineWidth > 0) {
                 System.out.print(' ');
                 currentLineWidth++;
+                //remainingChars.deleteCharAt(0); // Remove the printed space from remainingChars
             }
         }
         if (data.charAt(data.length() - 1) != '\n' && !buffer) {
@@ -139,7 +145,7 @@ public abstract class TextEngine {
         }
     }
 
-    public static void clearScreen() throws InterruptedException { //clears the screen
+    public static void clearScreen() { //clears the screen
         String OS_Name = Main.getOS_NAME();
         try {
             if (OS_Name.contains("Windows")) {
@@ -162,5 +168,52 @@ public abstract class TextEngine {
 
     public static Boolean checkValidInput(String command) { //checks for valid input command
         return command != null && !command.isEmpty() && !"".equals(command);
+    }
+
+    public static String parseCommand(String command, String possibleCommands[]) {
+        String[] illegalCommands = {"exit", "quit", "stats", "map", "inventory", "help", "save", "settings", "take it", "leave it", "open it", "leave"};
+        String matchedCommand = command;
+        int maxMatchLength = 0;
+        for (String illegalCommand : illegalCommands) {
+            if (command.equals(illegalCommand)) {
+                return command;
+            }
+        }
+        for (String possibleCommand : possibleCommands) {
+            if (command.equals(possibleCommand)) {
+                return command;
+            }
+            int matchLength = getMatchLength(command, possibleCommand);
+            if (matchLength > maxMatchLength) {
+                maxMatchLength = matchLength;
+                matchedCommand = possibleCommand;
+            }
+        }
+        if (!matchedCommand.equals(command)) {
+            System.out.println("Matched command: " + matchedCommand);
+        }
+        return (maxMatchLength > 0 && has(possibleCommands, matchedCommand)) ? matchedCommand : command;
+    }
+
+    private static int getMatchLength(String command, String possibleCommand) {
+        int length = Math.min(command.length(), possibleCommand.length());
+        int matchLength = 0;
+        for (int i = 0; i < length; i++) {
+            if (command.charAt(i) == possibleCommand.charAt(i)) {
+                matchLength++;
+            } else {
+                break;
+            }
+        }
+        return matchLength;
+    }
+
+    private static boolean has(String[] possibleCommands, String matchedCommand) {
+        for (String possibleCommand : possibleCommands) {
+            if (possibleCommand.equals(matchedCommand)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

@@ -125,6 +125,9 @@ public class Player {
     }
 
     public static String getName() { //get the name
+        if (name == null || name.isEmpty()) {
+            return "null";
+        }
         return name;
     }
 
@@ -133,6 +136,9 @@ public class Player {
     }
 
     public static int getHealth() { //get the health
+        if (health > maxHealth) {
+            health = maxHealth;
+        }
         return health;
     }
 
@@ -188,10 +194,16 @@ public class Player {
         TextEngine.enterToNext();
     }
 
-    public static void fairyHeal() throws InterruptedException {
+    public static boolean fairyHeal() {
+        if (health == maxHealth) {
+            TextEngine.printNoDelay("You are already at full health!", false);
+            TextEngine.enterToNext();
+            return false;
+        }
         health = maxHealth;
         TextEngine.printNoDelay("You have been fully healed by the fairy!", false);
         TextEngine.enterToNext();
+        return true;
     }
 
     public static int getDamageCalc() {
@@ -274,7 +286,7 @@ public class Player {
         while (true) {
             TextEngine.printWithDelays("Welcome to the game! What is your name hero?", true);
             command = console.readLine();
-            if (command != null && !command.isEmpty() && command.length() < 13) {
+            if (command != null && !command.isEmpty() && command.length() < 26) {
                 if ("exit".equals(command)) {
                     Main.startMenu();
                     TextEngine.clearScreen();
