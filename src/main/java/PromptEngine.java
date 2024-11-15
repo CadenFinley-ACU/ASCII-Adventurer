@@ -112,6 +112,7 @@ public class PromptEngine {
         String url = "https://api.openai.com/v1/chat/completions";
         String apiKey = userAPIKey; // API key goes here
         String model = "gpt-3.5-turbo";
+        System.out.println(message);
         try {
             URL obj = new URL(url);
             HttpURLConnection con = (HttpURLConnection) obj.openConnection();
