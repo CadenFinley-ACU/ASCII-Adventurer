@@ -19,7 +19,6 @@ public class TimerEngine {
                 try {
                     Thread.sleep(1000);
                     timeElapsedInSeconds++;
-                    System.out.println(timeElapsedInSeconds);
                 } catch (InterruptedException e) {
                     System.out.println("Timer interrupted");
                 }
