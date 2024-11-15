@@ -82,7 +82,7 @@ public class InventoryManager extends Player {
         return getTotalNumberOfItemsInInventory() + amount <= inventorySize;
     }
 
-    public static void put(String item, int amount) throws InterruptedException { //put an item in the inventory
+    public static void giveItem(String item, int amount) throws InterruptedException { //put an item in the inventory
         if (inventoryHasRoom(amount)) {
             if (inventory.get(item) != null) {
                 inventory.put(item, inventory.get(item) + amount);

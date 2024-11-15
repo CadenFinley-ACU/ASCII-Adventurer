@@ -2,6 +2,7 @@
 import java.io.Console;
 import java.io.File;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
@@ -190,29 +191,20 @@ public class Main {
         System.out.println(" / ___ \\ (_| |\\ V /  __/ | | | |_| |_| | | |  __/ |                ");
         System.out.println("/_/   \\_\\__,_| \\_/ \\___|_| |_|\\__|\\__,_|_|  \\___|_|           ");
         System.out.print(brightBoldEnd);
-
     }
 
     private static void displayHelp() throws InterruptedException { //main menu help command
-        if (PromptEngine.aiGenerationEnabled && false) {
-            PromptEngine.buildHelpPrompt(COMMANDS);
-            TextEngine.printWithDelays(PromptEngine.returnPrompt(), false);
-        } else {
-            //above is supposed to be dead for now
-            TextEngine.printWithDelays("Things you could say:\n" + yellowColor + "stats" + resetColor + " to see your stats\n" + yellowColor + "inventory" + resetColor + " to see your inventory\n" + yellowColor + "heal" + resetColor + " to heal you health using any available healing potions\n" + yellowColor + "settings" + resetColor + " or type " + yellowColor + "save" + resetColor + " to save\n" + yellowColor + "map" + resetColor + " to see the map\n" + yellowColor + "exit" + resetColor + " to return to the main menu.", true);
-        }
+        TextEngine.printWithDelays("Things you could say:\n" + yellowColor + "stats" + resetColor + " to see your stats\n" + yellowColor + "inventory" + resetColor + " to see your inventory\n" + yellowColor + "heal" + resetColor + " to heal you health using any available healing potions\n" + yellowColor + "settings" + resetColor + " or type " + yellowColor + "save" + resetColor + " to save\n" + yellowColor + "map" + resetColor + " to see the map\n" + yellowColor + "exit" + resetColor + " to return to the main menu.", true);
     }
 
     private static void exitGame() throws InterruptedException {   //exit game command
         GameSaveSerialization.saveGame();
         try {
-            FileWriter fwOb = new FileWriter(".runtime.txt", false);
-            PrintWriter pwOb = new PrintWriter(fwOb, false);
-            pwOb.flush();
-            pwOb.close();
-            fwOb.close();
-        } catch (Exception e) {
-            e.printStackTrace();
+            try (FileWriter fwOb = new FileWriter(".runtime.txt", false); PrintWriter pwOb = new PrintWriter(fwOb, false)) {
+                pwOb.flush();
+            }
+        } catch (IOException e) {
+            System.out.println("Error: " + e.getMessage());
         }
         TextEngine.printWithDelays("See ya next time!", false);
         TextEngine.enterToNext();
@@ -231,6 +223,7 @@ public class Main {
         TextEngine.printWithDelays("Using System Property: " + getOS_NAME(), false);
         TextEngine.printWithDelays("Using Console: " + console, false);
         TextEngine.printWithDelays("Text Speed: " + TextEngine.speedSetting, false);
+        TextEngine.printWithDelays("OpenAI API Key " + PromptEngine.userAPIKey, false);
         TextEngine.enterToNext();
         Player.debugStart();
     }
@@ -348,7 +341,7 @@ public class Main {
         }
     }
 
-    public static void wipeSave() throws InterruptedException { //wipe save command
+    public static void wipeSave() { //wipe save command
         playerCreated = false;
         savedPlace = null;
         gameComplete = false;

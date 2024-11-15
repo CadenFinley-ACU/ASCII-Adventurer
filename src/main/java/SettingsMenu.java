@@ -273,7 +273,6 @@ public abstract class SettingsMenu {
                     } else {
                         TextEngine.printNoDelay("(This feature is still experimental)", false);
                         TextEngine.printNoDelay("Please enter your OpenAI API key:", true);
-
                         command = console.readLine();
                         if (PromptEngine.testAPIKey(command)) {
                             PromptEngine.userAPIKey = command;

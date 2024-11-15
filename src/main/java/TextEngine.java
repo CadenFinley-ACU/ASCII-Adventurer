@@ -27,13 +27,11 @@ public abstract class TextEngine {
         try {
             String os = System.getProperty("os.name").toLowerCase();
             ProcessBuilder processBuilder;
-
             if (os.contains("win")) {
                 processBuilder = new ProcessBuilder("cmd", "/c", "mode con");
             } else {
                 processBuilder = new ProcessBuilder("sh", "-c", "tput cols");
             }
-
             Process process = processBuilder.start();
             BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
             String line;
@@ -50,7 +48,6 @@ public abstract class TextEngine {
             } else {
                 line = reader.readLine();
             }
-
             if (line != null && !line.isEmpty()) {
                 System.out.println("Terminal width: " + line);
                 MAX_LINE_WIDTH = Integer.parseInt(line);
