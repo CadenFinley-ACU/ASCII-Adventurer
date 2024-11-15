@@ -29,7 +29,7 @@ public class PromptEngine {
             "North", "South", "East", "West", "Northeast", "Northwest", "Southeast", "Southwest"
     );
 
-    public static void buildPrompt() throws InterruptedException {
+    public static void buildPrompt() {
         if (aiGenerationEnabled && (OpenWorld.checkChangeInRoom() || prompt == null || prompt.isEmpty())) {
             String villageDirection = Player.getCompassDirectionToClosestVillage();
             String nextDungeon = Player.getNextDungeon();

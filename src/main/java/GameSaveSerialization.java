@@ -178,7 +178,7 @@ public class GameSaveSerialization {
         writeSeparator(filePath);
         writeValue(String.valueOf(PromptEngine.promptLength), filePath);
         writeSeparator(filePath);
-        writeValue(String.valueOf(Main.playTime.getElapsedTime() + Main.playTime.getSavedTime()), filePath);
+        writeValue(String.valueOf(Main.playTime.getTime()), filePath);
         //do this after all other data is saved
         serializeAllLines(filePath, filePath);
         if (Player.getName().equals("Debug!")) {
@@ -187,7 +187,7 @@ public class GameSaveSerialization {
     }
 
     public static void loadGameSave() throws InterruptedException {
-        Main.playTime.setSavedTime(Main.playTime.getSavedTime() + Main.playTime.getElapsedTime());
+        Main.playTime.setSavedTime(Main.playTime.getTime());
         String buffer = "";
         deserializeToFile(filePath);
         try (BufferedReader reader = new BufferedReader(new FileReader(runtimePath))) {
