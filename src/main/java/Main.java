@@ -26,6 +26,8 @@ public class Main {
     public static String[] COMMANDS;
     public static TimerEngine playTime;
 
+    public static boolean TESTING = false;
+
     public static void main(String[] args) throws InterruptedException { //main game start
         TextEngine.setWidth();
         TextEngine.clearScreen();

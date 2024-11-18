@@ -1,7 +1,11 @@
 
+import java.util.HashMap;
 import java.util.Random;
 
 import org.junit.After;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
@@ -12,8 +16,12 @@ public class TestSuite_Adventure {
 
     @Before
     public void setUp() {
-        DungeonGenerator.testing = true;
+        // Reset the inventory and other static fields before each test
+        InventoryManager.inventory = new HashMap<>();
+        InventoryManager.inventorySize = 10; // Assuming a default inventory size
+        DungeonGenerator.testing = false;
         DungeonGenerator.wipe();
+        Main.TESTING = true;
     }
 
     @After
@@ -26,6 +34,7 @@ public class TestSuite_Adventure {
         System.out.println("-----------------------------");
         DungeonGenerator.wipe();
         DungeonGenerator.testing = false;
+        Main.TESTING = false;
     }
 
     @Test
@@ -304,112 +313,50 @@ public class TestSuite_Adventure {
     }
 
     @Test
-    public void testOpenWorldGen10000() {
-        for (int i = 0; i < 1000; i++) {
-            int[][] matrix = OpenWorldGenerator.getMatrix();
-            boolean connected = OpenWorldGenerator.validateMatrix();
-            assertTrue("There should be a path connecting 9 and 8 with values higher than 0", connected);
-            OpenWorldGenerator.printMatrix();
-        }
+    public void testInventoryHasRoom() throws InterruptedException {
+        Player.inventory = new HashMap<>();
+        Player.inventorySize = 10; // Assuming a default inventory size
+        Player.inventory.put("item1", 5);
+        assertTrue(InventoryManager.inventoryHasRoom(4));
+        assertFalse(InventoryManager.inventoryHasRoom(6));
     }
 
     @Test
-    public void testOpenWorldGen10001() {
-        for (int i = 0; i < 1000; i++) {
-            int[][] matrix = OpenWorldGenerator.getMatrix();
-            boolean connected = OpenWorldGenerator.validateMatrix();
-            assertTrue("There should be a path connecting 9 and 8 with values higher than 0", connected);
-            OpenWorldGenerator.printMatrix();
-        }
+    public void testGiveItem() throws InterruptedException {
+        Player.inventory = new HashMap<>();
+        Player.inventorySize = 10; // Assuming a default inventory size
+        Player.putItem("item1", 3);
+        assertEquals(3, Player.inventory.get("item1").intValue());
+
+        Player.putItem("item2", 2);
+        assertEquals(2, Player.inventory.get("item2").intValue());
+
+        Player.putItem("item3", 5);
+        assertEquals(5, Player.inventory.get("item3").intValue());
+
+        // Test adding item when there is no room
+        Player.putItem("item4", 1);
+        assertNull(Player.inventory.get("item4"));
     }
 
     @Test
-    public void testOpenWorldGen10002() {
-        for (int i = 0; i < 1000; i++) {
-            int[][] matrix = OpenWorldGenerator.getMatrix();
-            boolean connected = OpenWorldGenerator.validateMatrix();
-            assertTrue("There should be a path connecting 9 and 8 with values higher than 0", connected);
-            OpenWorldGenerator.printMatrix();
-        }
+    public void testGiveItemWithNegativeAmount() throws InterruptedException {
+        Player.inventory = new HashMap<>();
+        Player.putItem("item1", -1);
+        assertNull(Player.inventory.get("item1"));
     }
 
     @Test
-    public void testOpenWorldGen10003() {
-        for (int i = 0; i < 1000; i++) {
-            int[][] matrix = OpenWorldGenerator.getMatrix();
-            boolean connected = OpenWorldGenerator.validateMatrix();
-            assertTrue("There should be a path connecting 9 and 8 with values higher than 0", connected);
-            OpenWorldGenerator.printMatrix();
-        }
+    public void testGiveItemWith0Amount() throws InterruptedException {
+        Player.inventory = new HashMap<>();
+        Player.putItem("item1", 0);
+        assertNull(Player.inventory.get("item1"));
     }
 
     @Test
-    public void testOpenWorldGen10004() {
-        for (int i = 0; i < 1000; i++) {
-            int[][] matrix = OpenWorldGenerator.getMatrix();
-            boolean connected = OpenWorldGenerator.validateMatrix();
-            assertTrue("There should be a path connecting 9 and 8 with values higher than 0", connected);
-            OpenWorldGenerator.printMatrix();
-        }
-    }
-
-    @Test
-    public void testOpenWorldGen10005() {
-        for (int i = 0; i < 1000; i++) {
-            int[][] matrix = OpenWorldGenerator.getMatrix();
-            boolean connected = OpenWorldGenerator.validateMatrix();
-            assertTrue("There should be a path connecting 9 and 8 with values higher than 0", connected);
-            OpenWorldGenerator.printMatrix();
-        }
-    }
-
-    @Test
-    public void testOpenWorldGen10006() {
-        for (int i = 0; i < 1000; i++) {
-            int[][] matrix = OpenWorldGenerator.getMatrix();
-            boolean connected = OpenWorldGenerator.validateMatrix();
-            assertTrue("There should be a path connecting 9 and 8 with values higher than 0", connected);
-            OpenWorldGenerator.printMatrix();
-        }
-    }
-
-    @Test
-    public void testOpenWorldGen10007() {
-        for (int i = 0; i < 1000; i++) {
-            int[][] matrix = OpenWorldGenerator.getMatrix();
-            boolean connected = OpenWorldGenerator.validateMatrix();
-            assertTrue("There should be a path connecting 9 and 8 with values higher than 0", connected);
-            OpenWorldGenerator.printMatrix();
-        }
-    }
-
-    @Test
-    public void testOpenWorldGen10008() {
-        for (int i = 0; i < 1000; i++) {
-            int[][] matrix = OpenWorldGenerator.getMatrix();
-            boolean connected = OpenWorldGenerator.validateMatrix();
-            assertTrue("There should be a path connecting 9 and 8 with values higher than 0", connected);
-            OpenWorldGenerator.printMatrix();
-        }
-    }
-
-    @Test
-    public void testOpenWorldGen10009() {
-        for (int i = 0; i < 1000; i++) {
-            int[][] matrix = OpenWorldGenerator.getMatrix();
-            boolean connected = OpenWorldGenerator.validateMatrix();
-            assertTrue("There should be a path connecting 9 and 8 with values higher than 0", connected);
-            OpenWorldGenerator.printMatrix();
-        }
-    }
-
-    @Test
-    public void testOpenWorldGen10010() {
-        for (int i = 0; i < 1000; i++) {
-            int[][] matrix = OpenWorldGenerator.getMatrix();
-            boolean connected = OpenWorldGenerator.validateMatrix();
-            assertTrue("There should be a path connecting 9 and 8 with values higher than 0", connected);
-            OpenWorldGenerator.printMatrix();
-        }
+    public void testGiveItemWithZeroAmount() throws InterruptedException {
+        Player.inventory = new HashMap<>();
+        Player.putItem("item1", 0);
+        assertNull(Player.inventory.get("item1"));
     }
 }

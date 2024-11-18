@@ -63,7 +63,7 @@ public abstract class TextEngine {
 
     public static void printWithDelays(String data, boolean buffer) throws InterruptedException {
         // Use buffer if you are accepting input after the text is printed
-        if (speedSetting.equals("NoDelay")) {
+        if (speedSetting.equals("NoDelay") || Main.TESTING) {
             printNoDelay(data, buffer);
             return;
         }
@@ -180,8 +180,10 @@ public abstract class TextEngine {
     }
 
     public static void enterToNext() { //adds a pause and waits for enter
-        printNoDelay(yellowColor + "Press Enter to continue" + resetColor, false);
-        console.readLine();
+        if (!Main.TESTING) {
+            printNoDelay(yellowColor + "Press Enter to continue" + resetColor, false);
+            console.readLine();
+        }
     }
 
     public static Boolean checkValidInput(String command) { //checks for valid input command

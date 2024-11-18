@@ -271,6 +271,7 @@ public class Player {
         } else {
             if (inventorySize >= getTotalNumberOfItemsInInventory() + amount) {
                 InventoryManager.giveItem(item, amount);
+                InventoryManager.setStatsToHighestInInventory();
                 return true;
             } else {
                 TextEngine.printWithDelays("You have no room in your inventory!", false);
