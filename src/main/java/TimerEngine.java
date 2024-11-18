@@ -36,6 +36,12 @@ public class TimerEngine {
         long hours = ((minutes) / 60);
         if (hours > 99) {
             hours = 99;
+            if (minutes > 59) {
+                minutes = 59;
+                if (timeElapsedInSeconds % 60 > 59) {
+                    timeElapsedInSeconds = 59;
+                }
+            }
         }
         return String.format("%02d:%02d:%02d", hours, minutes, timeElapsedInSeconds % 60);
     }
