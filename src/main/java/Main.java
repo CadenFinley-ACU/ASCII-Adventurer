@@ -73,7 +73,7 @@ public class Main {
         TextEngine.printNoDelay("Generated Dungeons!", false);
     }
 
-    private static void createGameItems() { //initalize all the items in the game
+    public static void createGameItems() { //initalize all the items in the game
         //the value is equal to the damage, defense, or healing potential the item provides
         //this is only to use when you use the item not when you have it in your inventory or when it is on the map
         InventoryManager.createItem("weapon", "sword", 2); //spawn room weapon and shop 1

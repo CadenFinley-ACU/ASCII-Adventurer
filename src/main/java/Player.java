@@ -11,16 +11,16 @@ import java.util.Map;
  */
 public class Player {
 
-    private static int health;
-    private static int maxHealth;
+    private static int health = 100;
+    private static int maxHealth = 100;
     private static String name;
     public final static Console console = System.console();
     public static String command;
     public static String holdCommand;
-    public static int inventorySize;
+    private static int inventorySize = 20;
     private static int gold;
-    private static int damage;
-    private static int defense;
+    private static int damage = 0;
+    private static int defense = 0;
     public static Map<String, Integer> inventory = new HashMap<>();
     public static int playerX = 0;
     public static int playerY = 0;
@@ -40,8 +40,6 @@ public class Player {
     public static void playerStart() throws InterruptedException { //start the player
         maxHealth = 100;
         health = maxHealth;
-        damage = 0;
-        defense = 0;
         damage = 0;
         defense = 0;
         gold = 20;
@@ -158,6 +156,10 @@ public class Player {
 
     public static int getInventorySize() { //get the inventory size
         return inventorySize;
+    }
+
+    public static void hardSetInventorySize(int size) {
+        inventorySize = size;
     }
 
     public static void changeHealth(int change) throws InterruptedException {

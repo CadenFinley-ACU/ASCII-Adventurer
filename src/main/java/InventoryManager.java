@@ -45,7 +45,7 @@ public class InventoryManager extends Player {
             TextEngine.enterToNext();
             leave();
         } else {
-            TextEngine.printNoDelay("Inventory: " + getTotalNumberOfItemsInInventory() + "/" + Player.inventorySize, false);
+            TextEngine.printNoDelay("Inventory: " + getTotalNumberOfItemsInInventory() + "/" + Player.getInventorySize(), false);
             TextEngine.printWithDelays("You have the following items in your inventory:", false);
             Set<String> keys = inventory.keySet();
             for (String key : keys) {
@@ -73,13 +73,13 @@ public class InventoryManager extends Player {
     }
 
     public static boolean inventoryHasRoom(int amount) throws InterruptedException {
-        if (getTotalNumberOfItemsInInventory() + amount > inventorySize) {
+        if (getTotalNumberOfItemsInInventory() + amount > getInventorySize()) {
             TextEngine.printWithDelays("You have no room in your inventory.", false);
-            TextEngine.printWithDelays("You can only hold " + Player.inventorySize + " items. You have: " + getTotalNumberOfItemsInInventory() + " items.", false);
+            TextEngine.printWithDelays("You can only hold " + Player.getInventorySize() + " items. You have: " + getTotalNumberOfItemsInInventory() + " items.", false);
             TextEngine.printWithDelays("You can drop items by typing " + yellowColor + "drop" + resetColor + " in \nthe " + yellowColor + "inventory" + resetColor + "menu to make room.", false);
             TextEngine.enterToNext();
         }
-        return getTotalNumberOfItemsInInventory() + amount <= inventorySize;
+        return getTotalNumberOfItemsInInventory() + amount <= getInventorySize();
     }
 
     public static void giveItem(String item, int amount) throws InterruptedException { //put an item in the inventory
@@ -232,7 +232,7 @@ public class InventoryManager extends Player {
         if (inventory.isEmpty()) {
             leave();
         } else {
-            TextEngine.printNoDelay("Inventory: " + getTotalNumberOfItemsInInventory() + "/" + Player.inventorySize, false);
+            TextEngine.printNoDelay("Inventory: " + getTotalNumberOfItemsInInventory() + "/" + Player.getInventorySize(), false);
             TextEngine.printWithDelays("You have the following items in your inventory:", false);
             Set<String> keys = inventory.keySet();
             for (String key : keys) {

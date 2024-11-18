@@ -381,7 +381,7 @@ public class Dungeon extends Room {
         Main.screenRefresh();
         String localDungeon = currentDungeon;
         TextEngine.printNoDelay("Gold: " + Player.getGold(), false);
-        TextEngine.printNoDelay("Inventory: " + Player.getTotalNumberOfItemsInInventory() + "/" + Player.inventorySize, false);
+        TextEngine.printNoDelay("Inventory: " + Player.getTotalNumberOfItemsInInventory() + "/" + Player.getInventorySize(), false);
         TextEngine.printNoDelay("\n", false);
         TextEngine.printWithDelays("Welcome to the Dungeon shop Traveler! I snuck into this dungeon a long time ago and got lost.\nMaybe some of these items can help you on your journey.\nWhat would you like to buy?", false);
         switch (localDungeon) {
@@ -1328,6 +1328,7 @@ public class Dungeon extends Room {
                 if (!MountainCaveDungeon.completed) {
                     completedDungeons++;
                     MountainCaveDungeon.completed = true;
+                    backpackSequence("Backpack");
                 }
             }
             case "Mountain Top" -> {
@@ -1349,6 +1350,7 @@ public class Dungeon extends Room {
                 if (!DesertPlainsDungeon.completed) {
                     completedDungeons++;
                     DesertPlainsDungeon.completed = true;
+                    backpackSequence("Large Backpack");
                 }
             }
             case "Desert Pyramid" -> {
@@ -1536,5 +1538,14 @@ public class Dungeon extends Room {
                 OceanKingdomDungeon.roomsBeenTo = changedRoomsBeenTo;
             }
         }
+    }
+
+    private static void backpackSequence(String pack) throws InterruptedException {
+        if (Player.putItem(pack, 1)) {
+            return;
+        }
+        TextEngine.printWithDelays("You must take the " + yellowColor + pack + resetColor, false);
+        TextEngine.enterToNext();
+        backpackSequence(pack);
     }
 }

@@ -18,22 +18,24 @@ public class TestSuite_Adventure {
     public void setUp() {
         // Reset the inventory and other static fields before each test
         InventoryManager.inventory = new HashMap<>();
-        InventoryManager.inventorySize = 10; // Assuming a default inventory size
-        DungeonGenerator.testing = false;
+        DungeonGenerator.testing = true;
         DungeonGenerator.wipe();
         Main.TESTING = true;
+        Player.hardSetInventorySize(20);
     }
 
     @After
     public void tearDown() {
-        System.out.println("-----------------------------");
-        System.out.println("Tests run: " + testsrun);
-        System.out.println("Dungeons Generated: " + DungeonGenerator.runs + " Fails: " + DungeonGenerator.fails);
-        System.out.println(((float) DungeonGenerator.fails / DungeonGenerator.runs) * 100 + "% failure rate");
-        System.out.println("For every test run, " + (float) DungeonGenerator.runs / testsrun + " dungeons were generated");
-        System.out.println("-----------------------------");
-        DungeonGenerator.wipe();
-        DungeonGenerator.testing = false;
+        if (DungeonGenerator.testing) {
+            System.out.println("-----------------------------");
+            System.out.println("Tests run in dungeon gneration: " + testsrun);
+            System.out.println("Dungeons Generated: " + DungeonGenerator.runs + " Fails: " + DungeonGenerator.fails);
+            System.out.println(((float) DungeonGenerator.fails / DungeonGenerator.runs) * 100 + "% failure rate");
+            System.out.println("For every test run, " + (float) DungeonGenerator.runs / testsrun + " dungeons were generated");
+            System.out.println("-----------------------------");
+            DungeonGenerator.wipe();
+            DungeonGenerator.testing = false;
+        }
         Main.TESTING = false;
     }
 
@@ -314,49 +316,111 @@ public class TestSuite_Adventure {
 
     @Test
     public void testInventoryHasRoom() throws InterruptedException {
+        Player.hardSetInventorySize(20);
         Player.inventory = new HashMap<>();
-        Player.inventorySize = 10; // Assuming a default inventory size
-        Player.inventory.put("item1", 5);
+        Player.inventory.put("heath potion", 15);
         assertTrue(InventoryManager.inventoryHasRoom(4));
         assertFalse(InventoryManager.inventoryHasRoom(6));
     }
 
     @Test
     public void testGiveItem() throws InterruptedException {
+        Player.hardSetInventorySize(20);
         Player.inventory = new HashMap<>();
-        Player.inventorySize = 10; // Assuming a default inventory size
-        Player.putItem("item1", 3);
-        assertEquals(3, Player.inventory.get("item1").intValue());
+        Player.putItem("heath potion", 6);
+        assertEquals(6, Player.inventory.get("heath potion").intValue());
 
-        Player.putItem("item2", 2);
-        assertEquals(2, Player.inventory.get("item2").intValue());
+        Player.putItem("greater health potion", 4);
+        assertEquals(4, Player.inventory.get("greater health potion").intValue());
 
-        Player.putItem("item3", 5);
-        assertEquals(5, Player.inventory.get("item3").intValue());
+        Player.putItem("super health potion", 10);
+        assertEquals(10, Player.inventory.get("super health potion").intValue());
 
         // Test adding item when there is no room
-        Player.putItem("item4", 1);
-        assertNull(Player.inventory.get("item4"));
+        Player.putItem("greater heath potion", 1);
+        assertNull(Player.inventory.get("greater heath potion"));
     }
 
     @Test
     public void testGiveItemWithNegativeAmount() throws InterruptedException {
         Player.inventory = new HashMap<>();
-        Player.putItem("item1", -1);
-        assertNull(Player.inventory.get("item1"));
+        Player.hardSetInventorySize(20);
+        Player.putItem("heath potion", -1);
+        assertNull(Player.inventory.get("heath potion"));
     }
 
     @Test
     public void testGiveItemWith0Amount() throws InterruptedException {
         Player.inventory = new HashMap<>();
-        Player.putItem("item1", 0);
-        assertNull(Player.inventory.get("item1"));
+        Player.hardSetInventorySize(20);
+        Player.putItem("heath potion", 0);
+        assertNull(Player.inventory.get("heath potion"));
     }
 
     @Test
     public void testGiveItemWithZeroAmount() throws InterruptedException {
         Player.inventory = new HashMap<>();
-        Player.putItem("item1", 0);
-        assertNull(Player.inventory.get("item1"));
+        Player.hardSetInventorySize(20);
+        Player.putItem("heath potion", 0);
+        assertNull(Player.inventory.get("heath potion"));
+    }
+
+    @Test
+    public void testChangeInventorySize() throws InterruptedException {
+        Main.createGameItems();
+        Player.hardSetInventorySize(20);
+        Player.inventory = new HashMap<>();
+        assertEquals(20, Player.getInventorySize());
+        Player.putItem("Backpack", 1);
+        assertEquals(35, Player.getInventorySize());
+    }
+
+    @Test
+    public void testChangeInPlayerStats() throws InterruptedException {
+        Player.inventory = new HashMap<>();
+        Player.hardSetInventorySize(20);
+        InventoryManager.setStatsToHighestInInventory();
+        assertEquals(0, Player.getDamage());
+        assertEquals(0, Player.getDefense());
+        Player.putItem("sword", 1);
+        Player.putItem("shield", 1);
+        assertEquals(2, Player.getDamage());
+        assertEquals(2, Player.getDefense());
+    }
+
+    @Test
+    public void testChangeInPlayerStatsWithNegativeItems() throws InterruptedException {
+        Player.inventory = new HashMap<>();
+        Player.hardSetInventorySize(20);
+        InventoryManager.setStatsToHighestInInventory();
+        assertEquals(0, Player.getDamage());
+        assertEquals(0, Player.getDefense());
+        Player.putItem("sword", 1);
+        Player.putItem("shield", 1);
+        assertEquals(2, Player.getDamage());
+        assertEquals(2, Player.getDefense());
+        Player.putItem("sword", -1);
+        assertEquals(0, Player.getDamage());
+        assertEquals(2, Player.getDefense());
+        Player.putItem("shield", -1);
+        assertEquals(0, Player.getDamage());
+        assertEquals(0, Player.getDefense());
+    }
+
+    @Test
+    public void testMultipleItems() throws InterruptedException {
+        Player.inventory = new HashMap<>();
+        Player.hardSetInventorySize(20);
+        InventoryManager.setStatsToHighestInInventory();
+        assertEquals(0, Player.getDamage());
+        assertEquals(0, Player.getDefense());
+        Player.putItem("sword", 1);
+        Player.putItem("shield", 1);
+        assertEquals(2, Player.getDamage());
+        assertEquals(2, Player.getDefense());
+        Player.putItem("axe", 1);
+        Player.putItem("chainmail set", 1);
+        assertEquals(5, Player.getDamage());
+        assertEquals(5, Player.getDefense());
     }
 }

@@ -163,7 +163,9 @@ public class DungeonGenerator {
         try {
             if (hasValue(matrix, num) && num != 1) {
                 fails++;
-                System.err.println("Error: " + num + " already exists, retrying...");
+                if (testing) {
+                    System.err.println("Error: " + num + " already exists, retrying...");
+                }
                 start(matrixSize);
             }
             if (testing) {
