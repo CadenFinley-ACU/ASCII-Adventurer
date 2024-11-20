@@ -1,9 +1,6 @@
 
 import java.io.Console;
 import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -201,13 +198,7 @@ public class Main {
 
     private static void exitGame() throws InterruptedException {   //exit game command
         GameSaveSerialization.saveGame();
-        try {
-            try (FileWriter fwOb = new FileWriter(".runtime.txt", false); PrintWriter pwOb = new PrintWriter(fwOb, false)) {
-                pwOb.flush();
-            }
-        } catch (IOException e) {
-            System.out.println("Error: " + e.getMessage());
-        }
+        wipeFile(".runtime.txt");
         TextEngine.printWithDelays("See ya next time!", false);
         TextEngine.enterToNext();
         TextEngine.clearScreen();
@@ -354,15 +345,7 @@ public class Main {
         PromptEngine.aiGenerationEnabled = false;
         PromptEngine.userAPIKey = null;
         Main.playTime.setSavedTime(0);
-        try {
-            FileWriter fwOb = new FileWriter(".runtime.txt", false);
-            PrintWriter pwOb = new PrintWriter(fwOb, false);
-            pwOb.flush();
-            pwOb.close();
-            fwOb.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        wipeFile(".runtime.txt");
         GameSaveSerialization.saveGame();
         Enemy.resetEnemies();
     }
@@ -502,5 +485,12 @@ public class Main {
         TextEngine.printNoDelay("Health: " + Player.getHealth() + "/" + Player.getMaxHealth(), false);
         TextEngine.printNoDelay("Gold: " + Player.getGold(), false);
         TextEngine.printNoDelay("Completed Dungeons: " + Dungeon.completedDungeons, false);
+    }
+
+    public static void wipeFile(String fileName) {
+        File file = new File(fileName);
+        if (!file.delete()) {
+            System.out.println("Failed to delete the file");
+        }
     }
 }

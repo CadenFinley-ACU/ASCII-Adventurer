@@ -1,7 +1,6 @@
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.Console;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -22,8 +21,6 @@ public class GameSaveSerialization {
 
     private static final String NULL_MARKER = "NULL";
     public static int versionID = 1;
-    private static String command;
-    private final static Console console = System.console();
     public static String filePath = ".game_save.txt";
     public static String runtimePath = ".runtime.txt";
     //change file path manually in main in functions that call this class
@@ -347,6 +344,8 @@ public class GameSaveSerialization {
                 System.out.println("Save File Corrupt or Invalid... ");
                 TextEngine.printWithDelays("Erasing Save File and Restarting...", false);
                 TextEngine.enterToNext();
+                Main.wipeFile(".game_save.txt");
+                Main.wipeFile(".runtime.txt");
                 TextEngine.clearScreen();
                 Main.gameStartGenDungeon();
                 Main.wipeSave();
