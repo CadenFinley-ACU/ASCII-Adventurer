@@ -29,7 +29,7 @@ public class GameSaveSerialization {
         try (FileWriter writer = new FileWriter(filePath, false)) {
             writer.write(""); // This will clear the file
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("Error clearing file: " + e.getMessage());
         }
         writeValue(Player.getName(), filePath);
         writeSeparator(filePath);
@@ -185,159 +185,158 @@ public class GameSaveSerialization {
 
     public static void loadGameSave() throws InterruptedException {
         Main.playTime.setSavedTime(Main.playTime.getTime());
-        String buffer = "";
         deserializeToFile(filePath);
         try (BufferedReader reader = new BufferedReader(new FileReader(runtimePath))) {
             try {
                 String name = String.valueOf(reader.readLine());
-                buffer = reader.readLine();
+                reader.readLine();
                 int health = Integer.parseInt(reader.readLine());
-                buffer = reader.readLine();
+                reader.readLine();
                 int maxHealth = Integer.parseInt(reader.readLine());
-                buffer = reader.readLine();
+                reader.readLine();
                 int gold = Integer.parseInt(reader.readLine());
-                buffer = reader.readLine();
+                reader.readLine();
                 Map<String, Integer> inventory = readInventory(reader.readLine());
-                buffer = reader.readLine();
+                reader.readLine();
                 int inventorySize = Integer.parseInt(reader.readLine());
-                buffer = reader.readLine();
+                reader.readLine();
                 Player.playerSetSave(name, health, maxHealth, gold, inventory, inventorySize);
                 Main.savedPlace = reader.readLine();
-                buffer = reader.readLine();
+                reader.readLine();
                 Main.playerCreated = Boolean.parseBoolean(reader.readLine());
-                buffer = reader.readLine();
+                reader.readLine();
                 TextEngine.speedSetting = reader.readLine();
-                buffer = reader.readLine();
+                reader.readLine();
                 Dungeon.currentDungeon = reader.readLine();
-                buffer = reader.readLine();
+                reader.readLine();
 
                 Dungeon.completedDungeons = Integer.parseInt(reader.readLine());
-                buffer = reader.readLine();
+                reader.readLine();
                 Dungeon.currentPlayerPosition = readArray(reader);
-                buffer = reader.readLine();
+                reader.readLine();
                 Dungeon.lastPosition = readArray(reader);
-                buffer = reader.readLine();
+                reader.readLine();
                 Dungeon.meadowDungeon = readMatrix(reader);
-                buffer = reader.readLine();
+                reader.readLine();
                 Dungeon.darkForestDungeon = readMatrix(reader);
-                buffer = reader.readLine();
+                reader.readLine();
                 Dungeon.mountainCaveDungeon = readMatrix(reader);
-                buffer = reader.readLine();
+                reader.readLine();
                 Dungeon.mountainTopDungeon = readMatrix(reader);
-                buffer = reader.readLine();
+                reader.readLine();
                 Dungeon.desertOasisDungeon = readMatrix(reader);
-                buffer = reader.readLine();
+                reader.readLine();
                 Dungeon.desertPlainsDungeon = readMatrix(reader);
-                buffer = reader.readLine();
+                reader.readLine();
                 Dungeon.desertPyramidDungeon = readMatrix(reader);
-                buffer = reader.readLine();
+                reader.readLine();
                 Dungeon.oceanKingdomDungeon = readMatrix(reader);
-                buffer = reader.readLine();
+                reader.readLine();
 
                 SpawnRoom.roomSave = Integer.parseInt(reader.readLine());
-                buffer = reader.readLine();
+                reader.readLine();
                 OpenWorld.roomSave = Integer.parseInt(reader.readLine());
-                buffer = reader.readLine();
+                reader.readLine();
                 OpenWorld.roomNumber = Integer.parseInt(reader.readLine());
-                buffer = reader.readLine();
+                reader.readLine();
                 OpenWorld.holdCommand = reader.readLine();
-                buffer = reader.readLine();
+                reader.readLine();
                 Room.room = reader.readLine();
-                buffer = reader.readLine();
+                reader.readLine();
 
                 Dungeon.MeadowDungeon.completed = Boolean.parseBoolean(reader.readLine());
-                buffer = reader.readLine();
+                reader.readLine();
                 Dungeon.MeadowDungeon.visited = Boolean.parseBoolean(reader.readLine());
-                buffer = reader.readLine();
+                reader.readLine();
                 Dungeon.DarkForestDungeon.completed = Boolean.parseBoolean(reader.readLine());
-                buffer = reader.readLine();
+                reader.readLine();
                 Dungeon.DarkForestDungeon.visited = Boolean.parseBoolean(reader.readLine());
-                buffer = reader.readLine();
+                reader.readLine();
                 Dungeon.MountainCaveDungeon.completed = Boolean.parseBoolean(reader.readLine());
-                buffer = reader.readLine();
+                reader.readLine();
                 Dungeon.MountainCaveDungeon.visited = Boolean.parseBoolean(reader.readLine());
-                buffer = reader.readLine();
+                reader.readLine();
                 Dungeon.MountainTopDungeon.completed = Boolean.parseBoolean(reader.readLine());
-                buffer = reader.readLine();
+                reader.readLine();
                 Dungeon.MountainTopDungeon.visited = Boolean.parseBoolean(reader.readLine());
-                buffer = reader.readLine();
+                reader.readLine();
                 Dungeon.DesertOasisDungeon.completed = Boolean.parseBoolean(reader.readLine());
-                buffer = reader.readLine();
+                reader.readLine();
                 Dungeon.DesertOasisDungeon.visited = Boolean.parseBoolean(reader.readLine());
-                buffer = reader.readLine();
+                reader.readLine();
                 Dungeon.DesertPlainsDungeon.completed = Boolean.parseBoolean(reader.readLine());
-                buffer = reader.readLine();
+                reader.readLine();
                 Dungeon.DesertPlainsDungeon.visited = Boolean.parseBoolean(reader.readLine());
-                buffer = reader.readLine();
+                reader.readLine();
                 Dungeon.DesertPyramidDungeon.completed = Boolean.parseBoolean(reader.readLine());
-                buffer = reader.readLine();
+                reader.readLine();
                 Dungeon.DesertPyramidDungeon.visited = Boolean.parseBoolean(reader.readLine());
-                buffer = reader.readLine();
+                reader.readLine();
                 Dungeon.OceanKingdomDungeon.completed = Boolean.parseBoolean(reader.readLine());
-                buffer = reader.readLine();
+                reader.readLine();
                 Dungeon.OceanKingdomDungeon.visited = Boolean.parseBoolean(reader.readLine());
-                buffer = reader.readLine();
+                reader.readLine();
                 Dungeon.MeadowDungeon.roomsBeenTo = readMatrix(reader);
-                buffer = reader.readLine();
+                reader.readLine();
                 Dungeon.DarkForestDungeon.roomsBeenTo = readMatrix(reader);
-                buffer = reader.readLine();
+                reader.readLine();
                 Dungeon.MountainCaveDungeon.roomsBeenTo = readMatrix(reader);
-                buffer = reader.readLine();
+                reader.readLine();
                 Dungeon.MountainTopDungeon.roomsBeenTo = readMatrix(reader);
-                buffer = reader.readLine();
+                reader.readLine();
                 Dungeon.DesertOasisDungeon.roomsBeenTo = readMatrix(reader);
-                buffer = reader.readLine();
+                reader.readLine();
                 Dungeon.DesertPlainsDungeon.roomsBeenTo = readMatrix(reader);
-                buffer = reader.readLine();
+                reader.readLine();
                 Dungeon.DesertPyramidDungeon.roomsBeenTo = readMatrix(reader);
-                buffer = reader.readLine();
+                reader.readLine();
                 Dungeon.OceanKingdomDungeon.roomsBeenTo = readMatrix(reader);
-                buffer = reader.readLine();
+                reader.readLine();
                 Dungeon.MeadowDungeon.items = readList(reader);
-                buffer = reader.readLine();
+                reader.readLine();
                 Dungeon.DarkForestDungeon.items = readList(reader);
-                buffer = reader.readLine();
+                reader.readLine();
                 Dungeon.MountainCaveDungeon.items = readList(reader);
-                buffer = reader.readLine();
+                reader.readLine();
                 Dungeon.MountainTopDungeon.items = readList(reader);
-                buffer = reader.readLine();
+                reader.readLine();
                 Dungeon.DesertOasisDungeon.items = readList(reader);
-                buffer = reader.readLine();
+                reader.readLine();
                 Dungeon.DesertPlainsDungeon.items = readList(reader);
-                buffer = reader.readLine();
+                reader.readLine();
                 Dungeon.DesertPyramidDungeon.items = readList(reader);
-                buffer = reader.readLine();
+                reader.readLine();
                 Dungeon.OceanKingdomDungeon.items = readList(reader);
-                buffer = reader.readLine();
+                reader.readLine();
                 Dungeon.MeadowDungeon.mapRevealed = Boolean.parseBoolean(reader.readLine());
-                buffer = reader.readLine();
+                reader.readLine();
                 Dungeon.DarkForestDungeon.mapRevealed = Boolean.parseBoolean(reader.readLine());
-                buffer = reader.readLine();
+                reader.readLine();
                 Dungeon.MountainCaveDungeon.mapRevealed = Boolean.parseBoolean(reader.readLine());
-                buffer = reader.readLine();
+                reader.readLine();
                 Dungeon.MountainTopDungeon.mapRevealed = Boolean.parseBoolean(reader.readLine());
-                buffer = reader.readLine();
+                reader.readLine();
                 Dungeon.DesertOasisDungeon.mapRevealed = Boolean.parseBoolean(reader.readLine());
-                buffer = reader.readLine();
+                reader.readLine();
                 Dungeon.DesertPlainsDungeon.mapRevealed = Boolean.parseBoolean(reader.readLine());
-                buffer = reader.readLine();
+                reader.readLine();
                 Dungeon.DesertPyramidDungeon.mapRevealed = Boolean.parseBoolean(reader.readLine());
-                buffer = reader.readLine();
+                reader.readLine();
                 Dungeon.OceanKingdomDungeon.mapRevealed = Boolean.parseBoolean(reader.readLine());
-                buffer = reader.readLine();
+                reader.readLine();
 
                 Main.gameComplete = Boolean.parseBoolean(reader.readLine());
-                buffer = reader.readLine();
+                reader.readLine();
                 Dungeon.resetedAfterWin = Boolean.parseBoolean(reader.readLine());
-                buffer = reader.readLine();
+                reader.readLine();
                 OpenWorld.previousRoomSave = Integer.parseInt(reader.readLine());
-                buffer = reader.readLine();
+                reader.readLine();
                 PromptEngine.userAPIKey = reader.readLine();
-                buffer = reader.readLine();
+                reader.readLine();
                 PromptEngine.aiGenerationEnabled = Boolean.parseBoolean(reader.readLine());
-                buffer = reader.readLine();
+                reader.readLine();
                 PromptEngine.promptLength = Integer.parseInt(reader.readLine());
-                buffer = reader.readLine();
+                reader.readLine();
                 Main.playTime.setSavedTime(Long.parseLong(reader.readLine()));
 
             } catch (IOException | NumberFormatException e) {
@@ -364,7 +363,7 @@ public class GameSaveSerialization {
         try (FileWriter writer = new FileWriter(filePath, true)) { // true to append to the file
             writer.write("\n");
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("Error writing separator: " + e.getMessage());
         }
     }
 
@@ -377,7 +376,7 @@ public class GameSaveSerialization {
                 writer.write("\n");
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("Error writing matrix: " + e.getMessage());
         }
     }
 
@@ -389,7 +388,7 @@ public class GameSaveSerialization {
                 writer.write(value + "\n");
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("Error writing value: " + e.getMessage());
         }
     }
 
@@ -404,7 +403,7 @@ public class GameSaveSerialization {
                 writer.write("\n");
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("Error writing array: " + e.getMessage());
         }
     }
 
@@ -419,7 +418,7 @@ public class GameSaveSerialization {
                 writer.write("\n");
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("Error writing list: " + e.getMessage());
         }
     }
 
@@ -508,7 +507,7 @@ public class GameSaveSerialization {
             }
 
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("Error serializing file: " + e.getMessage());
         }
     }
 
@@ -537,14 +536,14 @@ public class GameSaveSerialization {
         try (PrintWriter writer = new PrintWriter(new FileWriter(log, true))) {
             throwable.printStackTrace(writer);
         } catch (IOException e) {
-            e.printStackTrace();
+            System.err.println("Error writing stack trace to log file: " + e.getMessage());
         }
 
         try {
             String[] cmd = {"/bin/bash", "-c", "open -a Terminal " + log};
             Runtime.getRuntime().exec(cmd);
         } catch (IOException e) {
-            e.printStackTrace();
+            System.err.println("Error opening Terminal: " + e.getMessage());
         }
     }
 }

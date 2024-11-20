@@ -11,8 +11,6 @@ import java.util.Set;
  */
 public class InventoryManager extends Player {
 
-    static String resetColor = "\033[0m"; // reset to default color
-    static String yellowColor = "\033[1;33m"; // yellow color
     // public String room;
     // public String area;
     //inventory format is itemname, amount
