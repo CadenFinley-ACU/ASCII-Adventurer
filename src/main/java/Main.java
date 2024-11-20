@@ -302,7 +302,7 @@ public class Main {
             playerCreated = false;
             Player.playerStart();
         } else {
-            playTime.startClock();
+            playTime.startClock(1);
             GameSaveSerialization.saveGame();
             InventoryManager.setStatsToHighestInInventory();
             switch (getSavedPlace()) {
@@ -377,7 +377,7 @@ public class Main {
             promptLoadSavedGame();
         } else if (playerCreated && Player.getName() != null && !"null".equals(Player.getName())) {
             saveSpace("SpawnRoom");
-            playTime.startClock();
+            playTime.startClock(1);
             loadSave();
         } else {
             Player.playerStart();

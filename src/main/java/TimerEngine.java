@@ -14,7 +14,7 @@ public class TimerEngine {
     private boolean running;
     private long timeElapsedInSeconds = 0;
 
-    public void startClock() {
+    public void startClock(int period) {
         //System.out.println("Timer started");
         running = true;
         // Start a new thread to display the clock
@@ -22,11 +22,11 @@ public class TimerEngine {
         executor.scheduleAtFixedRate(() -> {
             if (running) {
                 timeElapsedInSeconds++;
-                System.out.println(returnTime());
+                //System.out.println(returnTime());
             } else {
                 executor.shutdown();
             }
-        }, 0, 1, TimeUnit.SECONDS);
+        }, 0, period, TimeUnit.SECONDS);
     }
 
     public void stopClock() {

@@ -58,7 +58,7 @@ public class Player {
         name = "Debug!";
         Main.playerCreated = true;
         DungeonGenerator.testing = false;
-        Main.playTime.startClock();
+        Main.playTime.startClock(1);
         TextEngine.printNoDelay("Where do you want to spawn", false);
         TextEngine.printNoDelay(" 1:SpawnRoom", false);
         TextEngine.printNoDelay(" 2:OpenWorld", false);
@@ -324,7 +324,7 @@ public class Player {
         TextEngine.enterToNext();
         TextEngine.clearScreen();
         Main.playerCreated = true;
-        Main.playTime.startClock();
+        Main.playTime.startClock(1);
         Main.saveSpace("SpawnRoom");
         Main.loadSave();
     }
