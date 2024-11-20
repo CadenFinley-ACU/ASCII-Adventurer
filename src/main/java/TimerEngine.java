@@ -1,4 +1,8 @@
 
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+
 /**
  * Timer Engine
  *
@@ -14,16 +18,15 @@ public class TimerEngine {
         //System.out.println("Timer started");
         running = true;
         // Start a new thread to display the clock
-        new Thread(() -> {
-            while (running) {
-                try {
-                    Thread.sleep(1000);
-                    timeElapsedInSeconds++;
-                } catch (InterruptedException e) {
-                    System.out.println("Timer interrupted");
-                }
+        ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
+        executor.scheduleAtFixedRate(() -> {
+            if (running) {
+                timeElapsedInSeconds++;
+                System.out.println(returnTime());
+            } else {
+                executor.shutdown();
             }
-        }).start();
+        }, 0, 1, TimeUnit.SECONDS);
     }
 
     public void stopClock() {
@@ -32,8 +35,8 @@ public class TimerEngine {
     }
 
     public String returnTime() {
-        long minutes = ((timeElapsedInSeconds) / 60) % 60;
-        long hours = ((minutes) / 60);
+        long minutes = (timeElapsedInSeconds / 60) % 60;
+        long hours = (timeElapsedInSeconds / 3600);
         if (hours > 99) {
             hours = 99;
             if (minutes > 59) {
@@ -52,5 +55,9 @@ public class TimerEngine {
 
     public void setSavedTime(long save) {
         this.timeElapsedInSeconds = save;
+    }
+
+    public void debugTime(long time) {
+        this.timeElapsedInSeconds = time;
     }
 }

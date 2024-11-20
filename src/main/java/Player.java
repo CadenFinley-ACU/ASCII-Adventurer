@@ -114,6 +114,11 @@ public class Player {
                 Main.saveSpace("Village");
                 Main.loadSave();
             }
+            case "5" -> {
+                Main.playTime.debugTime(10000);
+                Main.saveSpace("SpawnRoom");
+                Main.loadSave();
+            }
             default -> {
                 Main.saveSpace("SpawnRoom");
                 Main.loadSave();
