@@ -39,9 +39,9 @@ public class TimerEngine {
         long hours = (timeElapsedInSeconds / 3600);
         if (hours > 99) {
             hours = 99;
-            if (minutes > 59) {
+            if (minutes >= 59) {
                 minutes = 59;
-                if (timeElapsedInSeconds % 60 > 59) {
+                if (timeElapsedInSeconds % 60 >= 59) {
                     timeElapsedInSeconds = 59;
                 }
             }

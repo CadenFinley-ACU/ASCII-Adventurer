@@ -115,7 +115,7 @@ public class Player {
                 Main.loadSave();
             }
             case "5" -> {
-                Main.playTime.debugTime(10000);
+                Main.playTime.debugTime(359940);
                 Main.saveSpace("SpawnRoom");
                 Main.loadSave();
             }
