@@ -329,13 +329,10 @@ public class TestSuite_Adventure {
         Player.inventory = new HashMap<>();
         Player.putItem("heath potion", 6);
         assertEquals(6, Player.inventory.get("heath potion").intValue());
-
         Player.putItem("greater health potion", 4);
         assertEquals(4, Player.inventory.get("greater health potion").intValue());
-
         Player.putItem("super health potion", 10);
         assertEquals(10, Player.inventory.get("super health potion").intValue());
-
         // Test adding item when there is no room
         Player.putItem("greater heath potion", 1);
         assertNull(Player.inventory.get("greater heath potion"));
@@ -373,6 +370,16 @@ public class TestSuite_Adventure {
         assertEquals(20, Player.getInventorySize());
         Player.putItem("Backpack", 1);
         assertEquals(35, Player.getInventorySize());
+    }
+
+    @Test
+    public void testChangeInventorySize2() throws InterruptedException {
+        Main.createGameItems();
+        Player.hardSetInventorySize(20);
+        Player.inventory = new HashMap<>();
+        assertEquals(20, Player.getInventorySize());
+        Player.putItem("Large Backpack", 1);
+        assertEquals(50, Player.getInventorySize());
     }
 
     @Test
@@ -422,5 +429,27 @@ public class TestSuite_Adventure {
         Player.putItem("chainmail set", 1);
         assertEquals(5, Player.getDamage());
         assertEquals(5, Player.getDefense());
+    }
+
+    @Test
+    public void testGiveMultipleItems() throws InterruptedException {
+        Player.inventory = new HashMap<>();
+        Player.hardSetInventorySize(100);
+        InventoryManager.setStatsToHighestInInventory();
+        assertEquals(0, Player.getDamage());
+        assertEquals(0, Player.getDefense());
+        Player.putItem("sword", 50);
+        Player.putItem("shield", 50);
+        assertEquals(2, Player.getDamage());
+        assertEquals(2, Player.getDefense());
+    }
+
+    @Test
+    public void testChangeHealth() throws InterruptedException {
+        int startHealth = Player.getHealth();
+        Player.changeHealth(-10);
+        assertEquals(startHealth - 10, Player.getHealth());
+        Player.changeHealth(10);
+        assertEquals(startHealth, Player.getHealth());
     }
 }
