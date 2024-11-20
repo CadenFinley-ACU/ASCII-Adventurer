@@ -446,10 +446,38 @@ public class TestSuite_Adventure {
 
     @Test
     public void testChangeHealth() throws InterruptedException {
+        Player.inventory = new HashMap<>();
+        Player.hardSetInventorySize(20);
+        InventoryManager.setStatsToHighestInInventory();
         int startHealth = Player.getHealth();
         Player.changeHealth(-10);
         assertEquals(startHealth - 10, Player.getHealth());
         Player.changeHealth(10);
         assertEquals(startHealth, Player.getHealth());
+    }
+
+    @Test
+    public void testItemModulation() throws InterruptedException {
+        Player.inventory = new HashMap<>();
+        Player.hardSetInventorySize(20);
+        InventoryManager.setStatsToHighestInInventory();
+        assertEquals(0, Player.getDamage());
+        assertEquals(0, Player.getDefense());
+        Player.putItem("sword", 1);
+        Player.putItem("shield", 1);
+        assertEquals(2, Player.getDamage());
+        assertEquals(2, Player.getDefense());
+        Player.putItem("axe", 1);
+        Player.putItem("chainmail set", 1);
+        assertEquals(5, Player.getDamage());
+        assertEquals(5, Player.getDefense());
+        Player.putItem("sword", -1);
+        Player.putItem("shield", -1);
+        assertEquals(5, Player.getDamage());
+        assertEquals(5, Player.getDefense());
+        Player.putItem("sword", 1);
+        Player.putItem("shield", 1);
+        assertEquals(5, Player.getDamage());
+        assertEquals(5, Player.getDefense());
     }
 }

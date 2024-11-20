@@ -276,7 +276,7 @@ public class InventoryManager extends Player {
         return 0; // or any other default value
     }
 
-    public static void useItemNoMenu(String item) throws InterruptedException { //this only shouls run with Player.heal() and keys
+    public static void useItemNoMenu(String item) throws InterruptedException { //this only should run with Player.heal() and keys
         if (Potions.containsKey(item) && !"heart container".equals(item)) {
             Player.changeHealth(Potions.get(item));
             Player.inventory.put(item, inventory.get(item) - 1);
