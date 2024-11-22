@@ -95,11 +95,11 @@ public abstract class TextEngine {
                             TimeUnit.MILLISECONDS.sleep(30);
                         case "Fast" ->
                             TimeUnit.MILLISECONDS.sleep(10);
-                        case "NoDelay" -> {
-                        }
-                        // Do nothing
-                        default -> {
+                        case "Normal" -> {
                             TimeUnit.MILLISECONDS.sleep(20);
+                        }
+                        default -> {
+                            //do nothing
                         }
                     }
                 }
