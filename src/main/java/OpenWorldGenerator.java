@@ -10,7 +10,9 @@ public class OpenWorldGenerator {
 
     private static final int SIZE = 20;
     private static int[][] matrix;
+    @SuppressWarnings("FieldMayBeFinal")
     private List<int[]> positions;
+    @SuppressWarnings("FieldMayBeFinal")
     private List<int[]> fivePositions;
     private int[] ninePosition;
     private Random random = new Random();
@@ -213,6 +215,7 @@ public class OpenWorldGenerator {
         }
     }
 
+    @SuppressWarnings("unused")
     private static int countRooms() {
         int count = 0;
         for (int i = 0; i < SIZE; i++) {

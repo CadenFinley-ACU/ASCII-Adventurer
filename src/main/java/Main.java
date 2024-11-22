@@ -1,8 +1,6 @@
 
 import java.io.Console;
 import java.io.File;
-import java.io.FileWriter;
-import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -23,12 +21,14 @@ public class Main {
     public static Map<String, Integer> savedInventory = new HashMap<>();
     public static boolean gameComplete = false;
     public static String[] COMMANDS;
-    public static TimerEngine playTime;
+    public static ClockEngine playTime;
+
+    public static boolean TESTING = false;
 
     public static void main(String[] args) throws InterruptedException { //main game start
         TextEngine.setWidth();
         TextEngine.clearScreen();
-        playTime = new TimerEngine();
+        playTime = new ClockEngine("stopwatch");
         TextEngine.printNoDelay("Loading...", false);
         TextEngine.printNoDelay("Creating Game Items...", false);
         createGameItems();
@@ -70,7 +70,7 @@ public class Main {
         TextEngine.printNoDelay("Generated Dungeons!", false);
     }
 
-    private static void createGameItems() { //initalize all the items in the game
+    public static void createGameItems() { //initalize all the items in the game
         //the value is equal to the damage, defense, or healing potential the item provides
         //this is only to use when you use the item not when you have it in your inventory or when it is on the map
         InventoryManager.createItem("weapon", "sword", 2); //spawn room weapon and shop 1
@@ -190,30 +190,15 @@ public class Main {
         System.out.println(" / ___ \\ (_| |\\ V /  __/ | | | |_| |_| | | |  __/ |                ");
         System.out.println("/_/   \\_\\__,_| \\_/ \\___|_| |_|\\__|\\__,_|_|  \\___|_|           ");
         System.out.print(brightBoldEnd);
-
     }
 
     private static void displayHelp() throws InterruptedException { //main menu help command
-        if (PromptEngine.aiGenerationEnabled && false) {
-            PromptEngine.buildHelpPrompt(COMMANDS);
-            TextEngine.printWithDelays(PromptEngine.returnPrompt(), false);
-        } else {
-            //above is supposed to be dead for now
-            TextEngine.printWithDelays("Things you could say:\n" + yellowColor + "stats" + resetColor + " to see your stats\n" + yellowColor + "inventory" + resetColor + " to see your inventory\n" + yellowColor + "heal" + resetColor + " to heal you health using any available healing potions\n" + yellowColor + "settings" + resetColor + " or type " + yellowColor + "save" + resetColor + " to save\n" + yellowColor + "map" + resetColor + " to see the map\n" + yellowColor + "exit" + resetColor + " to return to the main menu.", true);
-        }
+        TextEngine.printWithDelays("Things you could say:\n" + yellowColor + "stats" + resetColor + " to see your stats\n" + yellowColor + "inventory" + resetColor + " to see your inventory\n" + yellowColor + "heal" + resetColor + " to heal you health using any available healing potions\n" + yellowColor + "settings" + resetColor + " or type " + yellowColor + "save" + resetColor + " to save\n" + yellowColor + "map" + resetColor + " to see the map\n" + yellowColor + "exit" + resetColor + " to return to the main menu.", true);
     }
 
     private static void exitGame() throws InterruptedException {   //exit game command
         GameSaveSerialization.saveGame();
-        try {
-            FileWriter fwOb = new FileWriter(".runtime.txt", false);
-            PrintWriter pwOb = new PrintWriter(fwOb, false);
-            pwOb.flush();
-            pwOb.close();
-            fwOb.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        wipeFile(".runtime.txt");
         TextEngine.printWithDelays("See ya next time!", false);
         TextEngine.enterToNext();
         TextEngine.clearScreen();
@@ -231,6 +216,7 @@ public class Main {
         TextEngine.printWithDelays("Using System Property: " + getOS_NAME(), false);
         TextEngine.printWithDelays("Using Console: " + console, false);
         TextEngine.printWithDelays("Text Speed: " + TextEngine.speedSetting, false);
+        TextEngine.printWithDelays("OpenAI API Key " + PromptEngine.userAPIKey, false);
         TextEngine.enterToNext();
         Player.debugStart();
     }
@@ -316,7 +302,7 @@ public class Main {
             playerCreated = false;
             Player.playerStart();
         } else {
-            playTime.startClock();
+            playTime.startClock(1);
             GameSaveSerialization.saveGame();
             InventoryManager.setStatsToHighestInInventory();
             switch (getSavedPlace()) {
@@ -348,7 +334,7 @@ public class Main {
         }
     }
 
-    public static void wipeSave() throws InterruptedException { //wipe save command
+    public static void wipeSave() { //wipe save command
         playerCreated = false;
         savedPlace = null;
         gameComplete = false;
@@ -358,16 +344,8 @@ public class Main {
         Dungeon.generateDungeons();
         PromptEngine.aiGenerationEnabled = false;
         PromptEngine.userAPIKey = null;
-        Main.playTime.setSavedTime(0);
-        try {
-            FileWriter fwOb = new FileWriter(".runtime.txt", false);
-            PrintWriter pwOb = new PrintWriter(fwOb, false);
-            pwOb.flush();
-            pwOb.close();
-            fwOb.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        Main.playTime.setSavedTimeInSeconds(0);
+        wipeFile(".runtime.txt");
         GameSaveSerialization.saveGame();
         Enemy.resetEnemies();
     }
@@ -399,7 +377,7 @@ public class Main {
             promptLoadSavedGame();
         } else if (playerCreated && Player.getName() != null && !"null".equals(Player.getName())) {
             saveSpace("SpawnRoom");
-            playTime.startClock();
+            playTime.startClock(1);
             loadSave();
         } else {
             Player.playerStart();
@@ -507,5 +485,12 @@ public class Main {
         TextEngine.printNoDelay("Health: " + Player.getHealth() + "/" + Player.getMaxHealth(), false);
         TextEngine.printNoDelay("Gold: " + Player.getGold(), false);
         TextEngine.printNoDelay("Completed Dungeons: " + Dungeon.completedDungeons, false);
+    }
+
+    public static void wipeFile(String fileName) {
+        File file = new File(fileName);
+        if (!file.delete()) {
+            System.out.println("Failed to delete the file");
+        }
     }
 }

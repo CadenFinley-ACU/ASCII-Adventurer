@@ -29,7 +29,7 @@ public class PromptEngine {
             "North", "South", "East", "West", "Northeast", "Northwest", "Southeast", "Southwest"
     );
 
-    public static void buildPrompt() throws InterruptedException {
+    public static void buildPrompt() {
         if (aiGenerationEnabled && (OpenWorld.checkChangeInRoom() || prompt == null || prompt.isEmpty())) {
             String villageDirection = Player.getCompassDirectionToClosestVillage();
             String nextDungeon = Player.getNextDungeon();
@@ -83,7 +83,7 @@ public class PromptEngine {
                 dungeonPrompt = "The " + nextDungeon + " is to the " + dungeonNextDirection + " and is " + dungeonDistanceGauge + ".";
             }
             // "add more" / "make more complex"
-            prompt = chatGPT("Generate a me a prompt for a text adventure game designed for highschoolers. Always state the direction of the structure if it is given and the distance if it is given. When giving direction do not abbreviate the direction. Do this in around " + promptLength + " words or less using this info: The player headed " + OpenWorld.holdCommand + " and is in a " + setting + villagePrompt + dungeonPrompt + ".") + "\n";
+            prompt = chatGPT("Generate a me a prompt for a text adventure game designed for highschoolers. Always state the direction of the structure if it is given and the distance if it is given. When giving direction do not abbreviate the direction. Do this in around " + promptLength + " words or less using this info: The player headed " + OpenWorld.holdCommand + " and is in a " + setting + " " + villagePrompt + dungeonPrompt + ".") + "\n";
             Main.screenRefresh();
         }
     }
@@ -112,6 +112,7 @@ public class PromptEngine {
         String url = "https://api.openai.com/v1/chat/completions";
         String apiKey = userAPIKey; // API key goes here
         String model = "gpt-3.5-turbo";
+        //System.out.println(message);
         try {
             URL obj = new URL(url);
             HttpURLConnection con = (HttpURLConnection) obj.openConnection();
@@ -148,6 +149,7 @@ public class PromptEngine {
     private static String extractContentFromResponse(String response) {
         int startMarker = response.indexOf("content") + 11; // Marker for where the content starts.
         int endMarker = response.indexOf("\"", startMarker); // Marker for where the content ends.
+        //System.out.println(response);
         return response.substring(startMarker, endMarker); // Returns the substring containing only the response.
     }
 

@@ -746,7 +746,7 @@ public class OpenWorld extends Room {
         if (PromptEngine.aiGenerationEnabled) {
             TextEngine.printWithDelays(PromptEngine.returnPrompt(), false);
         } else {
-            Dungeon.dungeonCheck();
+            dungeonCheck();
             TextEngine.printWithDelays("Warning: Stepping into a dungeon will trigger battles,\n    but you may uncover valuable treasures within its chambers if you manage to survive.\n", false);
         }
         // TextEngine.printWithDelays("    You have entered the deep sea", false);
@@ -777,7 +777,7 @@ public class OpenWorld extends Room {
         if (PromptEngine.aiGenerationEnabled) {
             TextEngine.printWithDelays(PromptEngine.returnPrompt(), false);
         } else {
-            Dungeon.dungeonCheck();
+            dungeonCheck();
             TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
         }
         TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "east" + resetColor + ", or " + yellowColor + "west" + resetColor + " to continue your journey ", true);
@@ -926,7 +926,7 @@ public class OpenWorld extends Room {
         if (PromptEngine.aiGenerationEnabled) {
             TextEngine.printWithDelays(PromptEngine.returnPrompt(), false);
         } else {
-            Dungeon.dungeonCheck();
+            dungeonCheck();
         }
         TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
         TextEngine.printWithDelays("Which path will you choose? Type " + yellowColor + "north" + resetColor + ", " + yellowColor + "east" + resetColor + ", or " + yellowColor + "south" + resetColor + " to continue your journey", true);
@@ -1047,7 +1047,7 @@ public class OpenWorld extends Room {
         if (PromptEngine.aiGenerationEnabled) {
             TextEngine.printWithDelays(PromptEngine.returnPrompt(), false);
         } else {
-            Dungeon.dungeonCheck();
+            dungeonCheck();
         }
         TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
         TextEngine.printWithDelays("Which path will you choose? Type " + yellowColor + "north" + resetColor + ", or " + yellowColor + "south" + resetColor + " to continue your journey", true);
@@ -1077,7 +1077,7 @@ public class OpenWorld extends Room {
         if (PromptEngine.aiGenerationEnabled) {
             TextEngine.printWithDelays(PromptEngine.returnPrompt(), false);
         } else {
-            Dungeon.dungeonCheck();
+            dungeonCheck();
         }
         TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
         TextEngine.printWithDelays("Which path will you choose? Type " + yellowColor + "north" + resetColor + ", " + yellowColor + "east" + resetColor + ", or " + yellowColor + "south" + resetColor + " to continue your journey", true);
@@ -1112,7 +1112,7 @@ public class OpenWorld extends Room {
         if (PromptEngine.aiGenerationEnabled) {
             TextEngine.printWithDelays(PromptEngine.returnPrompt(), false);
         } else {
-            Dungeon.dungeonCheck();
+            dungeonCheck();
         }
         TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
         TextEngine.printWithDelays("Which path will you choose? Type " + yellowColor + "north" + resetColor + ", " + yellowColor + "east" + resetColor + ", " + yellowColor + "south" + resetColor + ", or " + yellowColor + "west" + resetColor + " to continue your journey", true);
@@ -1152,7 +1152,7 @@ public class OpenWorld extends Room {
         if (PromptEngine.aiGenerationEnabled) {
             TextEngine.printWithDelays(PromptEngine.returnPrompt(), false);
         } else {
-            Dungeon.dungeonCheck();
+            dungeonCheck();
         }
         TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
         TextEngine.printWithDelays("Which path will you choose? Type " + yellowColor + "north" + resetColor + ", " + yellowColor + "south" + resetColor + ", or " + yellowColor + "west" + resetColor + " to continue your journey", true);
@@ -1187,7 +1187,7 @@ public class OpenWorld extends Room {
         if (PromptEngine.aiGenerationEnabled) {
             TextEngine.printWithDelays(PromptEngine.returnPrompt(), false);
         } else {
-            Dungeon.dungeonCheck();
+            dungeonCheck();
         }
         TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
         TextEngine.printWithDelays("Which path will you choose? Type " + yellowColor + "north" + resetColor + ", or " + yellowColor + "south" + resetColor + " to continue your journey", true);
@@ -1217,7 +1217,7 @@ public class OpenWorld extends Room {
         if (PromptEngine.aiGenerationEnabled) {
             TextEngine.printWithDelays(PromptEngine.returnPrompt(), false);
         } else {
-            Dungeon.dungeonCheck();
+            dungeonCheck();
         }
         TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
         TextEngine.printWithDelays("Which path will you choose? Type " + yellowColor + "north" + resetColor + ", " + yellowColor + "east" + resetColor + ", or " + yellowColor + "south" + resetColor + " to continue your journey", true);
@@ -1296,7 +1296,7 @@ public class OpenWorld extends Room {
         if (PromptEngine.aiGenerationEnabled) {
             TextEngine.printWithDelays(PromptEngine.returnPrompt(), false);
         } else {
-            Dungeon.dungeonCheck();
+            dungeonCheck();
         }
         TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
         TextEngine.printWithDelays("Which path will you choose? Type " + yellowColor + "north" + resetColor + ", " + yellowColor + "The Village" + resetColor + ", " + yellowColor + "south" + resetColor + " or " + yellowColor + "west" + resetColor + " to continue your journey", true);
@@ -1337,7 +1337,7 @@ public class OpenWorld extends Room {
         if (PromptEngine.aiGenerationEnabled) {
             TextEngine.printWithDelays(PromptEngine.returnPrompt(), false);
         } else {
-            Dungeon.dungeonCheck();
+            dungeonCheck();
         }
         //TextEngine.printWithDelays("    You have entered the deep sea", false);
         TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
@@ -1368,7 +1368,7 @@ public class OpenWorld extends Room {
         if (PromptEngine.aiGenerationEnabled) {
             TextEngine.printWithDelays(PromptEngine.returnPrompt(), false);
         } else {
-            Dungeon.dungeonCheck();
+            dungeonCheck();
         }
         //TextEngine.printWithDelays("    You have entered the deep sea", false);
         TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
@@ -1451,7 +1451,7 @@ public class OpenWorld extends Room {
         if (PromptEngine.aiGenerationEnabled) {
             TextEngine.printWithDelays(PromptEngine.returnPrompt(), false);
         } else {
-            Dungeon.dungeonCheck();
+            dungeonCheck();
         }
         TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
         TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "north" + resetColor + ", " + yellowColor + "east" + resetColor + ", " + yellowColor + "south" + resetColor + ", or " + yellowColor + "west" + resetColor + " to continue your journey ", true);
@@ -1491,7 +1491,7 @@ public class OpenWorld extends Room {
         if (PromptEngine.aiGenerationEnabled) {
             TextEngine.printWithDelays(PromptEngine.returnPrompt(), false);
         } else {
-            Dungeon.dungeonCheck();
+            dungeonCheck();
         }
         //TextEngine.printWithDelays("    You have entered the desert", false);
         TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
@@ -1532,7 +1532,7 @@ public class OpenWorld extends Room {
         if (PromptEngine.aiGenerationEnabled) {
             TextEngine.printWithDelays(PromptEngine.returnPrompt(), false);
         } else {
-            Dungeon.dungeonCheck();
+            dungeonCheck();
         }
         TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
         TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "north" + resetColor + ", " + yellowColor + "east" + resetColor + ", " + yellowColor + "south" + resetColor + ", or " + yellowColor + "west" + resetColor + " to continue your journey ", true);
@@ -1572,7 +1572,7 @@ public class OpenWorld extends Room {
         if (PromptEngine.aiGenerationEnabled) {
             TextEngine.printWithDelays(PromptEngine.returnPrompt(), false);
         } else {
-            Dungeon.dungeonCheck();
+            dungeonCheck();
         }
         TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
         TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "The Village" + resetColor + ", " + yellowColor + "south" + resetColor + ", or " + yellowColor + "west" + resetColor + " to continue your journey ", true);
@@ -1608,7 +1608,7 @@ public class OpenWorld extends Room {
         if (PromptEngine.aiGenerationEnabled) {
             TextEngine.printWithDelays(PromptEngine.returnPrompt(), false);
         } else {
-            Dungeon.dungeonCheck();
+            dungeonCheck();
         }
         TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
         TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "north" + resetColor + ", " + yellowColor + "east" + resetColor + ", or " + yellowColor + "south" + resetColor + " to continue your journey ", true);
@@ -1643,7 +1643,7 @@ public class OpenWorld extends Room {
         if (PromptEngine.aiGenerationEnabled) {
             TextEngine.printWithDelays(PromptEngine.returnPrompt(), false);
         } else {
-            Dungeon.dungeonCheck();
+            dungeonCheck();
         }
         TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
         TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "north" + resetColor + ", " + yellowColor + "east" + resetColor + ", " + yellowColor + "south" + resetColor + ", or " + yellowColor + "west" + resetColor + " to continue your journey ", true);
@@ -1683,7 +1683,7 @@ public class OpenWorld extends Room {
         if (PromptEngine.aiGenerationEnabled) {
             TextEngine.printWithDelays(PromptEngine.returnPrompt(), false);
         } else {
-            Dungeon.dungeonCheck();
+            dungeonCheck();
         }
         TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
         TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "south" + resetColor + ", or " + yellowColor + "west" + resetColor + " to continue your journey ", true);
@@ -1713,7 +1713,7 @@ public class OpenWorld extends Room {
         if (PromptEngine.aiGenerationEnabled) {
             TextEngine.printWithDelays(PromptEngine.returnPrompt(), false);
         } else {
-            Dungeon.dungeonCheck();
+            dungeonCheck();
         }
         //TextEngine.printWithDelays("    You have started to climb the mountain", false);
         TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
@@ -1754,7 +1754,7 @@ public class OpenWorld extends Room {
         if (PromptEngine.aiGenerationEnabled) {
             TextEngine.printWithDelays(PromptEngine.returnPrompt(), false);
         } else {
-            Dungeon.dungeonCheck();
+            dungeonCheck();
         }
         //TextEngine.printWithDelays("    You have started to climb the mountain", false);
         TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
@@ -1795,7 +1795,7 @@ public class OpenWorld extends Room {
         if (PromptEngine.aiGenerationEnabled) {
             TextEngine.printWithDelays(PromptEngine.returnPrompt(), false);
         } else {
-            Dungeon.dungeonCheck();
+            dungeonCheck();
         }
         //TextEngine.printWithDelays("    You have started to climb the mountain", false);
         TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
@@ -1836,7 +1836,7 @@ public class OpenWorld extends Room {
         if (PromptEngine.aiGenerationEnabled) {
             TextEngine.printWithDelays(PromptEngine.returnPrompt(), false);
         } else {
-            Dungeon.dungeonCheck();
+            dungeonCheck();
         }
         //TextEngine.printWithDelays("    You have started to climb the mountain", false);
         TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
@@ -1872,7 +1872,7 @@ public class OpenWorld extends Room {
         if (PromptEngine.aiGenerationEnabled) {
             TextEngine.printWithDelays(PromptEngine.returnPrompt(), false);
         } else {
-            Dungeon.dungeonCheck();
+            dungeonCheck();
         }
         // TextEngine.printWithDelays("    You have entered the desert", false);
         TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
@@ -1909,7 +1909,7 @@ public class OpenWorld extends Room {
         if (PromptEngine.aiGenerationEnabled) {
             TextEngine.printWithDelays(PromptEngine.returnPrompt(), false);
         } else {
-            Dungeon.dungeonCheck();
+            dungeonCheck();
         }
         // TextEngine.printWithDelays("    You have entered the desert", false);
         TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
@@ -1950,7 +1950,7 @@ public class OpenWorld extends Room {
         if (PromptEngine.aiGenerationEnabled) {
             TextEngine.printWithDelays(PromptEngine.returnPrompt(), false);
         } else {
-            Dungeon.dungeonCheck();
+            dungeonCheck();
         }
         //TextEngine.printWithDelays("    You have entered the desert", false);
         TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
@@ -1991,7 +1991,7 @@ public class OpenWorld extends Room {
         if (PromptEngine.aiGenerationEnabled) {
             TextEngine.printWithDelays(PromptEngine.returnPrompt(), false);
         } else {
-            Dungeon.dungeonCheck();
+            dungeonCheck();
         }
         //TextEngine.printWithDelays("    You have entered the desert", false);
         TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
@@ -2027,7 +2027,7 @@ public class OpenWorld extends Room {
         if (PromptEngine.aiGenerationEnabled) {
             TextEngine.printWithDelays(PromptEngine.returnPrompt(), false);
         } else {
-            Dungeon.dungeonCheck();
+            dungeonCheck();
         }
         TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
         TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "north" + resetColor + ", " + yellowColor + "east" + resetColor + ", " + yellowColor + "south" + resetColor + ", or " + yellowColor + "west" + resetColor + " to continue your journey ", true);
@@ -2067,7 +2067,7 @@ public class OpenWorld extends Room {
         if (PromptEngine.aiGenerationEnabled) {
             TextEngine.printWithDelays(PromptEngine.returnPrompt(), false);
         } else {
-            Dungeon.dungeonCheck();
+            dungeonCheck();
         }
         TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
         TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "north" + resetColor + ", " + yellowColor + "east" + resetColor + ", " + yellowColor + "south" + resetColor + ", or " + yellowColor + "west" + resetColor + " to continue your journey ", true);
@@ -2107,7 +2107,7 @@ public class OpenWorld extends Room {
         if (PromptEngine.aiGenerationEnabled) {
             TextEngine.printWithDelays(PromptEngine.returnPrompt(), false);
         } else {
-            Dungeon.dungeonCheck();
+            dungeonCheck();
         }
         TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
         TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "north" + resetColor + ", " + yellowColor + "east" + resetColor + ", " + yellowColor + "south" + resetColor + ", or " + yellowColor + "west" + resetColor + " to continue your journey ", true);
@@ -2147,7 +2147,7 @@ public class OpenWorld extends Room {
         if (PromptEngine.aiGenerationEnabled) {
             TextEngine.printWithDelays(PromptEngine.returnPrompt(), false);
         } else {
-            Dungeon.dungeonCheck();
+            dungeonCheck();
         }
         TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
         TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "north" + resetColor + ", " + yellowColor + "east" + resetColor + ", " + yellowColor + "south" + resetColor + ", or " + yellowColor + "west" + resetColor + " to continue your journey ", true);
@@ -2187,7 +2187,7 @@ public class OpenWorld extends Room {
         if (PromptEngine.aiGenerationEnabled) {
             TextEngine.printWithDelays(PromptEngine.returnPrompt(), false);
         } else {
-            Dungeon.dungeonCheck();
+            dungeonCheck();
         }
         TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
         TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "north" + resetColor + ", " + yellowColor + "south" + resetColor + ", or " + yellowColor + "west" + resetColor + " to continue your journey ", true);
@@ -2270,7 +2270,7 @@ public class OpenWorld extends Room {
         if (PromptEngine.aiGenerationEnabled) {
             TextEngine.printWithDelays(PromptEngine.returnPrompt(), false);
         } else {
-            Dungeon.dungeonCheck();
+            dungeonCheck();
         }
         TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
         TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "north" + resetColor + ", " + yellowColor + "east" + resetColor + ", " + yellowColor + "south" + resetColor + ", or " + yellowColor + "west" + resetColor + " to continue your journey ", true);
@@ -2310,7 +2310,7 @@ public class OpenWorld extends Room {
         if (PromptEngine.aiGenerationEnabled) {
             TextEngine.printWithDelays(PromptEngine.returnPrompt(), false);
         } else {
-            Dungeon.dungeonCheck();
+            dungeonCheck();
         }
         //TextEngine.printWithDelays("    You have entered the desert", false);
         TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
@@ -2351,7 +2351,7 @@ public class OpenWorld extends Room {
         if (PromptEngine.aiGenerationEnabled) {
             TextEngine.printWithDelays(PromptEngine.returnPrompt(), false);
         } else {
-            Dungeon.dungeonCheck();
+            dungeonCheck();
         }
         TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
         TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "north" + resetColor + ", " + yellowColor + "east" + resetColor + ", " + yellowColor + "south" + resetColor + ", or " + yellowColor + "west" + resetColor + " to continue your journey ", true);
@@ -2391,7 +2391,7 @@ public class OpenWorld extends Room {
         if (PromptEngine.aiGenerationEnabled) {
             TextEngine.printWithDelays(PromptEngine.returnPrompt(), false);
         } else {
-            Dungeon.dungeonCheck();
+            dungeonCheck();
         }
         //TextEngine.printWithDelays("    You have entered the lost forest", false);
         TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
@@ -2432,7 +2432,7 @@ public class OpenWorld extends Room {
         if (PromptEngine.aiGenerationEnabled) {
             TextEngine.printWithDelays(PromptEngine.returnPrompt(), false);
         } else {
-            Dungeon.dungeonCheck();
+            dungeonCheck();
         }
         //TextEngine.printWithDelays("    You have entered the lost forest", false);
         TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
@@ -2473,7 +2473,7 @@ public class OpenWorld extends Room {
         if (PromptEngine.aiGenerationEnabled) {
             TextEngine.printWithDelays(PromptEngine.returnPrompt(), false);
         } else {
-            Dungeon.dungeonCheck();
+            dungeonCheck();
         }
         //TextEngine.printWithDelays("    You have entered the lost forest", false);
         TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
@@ -2604,7 +2604,7 @@ public class OpenWorld extends Room {
         if (PromptEngine.aiGenerationEnabled) {
             TextEngine.printWithDelays(PromptEngine.returnPrompt(), false);
         } else {
-            Dungeon.dungeonCheck();
+            dungeonCheck();
         }
         TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
         TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "north" + resetColor + ", " + yellowColor + "east" + resetColor + ", " + yellowColor + "south" + resetColor + ", or " + yellowColor + "west" + resetColor + " to continue your journey ", true);
@@ -2644,7 +2644,7 @@ public class OpenWorld extends Room {
         if (PromptEngine.aiGenerationEnabled) {
             TextEngine.printWithDelays(PromptEngine.returnPrompt(), false);
         } else {
-            Dungeon.dungeonCheck();
+            dungeonCheck();
         }
         //TextEngine.printWithDelays("    You have entered the lost forest", false);
         TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
@@ -2685,7 +2685,7 @@ public class OpenWorld extends Room {
         if (PromptEngine.aiGenerationEnabled) {
             TextEngine.printWithDelays(PromptEngine.returnPrompt(), false);
         } else {
-            Dungeon.dungeonCheck();
+            dungeonCheck();
         }
         TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
         TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "north" + resetColor + ", " + yellowColor + "east" + resetColor + ", " + yellowColor + "south" + resetColor + ", or " + yellowColor + "west" + resetColor + " to continue your journey ", true);
@@ -2862,7 +2862,7 @@ public class OpenWorld extends Room {
         if (PromptEngine.aiGenerationEnabled) {
             TextEngine.printWithDelays(PromptEngine.returnPrompt(), false);
         } else {
-            Dungeon.dungeonCheck();
+            dungeonCheck();
         }
         //TextEngine.printWithDelays("    You have entered the desert", false);
         TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
@@ -2903,7 +2903,7 @@ public class OpenWorld extends Room {
         if (PromptEngine.aiGenerationEnabled) {
             TextEngine.printWithDelays(PromptEngine.returnPrompt(), false);
         } else {
-            Dungeon.dungeonCheck();
+            dungeonCheck();
         }
         TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
         TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "north" + resetColor + ", " + yellowColor + "east" + resetColor + ", " + yellowColor + "south" + resetColor + ", or " + yellowColor + "west" + resetColor + " to continue your journey ", true);
@@ -2943,7 +2943,7 @@ public class OpenWorld extends Room {
         if (PromptEngine.aiGenerationEnabled) {
             TextEngine.printWithDelays(PromptEngine.returnPrompt(), false);
         } else {
-            Dungeon.dungeonCheck();
+            dungeonCheck();
         }
         //TextEngine.printWithDelays("    You have entered the lost forest", false);
         TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
@@ -2986,7 +2986,7 @@ public class OpenWorld extends Room {
         if (PromptEngine.aiGenerationEnabled) {
             TextEngine.printWithDelays(PromptEngine.returnPrompt(), false);
         } else {
-            Dungeon.dungeonCheck();
+            dungeonCheck();
         }
         TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
         TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "north" + resetColor + ", " + yellowColor + "east" + resetColor + ", or " + yellowColor + "west" + resetColor + " to continue your journey ", true);
@@ -3101,7 +3101,7 @@ public class OpenWorld extends Room {
         if (PromptEngine.aiGenerationEnabled) {
             TextEngine.printWithDelays(PromptEngine.returnPrompt(), false);
         } else {
-            Dungeon.dungeonCheck();
+            dungeonCheck();
         }
         //TextEngine.printWithDelays("    You have entered the desert", false);
         TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
@@ -3137,7 +3137,7 @@ public class OpenWorld extends Room {
         if (PromptEngine.aiGenerationEnabled) {
             TextEngine.printWithDelays(PromptEngine.returnPrompt(), false);
         } else {
-            Dungeon.dungeonCheck();
+            dungeonCheck();
         }
         TextEngine.printWithDelays("If you find yourself feeling lost, don't forget to check out the " + yellowColor + "map" + resetColor + " for guidance.\n", false);
         TextEngine.printWithDelays("What will you do next? Type " + yellowColor + "north" + resetColor + ", " + yellowColor + "west" + resetColor + ", or " + yellowColor + "The Village" + resetColor + " to continue your journey ", true);
