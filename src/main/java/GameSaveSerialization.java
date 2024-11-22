@@ -175,7 +175,7 @@ public class GameSaveSerialization {
         writeSeparator(filePath);
         writeValue(String.valueOf(PromptEngine.promptLength), filePath);
         writeSeparator(filePath);
-        writeValue(String.valueOf(Main.playTime.getTime()), filePath);
+        writeValue(String.valueOf(Main.playTime.getTimeElapsedInSeconds()), filePath);
         //do this after all other data is saved
         serializeAllLines(filePath, filePath);
         if (Player.getName().equals("Debug!")) {
@@ -184,7 +184,7 @@ public class GameSaveSerialization {
     }
 
     public static void loadGameSave() throws InterruptedException {
-        Main.playTime.setSavedTime(Main.playTime.getTime());
+        Main.playTime.setSavedTimeInSeconds(Main.playTime.getTimeElapsedInSeconds());
         deserializeToFile(filePath);
         try (BufferedReader reader = new BufferedReader(new FileReader(runtimePath))) {
             try {
@@ -337,7 +337,7 @@ public class GameSaveSerialization {
                 reader.readLine();
                 PromptEngine.promptLength = Integer.parseInt(reader.readLine());
                 reader.readLine();
-                Main.playTime.setSavedTime(Long.parseLong(reader.readLine()));
+                Main.playTime.setSavedTimeInSeconds(Long.parseLong(reader.readLine()));
 
             } catch (IOException | NumberFormatException e) {
                 System.out.println("Save File Corrupt or Invalid... ");

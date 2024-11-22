@@ -21,14 +21,14 @@ public class Main {
     public static Map<String, Integer> savedInventory = new HashMap<>();
     public static boolean gameComplete = false;
     public static String[] COMMANDS;
-    public static TimerEngine playTime;
+    public static ClockEngine playTime;
 
     public static boolean TESTING = false;
 
     public static void main(String[] args) throws InterruptedException { //main game start
         TextEngine.setWidth();
         TextEngine.clearScreen();
-        playTime = new TimerEngine();
+        playTime = new ClockEngine("stopwatch");
         TextEngine.printNoDelay("Loading...", false);
         TextEngine.printNoDelay("Creating Game Items...", false);
         createGameItems();
@@ -344,7 +344,7 @@ public class Main {
         Dungeon.generateDungeons();
         PromptEngine.aiGenerationEnabled = false;
         PromptEngine.userAPIKey = null;
-        Main.playTime.setSavedTime(0);
+        Main.playTime.setSavedTimeInSeconds(0);
         wipeFile(".runtime.txt");
         GameSaveSerialization.saveGame();
         Enemy.resetEnemies();
