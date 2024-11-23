@@ -338,7 +338,6 @@ public class GameSaveSerialization {
                 PromptEngine.promptLength = Integer.parseInt(reader.readLine());
                 reader.readLine();
                 Main.playTime.setSavedTimeInSeconds(Long.parseLong(reader.readLine()));
-
             } catch (IOException | NumberFormatException e) {
                 System.out.println("Save File Corrupt or Invalid... ");
                 TextEngine.printWithDelays("Erasing Save File and Restarting...", false);
@@ -538,7 +537,6 @@ public class GameSaveSerialization {
         } catch (IOException e) {
             System.err.println("Error writing stack trace to log file: " + e.getMessage());
         }
-
         try {
             String[] cmd = {"/bin/bash", "-c", "open -a Terminal " + log};
             Runtime.getRuntime().exec(cmd);
