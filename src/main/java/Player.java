@@ -168,6 +168,10 @@ public class Player {
     }
 
     public static void changeHealth(int change) throws InterruptedException {
+        if (change == 0) {
+            TextEngine.enterToNext();
+            return;
+        }
         String brightRedStart = "\033[1;31m";
         String brightGreenStart = "\033[1;32m";
         String brightEnd = "\033[0m";
