@@ -17,7 +17,7 @@ public class PromptEngine {
     private static final String resetColor = "\u001B[0m";
 
     public static String userAPIKey = null;
-    public static boolean aiGenerationEnabled = false;
+    public static boolean aiGenerationEnabled = true;
     public static int promptLength = 30;
     private static String prompt = null;
     private static final List<String> keywords = Arrays.asList(
