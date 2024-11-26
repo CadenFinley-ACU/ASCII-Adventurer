@@ -16,7 +16,7 @@ public class PromptEngine {
     private static final String yellowColor = "\u001B[33m";
     private static final String resetColor = "\u001B[0m";
 
-    public static String userAPIKey = null;
+    public static final String USER_API_KEY = null;
     public static boolean aiGenerationEnabled = true;
     public static int promptLength = 30;
     private static String prompt = null;
@@ -110,7 +110,7 @@ public class PromptEngine {
 
     private static String chatGPT(String message) {
         String url = "https://api.openai.com/v1/chat/completions";
-        String apiKey = userAPIKey; // API key goes here
+        String apiKey = USER_API_KEY; // API key goes here
         String model = "gpt-3.5-turbo";
         //System.out.println(message);
         try {
@@ -136,7 +136,7 @@ public class PromptEngine {
             // returns the extracted contents of the response.
             return extractContentFromResponse(response.toString());
         } catch (IOException e) {
-            TextEngine.printNoDelay("OpenAI API connection failed. Please check your API key and internet connection. Please try again later.", false);
+            TextEngine.printNoDelay("OpenAI API connection failed. Please check your internet connection and try again later.", false);
             TextEngine.printNoDelay("AI generation has been disabled. You can renable it in settings.", false);
             TextEngine.enterToNext();
             aiGenerationEnabled = false;
@@ -185,7 +185,7 @@ public class PromptEngine {
             aiGenerationEnabled = responseContent != null && !responseContent.isEmpty();
             return responseContent != null && !responseContent.isEmpty();
         } catch (IOException e) {
-            TextEngine.printNoDelay("API Key failed. Please check your API key and internet connection", false);
+            TextEngine.printNoDelay("API Key failed. Please check your internet connection", false);
             aiGenerationEnabled = false;
             return false;
         }

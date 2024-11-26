@@ -48,7 +48,7 @@ public class Main {
             TextEngine.printNoDelay("Save File Located!", false);
             if (PromptEngine.aiGenerationEnabled) {
                 TextEngine.printNoDelay("Testing OpenAI API Connection...", false);
-                if (PromptEngine.testAPIKey(PromptEngine.userAPIKey)) {
+                if (PromptEngine.testAPIKey(PromptEngine.USER_API_KEY)) {
                     TextEngine.printNoDelay("OpenAI API Connection Successful!", false);
                 } else {
                     TextEngine.printNoDelay("OpenAI API Connection Failed. Please check your internet connection and API key", false);
@@ -216,7 +216,6 @@ public class Main {
         TextEngine.printWithDelays("Using System Property: " + getOS_NAME(), false);
         TextEngine.printWithDelays("Using Console: " + console, false);
         TextEngine.printWithDelays("Text Speed: " + TextEngine.speedSetting, false);
-        TextEngine.printWithDelays("OpenAI API Key " + PromptEngine.userAPIKey, false);
         TextEngine.enterToNext();
         Player.debugStart();
     }
@@ -343,7 +342,6 @@ public class Main {
         Player.setName(null);
         Dungeon.generateDungeons();
         PromptEngine.aiGenerationEnabled = false;
-        PromptEngine.userAPIKey = null;
         Main.playTime.setSavedTimeInSeconds(0);
         wipeFile(".runtime.txt");
         GameSaveSerialization.saveGame();

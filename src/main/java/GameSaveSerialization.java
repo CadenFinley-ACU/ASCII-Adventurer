@@ -169,8 +169,6 @@ public class GameSaveSerialization {
         writeSeparator(filePath);
         writeValue(String.valueOf(OpenWorld.previousRoomSave), filePath);
         writeSeparator(filePath);
-        writeValue(PromptEngine.userAPIKey, filePath);
-        writeSeparator(filePath);
         writeValue(String.valueOf(PromptEngine.aiGenerationEnabled), filePath);
         writeSeparator(filePath);
         writeValue(String.valueOf(PromptEngine.promptLength), filePath);
@@ -330,8 +328,6 @@ public class GameSaveSerialization {
                 Dungeon.resetedAfterWin = Boolean.parseBoolean(reader.readLine());
                 reader.readLine();
                 OpenWorld.previousRoomSave = Integer.parseInt(reader.readLine());
-                reader.readLine();
-                PromptEngine.userAPIKey = reader.readLine();
                 reader.readLine();
                 PromptEngine.aiGenerationEnabled = Boolean.parseBoolean(reader.readLine());
                 reader.readLine();

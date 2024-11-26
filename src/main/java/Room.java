@@ -109,9 +109,8 @@ public class Room {
                 System.out.println();
             }
             System.out.println();
-            String setting = Player.getColorOfPlayerPostitionTile();
             if (checkNewEnvironment()) {
-                switch (setting) {
+                switch (Player.getColorOfPlayerPostitionTile()) {
                     case "mountain" ->
                         TextEngine.printWithDelays("You have entered the mountain area", false);
                     case "grassland" ->

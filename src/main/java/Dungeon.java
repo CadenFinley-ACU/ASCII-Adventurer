@@ -646,7 +646,7 @@ public class Dungeon extends Room {
     private static void leave() throws InterruptedException {
         TextEngine.printWithDelays("You leave the shop and return to the " + currentDungeon + " Dungeon.", false);
         TextEngine.enterToNext();
-        handleDirectionsAndCommands();
+        handleDirectionsAndCommands(false);
     }
 
     private static boolean checkIfCurrentDungeonIsRevealed() {
@@ -1388,7 +1388,7 @@ public class Dungeon extends Room {
         return sb.toString();
     }
 
-    public static void handleDirectionsAndCommands() throws InterruptedException {
+    public static void handleDirectionsAndCommands(boolean clearScreen) throws InterruptedException {
         boolean completed = false;
         int[][] roomsBeenTo = null;
         int[][] localDungeon = null;
@@ -1445,7 +1445,9 @@ public class Dungeon extends Room {
         }
         availableMove = null;
         directionsString = new ArrayList<>();
-        Main.screenRefresh();
+        if (clearScreen) {
+            Main.screenRefresh();
+        }
         DungeonGenerator.drawRoom(localDungeon, roomsBeenTo, currentPlayerPosition[0], currentPlayerPosition[1], 0, mapRevealed);
         availableMove = DungeonGenerator.getDirections(localDungeon, currentPlayerPosition[0], currentPlayerPosition[1]);
         if (completed) {

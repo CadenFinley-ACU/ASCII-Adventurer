@@ -119,6 +119,6 @@ public class DungeonInstance extends Dungeon {
         if (map[currentPlayerPosition[0]][currentPlayerPosition[1]] == 20 && roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] == 0) {
             trappedRoom();
         }
-        handleDirectionsAndCommands();
+        handleDirectionsAndCommands(true);
     }
 }

@@ -7,7 +7,6 @@
  */
 public class Village extends Room {
 
-    static String resetColor = "\033[0m"; // reset to default color
     static String yellowColor = "\033[1;33m"; // yellow color
 
     public static void startRoom() throws InterruptedException { //start room
