@@ -488,7 +488,7 @@ public class Main {
     public static void wipeFile(String fileName) {
         File file = new File(fileName);
         if (!file.delete()) {
-            System.out.println("Failed to delete the file");
+            System.out.println("Failed to delete the file: " + fileName);
         }
     }
 }
