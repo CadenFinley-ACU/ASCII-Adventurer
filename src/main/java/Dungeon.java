@@ -382,8 +382,7 @@ public class Dungeon extends Room {
         String localDungeon = currentDungeon;
         TextEngine.printNoDelay("Gold: " + Player.getGold(), false);
         TextEngine.printNoDelay("Inventory: " + Player.getTotalNumberOfItemsInInventory() + "/" + Player.getInventorySize(), false);
-        TextEngine.printNoDelay("\n", false);
-        TextEngine.printWithDelays("Welcome to the Dungeon shop Traveler! I snuck into this dungeon a long time ago and got lost.\nMaybe some of these items can help you on your journey.\nWhat would you like to buy?", false);
+        TextEngine.printWithDelays("\nWelcome to the Dungeon shop Traveler! I snuck into this dungeon a long time ago and got lost.\nMaybe some of these items can help you on your journey.\nWhat would you like to buy?", false);
         switch (localDungeon) {
             case "Meadow", "Dark Forest", "Mountain Cave", "Mountain Top" -> {
                 TextEngine.printNoDelay(yellowColor + "health potion" + resetColor + " ~20 gold\n" + yellowColor + "magic map" + resetColor + " ~50\n" + yellowColor + "K.O. Cannon" + resetColor + " ~3000 gold\nor " + yellowColor + " leave" + resetColor, true);
@@ -644,8 +643,6 @@ public class Dungeon extends Room {
     }
 
     private static void leave() throws InterruptedException {
-        TextEngine.printWithDelays("You leave the shop and return to the " + currentDungeon + " Dungeon.", false);
-        TextEngine.enterToNext();
         handleDirectionsAndCommands(false);
     }
 
@@ -746,7 +743,6 @@ public class Dungeon extends Room {
                 OceanKingdomDungeon.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = oceanKingdomDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
             }
         }
-        Main.loadSave();
     }
 
     public static void miniBossSequence() throws InterruptedException {
@@ -859,7 +855,6 @@ public class Dungeon extends Room {
                     int[] buffer = currentPlayerPosition.clone();
                     currentPlayerPosition = lastPosition.clone(); // Save the current position before moving
                     lastPosition = buffer.clone();
-                    Main.loadSave();
                 }
                 default -> {
                     defaultDungeonArgs(command);
@@ -896,8 +891,6 @@ public class Dungeon extends Room {
                     OceanKingdomDungeon.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = oceanKingdomDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
                 }
             }
-            Main.loadSave();
-            return;
         }
         if (numberOfEnemies > 1) {
             TextEngine.printWithDelays("You have entered a room with " + numberOfEnemies + " " + redColor + enemyType + "s" + resetColor + " in this room!\nYou were ambushed!", false);
@@ -936,7 +929,6 @@ public class Dungeon extends Room {
                             OceanKingdomDungeon.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = oceanKingdomDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
                         }
                     }
-                    Main.loadSave();
                     return;
                 }
                 case "run" -> {
@@ -944,7 +936,6 @@ public class Dungeon extends Room {
                     int[] buffer = currentPlayerPosition.clone();
                     currentPlayerPosition = lastPosition.clone(); // Save the current position before moving
                     lastPosition = buffer.clone();
-                    Main.loadSave();
                 }
                 default -> {
                     defaultDungeonArgs(command);
@@ -985,7 +976,6 @@ public class Dungeon extends Room {
             int[] buffer = currentPlayerPosition.clone();
             currentPlayerPosition = lastPosition.clone(); // Save the current position before moving
             lastPosition = buffer.clone();
-            Main.loadSave();
         }
     }
 
@@ -1021,7 +1011,6 @@ public class Dungeon extends Room {
             int[] buffer = currentPlayerPosition.clone();
             currentPlayerPosition = lastPosition.clone(); // Save the current position before moving
             lastPosition = buffer.clone();
-            Main.loadSave();
         }
     }
 
@@ -1060,19 +1049,16 @@ public class Dungeon extends Room {
                                 OceanKingdomDungeon.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = oceanKingdomDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
                             }
                         }
-                        Main.loadSave();
                     } else {
                         int[] buffer = currentPlayerPosition.clone();
                         currentPlayerPosition = lastPosition.clone(); // Save the current position before moving
                         lastPosition = buffer.clone();
-                        Main.loadSave();
                     }
                 }
                 case "no" -> {
                     int[] buffer = currentPlayerPosition.clone();
                     currentPlayerPosition = lastPosition.clone(); // Save the current position before moving
                     lastPosition = buffer.clone();
-                    Main.loadSave();
                 }
                 default -> {
                     defaultDungeonArgs(command);
@@ -1126,12 +1112,10 @@ public class Dungeon extends Room {
                         OceanKingdomDungeon.items.remove(randomItem);
                     }
                 }
-                Main.loadSave();
             } else {
                 int[] buffer = currentPlayerPosition.clone();
                 currentPlayerPosition = lastPosition.clone(); // Save the current position before moving
                 lastPosition = buffer.clone();
-                Main.loadSave();
             }
         } else {
             switch (currentDungeon) {
@@ -1300,7 +1284,6 @@ public class Dungeon extends Room {
                 OceanKingdomDungeon.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = oceanKingdomDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
             }
         }
-        Main.loadSave();
     }
 
     public static void bossRoom() throws InterruptedException {
@@ -1445,15 +1428,15 @@ public class Dungeon extends Room {
         }
         availableMove = null;
         directionsString = new ArrayList<>();
-        if (clearScreen) {
-            Main.screenRefresh();
-        }
-        DungeonGenerator.drawRoom(localDungeon, roomsBeenTo, currentPlayerPosition[0], currentPlayerPosition[1], 0, mapRevealed);
         availableMove = DungeonGenerator.getDirections(localDungeon, currentPlayerPosition[0], currentPlayerPosition[1]);
         if (completed) {
             TextEngine.printWithDelays("You have completed this dungeon. You can now type " + yellowColor + "leave" + resetColor + " to exit this dungeon.", false);
         }
-        System.out.println("Type " + yellowColor + "map" + resetColor + " to see the map.");
+        if (clearScreen) {
+            Main.screenRefresh();
+            DungeonGenerator.drawRoom(localDungeon, roomsBeenTo, currentPlayerPosition[0], currentPlayerPosition[1], 0, mapRevealed);
+            System.out.println("Type " + yellowColor + "map" + resetColor + " to see the map.");
+        }
         System.out.println();
         TextEngine.printWithDelays("You can move in the following directions: ", false);
         addDirections(availableMove);
