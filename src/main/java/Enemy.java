@@ -163,12 +163,12 @@ public class Enemy {
         } else {
             TextEngine.printWithDelays(space + brightRedStart + "You run from the " + type + "!" + brightRedEnd, false);
         }
-        int damage = (enemyDamageValues.get(type) * quantity) / 2;
+        int damage = 0 - (enemyDamageValues.get(type) * quantity) / 2;
         if (damage < 1) {
             damage = 1;
         }
         checkhealth(type, quantity, false);
-        return 0 - (damage);
+        return damage;
     }
 
     private static void checkhealth(String type, int quantity, boolean fight) throws InterruptedException {

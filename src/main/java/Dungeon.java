@@ -50,14 +50,15 @@ public class Dungeon extends Room {
     public static DungeonInstance OceanKingdomDungeon;
 
     public static void generateDungeons() { //generates all 8 dungeons and stores them in their respective variables
-        meadowDungeon = DungeonGenerator.generateAndReturnMatrix(5);
-        darkForestDungeon = DungeonGenerator.generateAndReturnMatrix(6);
-        mountainCaveDungeon = DungeonGenerator.generateAndReturnMatrix(7);
-        mountainTopDungeon = DungeonGenerator.generateAndReturnMatrix(7);
-        desertOasisDungeon = DungeonGenerator.generateAndReturnMatrix(8);
-        desertPlainsDungeon = DungeonGenerator.generateAndReturnMatrix(8);
-        desertPyramidDungeon = DungeonGenerator.generateAndReturnMatrix(9);
-        oceanKingdomDungeon = DungeonGenerator.generateAndReturnMatrix(11);
+        DungeonGenerator generator = new DungeonGenerator();
+        meadowDungeon = generator.generateDungeon(5);
+        darkForestDungeon = generator.generateDungeon(6);
+        mountainCaveDungeon = generator.generateDungeon(7);
+        mountainTopDungeon = generator.generateDungeon(7);
+        desertOasisDungeon = generator.generateDungeon(8);
+        desertPlainsDungeon = generator.generateDungeon(8);
+        desertPyramidDungeon = generator.generateDungeon(9);
+        oceanKingdomDungeon = generator.generateDungeon(11);
 
     }
 
