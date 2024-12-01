@@ -25,16 +25,35 @@ public abstract class TextEngine {
 
     public static void setWidth() {
         try {
-            ProcessBuilder processBuilder = new ProcessBuilder("sh", "-c", "tput cols");
+            String os = System.getProperty("os.name").toLowerCase();
+            ProcessBuilder processBuilder;
+            if (os.contains("win")) {
+                processBuilder = new ProcessBuilder("cmd", "/c", "mode con");
+            } else {
+                processBuilder = new ProcessBuilder("sh", "-c", "tput cols");
+            }
             Process process = processBuilder.start();
             BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-            String line = reader.readLine();
+            String line;
+            if (os.contains("win")) {
+                while ((line = reader.readLine()) != null) {
+                    if (line.contains("Columns")) {
+                        String[] parts = line.split(":");
+                        if (parts.length > 1) {
+                            line = parts[1].trim();
+                            break;
+                        }
+                    }
+                }
+            } else {
+                line = reader.readLine();
+            }
             if (line != null && !line.isEmpty()) {
                 System.out.println("Terminal width: " + line);
                 MAX_LINE_WIDTH = Integer.parseInt(line);
             } else {
                 System.out.println("Could not get the terminal width, using default value");
-                MAX_LINE_WIDTH = 80; // Default width if tput fails
+                MAX_LINE_WIDTH = 80; // Default width if tput/mode con fails
             }
         } catch (IOException e) {
             System.out.println("Could not get the terminal width, using default value");
@@ -44,7 +63,7 @@ public abstract class TextEngine {
 
     public static void printWithDelays(String data, boolean buffer) throws InterruptedException {
         // Use buffer if you are accepting input after the text is printed
-        if (speedSetting.equals("NoDelay")) {
+        if (speedSetting.equals("NoDelay") || Main.TESTING) {
             printNoDelay(data, buffer);
             return;
         }
@@ -54,7 +73,6 @@ public abstract class TextEngine {
         int currentLineWidth = 0; // Initialize the current line width
         String[] words = data.split(" "); // Split the data into words
         StringBuilder remainingChars = new StringBuilder(data); // Initialize remaining characters
-
         for (String word : words) {
             if (buffer) {
                 if ((currentLineWidth + word.length() >= MAX_LINE_WIDTH + 30) && currentLineWidth != 0) {
@@ -77,11 +95,11 @@ public abstract class TextEngine {
                             TimeUnit.MILLISECONDS.sleep(30);
                         case "Fast" ->
                             TimeUnit.MILLISECONDS.sleep(10);
-                        case "NoDelay" -> {
-                        }
-                        // Do nothing
-                        default -> {
+                        case "Normal" -> {
                             TimeUnit.MILLISECONDS.sleep(20);
+                        }
+                        default -> {
+                            //do nothing
                         }
                     }
                 }
@@ -162,8 +180,10 @@ public abstract class TextEngine {
     }
 
     public static void enterToNext() { //adds a pause and waits for enter
-        printNoDelay(yellowColor + "Press Enter to continue" + resetColor, false);
-        console.readLine();
+        if (!Main.TESTING) {
+            printNoDelay(yellowColor + "Press Enter to continue" + resetColor, false);
+            console.readLine();
+        }
     }
 
     public static Boolean checkValidInput(String command) { //checks for valid input command

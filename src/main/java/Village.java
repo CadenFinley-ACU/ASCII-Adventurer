@@ -7,7 +7,6 @@
  */
 public class Village extends Room {
 
-    static String resetColor = "\033[0m"; // reset to default color
     static String yellowColor = "\033[1;33m"; // yellow color
 
     public static void startRoom() throws InterruptedException { //start room
@@ -256,7 +255,7 @@ public class Village extends Room {
         Main.screenRefresh();
         // Shop implementation
         TextEngine.printNoDelay("Gold: " + Player.getGold(), false);
-        TextEngine.printNoDelay("Inventory: " + Player.getTotalNumberOfItemsInInventory() + "/" + Player.inventorySize, false);
+        TextEngine.printNoDelay("Inventory: " + Player.getTotalNumberOfItemsInInventory() + "/" + Player.getInventorySize(), false);
         TextEngine.printNoDelay("\n", false);
         TextEngine.printWithDelays("You step into the bustling shop,\nwhere the scent of various herbs and spices fills the air.\n      Shelves are lined with a variety of items, each glimmering under the soft light.\n\n", false);
         TextEngine.printWithDelays("Here, you can purchase useful items to aid you on your journey.\n\n", false);
@@ -314,7 +313,7 @@ public class Village extends Room {
         Main.screenRefresh();
         // Shop implementation
         TextEngine.printNoDelay("Gold: " + Player.getGold(), false);
-        TextEngine.printNoDelay("Inventory: " + Player.getTotalNumberOfItemsInInventory() + "/" + Player.inventorySize, false);
+        TextEngine.printNoDelay("Inventory: " + Player.getTotalNumberOfItemsInInventory() + "/" + Player.getInventorySize(), false);
         TextEngine.printNoDelay("\n", false);
         TextEngine.printWithDelays("You enter the shop.", false);
         TextEngine.printWithDelays("You can buy items here", false);
@@ -369,7 +368,7 @@ public class Village extends Room {
         Main.screenRefresh();
         // Shop implementation
         TextEngine.printNoDelay("Gold: " + Player.getGold(), false);
-        TextEngine.printNoDelay("Inventory: " + Player.getTotalNumberOfItemsInInventory() + "/" + Player.inventorySize, false);
+        TextEngine.printNoDelay("Inventory: " + Player.getTotalNumberOfItemsInInventory() + "/" + Player.getInventorySize(), false);
         TextEngine.printNoDelay("\n", false);
         TextEngine.printWithDelays("You enter the shop.", false);
         TextEngine.printWithDelays("You can buy items here", false);

@@ -52,7 +52,7 @@
                 <artifactId>exec-maven-plugin</artifactId>
                 <version>3.4.1</version>
                 <configuration>
-                    <mainClass>Main</mainClass> <!-- Replace this with your actual main class -->
+                    <mainClass>Main</mainClass>
                 </configuration>
             </plugin>
 

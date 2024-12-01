@@ -16,8 +16,8 @@ public class PromptEngine {
     private static final String yellowColor = "\u001B[33m";
     private static final String resetColor = "\u001B[0m";
 
-    public static String userAPIKey = null;
-    public static boolean aiGenerationEnabled = false;
+    public static final String USER_API_KEY = null;
+    public static boolean aiGenerationEnabled = true;
     public static int promptLength = 30;
     private static String prompt = null;
     private static final List<String> keywords = Arrays.asList(
@@ -29,7 +29,7 @@ public class PromptEngine {
             "North", "South", "East", "West", "Northeast", "Northwest", "Southeast", "Southwest"
     );
 
-    public static void buildPrompt() throws InterruptedException {
+    public static void buildPrompt() {
         if (aiGenerationEnabled && (OpenWorld.checkChangeInRoom() || prompt == null || prompt.isEmpty())) {
             String villageDirection = Player.getCompassDirectionToClosestVillage();
             String nextDungeon = Player.getNextDungeon();
@@ -83,7 +83,7 @@ public class PromptEngine {
                 dungeonPrompt = "The " + nextDungeon + " is to the " + dungeonNextDirection + " and is " + dungeonDistanceGauge + ".";
             }
             // "add more" / "make more complex"
-            prompt = chatGPT("Generate a me a prompt for a text adventure game designed for highschoolers. Always state the direction of the structure if it is given and the distance if it is given. When giving direction do not abbreviate the direction. Do this in around " + promptLength + " words or less using this info: The player headed " + OpenWorld.holdCommand + " and is in a " + setting + villagePrompt + dungeonPrompt + ".") + "\n";
+            prompt = chatGPT("Generate a me a prompt for a text adventure game designed for highschoolers. Always state the direction of the structure if it is given and the distance if it is given. When giving direction do not abbreviate the direction. Do this in around " + promptLength + " words or less using this info: The player headed " + OpenWorld.holdCommand + " and is in a " + setting + " " + villagePrompt + dungeonPrompt + ".") + "\n";
             Main.screenRefresh();
         }
     }
@@ -110,8 +110,9 @@ public class PromptEngine {
 
     private static String chatGPT(String message) {
         String url = "https://api.openai.com/v1/chat/completions";
-        String apiKey = userAPIKey; // API key goes here
+        String apiKey = USER_API_KEY; // API key goes here
         String model = "gpt-3.5-turbo";
+        //System.out.println(message);
         try {
             URL obj = new URL(url);
             HttpURLConnection con = (HttpURLConnection) obj.openConnection();
@@ -135,7 +136,7 @@ public class PromptEngine {
             // returns the extracted contents of the response.
             return extractContentFromResponse(response.toString());
         } catch (IOException e) {
-            TextEngine.printNoDelay("OpenAI API connection failed. Please check your API key and internet connection. Please try again later.", false);
+            TextEngine.printNoDelay("OpenAI API connection failed. Please check your internet connection and try again later.", false);
             TextEngine.printNoDelay("AI generation has been disabled. You can renable it in settings.", false);
             TextEngine.enterToNext();
             aiGenerationEnabled = false;
@@ -148,6 +149,7 @@ public class PromptEngine {
     private static String extractContentFromResponse(String response) {
         int startMarker = response.indexOf("content") + 11; // Marker for where the content starts.
         int endMarker = response.indexOf("\"", startMarker); // Marker for where the content ends.
+        //System.out.println(response);
         return response.substring(startMarker, endMarker); // Returns the substring containing only the response.
     }
 
@@ -183,7 +185,7 @@ public class PromptEngine {
             aiGenerationEnabled = responseContent != null && !responseContent.isEmpty();
             return responseContent != null && !responseContent.isEmpty();
         } catch (IOException e) {
-            TextEngine.printNoDelay("API Key failed. Please check your API key and internet connection", false);
+            TextEngine.printNoDelay("API Key failed. Please check your internet connection", false);
             aiGenerationEnabled = false;
             return false;
         }

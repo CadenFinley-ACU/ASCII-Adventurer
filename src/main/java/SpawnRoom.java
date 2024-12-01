@@ -35,7 +35,6 @@ public class SpawnRoom extends Room {
     }
 
     private static void part0() throws InterruptedException { //0
-        String resetColor = "\033[0m"; // reset to default color
         String yellowColor = "\033[1;33m"; // yellow color
 
         // Print the initial text with delays
@@ -76,7 +75,6 @@ public class SpawnRoom extends Room {
     }
 
     private static void part2() throws InterruptedException { //2
-        String resetColor = "\033[0m"; // reset to default color
         String yellowColor = "\033[1;33m"; // yellow color
         TextEngine.printWithDelays("You enter a cool, dimly lit room by a few torches", false);
         TextEngine.printWithDelays("There is a petestal in the middle where a mighty sword once lay", false);

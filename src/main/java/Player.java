@@ -11,16 +11,16 @@ import java.util.Map;
  */
 public class Player {
 
-    private static int health;
-    private static int maxHealth;
+    private static int health = 100;
+    private static int maxHealth = 100;
     private static String name;
     public final static Console console = System.console();
     public static String command;
     public static String holdCommand;
-    public static int inventorySize;
+    private static int inventorySize = 20;
     private static int gold;
-    private static int damage;
-    private static int defense;
+    private static int damage = 0;
+    private static int defense = 0;
     public static Map<String, Integer> inventory = new HashMap<>();
     public static int playerX = 0;
     public static int playerY = 0;
@@ -42,8 +42,6 @@ public class Player {
         health = maxHealth;
         damage = 0;
         defense = 0;
-        damage = 0;
-        defense = 0;
         gold = 20;
         inventorySize = 20;
         inventory.clear();
@@ -60,7 +58,7 @@ public class Player {
         name = "Debug!";
         Main.playerCreated = true;
         DungeonGenerator.testing = false;
-        Main.playTime.startClock();
+        Main.playTime.startClock(1);
         TextEngine.printNoDelay("Where do you want to spawn", false);
         TextEngine.printNoDelay(" 1:SpawnRoom", false);
         TextEngine.printNoDelay(" 2:OpenWorld", false);
@@ -116,6 +114,11 @@ public class Player {
                 Main.saveSpace("Village");
                 Main.loadSave();
             }
+            case "5" -> {
+                Main.playTime.debugTime(359940);
+                Main.saveSpace("SpawnRoom");
+                Main.loadSave();
+            }
             default -> {
                 Main.saveSpace("SpawnRoom");
                 Main.loadSave();
@@ -160,7 +163,15 @@ public class Player {
         return inventorySize;
     }
 
+    public static void hardSetInventorySize(int size) {
+        inventorySize = size;
+    }
+
     public static void changeHealth(int change) throws InterruptedException {
+        if (change == 0) {
+            TextEngine.enterToNext();
+            return;
+        }
         String brightRedStart = "\033[1;31m";
         String brightGreenStart = "\033[1;32m";
         String brightEnd = "\033[0m";
@@ -270,7 +281,8 @@ public class Player {
             return true;
         } else {
             if (inventorySize >= getTotalNumberOfItemsInInventory() + amount) {
-                InventoryManager.put(item, amount);
+                InventoryManager.giveItem(item, amount);
+                InventoryManager.setStatsToHighestInInventory();
                 return true;
             } else {
                 TextEngine.printWithDelays("You have no room in your inventory!", false);
@@ -316,7 +328,7 @@ public class Player {
         TextEngine.enterToNext();
         TextEngine.clearScreen();
         Main.playerCreated = true;
-        Main.playTime.startClock();
+        Main.playTime.startClock(1);
         Main.saveSpace("SpawnRoom");
         Main.loadSave();
     }
@@ -356,34 +368,20 @@ public class Player {
         }
     }
 
-    public static void heal() throws InterruptedException { //use available health potions in inventory to heal
-        if (inventory.containsKey("super health potion")) {
-            if (health < maxHealth) {
-                InventoryManager.useItemNoMenu("super health potion");
-            } else {
-                TextEngine.printWithDelays("You are already at full health!", false);
-                TextEngine.enterToNext();
-            }
+    public static void heal() throws InterruptedException {
+        if (!inventory.containsKey("super health potion") && !inventory.containsKey("greater health potion") && !inventory.containsKey("health potion")) {
+            TextEngine.printWithDelays("You have no health potions!", false);
+            TextEngine.enterToNext();
+        } else if (health >= maxHealth) {
+            TextEngine.printWithDelays("You are already at full health!", false);
+            TextEngine.enterToNext();
         } else {
-            if (inventory.containsKey("greater health potion")) {
-                if (health < maxHealth) {
-                    InventoryManager.useItemNoMenu("greater health potion");
-                } else {
-                    TextEngine.printWithDelays("You are already at full health!", false);
-                    TextEngine.enterToNext();
-                }
-            } else {
-                if (inventory.containsKey("health potion")) {
-                    if (health < maxHealth) {
-                        InventoryManager.useItemNoMenu("health potion");
-                    } else {
-                        TextEngine.printWithDelays("You are already at full health!", false);
-                        TextEngine.enterToNext();
-                    }
-                } else {
-                    TextEngine.printWithDelays("You have no health potions!", false);
-                    TextEngine.enterToNext();
-                }
+            if (inventory.containsKey("super health potion")) {
+                InventoryManager.useItemNoMenu("super health potion");
+            } else if (inventory.containsKey("greater health potion")) {
+                InventoryManager.useItemNoMenu("greater health potion");
+            } else if (inventory.containsKey("health potion")) {
+                InventoryManager.useItemNoMenu("health potion");
             }
         }
         Main.loadSave();

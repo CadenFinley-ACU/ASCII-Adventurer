@@ -1,6 +1,6 @@
 
 /**
- * map.java
+ * DungeonInstance.java
  *
  * Text Adventure Game SE374 F24 Final Project Caden Finley Albert Tucker
  * Grijesh Shrestha
@@ -9,13 +9,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * The DungeonInstance class represents an instance of a dungeon in a text
+ * adventure game. It extends the Dungeon class and includes various attributes
+ * and methods to manage the state and behavior of the dungeon.
+ */
 public class DungeonInstance extends Dungeon {
 
     private static final Random rand = new Random();
 
     private int[] spawnPosition;
-    private int[] bossRoom;
-    private List<String> enemies;
+    private final List<String> enemies;
     public int[][] roomsBeenTo;
     public List<String> items;
     public boolean completed = false;
@@ -30,6 +34,21 @@ public class DungeonInstance extends Dungeon {
     public String bossType;
     public String miniBossType;
 
+    /**
+     * Initializes a new instance of the DungeonInstance class with the
+     * specified parameters.
+     *
+     * @param enemies List of enemy types present in the dungeon.
+     * @param items List of items available in the dungeon.
+     * @param completed Indicates whether the dungeon has been completed.
+     * @param visited Indicates whether the dungeon has been visited.
+     * @param mapRevealed Indicates whether the map has been revealed.
+     * @param dungeonName The name of the dungeon.
+     * @param dungeonSaveName The save name of the dungeon.
+     * @param currentMiniBoss The type of the mini-boss in the dungeon.
+     * @param currentBoss The type of the boss in the dungeon.
+     * @param numberOfEnemies The potential number of enemies in the dungeon.
+     */
     public DungeonInstance(List<String> enemies, List<String> items, boolean completed, boolean visited, boolean mapRevealed, String dungeonName, String dungeonSaveName, String currentMiniBoss, String currentBoss, int numberOfEnemies) {
         super();
         this.enemies = enemies;
@@ -44,12 +63,20 @@ public class DungeonInstance extends Dungeon {
         this.potentialEnemies = numberOfEnemies;
     }
 
+    /**
+     * Sets the spawn position of the player in the dungeon.
+     */
     public void setValues() {
         this.spawnPosition = DungeonGenerator.findValue(map, 9);
-        this.bossRoom = DungeonGenerator.findValue(map, 8);
     }
 
-    public void startRoom() throws InterruptedException { //start room
+    /**
+     * Starts the room sequence in the dungeon. Initializes items and player
+     * position if the dungeon has not been visited.
+     *
+     * @throws InterruptedException if the thread is interrupted while waiting.
+     */
+    public void startRoom() throws InterruptedException {
         if (!visited) {
             fresh();
             items = new ArrayList<>(List.of("axe", "chainmail set"));
@@ -66,21 +93,33 @@ public class DungeonInstance extends Dungeon {
         startRooms();
     }
 
+    /**
+     * Initializes the roomsBeenTo array based on the size of the map.
+     */
     public void setShownMap() {
         this.roomsBeenTo = DungeonGenerator.createRoomsBeenTo(map.length);
     }
 
-    public void fresh() { //fresh
+    /**
+     * Resets the dungeon state, including map reveal status, visited status,
+     * completion status, spawn position, and rooms visited.
+     */
+    public void fresh() {
         mapRevealed = false;
         visited = false;
         completed = false;
         spawnPosition = DungeonGenerator.findValue(map, 9);
-        bossRoom = DungeonGenerator.findValue(map, 8);
         currentPlayerPosition = spawnPosition;
         roomsBeenTo = DungeonGenerator.createRoomsBeenTo(map.length);
         lastPosition = spawnPosition.clone();
     }
 
+    /**
+     * Starts the rooms in the dungeon and handles various room types based on
+     * the player's current position on the map.
+     *
+     * @throws InterruptedException if the thread is interrupted while waiting.
+     */
     public void startRooms() throws InterruptedException {
         currentMiniBoss = miniBossType;
         currentBoss = bossType;
@@ -122,6 +161,6 @@ public class DungeonInstance extends Dungeon {
         if (map[currentPlayerPosition[0]][currentPlayerPosition[1]] == 20 && roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] == 0) {
             trappedRoom();
         }
-        handleDirectionsAndCommands();
+        handleDirectionsAndCommands(true);
     }
 }

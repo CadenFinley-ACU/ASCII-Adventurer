@@ -115,7 +115,6 @@ public abstract class SettingsMenu {
                         switch (command) {
                             case "yes" -> {
                                 PromptEngine.aiGenerationEnabled = false;
-                                PromptEngine.userAPIKey = null;
                                 TextEngine.printWithDelays("AI generation disabled.", false);
                                 TextEngine.enterToNext();
                                 TextEngine.clearScreen();
@@ -129,20 +128,22 @@ public abstract class SettingsMenu {
                             }
                         }
                     } else {
-                        TextEngine.printNoDelay("(This feature is still experimental)", false);
-                        TextEngine.printNoDelay("Please enter your OpenAI API key:", true);
+                        TextEngine.printWithDelays("AI generation is disabled. Would you like to enable it? (yes or no)", true);
                         command = console.readLine();
-                        if (PromptEngine.testAPIKey(command)) {
-                            PromptEngine.userAPIKey = command;
-                            TextEngine.printWithDelays("API key accepted. AI generation enabled.", false);
-                            TextEngine.enterToNext();
-                            TextEngine.clearScreen();
-                            leave();
-                        } else {
-                            TextEngine.printWithDelays("API key not accepted.", false);
-                            TextEngine.enterToNext();
-                            TextEngine.clearScreen();
-                            start();
+                        switch (command) {
+                            case "yes" -> {
+                                PromptEngine.aiGenerationEnabled = true;
+                                TextEngine.printWithDelays("AI generation enable.", false);
+                                TextEngine.enterToNext();
+                                TextEngine.clearScreen();
+                                leave();
+                            }
+                            default -> {
+                                TextEngine.printWithDelays("AI generation remains disabled.", false);
+                                TextEngine.enterToNext();
+                                TextEngine.clearScreen();
+                                leave();
+                            }
                         }
                     }
                 }
@@ -252,12 +253,10 @@ public abstract class SettingsMenu {
                 case "ai" -> {
                     if (PromptEngine.aiGenerationEnabled) {
                         TextEngine.printNoDelay("AI generation is already enabled. Would you like to disable it? (yes or no)", true);
-
                         command = console.readLine();
                         switch (command) {
                             case "yes" -> {
                                 PromptEngine.aiGenerationEnabled = false;
-                                PromptEngine.userAPIKey = null;
                                 TextEngine.printWithDelays("AI generation disabled.", false);
                                 TextEngine.enterToNext();
                                 TextEngine.clearScreen();
@@ -271,21 +270,22 @@ public abstract class SettingsMenu {
                             }
                         }
                     } else {
-                        TextEngine.printNoDelay("(This feature is still experimental)", false);
-                        TextEngine.printNoDelay("Please enter your OpenAI API key:", true);
-
+                        TextEngine.printWithDelays("AI generation is disabled. Would you like to enable it? (yes or no)", true);
                         command = console.readLine();
-                        if (PromptEngine.testAPIKey(command)) {
-                            PromptEngine.userAPIKey = command;
-                            TextEngine.printWithDelays("API key accepted. AI generation enabled.", false);
-                            TextEngine.enterToNext();
-                            TextEngine.clearScreen();
-                            leaveToStart();
-                        } else {
-                            TextEngine.printWithDelays("API key not accepted.", false);
-                            TextEngine.enterToNext();
-                            TextEngine.clearScreen();
-                            startFromStartMenu();
+                        switch (command) {
+                            case "yes" -> {
+                                PromptEngine.aiGenerationEnabled = true;
+                                TextEngine.printWithDelays("AI generation enable.", false);
+                                TextEngine.enterToNext();
+                                TextEngine.clearScreen();
+                                leaveToStart();
+                            }
+                            default -> {
+                                TextEngine.printWithDelays("AI generation remains disabled.", false);
+                                TextEngine.enterToNext();
+                                TextEngine.clearScreen();
+                                leaveToStart();
+                            }
                         }
                     }
                 }
