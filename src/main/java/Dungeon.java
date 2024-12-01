@@ -6,8 +6,8 @@ import java.util.Random;
 /**
  * Dungeon Class
  *
- * Text Adventure Game SE374 F24 Final Project Caden Finley Albert Tucker
- * Grijesh Shrestha
+ * Text Adventure Game SE374 F24 Final Project 
+ * Caden Finley, Albert Tucker, Grijesh Shrestha
  */
 public class Dungeon extends Room {
 

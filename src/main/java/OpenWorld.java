@@ -4,7 +4,8 @@ import java.util.List;
 import java.util.Random;
 
 /**
- * Open World Class Written by Albert Tucker and Grijesh Shrestha
+ * Open World Class Written by 
+ * Albert Tucker and Grijesh Shrestha
  *
  * Text Adventure Game SE374 F24 Final Project
  *

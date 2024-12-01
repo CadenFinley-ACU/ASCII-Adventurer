@@ -8,8 +8,8 @@ import java.util.concurrent.TimeUnit;
 /**
  * Text Engine
  *
- * Text Adventure Game SE374 F24 Final Project Caden Finley Albert Tucker
- * Grijesh Shrestha
+ * Text Adventure Game SE374 F24 Final Project 
+ * Caden Finley, Albert Tucker, Grijesh Shrestha
  *
  * Written by Caden Finley
  *

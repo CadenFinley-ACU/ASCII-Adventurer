@@ -5,9 +5,7 @@
  * Text Adventure Game
  * SE374 F24
  * Final Project
- * Caden Finley
- * Albert Tucker
- * Grijesh Shrestha
+ * Caden Finley, Albert Tucker, Grijesh Shrestha
  */
 public class SpawnRoom extends Room {
 
