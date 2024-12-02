@@ -1,4 +1,8 @@
-
+/**
+ * @author ASCIIADVENTURERS
+ * @version 1.0
+ * 
+ */
 import java.io.Console;
 import java.io.File;
 import java.util.HashMap;
