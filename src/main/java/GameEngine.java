@@ -303,11 +303,25 @@ public class GameEngine {
         System.exit(0);
     }
 
+    /**
+     * Sets the text speed for the game.
+     *
+     * @param speed the desired text speed
+     * @throws InterruptedException if any thread has interrupted the current
+     * thread
+     */
     private static void setTextSpeed(String speed) throws InterruptedException { //set text speed command
         TextEngine.speedSetting = speed;
         TextEngine.printWithDelays("Text speed set to " + speed, true);
     }
 
+    /**
+     * Displays debug information such as OS name, console status, and text
+     * speed.
+     *
+     * @throws InterruptedException if any thread has interrupted the current
+     * thread
+     */
     private static void debugInfo() throws InterruptedException { //debug command
         TextEngine.speedSetting = "NoDelay";
         TextEngine.clearScreen();
@@ -318,6 +332,19 @@ public class GameEngine {
         Player.debugStart();
     }
 
+    /**
+     * Handles default in-game text commands.
+     *
+     * This method processes various in-game commands such as "help", "save",
+     * "exit", "inventory", "settings", "heal", "stats", and "map". Depending on
+     * the current game state, it either restricts the available commands or
+     * allows a broader set of commands. Each command triggers a specific action
+     * in the game.
+     *
+     * @param data the command input by the player
+     * @throws InterruptedException if any thread has interrupted the current
+     * thread
+     */
     public static void inGameDefaultTextHandling(String data) throws InterruptedException { //default in game commands
         if (!Dungeon.ableToUseMenuCommands()) {
             COMMANDS = new String[]{"help", "save", "exit"};
@@ -377,14 +404,45 @@ public class GameEngine {
         }
     }
 
+    /**
+     * Prints a message indicating that the command is not understood, with a
+     * delay.
+     *
+     * This method uses the TextEngine to print a message indicating that the
+     * command entered by the user is not understood, with a buffer delay.
+     *
+     * @throws InterruptedException if any thread has interrupted the current
+     * thread
+     */
     public static void invalidCommandWithBuffer() throws InterruptedException {
         TextEngine.printWithDelays("I'm sorry, I don't understand that command.", true);
     }
 
+    /**
+     * Prints a message indicating that the command is not understood, without a
+     * delay.
+     *
+     * This method uses the TextEngine to print a message indicating that the
+     * command entered by the user is not understood, without a buffer delay.
+     *
+     * @throws InterruptedException if any thread has interrupted the current
+     * thread
+     */
     public static void invalidCommand() throws InterruptedException {
         TextEngine.printWithDelays("I'm sorry, I don't understand that command.", false);
     }
 
+    /**
+     * Saves the current game state to a specified place.
+     *
+     * This method saves the current game state using GameSaveSerialization and
+     * updates the saved place. It also displays save information and prints a
+     * confirmation message.
+     *
+     * @param place the place where the game state should be saved
+     * @throws InterruptedException if any thread has interrupted the current
+     * thread
+     */
     public static void saveSpace(String place) throws InterruptedException { //save game command
         if (savedPlace != null) {
             GameSaveSerialization.saveGame();
@@ -394,6 +452,16 @@ public class GameEngine {
         savedPlace = place;
     }
 
+    /**
+     * Loads the saved game state.
+     *
+     * This method loads the saved game state and starts the game from the saved
+     * place. If no saved place is found, it initializes the player and starts
+     * the game from the beginning.
+     *
+     * @throws InterruptedException if any thread has interrupted the current
+     * thread
+     */
     public static void loadSave() throws InterruptedException { //load saved game command
         if (getSavedPlace() == null) {
             playerCreated = false;
@@ -431,6 +499,19 @@ public class GameEngine {
         }
     }
 
+    /**
+     * Wipes the current game save and resets the game state.
+     *
+     * This method performs the following actions: - Sets the playerCreated flag
+     * to false. - Sets the savedPlace to null. - Sets the gameComplete flag to
+     * false. - Resets the Dungeon.resetedAfterWin flag to false. - Resets all
+     * rooms by calling Room.reset("all"). - Sets the player's name to null. -
+     * Generates new dungeons by calling Dungeon.generateDungeons(). - Disables
+     * AI generation in the PromptEngine. - Resets the saved play time to 0
+     * seconds. - Wipes the runtime file by calling wipeFile(".runtime.txt"). -
+     * Saves the game state by calling GameSaveSerialization.saveGame(). -
+     * Resets all enemies by calling Enemy.resetEnemies().
+     */
     public static void wipeSave() { //wipe save command
         playerCreated = false;
         savedPlace = null;
@@ -446,6 +527,11 @@ public class GameEngine {
         Enemy.resetEnemies();
     }
 
+    /**
+     * Retrieves the saved place. If no place is saved, it returns "SpawnRoom".
+     *
+     * @return the saved place or "SpawnRoom" if no place is saved.
+     */
     public static String getSavedPlace() { //get the saved place
         if (savedPlace == null) {
             return "SpawnRoom";
@@ -453,6 +539,14 @@ public class GameEngine {
         return savedPlace;
     }
 
+    /**
+     * Checks if there is a saved game.
+     *
+     * This method verifies if a saved game file exists and if there is a saved
+     * place or player name.
+     *
+     * @return true if a saved game exists, false otherwise.
+     */
     public static boolean hasSave() { // Check if there is a save
         // Check if getSavedPlace() is not null
         // Check if the file game_save.txt exists
@@ -460,6 +554,15 @@ public class GameEngine {
         return saveFile.exists() && (getSavedPlace() != null || Player.getName() != null);
     }
 
+    /**
+     * Checks if there is a saved game and if the saved game is at the specified
+     * place. If there is no saved game or the saved game is not at the
+     * specified place, it saves the current place and the game state.
+     *
+     * @param place the place to check against the saved game
+     * @throws InterruptedException if the thread is interrupted while saving
+     * the game
+     */
     public static void checkSave(String place) throws InterruptedException { //check if there is a save and if that save is where you currently are
         if (!hasSave() || !getSavedPlace().equals(place)) {
             saveSpace(place);
@@ -467,6 +570,13 @@ public class GameEngine {
         }
     }
 
+    /**
+     * Starts the game. This method clears the screen, checks for saved games,
+     * and either prompts the user to load a saved game, starts a new game, or
+     * resumes a previously created game.
+     *
+     * @throws InterruptedException if the thread is interrupted while waiting
+     */
     public static void start() throws InterruptedException { //start the game
         TextEngine.clearScreen();
         if (hasSave() && Player.getName() != null && !"null".equals(Player.getName())) {
@@ -480,6 +590,15 @@ public class GameEngine {
         }
     }
 
+    /**
+     * Prompts the user to load a saved game. Displays save information and asks
+     * the user if they want to load their saved game. If the user responds with
+     * "no", it will confirm wiping the save. Otherwise, it will proceed to load
+     * the saved game.
+     *
+     * @throws InterruptedException if the thread is interrupted while waiting
+     * for user input
+     */
     private static void promptLoadSavedGame() throws InterruptedException { //prompt to load saved game
         displaySaveInfo();
         TextEngine.printWithDelays("Would you like to load your saved game? (" + yellowColor + "yes" + resetColor + " or " + yellowColor + "no" + resetColor + ") ", true);
@@ -491,6 +610,18 @@ public class GameEngine {
         }
     }
 
+    /**
+     * Confirms with the user whether to wipe the save data.
+     *
+     * This method prompts the user with a message indicating that all data will
+     * be wiped if they proceed. The user is given the option to respond with
+     * "yes" or "no". If the user confirms with "yes", the save data is wiped, a
+     * new game is started, and the player is initialized. If the user responds
+     * with "no", the current save data is loaded.
+     *
+     * @throws InterruptedException if the thread is interrupted while waiting
+     * for user input
+     */
     private static void confirmWipeSave() throws InterruptedException { //confirm to wipe save
         String textState = TextEngine.speedSetting;
         TextEngine.speedSetting = "Slow";
@@ -509,6 +640,11 @@ public class GameEngine {
         }
     }
 
+    /**
+     * Prints the status of the player, including their name and current
+     * adventure location. If the player has a saved place, it will include that
+     * in the status message. It also draws the player's health bar.
+     */
     public static void printStatus() { //print the status of the player
         if (getSavedPlace() != null) {
             TextEngine.printNoDelay(Player.getName() + "'s adventure through the " + getSavedPlace(), false);
@@ -521,15 +657,33 @@ public class GameEngine {
         System.out.println();
     }
 
+    /**
+     * Refreshes the screen by clearing it and then printing the player's
+     * status.
+     */
     public static void screenRefresh() { //refresh the screen
         TextEngine.clearScreen();
         printStatus();
     }
 
+    /**
+     * Retrieves the name of the operating system.
+     *
+     * @return the name of the operating system
+     */
     public static String getOS_NAME() { //get the os name
         return OS_NAME;
     }
 
+    /**
+     * Displays a QR code in the console that links to the source code of the
+     * project. The QR code is displayed using ASCII art. After displaying the
+     * QR code, the method waits for the user to press Enter before clearing the
+     * screen and returning to the start menu.
+     *
+     * @throws InterruptedException if the thread is interrupted while waiting
+     * for user input
+     */
     public static void showQrCode() throws InterruptedException {
         TextEngine.clearScreen();
         System.out.println("Scan this QR code to view the source code of this project:   ( https://github.com/CadenFinley-ACU/ASCII-Adventurer )");
@@ -574,6 +728,12 @@ public class GameEngine {
         startMenu();
     }
 
+    /**
+     * Displays the save information of the player. This includes the player's
+     * name, play time, current location, health status, gold amount, and the
+     * number of completed dungeons. The information is printed without delay
+     * using the TextEngine.
+     */
     private static void displaySaveInfo() {
         TextEngine.printNoDelay("Name: " + Player.getName(), false);
         TextEngine.printNoDelay("Play time: " + playTime.returnTime(), false);
@@ -583,6 +743,12 @@ public class GameEngine {
         TextEngine.printNoDelay("Completed Dungeons: " + Dungeon.completedDungeons, false);
     }
 
+    /**
+     * Deletes the specified file. If the file cannot be deleted, an error
+     * message is printed to the console.
+     *
+     * @param fileName the name of the file to be deleted
+     */
     public static void wipeFile(String fileName) {
         File file = new File(fileName);
         if (!file.delete()) {
