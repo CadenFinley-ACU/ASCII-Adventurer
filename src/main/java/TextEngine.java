@@ -8,8 +8,8 @@ import java.util.concurrent.TimeUnit;
 /**
  * Text Engine
  *
- * Text Adventure Game SE374 F24 Final Project 
- * Caden Finley, Albert Tucker, Grijesh Shrestha
+ * Text Adventure Game SE374 F24 Final Project Caden Finley, Albert Tucker,
+ * Grijesh Shrestha
  *
  * Written by Caden Finley
  *
@@ -23,6 +23,12 @@ public abstract class TextEngine {
 
     public static int MAX_LINE_WIDTH = 30; // Define the maximum line width
 
+    /**
+     * Sets the terminal width by querying the terminal for its current width.
+     * On Windows, it uses the "mode con" command, and on Unix-like systems, it
+     * uses the "tput cols" command. If the terminal width cannot be determined,
+     * a default width of 80 is used.
+     */
     public static void setWidth() {
         try {
             String os = System.getProperty("os.name").toLowerCase();
@@ -124,6 +130,16 @@ public abstract class TextEngine {
         }
     }
 
+    /**
+     * Prints the given data with delays between characters based on the speed
+     * setting. If buffering is enabled, it adds a prompt to press enter to type
+     * after the text is printed.
+     *
+     * @param data The data to be printed.
+     * @param buffer If true, adds a prompt to press enter to type after the
+     * text is printed.
+     * @throws InterruptedException If the thread is interrupted while sleeping.
+     */
     public static void printNoDelay(String data, boolean buffer) { //use buffer is you are accepting input after the text is printed
         if (buffer) {
             data = data + yellowColor + " (press enter to type)" + resetColor;
@@ -163,6 +179,12 @@ public abstract class TextEngine {
         }
     }
 
+    /**
+     * Clears the console screen. This method determines the operating system
+     * and clears the screen accordingly. For Windows, it uses a combination of
+     * ANSI escape codes and the "clear" command. For other operating systems,
+     * it uses only ANSI escape codes.
+     */
     public static void clearScreen() { //clears the screen
         String OS_Name = Main.getOS_NAME();
         try {
@@ -179,6 +201,11 @@ public abstract class TextEngine {
         }
     }
 
+    /**
+     * Adds a pause and waits for the user to press Enter to continue. If the
+     * application is not in testing mode, it will print a message prompting the
+     * user to press Enter and then wait for the Enter key to be pressed.
+     */
     public static void enterToNext() { //adds a pause and waits for enter
         if (!Main.TESTING) {
             printNoDelay(yellowColor + "Press Enter to continue" + resetColor, false);
@@ -186,10 +213,27 @@ public abstract class TextEngine {
         }
     }
 
+    /**
+     * Checks if the input command is valid.
+     *
+     * @param command the input command to be checked
+     * @return {@code true} if the command is not null, not empty, and not an
+     * empty string; {@code false} otherwise
+     */
     public static Boolean checkValidInput(String command) { //checks for valid input command
         return command != null && !command.isEmpty() && !"".equals(command);
     }
 
+    /**
+     * Parses the input command and matches it against a list of possible
+     * commands. If the command is found in the list of illegal commands, it
+     * returns the command as is. Otherwise, it tries to find the best match
+     * from the possible commands.
+     *
+     * @param command the input command to be parsed
+     * @param possibleCommands an array of possible commands to match against
+     * @return the matched command if found, otherwise the original command
+     */
     public static String parseCommand(String command, String possibleCommands[]) {
         String[] illegalCommands = {"exit", "quit", "stats", "map", "inventory", "help", "save", "settings", "take it", "leave it", "open it", "leave"};
         String matchedCommand = command;
@@ -215,6 +259,13 @@ public abstract class TextEngine {
         return (maxMatchLength > 0 && has(possibleCommands, matchedCommand)) ? matchedCommand : command;
     }
 
+    /**
+     * Calculates the length of the matching prefix between two strings.
+     *
+     * @param command the first string to compare
+     * @param possibleCommand the second string to compare
+     * @return the length of the matching prefix
+     */
     private static int getMatchLength(String command, String possibleCommand) {
         int length = Math.min(command.length(), possibleCommand.length());
         int matchLength = 0;
@@ -228,6 +279,14 @@ public abstract class TextEngine {
         return matchLength;
     }
 
+    /**
+     * Checks if a given command is present in an array of possible commands.
+     *
+     * @param possibleCommands an array of possible commands
+     * @param matchedCommand the command to check for
+     * @return true if the matchedCommand is found in possibleCommands, false
+     * otherwise
+     */
     private static boolean has(String[] possibleCommands, String matchedCommand) {
         for (String possibleCommand : possibleCommands) {
             if (possibleCommand.equals(matchedCommand)) {
