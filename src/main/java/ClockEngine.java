@@ -60,6 +60,7 @@ public class ClockEngine {
             if (this.running) {
                 this.timeElapsedInSeconds++;
                 if (this.timeElapsedInSeconds >= lengthInSeconds) {
+                    //System.out.println("Timer stopped");
                     stopClock();
                     executor.shutdown();
                 }
@@ -157,5 +158,9 @@ public class ClockEngine {
      */
     public void debugTime(long time) {
         this.timeElapsedInSeconds = time;
+    }
+
+    public boolean isRunning() {
+        return running;
     }
 }

@@ -3,19 +3,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-
 /**
- * ASCIIADVENTURER
- * Caden Finley
- * Albert Tucker
- * Grijesh Shrestha
+ * ASCIIADVENTURER Caden Finley Albert Tucker Grijesh Shrestha
  *
- * The Dungeon class represents a dungeon in the game. It extends the Room class and includes additional properties and methods specific to a dungeon.
- * 
+ * The Dungeon class represents a dungeon in the game. It extends the Room class
+ * and includes additional properties and methods specific to a dungeon.
+ *
  * @author ASCIIADVENTURERS
  * @version 1.0
  */
-
 public class Dungeon extends Room {
 
     static String yellowColor = "\033[1;33m"; // yellow color
@@ -985,6 +981,7 @@ public class Dungeon extends Room {
                     int[] buffer = currentPlayerPosition.clone();
                     currentPlayerPosition = lastPosition.clone(); // Save the current position before moving
                     lastPosition = buffer.clone();
+                    return;
                 }
                 default -> {
                     defaultDungeonArgs(command);
@@ -1075,6 +1072,7 @@ public class Dungeon extends Room {
                     int[] buffer = currentPlayerPosition.clone();
                     currentPlayerPosition = lastPosition.clone(); // Save the current position before moving
                     lastPosition = buffer.clone();
+                    return;
                 }
                 default -> {
                     defaultDungeonArgs(command);
@@ -1212,16 +1210,19 @@ public class Dungeon extends Room {
                                 OceanKingdomDungeon.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = oceanKingdomDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
                             }
                         }
+                        return;
                     } else {
                         int[] buffer = currentPlayerPosition.clone();
                         currentPlayerPosition = lastPosition.clone(); // Save the current position before moving
                         lastPosition = buffer.clone();
+                        return;
                     }
                 }
                 case "no" -> {
                     int[] buffer = currentPlayerPosition.clone();
                     currentPlayerPosition = lastPosition.clone(); // Save the current position before moving
                     lastPosition = buffer.clone();
+                    return;
                 }
                 default -> {
                     defaultDungeonArgs(command);
