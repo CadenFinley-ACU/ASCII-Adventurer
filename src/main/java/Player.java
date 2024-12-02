@@ -4,19 +4,15 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * ASCIIADVENTURER
- * Caden Finley
- * Albert Tucker
- * Grijesh Shrestha
+ * ASCIIADVENTURER Caden Finley Albert Tucker Grijesh Shrestha
  *
- * This class represents a player in the ASCII Adventure game.
- * It contains attributes and methods to manage the player's state and actions.
- * 
+ * This class represents a player in the ASCII Adventure game. It contains
+ * attributes and methods to manage the player's state and actions.
+ *
  * @author ASCIIADVENTURERS
  * @version 1.0
  */
 public class Player {
-
 
     private static int health = 100;
     private static int maxHealth = 100;
@@ -69,7 +65,8 @@ public class Player {
         inventorySize = 200;
         name = "Debug!";
         GameEngine.playerCreated = true;
-        DungeonGenerator.testing = false;
+        GameEngine.TESTING = true;
+        DungeonGenerator.testing = true;
         GameEngine.playTime.startClock(1);
         TextEngine.printNoDelay("Where do you want to spawn", false);
         TextEngine.printNoDelay(" 1:SpawnRoom", false);

@@ -254,9 +254,6 @@ public abstract class TextEngine {
                 matchedCommand = possibleCommand;
             }
         }
-        if (!matchedCommand.equals(command)) {
-            System.out.println("Matched command: " + matchedCommand);
-        }
         return (maxMatchLength > 0 && has(possibleCommands, matchedCommand)) ? matchedCommand : command;
     }
 

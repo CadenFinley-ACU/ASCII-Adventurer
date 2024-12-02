@@ -55,7 +55,7 @@ Caden Finley, Albert Tucker, Grijesh Shrestha
                 <artifactId>exec-maven-plugin</artifactId>
                 <version>3.4.1</version>
                 <configuration>
-                    <mainClass>Main</mainClass>
+                    <mainClass>GameEngine</mainClass>
                 </configuration>
             </plugin>
             <!-- Plugin for running tests -->
