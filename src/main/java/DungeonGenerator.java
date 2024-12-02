@@ -1,12 +1,17 @@
 
+/**
+ * ASCIIADVENTURER
+ * Caden Finley
+ *
+ * @author Caden Finley
+ * @version 1.0
+ */
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 import java.util.Random;
 
-// Written by Caden Finley ACU 2024
-// September 30, 2024
 public class DungeonGenerator {
 
     public static boolean testing = false;

@@ -1,12 +1,14 @@
 
 /**
- * Spawn Room Class
+ * ASCIIADVENTURER
+ * Caden Finley
+ * Albert Tucker
+ * Grijesh Shrestha
  *
- * Text Adventure Game
- * SE374 F24
- * Final Project
- * Caden Finley, Albert Tucker, Grijesh Shrestha
+ * @author ASCIIADVENTURERS
+ * @version 1.0
  */
+
 public class SpawnRoom extends Room {
 
     static int roomSave = 0;

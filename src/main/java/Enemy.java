@@ -1,13 +1,16 @@
 
+/**
+ * ASCIIADVENTURER
+ * Caden Finley
+ * Albert Tucker
+ * Grijesh Shrestha
+ *
+ * @author ASCIIADVENTURERS
+ * @version 1.0
+ */
 import java.io.Console;
 import java.util.Map;
 
-/**
- * Enemy Class
- *
- * Text Adventure Game SE374 F24 Final Project Caden Finley, Albert Tucker,
- * Grijesh Shrestha
- */
 public class Enemy {
 
     public final static Console console = System.console();

@@ -1,14 +1,17 @@
 
+/**
+ * ASCIIADVENTURER
+ * Caden Finley
+ * Albert Tucker
+ * Grijesh Shrestha
+ *
+ * @author ASCIIADVENTURERS
+ * @version 1.0
+ */
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-/**
- * Timer Engine
- *
- * Text Adventure Game SE374 F24 Final Project Caden Finley, Albert Tucker,
- * Grijesh Shrestha
- */
 public class ClockEngine {
 
     private boolean running;

@@ -1,4 +1,11 @@
 
+/**
+ * ASCIIADVENTURER
+ * Caden Finley
+ *
+ * @author Caden Finley
+ * @version 1.0
+ */
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -14,8 +21,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-// Written by Caden Finley ACU 2024
-// October 15, 2024
 
 public class GameSaveSerialization {
 
@@ -25,6 +30,28 @@ public class GameSaveSerialization {
     public static String runtimePath = ".runtime.txt";
     //change file path manually in main in functions that call this class
 
+    /**
+     * Saves the current game state to a file. This method writes various
+     * game-related data to a specified file, including player information, game
+     * engine states, dungeon states, and other relevant game data.
+     *
+     * The file is cleared before writing the new data.
+     *
+     * The following data is saved: - Player's name, health, max health, gold,
+     * inventory, inventory size - Game engine's saved place, player creation
+     * status, text engine speed setting - Dungeon states including current
+     * dungeon, completed dungeons, player positions, dungeon matrices - Room
+     * states including room saves, room numbers, hold commands - Dungeon
+     * completion and visitation statuses - Dungeon room matrices and items -
+     * Dungeon map reveal statuses - Game completion status, reset status after
+     * win, previous room save - Prompt engine settings including AI generation
+     * enabled status and prompt length - Game engine play time in seconds
+     *
+     * If the player's name is "Debug!", a stack trace is logged to the
+     * terminal.
+     *
+     * @throws IOException if an I/O error occurs while writing to the file
+     */
     public static void saveGame() {
         try (FileWriter writer = new FileWriter(filePath, false)) {
             writer.write(""); // This will clear the file
@@ -181,6 +208,13 @@ public class GameSaveSerialization {
         }
     }
 
+    /**
+     * Loads the game save from the specified file paths and initializes the
+     * game state.
+     *
+     * @throws InterruptedException if the thread is interrupted while loading
+     * the game save.
+     */
     public static void loadGameSave() throws InterruptedException {
         GameEngine.playTime.setSavedTimeInSeconds(GameEngine.playTime.getTimeElapsedInSeconds());
         deserializeToFile(filePath);
@@ -354,14 +388,25 @@ public class GameSaveSerialization {
         }
     }
 
+    /**
+     * Writes a separator (newline) to the specified file.
+     *
+     * @param filePath the path of the file to write to
+     */
     private static void writeSeparator(String filePath) {
-        try (FileWriter writer = new FileWriter(filePath, true)) { // true to append to the file
+        try (FileWriter writer = new FileWriter(filePath, true)) {
             writer.write("\n");
         } catch (IOException e) {
             System.out.println("Error writing separator: " + e.getMessage());
         }
     }
 
+    /**
+     * Writes a string value to the specified file.
+     *
+     * @param value the value to write
+     * @param filePath the path of the file to write to
+     */
     private static void writeMatrix(int[][] matrix, String filePath) {
         try (FileWriter writer = new FileWriter(filePath, true)) { // true to append to the file
             for (int[] row : matrix) {
@@ -375,6 +420,15 @@ public class GameSaveSerialization {
         }
     }
 
+    /**
+     * Writes a given value to a specified file. If the value is null, it writes
+     * "null" followed by a newline character. Otherwise, it writes the value
+     * followed by a newline character. The value is appended to the file if it
+     * already exists.
+     *
+     * @param value the value to be written to the file
+     * @param filePath the path of the file to which the value will be written
+     */
     private static void writeValue(String value, String filePath) {
         try (FileWriter writer = new FileWriter(filePath, true)) { // true to append to the file
             if (value == null) {
@@ -387,6 +441,16 @@ public class GameSaveSerialization {
         }
     }
 
+    /**
+     * Writes the contents of an integer array to a specified file. If the array
+     * is null, it writes "null" followed by a newline character. Otherwise, it
+     * writes each integer in the array separated by a space, followed by a
+     * newline character. The array is appended to the file if it already
+     * exists.
+     *
+     * @param array the integer array to be written to the file
+     * @param filePath the path of the file to which the array will be written
+     */
     private static void writeArray(int[] array, String filePath) {
         try (FileWriter writer = new FileWriter(filePath, true)) { // true to append to the file
             if (array == null) {
@@ -402,6 +466,15 @@ public class GameSaveSerialization {
         }
     }
 
+    /**
+     * Writes a list of strings to a file at the specified file path. If the
+     * list is null or empty, writes "null" followed by a newline. Otherwise,
+     * writes each string in the list followed by a comma and a space, and ends
+     * with a newline.
+     *
+     * @param list the list of strings to write to the file
+     * @param filePath the path of the file to write to
+     */
     private static void writeList(List<String> list, String filePath) {
         try (FileWriter writer = new FileWriter(filePath, true)) { // true to append to the file
             if (list == null || list.isEmpty()) {
@@ -417,6 +490,17 @@ public class GameSaveSerialization {
         }
     }
 
+    /**
+     * Reads a line from the given BufferedReader and converts it into an
+     * ArrayList of strings. If the line is equal to any of the null markers
+     * ("null", "NULL", "Null", or an empty string), returns null. Otherwise,
+     * splits the line by ", " and returns the resulting list.
+     *
+     * @param reader the BufferedReader to read from
+     * @return an ArrayList of strings parsed from the line, or null if the line
+     * is a null marker
+     * @throws IOException if an I/O error occurs
+     */
     private static ArrayList<String> readList(BufferedReader reader) throws IOException {
         String line = reader.readLine();
         if (line.equals(NULL_MARKER) || line.equals("null") || line.equals("") || line.equals("Null") || line.equals("NULL")) {
@@ -425,6 +509,17 @@ public class GameSaveSerialization {
         return new ArrayList<>(List.of(line.split(", ")));
     }
 
+    /**
+     * Reads a line from the given BufferedReader and converts it into an array
+     * of integers. If the line is equal to any of the null markers ("null",
+     * "NULL", "Null", or an empty string), returns null. Otherwise, splits the
+     * line by spaces and converts each value to an integer.
+     *
+     * @param reader the BufferedReader to read from
+     * @return an array of integers parsed from the line, or null if the line is
+     * a null marker
+     * @throws IOException if an I/O error occurs
+     */
     private static int[] readArray(BufferedReader reader) throws IOException {
         String line = reader.readLine();
         if (line.equals(NULL_MARKER) || line.equals("null") || line.equals("") || line.equals("Null") || line.equals("NULL")) {
@@ -438,6 +533,15 @@ public class GameSaveSerialization {
         return array;
     }
 
+    /**
+     * Reads a matrix from a BufferedReader. The matrix is expected to be in a
+     * space-separated format. The first line of the input determines the size
+     * of the matrix.
+     *
+     * @param reader the BufferedReader to read the matrix from
+     * @return a 2D integer array representing the matrix
+     * @throws IOException if an I/O error occurs
+     */
     private static int[][] readMatrix(BufferedReader reader) throws IOException {
         // Read the first line to determine the size of the matrix
         String[] firstLine = reader.readLine().trim().split(" ");
@@ -462,6 +566,16 @@ public class GameSaveSerialization {
         return matrix;
     }
 
+    /**
+     * Parses an inventory string and converts it into a map of item names to
+     * their quantities. The inventory string is expected to be in the format
+     * "{item1=quantity1, item2=quantity2, ...}".
+     *
+     * @param inventoryString the string representation of the inventory
+     * @return a map where the keys are item names and the values are their
+     * quantities
+     * @throws NumberFormatException if the quantity is not a valid integer
+     */
     private static Map<String, Integer> readInventory(String inventoryString) {
         Map<String, Integer> inventory = new HashMap<>();
 
@@ -485,6 +599,15 @@ public class GameSaveSerialization {
         return inventory;
     }
 
+    /**
+     * Reads all lines from a specified input file and serializes them into a
+     * single output file. The lines are stored in a list and then written as an
+     * object to the output file.
+     *
+     * @param inputFilePath the path to the input file to read lines from
+     * @param outputFilePath the path to the output file to serialize the lines
+     * to
+     */
     public static void serializeAllLines(String inputFilePath, String outputFilePath) {
         File inputFile = new File(inputFilePath);
         List<String> lines = new ArrayList<>();
@@ -506,6 +629,17 @@ public class GameSaveSerialization {
         }
     }
 
+    /**
+     * Deserializes a list of strings from a serialized file and writes them to
+     * an output file.
+     *
+     * @param serializedFilePath the path to the serialized file containing the
+     * list of strings
+     * @throws IOException if an I/O error occurs while reading from the
+     * serialized file or writing to the output file
+     * @throws ClassNotFoundException if the class of a serialized object cannot
+     * be found
+     */
     @SuppressWarnings("unchecked")
     public static void deserializeToFile(String serializedFilePath) {
         File outputFilePath = new File(runtimePath);
@@ -526,6 +660,12 @@ public class GameSaveSerialization {
         }
     }
 
+    /**
+     * Logs the stack trace of a throwable to a log file and opens the log file
+     * in the Terminal.
+     *
+     * @param throwable the throwable whose stack trace is to be logged
+     */
     private static void logStackTraceToTerminal(Throwable throwable) {
         String log = ".stack_trace_log.txt";
         try (PrintWriter writer = new PrintWriter(new FileWriter(log, true))) {

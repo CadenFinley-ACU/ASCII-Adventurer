@@ -1,4 +1,15 @@
 
+/**
+ * ASCIIADVENTURER
+ * Caden Finley
+ * Albert Tucker
+ * Grijesh Shrestha
+ * https://www.youtube.com/watch?v=TkJ2dFtD0ho
+ *
+ * @author ASCIIADVENTURERS
+ * @version 1.0
+ */
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -8,11 +19,7 @@ import java.net.URL;
 import java.util.Arrays;
 import java.util.List;
 
-// Written by Caden Finley ACU 2024
-// https://www.youtube.com/watch?v=TkJ2dFtD0ho
-// October 19, 2024
 public class PromptEngine {
-
     private static final String yellowColor = "\u001B[33m";
     private static final String resetColor = "\u001B[0m";
 

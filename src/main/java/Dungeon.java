@@ -1,14 +1,17 @@
 
+/**
+ * ASCIIADVENTURER
+ * Caden Finley
+ * Albert Tucker
+ * Grijesh Shrestha
+ *
+ * @author ASCIIADVENTURERS
+ * @version 1.0
+ */
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-/**
- * Dungeon Class
- *
- * Text Adventure Game SE374 F24 Final Project Caden Finley, Albert Tucker,
- * Grijesh Shrestha
- */
 public class Dungeon extends Room {
 
     static String yellowColor = "\033[1;33m"; // yellow color

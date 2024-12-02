@@ -1,12 +1,15 @@
 
+/**
+ * ASCIIADVENTURER
+ * Caden Finley
+ * Albert Tucker
+ * Grijesh Shrestha
+ *
+ * @author ASCIIADVENTURERS
+ * @version 1.0
+ */
 import java.io.Console;
 
-/**
- * Settings Menu
- *
- * Text Adventure Game SE374 F24 Final Project Caden Finley, Albert Tucker,
- * Grijesh Shrestha
- */
 public abstract class SettingsMenu {
 
     static String resetColor = "\033[0m"; // reset to default color

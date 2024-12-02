@@ -1,19 +1,17 @@
 
 /**
- * DungeonInstance.java
+ * ASCIIADVENTURER
+ * Caden Finley
+ * Albert Tucker
+ * Grijesh Shrestha
  *
- * Text Adventure Game SE374 F24 Final Project
- * Caden Finley, Albert Tucker, Grijesh Shrestha
+ * @author ASCIIADVENTURERS
+ * @version 1.0
  */
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-/**
- * The DungeonInstance class represents an instance of a dungeon in a text
- * adventure game. It extends the Dungeon class and includes various attributes
- * and methods to manage the state and behavior of the dungeon.
- */
 public class DungeonInstance extends Dungeon {
 
     private static final Random rand = new Random();

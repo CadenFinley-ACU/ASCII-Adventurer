@@ -1,18 +1,17 @@
 /**
+ * ASCIIADVENTURER
+ * A text-based adventure game with ASCII art.
+ * Caden Finley
+ * Albert Tucker
+ * Grijesh Shrestha
  * @author ASCIIADVENTURERS
  * @version 1.0
- * 
  */
 import java.io.Console;
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- *
- * Text Adventure Game SE374 F24 Final Project Caden Finley, Albert Tucker,
- * Grijesh Shrestha
- */
 public class GameEngine {
 
     static String resetColor = "\033[0m"; // reset to default color
