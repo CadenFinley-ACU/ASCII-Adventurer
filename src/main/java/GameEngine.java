@@ -61,15 +61,15 @@ public class GameEngine {
             GameSaveSerialization.loadGameSave();
             Dungeon.setMaps();
             TextEngine.printNoDelay("Save File Located!", false);
-            if (PromptEngine.aiGenerationEnabled) {
-                TextEngine.printNoDelay("Testing OpenAI API Connection...", false);
-                if (PromptEngine.testAPIKey(PromptEngine.USER_API_KEY)) {
-                    TextEngine.printNoDelay("OpenAI API Connection Successful!", false);
-                } else {
-                    TextEngine.printNoDelay("OpenAI API Connection Failed. Please check your internet connection and API key", false);
-                    TextEngine.printNoDelay("AI Generation Disabled", false);
-                    PromptEngine.aiGenerationEnabled = false;
-                }
+        }
+        if (PromptEngine.aiGenerationEnabled) {
+            TextEngine.printNoDelay("Testing OpenAI API Connection...", false);
+            if (PromptEngine.testAPIKey(PromptEngine.USER_API_KEY)) {
+                TextEngine.printNoDelay("OpenAI API Connection Successful!", false);
+            } else {
+                TextEngine.printNoDelay("OpenAI API Connection Failed. Please check your internet connection and API key", false);
+                TextEngine.printNoDelay("AI Generation Disabled", false);
+                PromptEngine.aiGenerationEnabled = false;
             }
         }
         TextEngine.printWithDelays("Starting Game!", false);
