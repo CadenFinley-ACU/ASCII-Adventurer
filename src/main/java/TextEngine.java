@@ -138,7 +138,6 @@ public abstract class TextEngine {
      * @param data The data to be printed.
      * @param buffer If true, adds a prompt to press enter to type after the
      * text is printed.
-     * @throws InterruptedException If the thread is interrupted while sleeping.
      */
     public static void printNoDelay(String data, boolean buffer) { //use buffer is you are accepting input after the text is printed
         if (buffer) {
