@@ -29,6 +29,11 @@ public class PromptEngine {
             "North", "South", "East", "West", "Northeast", "Northwest", "Southeast", "Southwest"
     );
 
+    /**
+     * The `buildPrompt` function generates a prompt for a text adventure game,
+     * providing information about the player's location, nearby structures, and
+     * distances in a descriptive manner.
+     */
     public static void buildPrompt() {
         if (aiGenerationEnabled && (OpenWorld.checkChangeInRoom() || prompt == null || prompt.isEmpty())) {
             String villageDirection = Player.getCompassDirectionToClosestVillage();
@@ -88,13 +93,33 @@ public class PromptEngine {
         }
     }
 
+    /**
+     * The function `buildHelpPrompt` generates a help prompt for a text
+     * adventure game with available commands using chatGPT if AI generation is
+     * enabled.
+     *
+     * @param availableCommands It looks like the `buildHelpPrompt` method is
+     * designed to generate a help prompt for a text adventure game. The method
+     * takes an array of available commands as a parameter. These commands are
+     * the actions that the player can use in the game.
+     */
     public static void buildHelpPrompt(String[] availableCommands) {
         if (aiGenerationEnabled) {
             prompt = chatGPT("Generate a help prompt for a text adventure game designed for highschoolers. The player can use the following commands: " + String.join(", ", availableCommands) + ".") + "\n";
         }
     }
 
-    public static String returnPrompt() throws InterruptedException {
+    /**
+     * The function `returnPrompt` checks if AI generation is enabled,
+     * highlights keywords in the prompt, and returns the modified prompt or a
+     * message if AI generation is disabled.
+     *
+     * @return The method `returnPrompt()` returns the generated prompt with
+     * highlighted keywords if AI generation is enabled. If AI generation is
+     * disabled, it returns the message "AI generation is disabled. Please
+     * enable it in settings."
+     */
+    public static String returnPrompt() {
         if (aiGenerationEnabled) {
             if (prompt == null || prompt.isEmpty()) {
                 buildPrompt();
@@ -108,6 +133,18 @@ public class PromptEngine {
         return "AI generation is disabled. Please enable it in settings.";
     }
 
+    /**
+     * The function `chatGPT` sends a message to the OpenAI API for chat
+     * completions using a specified model and API key, and returns the
+     * extracted content from the response.
+     *
+     * @param message The `chatGPT` method you provided is a Java method that
+     * interacts with the OpenAI GPT-3.5 API to generate chat completions based
+     * on the input message.
+     * @return The `chatGPT` method returns the extracted contents of the
+     * response from the OpenAI API after processing the input message through
+     * the GPT-3.5 model.
+     */
     private static String chatGPT(String message) {
         String url = "https://api.openai.com/v1/chat/completions";
         String apiKey = USER_API_KEY; // API key goes here
@@ -145,7 +182,17 @@ public class PromptEngine {
         }
     }
 
-    // This method extracts the response expected from chatgpt and returns it.
+    /**
+     * This function extracts content from a response string based on specific
+     * markers.
+     *
+     * @param response The `extractContentFromResponse` method takes a `String`
+     * parameter named `response`, which is the input string from which we want
+     * to extract the content. The method then finds the starting and ending
+     * markers within the response string to extract the content between them.
+     * @return The method `extractContentFromResponse` returns a substring
+     * containing the content extracted from the input response string.
+     */
     private static String extractContentFromResponse(String response) {
         int startMarker = response.indexOf("content") + 11; // Marker for where the content starts.
         int endMarker = response.indexOf("\"", startMarker); // Marker for where the content ends.
@@ -153,6 +200,20 @@ public class PromptEngine {
         return response.substring(startMarker, endMarker); // Returns the substring containing only the response.
     }
 
+    /**
+     * The function `testAPIKey` sends a test message to an API endpoint using
+     * the provided API key and checks if a valid response is received.
+     *
+     * @param apiKey The `testAPIKey` method you provided is used to test the
+     * validity of an API key by making a request to the OpenAI API endpoint.
+     * The `apiKey` parameter is the API key that is passed to the method for
+     * testing.
+     * @return The `testAPIKey` method returns a boolean value. If the API key
+     * is valid and the response from the API contains expected content, it
+     * returns `true`. If there is an IOException (e.g., internet connection
+     * issue) or the response does not contain the expected content, it returns
+     * `false`.
+     */
     public static boolean testAPIKey(String apiKey) {
         // userAPIKey = apiKey;
         // aiGenerationEnabled = true;
@@ -191,6 +252,15 @@ public class PromptEngine {
         }
     }
 
+    /**
+     * The function `setPromptLength` sets the length of a prompt based on the
+     * input string "short", "medium", or "long".
+     *
+     * @param length The `length` parameter in the `setPromptLength` method is a
+     * String that specifies the desired length of the prompt. It can have three
+     * possible values: "short", "medium", or "long". The method sets the
+     * `promptLength` variable based on the value of the `length`
+     */
     public static void setPromptLength(String length) {
         promptLength = switch (length) {
             case "short" ->

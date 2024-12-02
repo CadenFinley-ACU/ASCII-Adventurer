@@ -15,6 +15,11 @@ public abstract class SettingsMenu {
     private final static Console console = System.console();
     private static String command;
 
+    /**
+     * The `start()` function in Java presents a settings menu where users can
+     * adjust text speed, enable/disable AI-generated prompts, change their
+     * name, and exit the menu.
+     */
     public static void start() throws InterruptedException {  //start the settings menu
         String lastSavedState = TextEngine.speedSetting;
         TextEngine.clearScreen();
@@ -157,6 +162,11 @@ public abstract class SettingsMenu {
         }
     }
 
+    /**
+     * The function `startFromStartMenu` in Java allows the user to access and
+     * modify settings such as text speed, AI prompts, and name changes through
+     * a console interface.
+     */
     public static void startFromStartMenu() throws InterruptedException {  //start the settings menu
         String lastSavedState = TextEngine.speedSetting;
         TextEngine.clearScreen();
@@ -299,12 +309,20 @@ public abstract class SettingsMenu {
         }
     }
 
+    /**
+     * The `leave()` function returns to the last saved state after displaying a
+     * message and clearing the screen.
+     */
     private static void leave() throws InterruptedException { //leave the settings menu
         TextEngine.printWithDelays("Returning to last saved state.", false);
         TextEngine.clearScreen();
         Main.loadSave();
     }
 
+    /**
+     * The function `leaveToStart` returns to the start menu after displaying a
+     * message and clearing the screen.
+     */
     private static void leaveToStart() throws InterruptedException { //leave the settings menu
         TextEngine.printWithDelays("Returning to last saved state.", false);
         TextEngine.clearScreen();

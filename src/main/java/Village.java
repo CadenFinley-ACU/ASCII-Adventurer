@@ -9,6 +9,11 @@ public class Village extends Room {
 
     static String yellowColor = "\033[1;33m"; // yellow color
 
+    /**
+     * The startRoom function in Java sets the player in a village environment
+     * with various options to interact with different locations and warp to
+     * other areas based on completed dungeons.
+     */
     public static void startRoom() throws InterruptedException { //start room
         room = "Village";
         Main.checkSave(room);
@@ -145,6 +150,11 @@ public class Village extends Room {
         }
     }
 
+    /**
+     * The function `church()` in Java simulates a player interacting with a
+     * priest in a village church, allowing them to give or leave a heart
+     * container for blessings and strength enhancements.
+     */
     public static void church() throws InterruptedException { //church
 
         Main.screenRefresh();
@@ -206,6 +216,11 @@ public class Village extends Room {
         }
     }
 
+    /**
+     * The `hotel` function allows the player to rest and regain health at a
+     * cost in a text-based game, with options to either rest or leave the
+     * hotel.
+     */
     public static void hotel() throws InterruptedException { //hotel
         //hotel implementation
 
@@ -248,6 +263,10 @@ public class Village extends Room {
         }
     }
 
+    /**
+     * The shop1 function in Java allows players to buy items with gold,
+     * displaying a message with bold and bright text options.
+     */
     public static void shop1() throws InterruptedException { //shop1
         String brightBoldEnd = "\033[0m"; // end color
         String brightYellowStart = "\033[1;33m"; // Bright Yellow
@@ -306,6 +325,11 @@ public class Village extends Room {
         }
     }
 
+    /**
+     * The shop2 function in Java allows the player to buy items with gold,
+     * displaying options in a formatted message and handling user input
+     * accordingly.
+     */
     public static void shop2() throws InterruptedException { //shop2
         String brightBoldEnd = "\033[0m"; // end color
         String brightYellowStart = "\033[1;33m"; // Bright Yellow
@@ -361,6 +385,11 @@ public class Village extends Room {
         }
     }
 
+    /**
+     * The shop3 function in Java allows the player to buy items with gold,
+     * displaying a message with bold and bright text options and handling
+     * different cases based on user input.
+     */
     public static void shop3() throws InterruptedException {
         String brightBoldEnd = "\033[0m"; // end color
         String brightYellowStart = "\033[1;33m"; // Bright Yellow
@@ -416,6 +445,20 @@ public class Village extends Room {
         }
     }
 
+    /**
+     * The function `buyMultiple` allows the player to buy multiple items of a
+     * certain type from the village shop, handling input validation, cost
+     * calculation, inventory space check, and gold availability.
+     *
+     * @param type The `type` parameter in the `buyMultiple` method represents
+     * the type of item that the player wants to buy in the village shop. It
+     * could be any item available for purchase in the shop, such as potions,
+     * weapons, armor, or any other item that the player can acquire. The method
+     * @param cost The `cost` parameter in the `buyMultiple` method represents
+     * the price of each item that the player wants to buy from the village
+     * shop. This cost is multiplied by the quantity of items the player wishes
+     * to purchase to calculate the total cost of the transaction.
+     */
     private static void buyMultiple(String type, int cost) throws InterruptedException { //buy multiple clause for certain items in village shop
         TextEngine.printWithDelays("How many would you like to buy?", true);
         while (true) {
@@ -465,6 +508,11 @@ public class Village extends Room {
         }
     }
 
+    /**
+     * The `keepShopping` function prompts the user to continue shopping or not,
+     * and directs them to different shop options based on the number of
+     * completed dungeons.
+     */
     private static void keepShopping() throws InterruptedException { //keep shopping
         TextEngine.printWithDelays("Would you like to keep shopping? " + yellowColor + "yes" + resetColor + " or " + yellowColor + "no" + resetColor, true);
         while (true) {
@@ -488,6 +536,10 @@ public class Village extends Room {
         }
     }
 
+    /**
+     * The `leave()` function clears the screen, saves the previous room, and
+     * starts the initial room in a text-based adventure game.
+     */
     private static void leave() throws InterruptedException { //leave the village
         TextEngine.clearScreen();
         OpenWorld.previousRoomSave = OpenWorld.roomSave;

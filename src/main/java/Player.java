@@ -37,6 +37,11 @@ public class Player {
     public static String B = "\033[0;33m"; // brown color
     public static String healthColor = "";
 
+    /**
+     * Initializes the player with default values and starts the player.
+     *
+     * @throws InterruptedException if the thread is interrupted while waiting
+     */
     public static void playerStart() throws InterruptedException { //start the player
         maxHealth = 100;
         health = maxHealth;
@@ -127,17 +132,34 @@ public class Player {
 
     }
 
-    public static String getName() { //get the name
+    /**
+     * Retrieves the name of the player.
+     *
+     * @return the name of the player, or the literal string "null" if the name
+     * is not set or is empty
+     */
+    public static String getName() {
         if (name == null || name.isEmpty()) {
             return "null";
         }
         return name;
     }
 
+    /**
+     * Sets the name of the player.
+     *
+     * @param name the name to set
+     */
     public static void setName(String name) { //set the name
         Player.name = name;
     }
 
+    /**
+     * Gets the current health of the player. If the health exceeds the maximum
+     * health, it is set to the maximum health.
+     *
+     * @return the current health
+     */
     public static int getHealth() { //get the health
         if (health > maxHealth) {
             health = maxHealth;
@@ -145,28 +167,62 @@ public class Player {
         return health;
     }
 
+    /**
+     * Gets the maximum health of the player.
+     *
+     * @return the maximum health
+     */
     public static int getMaxHealth() { //get the max health
         return maxHealth;
     }
 
+    /**
+     * Gets the current amount of gold the player has.
+     *
+     * @return the amount of gold
+     */
     public static int getGold() { //get the gold
         return gold;
     }
 
+    /**
+     * Changes the inventory size by a specified amount.
+     *
+     * @param change the amount to change the inventory size by
+     * @throws InterruptedException if the thread is interrupted
+     */
     public static void changeInventorySize(int change) throws InterruptedException { //change the inventory size
         inventorySize += change;
         TextEngine.printWithDelays("Inventory size increased by " + change + " to " + inventorySize + "!", false);
         TextEngine.enterToNext();
     }
 
+    /**
+     * Gets the current inventory size.
+     *
+     * @return the inventory size
+     */
     public static int getInventorySize() { //get the inventory size
         return inventorySize;
     }
 
+    /**
+     * Sets the inventory size to a specified value.
+     *
+     * @param size the size to set the inventory to
+     */
     public static void hardSetInventorySize(int size) {
         inventorySize = size;
     }
 
+    /**
+     * Changes the health of the player by a specified amount. If the change is
+     * negative, it is adjusted by the player's defense and damage. If the
+     * health drops to zero or below, the player dies and the game ends.
+     *
+     * @param change the amount to change the health by
+     * @throws InterruptedException if the thread is interrupted
+     */
     public static void changeHealth(int change) throws InterruptedException {
         if (change == 0) {
             TextEngine.enterToNext();
@@ -205,6 +261,11 @@ public class Player {
         TextEngine.enterToNext();
     }
 
+    /**
+     * Heals the player to full health if not already at max health.
+     *
+     * @return true if the player was healed, false if already at max health
+     */
     public static boolean fairyHeal() {
         if (health == maxHealth) {
             TextEngine.printNoDelay("You are already at full health!", false);
@@ -217,11 +278,22 @@ public class Player {
         return true;
     }
 
+    /**
+     * Calculates the damage dealt by the player.
+     *
+     * @return the calculated damage
+     */
     public static int getDamageCalc() {
         return (defense + (damage - (damage / 3)));
     }
 
-    public static void changeMaxHealth(int change) throws InterruptedException { //change the max health
+    /**
+     * Changes the player's maximum health by a specified amount.
+     *
+     * @param change the amount to change the max health by
+     * @throws InterruptedException if the thread is interrupted
+     */
+    public static void changeMaxHealth(int change) throws InterruptedException {
         String brightGreenStart = "\033[1;32m";
         String brightEnd = "\033[0m";
         maxHealth += change;
@@ -229,6 +301,12 @@ public class Player {
         TextEngine.printWithDelays(brightGreenStart + "Your max health has increased by " + change + " points" + brightEnd, false);
     }
 
+    /**
+     * Changes the player's gold by a specified amount.
+     *
+     * @param change the amount to change the gold by
+     * @throws InterruptedException if the thread is interrupted
+     */
     public static void changeGold(int change) throws InterruptedException {
         String brightRedStart = "\033[1;31m";
         String brightGreenStart = "\033[1;32m";
@@ -243,26 +321,57 @@ public class Player {
         }
     }
 
-    public static void openInventory() throws InterruptedException { //open the inventory
+    /**
+     * Opens the inventory and prints its contents.
+     *
+     * @throws InterruptedException if the thread is interrupted while opening
+     * the inventory
+     */
+    public static void openInventory() throws InterruptedException {
         InventoryManager.printInventory();
     }
 
-    public static void setDamage(int amount) { //set the damage
+    /**
+     * Sets the damage value for the player.
+     *
+     * @param amount the amount of damage to set
+     */
+    public static void setDamage(int amount) {
         damage = amount;
     }
 
-    public static void setDefense(int amount) { //set the defense
+    /**
+     * Sets the defense value for the player.
+     *
+     * @param amount the amount of defense to set
+     */
+    public static void setDefense(int amount) {
         defense = amount;
     }
 
-    public static int getDamage() { //get the damage
+    /**
+     * Gets the current damage value of the player.
+     *
+     * @return the current damage value
+     */
+    public static int getDamage() {
         return damage;
     }
 
-    public static int getDefense() { //get the defense
+    /**
+     * Gets the current defense value of the player.
+     *
+     * @return the current defense value
+     */
+    public static int getDefense() {
         return defense;
     }
 
+    /**
+     * Gets the total number of items in the player's inventory.
+     *
+     * @return the total number of items in the inventory
+     */
     public static int getTotalNumberOfItemsInInventory() {
         int total = 0;
         for (String key : inventory.keySet()) {
@@ -271,20 +380,40 @@ public class Player {
         return total;
     }
 
+    /**
+     * Gets the string representation of the player's inventory.
+     *
+     * @return the inventory as a string
+     */
     public static String getInventory() {
         return inventory.toString();
     }
 
-    public static Boolean putItem(String item, int amount) throws InterruptedException { //put an item in the inventory
+    /**
+     * Adds an item to the player's inventory.
+     *
+     * @param item The name of the item to be added.
+     * @param amount The quantity of the item to be added.
+     * @return True if the item was successfully added, false otherwise.
+     * @throws InterruptedException If the thread is interrupted while waiting
+     * for user input.
+     */
+    public static Boolean putItem(String item, int amount) throws InterruptedException {
+        // Check if the item is a backpack
         if ("Backpack".equals(item) || "Large Backpack".equals(item)) {
+            // Change the inventory size based on the type of backpack
             changeInventorySize(InventoryManager.Potions.get(item));
             return true;
         } else {
+            // Check if there is enough room in the inventory for the item
             if (inventorySize >= getTotalNumberOfItemsInInventory() + amount) {
+                // Add the item to the inventory
                 InventoryManager.giveItem(item, amount);
+                // Update the inventory stats to the highest values
                 InventoryManager.setStatsToHighestInInventory();
                 return true;
             } else {
+                // Notify the player that there is no room in the inventory
                 TextEngine.printWithDelays("You have no room in your inventory!", false);
                 TextEngine.enterToNext();
                 return false;
@@ -292,6 +421,11 @@ public class Player {
         }
     }
 
+    /**
+     * Creates a new player and initializes the game settings.
+     *
+     * @throws InterruptedException if the thread is interrupted while sleeping
+     */
     private static void playerCreate() throws InterruptedException { //create the player
         String brightBoldEnd = "\033[0m";
         String brightYellowStart = "\033[1;33m";
@@ -333,6 +467,12 @@ public class Player {
         Main.loadSave();
     }
 
+    /**
+     * Prints the player's stats to the console.
+     *
+     * @throws InterruptedException if the thread is interrupted while printing
+     * stats
+     */
     public static void printStats() throws InterruptedException { //print the stats
         InventoryManager.setStatsToHighestInInventory();
         TextEngine.clearScreen();
@@ -368,14 +508,22 @@ public class Player {
         }
     }
 
+    /**
+     * Heals the player using available health potions from the inventory.
+     *
+     * @throws InterruptedException if the thread is interrupted while waiting.
+     */
     public static void heal() throws InterruptedException {
+        // Check if the inventory contains any health potions
         if (!inventory.containsKey("super health potion") && !inventory.containsKey("greater health potion") && !inventory.containsKey("health potion")) {
             TextEngine.printWithDelays("You have no health potions!", false);
             TextEngine.enterToNext();
         } else if (health >= maxHealth) {
+            // Check if the player's health is already at maximum
             TextEngine.printWithDelays("You are already at full health!", false);
             TextEngine.enterToNext();
         } else {
+            // Use the appropriate health potion from the inventory
             if (inventory.containsKey("super health potion")) {
                 InventoryManager.useItemNoMenu("super health potion");
             } else if (inventory.containsKey("greater health potion")) {
@@ -384,13 +532,27 @@ public class Player {
                 InventoryManager.useItemNoMenu("health potion");
             }
         }
+        // Load the saved game state
         Main.loadSave();
     }
 
+    /**
+     * Copies the inventory.
+     *
+     * @return a map representing the inventory with item names as keys and
+     * their quantities as values.
+     */
     public static Map<String, Integer> copyInventory() { //get the inventory Manager
         return inventory;
     }
 
+    /**
+     * This method prints the game map to the console. It updates the map with
+     * the player's position and the status of the dungeons based on the number
+     * of completed dungeons.
+     *
+     * @throws InterruptedException if the thread is interrupted while sleeping
+     */
     public static void printMap() throws InterruptedException {
         TextEngine.clearScreen();
         String[][] map = {
@@ -548,10 +710,28 @@ public class Player {
         Main.loadSave();
     }
 
+    /**
+     * Checks if there is enough room in the inventory to add a specified amount
+     * of items.
+     *
+     * @param amount the number of items to be added to the inventory
+     * @return true if there is enough room in the inventory, false otherwise
+     */
     public static Boolean hasRoomInInventory(int amount) {
         return inventorySize >= getTotalNumberOfItemsInInventory() + amount;
     }
 
+    /**
+     * Sets the player's attributes.
+     *
+     * @param localName the name of the player
+     * @param localHealth the current health of the player
+     * @param localMaxHealth the maximum health of the player
+     * @param localGold the amount of gold the player has
+     * @param localInventory the inventory of the player, represented as a map
+     * of item names to their quantities
+     * @param localInventorySize the size of the player's inventory
+     */
     public static void playerSetSave(String localName, int localHealth, int localMaxHealth, int localGold, Map<String, Integer> localInventory, int localInventorySize) {
         name = localName;
         health = localHealth;
@@ -561,6 +741,14 @@ public class Player {
         inventorySize = localInventorySize;
     }
 
+    /**
+     * Changes the name of the player. Prompts the user to enter a new name and
+     * validates the input. If the input is valid, the player's name is updated.
+     * If the user types "exit", the start menu is displayed.
+     *
+     * @throws InterruptedException if the thread is interrupted while waiting
+     * for user input
+     */
     public static void changeName() throws InterruptedException {
         String brightYellowStart = "\033[1;33m";
         String brightEnd = "\033[0m";
@@ -586,6 +774,15 @@ public class Player {
         Main.startMenu();
     }
 
+    /**
+     * Draws the health bar for the player. The health bar is represented by a
+     * series of colored bars and underscores. The color of the bars changes
+     * based on the player's current health. - Green: Health is more than half
+     * of the maximum health. - Yellow: Health is between half and a quarter
+     * plus a tenth of the maximum health. - Red: Health is less than or equal
+     * to a quarter plus a tenth of the maximum health. The health bar is
+     * printed to the console.
+     */
     public static void drawHealthBar() {
         int hearts = maxHealth / 20;
         if (hearts == 0) {
@@ -619,6 +816,17 @@ public class Player {
         System.out.println(healthBar);
     }
 
+    /**
+     * This method returns the environment type of the player's current position
+     * on the map. The map is represented as a 2D array of strings, where each
+     * string corresponds to a specific environment type. The method uses a
+     * predefined mapping of color codes to environment types to determine the
+     * environment type.
+     *
+     * @return A string representing the environment type of the player's
+     * current position. Possible values are "grassland", "desert", "mountain
+     * top", "ocean", "mountain", "lost forest", or "unknown".
+     */
     public static String getColorOfPlayerPostitionTile() {
         //     public static String G = "\033[0;32m"; // deep grass color
         // public static String b = "\033[1;34m"; // blue color
@@ -658,6 +866,14 @@ public class Player {
         return "unknown";
     }
 
+    /**
+     * This method calculates the compass direction to the closest village from
+     * the player's current position.
+     *
+     * @return A string representing the compass direction to the closest
+     * village. Possible values are: "North", "Northeast", "East", "Southeast",
+     * "South", "Southwest", "West", "Northwest", or "No village found".
+     */
     public static String getCompassDirectionToClosestVillage() {
         String[][] map = {
             {"     ", "", "", "", "", "", "", "", "     ", "", ""}, //0
@@ -725,6 +941,13 @@ public class Player {
         return "Unknown direction";
     }
 
+    /**
+     * Returns the compass direction to the closest dungeon based on the
+     * player's current position.
+     *
+     * @return A string representing the compass direction to the closest
+     * dungeon.
+     */
     public static String getCompassDirectionToClosestDungeon() {
         String[][] map = {
             {"     ", "[ D ]", "", "", "", "", "", "[ D ]", "     ", "", ""}, //0
@@ -883,6 +1106,13 @@ public class Player {
         return "Unknown direction";
     }
 
+    /**
+     * Returns the name of the next dungeon based on the number of completed
+     * dungeons.
+     *
+     * @return the name of the next dungeon or a completion message if all
+     * dungeons are completed.
+     */
     public static String getNextDungeon() {
         return switch (Dungeon.completedDungeons) {
             case 0 ->
@@ -908,6 +1138,13 @@ public class Player {
         };
     }
 
+    /**
+     * Calculates the distance from the player's current position to the closest
+     * village on the map.
+     *
+     * @return the distance to the closest village, or -1 if no village is
+     * found.
+     */
     public static int distanceToVillage() {
         String[][] map = {
             {"     ", "", "", "", "", "", "", "", "     ", "", ""}, //0
@@ -944,6 +1181,12 @@ public class Player {
         return minDistance - 1;
     }
 
+    /**
+     * Calculates the distance to the next dungeon based on the current state of
+     * the map and the number of completed dungeons.
+     *
+     * @return the distance to the next dungeon, or -1 if no dungeon is found.
+     */
     public static int distanceToNextDungeon() {
         String[][] map = {
             {"     ", "[ D ]", "", "", "", "", "", "[ D ]", "     ", "", ""}, //0

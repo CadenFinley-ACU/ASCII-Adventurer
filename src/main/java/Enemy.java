@@ -14,6 +14,12 @@ public class Enemy {
     public static String command;
     private static Map<String, Integer> enemyDamageValues;
 
+    /**
+     * This method initializes the enemyDamageValues map with the damage values
+     * for each enemy. If the dungeon has been reset after a win and the game is
+     * complete, the enemies are powered up with higher damage values.
+     * Otherwise, the enemies have their normal damage values.
+     */
     public static void createEnemies() {
         enemyDamageValues = null;
         if (Dungeon.resetedAfterWin && Main.gameComplete) {
@@ -133,10 +139,23 @@ public class Enemy {
         }
     }
 
+    /**
+     * This method resets the enemyDamageValues
+     */
     public static void resetEnemies() {
         createEnemies();
     }
 
+    /**
+     * Spawns enemies of a given type and quantity, and returns the total damage
+     * dealt by the enemies.
+     *
+     * @param type The type of enemy to spawn.
+     * @param quantity The number of enemies to spawn.
+     * @return The total damage dealt by the enemies as a negative integer.
+     * @throws InterruptedException If the thread is interrupted while printing
+     * text with delays.
+     */
     public static int spawnEnemy(String type, int quantity) throws InterruptedException { // Return the total damage as negative int so that you can change health
         String brightRedStart = "\033[1;31m"; // Start bright red text
         String brightRedEnd = "\033[0m"; // Reset formatting
@@ -154,6 +173,14 @@ public class Enemy {
         return damage;
     }
 
+    /**
+     * Runs the spawn enemy sequence and calculates the damage taken.
+     *
+     * @param type The type of enemy.
+     * @param quantity The number of enemies.
+     * @return The damage taken.
+     * @throws InterruptedException If the thread is interrupted.
+     */
     public static int runSpawnEnemy(String type, int quantity) throws InterruptedException {
         String brightRedStart = "\033[1;31m"; // Start bright red text
         String brightRedEnd = "\033[0m"; // Reset formatting
@@ -171,10 +198,22 @@ public class Enemy {
         return damage;
     }
 
+    /**
+     * Checks the player's health and determines the outcome of a fight or
+     * escape attempt.
+     *
+     * @param type The type of enemy.
+     * @param quantity The number of enemies.
+     * @param fight A boolean indicating whether the player is fighting (true)
+     * or escaping (false).
+     * @throws InterruptedException If the thread is interrupted during the
+     * delay in printing text.
+     */
     private static void checkhealth(String type, int quantity, boolean fight) throws InterruptedException {
         String brightGreenStart = "\033[1;32m"; // Start bright green text
         String brightGreenEnd = "\033[0m"; // Reset formatting
         String space = "     ";
+
         if (fight) {
             // Check the player's health
             if (!(Player.getHealth() <= (enemyDamageValues.get(type) * quantity) - Player.getDamageCalc())) {

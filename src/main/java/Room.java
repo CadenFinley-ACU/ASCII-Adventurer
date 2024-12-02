@@ -25,6 +25,22 @@ public class Room {
         {" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "}
     };
 
+    /**
+     * This Java function prompts the user to decide whether to open a chest in
+     * the room or leave it, based on the given item name and quantity.
+     *
+     * @param itemName itemName: The name of the item that the player is looking
+     * for in the chest.
+     * @param quantity The `quantity` parameter in the `hasChestInRoom` method
+     * represents the number of items you are looking for in the chest. When you
+     * call this method, you pass the name of the item you are searching for in
+     * the chest and the quantity of that item you are looking to find.
+     * @return The method `hasChestInRoom` will return a boolean value based on
+     * the user's input. If the user chooses to "open it", the method will
+     * return the result of the `hasItemInRoom` method with the specified
+     * `itemName` and `quantity`. If the user chooses to "leave it", the method
+     * will return `false`.
+     */
     public static boolean hasChestInRoom(String itemName, int quantity) throws InterruptedException {
         String yellowColor = "\033[1;33m"; // yellow color
 
@@ -45,6 +61,21 @@ public class Room {
         }
     }
 
+    /**
+     * The function `hasItemInRoom` displays item information, prompts the user
+     * to take or leave the item, and handles the corresponding actions.
+     *
+     * @param itemName itemName: the name of the item to check for in the room
+     * @param quantity The `quantity` parameter in the `hasItemInRoom` method
+     * represents the number of items of a particular type that are present in
+     * the room. It is used to determine how many of the specified item are
+     * available for interaction within the game environment.
+     * @return The method `hasItemInRoom` returns a boolean value. It returns
+     * `true` if the player chooses to take the item (by typing "take it") and
+     * successfully puts the item in their inventory using the `Player.putItem`
+     * method. It returns `false` if the player chooses to leave the item (by
+     * typing "leave it") or if certain conditions are met (such as trying
+     */
     public static boolean hasItemInRoom(String itemName, int quantity) throws InterruptedException {
         String yellowColor = "\033[1;33m"; // yellow color
 
@@ -79,6 +110,15 @@ public class Room {
         }
     }
 
+    /**
+     * The `reset` function resets specific areas or all areas in the room based
+     * on the input provided.
+     *
+     * @param area The `area` parameter in the `reset` method is a string that
+     * specifies the area to be reset. It can have one of the following values:
+     * "SpawnRoom", "OpenWorld", or "all". Depending on the value of `area`,
+     * different areas of the room will be reset using
+     */
     public static void reset(String area) { //reset the room
         room = null;
         switch (area) {
@@ -96,6 +136,10 @@ public class Room {
         }
     }
 
+    /**
+     * The function `reRenderSameRoom` updates the current room display based on
+     * the player's actions in the game world.
+     */
     public static void reRenderSameRoom() throws InterruptedException {
         if (OpenWorld.wasInFight) {
             OpenWorld.wasInFight = false;
@@ -131,6 +175,11 @@ public class Room {
         }
     }
 
+    /**
+     * The `drawCurrentRoom` function in Java dynamically generates and displays
+     * a game room environment with a player and enemies based on the current
+     * setting.
+     */
     public static void drawCurrentRoom() throws InterruptedException {
         currentRoom = new String[][]{
             {" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "},
@@ -265,6 +314,15 @@ public class Room {
 
     private static final Random random = new Random();
 
+    /**
+     * The `fillMountain` function randomly fills a 2D array representing a room
+     * with mountain peaks or snow based on a 50% chance.
+     *
+     * @param room The `room` parameter in the `fillMountain` method is a 2D
+     * array of Strings. Each element in the array represents a row in a room.
+     * The method iterates over each row and randomly fills it with either a
+     * mountain peak or mountain snow based on a 50% chance for
+     */
     private static void fillMountain(String[][] room) {
         for (String[] room1 : room) {
             for (int j = 0; j < room1.length; j++) {
@@ -279,6 +337,15 @@ public class Room {
         }
     }
 
+    /**
+     * The `fillGrassland` function populates a 2D array representing a room
+     * with grass or bushes based on random probabilities.
+     *
+     * @param room The `room` parameter is a 2D array of Strings representing a
+     * grid or room. Each element in the `room` array is an array of Strings,
+     * forming rows and columns in the grid. The method `fillGrassland` iterates
+     * over each element in the `room` array
+     */
     private static void fillGrassland(String[][] room) {
         for (String[] room1 : room) {
             for (int j = 0; j < room1.length; j++) {
@@ -293,6 +360,15 @@ public class Room {
         }
     }
 
+    /**
+     * The fillDesert function populates a 2D array representing a room with
+     * different elements such as cactus, sand, and oasis based on specified
+     * probabilities.
+     *
+     * @param room The `room` parameter in the `fillDesert` method is a 2D array
+     * of Strings representing a room layout. Each element in the array
+     * represents a cell in the room.
+     */
     private static void fillDesert(String[][] room) {
         for (String[] room1 : room) {
             for (int j = 0; j < room1.length; j++) {
@@ -311,6 +387,15 @@ public class Room {
         }
     }
 
+    /**
+     * The function `fillOcean` fills a 2D array representing a room with water
+     * tiles represented by the string "b~R".
+     *
+     * @param room The `room` parameter is a 2D array of Strings representing a
+     * room or space. The method `fillOcean` is designed to fill this room with
+     * water represented by the string concatenation of `Player.b + "~" +
+     * Player.R`.
+     */
     private static void fillOcean(String[][] room) {
         for (String[] room1 : room) {
             for (int j = 0; j < room1.length; j++) {
@@ -319,6 +404,16 @@ public class Room {
         }
     }
 
+    /**
+     * The fillForest function populates a 2D array representing a room with
+     * elements representing trees, grass, or bushes based on random
+     * probabilities.
+     *
+     * @param room The `fillForest` method you provided takes a 2D array of
+     * Strings called `room` as a parameter. This `room` array represents a grid
+     * where each element can contain different types of elements such as trees,
+     * grass, or bushes. The method iterates over each element in the `
+     */
     private static void fillForest(String[][] room) {
         for (String[] room1 : room) {
             for (int j = 0; j < room1.length; j++) {
@@ -335,6 +430,15 @@ public class Room {
         }
     }
 
+    /**
+     * The function `fillEmpty` randomly fills empty spaces in a 2D array with a
+     * 50% chance.
+     *
+     * @param room The `room` parameter in the `fillEmpty` method is a 2D array
+     * of Strings. It represents a room where each element in the array
+     * corresponds to a space in the room. The method fills empty spaces in the
+     * room by setting them to a blank space character (" ") with a
+     */
     private static void fillEmpty(String[][] room) {
         for (String[] room1 : room) {
             for (int j = 0; j < room1.length; j++) {
@@ -345,10 +449,23 @@ public class Room {
         }
     }
 
+    /**
+     * The function checks if the current environment is different from the
+     * buffered environment.
+     *
+     * @return The method `checkNewEnvironment()` is returning a boolean value
+     * that indicates whether the `environment` is different from the
+     * `bufferedEnvironment`.
+     */
     private static boolean checkNewEnvironment() {
         return !environment.equals(bufferedEnviroment);
     }
 
+    /**
+     * The `dungeonCheck` function checks the player's progress in completing
+     * different dungeons and provides directions to the next dungeon entrance
+     * based on the current location and completed dungeons.
+     */
     public static void dungeonCheck() throws InterruptedException {
         if (OpenWorld.holdCommand == null || OpenWorld.holdCommand.isEmpty() || OpenWorld.holdCommand.isBlank() || OpenWorld.holdCommand.equals(" ") || OpenWorld.holdCommand.equals("null")) {
             OpenWorld.holdCommand = "onward";

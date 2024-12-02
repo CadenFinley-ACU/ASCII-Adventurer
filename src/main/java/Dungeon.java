@@ -49,6 +49,10 @@ public class Dungeon extends Room {
     public static DungeonInstance DesertPyramidDungeon;
     public static DungeonInstance OceanKingdomDungeon;
 
+    /**
+     * The function generates 8 different dungeons using a DungeonGenerator
+     * object and stores them in respective variables.
+     */
     public static void generateDungeons() { //generates all 8 dungeons and stores them in their respective variables
         DungeonGenerator generator = new DungeonGenerator();
         meadowDungeon = generator.generateDungeon(5);
@@ -62,6 +66,10 @@ public class Dungeon extends Room {
 
     }
 
+    /**
+     * The function initializes different dungeon instances with specific enemy
+     * and loot configurations.
+     */
     public static void initalizeDungeons() {
         MeadowDungeon = new DungeonInstance(new ArrayList<>(List.of("Goblin", "Skeleton", "Slime", "Mimic")), new ArrayList<>(List.of("axe", "chainmail set")), false, false, false, "Meadow", "Meadow Dungeon", "Golem", "Forest Giant", 3);
         DarkForestDungeon = new DungeonInstance(new ArrayList<>(List.of("Goblin", "Skeleton", "Orc", "Mimic", "Zombie")), new ArrayList<>(List.of("broad sword", "full armor kit")), false, false, false, "Dark Forest", "Dark Forest Dungeon", "Forest Guardian", "Forest Spirit", 4);
@@ -73,6 +81,10 @@ public class Dungeon extends Room {
         OceanKingdomDungeon = new DungeonInstance(new ArrayList<>(List.of("Sea Serpent", "Sea Monster", "Sea Witch", "Sea Dragon", "Sea Dragon")), new ArrayList<>(List.of("god slayer hammer", "god slayer armor")), false, false, false, "Ocean Kingdom", "Ocean Kingdom Dungeon", "Leviathan", "Kraken", 4);
     }
 
+    /**
+     * The function sets the maps for different dungeons and initializes their
+     * values.
+     */
     public static void setMaps() {
         MeadowDungeon.map = meadowDungeon;
         DarkForestDungeon.map = darkForestDungeon;
@@ -92,6 +104,10 @@ public class Dungeon extends Room {
         OceanKingdomDungeon.setValues();
     }
 
+    /**
+     * The function `setRoomsBeenTo` sets the shown map for various dungeons in
+     * a game.
+     */
     public static void setRoomsBeenTo() {
         MeadowDungeon.setShownMap();
         DarkForestDungeon.setShownMap();
@@ -103,6 +119,16 @@ public class Dungeon extends Room {
         OceanKingdomDungeon.setShownMap();
     }
 
+    /**
+     * The function `defaultDungeonArgs` handles different actions such as
+     * leaving a dungeon, viewing a map, and resetting dungeons based on the
+     * input data provided.
+     *
+     * @param data The `defaultDungeonArgs` method takes a `String` parameter
+     * named `data`. This method is used to handle different actions within
+     * dungeons based on the provided `data`. The `data` parameter represents
+     * the action or command that the player wants to perform in the dungeon.
+     */
     public static void defaultDungeonArgs(String data) throws InterruptedException { //default dungeon arguments
         switch (data) {
             case "leave" -> {
@@ -333,6 +359,10 @@ public class Dungeon extends Room {
         }
     }
 
+    /**
+     * The `resetAll` function resets all dungeons and sets the completed
+     * dungeons count to 0.
+     */
     public static void resetAll() { //reset all dungeons
         generateDungeons();
         MeadowDungeon.fresh();
@@ -346,6 +376,17 @@ public class Dungeon extends Room {
         completedDungeons = 0;
     }
 
+    /**
+     * This function checks if the player has a key in their inventory and
+     * prompts them to unlock the door to the boss room, returning true if
+     * successful and false if not.
+     *
+     * @return The method `confirmBossContinue()` returns a boolean value. It
+     * returns `true` if the player chooses to unlock the door to the boss room
+     * and successfully uses the key, and it returns `false` in other cases such
+     * as if the player does not have the key, chooses not to unlock the door,
+     * or if there is an invalid input.
+     */
     public static boolean confirmBossContinue() throws InterruptedException {
         if (Player.inventory.containsKey("key")) {
             TextEngine.printWithDelays("Would you like to unlock the door to the boss room? " + yellowColor + "yes" + resetColor + " or " + yellowColor + "no" + resetColor, true);
@@ -378,6 +419,10 @@ public class Dungeon extends Room {
         }
     }
 
+    /**
+     * The dungeonShop function allows players to buy items from a shop within
+     * different dungeons based on their current location in the game.
+     */
     public static void dungeonShop() throws InterruptedException {
         Main.screenRefresh();
         String localDungeon = currentDungeon;
@@ -532,6 +577,20 @@ public class Dungeon extends Room {
         }
     }
 
+    /**
+     * The `buyMultiple` function allows the player to purchase multiple items
+     * from a village shop, handling input validation, cost calculations,
+     * inventory space checks, and gold availability.
+     *
+     * @param type The `type` parameter in the `buyMultiple` method represents
+     * the type of item that the player wants to buy from the village shop. It
+     * could be any item available for purchase in the shop, such as potions,
+     * weapons, armor, or any other item that the player can acquire in the game
+     * @param cost The `cost` parameter in the `buyMultiple` method represents
+     * the price of each item that the player wants to buy from the village
+     * shop. This cost is multiplied by the quantity of items the player wishes
+     * to purchase to calculate the total cost of the transaction.
+     */
     private static void buyMultiple(String type, int cost) throws InterruptedException { //buy multiple clause for certain items in village shop
         TextEngine.printWithDelays("How many would you like to buy?", true);
         while (true) {
@@ -581,6 +640,10 @@ public class Dungeon extends Room {
         }
     }
 
+    /**
+     * The function `keepShopping` prompts the user to continue shopping or
+     * leave, and handles the user input accordingly.
+     */
     private static void keepShopping() throws InterruptedException { //keep shopping
         TextEngine.printWithDelays("Would you like to keep shopping? " + yellowColor + "yes" + resetColor + " or " + yellowColor + "no" + resetColor, true);
         while (true) {
@@ -598,6 +661,10 @@ public class Dungeon extends Room {
         }
     }
 
+    /**
+     * The function `useMagicMap()` reveals the layout of different dungeons
+     * based on the current dungeon location.
+     */
     private static void useMagicMap() throws InterruptedException {
         switch (currentDungeon) {
             case "Meadow" -> {
@@ -643,10 +710,22 @@ public class Dungeon extends Room {
         }
     }
 
+    /**
+     * The `leave()` function handles directions and commands before exiting.
+     */
     private static void leave() throws InterruptedException {
         handleDirectionsAndCommands(false);
     }
 
+    /**
+     * The function `checkIfCurrentDungeonIsRevealed` checks if the map of the
+     * current dungeon is revealed based on the dungeon name.
+     *
+     * @return The method `checkIfCurrentDungeonIsRevealed` returns a boolean
+     * value based on whether the map of the current dungeon is revealed or not.
+     * The specific dungeon's `mapRevealed` property is checked based on the
+     * value of the `currentDungeon` variable.
+     */
     private static boolean checkIfCurrentDungeonIsRevealed() {
         switch (currentDungeon) {
             case "Meadow" -> {
@@ -679,6 +758,13 @@ public class Dungeon extends Room {
         }
     }
 
+    /**
+     * The function `ableToUseMenuCommands` checks if the player is allowed to
+     * use menu commands based on their current location in the game world.
+     *
+     * @return The method `ableToUseMenuCommands()` returns a boolean value. The
+     * return value depends on the conditions specified in the method.
+     */
     public static boolean ableToUseMenuCommands() {
         if ("OpenWorld".equals(Main.getSavedPlace()) || "Village".equals(Main.getSavedPlace()) || "SpawnRoom".equals(Main.getSavedPlace())) {
             return true;
@@ -714,6 +800,10 @@ public class Dungeon extends Room {
         }
     }
 
+    /**
+     * The dungeonIntroText function displays introductory text for the current
+     * dungeon and updates the player's progress in the dungeon.
+     */
     public static void dungeonIntroText() throws InterruptedException {
         TextEngine.printWithDelays("You have entered " + redColor + "The " + currentDungeon + resetColor + "!", false);
         TextEngine.printWithDelays("To beat the dungeon you must beat the " + redColor + currentBoss + resetColor + "!\nBe on the look out for treasure rooms! They hold some powerful loot.\nYou can always type help to see what commands you have available!\nGood Luck!", false);
@@ -746,6 +836,11 @@ public class Dungeon extends Room {
         }
     }
 
+    /**
+     * The `miniBossSequence` function handles the encounter with a mini boss in
+     * a specific dungeon, updating the dungeon map accordingly and loading the
+     * game save.
+     */
     public static void miniBossSequence() throws InterruptedException {
         TextEngine.printWithDelays("You have entered a room with a mini boss", false);
         Player.changeHealth(Enemy.spawnEnemy(currentMiniBoss, 1));
@@ -779,6 +874,10 @@ public class Dungeon extends Room {
         Main.loadSave();
     }
 
+    /**
+     * The `fairySequence` function updates the player's position on the current
+     * dungeon map and then loads a saved game.
+     */
     public static void fairySequence() throws InterruptedException {
         switch (currentDungeon) {
             case "Meadow" -> {
@@ -810,6 +909,11 @@ public class Dungeon extends Room {
         Main.loadSave();
     }
 
+    /**
+     * The keyRoomSequence function handles player interactions with enemies in
+     * different dungeon locations, allowing the player to choose between
+     * fighting or running.
+     */
     public static void keyRoomSequence() throws InterruptedException {
         if (numberOfEnemies < 2) {
             numberOfEnemies = 2;
@@ -864,6 +968,11 @@ public class Dungeon extends Room {
         }
     }
 
+    /**
+     * The function `fightRandomEnemies` handles player encounters with enemies
+     * in different dungeons, allowing the player to fight or run from the
+     * enemies.
+     */
     public static void fightRandomEnemies() throws InterruptedException {
         if (numberOfEnemies == 0) {
             switch (currentDungeon) {
@@ -945,6 +1054,11 @@ public class Dungeon extends Room {
         }
     }
 
+    /**
+     * The function `heartContainerRoom` checks if the player has a heart
+     * container in the room and updates the corresponding dungeon room
+     * accordingly.
+     */
     public static void heartContainerRoom() throws InterruptedException {
         if (hasItemInRoom("heart container", 1)) {
             switch (currentDungeon) {
@@ -980,6 +1094,10 @@ public class Dungeon extends Room {
         }
     }
 
+    /**
+     * The keyRoom function checks if the player has a key in the room and
+     * updates the roomsBeenTo array based on the current dungeon.
+     */
     public static void keyRoom() throws InterruptedException {
         if (hasItemInRoom("key", 1)) {
             switch (currentDungeon) {
@@ -1015,6 +1133,11 @@ public class Dungeon extends Room {
         }
     }
 
+    /**
+     * The fairyRoom function allows the player to interact with a mystical
+     * fairy who offers a healing wish, with options to accept or decline the
+     * wish.
+     */
     public static void fairyRoom() throws InterruptedException {
         TextEngine.printWithDelays("You have entered a room with a mystical fairy", false);
         TextEngine.printWithDelays("The fairy has granted you a wish of healing?", false);
@@ -1068,6 +1191,18 @@ public class Dungeon extends Room {
         }
     }
 
+    /**
+     * The function `testIfBossRoom` checks if the input integer is equal to 8
+     * and returns true if it is not equal to 0.
+     *
+     * @param check The `check` parameter in the `testIfBossRoom` method is used
+     * to determine if a room is a boss room. The method checks if the value of
+     * `check` is not equal to 0, and if it is not, it returns `true` if `check`
+     * is equal
+     * @return The method `testIfBossRoom` returns a boolean value. It returns
+     * `true` if the input `check` is not equal to 0 and is equal to 8,
+     * otherwise it returns `false`.
+     */
     public static boolean testIfBossRoom(int check) {
         if (check != 0) {
             return check == 8;
@@ -1075,6 +1210,18 @@ public class Dungeon extends Room {
         return false;
     }
 
+    /**
+     * The `itemRoom` function in Java handles the logic for interacting with
+     * items in different dungeon rooms, removing items if found in chests, and
+     * triggering specific sequences based on the dungeon type and available
+     * rooms.
+     *
+     * @param localItems The `localItems` parameter in the `itemRoom` method is
+     * a `List<String>` that contains items present in the current room. The
+     * method checks if the list is not empty and then randomly selects an item
+     * from the list to interact with. If the selected item is found in a chest
+     * in
+     */
     public static void itemRoom(List<String> localItems) throws InterruptedException {
         if (!localItems.isEmpty()) {
             String randomItem = localItems.get(rand.nextInt(localItems.size()));
@@ -1180,6 +1327,11 @@ public class Dungeon extends Room {
         }
     }
 
+    /**
+     * The `trappedRoomSequence` function randomly sets a specific value in a
+     * dungeon map based on the current dungeon the player is in and then
+     * updates the maps and loads the game save.
+     */
     public static void trappedRoomSequence() throws InterruptedException {
         int hit = new Random().nextBoolean() ? 1 : 2;
         if (hit == 1) {
@@ -1249,6 +1401,11 @@ public class Dungeon extends Room {
         Main.loadSave();
     }
 
+    /**
+     * The trappedRoom function simulates a player encountering a trap in a
+     * dungeon, potentially losing health, and updating the rooms visited in
+     * different dungeon locations.
+     */
     public static void trappedRoom() throws InterruptedException {
         TextEngine.printWithDelays("You have entered a trapped room! ", false);
         int hit = new Random().nextBoolean() ? 1 : 2;
@@ -1287,6 +1444,11 @@ public class Dungeon extends Room {
         }
     }
 
+    /**
+     * The bossRoom function handles the player's encounter with a boss, updates
+     * dungeon completion status, and progresses the game to the next room in
+     * the open world.
+     */
     public static void bossRoom() throws InterruptedException {
         TextEngine.printWithDelays("You have entered the boss room", false);
         Player.changeHealth(Enemy.spawnEnemy(currentBoss, 1));
@@ -1357,6 +1519,15 @@ public class Dungeon extends Room {
         OpenWorld.startRoom();
     }
 
+    /**
+     * Converts a list of direction strings into a single formatted string. Each
+     * direction is colored with yellowColor and resetColor. If there are
+     * multiple directions, they are separated by commas, and the last direction
+     * is prefixed with "or ".
+     *
+     * @param list the list of direction strings to be converted
+     * @return a formatted string of directions
+     */
     private static String directionsInString(ArrayList<String> list) {
         StringBuilder sb = new StringBuilder();
         int size = list.size();
@@ -1372,6 +1543,12 @@ public class Dungeon extends Room {
         return sb.toString();
     }
 
+    /**
+     * Handles the directions and commands for navigating through the dungeon.
+     *
+     * @param clearScreen A boolean indicating whether to clear the screen.
+     * @throws InterruptedException If the thread is interrupted.
+     */
     public static void handleDirectionsAndCommands(boolean clearScreen) throws InterruptedException {
         boolean completed = false;
         int[][] roomsBeenTo = null;
@@ -1471,6 +1648,15 @@ public class Dungeon extends Room {
         }
     }
 
+    /**
+     * Adds the available directions to the directionsString list based on the
+     * available moves. If the move leads to a boss room, "boss room" is added
+     * instead of the direction.
+     *
+     * @param availableMove an array of integers representing the available
+     * moves. Each index corresponds to a direction: 0 - north, 1 - south, 2 -
+     * west, 3 - east.
+     */
     private static void addDirections(int[] availableMove) {
         String[] directions = {"north", "south", "west", "east"};
         for (int i = 0; i < availableMove.length; i++) {
@@ -1484,6 +1670,20 @@ public class Dungeon extends Room {
         }
     }
 
+    /**
+     * Moves the player in the specified direction and updates the dungeon
+     * state.
+     *
+     * @param direction The direction in which the player is to be moved.
+     * @param positionChange An array representing the change in position for
+     * the player.
+     * @param roomsBeenTo A 2D array representing the rooms the player has been
+     * to.
+     * @param localDungeon A 2D array representing the current state of the
+     * dungeon.
+     * @throws InterruptedException If the thread is interrupted while moving
+     * the player.
+     */
     private static void movePlayer(String direction, int[] positionChange, int[][] roomsBeenTo, int[][] localDungeon) throws InterruptedException {
         if (directionsString.contains(direction)) {
             lastPosition = currentPlayerPosition.clone(); // Save the current position before moving
@@ -1497,6 +1697,16 @@ public class Dungeon extends Room {
         }
     }
 
+    /**
+     * Updates the roomsBeenTo array for the current dungeon.
+     *
+     * This method changes the roomsBeenTo array for the dungeon specified by
+     * the currentDungeon variable. The roomsBeenTo array keeps track of which
+     * rooms have been visited in the dungeon.
+     *
+     * @param changedRoomsBeenTo The new roomsBeenTo array to be set for the
+     * current dungeon.
+     */
     private static void changeDungeonRoomsBeenTo(int[][] changedRoomsBeenTo) {
         switch (currentDungeon) {
             case "Meadow" -> {
@@ -1526,6 +1736,13 @@ public class Dungeon extends Room {
         }
     }
 
+    /**
+     * Handles the sequence of adding an item to the player's backpack. If the
+     * item cannot be added, it prompts the player to take the item and retries.
+     *
+     * @param pack The name of the item to be added to the backpack.
+     * @throws InterruptedException If the thread is interrupted while waiting.
+     */
     private static void backpackSequence(String pack) throws InterruptedException {
         if (Player.putItem(pack, 1)) {
             return;

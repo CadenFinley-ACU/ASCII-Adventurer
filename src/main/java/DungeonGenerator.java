@@ -21,12 +21,22 @@ public class DungeonGenerator {
     private int[] coord8;
     private int[] coord9;
 
+    /**
+     * Generates a dungeon of the specified size.
+     *
+     * @param size the size of the dungeon to generate
+     * @return a 2D array representing the generated dungeon
+     */
     public int[][] generateDungeon(int size) {
         wipe();
         start(size);
         return matrix;
     }
 
+    /**
+     * Resets the dungeon matrix and coordinates. If testing mode is enabled,
+     * prints "Wiped" to the console.
+     */
     private void wipe() {
         matrix = null;
         coord8 = null;
@@ -36,6 +46,12 @@ public class DungeonGenerator {
         }
     }
 
+    /**
+     * Starts the dungeon generation process.
+     *
+     * @param pass The initial size of the matrix. If less than 5, it will be
+     * set to 5.
+     */
     private void start(int pass) {
         try {
             if (testing) {
