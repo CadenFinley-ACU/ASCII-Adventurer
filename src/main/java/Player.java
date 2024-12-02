@@ -1,18 +1,22 @@
 
+import java.io.Console;
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * ASCIIADVENTURER
  * Caden Finley
  * Albert Tucker
  * Grijesh Shrestha
  *
+ * This class represents a player in the ASCII Adventure game.
+ * It contains attributes and methods to manage the player's state and actions.
+ * 
  * @author ASCIIADVENTURERS
  * @version 1.0
  */
-import java.io.Console;
-import java.util.HashMap;
-import java.util.Map;
-
 public class Player {
+
 
     private static int health = 100;
     private static int maxHealth = 100;

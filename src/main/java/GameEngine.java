@@ -1,17 +1,20 @@
-/**
- * ASCIIADVENTURER
- * A text-based adventure game with ASCII art.
- * Caden Finley
- * Albert Tucker
- * Grijesh Shrestha
- * @author ASCIIADVENTURERS
- * @version 1.0
- */
+
 import java.io.Console;
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * ASCIIADVENTURER A text-based adventure game with ASCII art. Caden Finley
+ * Albert Tucker Grijesh Shrestha
+ *
+ * The GameEngine class is responsible for initializing and running the game. It
+ * sets up the game environment, loads game items, enemies, and dungeons, and
+ * starts the game.
+ *
+ * @author ASCIIADVENTURERS
+ * @version 1.0
+ */
 public class GameEngine {
 
     static String resetColor = "\033[0m"; // reset to default color

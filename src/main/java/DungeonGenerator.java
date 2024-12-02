@@ -1,17 +1,33 @@
 
-/**
- * ASCIIADVENTURER
- * Caden Finley
- *
- * @author Caden Finley
- * @version 1.0
- */
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 import java.util.Random;
 
+/**
+ * The DungeonGenerator class is responsible for generating a dungeon
+ * represented as a 2D array. It provides methods to generate the dungeon, reset
+ * the dungeon matrix, and start the dungeon generation process.
+ * <p>
+ * The class includes several static fields for color codes used in console
+ * output, as well as fields for the dungeon matrix and coordinates.
+ * </p>
+ * <p>
+ * Example usage:
+ * <pre>
+ *     DungeonGenerator generator = new DungeonGenerator();
+ *     int[][] dungeon = generator.generateDungeon(10);
+ * </pre>
+ * </p>
+ * <p>
+ * Note: If the testing mode is enabled, certain actions will print messages to
+ * the console.
+ * </p>
+ *
+ * @version 1.0
+ * @author Caden Finley
+ */
 public class DungeonGenerator {
 
     public static boolean testing = false;
@@ -513,11 +529,24 @@ public class DungeonGenerator {
         return directions.stream().mapToInt(i -> i).toArray();
     }
 
+    /**
+     * Creates a 2D array representing rooms that have been visited.
+     *
+     * @param size the size of the 2D array to be created
+     * @return a 2D array of integers with the specified size
+     */
     public static int[][] createRoomsBeenTo(int size) {
         int[][] temp = new int[size][size];
         return temp;
     }
 
+    /**
+     * Counts the number of rooms in the matrix that match the specified value.
+     *
+     * @param matrix the 2D array representing the dungeon
+     * @param find the value to search for in the matrix
+     * @return the number of rooms that match the specified value
+     */
     public static int numberOfRooms(int[][] matrix, int find) {
         int count = 0;
         for (int[] ints : matrix) {
@@ -530,6 +559,12 @@ public class DungeonGenerator {
         return count;
     }
 
+    /**
+     * Counts the number of non-zero rooms in the given matrix.
+     *
+     * @param matrix the 2D array representing the dungeon
+     * @return the number of rooms that are not zero
+     */
     public static int numberOfAllRooms(int[][] matrix) {
         int count = 0;
         for (int[] ints : matrix) {
@@ -542,6 +577,13 @@ public class DungeonGenerator {
         return count;
     }
 
+    /**
+     * Prints the dungeon map represented by the given 2D array. Non-zero values
+     * are printed within square brackets, while zero values are printed as
+     * spaces.
+     *
+     * @param passedMatrix the 2D array representing the dungeon map
+     */
     public static void printMap(int[][] passedMatrix) {
         for (int[] passedMatrix1 : passedMatrix) {
             for (int j = 0; j < passedMatrix.length; j++) {

@@ -1,15 +1,16 @@
 
+import java.io.Console;
+
 /**
- * ASCIIADVENTURER
- * Caden Finley
- * Albert Tucker
- * Grijesh Shrestha
+ * ASCIIADVENTURER Caden Finley Albert Tucker Grijesh Shrestha
+ *
+ * This class represents a settings menu for the ASCIIADVENTURER game. It allows
+ * users to adjust text speed, enable/disable AI-generated prompts, change their
+ * name, and exit the menu.
  *
  * @author ASCIIADVENTURERS
  * @version 1.0
  */
-import java.io.Console;
-
 public abstract class SettingsMenu {
 
     static String resetColor = "\033[0m"; // reset to default color

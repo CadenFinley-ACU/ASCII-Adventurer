@@ -1,15 +1,4 @@
 
-/**
- * ASCIIADVENTURER
- * Caden Finley
- * Albert Tucker
- * Grijesh Shrestha
- * https://www.youtube.com/watch?v=TkJ2dFtD0ho
- *
- * @author ASCIIADVENTURERS
- * @version 1.0
- */
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -19,7 +8,18 @@ import java.net.URL;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * ASCIIADVENTURER Caden Finley Albert Tucker Grijesh Shrestha
+ * https://www.youtube.com/watch?v=TkJ2dFtD0ho
+ *
+ * The PromptEngine class generates prompts for a text adventure game using an
+ * OpenAI API key.
+ *
+ * @author ASCIIADVENTURERS
+ * @version 1.0
+ */
 public class PromptEngine {
+
     private static final String yellowColor = "\u001B[33m";
     private static final String resetColor = "\u001B[0m";
 
@@ -27,6 +27,9 @@ public class PromptEngine {
     public static boolean aiGenerationEnabled = true;
     public static int promptLength = 30;
     private static String prompt = null;
+    /**
+     * List of keywords to highlight in the generated prompt.
+     */
     private static final List<String> keywords = Arrays.asList(
             "village", "meadow", "dungeon", "dark forest", "mountain cave", "mountain top",
             "desert pyramid", "desert oasis", "desert plains", "ocean kingdom", "next dungeon",

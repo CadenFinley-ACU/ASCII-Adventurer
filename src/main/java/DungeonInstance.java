@@ -1,17 +1,32 @@
 
-/**
- * ASCIIADVENTURER
- * Caden Finley
- * Albert Tucker
- * Grijesh Shrestha
- *
- * @author ASCIIADVENTURERS
- * @version 1.0
- */
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * ASCII ADVENTURER Caden Finley Albert Tucker Grijesh Shrestha The
+ * DungeonInstance class represents an instance of a dungeon in the
+ * ASCIIADVENTURER game. It extends the Dungeon class and includes additional
+ * properties and methods specific to a dungeon instance.
+ *
+ * <p>
+ * This class includes information about the enemies, items, and state of the
+ * dungeon, such as whether it has been completed or visited, and whether the
+ * map has been revealed. It also includes the names of the dungeon and its save
+ * file, as well as the types of the boss and mini-boss present in the
+ * dungeon.</p>
+ *
+ * <p>
+ * Example usage:</p>
+ * <pre>
+ *     List<String> enemies = new ArrayList<>();
+ *     List<String> items = new ArrayList<>();
+ *     DungeonInstance dungeon = new DungeonInstance(enemies, items, false, false, false, "Dungeon1", "Save1", "MiniBoss1", "Boss1", 10);
+ * </pre>
+ *
+ * @version 1.0
+ * @author ASCIIADVENTURERS
+ */
 public class DungeonInstance extends Dungeon {
 
     private static final Random rand = new Random();

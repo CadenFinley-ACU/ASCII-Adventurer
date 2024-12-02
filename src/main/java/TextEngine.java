@@ -1,19 +1,21 @@
 
-/**
- * ASCIIADVENTURER
- * Caden Finley
- * Albert Tucker
- * Grijesh Shrestha
- *
- * @author ASCIIADVENTURERS
- * @version 1.0
- */
 import java.io.BufferedReader;
 import java.io.Console;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * ASCIIADVENTURER Caden Finley Albert Tucker Grijesh Shrestha
+ *
+ * The TextEngine class provides methods for printing text with delays, clearing
+ * the console screen, and waiting for user input. It also includes methods for
+ * checking the validity of input commands, parsing commands, and matching
+ * commands against a list of possible commands.
+ *
+ * @author ASCIIADVENTURERS
+ * @version 1.0
+ */
 public abstract class TextEngine {
 
     public static String speedSetting = "Normal";

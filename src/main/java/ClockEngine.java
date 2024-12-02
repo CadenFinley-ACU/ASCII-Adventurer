@@ -1,17 +1,18 @@
 
-/**
- * ASCIIADVENTURER
- * Caden Finley
- * Albert Tucker
- * Grijesh Shrestha
- *
- * @author ASCIIADVENTURERS
- * @version 1.0
- */
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * ASCIIADVENTURER Caden Finley Albert Tucker Grijesh Shrestha
+ *
+ * The ClockEngine class represents a timer or stopwatch that can be started and
+ * stopped. It includes methods to start the clock, stop the clock, and return
+ * the time in a formatted string.
+ *
+ * @author ASCIIADVENTURERS
+ * @version 1.0
+ */
 public class ClockEngine {
 
     private boolean running;

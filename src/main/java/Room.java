@@ -1,15 +1,19 @@
 
+import java.io.Console;
+import java.util.Random;
+
 /**
  * ASCIIADVENTURER
  * Caden Finley
  * Albert Tucker
  * Grijesh Shrestha
- *
+ * 
+ * This class represents a room in the ASCII Adventure game. It contains methods
+ * to interact with the room, such as checking for chests and processing user commands.
+ * 
  * @author ASCIIADVENTURERS
  * @version 1.0
  */
-import java.io.Console;
-import java.util.Random;
 
 public class Room {
 

@@ -1,11 +1,4 @@
 
-/**
- * ASCIIADVENTURER
- * Caden Finley
- *
- * @author Caden Finley
- * @version 1.0
- */
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -22,6 +15,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * ASCIIADVENTURER Caden Finley
+ *
+ * The GameSaveSerialization class provides methods for saving and loading the
+ *
+ * @author Caden Finley
+ * @version 1.0
+ */
 public class GameSaveSerialization {
 
     private static final String NULL_MARKER = "NULL";

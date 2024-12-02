@@ -5,6 +5,8 @@
  * Albert Tucker
  * Grijesh Shrestha
  *
+ * The Village class represents the village area in the game. It extends the Room class and includes additional properties and methods specific to the village area.
+ *
  * @author ASCIIADVENTURERS
  * @version 1.0
  */
@@ -14,8 +16,9 @@ public class Village extends Room {
 
     /**
      * The startRoom function in Java sets the player in a village environment
-     * with various options to interact with different locations and warp to
-     * other areas based on completed dungeons.
+     * with      *
+     * various options to interact with different locations and warp to other
+     * areas based on completed dungeons.
      */
     public static void startRoom() throws InterruptedException { //start room
         room = "Village";

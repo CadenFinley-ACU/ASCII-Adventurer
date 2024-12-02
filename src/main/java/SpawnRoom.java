@@ -5,14 +5,21 @@
  * Albert Tucker
  * Grijesh Shrestha
  *
+ * The SpawnRoom class represents the starting room of the game. It extends the Room class and includes additional properties and methods specific to the starting room.
+ *
  * @author ASCIIADVENTURERS
  * @version 1.0
  */
-
 public class SpawnRoom extends Room {
 
     static int roomSave = 0;
 
+    /**
+     * Starts the room sequence. Depending on the value of roomSave, it will
+     * call different parts of the room sequence.
+     *
+     * @throws InterruptedException if the thread is interrupted
+     */
     public static void startRoom() throws InterruptedException { //start room
         room = "SpawnRoom";
         GameEngine.checkSave(room);
@@ -30,10 +37,19 @@ public class SpawnRoom extends Room {
         }
     }
 
+    /**
+     * Resets the roomSave variable to 0.
+     */
     public static void resetAll() { //reset all
         roomSave = 0;
     }
 
+    /**
+     * Handles the first part of the room sequence. Prints initial text and
+     * handles user commands.
+     *
+     * @throws InterruptedException if the thread is interrupted
+     */
     private static void part0() throws InterruptedException { //0
         String yellowColor = "\033[1;33m"; // yellow color
 
@@ -57,6 +73,11 @@ public class SpawnRoom extends Room {
         }
     }
 
+    /**
+     * Handles the second part of the room sequence.
+     *
+     * @throws InterruptedException if the thread is interrupted
+     */
     private static void part1() throws InterruptedException { //1
         if (Player.inventory.containsKey("sword")) {
             roomSave++;
@@ -74,6 +95,11 @@ public class SpawnRoom extends Room {
         }
     }
 
+    /**
+     * Handles the third part of the room sequence.
+     *
+     * @throws InterruptedException if the thread is interrupted
+     */
     private static void part2() throws InterruptedException { //2
         String yellowColor = "\033[1;33m"; // yellow color
         TextEngine.printWithDelays("You enter a cool, dimly lit room by a few torches", false);

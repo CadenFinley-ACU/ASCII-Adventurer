@@ -1,15 +1,17 @@
 
+import java.io.Console;
+import java.util.Map;
+
 /**
- * ASCIIADVENTURER
- * Caden Finley
- * Albert Tucker
- * Grijesh Shrestha
+ * The Enemy class represents various enemies in the game and their damage
+ * values. It provides functionality to initialize enemy damage values based on
+ * the game state.
+ *
+ * ASCIIADVENTURER Caden Finley Albert Tucker Grijesh Shrestha
  *
  * @author ASCIIADVENTURERS
  * @version 1.0
  */
-import java.io.Console;
-import java.util.Map;
 
 public class Enemy {
 

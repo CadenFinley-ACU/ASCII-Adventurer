@@ -1,14 +1,4 @@
 
-/**
- * ASCIIADVENTURER
- * Caden Finley
- * Albert Tucker
- * Grijesh Shrestha
- *
- * @author ASCIIADVENTURERS
- * @version 1.0
- */
-
 import java.util.HashMap;
 import java.util.Random;
 
@@ -19,6 +9,18 @@ import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
+
+
+/**
+ * ASCIIADVENTURER TEST SUITE
+ * Caden Finley
+ * Albert Tucker
+ * Grijesh Shrestha
+ *
+ * @author ASCIIADVENTURERS
+ * @version 1.0
+ */
+
 
 public class TestSuite_Adventure {
 

@@ -1,16 +1,20 @@
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
+
 /**
  * ASCIIADVENTURER
  * Caden Finley
  * Albert Tucker
  * Grijesh Shrestha
  *
+ * The Dungeon class represents a dungeon in the game. It extends the Room class and includes additional properties and methods specific to a dungeon.
+ * 
  * @author ASCIIADVENTURERS
  * @version 1.0
  */
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
 
 public class Dungeon extends Room {
 

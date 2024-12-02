@@ -1,16 +1,23 @@
 
-/**
- * ASCIIADVENTURER
- * Albert Tucker
- * Grijesh Shrestha
- *
- * @author ASCIIADVENTURERS
- * @version 1.0
- */
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * ASCIIADVENTURER Albert Tucker Grijesh Shrestha
+ *
+ * The OpenWorld class represents a dynamic environment where the player can
+ * encounter various enemies based on the type of terrain they are in. It
+ * extends the Room class and includes methods to start the room and handle
+ * encounters.
+ *
+ * <p>
+ * This class includes methods to initialize the room, check for changes in the
+ * room, and manage enemy encounters based on the player's position.</p>
+ *
+ * @version 1.0
+ * @author ASCIIADVENTURERS
+ */
 public class OpenWorld extends Room {
 
     static int roomSave = 74;
@@ -29,6 +36,13 @@ public class OpenWorld extends Room {
     public static boolean inFight = false;
     public static boolean wasInFight = false;
 
+    /**
+     * Starts the room by initializing the room name, checking the save state,
+     * saving the game, refreshing the screen, and setting up the list of
+     * enemies based on the player's position.
+     *
+     * @throws InterruptedException if the thread is interrupted while waiting
+     */
     public static void startRoom() throws InterruptedException { //start room
         room = "OpenWorld";
         GameEngine.checkSave(room);
@@ -656,15 +670,33 @@ public class OpenWorld extends Room {
         }
     }
 
+    /**
+     * Resets all game settings to their default values. Sets the room save to
+     * 74 and the room number to 0.
+     */
     public static void resetAll() { //reset all
         roomSave = 74;
         roomNumber = 0;
     }
 
+    /**
+     * Checks if there has been a change in the room.
+     *
+     * @return true if the current room save is different from the previous room
+     * save, false otherwise.
+     */
     public static boolean checkChangeInRoom() {
         return roomSave != previousRoomSave;
     }
 
+    /**
+     * Handles the encounter with enemies in the game. If there is an encounter
+     * and the number of enemies is greater than 0, it initiates a fight
+     * sequence. The player can choose to either fight or run.
+     *
+     * @throws InterruptedException if the thread is interrupted during the
+     * delay in text printing.
+     */
     private static void fightEnemies() throws InterruptedException {
         if (encounter && numberOfEnemies > 0) {
             drawCurrentRoom();
@@ -706,6 +738,12 @@ public class OpenWorld extends Room {
         }
     }
 
+    /**
+     * Handles the logic for rooms in the game. All rooms in this class are
+     * handled in a similar way.
+     *
+     * @throws InterruptedException if the thread is interrupted while sleeping.
+     */
     private static void room2() throws InterruptedException {
         if (PromptEngine.aiGenerationEnabled) {
             TextEngine.printWithDelays(PromptEngine.returnPrompt(), false);

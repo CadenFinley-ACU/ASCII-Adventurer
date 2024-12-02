@@ -1,23 +1,20 @@
 
-/**
- * ASCIIADVENTURER
- * Caden Finley
- * Albert Tucker
- * Grijesh Shrestha
- *
- * @author ASCIIADVENTURERS
- * @version 1.0
- */
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
+/**
+ * ASCIIADVENTURER Caden Finley Albert Tucker Grijesh Shrestha
+ *
+ * This class manages the inventory of a player, including weapons, armor,
+ * potions, and keys. It provides methods to create items and print the current
+ * inventory.
+ *
+ * @author ASCIIADVENTURERS
+ * @version 1.0
+ */
 public class InventoryManager extends Player {
 
-    // public String room;
-    // public String area;
-    //inventory format is itemname, amount
-    //map format : itemname, damage
     public static Map<String, Integer> Weapons = new HashMap<>();
     public static Map<String, Integer> Armor = new HashMap<>();
     public static Map<String, Integer> Potions = new HashMap<>();
