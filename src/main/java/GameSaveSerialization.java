@@ -43,9 +43,9 @@ public class GameSaveSerialization {
         writeSeparator(filePath);
         writeValue(String.valueOf(Player.getInventorySize()), filePath);
         writeSeparator(filePath);
-        writeValue(Main.savedPlace, filePath);
+        writeValue(GameEngine.savedPlace, filePath);
         writeSeparator(filePath);
-        writeValue(String.valueOf(Main.playerCreated), filePath);
+        writeValue(String.valueOf(GameEngine.playerCreated), filePath);
         writeSeparator(filePath);
         writeValue(TextEngine.speedSetting, filePath);
         writeSeparator(filePath);
@@ -163,7 +163,7 @@ public class GameSaveSerialization {
         writeSeparator(filePath);
         writeValue(String.valueOf(Dungeon.OceanKingdomDungeon.mapRevealed), filePath);
         writeSeparator(filePath);
-        writeValue(String.valueOf(Main.gameComplete), filePath);
+        writeValue(String.valueOf(GameEngine.gameComplete), filePath);
         writeSeparator(filePath);
         writeValue(String.valueOf(Dungeon.resetedAfterWin), filePath);
         writeSeparator(filePath);
@@ -173,7 +173,7 @@ public class GameSaveSerialization {
         writeSeparator(filePath);
         writeValue(String.valueOf(PromptEngine.promptLength), filePath);
         writeSeparator(filePath);
-        writeValue(String.valueOf(Main.playTime.getTimeElapsedInSeconds()), filePath);
+        writeValue(String.valueOf(GameEngine.playTime.getTimeElapsedInSeconds()), filePath);
         //do this after all other data is saved
         serializeAllLines(filePath, filePath);
         if (Player.getName().equals("Debug!")) {
@@ -182,7 +182,7 @@ public class GameSaveSerialization {
     }
 
     public static void loadGameSave() throws InterruptedException {
-        Main.playTime.setSavedTimeInSeconds(Main.playTime.getTimeElapsedInSeconds());
+        GameEngine.playTime.setSavedTimeInSeconds(GameEngine.playTime.getTimeElapsedInSeconds());
         deserializeToFile(filePath);
         try (BufferedReader reader = new BufferedReader(new FileReader(runtimePath))) {
             try {
@@ -199,9 +199,9 @@ public class GameSaveSerialization {
                 int inventorySize = Integer.parseInt(reader.readLine());
                 reader.readLine();
                 Player.playerSetSave(name, health, maxHealth, gold, inventory, inventorySize);
-                Main.savedPlace = reader.readLine();
+                GameEngine.savedPlace = reader.readLine();
                 reader.readLine();
-                Main.playerCreated = Boolean.parseBoolean(reader.readLine());
+                GameEngine.playerCreated = Boolean.parseBoolean(reader.readLine());
                 reader.readLine();
                 TextEngine.speedSetting = reader.readLine();
                 reader.readLine();
@@ -323,7 +323,7 @@ public class GameSaveSerialization {
                 Dungeon.OceanKingdomDungeon.mapRevealed = Boolean.parseBoolean(reader.readLine());
                 reader.readLine();
 
-                Main.gameComplete = Boolean.parseBoolean(reader.readLine());
+                GameEngine.gameComplete = Boolean.parseBoolean(reader.readLine());
                 reader.readLine();
                 Dungeon.resetedAfterWin = Boolean.parseBoolean(reader.readLine());
                 reader.readLine();
@@ -333,24 +333,24 @@ public class GameSaveSerialization {
                 reader.readLine();
                 PromptEngine.promptLength = Integer.parseInt(reader.readLine());
                 reader.readLine();
-                Main.playTime.setSavedTimeInSeconds(Long.parseLong(reader.readLine()));
+                GameEngine.playTime.setSavedTimeInSeconds(Long.parseLong(reader.readLine()));
             } catch (IOException | NumberFormatException e) {
                 System.out.println("Save File Corrupt or Invalid... ");
                 TextEngine.printWithDelays("Erasing Save File and Restarting...", false);
                 TextEngine.enterToNext();
-                Main.wipeFile(".game_save.txt");
-                Main.wipeFile(".runtime.txt");
+                GameEngine.wipeFile(".game_save.txt");
+                GameEngine.wipeFile(".runtime.txt");
                 TextEngine.clearScreen();
-                Main.gameStartGenDungeon();
-                Main.wipeSave();
-                Main.startMenu();
+                GameEngine.gameStartGenDungeon();
+                GameEngine.wipeSave();
+                GameEngine.startMenu();
             }
         } catch (Exception e) {
             System.out.println("Save File Not Found... ");
             TextEngine.printWithDelays("Restarting...", false);
             TextEngine.enterToNext();
             TextEngine.clearScreen();
-            Main.startMenu();
+            GameEngine.startMenu();
         }
     }
 

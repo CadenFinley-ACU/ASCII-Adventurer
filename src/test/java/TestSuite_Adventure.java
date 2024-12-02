@@ -1,7 +1,8 @@
+
 /**
  * Village Class
  *
- * Text Adventure Game SE374 F24 Final Project 
+ * Text Adventure Game SE374 F24 Final Project
  * Caden Finley, Albert Tucker, Grijesh Shrestha
  */
 
@@ -25,7 +26,7 @@ public class TestSuite_Adventure {
         // Reset the inventory and other static fields before each test
         InventoryManager.inventory = new HashMap<>();
         DungeonGenerator.testing = true;
-        Main.TESTING = true;
+        GameEngine.TESTING = true;
         Player.hardSetInventorySize(20);
     }
 
@@ -40,7 +41,7 @@ public class TestSuite_Adventure {
             System.out.println("-----------------------------");
             DungeonGenerator.testing = false;
         }
-        Main.TESTING = false;
+        GameEngine.TESTING = false;
     }
 
     @Test
@@ -383,7 +384,7 @@ public class TestSuite_Adventure {
 
     @Test
     public void testChangeInventorySize() throws InterruptedException {
-        Main.createGameItems();
+        GameEngine.createGameItems();
         Player.hardSetInventorySize(20);
         Player.inventory = new HashMap<>();
         assertEquals(20, Player.getInventorySize());
@@ -393,7 +394,7 @@ public class TestSuite_Adventure {
 
     @Test
     public void testChangeInventorySize2() throws InterruptedException {
-        Main.createGameItems();
+        GameEngine.createGameItems();
         Player.hardSetInventorySize(20);
         Player.inventory = new HashMap<>();
         assertEquals(20, Player.getInventorySize());

@@ -89,7 +89,7 @@ public class PromptEngine {
             }
             // "add more" / "make more complex"
             prompt = chatGPT("Generate a me a prompt for a text adventure game designed for highschoolers. Always state the direction of the structure if it is given and the distance if it is given. When giving direction do not abbreviate the direction. Do this in around " + promptLength + " words or less using this info: The player headed " + OpenWorld.holdCommand + " and is in a " + setting + " " + villagePrompt + dungeonPrompt + ".") + "\n";
-            Main.screenRefresh();
+            GameEngine.screenRefresh();
         }
     }
 

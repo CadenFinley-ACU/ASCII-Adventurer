@@ -13,9 +13,9 @@ public class SpawnRoom extends Room {
 
     public static void startRoom() throws InterruptedException { //start room
         room = "SpawnRoom";
-        Main.checkSave(room);
+        GameEngine.checkSave(room);
         GameSaveSerialization.saveGame();
-        Main.screenRefresh();
+        GameEngine.screenRefresh();
         switch (roomSave) {
             case 0 ->
                 part0();
@@ -24,7 +24,7 @@ public class SpawnRoom extends Room {
             case 2 ->
                 part2();
             default ->
-                Main.startMenu();
+                GameEngine.startMenu();
         }
     }
 
@@ -47,10 +47,10 @@ public class SpawnRoom extends Room {
             switch (command.toLowerCase().trim()) {
                 case "north" -> {
                     roomSave = 1;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 default ->
-                    Main.inGameDefaultTextHandling(command);
+                    GameEngine.inGameDefaultTextHandling(command);
             }
         }
     }
@@ -89,7 +89,7 @@ public class SpawnRoom extends Room {
                     OpenWorld.startRoom();
                 }
                 default ->
-                    Main.inGameDefaultTextHandling(command);
+                    GameEngine.inGameDefaultTextHandling(command);
             }
         }
 

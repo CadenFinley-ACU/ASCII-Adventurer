@@ -6,8 +6,8 @@ import java.util.Random;
 /**
  * Dungeon Class
  *
- * Text Adventure Game SE374 F24 Final Project 
- * Caden Finley, Albert Tucker, Grijesh Shrestha
+ * Text Adventure Game SE374 F24 Final Project Caden Finley, Albert Tucker,
+ * Grijesh Shrestha
  */
 public class Dungeon extends Room {
 
@@ -120,14 +120,10 @@ public class Dungeon extends Room {
     }
 
     /**
-     * The function `defaultDungeonArgs` handles different actions such as
-     * leaving a dungeon, viewing a map, and resetting dungeons based on the
-     * input data provided.
+     * Handles default dungeon arguments based on the provided data.
      *
-     * @param data The `defaultDungeonArgs` method takes a `String` parameter
-     * named `data`. This method is used to handle different actions within
-     * dungeons based on the provided `data`. The `data` parameter represents
-     * the action or command that the player wants to perform in the dungeon.
+     * @param data the command to be processed (e.g., "leave", "map", "reset")
+     * @throws InterruptedException if the thread is interrupted
      */
     public static void defaultDungeonArgs(String data) throws InterruptedException { //default dungeon arguments
         switch (data) {
@@ -219,104 +215,104 @@ public class Dungeon extends Room {
                 switch (currentDungeon) {
                     case "Meadow" -> {
                         if (ableToUseMenuCommands()) {
-                            Main.screenRefresh();
+                            GameEngine.screenRefresh();
                             TextEngine.printWithDelays("You open your map and see the following:\n", false);
                             System.out.println();
                             DungeonGenerator.printAdjacentRoomsAndCurrentRoomAndUnlockedRooms(meadowDungeon, MeadowDungeon.roomsBeenTo, currentPlayerPosition, MeadowDungeon.mapRevealed);
                             System.out.println();
                             TextEngine.enterToNext();
-                            Main.loadSave();
+                            GameEngine.loadSave();
                         } else {
                             TextEngine.printWithDelays("You cannot use the map right now", true);
                         }
                     }
                     case "Dark Forest" -> {
                         if (ableToUseMenuCommands()) {
-                            Main.screenRefresh();
+                            GameEngine.screenRefresh();
                             TextEngine.printWithDelays("You open your map and see the following:\n", false);
                             System.out.println();
                             DungeonGenerator.printAdjacentRoomsAndCurrentRoomAndUnlockedRooms(darkForestDungeon, DarkForestDungeon.roomsBeenTo, currentPlayerPosition, DarkForestDungeon.mapRevealed);
                             System.out.println();
                             TextEngine.enterToNext();
-                            Main.loadSave();
+                            GameEngine.loadSave();
                         } else {
                             TextEngine.printWithDelays("You cannot use the map right now", true);
                         }
                     }
                     case "Mountain Cave" -> {
                         if (ableToUseMenuCommands()) {
-                            Main.screenRefresh();
+                            GameEngine.screenRefresh();
                             TextEngine.printWithDelays("You open your map and see the following:\n", false);
                             System.out.println();
                             DungeonGenerator.printAdjacentRoomsAndCurrentRoomAndUnlockedRooms(mountainCaveDungeon, MountainCaveDungeon.roomsBeenTo, currentPlayerPosition, MountainCaveDungeon.mapRevealed);
                             System.out.println();
                             TextEngine.enterToNext();
-                            Main.loadSave();
+                            GameEngine.loadSave();
                         } else {
                             TextEngine.printWithDelays("You cannot use the map right now", true);
                         }
                     }
                     case "Mountain Top" -> {
                         if (ableToUseMenuCommands()) {
-                            Main.screenRefresh();
+                            GameEngine.screenRefresh();
                             TextEngine.printWithDelays("You open your map and see the following:\n", false);
                             System.out.println();
                             DungeonGenerator.printAdjacentRoomsAndCurrentRoomAndUnlockedRooms(mountainTopDungeon, MountainTopDungeon.roomsBeenTo, currentPlayerPosition, MountainTopDungeon.mapRevealed);
                             System.out.println();
                             TextEngine.enterToNext();
-                            Main.loadSave();
+                            GameEngine.loadSave();
                         } else {
                             TextEngine.printWithDelays("You cannot use the map right now", true);
                         }
                     }
                     case "Desert Oasis" -> {
                         if (ableToUseMenuCommands()) {
-                            Main.screenRefresh();
+                            GameEngine.screenRefresh();
                             TextEngine.printWithDelays("You open your map and see the following:\n", false);
                             System.out.println();
                             DungeonGenerator.printAdjacentRoomsAndCurrentRoomAndUnlockedRooms(desertOasisDungeon, DesertOasisDungeon.roomsBeenTo, currentPlayerPosition, DesertOasisDungeon.mapRevealed);
                             System.out.println();
                             TextEngine.enterToNext();
-                            Main.loadSave();
+                            GameEngine.loadSave();
                         } else {
                             TextEngine.printWithDelays("You cannot use the map right now", true);
                         }
                     }
                     case "Desert Plains" -> {
                         if (ableToUseMenuCommands()) {
-                            Main.screenRefresh();
+                            GameEngine.screenRefresh();
                             TextEngine.printWithDelays("You open your map and see the following:\n", false);
                             System.out.println();
                             DungeonGenerator.printAdjacentRoomsAndCurrentRoomAndUnlockedRooms(desertPlainsDungeon, DesertPlainsDungeon.roomsBeenTo, currentPlayerPosition, DesertPlainsDungeon.mapRevealed);
                             System.out.println();
                             TextEngine.enterToNext();
-                            Main.loadSave();
+                            GameEngine.loadSave();
                         } else {
                             TextEngine.printWithDelays("You cannot use the map right now", true);
                         }
                     }
                     case "Desert Pyramid" -> {
                         if (ableToUseMenuCommands()) {
-                            Main.screenRefresh();
+                            GameEngine.screenRefresh();
                             TextEngine.printWithDelays("You open your map and see the following:\n", false);
                             System.out.println();
                             DungeonGenerator.printAdjacentRoomsAndCurrentRoomAndUnlockedRooms(desertPyramidDungeon, DesertPyramidDungeon.roomsBeenTo, currentPlayerPosition, DesertPyramidDungeon.mapRevealed);
                             System.out.println();
                             TextEngine.enterToNext();
-                            Main.loadSave();
+                            GameEngine.loadSave();
                         } else {
                             TextEngine.printWithDelays("You cannot use the map right now", true);
                         }
                     }
                     case "Ocean Kingdom" -> {
                         if (ableToUseMenuCommands()) {
-                            Main.screenRefresh();
+                            GameEngine.screenRefresh();
                             TextEngine.printWithDelays("You open your map and see the following:\n", false);
                             System.out.println();
                             DungeonGenerator.printAdjacentRoomsAndCurrentRoomAndUnlockedRooms(oceanKingdomDungeon, OceanKingdomDungeon.roomsBeenTo, currentPlayerPosition, OceanKingdomDungeon.mapRevealed);
                             System.out.println();
                             TextEngine.enterToNext();
-                            Main.loadSave();
+                            GameEngine.loadSave();
                         } else {
                             TextEngine.printWithDelays("You cannot use the map right now", true);
                         }
@@ -325,7 +321,7 @@ public class Dungeon extends Room {
                 }
             }
             case "reset" -> {
-                if (Main.gameComplete) {
+                if (GameEngine.gameComplete) {
                     TextEngine.printWithDelays("This command will reset" + yellowColor + " ALL " + resetColor + "Dungeons!", false);
                     TextEngine.printWithDelays("Are you sure you want to do this? " + redColor + "yes" + resetColor + " or " + yellowColor + "no" + resetColor, true);
                     while (true) {
@@ -340,21 +336,21 @@ public class Dungeon extends Room {
                                 completedDungeons = 8;
                                 OpenWorld.roomSave = 74;
                                 room = "OpenWorld";
-                                Main.checkSave(room);
+                                GameEngine.checkSave(room);
                                 GameSaveSerialization.saveGame();
-                                Main.loadSave();
+                                GameEngine.loadSave();
                             }
                             default -> {
-                                Main.inGameDefaultTextHandling(data);
+                                GameEngine.inGameDefaultTextHandling(data);
                             }
                         }
                     }
                 } else {
-                    Main.inGameDefaultTextHandling(data);
+                    GameEngine.inGameDefaultTextHandling(data);
                 }
             }
             default -> {
-                Main.inGameDefaultTextHandling(data);
+                GameEngine.inGameDefaultTextHandling(data);
             }
         }
     }
@@ -377,15 +373,13 @@ public class Dungeon extends Room {
     }
 
     /**
-     * This function checks if the player has a key in their inventory and
-     * prompts them to unlock the door to the boss room, returning true if
-     * successful and false if not.
+     * Prompts the player to decide whether to unlock the door to the boss room
+     * if they have a key.
      *
-     * @return The method `confirmBossContinue()` returns a boolean value. It
-     * returns `true` if the player chooses to unlock the door to the boss room
-     * and successfully uses the key, and it returns `false` in other cases such
-     * as if the player does not have the key, chooses not to unlock the door,
-     * or if there is an invalid input.
+     * @return {@code true} if the player chooses to unlock the door and
+     * successfully uses the key, {@code false} otherwise.
+     * @throws InterruptedException if the thread is interrupted while waiting
+     * for user input.
      */
     public static boolean confirmBossContinue() throws InterruptedException {
         if (Player.inventory.containsKey("key")) {
@@ -420,11 +414,15 @@ public class Dungeon extends Room {
     }
 
     /**
-     * The dungeonShop function allows players to buy items from a shop within
-     * different dungeons based on their current location in the game.
+     * Opens the dungeon shop where the player can buy items based on their
+     * current dungeon location. Displays the player's gold and inventory
+     * status, and offers different items for purchase depending on the dungeon.
+     *
+     * @throws InterruptedException if the thread is interrupted while waiting
+     * for user input.
      */
     public static void dungeonShop() throws InterruptedException {
-        Main.screenRefresh();
+        GameEngine.screenRefresh();
         String localDungeon = currentDungeon;
         TextEngine.printNoDelay("Gold: " + Player.getGold(), false);
         TextEngine.printNoDelay("Inventory: " + Player.getTotalNumberOfItemsInInventory() + "/" + Player.getInventorySize(), false);
@@ -578,18 +576,13 @@ public class Dungeon extends Room {
     }
 
     /**
-     * The `buyMultiple` function allows the player to purchase multiple items
-     * from a village shop, handling input validation, cost calculations,
-     * inventory space checks, and gold availability.
+     * Allows the player to buy multiple items of a specified type from the
+     * village shop.
      *
-     * @param type The `type` parameter in the `buyMultiple` method represents
-     * the type of item that the player wants to buy from the village shop. It
-     * could be any item available for purchase in the shop, such as potions,
-     * weapons, armor, or any other item that the player can acquire in the game
-     * @param cost The `cost` parameter in the `buyMultiple` method represents
-     * the price of each item that the player wants to buy from the village
-     * shop. This cost is multiplied by the quantity of items the player wishes
-     * to purchase to calculate the total cost of the transaction.
+     * @param type The type of item to buy.
+     * @param cost The cost of a single item.
+     * @throws InterruptedException If the thread is interrupted while waiting
+     * for user input.
      */
     private static void buyMultiple(String type, int cost) throws InterruptedException { //buy multiple clause for certain items in village shop
         TextEngine.printWithDelays("How many would you like to buy?", true);
@@ -599,7 +592,7 @@ public class Dungeon extends Room {
                 try {
                     Integer.valueOf(command);
                 } catch (NumberFormatException e) {
-                    Main.invalidCommand();
+                    GameEngine.invalidCommand();
                     TextEngine.enterToNext();
                     buyMultiple(type, cost);
                 }
@@ -634,15 +627,19 @@ public class Dungeon extends Room {
                     }
                 }
             } else {
-                Main.invalidCommand();
+                GameEngine.invalidCommand();
                 keepShopping();
             }
         }
     }
 
     /**
-     * The function `keepShopping` prompts the user to continue shopping or
-     * leave, and handles the user input accordingly.
+     * Prompts the player to decide whether to keep shopping or not. If the
+     * player chooses "yes", the dungeon shop is reopened. If the player chooses
+     * "no", the player leaves the shop.
+     *
+     * @throws InterruptedException If the thread is interrupted while waiting
+     * for user input.
      */
     private static void keepShopping() throws InterruptedException { //keep shopping
         TextEngine.printWithDelays("Would you like to keep shopping? " + yellowColor + "yes" + resetColor + " or " + yellowColor + "no" + resetColor, true);
@@ -662,8 +659,13 @@ public class Dungeon extends Room {
     }
 
     /**
-     * The function `useMagicMap()` reveals the layout of different dungeons
-     * based on the current dungeon location.
+     * Uses the magic map to reveal the layout of the current dungeon. This
+     * method prints a message indicating the map has been used and reveals the
+     * layout of the dungeon. It then sets the mapRevealed flag to true for the
+     * respective dungeon.
+     *
+     * @throws InterruptedException if the thread is interrupted while printing
+     * the message
      */
     private static void useMagicMap() throws InterruptedException {
         switch (currentDungeon) {
@@ -711,7 +713,11 @@ public class Dungeon extends Room {
     }
 
     /**
-     * The `leave()` function handles directions and commands before exiting.
+     * Leaves the current dungeon. This method handles the directions and
+     * commands for leaving the dungeon.
+     *
+     * @throws InterruptedException if the thread is interrupted while handling
+     * directions and commands
      */
     private static void leave() throws InterruptedException {
         handleDirectionsAndCommands(false);
@@ -766,7 +772,7 @@ public class Dungeon extends Room {
      * return value depends on the conditions specified in the method.
      */
     public static boolean ableToUseMenuCommands() {
-        if ("OpenWorld".equals(Main.getSavedPlace()) || "Village".equals(Main.getSavedPlace()) || "SpawnRoom".equals(Main.getSavedPlace())) {
+        if ("OpenWorld".equals(GameEngine.getSavedPlace()) || "Village".equals(GameEngine.getSavedPlace()) || "SpawnRoom".equals(GameEngine.getSavedPlace())) {
             return true;
         }
         switch (currentDungeon) {
@@ -801,8 +807,13 @@ public class Dungeon extends Room {
     }
 
     /**
-     * The dungeonIntroText function displays introductory text for the current
-     * dungeon and updates the player's progress in the dungeon.
+     * Displays the introductory text for the current dungeon and updates the
+     * player's position. This method prints a welcome message, provides
+     * instructions, and updates the player's current position in the dungeon's
+     * map based on the current dungeon.
+     *
+     * @throws InterruptedException if the thread is interrupted while printing
+     * the messages
      */
     public static void dungeonIntroText() throws InterruptedException {
         TextEngine.printWithDelays("You have entered " + redColor + "The " + currentDungeon + resetColor + "!", false);
@@ -837,9 +848,10 @@ public class Dungeon extends Room {
     }
 
     /**
-     * The `miniBossSequence` function handles the encounter with a mini boss in
-     * a specific dungeon, updating the dungeon map accordingly and loading the
-     * game save.
+     * Initiates the mini boss sequence, updates the player's health, and marks
+     * the current room as visited.
+     *
+     * @throws InterruptedException if the thread is interrupted
      */
     public static void miniBossSequence() throws InterruptedException {
         TextEngine.printWithDelays("You have entered a room with a mini boss", false);
@@ -871,12 +883,14 @@ public class Dungeon extends Room {
             }
         }
         setMaps();
-        Main.loadSave();
+        GameEngine.loadSave();
     }
 
     /**
-     * The `fairySequence` function updates the player's position on the current
-     * dungeon map and then loads a saved game.
+     * Updates the player's position on the current dungeon map and then loads a
+     * saved game.
+     *
+     * @throws InterruptedException if the thread is interrupted
      */
     public static void fairySequence() throws InterruptedException {
         switch (currentDungeon) {
@@ -906,13 +920,17 @@ public class Dungeon extends Room {
             }
         }
         setMaps();
-        Main.loadSave();
+        GameEngine.loadSave();
     }
 
     /**
-     * The keyRoomSequence function handles player interactions with enemies in
-     * different dungeon locations, allowing the player to choose between
-     * fighting or running.
+     * Handles the sequence of events when the player enters a key room in the
+     * dungeon. This method will determine the number of enemies, prompt the
+     * player for a command, and execute the corresponding actions based on the
+     * player's choice.
+     *
+     * @throws InterruptedException if the thread is interrupted during the
+     * delay in text display.
      */
     public static void keyRoomSequence() throws InterruptedException {
         if (numberOfEnemies < 2) {
@@ -953,7 +971,7 @@ public class Dungeon extends Room {
                         }
                     }
                     setMaps();
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 case "run" -> {
                     Player.changeHealth(Enemy.runSpawnEnemy(enemyType, numberOfEnemies));
@@ -969,9 +987,13 @@ public class Dungeon extends Room {
     }
 
     /**
-     * The function `fightRandomEnemies` handles player encounters with enemies
-     * in different dungeons, allowing the player to fight or run from the
-     * enemies.
+     * Handles the sequence of events when the player enters a room with random
+     * enemies. This method will determine the number of enemies, prompt the
+     * player for a command, and execute the corresponding actions based on the
+     * player's choice.
+     *
+     * @throws InterruptedException if the thread is interrupted during the
+     * delay in text display.
      */
     public static void fightRandomEnemies() throws InterruptedException {
         if (numberOfEnemies == 0) {
@@ -1055,9 +1077,12 @@ public class Dungeon extends Room {
     }
 
     /**
-     * The function `heartContainerRoom` checks if the player has a heart
-     * container in the room and updates the corresponding dungeon room
-     * accordingly.
+     * The treasureRoom function allows the player to interact with a treasure
+     * chest and receive a random item. The player's position is updated on the
+     * dungeon map based on the current dungeon.
+     *
+     * @throws InterruptedException if the thread is interrupted while printing
+     * the message
      */
     public static void heartContainerRoom() throws InterruptedException {
         if (hasItemInRoom("heart container", 1)) {
@@ -1095,8 +1120,12 @@ public class Dungeon extends Room {
     }
 
     /**
-     * The keyRoom function checks if the player has a key in the room and
-     * updates the roomsBeenTo array based on the current dungeon.
+     * The keyRoom function allows the player to interact with a key and unlock
+     * a door. The player's position is updated on the dungeon map based on the
+     * current dungeon.
+     *
+     * @throws InterruptedException if the thread is interrupted while printing
+     * the message
      */
     public static void keyRoom() throws InterruptedException {
         if (hasItemInRoom("key", 1)) {
@@ -1134,9 +1163,12 @@ public class Dungeon extends Room {
     }
 
     /**
-     * The fairyRoom function allows the player to interact with a mystical
-     * fairy who offers a healing wish, with options to accept or decline the
-     * wish.
+     * The fairyRoom function allows the player to interact with a fairy and
+     * receive a wish of healing. The player's position is updated on the
+     * dungeon map based on the current dungeon.
+     *
+     * @throws InterruptedException if the thread is interrupted while printing
+     * the message
      */
     public static void fairyRoom() throws InterruptedException {
         TextEngine.printWithDelays("You have entered a room with a mystical fairy", false);
@@ -1211,16 +1243,18 @@ public class Dungeon extends Room {
     }
 
     /**
-     * The `itemRoom` function in Java handles the logic for interacting with
-     * items in different dungeon rooms, removing items if found in chests, and
-     * triggering specific sequences based on the dungeon type and available
-     * rooms.
+     * The function `testIfItemRoom` checks if the input integer is equal to 6
+     * and returns true if it is not equal to 0.
      *
-     * @param localItems The `localItems` parameter in the `itemRoom` method is
-     * a `List<String>` that contains items present in the current room. The
-     * method checks if the list is not empty and then randomly selects an item
-     * from the list to interact with. If the selected item is found in a chest
-     * in
+     * @param check The `check` parameter in the `testIfItemRoom` method is used
+     * to determine if a room is an item room. The method checks if the value of
+     * `check` is not equal to 0, and if it is not, it returns `true` if `check`
+     * is equal
+     * @return The method `testIfItemRoom` returns a boolean value. It returns
+     * `true` if the input `check` is not equal to 0 and is equal to 6,
+     * otherwise it returns `false`.
+     *
+     * @throws InterruptedException if the thread is interrupted while printing
      */
     public static void itemRoom(List<String> localItems) throws InterruptedException {
         if (!localItems.isEmpty()) {
@@ -1331,6 +1365,8 @@ public class Dungeon extends Room {
      * The `trappedRoomSequence` function randomly sets a specific value in a
      * dungeon map based on the current dungeon the player is in and then
      * updates the maps and loads the game save.
+     *
+     * @throws InterruptedException if the thread is interrupted while printing
      */
     public static void trappedRoomSequence() throws InterruptedException {
         int hit = new Random().nextBoolean() ? 1 : 2;
@@ -1398,13 +1434,15 @@ public class Dungeon extends Room {
             }
         }
         setMaps();
-        Main.loadSave();
+        GameEngine.loadSave();
     }
 
     /**
      * The trappedRoom function simulates a player encountering a trap in a
      * dungeon, potentially losing health, and updating the rooms visited in
      * different dungeon locations.
+     *
+     * @throws InterruptedException if the thread is interrupted while printing
      */
     public static void trappedRoom() throws InterruptedException {
         TextEngine.printWithDelays("You have entered a trapped room! ", false);
@@ -1448,6 +1486,8 @@ public class Dungeon extends Room {
      * The bossRoom function handles the player's encounter with a boss, updates
      * dungeon completion status, and progresses the game to the next room in
      * the open world.
+     *
+     * @throws InterruptedException if the thread is interrupted while printing
      */
     public static void bossRoom() throws InterruptedException {
         TextEngine.printWithDelays("You have entered the boss room", false);
@@ -1511,7 +1551,7 @@ public class Dungeon extends Room {
                 if (!OceanKingdomDungeon.completed) {
                     completedDungeons++;
                     OceanKingdomDungeon.completed = true;
-                    Main.gameComplete = true;
+                    GameEngine.gameComplete = true;
                 }
             }
         }
@@ -1611,7 +1651,7 @@ public class Dungeon extends Room {
             TextEngine.printWithDelays("You have completed this dungeon. You can now type " + yellowColor + "leave" + resetColor + " to exit this dungeon.", false);
         }
         if (clearScreen) {
-            Main.screenRefresh();
+            GameEngine.screenRefresh();
             DungeonGenerator.drawRoom(localDungeon, roomsBeenTo, currentPlayerPosition[0], currentPlayerPosition[1], 0, mapRevealed);
             System.out.println("Type " + yellowColor + "map" + resetColor + " to see the map.");
         }
@@ -1636,9 +1676,9 @@ public class Dungeon extends Room {
                         roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = localDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
                         currentPlayerPosition = DungeonGenerator.findValue(localDungeon, 8);
                         changeDungeonRoomsBeenTo(roomsBeenTo);
-                        Main.loadSave();
+                        GameEngine.loadSave();
                     } else {
-                        Main.loadSave();
+                        GameEngine.loadSave();
                     }
                 }
                 default ->
@@ -1691,7 +1731,7 @@ public class Dungeon extends Room {
             currentPlayerPosition[0] += positionChange[0];
             currentPlayerPosition[1] += positionChange[1];
             changeDungeonRoomsBeenTo(roomsBeenTo);
-            Main.loadSave();
+            GameEngine.loadSave();
         } else {
             Dungeon.defaultDungeonArgs(direction);
         }

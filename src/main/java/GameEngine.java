@@ -6,10 +6,10 @@ import java.util.Map;
 
 /**
  *
- * Text Adventure Game SE374 F24 Final Project 
- * Caden Finley, Albert Tucker, Grijesh Shrestha
+ * Text Adventure Game SE374 F24 Final Project Caden Finley, Albert Tucker,
+ * Grijesh Shrestha
  */
-public class Main {
+public class GameEngine {
 
     static String resetColor = "\033[0m"; // reset to default color
     static String yellowColor = "\033[1;33m"; // yellow color
@@ -25,6 +25,15 @@ public class Main {
 
     public static boolean TESTING = false;
 
+    /**
+     * The main entry point for the game. This method initializes the game
+     * environment, loads game items, enemies, and dungeons, and starts the
+     * game.
+     *
+     * @param args Command line arguments (not used).
+     * @throws InterruptedException If the thread is interrupted during
+     * execution.
+     */
     public static void main(String[] args) throws InterruptedException { //main game start
         TextEngine.setWidth();
         TextEngine.clearScreen();
@@ -61,6 +70,13 @@ public class Main {
         startMenu();
     }
 
+    /**
+     * Starts the game by generating dungeons. This method prints messages to
+     * indicate the start and completion of dungeon generation. If the
+     * generation takes more than approximately 10 seconds, it suggests
+     * restarting the game. It calls methods to generate dungeons, set maps, and
+     * initialize rooms.
+     */
     public static void gameStartGenDungeon() {
         TextEngine.printNoDelay("Generating Dungeons...", false);
         TextEngine.printNoDelay("(P.S. if this takes more than ~10 seconds, restart the game.)", false);
@@ -70,6 +86,12 @@ public class Main {
         TextEngine.printNoDelay("Generated Dungeons!", false);
     }
 
+    /**
+     * Initializes all the items in the game. The value is equal to the damage,
+     * defense, or healing potential the item provides. This is only to use when
+     * you use the item, not when you have it in your inventory or when it is on
+     * the map.
+     */
     public static void createGameItems() { //initalize all the items in the game
         //the value is equal to the damage, defense, or healing potential the item provides
         //this is only to use when you use the item not when you have it in your inventory or when it is on the map
@@ -125,6 +147,17 @@ public class Main {
         InventoryManager.createItem("key", "key", 0);
     }
 
+    /**
+     * Displays the start menu and handles user input commands.
+     *
+     * This method stops the play time clock, clears the screen, displays the
+     * splash screen, and prints the welcome message. If a saved game exists and
+     * the player's name is not null, it welcomes the player by name. Otherwise,
+     * it welcomes the player as "Hero". It then prompts the user for a command
+     * (Start, Settings, Exit) and handles the input.
+     *
+     * @throws InterruptedException if the thread is interrupted while waiting
+     */
     public static void startMenu() throws InterruptedException { //main menu and sstart menu text
         playTime.stopClock();
         TextEngine.clearScreen();
@@ -140,6 +173,12 @@ public class Main {
         handleMenuCommands();
     }
 
+    /**
+     * Handles the main menu commands in an infinite loop. This method reads
+     * commands from the console and executes the corresponding actions.
+     *
+     * @throws InterruptedException if the thread is interrupted while waiting.
+     */
     private static void handleMenuCommands() throws InterruptedException { //main menu command handling
         while (true) {
             COMMANDS = new String[]{"start", "settings", "exit"};
@@ -174,6 +213,30 @@ public class Main {
         }
     }
 
+    /**
+     * Displays the splash screen with a custom ASCII art message. The color of
+     * the text is adjusted based on the operating system.
+     *
+     * The splash screen includes a message about the AI feature and a link to
+     * the git repository.
+     *
+     * The colors used are: - Dark Purple for non-Mac operating systems - Bright
+     * Yellow for Mac operating systems
+     *
+     * The ASCII art displayed is:
+     *
+     * <pre>
+     *     _    ____   ____ ___ ___         Now With AI!
+     *    / \  / ___| / ___|_ _|_ _|        Type 'link' To see the git repo
+     *   / _ \ \___ \| |    | | | |         of this project!
+     *  / ___ \ ___) | |___ | | | |
+     * /_/ _ \_\____/ \____|___|___| _
+     *    / \   __| |_   _____ _ __ | |_ _   _ _ __ ___ _ __
+     *   / _ \ / _` \ \ / / _ \ '_ \| __| | | | '__/ _ \ '__|
+     *  / ___ \ (_| |\ V /  __/ | | | |_| |_| | | |  __/ |
+     * /_/   \_\__,_| \_/ \___|_| |_|\__|\__,_|_|  \___|_|
+     * </pre>
+     */
     private static void splashScreen() {
         String brightBoldEnd = "\033[0m"; // end color
         String darkPurpleStart = "\033[38;2;255;165;0m"; // ACU Purple
@@ -192,11 +255,40 @@ public class Main {
         System.out.print(brightBoldEnd);
     }
 
+    /**
+     * Displays the help menu with a list of available commands.
+     *
+     * This method prints out the possible commands that the user can input,
+     * including "stats", "inventory", "heal", "settings", "save", "map", and
+     * "exit". Each command is displayed with a delay for better readability.
+     *
+     * @throws InterruptedException if the thread executing the method is
+     * interrupted
+     */
     private static void displayHelp() throws InterruptedException { //main menu help command
         TextEngine.printWithDelays("Things you could say:\n" + yellowColor + "stats" + resetColor + " to see your stats\n" + yellowColor + "inventory" + resetColor + " to see your inventory\n" + yellowColor + "heal" + resetColor + " to heal you health using any available healing potions\n" + yellowColor + "settings" + resetColor + " or type " + yellowColor + "save" + resetColor + " to save\n" + yellowColor + "map" + resetColor + " to see the map\n" + yellowColor + "exit" + resetColor + " to return to the main menu.", true);
     }
 
-    private static void exitGame() throws InterruptedException {   //exit game command
+    /**
+     * Exits the game by performing the following actions:
+     * <ul>
+     * <li>Saves the current game state using
+     * {@link GameSaveSerialization#saveGame()}</li>
+     * <li>Wipes the runtime file ".runtime.txt" using
+     * {@link #wipeFile(String)}</li>
+     * <li>Prints a farewell message with delays using
+     * {@link TextEngine#printWithDelays(String, boolean)}</li>
+     * <li>Waits for user input to proceed using
+     * {@link TextEngine#enterToNext()}</li>
+     * <li>Clears the screen using {@link TextEngine#clearScreen()}</li>
+     * <li>Exits the program with status code 0 using
+     * {@link System#exit(int)}</li>
+     * </ul>
+     *
+     * @throws InterruptedException if any thread has interrupted the current
+     * thread
+     */
+    private static void exitGame() throws InterruptedException {
         GameSaveSerialization.saveGame();
         wipeFile(".runtime.txt");
         TextEngine.printWithDelays("See ya next time!", false);
@@ -342,7 +434,7 @@ public class Main {
         Player.setName(null);
         Dungeon.generateDungeons();
         PromptEngine.aiGenerationEnabled = false;
-        Main.playTime.setSavedTimeInSeconds(0);
+        GameEngine.playTime.setSavedTimeInSeconds(0);
         wipeFile(".runtime.txt");
         GameSaveSerialization.saveGame();
         Enemy.resetEnemies();

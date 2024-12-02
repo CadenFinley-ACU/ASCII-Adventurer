@@ -2,7 +2,7 @@
 /**
  * DungeonInstance.java
  *
- * Text Adventure Game SE374 F24 Final Project 
+ * Text Adventure Game SE374 F24 Final Project
  * Caden Finley, Albert Tucker, Grijesh Shrestha
  */
 import java.util.ArrayList;
@@ -83,11 +83,11 @@ public class DungeonInstance extends Dungeon {
             visited = true;
             currentPlayerPosition = DungeonGenerator.findValue(map, 9);
         }
-        if (!dungeonSaveName.equals(Main.getSavedPlace())) {
+        if (!dungeonSaveName.equals(GameEngine.getSavedPlace())) {
             currentPlayerPosition = DungeonGenerator.findValue(map, 9);
         }
         room = dungeonSaveName;
-        Main.checkSave(room);
+        GameEngine.checkSave(room);
         Dungeon.currentDungeon = dungeonName;
         GameSaveSerialization.saveGame();
         startRooms();
@@ -125,7 +125,7 @@ public class DungeonInstance extends Dungeon {
         currentBoss = bossType;
         numberOfEnemies = rand.nextInt(potentialEnemies);
         enemyType = enemies.get(rand.nextInt(enemies.size()));
-        Main.screenRefresh();
+        GameEngine.screenRefresh();
         DungeonGenerator.drawRoom(map, roomsBeenTo, currentPlayerPosition[0], currentPlayerPosition[1], numberOfEnemies, mapRevealed);
         if (map[currentPlayerPosition[0]][currentPlayerPosition[1]] == 9 && roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] == 0) {
             dungeonIntroText();

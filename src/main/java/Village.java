@@ -2,7 +2,7 @@
 /**
  * Village Class
  *
- * Text Adventure Game SE374 F24 Final Project 
+ * Text Adventure Game SE374 F24 Final Project
  * Caden Finley, Albert Tucker, Grijesh Shrestha
  */
 public class Village extends Room {
@@ -16,8 +16,8 @@ public class Village extends Room {
      */
     public static void startRoom() throws InterruptedException { //start room
         room = "Village";
-        Main.checkSave(room);
-        Main.screenRefresh();
+        GameEngine.checkSave(room);
+        GameEngine.screenRefresh();
         TextEngine.printWithDelays("You step into the village, surrounded by the hustle and bustle of life.\nVarious buildings dot the landscape, each offering something unique.", false);
         if (Dungeon.completedDungeons > 5) {
             TextEngine.printWithDelays("You can now warp to different areas using the " + yellowColor + "portal" + resetColor, false);
@@ -62,7 +62,7 @@ public class Village extends Room {
                                         leave();
                                     }
                                     default ->
-                                        Main.inGameDefaultTextHandling(command);
+                                        GameEngine.inGameDefaultTextHandling(command);
                                 }
                             }
                         }
@@ -85,7 +85,7 @@ public class Village extends Room {
                                         leave();
                                     }
                                     default ->
-                                        Main.inGameDefaultTextHandling(command);
+                                        GameEngine.inGameDefaultTextHandling(command);
                                 }
                             }
                         }
@@ -108,7 +108,7 @@ public class Village extends Room {
                                         leave();
                                     }
                                     default ->
-                                        Main.inGameDefaultTextHandling(command);
+                                        GameEngine.inGameDefaultTextHandling(command);
                                 }
                             }
                         }
@@ -138,14 +138,14 @@ public class Village extends Room {
                                 OpenWorld.startRoom();
                             }
                             default ->
-                                Main.inGameDefaultTextHandling(command);
+                                GameEngine.inGameDefaultTextHandling(command);
                         }
                     } else {
-                        Main.inGameDefaultTextHandling(command);
+                        GameEngine.inGameDefaultTextHandling(command);
                     }
                 }
                 default ->
-                    Main.inGameDefaultTextHandling(command);
+                    GameEngine.inGameDefaultTextHandling(command);
             }
         }
     }
@@ -157,7 +157,7 @@ public class Village extends Room {
      */
     public static void church() throws InterruptedException { //church
 
-        Main.screenRefresh();
+        GameEngine.screenRefresh();
         //church implementation
         TextEngine.printWithDelays("You step inside the village church, the air filled with the scent of incense and the soft glow of candlelight.\nThe serene atmosphere surrounds you as you approach the altar.\n\n", false);
         if (Player.inventory.containsKey("heart container")) {
@@ -174,13 +174,13 @@ public class Village extends Room {
                         Player.changeMaxHealth(InventoryManager.Potions.get("heart container") * amountofHeartContainers);
                         Player.putItem("heart container", -amountofHeartContainers);
                         TextEngine.enterToNext();
-                        Main.loadSave();
+                        GameEngine.loadSave();
                     }
                     case "leave it" -> {
-                        Main.loadSave();
+                        GameEngine.loadSave();
                     }
                     default ->
-                        Main.inGameDefaultTextHandling(command);
+                        GameEngine.inGameDefaultTextHandling(command);
                 }
             }
         } else {
@@ -191,7 +191,7 @@ public class Village extends Room {
                 command = console.readLine();
                 switch (command.toLowerCase().trim()) {
                     case "yes" -> {
-                        Main.loadSave();
+                        GameEngine.loadSave();
                     }
                     case "no" -> {
                         TextEngine.printWithDelays("There isn't anyhting here for you, try going to a dungeon.", false);
@@ -200,17 +200,17 @@ public class Village extends Room {
                         command = console.readLine();
                         switch (command.toLowerCase()) {
                             case "yes" -> {
-                                Main.loadSave();
+                                GameEngine.loadSave();
                             }
                             case "no" -> {
                                 church();
                             }
                             default ->
-                                Main.inGameDefaultTextHandling(command);
+                                GameEngine.inGameDefaultTextHandling(command);
                         }
                     }
                     default ->
-                        Main.inGameDefaultTextHandling(command);
+                        GameEngine.inGameDefaultTextHandling(command);
                 }
             }
         }
@@ -224,7 +224,7 @@ public class Village extends Room {
     public static void hotel() throws InterruptedException { //hotel
         //hotel implementation
 
-        Main.screenRefresh();
+        GameEngine.screenRefresh();
         int cost = (int) ((1 / 4.0) * (Player.getMaxHealth() - Player.getHealth()));
         if (cost < 1) {
             cost = 1;
@@ -236,7 +236,7 @@ public class Village extends Room {
         if (Player.getHealth() == Player.getMaxHealth()) {
             TextEngine.printWithDelays("You are already at full health, there is no need to rest.", false);
             TextEngine.enterToNext();
-            Main.loadSave();
+            GameEngine.loadSave();
         }
         TextEngine.printWithDelays("What will you do? Type " + yellowColor + "rest" + resetColor + " to restore your health (cost:" + cost + " gold) or " + yellowColor + "leave" + resetColor + " to exit the hotel", true);
         while (true) {
@@ -246,19 +246,19 @@ public class Village extends Room {
                     if (Player.getGold() < cost) {
                         TextEngine.printWithDelays("You do not have enough gold to rest", false);
                         TextEngine.enterToNext();
-                        Main.loadSave();
+                        GameEngine.loadSave();
                     } else {
                         TextEngine.printWithDelays("You have rested and restored your health", false);
                         Player.changeGold(-cost);
                         Player.changeHealth(Player.getMaxHealth() - Player.getHealth());
-                        Main.loadSave();
+                        GameEngine.loadSave();
                     }
                 }
                 case "leave" -> {
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 default ->
-                    Main.inGameDefaultTextHandling(command);
+                    GameEngine.inGameDefaultTextHandling(command);
             }
         }
     }
@@ -271,7 +271,7 @@ public class Village extends Room {
         String brightBoldEnd = "\033[0m"; // end color
         String brightYellowStart = "\033[1;33m"; // Bright Yellow
 
-        Main.screenRefresh();
+        GameEngine.screenRefresh();
         // Shop implementation
         TextEngine.printNoDelay("Gold: " + Player.getGold(), false);
         TextEngine.printNoDelay("Inventory: " + Player.getTotalNumberOfItemsInInventory() + "/" + Player.getInventorySize(), false);
@@ -317,10 +317,10 @@ public class Village extends Room {
                     buyMultiple("heart container", 50);
                 }
                 case "leave" -> {
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 default ->
-                    Main.inGameDefaultTextHandling(command);
+                    GameEngine.inGameDefaultTextHandling(command);
             }
         }
     }
@@ -334,7 +334,7 @@ public class Village extends Room {
         String brightBoldEnd = "\033[0m"; // end color
         String brightYellowStart = "\033[1;33m"; // Bright Yellow
 
-        Main.screenRefresh();
+        GameEngine.screenRefresh();
         // Shop implementation
         TextEngine.printNoDelay("Gold: " + Player.getGold(), false);
         TextEngine.printNoDelay("Inventory: " + Player.getTotalNumberOfItemsInInventory() + "/" + Player.getInventorySize(), false);
@@ -377,10 +377,10 @@ public class Village extends Room {
                     }
                 }
                 case "leave" -> {
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 default ->
-                    Main.inGameDefaultTextHandling(command);
+                    GameEngine.inGameDefaultTextHandling(command);
             }
         }
     }
@@ -394,7 +394,7 @@ public class Village extends Room {
         String brightBoldEnd = "\033[0m"; // end color
         String brightYellowStart = "\033[1;33m"; // Bright Yellow
 
-        Main.screenRefresh();
+        GameEngine.screenRefresh();
         // Shop implementation
         TextEngine.printNoDelay("Gold: " + Player.getGold(), false);
         TextEngine.printNoDelay("Inventory: " + Player.getTotalNumberOfItemsInInventory() + "/" + Player.getInventorySize(), false);
@@ -437,10 +437,10 @@ public class Village extends Room {
                     }
                 }
                 case "leave" -> {
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 default ->
-                    Main.inGameDefaultTextHandling(command);
+                    GameEngine.inGameDefaultTextHandling(command);
             }
         }
     }
@@ -467,7 +467,7 @@ public class Village extends Room {
                 try {
                     Integer.valueOf(command);
                 } catch (NumberFormatException e) {
-                    Main.invalidCommand();
+                    GameEngine.invalidCommand();
                     TextEngine.enterToNext();
                     buyMultiple(type, cost);
                 }
@@ -502,7 +502,7 @@ public class Village extends Room {
                     }
                 }
             } else {
-                Main.invalidCommand();
+                GameEngine.invalidCommand();
                 keepShopping();
             }
         }
@@ -528,10 +528,10 @@ public class Village extends Room {
                     }
                 }
                 case "no" -> {
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 default ->
-                    Main.inGameDefaultTextHandling(command);
+                    GameEngine.inGameDefaultTextHandling(command);
             }
         }
     }

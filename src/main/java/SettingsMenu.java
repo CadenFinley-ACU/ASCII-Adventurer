@@ -4,8 +4,8 @@ import java.io.Console;
 /**
  * Settings Menu
  *
- * Text Adventure Game SE374 F24 Final Project 
- * Caden Finley, Albert Tucker, Grijesh Shrestha
+ * Text Adventure Game SE374 F24 Final Project Caden Finley, Albert Tucker,
+ * Grijesh Shrestha
  */
 public abstract class SettingsMenu {
 
@@ -316,7 +316,7 @@ public abstract class SettingsMenu {
     private static void leave() throws InterruptedException { //leave the settings menu
         TextEngine.printWithDelays("Returning to last saved state.", false);
         TextEngine.clearScreen();
-        Main.loadSave();
+        GameEngine.loadSave();
     }
 
     /**
@@ -326,6 +326,6 @@ public abstract class SettingsMenu {
     private static void leaveToStart() throws InterruptedException { //leave the settings menu
         TextEngine.printWithDelays("Returning to last saved state.", false);
         TextEngine.clearScreen();
-        Main.startMenu();
+        GameEngine.startMenu();
     }
 }

@@ -5,8 +5,8 @@ import java.util.Random;
 /**
  * Room Class
  *
- * Text Adventure Game SE374 F24 Final Project 
- * Caden Finley, Albert Tucker, Grijesh Shrestha
+ * Text Adventure Game SE374 F24 Final Project Caden Finley, Albert Tucker,
+ * Grijesh Shrestha
  */
 public class Room {
 
@@ -26,20 +26,15 @@ public class Room {
     };
 
     /**
-     * This Java function prompts the user to decide whether to open a chest in
-     * the room or leave it, based on the given item name and quantity.
+     * Checks if there is a chest in the room and processes the user's command
+     * to either open it or leave it.
      *
-     * @param itemName itemName: The name of the item that the player is looking
-     * for in the chest.
-     * @param quantity The `quantity` parameter in the `hasChestInRoom` method
-     * represents the number of items you are looking for in the chest. When you
-     * call this method, you pass the name of the item you are searching for in
-     * the chest and the quantity of that item you are looking to find.
-     * @return The method `hasChestInRoom` will return a boolean value based on
-     * the user's input. If the user chooses to "open it", the method will
-     * return the result of the `hasItemInRoom` method with the specified
-     * `itemName` and `quantity`. If the user chooses to "leave it", the method
-     * will return `false`.
+     * @param itemName the name of the item to check for in the room
+     * @param quantity the quantity of the item to check for in the room
+     * @return true if the chest is opened and the item is found in the
+     * specified quantity, false otherwise
+     * @throws InterruptedException if the thread is interrupted while waiting
+     * for user input
      */
     public static boolean hasChestInRoom(String itemName, int quantity) throws InterruptedException {
         String yellowColor = "\033[1;33m"; // yellow color
@@ -56,25 +51,20 @@ public class Room {
                     return false;
                 }
                 default ->
-                    Main.inGameDefaultTextHandling(command);
+                    GameEngine.inGameDefaultTextHandling(command);
             }
         }
     }
 
     /**
-     * The function `hasItemInRoom` displays item information, prompts the user
-     * to take or leave the item, and handles the corresponding actions.
+     * Checks if the specified item is in the room and processes the user's
+     * command to either take it or leave it.
      *
-     * @param itemName itemName: the name of the item to check for in the room
-     * @param quantity The `quantity` parameter in the `hasItemInRoom` method
-     * represents the number of items of a particular type that are present in
-     * the room. It is used to determine how many of the specified item are
-     * available for interaction within the game environment.
-     * @return The method `hasItemInRoom` returns a boolean value. It returns
-     * `true` if the player chooses to take the item (by typing "take it") and
-     * successfully puts the item in their inventory using the `Player.putItem`
-     * method. It returns `false` if the player chooses to leave the item (by
-     * typing "leave it") or if certain conditions are met (such as trying
+     * @param itemName the name of the item to check for in the room
+     * @param quantity the quantity of the item to check for in the room
+     * @return true if the item is taken, false otherwise
+     * @throws InterruptedException if the thread is interrupted while waiting
+     * for user input
      */
     public static boolean hasItemInRoom(String itemName, int quantity) throws InterruptedException {
         String yellowColor = "\033[1;33m"; // yellow color
@@ -105,19 +95,17 @@ public class Room {
                     return false;
                 }
                 default ->
-                    Main.inGameDefaultTextHandling(command);
+                    GameEngine.inGameDefaultTextHandling(command);
             }
         }
     }
 
     /**
-     * The `reset` function resets specific areas or all areas in the room based
-     * on the input provided.
+     * Resets the specified area by setting the room to null and calling the
+     * reset method for the corresponding area.
      *
-     * @param area The `area` parameter in the `reset` method is a string that
-     * specifies the area to be reset. It can have one of the following values:
-     * "SpawnRoom", "OpenWorld", or "all". Depending on the value of `area`,
-     * different areas of the room will be reset using
+     * @param area the area to reset, which can be "SpawnRoom", "OpenWorld", or
+     * "all"
      */
     public static void reset(String area) { //reset the room
         room = null;
@@ -137,8 +125,14 @@ public class Room {
     }
 
     /**
-     * The function `reRenderSameRoom` updates the current room display based on
-     * the player's actions in the game world.
+     * Re-renders the current room. If the player was in a fight, it resets the
+     * room by removing enemy markers and prints the updated room. Additionally,
+     * it checks if the player has entered a new environment and prints a
+     * corresponding message. If the player was not in a fight, it simply draws
+     * the current room.
+     *
+     * @throws InterruptedException if the thread is interrupted while waiting
+     * for user input
      */
     public static void reRenderSameRoom() throws InterruptedException {
         if (OpenWorld.wasInFight) {
@@ -176,9 +170,12 @@ public class Room {
     }
 
     /**
-     * The `drawCurrentRoom` function in Java dynamically generates and displays
-     * a game room environment with a player and enemies based on the current
-     * setting.
+     * Draws the current room based on the player's position and environment.
+     * This method initializes the room, sets the environment, places the player
+     * and enemies in the room, and prints the room to the console.
+     *
+     * @throws InterruptedException if the thread is interrupted during
+     * execution
      */
     public static void drawCurrentRoom() throws InterruptedException {
         currentRoom = new String[][]{
@@ -462,9 +459,14 @@ public class Room {
     }
 
     /**
-     * The `dungeonCheck` function checks the player's progress in completing
-     * different dungeons and provides directions to the next dungeon entrance
-     * based on the current location and completed dungeons.
+     * Checks the current dungeon status and provides the appropriate message
+     * based on the player's current room and the number of completed dungeons.
+     * This method updates the player's command if it is null or empty, and
+     * prints a message with delays indicating the direction the player is
+     * walking and the entrance to the next dungeon.
+     *
+     * @throws InterruptedException if the thread is interrupted during
+     * execution
      */
     public static void dungeonCheck() throws InterruptedException {
         if (OpenWorld.holdCommand == null || OpenWorld.holdCommand.isEmpty() || OpenWorld.holdCommand.isBlank() || OpenWorld.holdCommand.equals(" ") || OpenWorld.holdCommand.equals("null")) {

@@ -69,7 +69,7 @@ public abstract class TextEngine {
 
     public static void printWithDelays(String data, boolean buffer) throws InterruptedException {
         // Use buffer if you are accepting input after the text is printed
-        if (speedSetting.equals("NoDelay") || Main.TESTING) {
+        if (speedSetting.equals("NoDelay") || GameEngine.TESTING) {
             printNoDelay(data, buffer);
             return;
         }
@@ -186,7 +186,7 @@ public abstract class TextEngine {
      * it uses only ANSI escape codes.
      */
     public static void clearScreen() { //clears the screen
-        String OS_Name = Main.getOS_NAME();
+        String OS_Name = GameEngine.getOS_NAME();
         try {
             if (OS_Name.contains("Windows")) {
                 System.out.print("\033[H\033[2J");
@@ -207,7 +207,7 @@ public abstract class TextEngine {
      * user to press Enter and then wait for the Enter key to be pressed.
      */
     public static void enterToNext() { //adds a pause and waits for enter
-        if (!Main.TESTING) {
+        if (!GameEngine.TESTING) {
             printNoDelay(yellowColor + "Press Enter to continue" + resetColor, false);
             console.readLine();
         }

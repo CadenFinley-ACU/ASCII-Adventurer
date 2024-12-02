@@ -6,8 +6,8 @@ import java.util.Set;
 /**
  * Inventory Manager
  *
- * Text Adventure Game SE374 F24 Final Project 
- * Caden Finley, Albert Tucker, Grijesh Shrestha
+ * Text Adventure Game SE374 F24 Final Project Caden Finley, Albert Tucker,
+ * Grijesh Shrestha
  */
 public class InventoryManager extends Player {
 
@@ -61,7 +61,7 @@ public class InventoryManager extends Player {
     public static void printInventory() throws InterruptedException {
         // Clear the screen and print the player's status
         TextEngine.clearScreen();
-        Main.printStatus();
+        GameEngine.printStatus();
 
         // Check if the inventory is empty
         if (inventory.isEmpty()) {
@@ -203,7 +203,7 @@ public class InventoryManager extends Player {
                 }
                 default -> {
                     // Handle any other commands
-                    Main.inGameDefaultTextHandling(command);
+                    GameEngine.inGameDefaultTextHandling(command);
                 }
             }
         }
@@ -218,7 +218,7 @@ public class InventoryManager extends Player {
     private static void leave() throws InterruptedException {
         //leave the inventory
         TextEngine.clearScreen();
-        Main.loadSave();
+        GameEngine.loadSave();
     }
 
     /**
@@ -253,7 +253,7 @@ public class InventoryManager extends Player {
             try {
                 Integer.valueOf(command);
             } catch (NumberFormatException e) {
-                Main.invalidCommand();
+                GameEngine.invalidCommand();
                 TextEngine.enterToNext();
                 Player.openInventory();
                 return;

@@ -4,8 +4,7 @@ import java.util.List;
 import java.util.Random;
 
 /**
- * Open World Class Written by 
- * Albert Tucker and Grijesh Shrestha
+ * Open World Class Written by Albert Tucker and Grijesh Shrestha
  *
  * Text Adventure Game SE374 F24 Final Project
  *
@@ -30,9 +29,9 @@ public class OpenWorld extends Room {
 
     public static void startRoom() throws InterruptedException { //start room
         room = "OpenWorld";
-        Main.checkSave(room);
+        GameEngine.checkSave(room);
         GameSaveSerialization.saveGame();
-        Main.screenRefresh();
+        GameEngine.screenRefresh();
         enemies = new ArrayList<>(List.of("Goblin", "Slime", "Bandit"));
         if (checkChangeInRoom()) {
             switch (Player.getColorOfPlayerPostitionTile()) {
@@ -682,7 +681,7 @@ public class OpenWorld extends Room {
                         Player.changeHealth(Enemy.spawnEnemy(enemyType, numberOfEnemies));
                         inFight = false;
                         encounter = false;
-                        Main.screenRefresh();
+                        GameEngine.screenRefresh();
                         return;
                     }
                     case "run" -> {
@@ -695,11 +694,11 @@ public class OpenWorld extends Room {
                         }
                         inFight = false;
                         encounter = false;
-                        Main.screenRefresh();
+                        GameEngine.screenRefresh();
                         return;
                     }
                     default ->
-                        Main.inGameDefaultTextHandling(command);
+                        GameEngine.inGameDefaultTextHandling(command);
                 }
             }
         }
@@ -727,7 +726,7 @@ public class OpenWorld extends Room {
                 case "east" -> {
                     previousRoomSave = roomSave;
                     roomSave = 3;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 case "the ocean kingdom" -> {
                     if (Dungeon.completedDungeons > 6) {
@@ -738,7 +737,7 @@ public class OpenWorld extends Room {
                     }
                 }
                 default ->
-                    Main.inGameDefaultTextHandling(command);
+                    GameEngine.inGameDefaultTextHandling(command);
             }
         }
     }
@@ -761,15 +760,15 @@ public class OpenWorld extends Room {
                 case "east" -> {
                     previousRoomSave = roomSave;
                     roomSave = 4;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 case "west" -> {
                     previousRoomSave = roomSave;
                     roomSave = 2;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 default ->
-                    Main.inGameDefaultTextHandling(command);
+                    GameEngine.inGameDefaultTextHandling(command);
             }
         }
     }
@@ -791,15 +790,15 @@ public class OpenWorld extends Room {
                 case "east" -> {
                     previousRoomSave = roomSave;
                     roomSave = 5;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 case "west" -> {
                     previousRoomSave = roomSave;
                     roomSave = 3;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 default ->
-                    Main.inGameDefaultTextHandling(command);
+                    GameEngine.inGameDefaultTextHandling(command);
             }
         }
     }
@@ -826,20 +825,20 @@ public class OpenWorld extends Room {
                 case "east" -> {
                     previousRoomSave = roomSave;
                     roomSave = 6;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 case "south" -> {
                     previousRoomSave = roomSave;
                     roomSave = 9;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 case "west" -> {
                     previousRoomSave = roomSave;
                     roomSave = 4;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 default ->
-                    Main.inGameDefaultTextHandling(command);
+                    GameEngine.inGameDefaultTextHandling(command);
             }
         }
     }
@@ -865,12 +864,12 @@ public class OpenWorld extends Room {
                 case "south" -> {
                     previousRoomSave = roomSave;
                     roomSave = 10;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 case "west" -> {
                     previousRoomSave = roomSave;
                     roomSave = 5;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 case "the mountain top" -> {
                     if (Dungeon.completedDungeons > 2) {
@@ -881,7 +880,7 @@ public class OpenWorld extends Room {
                     }
                 }
                 default ->
-                    Main.inGameDefaultTextHandling(command);
+                    GameEngine.inGameDefaultTextHandling(command);
             }
         }
     }
@@ -915,10 +914,10 @@ public class OpenWorld extends Room {
                 case "south" -> {
                     previousRoomSave = roomSave;
                     roomSave = 12;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 default ->
-                    Main.inGameDefaultTextHandling(command);
+                    GameEngine.inGameDefaultTextHandling(command);
             }
         }
     }
@@ -940,20 +939,20 @@ public class OpenWorld extends Room {
                 case "north" -> {
                     previousRoomSave = roomSave;
                     roomSave = 5;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 case "east" -> {
                     previousRoomSave = roomSave;
                     roomSave = 10;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 case "south" -> {
                     previousRoomSave = roomSave;
                     roomSave = 13;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 default ->
-                    Main.inGameDefaultTextHandling(command);
+                    GameEngine.inGameDefaultTextHandling(command);
             }
         }
     }
@@ -979,25 +978,25 @@ public class OpenWorld extends Room {
                 case "north" -> {
                     previousRoomSave = roomSave;
                     roomSave = 6;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 case "east" -> {
                     previousRoomSave = roomSave;
                     roomSave = 11;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 case "south" -> {
                     previousRoomSave = roomSave;
                     roomSave = 14;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 case "west" -> {
                     previousRoomSave = roomSave;
                     roomSave = 9;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 default ->
-                    Main.inGameDefaultTextHandling(command);
+                    GameEngine.inGameDefaultTextHandling(command);
             }
         }
     }
@@ -1031,15 +1030,15 @@ public class OpenWorld extends Room {
                 case "south" -> {
                     previousRoomSave = roomSave;
                     roomSave = 15;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 case "west" -> {
                     previousRoomSave = roomSave;
                     roomSave = 10;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 default ->
-                    Main.inGameDefaultTextHandling(command);
+                    GameEngine.inGameDefaultTextHandling(command);
             }
         }
     }
@@ -1061,15 +1060,15 @@ public class OpenWorld extends Room {
                 case "north" -> {
                     previousRoomSave = roomSave;
                     roomSave = 8;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 case "south" -> {
                     previousRoomSave = roomSave;
                     roomSave = 16;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 default ->
-                    Main.inGameDefaultTextHandling(command);
+                    GameEngine.inGameDefaultTextHandling(command);
             }
         }
     }
@@ -1091,20 +1090,20 @@ public class OpenWorld extends Room {
                 case "north" -> {
                     previousRoomSave = roomSave;
                     roomSave = 9;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 case "east" -> {
                     previousRoomSave = roomSave;
                     roomSave = 14;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 case "south" -> {
                     previousRoomSave = roomSave;
                     roomSave = 17;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 default ->
-                    Main.inGameDefaultTextHandling(command);
+                    GameEngine.inGameDefaultTextHandling(command);
             }
         }
     }
@@ -1126,25 +1125,25 @@ public class OpenWorld extends Room {
                 case "north" -> {
                     previousRoomSave = roomSave;
                     roomSave = 10;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 case "east" -> {
                     previousRoomSave = roomSave;
                     roomSave = 15;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 case "south" -> {
                     previousRoomSave = roomSave;
                     roomSave = 18;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 case "west" -> {
                     previousRoomSave = roomSave;
                     roomSave = 13;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 default ->
-                    Main.inGameDefaultTextHandling(command);
+                    GameEngine.inGameDefaultTextHandling(command);
             }
         }
     }
@@ -1166,20 +1165,20 @@ public class OpenWorld extends Room {
                 case "north" -> {
                     previousRoomSave = roomSave;
                     roomSave = 11;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 case "south" -> {
                     previousRoomSave = roomSave;
                     roomSave = 19;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 case "west" -> {
                     previousRoomSave = roomSave;
                     roomSave = 14;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 default ->
-                    Main.inGameDefaultTextHandling(command);
+                    GameEngine.inGameDefaultTextHandling(command);
             }
         }
     }
@@ -1201,15 +1200,15 @@ public class OpenWorld extends Room {
                 case "north" -> {
                     previousRoomSave = roomSave;
                     roomSave = 12;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 case "south" -> {
                     previousRoomSave = roomSave;
                     roomSave = 22;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 default ->
-                    Main.inGameDefaultTextHandling(command);
+                    GameEngine.inGameDefaultTextHandling(command);
             }
         }
     }
@@ -1231,20 +1230,20 @@ public class OpenWorld extends Room {
                 case "north" -> {
                     previousRoomSave = roomSave;
                     roomSave = 13;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 case "east" -> {
                     previousRoomSave = roomSave;
                     roomSave = 18;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 case "south" -> {
                     previousRoomSave = roomSave;
                     roomSave = 25;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 default ->
-                    Main.inGameDefaultTextHandling(command);
+                    GameEngine.inGameDefaultTextHandling(command);
             }
         }
     }
@@ -1270,25 +1269,25 @@ public class OpenWorld extends Room {
                 case "north" -> {
                     previousRoomSave = roomSave;
                     roomSave = 14;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 case "east" -> {
                     previousRoomSave = roomSave;
                     roomSave = 19;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 case "south" -> {
                     previousRoomSave = roomSave;
                     roomSave = 26;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 case "west" -> {
                     previousRoomSave = roomSave;
                     roomSave = 17;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 default ->
-                    Main.inGameDefaultTextHandling(command);
+                    GameEngine.inGameDefaultTextHandling(command);
             }
         }
     }
@@ -1310,26 +1309,26 @@ public class OpenWorld extends Room {
                 case "north" -> {
                     previousRoomSave = roomSave;
                     roomSave = 15;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 case "the village" -> {
                     previousRoomSave = roomSave;
                     saveRoomNumber = roomNumber;
                     roomSave = 1;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 case "south" -> {
                     previousRoomSave = roomSave;
                     roomSave = 28;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 case "west" -> {
                     previousRoomSave = roomSave;
                     roomSave = 18;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 default ->
-                    Main.inGameDefaultTextHandling(command);
+                    GameEngine.inGameDefaultTextHandling(command);
             }
         }
     }
@@ -1352,15 +1351,15 @@ public class OpenWorld extends Room {
                 case "east" -> {
                     previousRoomSave = roomSave;
                     roomSave = 22;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 case "south" -> {
                     previousRoomSave = roomSave;
                     roomSave = 30;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 default ->
-                    Main.inGameDefaultTextHandling(command);
+                    GameEngine.inGameDefaultTextHandling(command);
             }
         }
     }
@@ -1383,20 +1382,20 @@ public class OpenWorld extends Room {
                 case "north" -> {
                     previousRoomSave = roomSave;
                     roomSave = 16;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 case "south" -> {
                     previousRoomSave = roomSave;
                     roomSave = 31;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 case "west" -> {
                     previousRoomSave = roomSave;
                     roomSave = 21;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 default ->
-                    Main.inGameDefaultTextHandling(command);
+                    GameEngine.inGameDefaultTextHandling(command);
             }
         }
     }
@@ -1422,17 +1421,17 @@ public class OpenWorld extends Room {
                 case "north" -> {
                     previousRoomSave = roomSave;
                     roomSave = 17;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 case "east" -> {
                     previousRoomSave = roomSave;
                     roomSave = 26;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 case "south" -> {
                     previousRoomSave = roomSave;
                     roomSave = 33;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 case "the mountain cave" -> {
                     if (Dungeon.completedDungeons > 1) {
@@ -1443,7 +1442,7 @@ public class OpenWorld extends Room {
                     }
                 }
                 default ->
-                    Main.inGameDefaultTextHandling(command);
+                    GameEngine.inGameDefaultTextHandling(command);
             }
         }
     }
@@ -1465,25 +1464,25 @@ public class OpenWorld extends Room {
                 case "north" -> {
                     previousRoomSave = roomSave;
                     roomSave = 18;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 case "east" -> {
                     previousRoomSave = roomSave;
                     roomSave = 28;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 case "south" -> {
                     previousRoomSave = roomSave;
                     roomSave = 34;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 case "west" -> {
                     previousRoomSave = roomSave;
                     roomSave = 25;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 default ->
-                    Main.inGameDefaultTextHandling(command);
+                    GameEngine.inGameDefaultTextHandling(command);
             }
         }
     }
@@ -1506,25 +1505,25 @@ public class OpenWorld extends Room {
                 case "north" -> {
                     previousRoomSave = roomSave;
                     roomSave = 49;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 case "east" -> {
                     previousRoomSave = roomSave;
                     roomSave = 57;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 case "south" -> {
                     previousRoomSave = roomSave;
                     roomSave = 65;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 case "west" -> {
                     previousRoomSave = roomSave;
                     roomSave = 55;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 default ->
-                    Main.inGameDefaultTextHandling(command);
+                    GameEngine.inGameDefaultTextHandling(command);
             }
         }
     }
@@ -1546,25 +1545,25 @@ public class OpenWorld extends Room {
                 case "north" -> {
                     previousRoomSave = roomSave;
                     roomSave = 19;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 case "east" -> {
                     previousRoomSave = roomSave;
                     roomSave = 29;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 case "south" -> {
                     previousRoomSave = roomSave;
                     roomSave = 35;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 case "west" -> {
                     previousRoomSave = roomSave;
                     roomSave = 26;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 default ->
-                    Main.inGameDefaultTextHandling(command);
+                    GameEngine.inGameDefaultTextHandling(command);
             }
         }
     }
@@ -1587,20 +1586,20 @@ public class OpenWorld extends Room {
                     previousRoomSave = roomSave;
                     saveRoomNumber = roomNumber;
                     roomSave = 1;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 case "south" -> {
                     previousRoomSave = roomSave;
                     roomSave = 36;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 case "west" -> {
                     previousRoomSave = roomSave;
                     roomSave = 28;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 default ->
-                    Main.inGameDefaultTextHandling(command);
+                    GameEngine.inGameDefaultTextHandling(command);
             }
         }
     }
@@ -1622,20 +1621,20 @@ public class OpenWorld extends Room {
                 case "north" -> {
                     previousRoomSave = roomSave;
                     roomSave = 21;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 case "east" -> {
                     previousRoomSave = roomSave;
                     roomSave = 31;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 case "south" -> {
                     previousRoomSave = roomSave;
                     roomSave = 37;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 default ->
-                    Main.inGameDefaultTextHandling(command);
+                    GameEngine.inGameDefaultTextHandling(command);
             }
         }
     }
@@ -1657,25 +1656,25 @@ public class OpenWorld extends Room {
                 case "north" -> {
                     previousRoomSave = roomSave;
                     roomSave = 22;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 case "east" -> {
                     previousRoomSave = roomSave;
                     roomSave = 32;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 case "south" -> {
                     previousRoomSave = roomSave;
                     roomSave = 38;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 case "west" -> {
                     previousRoomSave = roomSave;
                     roomSave = 30;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 default ->
-                    Main.inGameDefaultTextHandling(command);
+                    GameEngine.inGameDefaultTextHandling(command);
             }
         }
     }
@@ -1697,15 +1696,15 @@ public class OpenWorld extends Room {
                 case "south" -> {
                     previousRoomSave = roomSave;
                     roomSave = 39;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 case "west" -> {
                     previousRoomSave = roomSave;
                     roomSave = 31;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 default ->
-                    Main.inGameDefaultTextHandling(command);
+                    GameEngine.inGameDefaultTextHandling(command);
             }
         }
     }
@@ -1728,25 +1727,25 @@ public class OpenWorld extends Room {
                 case "north" -> {
                     previousRoomSave = roomSave;
                     roomSave = 25;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 case "east" -> {
                     previousRoomSave = roomSave;
                     roomSave = 34;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 case "south" -> {
                     previousRoomSave = roomSave;
                     roomSave = 42;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 case "west" -> {
                     previousRoomSave = roomSave;
                     roomSave = 62;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 default ->
-                    Main.inGameDefaultTextHandling(command);
+                    GameEngine.inGameDefaultTextHandling(command);
             }
         }
     }
@@ -1769,25 +1768,25 @@ public class OpenWorld extends Room {
                 case "north" -> {
                     previousRoomSave = roomSave;
                     roomSave = 26;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 case "east" -> {
                     previousRoomSave = roomSave;
                     roomSave = 35;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 case "south" -> {
                     previousRoomSave = roomSave;
                     roomSave = 43;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 case "west" -> {
                     previousRoomSave = roomSave;
                     roomSave = 33;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 default ->
-                    Main.inGameDefaultTextHandling(command);
+                    GameEngine.inGameDefaultTextHandling(command);
             }
         }
     }
@@ -1810,25 +1809,25 @@ public class OpenWorld extends Room {
                 case "north" -> {
                     previousRoomSave = roomSave;
                     roomSave = 28;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 case "east" -> {
                     previousRoomSave = roomSave;
                     roomSave = 36;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 case "south" -> {
                     previousRoomSave = roomSave;
                     roomSave = 44;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 case "west" -> {
                     previousRoomSave = roomSave;
                     roomSave = 34;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 default ->
-                    Main.inGameDefaultTextHandling(command);
+                    GameEngine.inGameDefaultTextHandling(command);
             }
         }
     }
@@ -1851,20 +1850,20 @@ public class OpenWorld extends Room {
                 case "north" -> {
                     previousRoomSave = roomSave;
                     roomSave = 29;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 case "south" -> {
                     previousRoomSave = roomSave;
                     roomSave = 45;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 case "west" -> {
                     previousRoomSave = roomSave;
                     roomSave = 35;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 default ->
-                    Main.inGameDefaultTextHandling(command);
+                    GameEngine.inGameDefaultTextHandling(command);
             }
         }
     }
@@ -1887,21 +1886,21 @@ public class OpenWorld extends Room {
                 case "north" -> {
                     previousRoomSave = roomSave;
                     roomSave = 30;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 case "east" -> {
                     previousRoomSave = roomSave;
                     roomSave = 38;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 case "the village" -> {
                     previousRoomSave = roomSave;
                     saveRoomNumber = roomNumber;
                     roomSave = 1;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 default ->
-                    Main.inGameDefaultTextHandling(command);
+                    GameEngine.inGameDefaultTextHandling(command);
             }
         }
     }
@@ -1924,25 +1923,25 @@ public class OpenWorld extends Room {
                 case "north" -> {
                     previousRoomSave = roomSave;
                     roomSave = 31;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 case "east" -> {
                     previousRoomSave = roomSave;
                     roomSave = 39;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 case "south" -> {
                     previousRoomSave = roomSave;
                     roomSave = 47;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 case "west" -> {
                     previousRoomSave = roomSave;
                     roomSave = 37;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 default ->
-                    Main.inGameDefaultTextHandling(command);
+                    GameEngine.inGameDefaultTextHandling(command);
             }
         }
     }
@@ -1965,25 +1964,25 @@ public class OpenWorld extends Room {
                 case "north" -> {
                     previousRoomSave = roomSave;
                     roomSave = 32;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 case "east" -> {
                     previousRoomSave = roomSave;
                     roomSave = 40;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 case "south" -> {
                     previousRoomSave = roomSave;
                     roomSave = 48;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 case "west" -> {
                     previousRoomSave = roomSave;
                     roomSave = 38;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 default ->
-                    Main.inGameDefaultTextHandling(command);
+                    GameEngine.inGameDefaultTextHandling(command);
             }
         }
     }
@@ -2006,20 +2005,20 @@ public class OpenWorld extends Room {
                 case "east" -> {
                     previousRoomSave = roomSave;
                     roomSave = 41;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 case "south" -> {
                     previousRoomSave = roomSave;
                     roomSave = 49;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 case "west" -> {
                     previousRoomSave = roomSave;
                     roomSave = 39;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 default ->
-                    Main.inGameDefaultTextHandling(command);
+                    GameEngine.inGameDefaultTextHandling(command);
             }
         }
     }
@@ -2041,25 +2040,25 @@ public class OpenWorld extends Room {
                 case "north" -> {
                     previousRoomSave = roomSave;
                     roomSave = 62;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 case "east" -> {
                     previousRoomSave = roomSave;
                     roomSave = 42;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 case "south" -> {
                     previousRoomSave = roomSave;
                     roomSave = 50;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 case "west" -> {
                     previousRoomSave = roomSave;
                     roomSave = 40;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 default ->
-                    Main.inGameDefaultTextHandling(command);
+                    GameEngine.inGameDefaultTextHandling(command);
             }
         }
     }
@@ -2081,25 +2080,25 @@ public class OpenWorld extends Room {
                 case "north" -> {
                     previousRoomSave = roomSave;
                     roomSave = 33;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 case "east" -> {
                     previousRoomSave = roomSave;
                     roomSave = 43;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 case "south" -> {
                     previousRoomSave = roomSave;
                     roomSave = 51;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 case "west" -> {
                     previousRoomSave = roomSave;
                     roomSave = 41;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 default ->
-                    Main.inGameDefaultTextHandling(command);
+                    GameEngine.inGameDefaultTextHandling(command);
             }
         }
     }
@@ -2121,25 +2120,25 @@ public class OpenWorld extends Room {
                 case "north" -> {
                     previousRoomSave = roomSave;
                     roomSave = 34;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 case "east" -> {
                     previousRoomSave = roomSave;
                     roomSave = 44;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 case "south" -> {
                     previousRoomSave = roomSave;
                     roomSave = 52;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 case "west" -> {
                     previousRoomSave = roomSave;
                     roomSave = 42;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 default ->
-                    Main.inGameDefaultTextHandling(command);
+                    GameEngine.inGameDefaultTextHandling(command);
             }
         }
     }
@@ -2161,25 +2160,25 @@ public class OpenWorld extends Room {
                 case "north" -> {
                     previousRoomSave = roomSave;
                     roomSave = 35;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 case "east" -> {
                     previousRoomSave = roomSave;
                     roomSave = 45;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 case "south" -> {
                     previousRoomSave = roomSave;
                     roomSave = 53;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 case "west" -> {
                     previousRoomSave = roomSave;
                     roomSave = 43;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 default ->
-                    Main.inGameDefaultTextHandling(command);
+                    GameEngine.inGameDefaultTextHandling(command);
             }
         }
     }
@@ -2201,20 +2200,20 @@ public class OpenWorld extends Room {
                 case "north" -> {
                     previousRoomSave = roomSave;
                     roomSave = 36;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 case "south" -> {
                     previousRoomSave = roomSave;
                     roomSave = 54;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 case "west" -> {
                     previousRoomSave = roomSave;
                     roomSave = 44;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 default ->
-                    Main.inGameDefaultTextHandling(command);
+                    GameEngine.inGameDefaultTextHandling(command);
             }
         }
     }
@@ -2240,12 +2239,12 @@ public class OpenWorld extends Room {
                 case "north" -> {
                     previousRoomSave = roomSave;
                     roomSave = 38;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 case "east" -> {
                     previousRoomSave = roomSave;
                     roomSave = 48;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 case "the desert pyramid" -> {
                     if (Dungeon.completedDungeons > 5) {
@@ -2259,10 +2258,10 @@ public class OpenWorld extends Room {
                     previousRoomSave = roomSave;
                     saveRoomNumber = roomNumber;
                     roomSave = 1;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 default ->
-                    Main.inGameDefaultTextHandling(command);
+                    GameEngine.inGameDefaultTextHandling(command);
             }
         }
     }
@@ -2284,25 +2283,25 @@ public class OpenWorld extends Room {
                 case "north" -> {
                     previousRoomSave = roomSave;
                     roomSave = 39;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 case "east" -> {
                     previousRoomSave = roomSave;
                     roomSave = 49;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 case "south" -> {
                     previousRoomSave = roomSave;
                     roomSave = 55;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 case "west" -> {
                     previousRoomSave = roomSave;
                     roomSave = 47;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 default ->
-                    Main.inGameDefaultTextHandling(command);
+                    GameEngine.inGameDefaultTextHandling(command);
             }
         }
     }
@@ -2325,25 +2324,25 @@ public class OpenWorld extends Room {
                 case "north" -> {
                     previousRoomSave = roomSave;
                     roomSave = 40;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 case "east" -> {
                     previousRoomSave = roomSave;
                     roomSave = 50;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 case "south" -> {
                     previousRoomSave = roomSave;
                     roomSave = 27;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 case "west" -> {
                     previousRoomSave = roomSave;
                     roomSave = 48;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 default ->
-                    Main.inGameDefaultTextHandling(command);
+                    GameEngine.inGameDefaultTextHandling(command);
             }
         }
     }
@@ -2365,25 +2364,25 @@ public class OpenWorld extends Room {
                 case "north" -> {
                     previousRoomSave = roomSave;
                     roomSave = 41;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 case "east" -> {
                     previousRoomSave = roomSave;
                     roomSave = 51;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 case "south" -> {
                     previousRoomSave = roomSave;
                     roomSave = 57;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 case "west" -> {
                     previousRoomSave = roomSave;
                     roomSave = 49;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 default ->
-                    Main.inGameDefaultTextHandling(command);
+                    GameEngine.inGameDefaultTextHandling(command);
             }
         }
     }
@@ -2406,25 +2405,25 @@ public class OpenWorld extends Room {
                 case "north" -> {
                     previousRoomSave = roomSave;
                     roomSave = 42;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 case "east" -> {
                     previousRoomSave = roomSave;
                     roomSave = 52;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 case "south" -> {
                     previousRoomSave = roomSave;
                     roomSave = 58;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 case "west" -> {
                     previousRoomSave = roomSave;
                     roomSave = 50;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 default ->
-                    Main.inGameDefaultTextHandling(command);
+                    GameEngine.inGameDefaultTextHandling(command);
             }
         }
     }
@@ -2447,25 +2446,25 @@ public class OpenWorld extends Room {
                 case "north" -> {
                     previousRoomSave = roomSave;
                     roomSave = 43;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 case "east" -> {
                     previousRoomSave = roomSave;
                     roomSave = 53;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 case "south" -> {
                     previousRoomSave = roomSave;
                     roomSave = 59;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 case "west" -> {
                     previousRoomSave = roomSave;
                     roomSave = 51;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 default ->
-                    Main.inGameDefaultTextHandling(command);
+                    GameEngine.inGameDefaultTextHandling(command);
             }
         }
     }
@@ -2488,25 +2487,25 @@ public class OpenWorld extends Room {
                 case "north" -> {
                     previousRoomSave = roomSave;
                     roomSave = 44;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 case "east" -> {
                     previousRoomSave = roomSave;
                     roomSave = 54;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 case "south" -> {
                     previousRoomSave = roomSave;
                     roomSave = 60;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 case "west" -> {
                     previousRoomSave = roomSave;
                     roomSave = 52;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 default ->
-                    Main.inGameDefaultTextHandling(command);
+                    GameEngine.inGameDefaultTextHandling(command);
             }
         }
     }
@@ -2533,7 +2532,7 @@ public class OpenWorld extends Room {
                 case "north" -> {
                     previousRoomSave = roomSave;
                     roomSave = 45;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 case "the dark forest" -> {
                     if (Dungeon.completedDungeons > 0) {
@@ -2546,10 +2545,10 @@ public class OpenWorld extends Room {
                 case "west" -> {
                     previousRoomSave = roomSave;
                     roomSave = 53;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 default ->
-                    Main.inGameDefaultTextHandling(command);
+                    GameEngine.inGameDefaultTextHandling(command);
             }
         }
     }
@@ -2575,17 +2574,17 @@ public class OpenWorld extends Room {
                 case "north" -> {
                     previousRoomSave = roomSave;
                     roomSave = 48;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 case "east" -> {
                     previousRoomSave = roomSave;
                     roomSave = 27;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 case "south" -> {
                     previousRoomSave = roomSave;
                     roomSave = 64;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 case "the desert pyramid" -> {
                     if (Dungeon.completedDungeons > 5) {
@@ -2596,7 +2595,7 @@ public class OpenWorld extends Room {
                     }
                 }
                 default ->
-                    Main.inGameDefaultTextHandling(command);
+                    GameEngine.inGameDefaultTextHandling(command);
             }
         }
     }
@@ -2618,25 +2617,25 @@ public class OpenWorld extends Room {
                 case "north" -> {
                     previousRoomSave = roomSave;
                     roomSave = 50;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 case "east" -> {
                     previousRoomSave = roomSave;
                     roomSave = 58;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 case "south" -> {
                     previousRoomSave = roomSave;
                     roomSave = 66;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 case "west" -> {
                     previousRoomSave = roomSave;
                     roomSave = 27;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 default ->
-                    Main.inGameDefaultTextHandling(command);
+                    GameEngine.inGameDefaultTextHandling(command);
             }
         }
     }
@@ -2659,25 +2658,25 @@ public class OpenWorld extends Room {
                 case "north" -> {
                     previousRoomSave = roomSave;
                     roomSave = 51;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 case "east" -> {
                     previousRoomSave = roomSave;
                     roomSave = 59;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 case "south" -> {
                     previousRoomSave = roomSave;
                     roomSave = 67;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 case "west" -> {
                     previousRoomSave = roomSave;
                     roomSave = 57;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 default ->
-                    Main.inGameDefaultTextHandling(command);
+                    GameEngine.inGameDefaultTextHandling(command);
             }
         }
     }
@@ -2699,25 +2698,25 @@ public class OpenWorld extends Room {
                 case "north" -> {
                     previousRoomSave = roomSave;
                     roomSave = 52;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 case "east" -> {
                     previousRoomSave = roomSave;
                     roomSave = 60;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 case "south" -> {
                     previousRoomSave = roomSave;
                     roomSave = 68;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 case "west" -> {
                     previousRoomSave = roomSave;
                     roomSave = 58;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 default ->
-                    Main.inGameDefaultTextHandling(command);
+                    GameEngine.inGameDefaultTextHandling(command);
             }
         }
     }
@@ -2743,7 +2742,7 @@ public class OpenWorld extends Room {
                 case "north" -> {
                     previousRoomSave = roomSave;
                     roomSave = 53;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 case "the dark forest" -> {
                     if (Dungeon.completedDungeons > 0) {
@@ -2756,15 +2755,15 @@ public class OpenWorld extends Room {
                 case "south" -> {
                     previousRoomSave = roomSave;
                     roomSave = 69;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 case "west" -> {
                     previousRoomSave = roomSave;
                     roomSave = 59;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 default ->
-                    Main.inGameDefaultTextHandling(command);
+                    GameEngine.inGameDefaultTextHandling(command);
             }
         }
     }
@@ -2791,12 +2790,12 @@ public class OpenWorld extends Room {
                 case "east" -> {
                     previousRoomSave = roomSave;
                     roomSave = 33;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 case "south" -> {
                     previousRoomSave = roomSave;
                     roomSave = 41;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 case "the mountain cave" -> {
                     if (Dungeon.completedDungeons > 1) {
@@ -2807,7 +2806,7 @@ public class OpenWorld extends Room {
                     }
                 }
                 default ->
-                    Main.inGameDefaultTextHandling(command);
+                    GameEngine.inGameDefaultTextHandling(command);
             }
         }
     }
@@ -2833,17 +2832,17 @@ public class OpenWorld extends Room {
                 case "north" -> {
                     previousRoomSave = roomSave;
                     roomSave = 55;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 case "east" -> {
                     previousRoomSave = roomSave;
                     roomSave = 65;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 case "south" -> {
                     previousRoomSave = roomSave;
                     roomSave = 72;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 case "the desert plains" -> {
                     if (Dungeon.completedDungeons > 4) {
@@ -2854,7 +2853,7 @@ public class OpenWorld extends Room {
                     }
                 }
                 default ->
-                    Main.inGameDefaultTextHandling(command);
+                    GameEngine.inGameDefaultTextHandling(command);
             }
         }
     }
@@ -2877,25 +2876,25 @@ public class OpenWorld extends Room {
                 case "north" -> {
                     previousRoomSave = roomSave;
                     roomSave = 27;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 case "east" -> {
                     previousRoomSave = roomSave;
                     roomSave = 66;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 case "south" -> {
                     previousRoomSave = roomSave;
                     roomSave = 73;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 case "west" -> {
                     previousRoomSave = roomSave;
                     roomSave = 64;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 default ->
-                    Main.inGameDefaultTextHandling(command);
+                    GameEngine.inGameDefaultTextHandling(command);
             }
         }
     }
@@ -2917,25 +2916,25 @@ public class OpenWorld extends Room {
                 case "north" -> {
                     previousRoomSave = roomSave;
                     roomSave = 57;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 case "east" -> {
                     previousRoomSave = roomSave;
                     roomSave = 67;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 case "south" -> {
                     previousRoomSave = roomSave;
                     roomSave = 74;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 case "west" -> {
                     previousRoomSave = roomSave;
                     roomSave = 65;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 default ->
-                    Main.inGameDefaultTextHandling(command);
+                    GameEngine.inGameDefaultTextHandling(command);
             }
         }
     }
@@ -2958,26 +2957,26 @@ public class OpenWorld extends Room {
                 case "north" -> {
                     previousRoomSave = roomSave;
                     roomSave = 58;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 case "east" -> {
                     previousRoomSave = roomSave;
                     roomSave = 68;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 case "the village" -> {
                     previousRoomSave = roomSave;
                     saveRoomNumber = roomNumber;
                     roomSave = 1;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 case "west" -> {
                     previousRoomSave = roomSave;
                     roomSave = 66;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 default ->
-                    Main.inGameDefaultTextHandling(command);
+                    GameEngine.inGameDefaultTextHandling(command);
             }
         }
     }
@@ -3000,20 +2999,20 @@ public class OpenWorld extends Room {
                 case "north" -> {
                     previousRoomSave = roomSave;
                     roomSave = 59;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 case "east" -> {
                     previousRoomSave = roomSave;
                     roomSave = 69;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 case "west" -> {
                     previousRoomSave = roomSave;
                     roomSave = 67;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 default ->
-                    Main.inGameDefaultTextHandling(command);
+                    GameEngine.inGameDefaultTextHandling(command);
             }
         }
     }
@@ -3039,7 +3038,7 @@ public class OpenWorld extends Room {
                 case "north" -> {
                     previousRoomSave = roomSave;
                     roomSave = 60;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 case "the meadow" -> {
                     previousRoomSave = roomSave;
@@ -3048,10 +3047,10 @@ public class OpenWorld extends Room {
                 case "west" -> {
                     previousRoomSave = roomSave;
                     roomSave = 68;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 default ->
-                    Main.inGameDefaultTextHandling(command);
+                    GameEngine.inGameDefaultTextHandling(command);
             }
         }
     }
@@ -3077,12 +3076,12 @@ public class OpenWorld extends Room {
                 case "north" -> {
                     previousRoomSave = roomSave;
                     roomSave = 64;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 case "east" -> {
                     previousRoomSave = roomSave;
                     roomSave = 73;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 case "the desert oasis" -> {
                     if (Dungeon.completedDungeons > 3) {
@@ -3093,7 +3092,7 @@ public class OpenWorld extends Room {
                     }
                 }
                 default ->
-                    Main.inGameDefaultTextHandling(command);
+                    GameEngine.inGameDefaultTextHandling(command);
             }
         }
     }
@@ -3116,20 +3115,20 @@ public class OpenWorld extends Room {
                 case "north" -> {
                     previousRoomSave = roomSave;
                     roomSave = 65;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 case "east" -> {
                     previousRoomSave = roomSave;
                     roomSave = 74;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 case "west" -> {
                     previousRoomSave = roomSave;
                     roomSave = 72;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 default ->
-                    Main.inGameDefaultTextHandling(command);
+                    GameEngine.inGameDefaultTextHandling(command);
             }
         }
     }
@@ -3151,21 +3150,21 @@ public class OpenWorld extends Room {
                 case "north" -> {
                     previousRoomSave = roomSave;
                     roomSave = 66;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 case "the village" -> {
                     previousRoomSave = roomSave;
                     saveRoomNumber = roomNumber;
                     roomSave = 1;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 case "west" -> {
                     previousRoomSave = roomSave;
                     roomSave = 73;
-                    Main.loadSave();
+                    GameEngine.loadSave();
                 }
                 default ->
-                    Main.inGameDefaultTextHandling(command);
+                    GameEngine.inGameDefaultTextHandling(command);
             }
         }
     }

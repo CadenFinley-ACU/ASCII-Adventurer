@@ -5,8 +5,8 @@ import java.util.Map;
 /**
  * Enemy Class
  *
- * Text Adventure Game SE374 F24 Final Project 
- * Caden Finley, Albert Tucker, Grijesh Shrestha
+ * Text Adventure Game SE374 F24 Final Project Caden Finley, Albert Tucker,
+ * Grijesh Shrestha
  */
 public class Enemy {
 
@@ -22,7 +22,7 @@ public class Enemy {
      */
     public static void createEnemies() {
         enemyDamageValues = null;
-        if (Dungeon.resetedAfterWin && Main.gameComplete) {
+        if (Dungeon.resetedAfterWin && GameEngine.gameComplete) {
             //powered up enemies
             enemyDamageValues = Map.copyOf(Map.ofEntries( //name of enemy / damage values for each enemy
                     //enemies

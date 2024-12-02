@@ -6,8 +6,8 @@ import java.util.Map;
 /**
  * Player Engine
  *
- * Text Adventure Game SE374 F24 Final Project 
- * Caden Finley, Albert Tucker, Grijesh Shrestha
+ * Text Adventure Game SE374 F24 Final Project Caden Finley, Albert Tucker,
+ * Grijesh Shrestha
  */
 public class Player {
 
@@ -61,9 +61,9 @@ public class Player {
         gold = 20000000;
         inventorySize = 200;
         name = "Debug!";
-        Main.playerCreated = true;
+        GameEngine.playerCreated = true;
         DungeonGenerator.testing = false;
-        Main.playTime.startClock(1);
+        GameEngine.playTime.startClock(1);
         TextEngine.printNoDelay("Where do you want to spawn", false);
         TextEngine.printNoDelay(" 1:SpawnRoom", false);
         TextEngine.printNoDelay(" 2:OpenWorld", false);
@@ -73,12 +73,12 @@ public class Player {
         command = console.readLine();
         switch (command) {
             case "1" -> {
-                Main.saveSpace("SpawnRoom");
-                Main.loadSave();
+                GameEngine.saveSpace("SpawnRoom");
+                GameEngine.loadSave();
             }
             case "2" -> {
-                Main.saveSpace("OpenWorld");
-                Main.loadSave();
+                GameEngine.saveSpace("OpenWorld");
+                GameEngine.loadSave();
             }
             case "3" -> {
                 TextEngine.printNoDelay(" 1:Meadow\n 2:Dark Forest\n 3:Mountain Cave\n 4:Mountain Top\n 5:Desert Oasis\n 6:Desert Plains\n 7 Desert Pyramid\n 8:Ocean Kingdom", false);
@@ -110,23 +110,23 @@ public class Player {
                         Dungeon.OceanKingdomDungeon.startRoom();
                     }
                     default -> {
-                        Main.saveSpace("SpawnRoom");
-                        Main.loadSave();
+                        GameEngine.saveSpace("SpawnRoom");
+                        GameEngine.loadSave();
                     }
                 }
             }
             case "4" -> {
-                Main.saveSpace("Village");
-                Main.loadSave();
+                GameEngine.saveSpace("Village");
+                GameEngine.loadSave();
             }
             case "5" -> {
-                Main.playTime.debugTime(359940);
-                Main.saveSpace("SpawnRoom");
-                Main.loadSave();
+                GameEngine.playTime.debugTime(359940);
+                GameEngine.saveSpace("SpawnRoom");
+                GameEngine.loadSave();
             }
             default -> {
-                Main.saveSpace("SpawnRoom");
-                Main.loadSave();
+                GameEngine.saveSpace("SpawnRoom");
+                GameEngine.loadSave();
             }
         }
 
@@ -254,8 +254,8 @@ public class Player {
             TextEngine.printWithDelays(space + brightRedStart + "You have died!" + brightEnd, false);
             TextEngine.printWithDelays(space + brightRedStart + "Game Over!" + brightEnd, false);
             TextEngine.enterToNext();
-            Main.wipeSave();
-            Main.startMenu();
+            GameEngine.wipeSave();
+            GameEngine.startMenu();
         }
 
         TextEngine.enterToNext();
@@ -434,7 +434,7 @@ public class Player {
             command = console.readLine();
             if (command != null && !command.isEmpty() && command.length() < 26) {
                 if ("exit".equals(command)) {
-                    Main.startMenu();
+                    GameEngine.startMenu();
                     TextEngine.clearScreen();
                 } else {
                     setName(command);
@@ -461,10 +461,10 @@ public class Player {
         TextEngine.printWithDelays("Good luck!", false);
         TextEngine.enterToNext();
         TextEngine.clearScreen();
-        Main.playerCreated = true;
-        Main.playTime.startClock(1);
-        Main.saveSpace("SpawnRoom");
-        Main.loadSave();
+        GameEngine.playerCreated = true;
+        GameEngine.playTime.startClock(1);
+        GameEngine.saveSpace("SpawnRoom");
+        GameEngine.loadSave();
     }
 
     /**
@@ -478,7 +478,7 @@ public class Player {
         TextEngine.clearScreen();
         TextEngine.printNoDelay("Player Stats:", false);
         TextEngine.printNoDelay("Name: " + name, false);
-        TextEngine.printNoDelay("Play Time: " + Main.playTime.returnTime(), false);
+        TextEngine.printNoDelay("Play Time: " + GameEngine.playTime.returnTime(), false);
         drawHealthBar();
         TextEngine.printNoDelay("Gold: " + gold, false);
         TextEngine.printNoDelay("Damage: " + damage, false);
@@ -492,7 +492,7 @@ public class Player {
             gold = 20000000;
             inventorySize = 200;
             putItem("k.o. cannon", 10);
-            Main.loadSave();
+            GameEngine.loadSave();
         } else if ("complete".equals(command) && name.equals("Debug!")) {
             maxHealth = 10000;
             health = maxHealth;
@@ -500,11 +500,11 @@ public class Player {
             inventorySize = 200;
             putItem("k.o. cannon", 10);
             Dungeon.completedDungeons = 8;
-            Main.gameComplete = true;
-            Main.loadSave();
+            GameEngine.gameComplete = true;
+            GameEngine.loadSave();
         } else {
             command = null;
-            Main.loadSave();
+            GameEngine.loadSave();
         }
     }
 
@@ -533,7 +533,7 @@ public class Player {
             }
         }
         // Load the saved game state
-        Main.loadSave();
+        GameEngine.loadSave();
     }
 
     /**
@@ -707,7 +707,7 @@ public class Player {
         System.out.println();
         System.out.println("If you are still feeling lost type " + yellowColor + "help" + resetColor + " for a list of commands.");
         TextEngine.enterToNext();
-        Main.loadSave();
+        GameEngine.loadSave();
     }
 
     /**
@@ -758,7 +758,7 @@ public class Player {
             command = console.readLine();
             if (command != null && !command.isEmpty() && command.length() < 13) {
                 if ("exit".equals(command)) {
-                    Main.startMenu();
+                    GameEngine.startMenu();
                     TextEngine.clearScreen();
                 } else {
                     setName(command);
@@ -771,7 +771,7 @@ public class Player {
         }
         TextEngine.printWithDelays(space + "Your name has been changed to " + brightYellowStart + name + brightEnd, false);
         TextEngine.enterToNext();
-        Main.startMenu();
+        GameEngine.startMenu();
     }
 
     /**
