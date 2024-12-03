@@ -1501,7 +1501,7 @@ public class Dungeon extends Room {
         inBossFight = true;
         Enemy.bossFight(currentBoss);
         TextEngine.printWithDelays("You have defeated the " + currentBoss + " and completed the dungeon!", false);
-        Player.changeGold(Enemy.enemyDamageValues.get(currentBoss));
+        Player.changeGold(Enemy.enemyDamageValues.get(currentBoss) * 2);
         TextEngine.enterToNext();
         switch (currentDungeon) {
             case "Meadow" -> {

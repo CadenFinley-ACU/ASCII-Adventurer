@@ -17,6 +17,7 @@ public class Enemy {
     public final static Console console = System.console();
     public static String command;
     public static Map<String, Integer> enemyDamageValues;
+    private static Map<String, Integer> enemyHealthValues;
 
     /**
      * This method initializes the enemyDamageValues map with the damage values
@@ -85,7 +86,7 @@ public class Enemy {
             ));
         } else {
             enemyDamageValues = Map.copyOf(Map.ofEntries( //name of enemy / damage values for each enemy
-                    //enemies
+                    //enemies int = atk
                     Map.entry("Mountain Lion", 10),
                     Map.entry("Barbarian", 5),
                     Map.entry("Shark", 5),
@@ -114,7 +115,7 @@ public class Enemy {
                     Map.entry("Sea Witch", 55),
                     Map.entry("Sea Dragon", 70),
                     Map.entry("Sea Giant", 60),
-                    //minibosses
+                    //minibosses int = atk
                     Map.entry("Golem", 35), //dungeon 1
                     Map.entry("Forest Guardian", 45), //dungeon 2  //forest area
 
@@ -127,18 +128,18 @@ public class Enemy {
 
                     Map.entry("Leviathan", 150), //dungeon 8 //ocean area
 
-                    //bosses
-                    Map.entry("Forest Giant", 50), //dungeon 1 
-                    Map.entry("Forest Spirit", 55), //dungeon 2
+                    //bosses int = atk health = atk * 3
+                    Map.entry("Forest Giant", 20), //dungeon 1 
+                    Map.entry("Forest Spirit", 25), //dungeon 2
 
-                    Map.entry("Wyvern", 70), //dungeon 3
-                    Map.entry("Ice Dragon", 80), //dungeon 4
+                    Map.entry("Wyvern", 25), //dungeon 3
+                    Map.entry("Ice Dragon", 45), //dungeon 4
 
-                    Map.entry("Phoenix", 90), //dungeon 5
-                    Map.entry("Giant Scorpion", 100), //dungeon 6
-                    Map.entry("Giant Sand Worm", 110), //dungeon 7
+                    Map.entry("Phoenix", 65), //dungeon 5
+                    Map.entry("Giant Scorpion", 70), //dungeon 6
+                    Map.entry("Giant Sand Worm", 80), //dungeon 7
 
-                    Map.entry("Kraken", 200) //dungeon 8
+                    Map.entry("Kraken", 130) //dungeon 8
             ));
         }
     }
@@ -260,8 +261,9 @@ public class Enemy {
     private static void bossFightLoop(String boss) throws InterruptedException {
         ClockEngine timer = new ClockEngine("timer");
         int heals = 3;
-        int currentMaxBossHealth = enemyDamageValues.get(boss) + enemyDamageValues.get(boss) / 3;
+        int currentMaxBossHealth = enemyDamageValues.get(boss) * 3;
         int currentBossHealth = currentMaxBossHealth;
+        int currentBossDamage = enemyDamageValues.get(boss);
         int hit = 1;
         timer.startClock(60 * 5); //5 minutes
         while (true) { //bossfight loop
@@ -320,7 +322,20 @@ public class Enemy {
                     if (command.equals("dodge")) {
                         TextEngine.printWithDelays("You tried to dodge the attack but failed!", false);
                     }
-                    float damageTaken = ((currentMaxBossHealth)) - Player.getDefense();
+                    int attackType = (int) (Math.random() * 5);
+                    float damageTaken = currentBossDamage - Player.getDefense();
+                    if (damageTaken < 1) {
+                        damageTaken = 1;
+                    }
+                    switch (attackType) {
+                        case 0 -> {
+                            TextEngine.printWithDelays("The " + boss + " uses a powerful attack!", false);
+                            damageTaken *= 1.5;
+                        }
+                        default -> {
+                            TextEngine.printWithDelays("The " + boss + " uses a normal attack!", false);
+                        }
+                    }
                     Player.changeHealth((int) -damageTaken);
                 }
             }
