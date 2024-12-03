@@ -981,7 +981,7 @@ public class Dungeon extends Room {
                     int[] buffer = currentPlayerPosition.clone();
                     currentPlayerPosition = lastPosition.clone(); // Save the current position before moving
                     lastPosition = buffer.clone();
-                    return;
+                    GameEngine.loadSave();
                 }
                 default -> {
                     defaultDungeonArgs(command);
@@ -1072,7 +1072,7 @@ public class Dungeon extends Room {
                     int[] buffer = currentPlayerPosition.clone();
                     currentPlayerPosition = lastPosition.clone(); // Save the current position before moving
                     lastPosition = buffer.clone();
-                    return;
+                    GameEngine.loadSave();
                 }
                 default -> {
                     defaultDungeonArgs(command);
@@ -1117,10 +1117,6 @@ public class Dungeon extends Room {
                     OceanKingdomDungeon.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = oceanKingdomDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
                 }
             }
-        } else {
-            int[] buffer = currentPlayerPosition.clone();
-            currentPlayerPosition = lastPosition.clone(); // Save the current position before moving
-            lastPosition = buffer.clone();
         }
     }
 
@@ -1160,10 +1156,6 @@ public class Dungeon extends Room {
                     OceanKingdomDungeon.roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = oceanKingdomDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
                 }
             }
-        } else {
-            int[] buffer = currentPlayerPosition.clone();
-            currentPlayerPosition = lastPosition.clone(); // Save the current position before moving
-            lastPosition = buffer.clone();
         }
     }
 
@@ -1212,16 +1204,10 @@ public class Dungeon extends Room {
                         }
                         return;
                     } else {
-                        int[] buffer = currentPlayerPosition.clone();
-                        currentPlayerPosition = lastPosition.clone(); // Save the current position before moving
-                        lastPosition = buffer.clone();
                         return;
                     }
                 }
                 case "no" -> {
-                    int[] buffer = currentPlayerPosition.clone();
-                    currentPlayerPosition = lastPosition.clone(); // Save the current position before moving
-                    lastPosition = buffer.clone();
                     return;
                 }
                 default -> {
@@ -1302,10 +1288,6 @@ public class Dungeon extends Room {
                         OceanKingdomDungeon.items.remove(randomItem);
                     }
                 }
-            } else {
-                int[] buffer = currentPlayerPosition.clone();
-                currentPlayerPosition = lastPosition.clone(); // Save the current position before moving
-                lastPosition = buffer.clone();
             }
         } else {
             switch (currentDungeon) {
@@ -1406,6 +1388,9 @@ public class Dungeon extends Room {
                 }
             }
         } else {
+            TextEngine.printWithDelays("There seems to have been a trap in this room, but it was disarmed!", false);
+            TextEngine.printWithDelays("We need to be on the lookout for other traps!", false);
+            TextEngine.enterToNext();
             switch (currentDungeon) {
                 case "Meadow" -> {
                     meadowDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]] = 1;
@@ -1674,19 +1659,18 @@ public class Dungeon extends Room {
             command = TextEngine.parseCommand(Room.console.readLine().toLowerCase().trim(), directionsString.toArray(String[]::new));
             switch (command) {
                 case "north" ->
-                    movePlayer(command, new int[]{-1, 0}, roomsBeenTo, localDungeon);
+                    movePlayer(command, new int[]{-1, 0});
                 case "east" ->
-                    movePlayer(command, new int[]{0, 1}, roomsBeenTo, localDungeon);
+                    movePlayer(command, new int[]{0, 1});
                 case "south" ->
-                    movePlayer(command, new int[]{1, 0}, roomsBeenTo, localDungeon);
+                    movePlayer(command, new int[]{1, 0});
                 case "west" ->
-                    movePlayer(command, new int[]{0, -1}, roomsBeenTo, localDungeon);
+                    movePlayer(command, new int[]{0, -1});
                 case "boss room" -> {
                     if (confirmBossContinue()) {
                         lastPosition = currentPlayerPosition.clone(); // Save the current position before moving
                         roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = localDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
                         currentPlayerPosition = DungeonGenerator.findValue(localDungeon, 8);
-                        changeDungeonRoomsBeenTo(roomsBeenTo);
                         GameEngine.loadSave();
                     } else {
                         GameEngine.loadSave();
@@ -1735,55 +1719,14 @@ public class Dungeon extends Room {
      * @throws InterruptedException If the thread is interrupted while moving
      * the player.
      */
-    private static void movePlayer(String direction, int[] positionChange, int[][] roomsBeenTo, int[][] localDungeon) throws InterruptedException {
+    private static void movePlayer(String direction, int[] positionChange) throws InterruptedException {
         if (directionsString.contains(direction)) {
             lastPosition = currentPlayerPosition.clone(); // Save the current position before moving
-            roomsBeenTo[currentPlayerPosition[0]][currentPlayerPosition[1]] = localDungeon[currentPlayerPosition[0]][currentPlayerPosition[1]];
             currentPlayerPosition[0] += positionChange[0];
             currentPlayerPosition[1] += positionChange[1];
-            changeDungeonRoomsBeenTo(roomsBeenTo);
             GameEngine.loadSave();
         } else {
             Dungeon.defaultDungeonArgs(direction);
-        }
-    }
-
-    /**
-     * Updates the roomsBeenTo array for the current dungeon.
-     *
-     * This method changes the roomsBeenTo array for the dungeon specified by
-     * the currentDungeon variable. The roomsBeenTo array keeps track of which
-     * rooms have been visited in the dungeon.
-     *
-     * @param changedRoomsBeenTo The new roomsBeenTo array to be set for the
-     * current dungeon.
-     */
-    private static void changeDungeonRoomsBeenTo(int[][] changedRoomsBeenTo) {
-        switch (currentDungeon) {
-            case "Meadow" -> {
-                MeadowDungeon.roomsBeenTo = changedRoomsBeenTo;
-            }
-            case "Dark Forest" -> {
-                DarkForestDungeon.roomsBeenTo = changedRoomsBeenTo;
-            }
-            case "Mountain Cave" -> {
-                MountainCaveDungeon.roomsBeenTo = changedRoomsBeenTo;
-            }
-            case "Mountain Top" -> {
-                MountainTopDungeon.roomsBeenTo = changedRoomsBeenTo;
-            }
-            case "Desert Oasis" -> {
-                DesertOasisDungeon.roomsBeenTo = changedRoomsBeenTo;
-            }
-            case "Desert Plains" -> {
-                DesertPlainsDungeon.roomsBeenTo = changedRoomsBeenTo;
-            }
-            case "Desert Pyramid" -> {
-                DesertPyramidDungeon.roomsBeenTo = changedRoomsBeenTo;
-            }
-            case "Ocean Kingdom" -> {
-                OceanKingdomDungeon.roomsBeenTo = changedRoomsBeenTo;
-            }
         }
     }
 

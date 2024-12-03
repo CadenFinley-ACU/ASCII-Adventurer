@@ -1,5 +1,4 @@
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -35,6 +34,7 @@ public class DungeonInstance extends Dungeon {
     private final List<String> enemies;
     public int[][] roomsBeenTo;
     public List<String> items;
+    private List<String> originitems;
     public boolean completed = false;
     public boolean visited = false;
     public boolean mapRevealed;
@@ -66,6 +66,7 @@ public class DungeonInstance extends Dungeon {
         super();
         this.enemies = enemies;
         this.items = items;
+        this.originitems = items;
         this.completed = completed;
         this.visited = visited;
         this.mapRevealed = mapRevealed;
@@ -92,7 +93,7 @@ public class DungeonInstance extends Dungeon {
     public void startRoom() throws InterruptedException {
         if (!visited) {
             fresh();
-            items = new ArrayList<>(List.of("axe", "chainmail set"));
+            items = originitems;
             visited = true;
             currentPlayerPosition = DungeonGenerator.findValue(map, 9);
         }
