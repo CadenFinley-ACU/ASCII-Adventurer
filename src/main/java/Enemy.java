@@ -252,7 +252,7 @@ public class Enemy {
         String brightRedEnd = "\033[0m"; // Reset formatting
         TextEngine.printWithDelays("You have entered the boss room!", false);
         TextEngine.printWithDelays("You are now fighting the " + brightRedStart + boss + brightRedEnd + "!", false);
-        TextEngine.printWithDelays("You have 5 minutes to defeat the boss!", false);
+        TextEngine.printWithDelays("You have 3 minutes to defeat the boss!", false);
         TextEngine.enterToNext();
         GameEngine.screenRefresh();
         bossFightLoop(boss);
@@ -266,7 +266,8 @@ public class Enemy {
         int currentBossDamage = enemyDamageValues.get(boss);
         int hit = 1;
         int bossAnger = 6;
-        timer.startClock(60 * 5); //5 minutes
+        float attackMultiplier = 1.0f;
+        timer.startClock(60 * 3); //3 minutes
         while (true) { //bossfight loop
             drawRoom();
             if (!timer.isRunning()) {
@@ -304,25 +305,33 @@ public class Enemy {
                     hit = (int) (Math.random() * 2);
                 }
                 case "heal" -> {
-                    hit = 1;
-                    bossAnger--;
-                    Player.heal();
+                    if (Player.canHeal()) {
+                        Player.heal();
+                        hit = 1;
+                        bossAnger--;
+                    } else {
+                        TextEngine.printWithDelays("You cannot heal right now!", false);
+                        hit = (int) (Math.random() * 2);
+                        command = "dodge";
+                    }
                 }
             }
+            if (bossAnger <= 1) {
+                attackMultiplier = 1.0f;
+                TextEngine.printWithDelays("The " + boss + " is enraged!", false);
+            }
             int bossHealthChange = (int) (Math.random() * 5);
-            if (bossHealthChange == 0 && currentBossHealth < currentMaxBossHealth / 3 && heals > 0) {
+            if (bossHealthChange == 0 && currentBossHealth < currentMaxBossHealth / 4 && heals > 0) {
                 if (hit == 0) {
                     TextEngine.printWithDelays("You tried to dodge an attack but the " + boss + " heals itself!", false);
                 }
-                currentBossHealth += currentMaxBossHealth / 2;
+                TextEngine.printWithDelays("The " + boss + " heals itself for " + currentMaxBossHealth / 3 + " health!", false);
+                currentBossHealth += currentMaxBossHealth / 3;
                 heals--;
-                TextEngine.printWithDelays("The " + boss + " heals itself for " + currentMaxBossHealth / 2 + " health!", false);
+                attackMultiplier -= 0.2f;
                 bossAnger++;
                 TextEngine.enterToNext();
             } else {
-                if (bossAnger <= 1) {
-                    TextEngine.printWithDelays("The " + boss + " is enraged!", false);
-                }
                 TextEngine.printWithDelays("The " + boss + " attacks you!", false);
                 if (hit == 0) {
                     TextEngine.printWithDelays("You dodge the attack!", false);
@@ -334,7 +343,7 @@ public class Enemy {
                         TextEngine.printWithDelays("You tried to dodge the attack but failed!", false);
                     }
                     int attackType = (int) (Math.random() * bossAnger);
-                    float damageTaken = currentBossDamage - Player.getDefense();
+                    float damageTaken = (currentBossDamage * attackMultiplier) - Player.getDefense();
                     if (damageTaken < 1) {
                         damageTaken = 1;
                     }

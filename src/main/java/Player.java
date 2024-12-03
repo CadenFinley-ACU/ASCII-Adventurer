@@ -541,6 +541,10 @@ public class Player {
         }
     }
 
+    public static boolean canHeal() {
+        return (inventory.containsKey("super health potion") || inventory.containsKey("greater health potion") || inventory.containsKey("health potion")) && health < maxHealth;
+    }
+
     /**
      * Copies the inventory.
      *
