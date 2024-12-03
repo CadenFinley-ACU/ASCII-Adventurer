@@ -265,6 +265,7 @@ public class Enemy {
         int currentBossHealth = currentMaxBossHealth;
         int currentBossDamage = enemyDamageValues.get(boss);
         int hit = 1;
+        int bossAnger = 6;
         timer.startClock(60 * 5); //5 minutes
         while (true) { //bossfight loop
             drawRoom();
@@ -272,6 +273,9 @@ public class Enemy {
                 TextEngine.printWithDelays("You ran out of time!", false);
                 TextEngine.printWithDelays("The " + boss + " has defeated you!", false);
                 Player.changeHealth(-Player.getMaxHealth());
+            }
+            if (bossAnger < 0) {
+                bossAnger = 0;
             }
             System.out.println("Time Remaining: " + timer.returnTime());
             displayBossHealth(boss, currentBossHealth, currentMaxBossHealth);
@@ -301,6 +305,7 @@ public class Enemy {
                 }
                 case "heal" -> {
                     hit = 1;
+                    bossAnger--;
                     Player.heal();
                 }
             }
@@ -312,6 +317,7 @@ public class Enemy {
                 currentBossHealth += currentMaxBossHealth / 2;
                 heals--;
                 TextEngine.printWithDelays("The " + boss + " heals itself for " + currentMaxBossHealth / 2 + " health!", false);
+                bossAnger++;
                 TextEngine.enterToNext();
             } else {
                 TextEngine.printWithDelays("The " + boss + " attacks you!", false);
@@ -324,7 +330,7 @@ public class Enemy {
                     if (command.equals("dodge")) {
                         TextEngine.printWithDelays("You tried to dodge the attack but failed!", false);
                     }
-                    int attackType = (int) (Math.random() * 6);
+                    int attackType = (int) (Math.random() * bossAnger);
                     float damageTaken = currentBossDamage - Player.getDefense();
                     if (damageTaken < 1) {
                         damageTaken = 1;
@@ -373,8 +379,8 @@ public class Enemy {
         if (hearts == 0) {
             hearts = 1;
         }
-        if (hearts > 25) {
-            hearts = 25;
+        if (hearts > 50) {
+            hearts = 50;
         }
         int filledBars = (int) Math.round(((double) health / maxHealth) * hearts);
         if (filledBars == 0 && health > 0) {
