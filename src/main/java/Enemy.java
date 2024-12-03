@@ -317,12 +317,14 @@ public class Enemy {
                 TextEngine.printWithDelays("The " + boss + " attacks you!", false);
                 if (hit == 0) {
                     TextEngine.printWithDelays("You dodge the attack!", false);
+                    TextEngine.printWithDelays("You gained back 15 seconds!", false);
+                    timer.addTimeToTimerInSeconds(15);
                     TextEngine.enterToNext();
                 } else {
                     if (command.equals("dodge")) {
                         TextEngine.printWithDelays("You tried to dodge the attack but failed!", false);
                     }
-                    int attackType = (int) (Math.random() * 5);
+                    int attackType = (int) (Math.random() * 6);
                     float damageTaken = currentBossDamage - Player.getDefense();
                     if (damageTaken < 1) {
                         damageTaken = 1;
@@ -330,7 +332,11 @@ public class Enemy {
                     switch (attackType) {
                         case 0 -> {
                             TextEngine.printWithDelays("The " + boss + " uses a powerful attack!", false);
-                            damageTaken *= 1.5;
+                            damageTaken *= 1.3;
+                        }
+                        case 1 -> {
+                            TextEngine.printWithDelays("The " + boss + " missed!", false);
+                            damageTaken = 0;
                         }
                         default -> {
                             TextEngine.printWithDelays("The " + boss + " uses a normal attack!", false);

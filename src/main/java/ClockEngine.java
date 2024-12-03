@@ -168,4 +168,10 @@ public class ClockEngine {
     public boolean isRunning() {
         return running;
     }
+
+    public void addTimeToTimerInSeconds(int timeInSeconds) {
+        if (whatAmI.equals("timer")) {
+            this.remainingTimeInSeconds += timeInSeconds;
+        }
+    }
 }
