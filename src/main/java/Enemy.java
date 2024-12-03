@@ -307,7 +307,7 @@ public class Enemy {
                 if (hit == 0) {
                     TextEngine.printWithDelays("You tried to dodge an attack but the " + boss + " heals itself!", false);
                 }
-                currentBossHealth += enemyDamageValues.get(boss);
+                currentBossHealth += currentMaxBossHealth / 2;
                 TextEngine.printWithDelays("The " + boss + " heals itself for " + currentMaxBossHealth / 2 + " health!", false);
                 TextEngine.enterToNext();
             } else {
@@ -319,7 +319,7 @@ public class Enemy {
                     if (command.equals("dodge")) {
                         TextEngine.printWithDelays("You tried to dodge the attack but failed!", false);
                     }
-                    float damageTaken = ((enemyDamageValues.get(boss) / 3)) - Player.getDefense();
+                    float damageTaken = ((currentMaxBossHealth / 3)) - Player.getDefense();
                     Player.changeHealth((int) -damageTaken);
                 }
             }
