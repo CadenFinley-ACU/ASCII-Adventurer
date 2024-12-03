@@ -266,6 +266,11 @@ public class Enemy {
         timer.startClock(60 * 5); //5 minutes
         while (true) { //bossfight loop
             drawRoom();
+            if (!timer.isRunning()) {
+                TextEngine.printWithDelays("You ran out of time!", false);
+                TextEngine.printWithDelays("The " + boss + " has defeated you!", false);
+                Player.changeHealth(-Player.getMaxHealth());
+            }
             System.out.println("Time Remaining: " + timer.returnTime());
             displayBossHealth(boss, currentBossHealth, currentMaxBossHealth);
             command = askBossCommand();
@@ -296,11 +301,6 @@ public class Enemy {
                     hit = 1;
                     Player.heal();
                 }
-            }
-            if (!timer.isRunning()) {
-                TextEngine.printWithDelays("You ran out of time!", false);
-                TextEngine.printWithDelays("The " + boss + " has defeated you!", false);
-                Player.changeHealth(-Player.getMaxHealth());
             }
             int bossHealthChange = (int) (Math.random() * 5);
             if (bossHealthChange == 0 && currentBossHealth < currentMaxBossHealth / 3) {

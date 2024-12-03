@@ -14,7 +14,6 @@ import java.util.Random;
  */
 public class Dungeon extends Room {
 
-    static String yellowColor = "\033[1;33m"; // yellow color
     public static String currentDungeon;
     public static int completedDungeons = 0;
     public static int numberOfEnemies;
