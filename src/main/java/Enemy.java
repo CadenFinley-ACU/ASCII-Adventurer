@@ -263,7 +263,7 @@ public class Enemy {
         int currentMaxBossHealth = enemyDamageValues.get(boss);
         int currentBossHealth = currentMaxBossHealth;
         int hit = 1;
-        timer.startClock(60 * 1); //5 minutes
+        timer.startClock(60 * 5); //5 minutes
         while (true) { //bossfight loop
             drawRoom();
             System.out.println("Time Remaining: " + timer.returnTime());
