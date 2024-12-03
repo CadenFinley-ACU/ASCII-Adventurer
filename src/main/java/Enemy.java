@@ -196,8 +196,8 @@ public class Enemy {
             TextEngine.printWithDelays(space + brightRedStart + "You run from the " + type + "!" + brightRedEnd, false);
         }
         int damage = 0 - (enemyDamageValues.get(type) * quantity) / 2;
-        if (damage >= 0) {
-            damage = -1;
+        if (damage > 0) {
+            damage = 0;
         }
         checkhealth(type, quantity, false);
         return damage;
