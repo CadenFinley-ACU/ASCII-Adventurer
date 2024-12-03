@@ -1,6 +1,7 @@
 
 import java.io.Console;
 import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -300,6 +301,9 @@ public class GameEngine {
         TextEngine.printWithDelays("See ya next time!", false);
         TextEngine.enterToNext();
         TextEngine.clearScreen();
+        if (Player.getName().equals("Debug!")) {
+            GameSaveSerialization.logStackTraceToTerminal(new IOException());
+        }
         System.exit(0);
     }
 
