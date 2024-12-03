@@ -320,6 +320,9 @@ public class Enemy {
                 bossAnger++;
                 TextEngine.enterToNext();
             } else {
+                if (bossAnger <= 1) {
+                    TextEngine.printWithDelays("The " + boss + " is enraged!", false);
+                }
                 TextEngine.printWithDelays("The " + boss + " attacks you!", false);
                 if (hit == 0) {
                     TextEngine.printWithDelays("You dodge the attack!", false);
