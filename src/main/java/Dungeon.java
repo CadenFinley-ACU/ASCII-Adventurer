@@ -723,7 +723,7 @@ public class Dungeon extends Room {
      * directions and commands
      */
     private static void leave() throws InterruptedException {
-        handleDirectionsAndCommands(false);
+        handleDirectionsAndCommands(true);
     }
 
     /**
