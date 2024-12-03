@@ -239,7 +239,6 @@ public class GameSaveSerialization {
                 reader.readLine();
                 Dungeon.currentDungeon = reader.readLine();
                 reader.readLine();
-
                 Dungeon.completedDungeons = Integer.parseInt(reader.readLine());
                 reader.readLine();
                 Dungeon.currentPlayerPosition = readArray(reader);
@@ -262,7 +261,6 @@ public class GameSaveSerialization {
                 reader.readLine();
                 Dungeon.oceanKingdomDungeon = readMatrix(reader);
                 reader.readLine();
-
                 SpawnRoom.roomSave = Integer.parseInt(reader.readLine());
                 reader.readLine();
                 OpenWorld.roomSave = Integer.parseInt(reader.readLine());
@@ -273,7 +271,6 @@ public class GameSaveSerialization {
                 reader.readLine();
                 Room.room = reader.readLine();
                 reader.readLine();
-
                 Dungeon.MeadowDungeon.completed = Boolean.parseBoolean(reader.readLine());
                 reader.readLine();
                 Dungeon.MeadowDungeon.visited = Boolean.parseBoolean(reader.readLine());
@@ -354,7 +351,6 @@ public class GameSaveSerialization {
                 reader.readLine();
                 Dungeon.OceanKingdomDungeon.mapRevealed = Boolean.parseBoolean(reader.readLine());
                 reader.readLine();
-
                 GameEngine.gameComplete = Boolean.parseBoolean(reader.readLine());
                 reader.readLine();
                 Dungeon.resetedAfterWin = Boolean.parseBoolean(reader.readLine());
@@ -373,7 +369,6 @@ public class GameSaveSerialization {
                 GameEngine.wipeFile(".game_save.txt");
                 GameEngine.wipeFile(".runtime.txt");
                 TextEngine.clearScreen();
-                GameEngine.gameStartGenDungeon();
                 GameEngine.wipeSave();
                 GameEngine.startMenu();
             }

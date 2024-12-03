@@ -51,7 +51,6 @@ public class SpawnRoom extends Room {
      * @throws InterruptedException if the thread is interrupted
      */
     private static void part0() throws InterruptedException { //0
-        String yellowColor = "\033[1;33m"; // yellow color
 
         // Print the initial text with delays
         TextEngine.printWithDelays("You awaken in a dim, damp cave, the air thick with the scent of moss and stone. \nThe only thing you have is the clothes you're wearing. To the north, you spot a faint glimmer of light.", false);
@@ -101,7 +100,6 @@ public class SpawnRoom extends Room {
      * @throws InterruptedException if the thread is interrupted
      */
     private static void part2() throws InterruptedException { //2
-        String yellowColor = "\033[1;33m"; // yellow color
         TextEngine.printWithDelays("You enter a cool, dimly lit room by a few torches", false);
         TextEngine.printWithDelays("There is a petestal in the middle where a mighty sword once lay", false);
         TextEngine.printWithDelays("Where to?\n Deeper in the Cave or Back out in the Wilderness?", false);

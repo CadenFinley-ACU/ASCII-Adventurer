@@ -527,12 +527,13 @@ public class GameEngine {
         Dungeon.resetedAfterWin = false;
         Room.reset("all");
         Player.setName(null);
-        Dungeon.generateDungeons();
         PromptEngine.aiGenerationEnabled = false;
         GameEngine.playTime.setSavedTimeInSeconds(0);
         wipeFile(".runtime.txt");
+        gameStartGenDungeon();
         GameSaveSerialization.saveGame();
         Enemy.resetEnemies();
+        TextEngine.clearScreen();
     }
 
     /**
