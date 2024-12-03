@@ -280,7 +280,7 @@ public class Room {
             for (int i = 0; i < OpenWorld.numberOfEnemies;) {
                 int enemyX = random.nextInt(currentRoom[0].length);
                 int enemyY = random.nextInt(currentRoom.length);
-                if (!(currentRoom[enemyY][enemyX].equals("P") || enemyX == 0)) {
+                if (!(currentRoom[enemyY][enemyX].equals("P") && enemyX == 0)) {
                     currentRoom[enemyY][enemyX] = redColor + enemyRender + resetColor;
                     i++;
                 }

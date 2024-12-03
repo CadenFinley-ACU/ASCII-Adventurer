@@ -793,91 +793,7 @@ public class DungeonGenerator {
         } else {
             switch (localDungeon[x][y]) {
                 case 1, 3 -> {
-                    room[2][7] = "P"; // Player
-                    List<int[]> emptySpots = new ArrayList<>();
-                    Random random = new Random();
-                    // Collect all empty spots in the room
-                    for (int row = 0; row < room.length; row++) {
-                        for (int col = 0; col < room[row].length; col++) {
-                            if (room[row][col].equals(" ")) { // Assuming ' ' represents an empty spot
-                                emptySpots.add(new int[]{row, col});
-                            }
-                        }
-                    }
-                    // Place enemies at random empty spots
-                    if (localDungeon[x][y] == 3) {
-                        if (numberofEnemies < 2) {
-                            numberofEnemies = 2;
-                        }
-                    }
-                    for (int i = 0; i < numberofEnemies && !emptySpots.isEmpty(); i++) {
-                        int randomIndex = random.nextInt(emptySpots.size());
-                        int[] spot = emptySpots.remove(randomIndex);
-                        String enemyRender;
-                        switch (Dungeon.enemyType) {
-                            case "Goblin" ->
-                                enemyRender = "G";
-                            case "Orc" ->
-                                enemyRender = "O";
-                            case "Troll" ->
-                                enemyRender = "T";
-                            case "Bandit" ->
-                                enemyRender = "B";
-                            case "Spider" ->
-                                enemyRender = "S";
-                            case "Giant Rat" ->
-                                enemyRender = "R";
-                            case "Skeleton" ->
-                                enemyRender = "S";
-                            case "Zombie" ->
-                                enemyRender = "Z";
-                            case "Ghost" ->
-                                enemyRender = "G";
-                            case "Demon" ->
-                                enemyRender = "D";
-                            case "Vampire" ->
-                                enemyRender = "V";
-                            case "Werewolf" ->
-                                enemyRender = "W";
-                            case "Witch" ->
-                                enemyRender = "W";
-                            case "Giant" ->
-                                enemyRender = "G";
-                            case "Mummy" ->
-                                enemyRender = "M";
-                            case "Slime" ->
-                                enemyRender = "S";
-                            case "Mimic" ->
-                                enemyRender = "M";
-                            case "Gargoyle" ->
-                                enemyRender = "G";
-                            case "Sea Serpent" ->
-                                enemyRender = "S";
-                            case "Sea Monster" ->
-                                enemyRender = "M";
-                            case "Sea Witch" ->
-                                enemyRender = "W";
-                            case "Sea Dragon" ->
-                                enemyRender = "D";
-                            case "Sea Giant" ->
-                                enemyRender = "G";
-                            case "Scorpion" ->
-                                enemyRender = "S";
-                            case "Mountain Lion" ->
-                                enemyRender = "M";
-                            case "Barbarian" ->
-                                enemyRender = "B";
-                            case "Shark" ->
-                                enemyRender = "S";
-                            case "Pirate" ->
-                                enemyRender = "P";
-                            case "Minotaur" ->
-                                enemyRender = "M";
-                            default ->
-                                enemyRender = "E";
-                        }
-                        room[spot[0]][spot[1]] = redColor + enemyRender + resetColor; // Enemy
-                    }
+                    room = placeEnemy(room, numberofEnemies, x, y, localDungeon);
                 }
                 case 2 -> {
                     room[2][5] = "P"; // Item Room
@@ -1237,6 +1153,105 @@ public class DungeonGenerator {
             System.out.println();
         }
         System.out.println();
+    }
+
+    private static String[][] placeEnemy(String[][] room, int numberofEnemies, int x, int y, int[][] localDungeon) {
+        String[][] originRoom = room;
+        room[2][7] = "P"; // Player
+        List<int[]> emptySpots = new ArrayList<>();
+        Random random = new Random();
+        // Collect all empty spots in the room
+        for (int row = 0; row < room.length; row++) {
+            for (int col = 0; col < room[row].length; col++) {
+                if (room[row][col].equals(" ") || room[row][col].equals("")) { // Assuming ' ' represents an empty spot
+                    emptySpots.add(new int[]{row, col});
+                }
+            }
+        }
+        // Place enemies at random empty spots
+        if (localDungeon[x][y] == 3) {
+            if (numberofEnemies < 2) {
+                numberofEnemies = 2;
+            }
+        }
+        boolean enemyPlaced = false;
+        for (int i = 0; i < numberofEnemies && !emptySpots.isEmpty();) {
+            int randomIndex = random.nextInt(emptySpots.size());
+            int[] spot = emptySpots.remove(randomIndex);
+            String enemyRender;
+            switch (Dungeon.enemyType) {
+                case "Goblin" ->
+                    enemyRender = "G";
+                case "Orc" ->
+                    enemyRender = "O";
+                case "Troll" ->
+                    enemyRender = "T";
+                case "Bandit" ->
+                    enemyRender = "B";
+                case "Spider" ->
+                    enemyRender = "S";
+                case "Giant Rat" ->
+                    enemyRender = "R";
+                case "Skeleton" ->
+                    enemyRender = "S";
+                case "Zombie" ->
+                    enemyRender = "Z";
+                case "Ghost" ->
+                    enemyRender = "G";
+                case "Demon" ->
+                    enemyRender = "D";
+                case "Vampire" ->
+                    enemyRender = "V";
+                case "Werewolf" ->
+                    enemyRender = "W";
+                case "Witch" ->
+                    enemyRender = "W";
+                case "Giant" ->
+                    enemyRender = "G";
+                case "Mummy" ->
+                    enemyRender = "M";
+                case "Slime" ->
+                    enemyRender = "S";
+                case "Mimic" ->
+                    enemyRender = "M";
+                case "Gargoyle" ->
+                    enemyRender = "G";
+                case "Sea Serpent" ->
+                    enemyRender = "S";
+                case "Sea Monster" ->
+                    enemyRender = "M";
+                case "Sea Witch" ->
+                    enemyRender = "W";
+                case "Sea Dragon" ->
+                    enemyRender = "D";
+                case "Sea Giant" ->
+                    enemyRender = "G";
+                case "Scorpion" ->
+                    enemyRender = "S";
+                case "Mountain Lion" ->
+                    enemyRender = "M";
+                case "Barbarian" ->
+                    enemyRender = "B";
+                case "Shark" ->
+                    enemyRender = "S";
+                case "Pirate" ->
+                    enemyRender = "P";
+                case "Minotaur" ->
+                    enemyRender = "M";
+                default ->
+                    enemyRender = "E";
+            }
+            if (spot[0] != 2 && spot[1] != 7) {
+                room[spot[0]][spot[1]] = redColor + enemyRender + resetColor; // Enemy
+                i++;
+                enemyPlaced = true;
+            }
+        }
+        // Ensure at least one enemy is placed
+        if (!enemyPlaced) {
+            return placeEnemy(originRoom, numberofEnemies, x, y, localDungeon);
+        }
+        return room;
     }
 }
 
