@@ -12,12 +12,11 @@ import java.util.Map;
  * @author ASCIIADVENTURERS
  * @version 1.0
  */
-
 public class Enemy {
 
     public final static Console console = System.console();
     public static String command;
-    private static Map<String, Integer> enemyDamageValues;
+    public static Map<String, Integer> enemyDamageValues;
 
     /**
      * This method initializes the enemyDamageValues map with the damage values
@@ -246,5 +245,168 @@ public class Enemy {
                 }
             }
         }
+    }
+
+    public static void bossFight(String boss) throws InterruptedException {
+        String brightRedStart = "\033[1;31m"; // Start bright red text
+        String brightRedEnd = "\033[0m"; // Reset formatting
+        TextEngine.printWithDelays("You have entered the boss room!", false);
+        TextEngine.printWithDelays("You are now fighting the " + brightRedStart + boss + brightRedEnd + "!", false);
+        TextEngine.enterToNext();
+        GameEngine.screenRefresh();
+        bossFightLoop(boss);
+    }
+
+    private static void bossFightLoop(String boss) throws InterruptedException {
+        int currentMaxBossHealth = enemyDamageValues.get(boss) * 2;
+        int currentBossHealth = currentMaxBossHealth;
+        int hit = 1;
+        while (true) { //bossfight loop
+            drawRoom();
+            displayBossHealth(boss, currentBossHealth, currentMaxBossHealth);
+            command = askBossCommand();
+            switch (command) {
+                case "attack" -> {
+                    hit = 1;
+                    int damage = Player.getDamage();
+                    if (damage < 1) {
+                        damage = 1;
+                    }
+                    TextEngine.printWithDelays("You attack the " + boss + "!", false);
+                    TextEngine.printWithDelays("You deal " + damage + " damage!", false);
+                    currentBossHealth -= damage;
+                    if (currentBossHealth <= 0) {
+                        return;
+                    }
+                    TextEngine.printWithDelays("The " + boss + " has " + currentBossHealth + " health left!", false);
+                    TextEngine.enterToNext();
+                }
+                case "dodge" -> {
+                    hit = (int) (Math.random() * 2);
+                }
+                case "heal" -> {
+                    hit = 1;
+                    Player.heal();
+                }
+            }
+            int bossHealthChange = (int) (Math.random() * 5);
+            if (bossHealthChange == 0 && currentBossHealth < currentMaxBossHealth / 3) {
+                if (hit == 0) {
+                    TextEngine.printWithDelays("You tried to dodge an attack but the " + boss + " heals itself!", false);
+                }
+                currentBossHealth += enemyDamageValues.get(boss);
+                TextEngine.printWithDelays("The " + boss + " heals itself for " + currentMaxBossHealth / 2 + " health!", false);
+                TextEngine.enterToNext();
+            } else {
+                TextEngine.printWithDelays("The " + boss + " attacks you!", false);
+                if (hit == 0) {
+                    TextEngine.printWithDelays("You dodge the attack!", false);
+                    TextEngine.enterToNext();
+                } else {
+                    if (command.equals("dodge")) {
+                        TextEngine.printWithDelays("You tried to dodge the attack but failed!", false);
+                    }
+                    int damageTaken = enemyDamageValues.get(boss) - Player.getDamageCalc();
+                    Player.changeHealth(-damageTaken);
+                }
+            }
+            GameEngine.screenRefresh();
+        }
+    }
+
+    private static String askBossCommand() throws InterruptedException {
+        String yellowColor = "\033[0;33m"; // Start yellow text 
+        String resetColor = "\033[0m"; // Reset formatting
+        TextEngine.printWithDelays("What would you like to do?", false);
+        TextEngine.printWithDelays(yellowColor + "Attack, Dodge, or Heal" + resetColor, true);
+        while (true) {
+            command = TextEngine.parseCommand(Room.console.readLine().toLowerCase().trim(), new String[]{"attack", "dodge", "heal"});
+            if (command.equals("attack") || command.equals("dodge") || command.equals("heal")) {
+                break;
+            } else {
+                Dungeon.defaultDungeonArgs(command);
+            }
+        }
+        return command;
+    }
+
+    private static void displayBossHealth(String boss, int health, int maxHealth) {
+        int hearts = maxHealth / 20;
+        String redColor = "\033[0;31m"; // Start red text
+        String resetColor = "\033[0m"; // Reset formatting
+        String healthColor;
+        if (hearts == 0) {
+            hearts = 1;
+        }
+        if (hearts > 25) {
+            hearts = 25;
+        }
+        int filledBars = (int) Math.round(((double) health / maxHealth) * hearts);
+        if (filledBars == 0 && health > 0) {
+            filledBars = 1;
+        }
+        healthColor = redColor;
+        StringBuilder bar = new StringBuilder("|");
+        for (int i = 0; i < hearts; i++) {
+            if (i < filledBars) {
+                bar.append(healthColor).append("█").append(resetColor);
+            } else {
+                bar.append("_");
+            }
+        }
+        bar.append("|");
+        String healthBar = bar.toString();
+        System.out.println(boss + " Health: " + health + " / " + maxHealth);
+        System.out.println(healthBar);
+        System.out.println();
+    }
+
+    private static void drawRoom() {
+        int[][] roomsBeenTo = null;
+        int[][] localDungeon = null;
+        boolean mapRevealed = false;
+        switch (Dungeon.currentDungeon) {
+            case "Meadow" -> {
+                roomsBeenTo = Dungeon.MeadowDungeon.roomsBeenTo;
+                localDungeon = Dungeon.meadowDungeon;
+                mapRevealed = Dungeon.MeadowDungeon.mapRevealed;
+            }
+            case "Dark Forest" -> {
+                roomsBeenTo = Dungeon.DarkForestDungeon.roomsBeenTo;
+                localDungeon = Dungeon.darkForestDungeon;
+                mapRevealed = Dungeon.DarkForestDungeon.mapRevealed;
+            }
+            case "Mountain Cave" -> {
+                roomsBeenTo = Dungeon.MountainCaveDungeon.roomsBeenTo;
+                localDungeon = Dungeon.mountainCaveDungeon;
+                mapRevealed = Dungeon.MountainCaveDungeon.mapRevealed;
+            }
+            case "Mountain Top" -> {
+                roomsBeenTo = Dungeon.MountainTopDungeon.roomsBeenTo;
+                localDungeon = Dungeon.mountainTopDungeon;
+                mapRevealed = Dungeon.MountainTopDungeon.mapRevealed;
+            }
+            case "Desert Oasis" -> {
+                roomsBeenTo = Dungeon.DesertOasisDungeon.roomsBeenTo;
+                localDungeon = Dungeon.desertOasisDungeon;
+                mapRevealed = Dungeon.DesertOasisDungeon.mapRevealed;
+            }
+            case "Desert Plains" -> {
+                roomsBeenTo = Dungeon.DesertPlainsDungeon.roomsBeenTo;
+                localDungeon = Dungeon.desertPlainsDungeon;
+                mapRevealed = Dungeon.DesertPlainsDungeon.mapRevealed;
+            }
+            case "Desert Pyramid" -> {
+                roomsBeenTo = Dungeon.DesertPyramidDungeon.roomsBeenTo;
+                localDungeon = Dungeon.desertPyramidDungeon;
+                mapRevealed = Dungeon.DesertPyramidDungeon.mapRevealed;
+            }
+            case "Ocean Kingdom" -> {
+                roomsBeenTo = Dungeon.OceanKingdomDungeon.roomsBeenTo;
+                localDungeon = Dungeon.oceanKingdomDungeon;
+                mapRevealed = Dungeon.OceanKingdomDungeon.mapRevealed;
+            }
+        }
+        DungeonGenerator.drawRoom(localDungeon, roomsBeenTo, Dungeon.currentPlayerPosition[0], Dungeon.currentPlayerPosition[1], 0, mapRevealed);
     }
 }

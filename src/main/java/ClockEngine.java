@@ -112,7 +112,7 @@ public class ClockEngine {
     public String returnTime() {
         long minutes = (this.timeElapsedInSeconds / 60) % 60;
         long hours = (this.timeElapsedInSeconds / 3600);
-        if (hours > 99) {
+        if (hours >= 99) {
             hours = 99;
             if (minutes >= 59) {
                 minutes = 59;

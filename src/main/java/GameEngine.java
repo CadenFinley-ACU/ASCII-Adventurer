@@ -380,10 +380,14 @@ public class GameEngine {
                     TextEngine.enterToNext();
                 }
                 case "exit" -> {
-                    TextEngine.printWithDelays("Returning to main menu.", false);
-                    TextEngine.clearScreen();
-                    saveSpace(savedPlace);
-                    startMenu();
+                    if (!Dungeon.inBossFight) {
+                        TextEngine.printWithDelays("Returning to main menu.", false);
+                        TextEngine.clearScreen();
+                        saveSpace(savedPlace);
+                        startMenu();
+                    } else {
+                        TextEngine.printWithDelays("You cannot use that command right now.", true);
+                    }
                 }
                 case "heal" ->
                     Player.heal();

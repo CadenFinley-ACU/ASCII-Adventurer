@@ -125,6 +125,7 @@ public class DungeonInstance extends Dungeon {
         currentPlayerPosition = spawnPosition;
         roomsBeenTo = DungeonGenerator.createRoomsBeenTo(map.length);
         lastPosition = spawnPosition.clone();
+        currentBoss = bossType;
     }
 
     /**

@@ -3,24 +3,22 @@ import java.io.Console;
 import java.util.Random;
 
 /**
- * ASCIIADVENTURER
- * Caden Finley
- * Albert Tucker
- * Grijesh Shrestha
- * 
+ * ASCIIADVENTURER Caden Finley Albert Tucker Grijesh Shrestha
+ *
  * This class represents a room in the ASCII Adventure game. It contains methods
- * to interact with the room, such as checking for chests and processing user commands.
- * 
+ * to interact with the room, such as checking for chests and processing user
+ * commands.
+ *
  * @author ASCIIADVENTURERS
  * @version 1.0
  */
-
 public class Room {
 
     public final static Console console = System.console();
     public static String command;
     public static String room = null;
     public static String redColor = "\033[0;31m"; // red color
+    public static String yellowColor = "\033[1;33m"; // yellow color
     public static String resetColor = "\033[0m"; // reset to default color
     public static String bufferedEnviroment = null;
     public static String environment = null;
@@ -592,5 +590,16 @@ public class Room {
             default ->
                 TextEngine.printWithDelays("this function isnt working right", false);
         }
+    }
+
+    public static void gameCompletionSequence() throws InterruptedException {
+        if (Dungeon.resetedAfterWin) {
+            return;
+        }
+        TextEngine.printWithDelays("Congratulations! You have completed the game!", false);
+        TextEngine.printWithDelays("Thank you for playing ASCII Adventure!", false);
+        TextEngine.printWithDelays("We hope you enjoyed the game!", false);
+        TextEngine.printWithDelays("You can continue to fight tougher enemies in the dungeons by typing " + yellowColor + "reset" + resetColor + " in any dungeon!", false);
+        TextEngine.enterToNext();
     }
 }

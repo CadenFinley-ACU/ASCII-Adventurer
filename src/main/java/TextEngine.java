@@ -208,10 +208,8 @@ public abstract class TextEngine {
      * user to press Enter and then wait for the Enter key to be pressed.
      */
     public static void enterToNext() { //adds a pause and waits for enter
-        if (!GameEngine.TESTING) {
-            printNoDelay(yellowColor + "Press Enter to continue" + resetColor, false);
-            console.readLine();
-        }
+        printNoDelay(yellowColor + "Press Enter to continue" + resetColor, false);
+        console.readLine();
     }
 
     /**

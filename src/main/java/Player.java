@@ -237,7 +237,6 @@ public class Player {
         String brightEnd = "\033[0m";
         String space = "     ";
         int damageCalc = (defense + damage - (damage / 3));
-
         if (change < 0) {
             change += damageCalc;
             if (change >= 0) {
@@ -250,20 +249,18 @@ public class Player {
                 TextEngine.printWithDelays(space + brightGreenStart + "You gained " + change + " health!" + brightEnd, false);
             }
         }
-
         health += change;
         if (health > maxHealth) {
             health = maxHealth;
         }
-
         if (health <= 0) {
+            Dungeon.inBossFight = false;
             TextEngine.printWithDelays(space + brightRedStart + "You have died!" + brightEnd, false);
             TextEngine.printWithDelays(space + brightRedStart + "Game Over!" + brightEnd, false);
             TextEngine.enterToNext();
             GameEngine.wipeSave();
             GameEngine.startMenu();
         }
-
         TextEngine.enterToNext();
     }
 
@@ -539,7 +536,9 @@ public class Player {
             }
         }
         // Load the saved game state
-        GameEngine.loadSave();
+        if (!Dungeon.inBossFight) {
+            GameEngine.loadSave();
+        }
     }
 
     /**
