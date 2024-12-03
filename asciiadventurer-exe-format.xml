@@ -3,7 +3,7 @@
   <dontWrapJar>false</dontWrapJar>
   <headerType>console</headerType>
   <jar>C:\Users\blade\OneDrive\Documents\GitHub\BarrettHall\ASCII-Adventurer\game\asciiadventurer.jar</jar>
-  <outfile>C:\Users\blade\OneDrive\Documents\GitHub\ASCII-Adventurer.exe</outfile>
+  <outfile>C:\Users\blade\OneDrive\Documents\GitHub\BarrettHall\ASCII-Adventurer\game\ASCII-Adventurer.exe</outfile>
   <errTitle>You need to download the correct version of java</errTitle>
   <cmdLine></cmdLine>
   <chdir>.</chdir>
