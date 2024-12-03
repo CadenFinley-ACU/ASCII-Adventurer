@@ -109,17 +109,17 @@ public class GameEngine {
 
         InventoryManager.createItem("weapon", "better sword", 10); //dungeon 3
 
-        InventoryManager.createItem("weapon", "great sword", 15); //dungeon 4
+        InventoryManager.createItem("weapon", "great sword", 13); //dungeon 4
 
-        InventoryManager.createItem("weapon", "master sword", 35);//dungeon 5
+        InventoryManager.createItem("weapon", "master sword", 15);//dungeon 5
 
-        InventoryManager.createItem("weapon", "legendary sword", 50); //dungeon 6
+        InventoryManager.createItem("weapon", "legendary sword", 17); //dungeon 6
 
-        InventoryManager.createItem("weapon", "excalibur", 80); //dungeon 7
+        InventoryManager.createItem("weapon", "excalibur", 20); //dungeon 7
 
-        InventoryManager.createItem("weapon", "god slayer hammer", 100); //dungeon 8
+        InventoryManager.createItem("weapon", "god slayer hammer", 25); //dungeon 8
 
-        InventoryManager.createItem("weapon", "K.O. Cannon", 10000); //dungeon shop
+        InventoryManager.createItem("weapon", "K.O. Cannon", 30); //dungeon shop
 
         //*  ************************************************************************************ */
         InventoryManager.createItem("armor", "shield", 2); //village shop
@@ -128,17 +128,17 @@ public class GameEngine {
 
         InventoryManager.createItem("armor", "full armor kit", 10); //dungeon 2
 
-        InventoryManager.createItem("armor", "ninja armor", 15); //dungeon 3
+        InventoryManager.createItem("armor", "ninja armor", 13); //dungeon 3
 
-        InventoryManager.createItem("armor", "knight armor", 25); //dungeon 4
+        InventoryManager.createItem("armor", "knight armor", 15); //dungeon 4
 
-        InventoryManager.createItem("armor", "royal armor", 35); //dungeon 5
+        InventoryManager.createItem("armor", "royal armor", 17); //dungeon 5
 
-        InventoryManager.createItem("armor", "demon armor", 40); //dungeon 6
+        InventoryManager.createItem("armor", "demon armor", 20); //dungeon 6
 
-        InventoryManager.createItem("armor", "angel armor", 50); //dungeon 7
+        InventoryManager.createItem("armor", "angel armor", 25); //dungeon 7
 
-        InventoryManager.createItem("armor", "god slayer armor", 75); //dungeon 8
+        InventoryManager.createItem("armor", "god slayer armor", 30); //dungeon 8
 
         //*  ************************************************************************************ */
         InventoryManager.createItem("potion", "health potion", 15); //village level 1 | dungeon 0,1,2
