@@ -110,6 +110,21 @@ public class ClockEngine {
      * @return the formatted time string
      */
     public String returnTime() {
+        if (whatAmI.equals("timer") && timeElapsedInSeconds == 0) {
+            //return remaining time
+            long minutes = (this.remainingTimeInSeconds / 60) % 60;
+            long hours = (this.remainingTimeInSeconds / 3600);
+            if (hours >= 99) {
+                hours = 99;
+                if (minutes >= 59) {
+                    minutes = 59;
+                    if (this.remainingTimeInSeconds % 60 >= 59) {
+                        this.remainingTimeInSeconds = 59;
+                    }
+                }
+            }
+            return String.format("%02d:%02d:%02d", hours, minutes, this.remainingTimeInSeconds % 60);
+        }
         long minutes = (this.timeElapsedInSeconds / 60) % 60;
         long hours = (this.timeElapsedInSeconds / 3600);
         if (hours >= 99) {

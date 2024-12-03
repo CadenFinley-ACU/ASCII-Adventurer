@@ -252,17 +252,21 @@ public class Enemy {
         String brightRedEnd = "\033[0m"; // Reset formatting
         TextEngine.printWithDelays("You have entered the boss room!", false);
         TextEngine.printWithDelays("You are now fighting the " + brightRedStart + boss + brightRedEnd + "!", false);
+        TextEngine.printWithDelays("You have 5 minutes to defeat the boss!", false);
         TextEngine.enterToNext();
         GameEngine.screenRefresh();
         bossFightLoop(boss);
     }
 
     private static void bossFightLoop(String boss) throws InterruptedException {
+        ClockEngine timer = new ClockEngine("timer");
         int currentMaxBossHealth = enemyDamageValues.get(boss) * 2;
         int currentBossHealth = currentMaxBossHealth;
         int hit = 1;
+        timer.startClock(60 * 5); //5 minutes
         while (true) { //bossfight loop
             drawRoom();
+            System.out.println("Time Remaining: " + timer.returnTime());
             displayBossHealth(boss, currentBossHealth, currentMaxBossHealth);
             command = askBossCommand();
             switch (command) {
@@ -309,6 +313,11 @@ public class Enemy {
                     int damageTaken = enemyDamageValues.get(boss) - Player.getDamageCalc();
                     Player.changeHealth(-damageTaken);
                 }
+            }
+            if (!timer.isRunning()) {
+                TextEngine.printWithDelays("You ran out of time!", false);
+                TextEngine.printWithDelays("The " + boss + " has defeated you!", false);
+                Player.changeHealth(-Player.getHealth());
             }
             GameEngine.screenRefresh();
         }
