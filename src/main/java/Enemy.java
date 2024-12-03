@@ -319,7 +319,7 @@ public class Enemy {
                     if (command.equals("dodge")) {
                         TextEngine.printWithDelays("You tried to dodge the attack but failed!", false);
                     }
-                    float damageTaken = ((enemyDamageValues.get(boss) / (5 / 2)) - 2) - Player.getDefense();
+                    float damageTaken = ((enemyDamageValues.get(boss) / 3)) - Player.getDefense();
                     Player.changeHealth((int) -damageTaken);
                 }
             }
