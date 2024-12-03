@@ -1501,7 +1501,7 @@ public class Dungeon extends Room {
     public static void bossRoom() throws InterruptedException {
         inBossFight = true;
         Enemy.bossFight(currentBoss);
-        TextEngine.printWithDelays("You have defeated the" + currentBoss + " and completed the dungeon!", false);
+        TextEngine.printWithDelays("You have defeated the " + currentBoss + " and completed the dungeon!", false);
         TextEngine.enterToNext();
         switch (currentDungeon) {
             case "Meadow" -> {

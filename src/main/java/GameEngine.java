@@ -356,10 +356,14 @@ public class GameEngine {
                     TextEngine.printWithDelays("Game saved!", true);
                 }
                 case "exit" -> {
-                    TextEngine.printWithDelays("Returning to main menu.", false);
-                    TextEngine.clearScreen();
-                    saveSpace(savedPlace);
-                    startMenu();
+                    if (!Dungeon.inBossFight) {
+                        TextEngine.printWithDelays("Returning to main menu.", false);
+                        TextEngine.clearScreen();
+                        saveSpace(savedPlace);
+                        startMenu();
+                    } else {
+                        TextEngine.printWithDelays("You cannot use that command right now.", true);
+                    }
                 }
                 default ->
                     invalidCommandWithBuffer();
@@ -380,14 +384,10 @@ public class GameEngine {
                     TextEngine.enterToNext();
                 }
                 case "exit" -> {
-                    if (!Dungeon.inBossFight) {
-                        TextEngine.printWithDelays("Returning to main menu.", false);
-                        TextEngine.clearScreen();
-                        saveSpace(savedPlace);
-                        startMenu();
-                    } else {
-                        TextEngine.printWithDelays("You cannot use that command right now.", true);
-                    }
+                    TextEngine.printWithDelays("Returning to main menu.", false);
+                    TextEngine.clearScreen();
+                    saveSpace(savedPlace);
+                    startMenu();
                 }
                 case "heal" ->
                     Player.heal();

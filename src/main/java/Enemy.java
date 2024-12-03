@@ -260,10 +260,10 @@ public class Enemy {
 
     private static void bossFightLoop(String boss) throws InterruptedException {
         ClockEngine timer = new ClockEngine("timer");
-        int currentMaxBossHealth = enemyDamageValues.get(boss) * 2;
+        int currentMaxBossHealth = enemyDamageValues.get(boss);
         int currentBossHealth = currentMaxBossHealth;
         int hit = 1;
-        timer.startClock(60 * 5); //5 minutes
+        timer.startClock(60 * 1); //5 minutes
         while (true) { //bossfight loop
             drawRoom();
             System.out.println("Time Remaining: " + timer.returnTime());
@@ -277,12 +277,16 @@ public class Enemy {
                         damage = 1;
                     }
                     TextEngine.printWithDelays("You attack the " + boss + "!", false);
+                    int criticalHit = (int) (Math.random() * 10);
+                    if (criticalHit == 0) {
+                        damage *= 2;
+                        TextEngine.printWithDelays("It was a critical hit!", false);
+                    }
                     TextEngine.printWithDelays("You deal " + damage + " damage!", false);
                     currentBossHealth -= damage;
                     if (currentBossHealth <= 0) {
                         return;
                     }
-                    TextEngine.printWithDelays("The " + boss + " has " + currentBossHealth + " health left!", false);
                     TextEngine.enterToNext();
                 }
                 case "dodge" -> {
@@ -292,6 +296,11 @@ public class Enemy {
                     hit = 1;
                     Player.heal();
                 }
+            }
+            if (!timer.isRunning()) {
+                TextEngine.printWithDelays("You ran out of time!", false);
+                TextEngine.printWithDelays("The " + boss + " has defeated you!", false);
+                Player.changeHealth(-Player.getMaxHealth());
             }
             int bossHealthChange = (int) (Math.random() * 5);
             if (bossHealthChange == 0 && currentBossHealth < currentMaxBossHealth / 3) {
@@ -310,14 +319,9 @@ public class Enemy {
                     if (command.equals("dodge")) {
                         TextEngine.printWithDelays("You tried to dodge the attack but failed!", false);
                     }
-                    int damageTaken = enemyDamageValues.get(boss) - Player.getDamageCalc();
-                    Player.changeHealth(-damageTaken);
+                    float damageTaken = ((enemyDamageValues.get(boss) / (5 / 2)) - 2) - Player.getDefense();
+                    Player.changeHealth((int) -damageTaken);
                 }
-            }
-            if (!timer.isRunning()) {
-                TextEngine.printWithDelays("You ran out of time!", false);
-                TextEngine.printWithDelays("The " + boss + " has defeated you!", false);
-                Player.changeHealth(-Player.getHealth());
             }
             GameEngine.screenRefresh();
         }
