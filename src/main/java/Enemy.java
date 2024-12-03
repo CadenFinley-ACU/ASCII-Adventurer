@@ -259,6 +259,7 @@ public class Enemy {
 
     private static void bossFightLoop(String boss) throws InterruptedException {
         ClockEngine timer = new ClockEngine("timer");
+        int heals = 3;
         int currentMaxBossHealth = enemyDamageValues.get(boss);
         int currentBossHealth = currentMaxBossHealth;
         int hit = 1;
@@ -302,11 +303,12 @@ public class Enemy {
                 }
             }
             int bossHealthChange = (int) (Math.random() * 5);
-            if (bossHealthChange == 0 && currentBossHealth < currentMaxBossHealth / 3) {
+            if (bossHealthChange == 0 && currentBossHealth < currentMaxBossHealth / 3 && heals > 0) {
                 if (hit == 0) {
                     TextEngine.printWithDelays("You tried to dodge an attack but the " + boss + " heals itself!", false);
                 }
                 currentBossHealth += currentMaxBossHealth / 2;
+                heals--;
                 TextEngine.printWithDelays("The " + boss + " heals itself for " + currentMaxBossHealth / 2 + " health!", false);
                 TextEngine.enterToNext();
             } else {
@@ -318,7 +320,7 @@ public class Enemy {
                     if (command.equals("dodge")) {
                         TextEngine.printWithDelays("You tried to dodge the attack but failed!", false);
                     }
-                    float damageTaken = ((currentMaxBossHealth / 3)) - Player.getDefense();
+                    float damageTaken = (enemyDamageValues.get(boss) * enemyDamageValues.get(boss)) / (enemyDamageValues.get(boss) * 5) - Player.getDefense();
                     Player.changeHealth((int) -damageTaken);
                 }
             }

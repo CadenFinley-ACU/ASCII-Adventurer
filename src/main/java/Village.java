@@ -16,9 +16,8 @@ public class Village extends Room {
 
     /**
      * The startRoom function in Java sets the player in a village environment
-     * with      *
-     * various options to interact with different locations and warp to other
-     * areas based on completed dungeons.
+     * with * various options to interact with different locations and warp to
+     * other areas based on completed dungeons.
      */
     public static void startRoom() throws InterruptedException { //start room
         room = "Village";
@@ -231,7 +230,7 @@ public class Village extends Room {
         //hotel implementation
 
         GameEngine.screenRefresh();
-        int cost = (int) ((1 / 4.0) * (Player.getMaxHealth() - Player.getHealth()));
+        int cost = (int) ((1 / 6.0) * (Player.getMaxHealth() - Player.getHealth()));
         if (cost < 1) {
             cost = 1;
         }
