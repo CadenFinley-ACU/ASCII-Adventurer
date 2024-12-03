@@ -1156,7 +1156,6 @@ public class DungeonGenerator {
     }
 
     private static String[][] placeEnemy(String[][] room, int numberofEnemies, int x, int y, int[][] localDungeon) {
-        String[][] originRoom = room;
         room[2][7] = "P"; // Player
         List<int[]> emptySpots = new ArrayList<>();
         Random random = new Random();
@@ -1174,7 +1173,6 @@ public class DungeonGenerator {
                 numberofEnemies = 2;
             }
         }
-        boolean enemyPlaced = false;
         for (int i = 0; i < numberofEnemies && !emptySpots.isEmpty();) {
             int randomIndex = random.nextInt(emptySpots.size());
             int[] spot = emptySpots.remove(randomIndex);
@@ -1244,12 +1242,7 @@ public class DungeonGenerator {
             if (spot[0] != 2 && spot[1] != 7) {
                 room[spot[0]][spot[1]] = redColor + enemyRender + resetColor; // Enemy
                 i++;
-                enemyPlaced = true;
             }
-        }
-        // Ensure at least one enemy is placed
-        if (!enemyPlaced) {
-            return placeEnemy(originRoom, numberofEnemies, x, y, localDungeon);
         }
         return room;
     }
