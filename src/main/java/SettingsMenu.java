@@ -32,7 +32,6 @@ public abstract class SettingsMenu {
         TextEngine.printNoDelay("The current speed is set to: " + TextEngine.speedSetting, false);
         TextEngine.printWithDelays("You can change the speed to: " + yellowColor + "Slow" + resetColor + ", " + yellowColor + "Normal" + resetColor + ", " + yellowColor + "Fast" + resetColor + ", or " + yellowColor + "NoDelay" + resetColor, false);
         TextEngine.printWithDelays("You can also type: " + yellowColor + "AI " + resetColor + "to enable or disable AI generated prompts in game", false);
-        TextEngine.printWithDelays("(This is still experimental and requires you to have your own API key and an internet connection...)", false);
         TextEngine.printWithDelays("You can also type: " + yellowColor + "change name " + resetColor + "to change your name", false);
         TextEngine.printWithDelays("Type " + yellowColor + "exit" + resetColor + " to leave this menu", true);
         while (true) {
@@ -179,7 +178,6 @@ public abstract class SettingsMenu {
         TextEngine.printNoDelay("The current speed is set to: " + TextEngine.speedSetting, false);
         TextEngine.printWithDelays("You can change the speed to: " + yellowColor + "Slow" + resetColor + ", " + yellowColor + "Normal" + resetColor + ", " + yellowColor + "Fast" + resetColor + ", or " + yellowColor + "NoDelay" + resetColor, false);
         TextEngine.printWithDelays("You can also type: " + yellowColor + "AI " + resetColor + "to enable or disable AI generated prompts in game", false);
-        TextEngine.printWithDelays("(This is still experimental and requires you to have your own API key and an internet connection...)", false);
         TextEngine.printWithDelays("You can also type: " + yellowColor + "change name " + resetColor + "to change your name", false);
         TextEngine.printWithDelays("Type " + yellowColor + "exit" + resetColor + " to leave this menu", true);
         while (true) {

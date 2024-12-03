@@ -217,7 +217,6 @@ public class Enemy {
         String brightGreenStart = "\033[1;32m"; // Start bright green text
         String brightGreenEnd = "\033[0m"; // Reset formatting
         String space = "     ";
-
         if (fight) {
             // Check the player's health
             if (!(Player.getHealth() <= (enemyDamageValues.get(type) * quantity) - Player.getDamageCalc())) {
