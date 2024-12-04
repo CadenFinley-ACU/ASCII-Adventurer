@@ -596,6 +596,7 @@ public class Room {
         if (Dungeon.resetedAfterWin) {
             return;
         }
+        GameEngine.screenRefresh();
         TextEngine.printWithDelays("Congratulations! You have completed the game!", false);
         TextEngine.printWithDelays("Thank you for playing ASCII Adventure!", false);
         TextEngine.printWithDelays("We hope you enjoyed the game!", false);

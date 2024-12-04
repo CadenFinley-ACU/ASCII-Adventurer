@@ -34,7 +34,7 @@ public class DungeonInstance extends Dungeon {
     public final List<String> enemies;
     public int[][] roomsBeenTo;
     public List<String> items;
-    private List<String> originitems;
+    private final List<String> originitems;
     public boolean completed = false;
     public boolean visited = false;
     public boolean mapRevealed;
