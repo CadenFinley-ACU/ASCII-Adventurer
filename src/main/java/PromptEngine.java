@@ -10,7 +10,6 @@ import java.util.List;
 
 /**
  * ASCIIADVENTURER Caden Finley Albert Tucker Grijesh Shrestha
- * https://www.youtube.com/watch?v=TkJ2dFtD0ho
  *
  * The PromptEngine class generates prompts for a text adventure game using an
  * OpenAI API key.
