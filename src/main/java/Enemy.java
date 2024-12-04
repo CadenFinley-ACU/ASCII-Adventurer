@@ -171,7 +171,7 @@ public class Enemy {
             TextEngine.printWithDelays(space + brightRedStart + "You fight the " + type + "!" + brightRedEnd, false);
         }
         checkhealth(type, quantity, true);
-        int damage = 0 - (enemyDamageValues.get(type) * quantity) - Player.getDamageCalc();
+        int damage = 0 - ((enemyDamageValues.get(type) * quantity) - Player.getDamageCalc());
         if (damage > -1) {
             damage = -1;
         }
@@ -196,7 +196,7 @@ public class Enemy {
         } else {
             TextEngine.printWithDelays(space + brightRedStart + "You run from the " + type + "!" + brightRedEnd, false);
         }
-        int damage = 0 - ((enemyDamageValues.get(type) * quantity) / 2) - Player.getDamageCalc() / 2;
+        int damage = 0 - (((enemyDamageValues.get(type) * quantity) / 2) - Player.getDamageCalc() / 2);
         if (damage >= 0) {
             damage = -1;
         }
