@@ -123,9 +123,9 @@ public class GameEngine {
         InventoryManager.createItem("weapon", "K.O. Cannon", 10000); //dungeon shop
 
         //*  ************************************************************************************ */
-        InventoryManager.createItem("armor", "shield", 2); //village shop
+        InventoryManager.createItem("armor", "shield", 5); //village shop
 
-        InventoryManager.createItem("armor", "chainmail set", 5); //dungeon 1
+        InventoryManager.createItem("armor", "chainmail set", 7); //dungeon 1
 
         InventoryManager.createItem("armor", "full armor kit", 10); //dungeon 2
 
