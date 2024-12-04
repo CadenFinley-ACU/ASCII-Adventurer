@@ -22,6 +22,7 @@ public class PromptEngine {
     private static final String yellowColor = "\u001B[33m";
     private static final String resetColor = "\u001B[0m";
 
+    public static final String USER_API_KEY = null;
     public static boolean aiGenerationEnabled = true;
     public static int promptLength = 30;
     private static String prompt = null;
