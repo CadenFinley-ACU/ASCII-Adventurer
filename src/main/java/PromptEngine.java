@@ -22,7 +22,6 @@ public class PromptEngine {
     private static final String yellowColor = "\u001B[33m";
     private static final String resetColor = "\u001B[0m";
 
-    public static final String USER_API_KEY = null;
     public static boolean aiGenerationEnabled = true;
     public static int promptLength = 30;
     private static String prompt = null;
@@ -45,61 +44,64 @@ public class PromptEngine {
      */
     public static void buildPrompt() {
         if (aiGenerationEnabled && (OpenWorld.checkChangeInRoom() || prompt == null || prompt.isEmpty())) {
-            String villageDirection = Player.getCompassDirectionToClosestVillage();
-            String nextDungeon = Player.getNextDungeon();
-            String dungeonNextDirection = Player.getCompassDirectionToClosestDungeon();
-            String setting = Player.getColorOfPlayerPostitionTile();
-            int distanceToVillage = Player.distanceToVillage();
-            int distanceToDungeon = Player.distanceToNextDungeon();
-            String villageDistanceGauge;
-            String dungeonDistanceGauge;
-            String villagePrompt;
-            String dungeonPrompt;
-            TextEngine.printNoDelay("Loading...", false);
-            if (villageDirection == null || villageDirection.isEmpty() || villageDirection.equals("No village found")) {
-                villageDirection = "There is no village nearby";
-            }
-            if (nextDungeon == null || nextDungeon.isEmpty() || nextDungeon.equals("No dungeon found")) {
-                nextDungeon = "There is no dungeon nearby";
-            }
-            if (setting == null || setting.isEmpty()) {
-                setting = "grassland";
-            }
-            if (dungeonNextDirection == null || dungeonNextDirection.isEmpty() || dungeonNextDirection.equals("No dungeon found")) {
-                dungeonNextDirection = "There is no dungeon nearby";
-            }
-            if (distanceToDungeon > 0) {
-                if (distanceToDungeon == 0) {
-                    dungeonDistanceGauge = "Right next to the player";
-                } else {
-                    dungeonDistanceGauge = distanceToDungeon + " tiles away";
-                }
-            } else {
-                dungeonDistanceGauge = "There is no dungeon nearby.";
-            }
-            if (distanceToVillage > 0) {
-                if (distanceToVillage == 0) {
-                    villageDistanceGauge = "Right next to the player";
-                } else {
-                    villageDistanceGauge = distanceToVillage + " tiles away";
-                }
-            } else {
-                villageDistanceGauge = "There is no village nearby";
-            }
-            if (distanceToVillage == 0) {
-                villagePrompt = "The village is directly to the " + villageDirection + ".";
-            } else {
-                villagePrompt = "The village is to the " + villageDirection + " and is " + villageDistanceGauge + ".";
-            }
-            if (distanceToDungeon == 0) {
-                dungeonPrompt = "The " + nextDungeon + " is directly to the " + dungeonNextDirection + ".";
-            } else {
-                dungeonPrompt = "The " + nextDungeon + " is to the " + dungeonNextDirection + " and is " + dungeonDistanceGauge + ".";
-            }
-            // "add more" / "make more complex"
-            prompt = chatGPT("Generate a me a prompt for a text adventure game designed for highschoolers. Always state the direction of the structure if it is given and the distance if it is given. When giving direction do not abbreviate the direction. Do this in around " + promptLength + " words or less using this info: The player headed " + OpenWorld.holdCommand + " and is in a " + setting + " " + villagePrompt + dungeonPrompt + ".") + "\n";
+            prompt = chatGPT(buildMessage()) + "\n";
             GameEngine.screenRefresh();
         }
+    }
+
+    private static String buildMessage() {
+        String villageDirection = Player.getCompassDirectionToClosestVillage();
+        String nextDungeon = Player.getNextDungeon();
+        String dungeonNextDirection = Player.getCompassDirectionToClosestDungeon();
+        String setting = Player.getColorOfPlayerPostitionTile();
+        int distanceToVillage = Player.distanceToVillage();
+        int distanceToDungeon = Player.distanceToNextDungeon();
+        String villageDistanceGauge;
+        String dungeonDistanceGauge;
+        String villagePrompt;
+        String dungeonPrompt;
+        TextEngine.printNoDelay("Loading...", false);
+        if (villageDirection == null || villageDirection.isEmpty() || villageDirection.equals("No village found")) {
+            villageDirection = "There is no village nearby";
+        }
+        if (nextDungeon == null || nextDungeon.isEmpty() || nextDungeon.equals("No dungeon found")) {
+            nextDungeon = "There is no dungeon nearby";
+        }
+        if (setting == null || setting.isEmpty()) {
+            setting = "grassland";
+        }
+        if (dungeonNextDirection == null || dungeonNextDirection.isEmpty() || dungeonNextDirection.equals("No dungeon found")) {
+            dungeonNextDirection = "There is no dungeon nearby";
+        }
+        if (distanceToDungeon > 0) {
+            if (distanceToDungeon == 0) {
+                dungeonDistanceGauge = "Right next to the player";
+            } else {
+                dungeonDistanceGauge = distanceToDungeon + " tiles away";
+            }
+        } else {
+            dungeonDistanceGauge = "There is no dungeon nearby.";
+        }
+        if (distanceToVillage > 0) {
+            if (distanceToVillage == 0) {
+                villageDistanceGauge = "Right next to the player";
+            } else {
+                villageDistanceGauge = distanceToVillage + " tiles away";
+            }
+        } else {
+            villageDistanceGauge = "There is no village nearby";
+        }
+        if (distanceToVillage == 0) {
+            villagePrompt = "The village is directly to the " + villageDirection + ".";
+        } else {
+            villagePrompt = "The village is to the " + villageDirection + " and is " + villageDistanceGauge + ".";
+        }
+        if (distanceToDungeon == 0) {
+            dungeonPrompt = "The " + nextDungeon + " is directly to the " + dungeonNextDirection + ".";
+        } else {
+            dungeonPrompt = "The " + nextDungeon + " is to the " + dungeonNextDirection + " and is " + dungeonDistanceGauge + ".";
+        }
+        return ("Generate a me a prompt for a text adventure game designed for highschoolers. Always state the direction of the structure if it is given and the distance if it is given. When giving direction do not abbreviate the direction. Do this in around " + promptLength + " words or less using this info: The player headed " + OpenWorld.holdCommand + " and is in a " + setting + " " + villagePrompt + dungeonPrompt + ".");
     }
 
     /**
