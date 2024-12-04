@@ -479,6 +479,7 @@ public class Player {
         TextEngine.printNoDelay("Player Stats:", false);
         TextEngine.printNoDelay("Name: " + name, false);
         TextEngine.printNoDelay("Play Time: " + GameEngine.playTime.returnTime(), false);
+        TextEngine.printNoDelay("Completed Dungeons: " + Dungeon.completedDungeons, false);
         drawHealthBar();
         TextEngine.printNoDelay("Gold: " + gold, false);
         TextEngine.printNoDelay("Damage: " + damage, false);
@@ -486,7 +487,7 @@ public class Player {
         TextEngine.printNoDelay("Inventory: " + getTotalNumberOfItemsInInventory() + "/" + inventorySize, false);
         TextEngine.printNoDelay(yellowColor + "Press Enter to continue" + resetColor, false);
         command = console.readLine();
-        if ("[][][]CadenTesting".equals(command)) {
+        if ("[][][]CadenTesting".equals(command) && name.equals("Debug!")) {
             maxHealth = 10000;
             health = maxHealth;
             gold = 20000000;
@@ -538,7 +539,13 @@ public class Player {
         }
     }
 
-    public static boolean canHeal() {
+    public static boolean canHeal() throws InterruptedException {
+        if (health >= maxHealth) {
+            TextEngine.printWithDelays("You cannot heal right now! You are already at full health!", false);
+        }
+        if (!(inventory.containsKey("super health potion") || inventory.containsKey("greater health potion") || inventory.containsKey("health potion"))) {
+            TextEngine.printWithDelays("You cannot heal right now! You have no health potions!", false);
+        }
         return (inventory.containsKey("super health potion") || inventory.containsKey("greater health potion") || inventory.containsKey("health potion")) && health < maxHealth;
     }
 

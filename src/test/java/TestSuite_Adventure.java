@@ -545,7 +545,7 @@ public class TestSuite_Adventure {
     @Test
     public void testStartClockTimer() throws InterruptedException {
         System.out.println("Starting testStartClockTimer");
-        timer = new ClockEngine("timer");
+        timer = new ClockEngine("timer", null);
         timer.startClock(2);
         Thread.sleep(3000); // Wait for the timer to finish
         assertFalse(timer.isRunning());
@@ -555,7 +555,7 @@ public class TestSuite_Adventure {
     @Test
     public void testStartClockStopwatch() throws InterruptedException {
         System.out.println("Starting testStartClockStopwatch");
-        stopwatch = new ClockEngine("stopwatch");
+        stopwatch = new ClockEngine("stopwatch", null);
         stopwatch.startClock(1);
         Thread.sleep(3000); // Wait for the stopwatch to run
         assertTrue(stopwatch.isRunning());
@@ -567,7 +567,7 @@ public class TestSuite_Adventure {
     @Test
     public void testStopClock() {
         System.out.println("Starting testStopClock");
-        stopwatch = new ClockEngine("stopwatch");
+        stopwatch = new ClockEngine("stopwatch", null);
         stopwatch.startClock(1);
         stopwatch.stopClock();
         assertFalse(stopwatch.isRunning());
@@ -575,21 +575,21 @@ public class TestSuite_Adventure {
 
     @Test
     public void testReturnTime() {
-        stopwatch = new ClockEngine("stopwatch");
+        stopwatch = new ClockEngine("stopwatch", null);
         stopwatch.debugTime(3661); // 1 hour, 1 minute, 1 second
         assertEquals("01:01:01", stopwatch.returnTime());
     }
 
     @Test
     public void testGetTimeElapsedInSeconds() {
-        stopwatch = new ClockEngine("stopwatch");
+        stopwatch = new ClockEngine("stopwatch", null);
         stopwatch.debugTime(3661);
         assertEquals(3661, stopwatch.getTimeElapsedInSeconds());
     }
 
     @Test
     public void testGetRemainingTimeInSeconds() {
-        timer = new ClockEngine("timer");
+        timer = new ClockEngine("timer", null);
         timer.startClock(10);
         timer.addTimeToTimerInSeconds(5);
         assertTrue(timer.getRemainingTimeInSeconds() > 0);
@@ -597,21 +597,21 @@ public class TestSuite_Adventure {
 
     @Test
     public void testSetSavedTimeInSeconds() {
-        stopwatch = new ClockEngine("stopwatch");
+        stopwatch = new ClockEngine("stopwatch", null);
         stopwatch.setSavedTimeInSeconds(500);
         assertEquals(500, stopwatch.getTimeElapsedInSeconds());
     }
 
     @Test
     public void testDebugTime() {
-        stopwatch = new ClockEngine("stopwatch");
+        stopwatch = new ClockEngine("stopwatch", null);
         stopwatch.debugTime(1000);
         assertEquals(1000, stopwatch.getTimeElapsedInSeconds());
     }
 
     @Test
     public void testAddTimeToTimerInSeconds() {
-        timer = new ClockEngine("timer");
+        timer = new ClockEngine("timer", null);
         timer.startClock(10);
         timer.addTimeToTimerInSeconds(100);
         assertTrue(timer.getRemainingTimeInSeconds() > 10);

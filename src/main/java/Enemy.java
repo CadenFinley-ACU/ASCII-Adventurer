@@ -14,10 +14,12 @@ import java.util.Map;
  */
 public class Enemy {
 
+    private static String yellowColor = "\033[0;33m"; // Start yellow text 
+    private static String resetColor = "\033[0m"; // Reset formatting
     public final static Console console = System.console();
     public static String command;
     public static Map<String, Integer> enemyDamageValues;
-    private static Map<String, Integer> enemyHealthValues;
+    private static ClockEngine timer;
 
     /**
      * This method initializes the enemyDamageValues map with the damage values
@@ -248,7 +250,7 @@ public class Enemy {
         }
     }
 
-    public static void bossFight(String boss) throws InterruptedException {
+    public static boolean bossFight(String boss) throws InterruptedException {
         String brightRedStart = "\033[1;31m"; // Start bright red text
         String brightRedEnd = "\033[0m"; // Reset formatting
         TextEngine.printWithDelays("You have entered the boss room!", false);
@@ -256,11 +258,12 @@ public class Enemy {
         TextEngine.printWithDelays("You have 3 minutes to defeat the boss!", false);
         TextEngine.enterToNext();
         GameEngine.screenRefresh();
-        bossFightLoop(boss);
+        return bossFightLoop(boss);
     }
 
-    private static void bossFightLoop(String boss) throws InterruptedException {
-        ClockEngine timer = new ClockEngine("timer");
+    private static boolean bossFightLoop(String boss) throws InterruptedException {
+        Enemy trigger = new Enemy();
+        timer = new ClockEngine("timer", trigger);
         int heals = 3;
         int currentMaxBossHealth = enemyDamageValues.get(boss) * 3;
         int currentBossHealth = currentMaxBossHealth;
@@ -269,19 +272,32 @@ public class Enemy {
         int bossAnger = 10;
         float attackMultiplier = 1.0f;
         timer.startClock(60 * 3); //3 minutes
+        trigger.startBossTrigger(boss);
         while (true) { //bossfight loop
-            drawRoom();
             if (!timer.isRunning()) {
-                TextEngine.printWithDelays("You ran out of time!", false);
-                TextEngine.printWithDelays("The " + boss + " has defeated you!", false);
-                Player.changeHealth(-Player.getMaxHealth());
+                return false;
             }
+            drawRoom();
             if (bossAnger < 0) {
                 bossAnger = 0;
             }
-            System.out.println("Time Remaining: " + timer.returnTime());
             displayBossHealth(boss, currentBossHealth, currentMaxBossHealth);
-            command = askBossCommand();
+            TextEngine.printWithDelays("What would you like to do?", false);
+            TextEngine.printWithDelays(yellowColor + "Attack, Dodge, or Heal" + resetColor, true);
+            while (true) {
+                command = TextEngine.parseCommand(Room.console.readLine().toLowerCase().trim(), new String[]{"attack", "dodge", "heal"});
+                if (!timer.isRunning()) {
+                    return false;
+                }
+                if (command.equals("attack") || command.equals("dodge") || command.equals("heal")) {
+                    break;
+                } else {
+                    Dungeon.defaultDungeonArgs(command);
+                }
+            }
+            if (!timer.isRunning()) {
+                return false;
+            }
             switch (command) {
                 case "attack" -> {
                     hit = 1;
@@ -299,7 +315,7 @@ public class Enemy {
                     TextEngine.printWithDelays("You deal " + damage + " damage!", false);
                     currentBossHealth -= damage;
                     if (currentBossHealth <= 0) {
-                        return;
+                        return true;
                     }
                     TextEngine.enterToNext();
                 }
@@ -312,7 +328,6 @@ public class Enemy {
                         hit = 1;
                         bossAnger--;
                     } else {
-                        TextEngine.printWithDelays("You cannot heal right now!", false);
                         hit = (int) (Math.random() * 2);
                         command = "dodge";
                     }
@@ -371,26 +386,9 @@ public class Enemy {
         }
     }
 
-    private static String askBossCommand() throws InterruptedException {
-        String yellowColor = "\033[0;33m"; // Start yellow text 
-        String resetColor = "\033[0m"; // Reset formatting
-        TextEngine.printWithDelays("What would you like to do?", false);
-        TextEngine.printWithDelays(yellowColor + "Attack, Dodge, or Heal" + resetColor, true);
-        while (true) {
-            command = TextEngine.parseCommand(Room.console.readLine().toLowerCase().trim(), new String[]{"attack", "dodge", "heal"});
-            if (command.equals("attack") || command.equals("dodge") || command.equals("heal")) {
-                break;
-            } else {
-                Dungeon.defaultDungeonArgs(command);
-            }
-        }
-        return command;
-    }
-
     private static void displayBossHealth(String boss, int health, int maxHealth) {
         int hearts = maxHealth / 20;
         String redColor = "\033[0;31m"; // Start red text
-        String resetColor = "\033[0m"; // Reset formatting
         String healthColor;
         if (hearts == 0) {
             hearts = 1;
@@ -413,7 +411,8 @@ public class Enemy {
         }
         bar.append("|");
         String healthBar = bar.toString();
-        System.out.println(boss + " Health: " + health + " / " + maxHealth);
+        System.out.print(boss + " Health: " + health + " / " + maxHealth);
+        System.out.println("        Time Remaining: " + timer.returnTime());
         System.out.println(healthBar);
         System.out.println();
     }
@@ -465,5 +464,31 @@ public class Enemy {
             }
         }
         DungeonGenerator.drawRoom(localDungeon, roomsBeenTo, Dungeon.currentPlayerPosition[0], Dungeon.currentPlayerPosition[1], 0, mapRevealed);
+    }
+
+    public static void playerDefeat(String boss) throws InterruptedException {
+        TextEngine.printWithDelays("\nYou ran out of time!", false);
+        TextEngine.printWithDelays("The " + boss + " has defeated you!", false);
+        TextEngine.printNoDelay("\033[1;33m" + "Press Enter to continue" + resetColor, false);
+    }
+
+    private void startBossTrigger(String boss) {
+        new Thread(() -> {
+            while (timer.isRunning()) {
+                try {
+                    synchronized (this) {
+                        wait();
+                    }
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                    System.err.println("Thread Interrupted");
+                }
+            }
+            try {
+                playerDefeat(boss);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        }).start();
     }
 }

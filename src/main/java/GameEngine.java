@@ -44,7 +44,7 @@ public class GameEngine {
     public static void main(String[] args) throws InterruptedException { //main game start
         TextEngine.setWidth();
         TextEngine.clearScreen();
-        playTime = new ClockEngine("stopwatch");
+        playTime = new ClockEngine("stopwatch", null);
         TextEngine.printNoDelay("Loading...", false);
         TextEngine.printNoDelay("Creating Game Items...", false);
         createGameItems();
@@ -527,11 +527,12 @@ public class GameEngine {
         Enemy.resetEnemies();
         gameStartGenDungeon();
         Dungeon.resetedAfterWin = false;
-        Room.reset("all");
+        Dungeon.currentPlayerPosition = null;
         Player.setName(null);
         PromptEngine.aiGenerationEnabled = false;
         GameEngine.playTime.setSavedTimeInSeconds(0);
         wipeFile(".runtime.txt");
+        Room.reset("all");
         GameSaveSerialization.saveGame();
         TextEngine.clearScreen();
     }

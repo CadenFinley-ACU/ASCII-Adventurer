@@ -15,19 +15,25 @@ import java.util.concurrent.TimeUnit;
  */
 public class ClockEngine {
 
-    private boolean running;
+    private boolean running = false;
     private long timeElapsedInSeconds = 0;
     private long remainingTimeInSeconds = 0;
     private final String whatAmI;
+    private boolean hasTrigger = false;
+    private Object trigger = null;
 
     /**
      * Constructs a ClockEngine with the specified type.
      *
      * @param type the type of the clock engine
      */
-    public ClockEngine(String type) {
+    public ClockEngine(String type, Object trigger) {
         this.running = false;
         this.whatAmI = type;
+        if (trigger != null) {
+            hasTrigger = true;
+            this.trigger = trigger;
+        }
     }
 
     /**
@@ -99,6 +105,11 @@ public class ClockEngine {
     public void stopClock() {
         //System.out.println("Timer stopped");
         running = false;
+        if (whatAmI.equals("timer") && hasTrigger) {
+            synchronized (trigger) {
+                trigger.notifyAll();
+            }
+        }
     }
 
     /**

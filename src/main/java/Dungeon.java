@@ -1171,7 +1171,9 @@ public class Dungeon extends Room {
      */
     public static void bossRoom() throws InterruptedException {
         inBossFight = true;
-        Enemy.bossFight(currentBoss);
+        if (!Enemy.bossFight(currentBoss)) {
+            Player.changeHealth(-Player.getMaxHealth());
+        }
         TextEngine.printWithDelays("You have defeated the " + currentBoss + " and completed the dungeon!", false);
         Player.changeGold(Enemy.enemyDamageValues.get(currentBoss) * 2);
         TextEngine.enterToNext();
