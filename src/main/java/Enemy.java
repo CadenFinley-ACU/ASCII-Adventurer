@@ -130,9 +130,9 @@ public class Enemy {
 
                     //bosses int = atk health = atk * 3
                     Map.entry("Forest Giant", 20), //dungeon 1 
-                    Map.entry("Forest Spirit", 35), //dungeon 2
+                    Map.entry("Forest Spirit", 30), //dungeon 2
 
-                    Map.entry("Wyvern", 25), //dungeon 3
+                    Map.entry("Wyvern", 35), //dungeon 3
                     Map.entry("Ice Dragon", 45), //dungeon 4
 
                     Map.entry("Phoenix", 65), //dungeon 5
@@ -171,7 +171,7 @@ public class Enemy {
             TextEngine.printWithDelays(space + brightRedStart + "You fight the " + type + "!" + brightRedEnd, false);
         }
         checkhealth(type, quantity, true);
-        int damage = 0 - ((enemyDamageValues.get(type) - Player.getDamageCalc()) * quantity);
+        int damage = 0 - (enemyDamageValues.get(type) * quantity) - Player.getDamageCalc();
         if (damage > -1) {
             damage = -1;
         }
@@ -179,6 +179,7 @@ public class Enemy {
     }
 
     /**
+     *
      * Runs the spawn enemy sequence and calculates the damage taken.
      *
      * @param type The type of enemy.
@@ -195,9 +196,9 @@ public class Enemy {
         } else {
             TextEngine.printWithDelays(space + brightRedStart + "You run from the " + type + "!" + brightRedEnd, false);
         }
-        int damage = 0 - (enemyDamageValues.get(type) * quantity) / 2;
-        if (damage > 0) {
-            damage = 0;
+        int damage = 0 - ((enemyDamageValues.get(type) * quantity) / 2) - Player.getDamageCalc() / 2;
+        if (damage >= 0) {
+            damage = -1;
         }
         checkhealth(type, quantity, false);
         return damage;
@@ -220,7 +221,7 @@ public class Enemy {
         String space = "     ";
         if (fight) {
             // Check the player's health
-            if (!(Player.getHealth() <= ((enemyDamageValues.get(type) - Player.getDamageCalc())) * quantity)) {
+            if (!(Player.getHealth() <= (enemyDamageValues.get(type) * quantity) - Player.getDamageCalc())) {
                 // Print victory message in green
                 if (quantity > 1) {
                     TextEngine.printWithDelays(space + brightGreenStart + "You beat the " + quantity + " " + type + "s!" + brightGreenEnd, false);
@@ -236,7 +237,7 @@ public class Enemy {
             }
         } else {
             // Check the player's health
-            if (!(Player.getHealth() <= ((enemyDamageValues.get(type) - Player.getDamageCalc()) * quantity) / 2)) {
+            if (!(Player.getHealth() <= ((enemyDamageValues.get(type) * quantity) / 2) - Player.getDamageCalc())) {
                 // Print victory message in green
                 if (quantity > 1) {
                     TextEngine.printWithDelays(space + brightGreenStart + "You escaped the " + quantity + " " + type + "s!" + brightGreenEnd, false);
@@ -265,7 +266,7 @@ public class Enemy {
         int currentBossHealth = currentMaxBossHealth;
         int currentBossDamage = enemyDamageValues.get(boss);
         int hit = 1;
-        int bossAnger = 6;
+        int bossAnger = 10;
         float attackMultiplier = 1.0f;
         timer.startClock(60 * 3); //3 minutes
         while (true) { //bossfight loop
@@ -292,6 +293,7 @@ public class Enemy {
                     int criticalHit = (int) (Math.random() * 10);
                     if (criticalHit == 0) {
                         damage *= 2;
+                        bossAnger--;
                         TextEngine.printWithDelays("It was a critical hit!", false);
                     }
                     TextEngine.printWithDelays("You deal " + damage + " damage!", false);
@@ -337,6 +339,7 @@ public class Enemy {
                     TextEngine.printWithDelays("You dodge the attack!", false);
                     TextEngine.printWithDelays("You gained back 15 seconds!", false);
                     timer.addTimeToTimerInSeconds(15);
+                    bossAnger--;
                     TextEngine.enterToNext();
                 } else {
                     if (command.equals("dodge")) {
@@ -350,7 +353,7 @@ public class Enemy {
                     switch (attackType) {
                         case 0 -> {
                             TextEngine.printWithDelays("The " + boss + " uses a powerful attack!", false);
-                            damageTaken *= 1.2;
+                            damageTaken *= 1.3f;
                         }
                         case 1 -> {
                             TextEngine.printWithDelays("The " + boss + " missed!", false);
@@ -358,7 +361,7 @@ public class Enemy {
                         }
                         default -> {
                             TextEngine.printWithDelays("The " + boss + " uses a normal attack!", false);
-                            damageTaken *= 0.8f;
+                            damageTaken *= 0.9f;
                         }
                     }
                     Player.changeHealth((int) -damageTaken);

@@ -237,15 +237,14 @@ public class Player {
         String brightEnd = "\033[0m";
         String space = "     ";
         if (change < 0) {
-            if (change >= 0) {
-                change = -1;
-            }
             TextEngine.printWithDelays(space + brightRedStart + "You took " + change + " damage!" + brightEnd, false);
         } else {
-            change = Math.min(change, maxHealth - health);
-            if (change != 0) {
-                TextEngine.printWithDelays(space + brightGreenStart + "You gained " + change + " health!" + brightEnd, false);
+            if (change == 0) {
+                TextEngine.enterToNext();
+                return;
             }
+            change = Math.min(change, maxHealth - health);
+            TextEngine.printWithDelays(space + brightGreenStart + "You gained " + change + " health!" + brightEnd, false);
         }
         health += change;
         if (health > maxHealth) {
