@@ -21,6 +21,10 @@ import org.junit.Test;
  *
  * @author ASCIIADVENTURERS
  * @version 1.0
+ *
+ * This test suite tests the following classes: - DungeonGenerator -
+ * InventoryManager - ClockEngine - DungeonInstance - TextEngine - OpenWorld -
+ * SpawnRoom - Dungeon - DungeonInstance - PromptEngine - GameEngine - Player
  */
 public class TestSuite_Adventure {
 
