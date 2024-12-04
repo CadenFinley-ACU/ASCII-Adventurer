@@ -40,7 +40,6 @@ public class TestSuite_Adventure {
         DungeonGenerator.testing = true;
         GameEngine.TESTING = true;
         Player.hardSetInventorySize(20);
-
     }
 
     @After
@@ -326,7 +325,13 @@ public class TestSuite_Adventure {
     public void testDungeonGeneratorActualSizes8() {
         DungeonGenerator generator = new DungeonGenerator();
         testsrun++;
-        generator.generateDungeon(15);
+        Random rand = new Random();
+        int y = rand.nextInt(11) + 6;
+        int[][] map = generator.generateDungeon(y);
+        int[][] created = DungeonGenerator.createRoomsBeenTo(map.length);
+        int[] x = DungeonGenerator.findValue(map, 9);
+        DungeonGenerator.drawRoom(map, created, x[0], x[1], 0, false);
+        DungeonGenerator.printAdjacentRoomsAndCurrentRoomAndUnlockedRooms(map, created, x, true);
         boolean connected = generator.testArrays();
         assertTrue("There should be a path connecting 9 and 8 with values higher than 0", connected);
     }
@@ -335,12 +340,31 @@ public class TestSuite_Adventure {
     public void stupidStress() {
         for (int i = 0; i < 1000; i++) {
             DungeonGenerator generator = new DungeonGenerator();
-            Random rand = new Random();
             testsrun++;
-            generator.generateDungeon(rand.nextInt(11) + 6);
+            Random rand = new Random();
+            int y = rand.nextInt(11) + 6;
+            int[][] map = generator.generateDungeon(y);
+            int[][] created = DungeonGenerator.createRoomsBeenTo(map.length);
+            int[] x = DungeonGenerator.findValue(map, 9);
+            DungeonGenerator.drawRoom(map, created, x[0], x[1], 0, false);
+            DungeonGenerator.printAdjacentRoomsAndCurrentRoomAndUnlockedRooms(map, created, x, true);
             boolean connected = generator.testArrays();
             assertTrue("There should be a path connecting 9 and 8 with values higher than 0", connected);
         }
+    }
+
+    @Test
+    public void testRoomGeneration() {
+        DungeonGenerator generator = new DungeonGenerator();
+        testsrun++;
+        int[][] map = generator.generateDungeon(10);
+        int[][] created = DungeonGenerator.createRoomsBeenTo(map.length);
+        int[] x = DungeonGenerator.findValue(map, 9);
+        DungeonGenerator.drawRoom(map, created, x[0], x[1], 0, false);
+        DungeonGenerator.printAdjacentRoomsAndCurrentRoomAndUnlockedRooms(map, created, x, true);
+        assertNotNull(map);
+        assertNotNull(created);
+        assertNotNull(x);
     }
 
     @Test
@@ -349,7 +373,6 @@ public class TestSuite_Adventure {
         Player.inventory = new HashMap<>();
         Player.inventory.put("heath potion", 15);
         assertTrue(InventoryManager.inventoryHasRoom(4));
-
         assertFalse(InventoryManager.inventoryHasRoom(6));
     }
 
@@ -360,7 +383,6 @@ public class TestSuite_Adventure {
         Player.putItem("heath potion", 6);
         assertEquals(6, Player.inventory.get("heath potion").intValue());
         Player.putItem("greater health potion", 4);
-
         assertEquals(4, Player.inventory.get("greater health potion").intValue());
         Player.putItem("super health potion", 10);
         assertEquals(10, Player.inventory.get("super health potion").intValue());
