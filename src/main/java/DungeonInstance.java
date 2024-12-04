@@ -30,8 +30,8 @@ public class DungeonInstance extends Dungeon {
 
     private static final Random rand = new Random();
 
-    private int[] spawnPosition;
-    private final List<String> enemies;
+    public int[] spawnPosition;
+    public final List<String> enemies;
     public int[][] roomsBeenTo;
     public List<String> items;
     private List<String> originitems;
@@ -122,6 +122,7 @@ public class DungeonInstance extends Dungeon {
         mapRevealed = false;
         visited = false;
         completed = false;
+        items = originitems;
         spawnPosition = DungeonGenerator.findValue(map, 9);
         currentPlayerPosition = spawnPosition;
         roomsBeenTo = DungeonGenerator.createRoomsBeenTo(map.length);

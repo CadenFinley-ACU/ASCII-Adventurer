@@ -123,7 +123,7 @@ public class GameEngine {
         InventoryManager.createItem("weapon", "K.O. Cannon", 10000); //dungeon shop
 
         //*  ************************************************************************************ */
-        InventoryManager.createItem("armor", "shield", 5); //village shop
+        InventoryManager.createItem("armor", "shield", 2); //village shop
 
         InventoryManager.createItem("armor", "chainmail set", 7); //dungeon 1
 
@@ -524,15 +524,15 @@ public class GameEngine {
         playerCreated = false;
         savedPlace = null;
         gameComplete = false;
+        Enemy.resetEnemies();
+        gameStartGenDungeon();
         Dungeon.resetedAfterWin = false;
         Room.reset("all");
         Player.setName(null);
         PromptEngine.aiGenerationEnabled = false;
         GameEngine.playTime.setSavedTimeInSeconds(0);
         wipeFile(".runtime.txt");
-        gameStartGenDungeon();
         GameSaveSerialization.saveGame();
-        Enemy.resetEnemies();
         TextEngine.clearScreen();
     }
 

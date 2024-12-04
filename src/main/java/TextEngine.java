@@ -208,6 +208,9 @@ public abstract class TextEngine {
      * user to press Enter and then wait for the Enter key to be pressed.
      */
     public static void enterToNext() { //adds a pause and waits for enter
+        if (GameEngine.TESTING) {
+            return;
+        }
         printNoDelay(yellowColor + "Press Enter to continue" + resetColor, false);
         console.readLine();
     }
@@ -252,7 +255,7 @@ public abstract class TextEngine {
                 matchedCommand = possibleCommand;
             }
         }
-        return (maxMatchLength > 0 && has(possibleCommands, matchedCommand)) ? matchedCommand : command;
+        return (maxMatchLength > 0 && has(possibleCommands, matchedCommand)) ? matchedCommand.toLowerCase() : command.toLowerCase();
     }
 
     /**
@@ -262,7 +265,10 @@ public abstract class TextEngine {
      * @param possibleCommand the second string to compare
      * @return the length of the matching prefix
      */
-    private static int getMatchLength(String command, String possibleCommand) {
+    public static int getMatchLength(String command, String possibleCommand) {
+        if (command == null || possibleCommand == null) {
+            return 0;
+        }
         int length = Math.min(command.length(), possibleCommand.length());
         int matchLength = 0;
         for (int i = 0; i < length; i++) {
@@ -283,7 +289,7 @@ public abstract class TextEngine {
      * @return true if the matchedCommand is found in possibleCommands, false
      * otherwise
      */
-    private static boolean has(String[] possibleCommands, String matchedCommand) {
+    public static boolean has(String[] possibleCommands, String matchedCommand) {
         for (String possibleCommand : possibleCommands) {
             if (possibleCommand.equals(matchedCommand)) {
                 return true;

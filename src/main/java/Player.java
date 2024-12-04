@@ -66,7 +66,7 @@ public class Player {
         name = "Debug!";
         GameEngine.playerCreated = true;
         GameEngine.TESTING = true;
-        DungeonGenerator.testing = true;
+        DungeonGenerator.testing = false;
         GameEngine.playTime.startClock(1);
         TextEngine.printNoDelay("Where do you want to spawn", false);
         TextEngine.printNoDelay(" 1:SpawnRoom", false);

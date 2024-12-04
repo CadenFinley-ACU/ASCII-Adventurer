@@ -377,6 +377,7 @@ public class GameSaveSerialization {
             TextEngine.printWithDelays("Restarting...", false);
             TextEngine.enterToNext();
             TextEngine.clearScreen();
+            GameEngine.wipeSave();
             GameEngine.startMenu();
         }
     }
