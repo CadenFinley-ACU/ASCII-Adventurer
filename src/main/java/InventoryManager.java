@@ -174,14 +174,18 @@ public class InventoryManager extends Player {
 
         // Continuously read user commands and perform actions
         while (true) {
-            command = console.readLine();
+            command = TextEngine.parseCommand(console.readLine(), new String[]{"use", "drop", "exit"});
             switch (command) {
                 case "use" -> {
                     // Clear the screen and prompt the user to select an item to use
                     TextEngine.clearScreen();
                     printInventoryNoMenu();
-                    TextEngine.printWithDelays("Which item would you like to use?", true);
+                    TextEngine.printWithDelays("Which item would you like to use? (or " + yellowColor + "leave" + resetColor + ")", true);
                     command = console.readLine();
+                    if (command.equals("leave")) {
+                        Player.openInventory();
+                        break;
+                    }
                     useItem(command);
                 }
                 case "drop" -> {
@@ -192,6 +196,7 @@ public class InventoryManager extends Player {
                     command = console.readLine();
                     if (command.equals("leave")) {
                         Player.openInventory();
+                        break;
                     }
                     tossItem(command);
                 }
