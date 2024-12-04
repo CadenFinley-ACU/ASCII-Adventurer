@@ -1245,7 +1245,6 @@ public class DungeonGenerator {
                     i++;
                 }
             }
-            return room;
         }
         return room;
     }
@@ -1265,6 +1264,3 @@ public class DungeonGenerator {
  * 15 - last position
  * 20 - Trapped room
  */
-
-
-
