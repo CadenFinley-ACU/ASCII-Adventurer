@@ -97,7 +97,7 @@ public class DungeonInstance extends Dungeon {
             visited = true;
             currentPlayerPosition = DungeonGenerator.findValue(map, 9);
         }
-        if (!dungeonSaveName.equals(GameEngine.getSavedPlace())) {
+        if (!dungeonSaveName.equals(GameEngine.getSavedPlace()) || currentPlayerPosition == null) {
             currentPlayerPosition = DungeonGenerator.findValue(map, 9);
         }
         room = dungeonSaveName;

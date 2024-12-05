@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.TimeoutException;
 
 /**
  * ASCIIADVENTURER A text-based adventure game with ASCII art. Caden Finley
@@ -40,8 +41,9 @@ public class GameEngine {
      * @param args Command line arguments (not used).
      * @throws InterruptedException If the thread is interrupted during
      * execution.
+     * @throws TimeoutException
      */
-    public static void main(String[] args) throws InterruptedException { //main game start
+    public static void main(String[] args) throws InterruptedException, TimeoutException { //main game start
         TextEngine.setWidth();
         TextEngine.clearScreen();
         playTime = new ClockEngine("stopwatch", null);
@@ -67,10 +69,6 @@ public class GameEngine {
             TextEngine.printNoDelay("Testing OpenAI API Connection...", false);
             if (PromptEngine.testAPIKey(PromptEngine.USER_API_KEY)) {
                 TextEngine.printNoDelay("OpenAI API Connection Successful!", false);
-            } else {
-                TextEngine.printNoDelay("OpenAI API Connection Failed. Please check your internet connection and API key", false);
-                TextEngine.printNoDelay("AI Generation Disabled", false);
-                PromptEngine.aiGenerationEnabled = false;
             }
         }
         TextEngine.printWithDelays("Starting Game!", false);

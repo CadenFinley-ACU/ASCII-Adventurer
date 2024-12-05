@@ -271,11 +271,11 @@ public class Enemy {
         int hit = 1;
         int bossAnger = 10;
         float attackMultiplier = 1.0f;
-        timer.startClock(60 * 3); //3 minutes
+        timer.startClock(3 * 60); //3 minutes
         trigger.startBossTrigger(boss);
         while (true) { //bossfight loop
             if (!timer.isRunning()) {
-                return false;
+                break;
             }
             drawRoom();
             if (bossAnger < 0) {
@@ -287,16 +287,13 @@ public class Enemy {
             while (true) {
                 command = TextEngine.parseCommand(Room.console.readLine().toLowerCase().trim(), new String[]{"attack", "dodge", "heal"});
                 if (!timer.isRunning()) {
-                    return false;
+                    break;
                 }
                 if (command.equals("attack") || command.equals("dodge") || command.equals("heal")) {
                     break;
                 } else {
                     Dungeon.defaultDungeonArgs(command);
                 }
-            }
-            if (!timer.isRunning()) {
-                return false;
             }
             switch (command) {
                 case "attack" -> {
@@ -315,6 +312,7 @@ public class Enemy {
                     TextEngine.printWithDelays("You deal " + damage + " damage!", false);
                     currentBossHealth -= damage;
                     if (currentBossHealth <= 0) {
+                        timer.stopClock();
                         return true;
                     }
                     TextEngine.enterToNext();
@@ -333,6 +331,9 @@ public class Enemy {
                     }
                 }
             }
+            if (!timer.isRunning()) {
+                break;
+            }
             if (bossAnger <= 1) {
                 attackMultiplier = 1.0f;
                 TextEngine.printWithDelays("The " + boss + " is enraged!", false);
@@ -348,6 +349,9 @@ public class Enemy {
                 attackMultiplier -= 0.2f;
                 bossAnger++;
                 TextEngine.enterToNext();
+                if (!timer.isRunning()) {
+                    break;
+                }
             } else {
                 TextEngine.printWithDelays("The " + boss + " attacks you!", false);
                 if (hit == 0) {
@@ -356,6 +360,9 @@ public class Enemy {
                     timer.addTimeToTimerInSeconds(15);
                     bossAnger--;
                     TextEngine.enterToNext();
+                    if (!timer.isRunning()) {
+                        break;
+                    }
                 } else {
                     if (command.equals("dodge")) {
                         TextEngine.printWithDelays("You tried to dodge the attack but failed!", false);
@@ -379,11 +386,19 @@ public class Enemy {
                             damageTaken *= 0.9f;
                         }
                     }
+                    if (!timer.isRunning()) {
+                        break;
+                    }
                     Player.changeHealth((int) -damageTaken);
                 }
             }
+            if (!timer.isRunning()) {
+                break;
+            }
             GameEngine.screenRefresh();
         }
+        timer.stopClock();
+        return false;
     }
 
     private static void displayBossHealth(String boss, int health, int maxHealth) {

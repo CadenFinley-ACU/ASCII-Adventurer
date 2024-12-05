@@ -69,6 +69,11 @@ public class ClockEngine {
                     //System.out.println("Timer stopped");
                     stopClock();
                     executor.shutdown();
+                    if (hasTrigger) {
+                        synchronized (trigger) {
+                            trigger.notifyAll();
+                        }
+                    }
                 }
                 this.remainingTimeInSeconds = lengthInSeconds - this.timeElapsedInSeconds;
             } else {
@@ -105,11 +110,6 @@ public class ClockEngine {
     public void stopClock() {
         //System.out.println("Timer stopped");
         running = false;
-        if (whatAmI.equals("timer") && hasTrigger) {
-            synchronized (trigger) {
-                trigger.notifyAll();
-            }
-        }
     }
 
     /**
