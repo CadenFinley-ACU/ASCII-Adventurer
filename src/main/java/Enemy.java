@@ -389,6 +389,9 @@ public class Enemy {
                     if (!timer.isRunning()) {
                         break;
                     }
+                    if (Player.getHealth() - (int) damageTaken <= 0) {
+                        timer.stopClock();
+                    }
                     Player.changeHealth((int) -damageTaken);
                 }
             }

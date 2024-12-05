@@ -247,6 +247,9 @@ public class DungeonGenerator {
                 } while (!isConnected(x, y) || matrix[x][y] > 1 || (coord8[0] == x && coord8[1] == y) || (coord9[0] == x && coord9[1] == y));
                 matrix[x][y] = num;
                 addedOnes++;
+                if (addedOnes == minOnes) {
+                    break;
+                }
             }
             if (testing) {
                 printMap(matrix);
