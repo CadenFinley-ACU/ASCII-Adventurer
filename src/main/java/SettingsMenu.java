@@ -1,5 +1,6 @@
 
 import java.io.Console;
+import java.util.concurrent.TimeoutException;
 
 /**
  * ASCIIADVENTURER Caden Finley Albert Tucker Grijesh Shrestha
@@ -140,11 +141,22 @@ public abstract class SettingsMenu {
                         command = console.readLine();
                         switch (command) {
                             case "yes" -> {
-                                PromptEngine.aiGenerationEnabled = true;
-                                TextEngine.printWithDelays("AI generation enable.", false);
-                                TextEngine.enterToNext();
-                                TextEngine.clearScreen();
-                                leave();
+                                try {
+                                    if (!PromptEngine.testAPIKey(PromptEngine.USER_API_KEY)) {
+                                        TextEngine.printWithDelays("AI generation could not be enabled. Please check your API key.", false);
+                                        TextEngine.enterToNext();
+                                        TextEngine.clearScreen();
+                                        leave();
+                                    } else {
+                                        PromptEngine.aiGenerationEnabled = true;
+                                        TextEngine.printWithDelays("AI generation enabled.", false);
+                                        TextEngine.enterToNext();
+                                        TextEngine.clearScreen();
+                                        leave();
+                                    }
+                                } catch (TimeoutException e) {
+                                    leave();
+                                }
                             }
                             default -> {
                                 TextEngine.printWithDelays("AI generation remains disabled.", false);
@@ -286,11 +298,22 @@ public abstract class SettingsMenu {
                         command = console.readLine();
                         switch (command) {
                             case "yes" -> {
-                                PromptEngine.aiGenerationEnabled = true;
-                                TextEngine.printWithDelays("AI generation enable.", false);
-                                TextEngine.enterToNext();
-                                TextEngine.clearScreen();
-                                leaveToStart();
+                                try {
+                                    if (!PromptEngine.testAPIKey(PromptEngine.USER_API_KEY)) {
+                                        TextEngine.printWithDelays("AI generation could not be enabled. Please check your API key.", false);
+                                        TextEngine.enterToNext();
+                                        TextEngine.clearScreen();
+                                        leaveToStart();
+                                    } else {
+                                        PromptEngine.aiGenerationEnabled = true;
+                                        TextEngine.printWithDelays("AI generation enabled.", false);
+                                        TextEngine.enterToNext();
+                                        TextEngine.clearScreen();
+                                        leaveToStart();
+                                    }
+                                } catch (TimeoutException e) {
+                                    leaveToStart();
+                                }
                             }
                             default -> {
                                 TextEngine.printWithDelays("AI generation remains disabled.", false);

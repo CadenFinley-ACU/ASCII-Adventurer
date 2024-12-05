@@ -69,6 +69,8 @@ public class GameEngine {
             TextEngine.printNoDelay("Testing OpenAI API Connection...", false);
             if (PromptEngine.testAPIKey(PromptEngine.USER_API_KEY)) {
                 TextEngine.printNoDelay("OpenAI API Connection Successful!", false);
+            } else {
+                PromptEngine.aiGenerationEnabled = false;
             }
         }
         TextEngine.printWithDelays("Starting Game!", false);
@@ -527,7 +529,6 @@ public class GameEngine {
         Dungeon.resetedAfterWin = false;
         Dungeon.currentPlayerPosition = null;
         Player.setName(null);
-        PromptEngine.aiGenerationEnabled = false;
         GameEngine.playTime.setSavedTimeInSeconds(0);
         wipeFile(".runtime.txt");
         Room.reset("all");
