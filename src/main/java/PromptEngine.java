@@ -7,6 +7,14 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 
 /**
  * ASCIIADVENTURER Caden Finley Albert Tucker Grijesh Shrestha
@@ -45,7 +53,13 @@ public class PromptEngine {
      */
     public static void buildPrompt() {
         if (aiGenerationEnabled && (OpenWorld.checkChangeInRoom() || prompt == null || prompt.isEmpty())) {
-            prompt = chatGPT(buildMessage()) + "\n";
+            try {
+                prompt = chatGPT(buildMessage()) + "\n";
+            } catch (TimeoutException e) {
+                TextEngine.printNoDelay("AI Generation is now disabled. Re-enable it in settings.", false);
+                aiGenerationEnabled = false;
+                TextEngine.enterToNext();
+            }
             GameEngine.screenRefresh();
         }
     }
@@ -106,22 +120,6 @@ public class PromptEngine {
     }
 
     /**
-     * The function `buildHelpPrompt` generates a help prompt for a text
-     * adventure game with available commands using chatGPT if AI generation is
-     * enabled.
-     *
-     * @param availableCommands It looks like the `buildHelpPrompt` method is
-     * designed to generate a help prompt for a text adventure game. The method
-     * takes an array of available commands as a parameter. These commands are
-     * the actions that the player can use in the game.
-     */
-    public static void buildHelpPrompt(String[] availableCommands) {
-        if (aiGenerationEnabled) {
-            prompt = chatGPT("Generate a help prompt for a text adventure game designed for highschoolers. The player can use the following commands: " + String.join(", ", availableCommands) + ".") + "\n";
-        }
-    }
-
-    /**
      * The function `returnPrompt` checks if AI generation is enabled,
      * highlights keywords in the prompt, and returns the modified prompt or a
      * message if AI generation is disabled.
@@ -157,40 +155,57 @@ public class PromptEngine {
      * response from the OpenAI API after processing the input message through
      * the GPT-3.5 model.
      */
-    private static String chatGPT(String message) {
-        String url = "https://api.openai.com/v1/chat/completions";
-        String apiKey = USER_API_KEY; // API key goes here
-        String model = "gpt-3.5-turbo";
-        //System.out.println(message);
-        try {
-            URL obj = new URL(url);
-            HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-            con.setRequestMethod("POST");
-            con.setRequestProperty("Authorization", "Bearer " + apiKey);
-            con.setRequestProperty("Content-Type", "application/json");
-            String body = "{\"model\": \"" + model + "\", \"messages\": [{\"role\": \"user\", \"content\": \"" + message + "\"}]}";
-            con.setDoOutput(true);
-            try (OutputStreamWriter writer = new OutputStreamWriter(con.getOutputStream())) {
-                writer.write(body);
-                writer.flush();
-            }
-            StringBuilder response;
-            try (BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()))) {
-                String inputLine;
-                response = new StringBuilder();
-                while ((inputLine = in.readLine()) != null) {
-                    response.append(inputLine);
+    private static String chatGPT(String message) throws TimeoutException {
+        ExecutorService executor = Executors.newSingleThreadExecutor();
+        Future<String> future = executor.submit(() -> {
+            String url = "https://api.openai.com/v1/chat/completions";
+            String apiKey = USER_API_KEY; // API key goes here
+            String model = "gpt-3.5-turbo";
+            //System.out.println(message);
+            try {
+                URL obj = new URL(url);
+                HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+                con.setRequestMethod("POST");
+                con.setRequestProperty("Authorization", "Bearer " + apiKey);
+                con.setRequestProperty("Content-Type", "application/json");
+                String body = "{\"model\": \"" + model + "\", \"messages\": [{\"role\": \"user\", \"content\": \"" + message + "\"}]}";
+                con.setDoOutput(true);
+                try (OutputStreamWriter writer = new OutputStreamWriter(con.getOutputStream())) {
+                    writer.write(body);
+                    writer.flush();
                 }
+                StringBuilder response;
+                try (BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()))) {
+                    String inputLine;
+                    response = new StringBuilder();
+                    while ((inputLine = in.readLine()) != null) {
+                        response.append(inputLine);
+                    }
+                }
+                // returns the extracted contents of the response.
+                return extractContentFromResponse(response.toString());
+            } catch (IOException e) {
+                TextEngine.printNoDelay("OpenAI API connection failed. Please check your internet connection and try again later.", false);
+                TextEngine.printNoDelay("AI generation has been disabled. You can renable it in settings.", false);
+                TextEngine.enterToNext();
+                aiGenerationEnabled = false;
+                return null;
+                //throw new RuntimeException(e);
             }
-            // returns the extracted contents of the response.
-            return extractContentFromResponse(response.toString());
-        } catch (IOException e) {
+        });
+        try {
+            return future.get(10, TimeUnit.SECONDS);
+        } catch (TimeoutException e) {
+            future.cancel(true);
             TextEngine.printNoDelay("OpenAI API connection failed. Please check your internet connection and try again later.", false);
             TextEngine.printNoDelay("AI generation has been disabled. You can renable it in settings.", false);
             TextEngine.enterToNext();
             aiGenerationEnabled = false;
-            return " ";
-            //throw new RuntimeException(e);
+            return null;
+        } catch (InterruptedException | ExecutionException e) {
+            throw new RuntimeException(e);
+        } finally {
+            executor.shutdown();
         }
     }
 
@@ -226,41 +241,59 @@ public class PromptEngine {
      * issue) or the response does not contain the expected content, it returns
      * `false`.
      */
-    public static boolean testAPIKey(String apiKey) {
-        // userAPIKey = apiKey;
-        // aiGenerationEnabled = true;
-        // return true;
-        String testMessage = "This is a test message to check if the API key is valid.";
-        try {
-            String url = "https://api.openai.com/v1/chat/completions";
-            String model = "gpt-3.5-turbo";
-            URL obj = new URL(url);
-            HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-            con.setRequestMethod("POST");
-            con.setRequestProperty("Authorization", "Bearer " + apiKey);
-            con.setRequestProperty("Content-Type", "application/json");
-            String body = "{\"model\": \"" + model + "\", \"messages\": [{\"role\": \"user\", \"content\": \"" + testMessage + "\"}]}";
-            con.setDoOutput(true);
-            try (OutputStreamWriter writer = new OutputStreamWriter(con.getOutputStream())) {
-                writer.write(body);
-                writer.flush();
-            }
-            StringBuilder response;
-            try (BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()))) {
-                String inputLine;
-                response = new StringBuilder();
-                while ((inputLine = in.readLine()) != null) {
-                    response.append(inputLine);
+    public static boolean testAPIKey(String apiKey) throws TimeoutException {
+        Callable<Boolean> task = () -> {
+            String testMessage = "This is a test message to check if the API key is valid.";
+            try {
+                String url = "https://api.openai.com/v1/chat/completions";
+                String model = "gpt-3.5-turbo";
+                URL obj = new URL(url);
+                HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+                con.setRequestMethod("POST");
+                con.setRequestProperty("Authorization", "Bearer " + apiKey);
+                con.setRequestProperty("Content-Type", "application/json");
+                String body = "{\"model\": \"" + model + "\", \"messages\": [{\"role\": \"user\", \"content\": \"" + testMessage + "\"}]}";
+                con.setDoOutput(true);
+                try (OutputStreamWriter writer = new OutputStreamWriter(con.getOutputStream())) {
+                    writer.write(body);
+                    writer.flush();
                 }
+                StringBuilder response;
+                try (BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()))) {
+                    String inputLine;
+                    response = new StringBuilder();
+                    while ((inputLine = in.readLine()) != null) {
+                        response.append(inputLine);
+                    }
+                }
+                // Check if the response contains the expected content
+                String responseContent = extractContentFromResponse(response.toString());
+                aiGenerationEnabled = responseContent != null && !responseContent.isEmpty();
+                return responseContent != null && !responseContent.isEmpty();
+            } catch (IOException e) {
+                TextEngine.printNoDelay("API Key failed. Please check your internet connection", false);
+                aiGenerationEnabled = false;
+                return false;
             }
-            // Check if the response contains the expected content
-            String responseContent = extractContentFromResponse(response.toString());
-            aiGenerationEnabled = responseContent != null && !responseContent.isEmpty();
-            return responseContent != null && !responseContent.isEmpty();
-        } catch (IOException e) {
-            TextEngine.printNoDelay("API Key failed. Please check your internet connection", false);
+        };
+
+        ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
+        Future<Boolean> future = executor.submit(task);
+        try {
+            return future.get(10, TimeUnit.SECONDS); // Set timeout to 10 seconds
+        } catch (TimeoutException e) {
+            future.cancel(true);
             aiGenerationEnabled = false;
+            TextEngine.printNoDelay("API Key validation timed out. AI generation is disabled, re-enable it in settings.", false);
+            TextEngine.enterToNext();
             return false;
+        } catch (InterruptedException | ExecutionException e) {
+            aiGenerationEnabled = false;
+            TextEngine.printNoDelay("API Key failed. AI generation is disabled, re-enable it in settings.", false);
+            TextEngine.enterToNext();
+            return false;
+        } finally {
+            executor.shutdown();
         }
     }
 
