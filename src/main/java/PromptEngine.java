@@ -197,7 +197,7 @@ public class PromptEngine {
             return future.get(10, TimeUnit.SECONDS);
         } catch (TimeoutException e) {
             future.cancel(true);
-            TextEngine.printNoDelay("OpenAI API connection failed. Please check your internet connection and try again later.", false);
+            TextEngine.printNoDelay("OpenAI API connection timed out.", false);
             TextEngine.printNoDelay("AI generation has been disabled. You can renable it in settings.", false);
             TextEngine.enterToNext();
             aiGenerationEnabled = false;
